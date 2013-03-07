@@ -1,0 +1,56 @@
+{
+  "name": "helper",
+  "description": "Library of helpers for popular client-side template engines. Created for Assemble, but can be used with any project.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/assemble/template-helpers",
+  "authors": [
+    {
+      "name": "Brian Woodward",
+      "url": "http://github.com/doowb/"
+    },
+    {
+      "name": "Jon Schlinkert",
+      "url": "http://github.com/jonschlinkert/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/assemble/template-helpers"
+  },
+  "bugs": {
+    "url": "git://github.com/assemble/template-helpers/isues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/assemble/helper/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "lib/helpers",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "assemble": "0.3.81",
+    "grunt": "~0.4.0",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0"
+  },
+  "keywords": [
+    "client-side templates",
+    "templates",
+    "handlebars helpers",
+    "handlebars",
+    "helper library",
+    "block helper",
+    "site builder",
+    "example helper",
+    "helper",
+    "helpers",
+    "template helpers"
+  ]
+}
