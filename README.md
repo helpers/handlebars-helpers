@@ -1,6 +1,6 @@
-# [Helper Library v0.1.3](http://github.com/assemble/helper-lib)
+# [Helper Library v0.1.4](http://github.com/assemble/helper-lib)
 
-> A growing collection of useful helpers for Assemble.
+> A growing collection of useful Handlebars helpers.
 
 
 ## Quick start
