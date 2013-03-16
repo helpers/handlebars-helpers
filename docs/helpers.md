@@ -1,666 +1,622 @@
+# Helpers Library
 
-A growing collection of useful helpers for Assemble.
-
-TODO:
-- [ ] this needs to be better organized.
-- [ ] Add links to unit tests, CONTRIBUTING.md.
-- [ ] Combine redundant helpers.
+> A growing collection of useful helpers for Assemble.
 
 
-- [Handlebars Helpers](#handlebars-helpers)
-- [Credit](#credit)
+## Handlebars
+[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
 
-
-
-### Handlebars Helpers
-
-[Handlebars.js](https://github.com/wycats/handlebars.js).
 
 ### Equals
-
 #### If x Equals y
-
-**Parameters**:
-**Usage**:
-
-
-    {{#if_eq x compare=y}} ... {{/if_eq}}
-
+Parameters: `none`
+``` handlebars
+{{#if_eq x compare=y}} ... {{/if_eq}}
+```
 
 #### Unless x Equals y
-
-**Parameters**:
-**Usage**:
-
-    {{#unless_eq x compare=y}} ... {{/unless_eq}}
+Parameters: `none`
+``` handlebars
+{{#unless_eq x compare=y}} ... {{/unless_eq}}
+```
 
 
 
 ### Greater Than
-
 #### If x > y
-
-**Parameters**:
-**Usage**:
-
-    {{#if_gt x compare=y}} ... {{/if_gt}}
-
+Parameters: `none`
+``` handlebars
+{{#if_gt x compare=y}} ... {{/if_gt}}
+```
 
 #### Unless x > y
-
-**Parameters**:
-**Usage**:
-
-    {{#unless_gt x compare=y}} ... {{/unless_gt}}
+Parameters: `none`
+``` handlebars
+{{#unless_gt x compare=y}} ... {{/unless_gt}}
+```
 
 
 
 ### Greater Than or Equal To
-
 #### If x >= y
-
-**Parameters**:
-**Usage**:
-
-    {{#if_gteq x compare=y}} ... {{/if_gteq}}
-
+Parameters: `none`
+``` handlebars
+{{#if_gteq x compare=y}} ... {{/if_gteq}}
+```
 
 #### Unless x >= y
-
-**Parameters**:
-**Usage**:
-
-    {{#unless_gteq x compare=y}} ... {{/unless_gteq}}
+Parameters: `none`
+``` handlebars
+{{#unless_gteq x compare=y}} ... {{/unless_gteq}}
+```
 
 
 
 ### Less Than
-
 #### If x < y
-
-**Parameters**:
-**Usage**:
-
-    {{#if_lt x compare=y}} ... {{/if_lt}}
-
+Parameters: `none`
+``` handlebars
+{{#if_lt x compare=y}} ... {{/if_lt}}
+```
 
 #### Unless x < y
-
-**Parameters**:
-**Usage**:
-
-    {{#unless_lt x compare=y}} ... {{/unless_lt}}
-
+Parameters: `none`
+``` handlebars
+{{#unless_lt x compare=y}} ... {{/unless_lt}}
+```
 
 
 
 ### Less Than or Equal To
-
 #### If x <= y
-
-**Parameters**:
-**Usage**:
-
-    {{#if_lteq x compare=y}} ... {{/if_lteq}}
-
+Parameters: `none`
+``` handlebars
+{{#if_lteq x compare=y}} ... {{/if_lteq}}
+```
 
 #### Unless x <= y
-
-**Parameters**:
-**Usage**:
-
-    {{#unless_lteq x compare=y}} ... {{/unless_lteq}}
-
-
-### nl2br
-Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks
-
-`{{nl2br description}}`
-
+Parameters: `none`
+``` handlebars
+{{#unless_lteq x compare=y}} ... {{/unless_lteq}}
+```
 
 
 
 ### Strings
+#### hyphenate
+Parameters: `none`
+<br>Description: _Replace spaces in string with hyphens._
+``` handlebars
+{{hyphenate "make this all hyphenated"}}
+
+// Result 
+make-this-all-hyphenated
+```
+
+#### dashify
+Parameters: `none`
+<br>Description: _Same as `hyphenate`, but replaces dots in string with hyphens._
+``` handlebars
+{{dashify "make.this.all.hyphenated"}}
+
+// Result
+make-this-all-hyphenated
+```
 
 #### lowercase
+Parameters: `none`
+<br>Description: _Turns a string to lowercase._
+``` handlebars
+{{lowercase "MAKE THIS ALL LOWERCASE"}}
 
-Turns a string to lowercase.
-
-**Parameters**: none.
-**Usage**:
-
-    {{lowercase "MAKE THIS ALL LOWERCASE"}}
-
-**result**
-    make this all lowercase
+// Result
+make this all lowercase
+```
 
 #### uppercase
+Parameters: `none`
+<br>Description: Turns a string to uppercase. Opposite of `{{lowercase}}`.
+``` handlebars
+ {{uppercase "make this all uppercase"}}
 
-Turns a string to uppercase. Opposite of `{{lowercase}}`.
-
-**Parameters**: none.
-**Usage**:
-
-    {{uppercase "make this all uppercase"}}
-
-**result**
-    MAKE THIS ALL UPPERCASE
+// Result
+MAKE THIS ALL UPPERCASE
+```
 
 #### capitalizeFirst
+Parameters: `none`
+<br>Description: Capitalizes the first word in a string.
+``` handlebars
+{{capitalizeFirst "capitalize first word in this sentence"}}
 
-Capitalizes the first word in a string.
-
-**Parameters**: none.
-**Usage**:
-
-    {{capitalizeFirst "capitalize first word in this sentence"}}
-
-**result**
-    Capitalize first word in this sentence
+// Result
+Capitalize first word in this sentence
+```
 
 #### capitalizeEach
+Parameters: `none`
+<br>Description: Capitalizes each word in a string.
+``` handlebars
+{{capitalizeEach "capitalize EACH word in this sentence"}}
 
-Capitalizes each word in a string.
-
-**Parameters**: none.
-**Usage**:
-
-    {{capitalizeEach "capitalize EACH word in this sentence"}}
-
-**result**
-    Capitalize EACH Word In This Sentence
+// Result
+Capitalize EACH Word In This Sentence
+```
 
 #### titleize
+Parameters: `none`
+Description: Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel).
+``` handlebars
+{{titleize "capitalize EACH word in this sentence"}}
 
-Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel).
-
-**Parameters**: none.
-**Usage**:
-
-    {{titleize "capitalize EACH word in this sentence"}}
-
-**result**
-    Capitalize Each Word In This Sentence.
+// Result
+Capitalize Each Word In This Sentence.
+```
 
 #### sentence
+Parameters: `none`
+Description: Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase.
+``` handlebars
+{{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
 
-Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase.
-
-**Parameters**: none.
-**Usage**:
-
-    {{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
-
-**result**
-    Capitalize the first word in each sentence. But make the other words lowercase.
+// Result
+Capitalize the first word in each sentence. But make the other words lowercase.
+```
 
 #### reverse
+Parameters: `none`
+Description: Reverses a string.
+``` handlebars
+{{reverse "bender should NOT be allowed on TV."}}
 
-Reverses a string.
-
-**Parameters**: none.
-**Usage**:
-
-    {{reverse "bender should NOT be allowed on TV."}}
-
-**result**
-    .VT no dewolla eb TON dluohs redneb
+// Result
+.VT no dewolla eb TON dluohs redneb
+```
 
 #### truncate
+Parameters: 
+<br>length: `int`- The number of characters to keep (Required). 
+<br>omission: `string` - A string to denote an omission (Optional). 
+<br>Description: Truncates a string given a specified `length`, providing a custom string to denote an `omission`.
+``` handlebars
+{{truncate "Bender should not be allowed on tv." 31 "..."}}
 
-Truncates a string given a specified `length`, providing a custom string to denote an `omission`.
-
-**Parameters**:
-
-    length [int] - The number of characters to keep (Required)
-    omission [string] - A string to denote an omission (Optional)
-**Usage**:
-
-    {{truncate "Bender should not be allowed on tv." 31 "..."}}
-
-**result**
-    Bender should not be allowed...
+// Result
+Bender should not be allowed...
+```
 
 #### center
+Parameters:
+<br>spaces: `int` - The number of spaces. (Required)
+<br>Description: Centers a string using non-breaking spaces.
+``` handlebars
+{{center "Bender should not be allowed on tv." 10}}
 
-Centers a string using non-breaking spaces.
-
-**Parameters**:
-
-    spaces [int] - The number of spaces. (Required)
-**Usage**:
-
-    {{center "Bender should not be allowed on tv." 10}}
-
-**result**
-```
+// Result:
 |              Bender should not be allowed on tv.              |
 ```
 
 #### newLineToBr
+Parameters: `none`
+<br>Description: Converts new line characters `\n` to line breaks `<br>`.
+```
+{{{newLineToBr "Bender \n should \n not \n be allowed on tv."}}}
 
-Converts new line characters `\n` to line breaks `<br>`.
+// Result:
+Bender <br> should <br> not <br> be allowed on tv.
+````
 
-**Parameters**: none.
-**Usage**:
+#### nl2br
+Parameters: `none`
+<br>Description: Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks
+``` handlebars
+{{nl2br description}}
 
-    {{{newLineToBr "Bender \n should \n not \n be allowed on tv."}}}
+// Result: 
+<br>
+```
 
-**result**
-    Bender <br> should <br> not <br> be allowed on tv.
+
 
 ### Collections
 
 #### first
+Parameters: `none`
+<br>Description: Returns the first item in a collection.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Returns the first item in a collection.
+// Template
+{{first collection}}
 
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{first collection}}
-
-**result**
-    Amy Wong
+// Result:
+Amy Wong
+```
 
 #### withFirst
+Parameters: `none`
+<br>Description: Use the first item in a collection inside a block.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Use the first item in a collection inside a block.
+// Template
+{{#withFirst collection}}
+  <p>{{this}} is smart.</p>
+{{/withFirst}}
 
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{#withFirst collection}}
-        <p>{{this}} is smart.</p>
-    {{/withFirst}}
-
-**result**
-    <p>Amy Wong is smart.</p>
+// Result:
+<p>Amy Wong is smart.</p>
+```
 
 #### last
+Parameters: `none`
+<br>Description: Returns the last item in a collection. Opposite of `first`.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Returns the last item in a collection. Opposite of `first`.
+// Template
+{{last collection}}
 
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{last collection}}
-
-**result**
-    Scruffy
+// Result:
+Scruffy
+```
 
 #### withLast
+Parameters: `none`
+<br>Description: Use the last item in a collection inside a block. Opposite of `withFirst`.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Use the last item in a collection inside a block. Opposite of `withFirst`.
+// Template
+{{#withLast collection}}
+  <p>{{this}} is lazy.</p>
+{{/withLast}}
 
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{#withLast collection}}
-        <p>{{this}} is lazy.</p>
-    {{/withLast}}
-
-**result**
+// Result:
     <p>Scruffy is lazy.</p>
+```
 
 #### after
+Parameters:
+<br>count `int` - How many items to omit from the beginning. (Required)
+<br>Description: Returns all of the items in the collection after the specified count.
+```
+// Date
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Returns all of the items in the collection after the specified count.
+// Template
+{{after collection 5}}
 
-**Parameters**:
-
-    count [int] - How many items to omit from the beginning. (Required)
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{after collection 5}}
-
-**result**
-    Leela, Professor Farnsworth, Scruffy
+// Result:
+Leela, Professor Farnsworth, Scruffy
+```
 
 #### withAfter
+Parameters:
+<br>count `int` - How many items to omit from the beginning. (Required)
+<br>Description: Use all of the items in the collection after the specified count inside a block.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Use all of the items in the collection after the specified count inside a block.
+// Template
+{{#withAfter collection 5}}
+    {{titleize this}}
+{{/withAfter}}
 
-**Parameters**:
-
-    count [int] - How many items to omit from the beginning. (Required)
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{#withAfter collection 5}}
-        {{titleize this}}
-    {{/withAfter}}
-
-**result**
-    Leela Professor Farnsworth Scruffy
+// Result:
+Leela Professor Farnsworth Scruffy
+```
 
 #### before
+Parameters:
+<br>count `int` - How many items to omit from the end. (Required)
+<br>Description: Returns all of the items in the collection before the specified count. Opposite of `after`.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Returns all of the items in the collection before the specified count. Opposite of `after`.
+// Template
+{{before collection 5}}
 
-**Parameters**:
-
-    count [int] - How many items to omit from the end. (Required)
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{before collection 5}}
-
-**result**
-    Amy Wong, Bender, Dr. Zoidberg
+// Result:
+Amy Wong, Bender, Dr. Zoidberg
+```
 
 #### withBefore
+Parameters:
+<br>count `int` - How many items to omit from the end. (Required)
+<br>Description: Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`.
+```
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`.
+// Template
+{{#withBefore collection 5}}
+    {{reverse this}}
+{{/withBefore}}
 
-**Parameters**:
-
-    count [int] - How many items to omit from the end. (Required)
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{#withBefore collection 5}}
-        {{reverse this}}
-    {{/withBefore}}
-
-**result**
-    gnoW ymA redneB grebdioZ .rD
+// Result:
+gnoW ymA redneB grebdioZ .rD
+```
 
 #### join
+Parameters:
+<br>separator `string` - A string to use as a separator between the items. (Optional)
+<br>Description: Joins all elements of a collection into a string using a separator if specified.
+``` handlebars
+// Data
+collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 
-Joins all elements of a collection into a string using a separator if specified.
+// Template
+{{join collection " & "}}
 
-**Parameters**:
-
-    separator [string] - A string to use as a separator between the items. (Optional)
-**Usage**:
-
-    collection = ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
-
-    {{join collection " & "}}
-
-**result**
-    Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
-
+// Result:
+Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
+```
 #### sort
+Parameters: `none`
+<br>Description: Returns the collection sorted.
+```
+// Data
+collection = ['Dr. Zoidberg', 'Fry', 'Amy Wong', 'Professor Farnsworth', 'Bender', 'Hermes Conrad', 'Leela', 'Scruffy']
 
-Returns the collection sorted.
+// Template
+{{sort collection}}
 
-**Parameters**:
-
-    none.
-**Usage**:
-
-    collection = ['Dr. Zoidberg', 'Fry', 'Amy Wong', 'Professor Farnsworth', 'Bender', 'Hermes Conrad', 'Leela', 'Scruffy']
-
-    {{sort collection}}
-
-**result**
-    Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
+// Result:
+Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
+```
 
 #### withSort
+Parameters:
+<br>field `string` - String name of the field or property to sort by. (Optional)
+<br>Description: Uses the sorted collection inside the block.
+```
+// Data
+collection = [
+  name: 'Leela'
+  deliveries: 8021,
 
-Uses the sorted collection inside the block.
+  name: 'Bender'
+  deliveries: 239,
 
-**Parameters**:
+  name: 'Fry'
+  deliveries: -12
+]
 
-    field [string] - String name of the field or property to sort by. (Optional)
-**Usage**:
+// Template
+{{#withSort collection "deliveries"}}
+    {{name}}: {{deliveries}} <br>
+{{/withSort}}
 
-    collection = [
-            name: 'Leela'
-            deliveries: 8021
-        ,
-            name: 'Bender'
-            deliveries: 239
-        ,
-            name: 'Fry'
-            deliveries: -12
-    ]
-
-    {{#withSort collection "deliveries"}}
-        {{name}}: {{deliveries}} <br>
-    {{/withSort}}
-
-**result**
-    Fry: -12
-    Bender: 239
-    Leela: 8021
+// Result:
+Fry: -12
+Bender: 239
+Leela: 8021
+```
 
 #### length
+Parameters: `none`
+<br>Description: Returns the length of the collection.
+```
+// Data
+collection = ['Dr. Zoidberg', 'Fry', 'Amy Wong', 'Professor Farnsworth', 'Bender', 'Hermes Conrad', 'Leela', 'Scruffy']
 
-Returns the length of the collection.
+// Template
+{{length collection}}
 
-**Parameters**: none.
-
-    collection = ['Dr. Zoidberg', 'Fry', 'Amy Wong', 'Professor Farnsworth', 'Bender', 'Hermes Conrad', 'Leela', 'Scruffy']
-
-    {{length collection}}
-
-**result**
-    8
+// Result:
+8
+```
 
 #### lengthEqual
+Parameters:
+<br>length `int` - The value to test against. (Required)
+<br>Description: Conditionally render a block based on the length of a collection.
+```
+// Data
+collection = [
+  name: 'Leela'
+  deliveries: 8021,
 
-Conditionally render a block based on the length of a collection.
+  name: 'Bender'
+  deliveries: 239,
 
-**Parameters**:
+  name: 'Fry'
+  deliveries: -12
+]
 
-    length [int] - The value to test against. (Required)
-**Usage**:
-
-    collection = [
-            name: 'Leela'
-            deliveries: 8021
-        ,
-            name: 'Bender'
-            deliveries: 239
-        ,
-            name: 'Fry'
-            deliveries: -12
-    ]
-
-
-    {{#lengthEqual collection 3}}
+// Template
+{{#lengthEqual collection 3}}
         There are 3 people in Planet Express.
-    {{else}}
+{{else}}
         This is not Planet Express.
-    {{/lengthEqual}}
+{{/lengthEqual}}
 
-**result**
-    There are 3 people in Planet Express.
+// Result:
+There are 3 people in Planet Express.
+```
 
 #### empty
+Parameters: `none`
+<br>Description: Conditionally render a block if the collection is empty.
+```
+// Data
+collection = []
 
-Conditionally render a block if the collection is empty.
-
-**Parameters**: none.
-**Usage**:
-
-    collection = []
-
-    {{#empty collection}}
+// Template
+{{#empty collection}}
         Good news everyone!
-    {{else}}
+{{else}}
         Bad news everyone!
-    {{/empty}}
+{{/empty}}
 
-**result**
-    Good news everyone!
-
+// Result:
+Good news everyone!
+```
 #### any
+Parameters: `none`
+<br>Description: Conditionally render a block if the collection isn't empty. Opposite of `empty`
+```
+// Data
+collection = ['Professor Farnsworth']
 
-Conditionally render a block if the collection isn't empty. Opposite of `empty`
-
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Professor Farnsworth']
-
-    {{#any collection}}
+// Templates
+{{#any collection}}
         Good news everyone!
-    {{else}}
+{{else}}
         Bad news everyone!
-    {{/any}}
+{{/any}}
 
-**result**
-    Good news everyone!
+// Result:
+Good news everyone!
+```
 
 #### inArray
+Parameters:
+<br>value `string|int` - A value to test against. (Required)
+<br>Description: Conditionally render a block if a specified value is in the collection.
+```
+// Data
+collection = ['Professor Farnsworth', 'Fry', 'Bender']
 
-Conditionally render a block if a specified value is in the collection.
-
-**Parameters**:
-
-    value [string|int] - A value to test against. (Required)
-**Usage**:
-
-    collection = ['Professor Farnsworth', 'Fry', 'Bender']
-
-    {{#inArray collection "Fry"}}
+// Templates
+{{#inArray collection "Fry"}}
         I'm walking on sunshine!
-    {{else}}
+{{else}}
         I'm walking on darkness.
-    {{/any}}
+{{/any}}
 
-**result**
-    I'm walking on sunshine!
+// Result:
+I'm walking on sunshine!
+```
 
 #### eachIndex
+Parameters: `none`
+<br>Description: Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context.
+```
+// Data
+collection = ['Professor Farnsworth', 'Fry', 'Bender']
 
-Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context.
+// Templates
+{{#eachIndex collection}}
+    {{this}} is {{index}}
+{{/eachIndex}}
 
-**Parameters**: none.
-**Usage**:
-
-    collection = ['Professor Farnsworth', 'Fry', 'Bender']
-
-    {{#eachIndex collection}}
-        {{this}} is {{index}}
-    {{/eachIndex}}
-
-**result**
-    Professor Farnsworth is 0, Fry is 1, Bender is 2
+// Result:
+Professor Farnsworth is 0, Fry is 1, Bender is 2
+```
 
 ### Math
 
 #### add
+Parameters:
+<br>value `int` - The number to add to the expression. (Required)
+<br>Description: Returns the sum of two numbers.
+```
+// Data
+value = 5
 
-Returns the sum of two numbers.
+// Template
+{{add value 5}}
 
-**Parameters**:
-
-    value [int] - The number to add to the expression. (Required)
-**Usage**:
-
-    value = 5
-
-    {{add value 5}}
-
-**result**
-    10
+// Result:
+10
+```
 
 #### subtract
+Parameters:
+<br>value `int` - The number to subtract from the expression. (Required)
+<br>Description: Returns the difference of two numbers. Opposite of `add`
+```
+// Data
+value = 5
 
-Returns the difference of two numbers. Opposite of `add`
+// Template
+{{subtract value 5}}
 
-**Parameters**:
-
-    value [int] - The number to subtract from the expression. (Required)
-**Usage**:
-
-    value = 5
-
-    {{subtract value 5}}
-
-**result**
-    0
+// Result
+Result:
+0
+```
 
 #### divide
 
 Returns the division of two numbers.
+Parameters:
 
-**Parameters**:
 
-    value [int] - The number to divide the expression. (Required)
-**Usage**:
+    value `int` - The number to divide the expression. (Required)
+<br>Example:
 
     value = 5
 
-    {{divide value 5}}
+{{divide value 5}}
 
-**result**
+Result:
     1
 
 #### multiply
 
 Returns the multiplication of two numbers.
+Parameters:
 
-**Parameters**:
 
-    value [int] - The number to multiply the expression. (Required)
-**Usage**:
+    value `int` - The number to multiply the expression. (Required)
+<br>Example:
 
     value = 5
 
-    {{multiply value 5}}
+{{multiply value 5}}
 
-**result**
+Result:
     25
 
 #### floor
 
 Returns the value rounded down to the nearest integer.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = 5.6
 
-    {{floor value}}
+{{floor value}}
 
-**result**
+Result:
     5
 
 #### ceil
 
 Returns the value rounded up to the nearest integer.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = 5.6
 
-    {{ceil value}}
+{{ceil value}}
 
-**result**
+Result:
     6
 
 #### round
 
 Returns the value rounded to the nearest integer.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = 5.69
 
-    {{round value}}
+{{round value}}
 
-**result**
+Result:
     6
 
 ### Numbers
@@ -668,92 +624,92 @@ Returns the value rounded to the nearest integer.
 #### toFixed
 
 Returns exactly `digits` after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length.
+Parameters:
 
-**Parameters**:
 
-    digits [int] - The number of digits to appear after the decimal point. (Optional)
-**Usage**:
+    digits `int` - The number of digits to appear after the decimal point. (Optional)
+<br>Example:
 
     value = 5.53231
 
-    {{toFixed value 3}}
+{{toFixed value 3}}
 
-**result**
+Result:
     5.532
 
 #### toPrecision
 
 Returns the number in fixed-point or exponential notation rounded to `precision` significant digits.
+Parameters:
 
-**Parameters**:
 
-    precision [int] - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
-**Usage**:
+    precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
+<br>Example:
 
     value = 555.322
 
-    {{toPrecision value 4}}
+{{toPrecision value 4}}
 
-**result**
+Result:
     555.3
 
 
 #### toExponential
 
 Returns the number in exponential notation with one digit before the decimal point, rounded to `fractions` digits after the decimal point.
+Parameters:
 
-**Parameters**:
 
-    fractions [int] - An integer specifying the number of digits after the decimal point. (Optional)
-**Usage**:
+    fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
+<br>Example:
 
     value = 5
 
-    {{toExponential value 5}}
+{{toExponential value 5}}
 
-**result**
+Result:
     5.00000e+0
 
 #### toInt
 
 Returns an integer.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = '22.2abc'
 
-    {{toInt value}}
+{{toInt value}}
 
-**result**
+Result:
     22
 
 #### toFloat
 
 Returns a floating point number.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = '22.2abc'
 
-    {{toFloat value}}
+{{toFloat value}}
 
-**result**
+Result:
     22.2
 
 #### addCommas
 
 Adds commas to a number.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     value = 2222222
 
-    {{addCommas value}}
+{{addCommas value}}
 
-**result**
+Result:
     2,222,222
 
 
@@ -763,163 +719,163 @@ Adds commas to a number.
 #### is
 
 Conditionally render a block if the condition is true.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#is number 5}}
+{{#is number 5}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/is}}
+{{/is}}
 
-**result**
+Result:
     Kiss my shiny metal ass!
 
 #### isnt
 
 Conditionally render a block if the condition is false. Opposite of `is`.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#isnt number 5}}
+{{#isnt number 5}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/isnt}}
+{{/isnt}}
 
-**result**
+Result:
     Never mind :(
 
 #### gt
 
 Conditionally render a block if the value is greater than a given number.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#gt number 8}}
+{{#gt number 8}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/gt}}
+{{/gt}}
 
-**result**
+Result:
    Never mind :(
 
 #### gte
 
 Conditionally render a block if the value is greater or equal than a given number.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#gte number 5}}
+{{#gte number 5}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/gte}}
+{{/gte}}
 
-**result**
+Result:
     Kiss my shiny metal ass!
 
 #### lt
 
 Conditionally render a block if the value is less than a given number. Opposite of `gt`.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#lt number 3}}
+{{#lt number 3}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/lt}}
+{{/lt}}
 
-**result**
+Result:
     Never mind :(
 
 #### lte
 
 Conditionally render a block if the value is less or equal than a given number. Opposite of `gte`.
+Parameters:
 
-**Parameters**:
 
-    value [string|int] - the value to test against.
-**Usage**:
+    value `string|int` - the value to test against.
+<br>Example:
 
     number = 5
 
-    {{#lte number 5}}
+{{#lte number 5}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/lte}}
+{{/lte}}
 
-**result**
+Result:
     Kiss my shiny metal ass!
 
 #### or
 
 Conditionally render a block if one of the values is truthy.
+Parameters:
 
-**Parameters**:
 
-    values [string|int] - the values to test against.
-**Usage**:
+    values `string|int` - the values to test against.
+<br>Example:
 
     great = no
     magnificent = true
 
-    {{#or great magnificent}}
+{{#or great magnificent}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/or}}
+{{/or}}
 
-**result**
+Result:
     Kiss my shiny metal ass!
 
 #### and
 
 Conditionally render a block if both values are truthy.
+Parameters:
 
-**Parameters**:
 
-    values [string|int] - the values to test against.
-**Usage**:
+    values `string|int` - the values to test against.
+<br>Example:
 
     great = true
     magnificent = true
 
-    {{#and great magnificent}}
+{{#and great magnificent}}
         Kiss my shiny metal ass!
-    {{else}}
+{{else}}
         Never mind :(
-    {{/and}}
+{{/and}}
 
-**result**
+Result:
     Kiss my shiny metal ass!
 
 ### Dates
@@ -927,20 +883,20 @@ Conditionally render a block if both values are truthy.
 #### formatDate
 
 Formats a date into a string given a format. Accepts any value that can be passed to `new Date()`. This helper is a port of the [formatDate-js](http://https://github.com/michaelbaldry/formatDate-js) library by [Michael Baldry](https://github.com/michaelbaldry).
+Parameters:
 
-**Parameters**:
 
-    format [string] - The format string, according to these tokens: (http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime) (Required)
-**Usage**:
+    format `string` - The format string, according to these tokens: (http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime) (Required)
+<br>Example:
 
     date = new Date()
 
-    {{formatDate date "%m/%d/%Y"}}
-    {{formatDate date "%I:%M%p"}}
-    {{formatDate date "%F"}}
-    {{formatDate date "%Y%m%dT%H%M%S%z"}}
+{{formatDate date "%m/%d/%Y"}}
+{{formatDate date "%I:%M%p"}}
+{{formatDate date "%F"}}
+{{formatDate date "%Y%m%dT%H%M%S%z"}}
 
-**result**
+Result:
     07/26/2012
     11:38PM
     2012-07-26
@@ -949,31 +905,31 @@ Formats a date into a string given a format. Accepts any value that can be passe
 #### now
 
 Returns the current date.
+Parameters:
 
-**Parameters**:
 
-    format [string] - The format string, according to these tokens: http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime (Optional)
-**Usage**:
+    format `string` - The format string, according to these tokens: http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime (Optional)
+<br>Example:
 
-    {{now}}
-    {{now "%m/%d/%Y"}}
+{{now}}
+{{now "%m/%d/%Y"}}
 
-**result**
+Result:
     Thu Jul 26 2012 23:41:02 GMT-0400 (AST)
     07/26/2012
 
 #### timeago
 
 Returns a human-readable time phrase from the given date.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
     date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 
-    {{timeago date}}
+{{timeago date}}
 
-**result**
+Result:
     4 days ago
 
 ### Inflections
@@ -981,36 +937,36 @@ Returns a human-readable time phrase from the given date.
 #### inflect
 
 Returns the plural or singular form of a word based on a count.
+Parameters:
 
-**Parameters**:
 
-    singular [string] - The singular form of the word. (Required)
-    plural [string] - The plural form of the word. (Required)
+    singular `string` - The singular form of the word. (Required)
+    plural `string` - The plural form of the word. (Required)
     include [boolean] - whether or not to include the count before the word. (Optional)
-**Usage**:
+<br>Example:
 
     enemies = 0
     friends = 1
 
-    {{inflect enemies "enemy" "enemies"}}
-    {{inflect friends "friend" "friends" true}}
+{{inflect enemies "enemy" "enemies"}}
+{{inflect friends "friend" "friends" true}}
 
-**result**
+Result:
     enemies
     1 friend
 
 #### ordinalize
 
 Turns a number into an ordinal string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel).
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
-    {{ordinalize 3}}
-    {{ordinalize 1}}
-    {{ordinalize 22}}
+{{ordinalize 3}}
+{{ordinalize 1}}
+{{ordinalize 22}}
 
-**result**
+Result:
     3rd
     1st
     22nd
@@ -1020,13 +976,13 @@ Turns a number into an ordinal string. Taken from the templating library [Walrus
 #### ul
 
 Creates an unordered list.
+Parameters:
 
-**Parameters**:
 
     hash [html attributes] - HTML attributes to use on the ul element. (Optional)
-**Usage**:
+<br>Example:
 
-    collection = [
+collection = [
             name: 'Leela'
             deliveries: 8021
         ,
@@ -1037,11 +993,11 @@ Creates an unordered list.
             deliveries: 1
     ]
 
-    {{#ul collection class="deliveries-list"}}
-        {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
-    {{/ul}}
+{{#ul collection class="deliveries-list"}}
+    {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
+{{/ul}}
 
-**result**
+Result:
     <ul class="deliveries-list">
         <li>
             Leela - 8021 deliveries
@@ -1061,39 +1017,37 @@ Same as the `ul` helper but creates and ordered list.
 #### br
 
 Returns `<br>` tags based on a count.
+Parameters:
+<br>count `int` - The number of `br` elements to render. (Optional)
+<br>Example:
 
-**Parameters**:
+{{br 5}}
 
-    count [int] - The number of `br` elements to render. (Optional)
-**Usage**:
-
-    {{br 5}}
-
-**result**
-    <br><br><br><br><br>
+Result:
+    `<br><br><br><br><br>`
 
 ### Logging
 
 #### log
 
 Simple console.log()
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
-    {{log "Hi console :)"}}
+{{log "Hi console :)"}}
 
-**result**
+Result:
     Hi console :)
 
 #### debug
 
 Simple console.debug() that shows the current context.
+Parameters: `none`
 
-**Parameters**: none.
-**Usage**:
+<br>Example:
 
-    collection = [
+collection = [
             name: 'Leela'
             deliveries: 8021
         ,
@@ -1104,11 +1058,11 @@ Simple console.debug() that shows the current context.
             deliveries: 1
     ]
 
-    {{#withFirst collection}}
-        {{debug name}}
-    {{/withFirst}}
+{{#withFirst collection}}
+    {{debug name}}
+{{/withFirst}}
 
-**result**
+Result:
     Context: { deliveries: 8021, name: "Leela" }
     Value: Leela
     -----------------------------------------------
@@ -1118,50 +1072,50 @@ Simple console.debug() that shows the current context.
 #### default
 
 Provides a default or fallback value if a value doesn't exist.
+Parameters:
 
-**Parameters**:
 
-    defaultValue [string|int] - The default value to use.
-**Usage**:
+    defaultValue `string|int` - The default value to use.
+<br>Example:
 
     title = ''
 
-    {{default title "Not title available."}}
+{{default title "Not title available."}}
 
-**result**
+Result:
     Not title available.
 
 #### partial
 
 Provides an easy way to register and use partials inside your templates. This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. It was created with [brunch](http://brunch.io) in mind (which I use a lot), because brunch automatically wraps your scripts and templates in common.js modules to use in the browser.
+Parameters:
 
-**Parameters**:
 
-    name [string] - The name or path of the file in which your template is define. You can tell swag where your templates folder is by overriding Swag.Config.partialsPath. (Required)
+    name `string` - The name or path of the file in which your template is defined. (Required)
 
     data [int|string|collection] - The data you want to use inside the partial. (Optional)
-**Usage**:
+<br>Example:
 
-    # Path to your templates from where yo override Swag.Config.partialsPath
+    # Path to your templates from where you override config.partialsPath
     # The path must finish with a foward slash '/'
-    Swag.Config.partialsPath = '../views/templates/'
+    config.partialsPath = '../views/templates/'
 
-    collection = ['Professor Farnsworth', 'Fry', 'Bender']
+collection = ['Professor Farnsworth', 'Fry', 'Bender']
 
     # Your Partial (planet_express.hbs)
-    {{sort this}}
+{{sort this}}
 
     # Your template
     <p>
-        {{partial "planet_express" collection}}
+    {{partial "planet_express" collection}}
     </p>
 
-**result**
+Result:
     <p>Bender, Fry, Professor Farnsworth</p>
 
 
 
-## Credit
+### Credit
 
 Many of these helpers come from the following repos:
   * [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
