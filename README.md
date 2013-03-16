@@ -35,81 +35,6 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 
 ## The Helpers
 
-### Equals
-#### If x Equals y
-Parameters: `none`
-``` handlebars
-{{#if_eq x compare=y}} ... {{/if_eq}}
-```
-
-#### Unless x Equals y
-Parameters: `none`
-``` handlebars
-{{#unless_eq x compare=y}} ... {{/unless_eq}}
-```
-
-
-
-### Greater Than
-#### If x > y
-Parameters: `none`
-``` handlebars
-{{#if_gt x compare=y}} ... {{/if_gt}}
-```
-
-#### Unless x > y
-Parameters: `none`
-``` handlebars
-{{#unless_gt x compare=y}} ... {{/unless_gt}}
-```
-
-
-
-### Greater Than or Equal To
-#### If x >= y
-Parameters: `none`
-``` handlebars
-{{#if_gteq x compare=y}} ... {{/if_gteq}}
-```
-
-#### Unless x >= y
-Parameters: `none`
-``` handlebars
-{{#unless_gteq x compare=y}} ... {{/unless_gteq}}
-```
-
-
-
-### Less Than
-#### If x < y
-Parameters: `none`
-``` handlebars
-{{#if_lt x compare=y}} ... {{/if_lt}}
-```
-
-#### Unless x < y
-Parameters: `none`
-``` handlebars
-{{#unless_lt x compare=y}} ... {{/unless_lt}}
-```
-
-
-
-### Less Than or Equal To
-#### If x <= y
-Parameters: `none`
-``` handlebars
-{{#if_lteq x compare=y}} ... {{/if_lteq}}
-```
-
-#### Unless x <= y
-Parameters: `none`
-``` handlebars
-{{#unless_lteq x compare=y}} ... {{/unless_lteq}}
-```
-
-
-
 ### Strings
 #### hyphenate
 _Replace spaces in string with hyphens._
@@ -874,7 +799,9 @@ value = 2222222
 
 
 
-### Comparisons
+## Comparisons
+
+### Equal
 #### is
 _Conditionally render a block if the condition is true._
 <br>Parameters: value `string|int` - the value to test against.
@@ -893,6 +820,14 @@ number = 5
 // Result:
 Kiss my shiny metal ass!
 ```
+#### if_eq
+**Same as `is`, consider consolidating**
+_Conditionally render a block if the condition is true (If x = y)._
+Parameters: `none`
+``` handlebars
+{{#if_eq x compare=y}} ... {{/if_eq}}
+```
+
 #### isnt
 _Conditionally render a block if the condition is false. Opposite of `is`._
 <br>Parameters: value `string|int` - the value to test against.
@@ -912,8 +847,65 @@ number = 5
 Never mind :(
 ```
 
+#### or
+_Conditionally render a block if one of the values is truthy._
+<br>Parameters: values `string|int` - the values to test against.
+``` js
+great = no
+magnificent = true
+```
+``` html
+// Template
+{{#or great magnificent}}
+    Kiss my shiny metal ass!
+{{else}}
+    Never mind :(
+{{/or}}
+
+// Result:
+Kiss my shiny metal ass!
+```
+
+#### and
+_Conditionally render a block if both values are truthy._
+<br>Parameters: values `string|int` - the values to test against.
+``` js
+// Data
+great = true
+magnificent = true
+```
+``` html
+// Template
+{{#and great magnificent}}
+    Kiss my shiny metal ass!
+{{else}}
+    Never mind :(
+{{/and}}
+
+// Result:
+Kiss my shiny metal ass!
+```
+
+#### unless_eq
+**Same as `isnt`, consider consolidating**
+_Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
+Parameters: `none`
+``` handlebars
+{{#unless_eq x compare=y}} ... {{/unless_eq}}
+```
+
+
+### Greater Than
+#### if_gt
+_Conditionally render a block if the value is greater than a given number (If x > y)._
+Parameters: `none`
+``` handlebars
+{{#if_gt x compare=y}} ... {{/if_gt}}
+```
+
 #### gt
-_Conditionally render a block if the value is greater than a given number._
+**Same as `if_gt`, consider consolidating**
+_Conditionally render a block if the value is greater than a given number (If x > y)._
 <br>Parameters: value `string|int` - the value to test against.
 ``` js
 // Data
@@ -931,8 +923,23 @@ number = 5
 Never mind :(
 ```
 
+#### unless_gt
+_Unless greater than (Unless x > y)_
+Parameters: `none`
+``` handlebars
+{{#unless_gt x compare=y}} ... {{/unless_gt}}
+```
+
+#### if_gteq
+_Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
+Parameters: `none`
+``` handlebars
+{{#if_gteq x compare=y}} ... {{/if_gteq}}
+```
+
 #### gte
-_Conditionally render a block if the value is greater or equal than a given number._
+**Same as `if_gteq`, consider consolidating**
+_Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 <br>Parameters: value `string|int` - the value to test against.
 
 ``` js
@@ -950,6 +957,16 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
+
+#### unless_gteq
+_Render block, unless given value is greater than or equal to._
+Parameters: `none`
+_Unless x >= y_
+``` handlebars
+{{#unless_gteq x compare=y}} ... {{/unless_gteq}}
+```
+
+### Less Than
 #### lt
 _Conditionally render a block if the value is less than a given number. Opposite of `gt`._
 <br>Parameters: value `string|int` - the value to test against.
@@ -985,46 +1002,20 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
-#### or
-_Conditionally render a block if one of the values is truthy._
-<br>Parameters: values `string|int` - the values to test against.
-``` js
-great = no
-magnificent = true
-
-```
-``` html
-// Template
-{{#or great magnificent}}
-    Kiss my shiny metal ass!
-{{else}}
-    Never mind :(
-{{/or}}
-
-// Result:
-Kiss my shiny metal ass!
+#### unless_lt 
+_Render block, unless value is less than a given number (Unless x < y)_
+Parameters: `none`
+``` handlebars
+{{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
-#### and
-_Conditionally render a block if both values are truthy._
-<br>Parameters: values `string|int` - the values to test against.
-``` js
-// Data
-great = true
-magnificent = true
-
+#### unless_lteq 
+_Render block, unless value is less than or equal to a given number (Unless x <= y)_
+Parameters: `none`
+``` handlebars
+{{#unless_lteq x compare=y}} ... {{/unless_lteq}}
 ```
-``` html
-// Template
-{{#and great magnificent}}
-    Kiss my shiny metal ass!
-{{else}}
-    Never mind :(
-{{/and}}
 
-// Result:
-Kiss my shiny metal ass!
-```
 
 ### Special
 #### formatPhoneNumber

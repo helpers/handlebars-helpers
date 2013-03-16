@@ -1,0 +1,6 @@
+{
+  "name": "helper-lib",
+  "description": "A massive collection of useful Handlebars helpers.",
+  "version": "0.1.4",
+  "main": "./lib/helpers.js"
+}
