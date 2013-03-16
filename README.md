@@ -13,7 +13,6 @@ Install the module with: `npm install helpers`
 
 ```javascript
 var helpers = require('helpers');
-helpers.awesome(); // "awesome"
 ```
 **without npm**
 
@@ -22,10 +21,9 @@ helpers.awesome(); // "awesome"
 * Install with Twitter's [Bower](http://twitter.github.com/bower): `bower install helper-lib`.
 
 
+## Overview
 
-## Handlebars Helpers
-
-Handlebars includes some commonly used built-in helpers, including `{{#each}}`, `{{#if}}` and `{{#unless}}`.
+Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
 * A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space). 
 * Each parameter is a Handlebars expression. 
@@ -33,6 +31,9 @@ Handlebars includes some commonly used built-in helpers, including `{{#each}}`, 
 
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
 
+
+
+## The Helpers
 
 ### Equals
 #### If x Equals y
