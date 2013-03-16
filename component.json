@@ -1,6 +1,10 @@
 {
   "name": "helper-lib",
   "description": "A massive collection of useful Handlebars helpers.",
-  "version": "0.1.4",
-  "main": "./lib/helpers.js"
+  "version": "0.1.6",
+  "main": "./lib/helpers.js",
+  "dependencies": {
+    "type": "git",
+    "helpers": "git://github.com/assemble/helper-lib"
+  }
 }
