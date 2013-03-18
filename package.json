@@ -1,16 +1,20 @@
 {
   "name": "helper-lib",
-  "description": "A massive collection of useful Handlebars helpers.",
-  "version": "0.1.6",
+  "description": "An extensive collection of useful Handlebars helpers.",
+  "version": "0.1.4",
   "homepage": "https://github.com/assemble/helper-lib",
-  "authors": [
+  "author": {
+    "name": "assemble",
+    "url": "https://github.com/assemble/assemble"
+  },
+  "contributors": [
     {
       "name": "Brian Woodward",
-      "url": "http://github.com/doowb/"
+      "url": "https://github.com/doowb"
     },
     {
       "name": "Jon Schlinkert",
-      "url": "http://github.com/jonschlinkert/"
+      "url": "https://github.com/jonschlinkert"
     }
   ],
   "repository": {
@@ -31,16 +35,15 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt nodeunit"
+    "test": "grunt test"
   },
   "dependencies": {
-    "assemble": "0.3.9"
+    "assemble": "0.3.14"
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-contrib-jshint": "~0.1.1",
-    "grunt-contrib-nodeunit": "~0.1.2",
-    "grunt-contrib-watch": "~0.2.0"
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-nodeunit": "~0.1.2"
   },
   "keywords": [
     "block helper",
