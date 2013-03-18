@@ -1,0 +1,5 @@
+roadmap:
+  tasks:
+    - Separate into modules
+    - Proper testing for each helper
+    - YAML format, use templates for easier maintenance

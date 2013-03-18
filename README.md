@@ -1,40 +1,61 @@
-# [Helper Library v0.1.4](http://github.com/assemble/helper-lib)
+# [Helper Library v0.1.4](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
-> A growing collection of useful Handlebars helpers.
+> An extensive collection of useful Handlebars helpers.
+
 
 
 ## Quick start
+This plugin requires Grunt `~0.4.1` **for linting and testing only**, but you do not require Grunt to use the helpers.
 
-These quick start options are available:
+However, you will learn a lot about how to use these helpers if you run the tests and play around with the data yourself. 
 
-**with npm**
+So if you want to fire up [Grunt](http://gruntjs.com/) but If you haven't used it before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
-Install the module with: `npm install helpers`
+#### with `npm`
 
-```javascript
-var helpers = require('helpers');
+```shell
+npm install helper-lib --save-dev
 ```
-**without npm**
 
-* [Download the latest release](https://github.com/Assemble/helper-lib/zipball/master).
+Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+
+```js
+grunt.loadNpmTasks('helper-lib');
+```
+
+#### without `npm`
+
+The following quick start alternatives are available:
+
+* [Download the latest release](https://github.com/assemble/helper-lib/zipball/master).
 * Clone the repo: `git clone git://github.com/assemble/helper-lib.git`.
 * Install with Twitter's [Bower](http://twitter.github.com/bower): `bower install helper-lib`.
 
 
-## Overview
+### 
+Before you get started you must first install [the required local dependencies](package.json):
 
-Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
+```
+$ npm install
+```
 
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space). 
-* Each parameter is a Handlebars expression. 
-* Handlebars helpers can be accessed from any context in a template.
+When completed, you'll be able to run the various `grunt` commands provided:
 
-[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
+#### build - `grunt`
+Runs the Less.js compiler to rebuild the specified `/test/fixtures/**` files. .
 
+#### test - `grunt test`
+Runs jshint on JavaScripts and nodeunit tests on helpers. 
+
+#### watch - `grunt watch`
+This is a convenience method for watching helpers and automatically re-building them whenever you save. Requires the [grunt-contrib-watch](http://github.com/gruntjs/grunt-contrib-watch) Grunt plugin.
+
+Should you encounter problems with installing dependencies or running the `grunt` commands, be sure to first uninstall any previous versions (global and local) you may have installed, and then rerun `npm install`.
 
 **Table of Contents** 
 
 - [The Helpers](#the-helpers)
+  - [Path](#path)
   - [Strings](#strings)
     - [hyphenate](#hyphenate)
     - [dashify](#dashify)
@@ -47,7 +68,6 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
     - [reverse](#reverse)
     - [truncate](#truncate)
     - [center](#center)
-    - [newLineToBr](#newlinetobr)
     - [nl2br](#nl2br)
   - [Collections](#collections)
     - [first](#first)
@@ -129,8 +149,53 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 - [Authors](#authors)
 - [Credit](#credit)
 
+## Overview
+Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
+
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space). 
+* Each parameter is a Handlebars expression. 
+* Handlebars helpers can be accessed from any context in a template.
+
+[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
+
+
+#### Custom Helpers
+
+> Contributions welcome! Please consider adding your own helpers to this library.
+
+Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
+
+Handlebars allows two different kinds of helpers:
+
+* **Expression helpers** are basically regular functions that take the name of the helper and the helper function as arguments. Once an expression helper is registered, it can be called anywhere in your templates, then Handlebars takes the expression's return value and writes it into the template.
+* **Block helpers** There are a few block helpers included by default with Handlebars, `{{#each}}`, `{{#if}}` and `{{#unless}}`. Custom block helpers are registered the same way as exptression helpers, but the difference is that Handlebars will pass the contents of the block compiled into a function to the helper.
 
 ## The Helpers
+
+### Path
+Path helpers are [node.js](http://nodejs.org/api/path.html#path_path_relative_from_to) utilities for handling and transforming file paths. As with node.js: 
+
+> "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
+
+#### relative
+_Derive the relative path from one absolute path to another._
+Type: `String`
+Default: `none`
+
+Usage:
+``` html
+{{relative "from" "to"}}
+```
+Example:
+``` handlebars
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+
+```
+Renders to: 
+``` html
+<a href="../../dist/assets/css/styles.css"></a> 
+```
+
 
 ### Strings
 #### hyphenate
@@ -246,16 +311,6 @@ _Centers a string using non-breaking spaces._
 // Result:
 |              Bender should not be allowed on tv.              |
 ```
-
-#### newLineToBr
-_Converts new line characters `\n` to line breaks `<br>`._
-<br>Parameters: `none`
-```
-{{{newLineToBr "Bender \n should \n not \n be allowed on tv."}}}
-
-// Result:
-Bender <br> should <br> not <br> be allowed on tv.
-````
 
 #### nl2br
 _Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks_
@@ -692,7 +747,6 @@ TODO...
 ```
 
 
-
 ### Math
 #### add
 _Returns the sum of two numbers._
@@ -800,8 +854,9 @@ value = 5.69
 6
 ```
 
-### Numbers
 
+
+### Numbers
 #### toFixed
 _Returns exactly `digits` after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length._
 <br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
@@ -895,10 +950,7 @@ value = 2222222
 ```
 
 
-
-## Comparisons
-
-### Equal
+### Comparisons: Equal
 #### is
 _Conditionally render a block if the condition is true._
 <br>Parameters: value `string|int` - the value to test against.
@@ -992,7 +1044,8 @@ Parameters: `none`
 ```
 
 
-### Greater Than
+
+### Comparisons: Greater Than
 #### if_gt
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
@@ -1063,7 +1116,8 @@ _Unless x >= y_
 {{#unless_gteq x compare=y}} ... {{/unless_gteq}}
 ```
 
-### Less Than
+
+### Comparisons: Less Than
 #### lt
 _Conditionally render a block if the value is less than a given number. Opposite of `gt`._
 <br>Parameters: value `string|int` - the value to test against.
@@ -1114,20 +1168,6 @@ Parameters: `none`
 ```
 
 
-### Special
-#### formatPhoneNumber
-_Output a formatted phone number_
-Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-```js
-phoneNumber: 4444444444
-```
-``` handlebars
-{{formatPhoneNumber phoneNumber}}
-```
-Result:
-```
-(444) 444-4444
-```
 
 ### Dates
 #### formatDate
@@ -1181,6 +1221,22 @@ date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 
 
 
+### Special
+#### formatPhoneNumber
+_Output a formatted phone number_
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+```js
+phoneNumber: 4444444444
+```
+``` handlebars
+{{formatPhoneNumber phoneNumber}}
+```
+Result:
+```
+(444) 444-4444
+```
+
+
 ### Inflections
 #### inflect
 _Returns the plural or singular form of a word based on a count._
@@ -1221,52 +1277,79 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 ### HTML
 #### ul
 _Creates an unordered list._
-<br>Parameters: hash `html attributes` - HTML attributes to use on the ul element. (Optional)
+
+Params: `Hash|HTML attributes`, `Optional`
+
+HTML attributes to use on the `ul` element. 
 ``` js
 // Data
 collection = [
-        name: 'Leela'
-        deliveries: 8021
-    ,
-        name: 'Bender'
-        deliveries: 239
-    ,
-        name: 'Fry'
-        deliveries: 1
+  name: 'Leela'
+  deliveries: 8021,
+  name: 'Bender'
+  deliveries: 239,
+  name: 'Fry'
+  deliveries: 1
 ]
 ```
-``` handlebars
+``` hbs
 // Template
 {{#ul collection class="deliveries-list"}}
-{{name}} - {{inflect deliveries "delivery" "deliveries" true}}
+  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
 ```
 ``` html
 // Result:
 <ul class="deliveries-list">
-    <li>
-        Leela - 8021 deliveries
-    </li>
-    <li>
-        Bender - 239 deliveries
-    </li>
-    <li>
-        Fry - 1 delivery
-    </li>
+  <li> Leela - 8021 deliveries </li>
+  <li> Bender - 239 deliveries </li>
+  <li> Fry - 1 delivery </li>
 </ul>
 ```
 #### ol
+_Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
 
+Params: `Hash`, `HTML attributes`, `Optional`
+
+HTML attributes to use on the `ol` element. 
+``` js
+// Data
+collection = [
+  name: 'Leela'
+  deliveries: 8021,
+  name: 'Bender'
+  deliveries: 239,
+  name: 'Fry'
+  deliveries: 1
+]
+```
+``` hbs
+// Template
+{{#ol collection class="deliveries-list"}}
+  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
+{{/ol}}
+```
+``` html
+// Result:
+<ol class="deliveries-list">
+  <li> Leela - 8021 deliveries </li>
+  <li> Bender - 239 deliveries </li>
+  <li> Fry - 1 delivery </li>
+</ol>
+```
 
 #### br
-_Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
-<br>Parameters: Count `int` - The number of `br` elements to render. (Optional)
-``` html
-// Template
-{{br 5}}
+Params: `Integer|Count`, `Optional`
 
-// Result:
-`<br><br>`
+The number of `br` elements to render. 
+
+`template.hbs`
+``` hbs
+{{br 5}}
+```
+renders to:
+``` html
+`<br><br><br><br><br>`
 ```
 
 
@@ -1288,16 +1371,13 @@ _Simple `console.debug()` that shows the current context._
 ``` js
 // Data
 collection = [
-        name: 'Leela'
-        deliveries: 8021
-    ,
-        name: 'Bender'
-        deliveries: 239
-    ,
-        name: 'Fry'
-        deliveries: 1
+  name: 'Leela'
+  deliveries: 8021,
+  name: 'Bender'
+  deliveries: 239,
+  name: 'Fry'
+  deliveries: 1
 ]
-
 ```
 ``` html
 // Template
@@ -1357,34 +1437,17 @@ collection = [
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
+
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
+Want to help make helper-lib even better? All constructive feedback and contributions are welcome, so please consider contributing!  We can always use help creating, tests, documentation or resolving [Issues](https://github.com/assemble/helper-lib/issues), but if you have other ideas for how you can help, Brian and I would love to hear them!
 
-#### Adding Custom Helpers
+[https://github.com/assemble/helper-lib/issues](http://github.com/assemble/helper-lib/issues)
+ In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
 
-> Contributions welcome! Please consider adding your own helpers to this library.
-
-Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
-
-Handlebars allows two different kinds of helpers:
-
-* **Expression helpers** are basically regular functions that take the name of the helper and the helper function as arguments. Once an expression helper is registered, it can be called anywhere in your templates, then Handlebars takes the expression's return value and writes it into the template.
-* **Block helpers** There are a few block helpers included by default with Handlebars, `{{#each}}`, `{{#if}}` and `{{#unless}}`. Custom block helpers are registered the same way as exptression helpers, but the difference is that Handlebars will pass the contents of the block compiled into a function to the helper.
-
-
-## Release History
-* 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty"
-* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
-* 2013-03-06    v0.1.0    First commit. 
-
-
-## Roadmap
-* Separate into modules
-* Proper testing for each helper
-* YAML format, use templates for easier maintenance
 
 
 ## Authors
+
 **Jon Schlinkert**
 
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
@@ -1395,11 +1458,88 @@ Handlebars allows two different kinds of helpers:
 + [http://twitter.com/doowb](http://twitter.com/doowb)
 + [http://github.com/doowb](http://github.com/doowb)
 
+## Copyright and license
+Copyright 2013 Assemble
 
-## Credit
-> Many of these helpers come from the following repos:
+[MIT License](LICENSE-MIT)
 
-* [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
-* [Swag v0.2.1, by Elving Rodriguez](http://elving.github.com/swag/)
 
+
+## Release History
+
+* 2013-03-18    v0.1.4    New path helper "relative", for resolving relative path from one absolute path to another. 
+* 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty" 
+* 2013-03-15    v0.1.2    Update README.md with documentation, examples. 
+* 2013-03-06    v0.1.0    First commit. 
+
+
+### Roadmap
+* Separate into modules
+* Proper testing for each helper
+* YAML format, use templates for easier maintenance
+
+---
+
+_This README was generated using the Grunt.js plugin, [assemble](http://github.com/assemble/assemble) on Mon Mar 18 2013 05:42:46._
+
+
+
+
+
+
+[download]: https://github.com/assemble/helper-lib/zipball/master
+
+
+[config]: https://github.com/assemble/assemble/wiki/Configuration
+[gruntfile]: https://github.com/assemble/assemble/wiki/Gruntfile
+[tasks]: https://github.com/assemble/assemble/wiki/Task-and-Targets
+[options]: https://github.com/assemble/assemble/wiki/Options
+
+
+[templates]: https://github.com/assemble/assemble/wiki/Templates
+[layouts]: https://github.com/assemble/assemble/wiki/Layouts
+[pages]: https://github.com/assemble/assemble/wiki/Pages
+[partials]: https://github.com/assemble/assemble/wiki/Partials
+[helpers]: https://github.com/assemble/assemble/wiki/Helpers
+[collections]: https://github.com/assemble/assemble/wiki/Collections
+[assets]: https://github.com/assemble/assemble/wiki/Assets
+
+
+[content]: https://github.com/assemble/assemble/wiki/Content
+[data]: https://github.com/assemble/assemble/wiki/Data
+[markdown]: https://github.com/assemble/assemble/wiki/Markdown
+
+
+[examples]: https://github.com/assemble/assemble-examples
+[exampleSite]: https://github.com/assemble/assemble-examples
+[exampleBasic]: https://github.com/assemble/assemble-examples
+[exampleAdvanced]: https://github.com/assemble/assemble-examples
+[exampleGrid]: https://github.com/assemble/assemble-examples
+[exampleTable]: https://github.com/assemble/assemble-examples
+[exampleForm]: https://github.com/assemble/assemble-examples
+
+
+[contribute]: https://github.com/assemble/assemble/wiki/Contributing-to-Assemble
+[extend]: https://github.com/assemble/assemble/wiki/Extending-Assemble
+[helpers-lib]: https://github.com/assemble/helpers-lib
+
+
+[grunt]: http://gruntjs.com/
+[upgrading]: http://gruntjs.com/upgrading-from-0.3-to-0.4
+[getting-started]: http://gruntjs.com/getting-started
+[package]: https://npmjs.org/doc/json.html
+
+
+[assemble]: https://github.com/assemble/assemble
+[pre]: https://github.com/assemble/pre
+[dry]: https://github.com/assemble/dry
+[assemble-github-com]: https://github.com/assemble/assemble.github.com
+[assemble-examples-bootstrap]: https://github.com/assemble/assemble-examples-bootstrap
+[assemble-internal]: https://github.com/assemble/assemble-internal
+[assemble-styles]: https://github.com/assemble/assemble-styles
+[assemble-examples-readme]: https://github.com/assemble/assemble-examples-readme
+[grunt-toc]: https://github.com/assemble/grunt-toc
+[helper-lib]: https://github.com/assemble/helper-lib
+[grunt-dry]: https://github.com/assemble/grunt-dry
+[assemble-examples]: https://github.com/assemble/assemble-examples
 
