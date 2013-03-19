@@ -1,4 +1,4 @@
-# [Helper Library v0.1.4](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.7](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > An extensive collection of useful Handlebars helpers.
 
@@ -1467,7 +1467,7 @@ Copyright 2013 Assemble
 
 ## Release History
 
-* 2013-03-18    v0.1.4    New path helper "relative", for resolving relative path from one absolute path to another. 
+* 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another. 
 * 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty" 
 * 2013-03-15    v0.1.2    Update README.md with documentation, examples. 
 * 2013-03-06    v0.1.0    First commit. 
@@ -1480,7 +1480,7 @@ Copyright 2013 Assemble
 
 ---
 
-_This README was generated using the Grunt.js plugin, [assemble](http://github.com/assemble/assemble) on Mon Mar 18 2013 05:42:46._
+_This README was generated using the Grunt.js plugin, [assemble](http://github.com/assemble/assemble) on Mon Mar 18 2013 12:27:34._
 
 
 

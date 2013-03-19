@@ -42,11 +42,8 @@ module.exports = function(grunt) {
     assemble: {
       // Run basic tests on templates and data.
       tests: {
-        options: {
-          partials: ['test/spec/helpers/*.hbs']
-        },
         files: {
-          'test/actual': ['test/spec/tests.hbs']
+          'test/actual': ['test/spec/*.hbs']
         }
       },
       // Internal task to build README, docs.

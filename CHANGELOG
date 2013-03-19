@@ -1,4 +1,4 @@
-v0.1.4:
+v0.1.7:
   date: "2013-03-18"
   changes:
     - New path helper "relative", for resolving relative path from one absolute path to another.

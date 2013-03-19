@@ -1,0 +1,29 @@
+---
+from: test/spec/spec.hbs
+to: test/actual/something.html
+---
+
+One: {{relative from to}}
+
+Two: {{relative "docs/toc.md" "lib"}}
+Three: {{relative "lib" "docs/toc.md"}}
+
+Four: {{relative "." "lib"}}
+Five: {{relative "docs/toc.md" "."}}
+Six: {{relative " " "lib"}}
+Seven: {{relative "docs/toc.md" ""}}
+Eight: {{relative "./" "lib"}}
+Nine: {{relative "docs/toc.md" "/"}}
+
+Exension: {{ext "docs/toc.md"}}
+Filename: {{filename "docs/toc.md"}}
+Basename: {{basename "docs/toc.md"}}
+Absolute: {{absolute}}
+Current: {{current}}
+
+<a href="{{relative "docs/toc.md" "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "." "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative " " "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "/" "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "docs/toc.md" "."}}/assets/css/styles.css"></a> 
+<a href="{{relative "docs/toc.md" "/"}}/assets/css/styles.css"></a> 
