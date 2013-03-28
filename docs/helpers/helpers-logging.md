@@ -3,7 +3,7 @@ _Simple `console.log()`_
 <br>Parameters: `none`
 ``` html
 // Template
-\{{log "Hi console :)"}}
+{{log "Hi console :)"}}
 
 // Result:
 Hi console :)
@@ -25,9 +25,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withFirst collection}}
-\{{debug name}}
-\{{/withFirst}}
+{{#withFirst collection}}
+   {{debug name}}
+{{/withFirst}}
 
 // Result:
 Context: { deliveries: 8021, name: "Leela" }

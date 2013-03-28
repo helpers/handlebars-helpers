@@ -4,16 +4,17 @@ Path helpers are [node.js](http://nodejs.org/api/path.html#path_path_relative_fr
 
 #### relative
 _Derive the relative path from one absolute path to another._
-Type: `String`
+
+Parameters: `string` (the value to test against)
 Default: `none`
 
 Usage:
 ``` html
-\{{relative "from" "to"}}
+{{relative "from" "to"}}
 ```
 Example:
 ``` handlebars
-<a href="\{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 
 ```
 Renders to: 

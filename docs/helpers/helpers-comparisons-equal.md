@@ -1,27 +1,55 @@
 #### is
-_Conditionally render a block if the condition is true._
-<br>Parameters: value `string|int` - the value to test against.
+_Conditionally render a block if the condition is true (if x = y)._
+
+Parameters: `string|int` (the value to test against)
+Default: `undefined`
+
+Example #1:
 ``` js
 // Data
-number = 5
+---
+number = 5 
+---
 ```
 ``` html
 // Template
-\{{#is number 5}}
+{{#is number 5}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/is}}
+{{/is}}
 
 // Result:
 Kiss my shiny metal ass!
 ```
+
+Example #2:
+
+If you are using [Assemble](), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
+
+``` yaml
+--- # YAML Front Matter
+number = 5 
+---
+```
+``` html
+{{#is number 5}}
+    Kiss my shiny metal ass!
+{{else}}
+    Never mind :(
+{{/is}}
+```
+Result:
+```
+Kiss my shiny metal ass!
+```
+
 #### if_eq
 **Same as `is`, consider consolidating**
 _Conditionally render a block if the condition is true (If x = y)._
 Parameters: `none`
 ``` handlebars
-\{{#if_eq x compare=y}} ... \{{/if_eq}}
+{{#if_eq x compare=y}} ... {{/if_eq}}
 ```
 
 #### isnt
@@ -33,11 +61,11 @@ number = 5
 ```
 ``` html
 // Template
-\{{#isnt number 5}}
+{{#isnt number 5}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/isnt}}
+{{/isnt}}
 
 // Result:
 Never mind :(
@@ -52,11 +80,11 @@ magnificent = true
 ```
 ``` html
 // Template
-\{{#or great magnificent}}
+{{#or great magnificent}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/or}}
+{{/or}}
 
 // Result:
 Kiss my shiny metal ass!
@@ -72,11 +100,11 @@ magnificent = true
 ```
 ``` html
 // Template
-\{{#and great magnificent}}
+{{#and great magnificent}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/and}}
+{{/and}}
 
 // Result:
 Kiss my shiny metal ass!
@@ -87,5 +115,5 @@ Kiss my shiny metal ass!
 _Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
 Parameters: `none`
 ``` handlebars
-\{{#unless_eq x compare=y}} ... \{{/unless_eq}}
+{{#unless_eq x compare=y}} ... {{/unless_eq}}
 ```

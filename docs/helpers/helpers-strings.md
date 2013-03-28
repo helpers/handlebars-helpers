@@ -2,7 +2,7 @@
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
-\{{hyphenate "make this all hyphenated"}}
+{{hyphenate "make this all hyphenated"}}
 
 // Result 
 make-this-all-hyphenated
@@ -12,7 +12,7 @@ make-this-all-hyphenated
 _Same as `hyphenate`, but replaces dots in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
-\{{dashify "make.this.all.hyphenated"}}
+{{dashify "make.this.all.hyphenated"}}
 
 // Result
 make-this-all-hyphenated
@@ -22,17 +22,17 @@ make-this-all-hyphenated
 _Turns a string to lowercase._
 <br>Parameters: `none`
 ``` handlebars
-\{{lowercase "MAKE THIS ALL LOWERCASE"}}
+{{lowercase "MAKE THIS ALL LOWERCASE"}}
 
 // Result
 make this all lowercase
 ```
 
 #### uppercase
-_Turns a string to uppercase. Opposite of `\{{lowercase}}`._
+_Turns a string to uppercase. Opposite of `{{lowercase}}`._
 <br>Parameters: `none`
 ``` handlebars
- \{{uppercase "make this all uppercase"}}
+ {{uppercase "make this all uppercase"}}
 
 // Result
 MAKE THIS ALL UPPERCASE
@@ -42,7 +42,7 @@ MAKE THIS ALL UPPERCASE
 _Capitalizes the first word in a string._
 <br>Parameters: `none`
 ``` handlebars
-\{{capitalizeFirst "capitalize first word in this sentence"}}
+{{capitalizeFirst "capitalize first word in this sentence"}}
 
 // Result
 Capitalize first word in this sentence
@@ -52,7 +52,7 @@ Capitalize first word in this sentence
 _Capitalizes each word in a string._
 <br>Parameters: `none`
 ``` handlebars
-\{{capitalizeEach "capitalize EACH word in this sentence"}}
+{{capitalizeEach "capitalize EACH word in this sentence"}}
 
 // Result
 Capitalize EACH Word In This Sentence
@@ -62,7 +62,7 @@ Capitalize EACH Word In This Sentence
 _Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
 ``` handlebars
-\{{titleize "capitalize EACH word in this sentence"}}
+{{titleize "capitalize EACH word in this sentence"}}
 
 // Result
 Capitalize Each Word In This Sentence.
@@ -72,7 +72,7 @@ Capitalize Each Word In This Sentence.
 _Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase._
 Parameters: `none`
 ``` handlebars
-\{{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
+{{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
 
 // Result
 Capitalize the first word in each sentence. But make the other words lowercase.
@@ -82,7 +82,7 @@ Capitalize the first word in each sentence. But make the other words lowercase.
 _Reverses a string._
 <br>Parameters: `none`
 ``` handlebars
-\{{reverse "bender should NOT be allowed on TV."}}
+{{reverse "bender should NOT be allowed on TV."}}
 
 // Result
 .VT no dewolla eb TON dluohs redneb
@@ -96,7 +96,7 @@ _Truncates a string given a specified `length`, providing a custom string to den
 * omission: `string` - A string to denote an omission (Optional). 
 
 ``` handlebars
-\{{truncate "Bender should not be allowed on tv." 31 "..."}}
+{{truncate "Bender should not be allowed on tv." 31 "..."}}
 
 // Result
 Bender should not be allowed...
@@ -106,7 +106,7 @@ Bender should not be allowed...
 _Centers a string using non-breaking spaces._
 <br>Parameters: spaces: `int` - The number of spaces. (Required)
 ``` handlebars
-\{{center "Bender should not be allowed on tv." 10}}
+{{center "Bender should not be allowed on tv." 10}}
 
 // Result:
 |              Bender should not be allowed on tv.              |
@@ -116,7 +116,7 @@ _Centers a string using non-breaking spaces._
 _Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks_
 <br>Parameters: `none`
 ``` handlebars
-\{{nl2br <br>description}}
+{{nl2br <br>description}}
 
 // Result: 
 <br>

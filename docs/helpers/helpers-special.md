@@ -5,7 +5,7 @@ Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-part
 phoneNumber: 4444444444
 ```
 ``` handlebars
-\{{formatPhoneNumber phoneNumber}}
+{{formatPhoneNumber phoneNumber}}
 ```
 Result:
 ```

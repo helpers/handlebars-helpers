@@ -17,7 +17,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{first collection}}
+{{first collection}}
 
 // Result:
 Amy Wong
@@ -41,9 +41,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withFirst collection}}
-  <p>\{{this}} is smart.</p>
-\{{/withFirst}}
+{{#withFirst collection}}
+  <p>{{this}} is smart.</p>
+{{/withFirst}}
 
 // Result:
 <p>Amy Wong is smart.</p>
@@ -67,7 +67,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{last collection}}
+{{last collection}}
 
 // Result:
 Scruffy
@@ -91,9 +91,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withLast collection}}
-  <p>\{{this}} is lazy.</p>
-\{{/withLast}}
+{{#withLast collection}}
+  <p>{{this}} is lazy.</p>
+{{/withLast}}
 
 // Result:
 <p>Scruffy is lazy.</p>
@@ -117,7 +117,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{after collection 5}}
+{{after collection 5}}
 
 // Result:
 Leela, Professor Farnsworth, Scruffy
@@ -141,9 +141,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withAfter collection 5}}
-    \{{titleize this}}
-\{{/withAfter}}
+{{#withAfter collection 5}}
+    {{titleize this}}
+{{/withAfter}}
 
 // Result:
 Leela Professor Farnsworth Scruffy
@@ -167,7 +167,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{before collection 5}}
+{{before collection 5}}
 
 // Result:
 Amy Wong, Bender, Dr. Zoidberg
@@ -191,9 +191,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withBefore collection 5}}
-    \{{reverse this}}
-\{{/withBefore}}
+{{#withBefore collection 5}}
+    {{reverse this}}
+{{/withBefore}}
 
 // Result:
 gnoW ymA redneB grebdioZ .rD
@@ -217,7 +217,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{join collection " & "}}
+{{join collection " & "}}
 
 // Result:
 Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
@@ -241,7 +241,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{sort collection}}
+{{sort collection}}
 
 // Result:
 Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
@@ -266,9 +266,9 @@ collection = [
 ```
 ``` html
 // Template
-\{{#withSort collection "deliveries"}}
-    \{{name}}: \{{deliveries}} <br>
-\{{/withSort}}
+{{#withSort collection "deliveries"}}
+    {{name}}: {{deliveries}} <br>
+{{/withSort}}
 
 // Result:
 Fry: -12
@@ -295,7 +295,7 @@ collection = [
 ```
 ``` html
 // Template
-\{{length collection}}
+{{length collection}}
 
 // Result:
 8
@@ -319,11 +319,11 @@ collection = [
 ```
 ``` html
 // Template
-\{{#lengthEqual collection 3}}
+{{#lengthEqual collection 3}}
         There are 3 people in Planet Express.
-\{{else}}
+{{else}}
         This is not Planet Express.
-\{{/lengthEqual}}
+{{/lengthEqual}}
 
 // Result:
 There are 3 people in Planet Express.
@@ -338,11 +338,11 @@ collection = []
 ```
 ``` html
 // Template
-\{{#empty collection}}
+{{#empty collection}}
         Good news everyone!
-\{{else}}
+{{else}}
         Bad news everyone!
-\{{/empty}}
+{{/empty}}
 
 // Result:
 Good news everyone!
@@ -356,11 +356,11 @@ collection = ['Professor Farnsworth']
 ```
 ``` html
 // Templates
-\{{#any collection}}
+{{#any collection}}
         Good news everyone!
-\{{else}}
+{{else}}
         Bad news everyone!
-\{{/any}}
+{{/any}}
 
 // Result:
 Good news everyone!
@@ -375,18 +375,18 @@ collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
 ``` html
 // Templates
-\{{#inArray collection "Fry"}}
+{{#inArray collection "Fry"}}
         I'm walking on sunshine!
-\{{else}}
+{{else}}
         I'm walking on darkness.
-\{{/any}}
+{{/any}}
 
 // Result:
 I'm walking on sunshine!
 ```
 
 #### eachIndex
-_Current implementation of the default Handlebars loop helper \{{#each}} adding index (0-based index) to the loop context._
+_Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context._
 <br>Parameters: `none`
 ``` js
 // Data
@@ -394,9 +394,9 @@ collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
 ``` html
 // Templates
-\{{#eachIndex collection}}
-    \{{this}} is \{{index}}
-\{{/eachIndex}}
+{{#eachIndex collection}}
+    {{this}} is {{index}}
+{{/eachIndex}}
 
 // Result:
 Professor Farnsworth is 0, Fry is 1, Bender is 2
@@ -411,9 +411,9 @@ TODO...
 ```
 ``` html
 // Templates
-\{{#eachProperty object}}
-    \{{property}}: \{{value}}<br/>
-\{{/eachProperty }}
+{{#eachProperty object}}
+    {{property}}: {{value}}<br/>
+{{/eachProperty }}
 
 // Result
 TODO...

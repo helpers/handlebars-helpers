@@ -5,11 +5,11 @@ _Conditionally render a block if the value is less than a given number. Opposite
 number = 5
 ```
 ``` html
-\{{#lt number 3}}
+{{#lt number 3}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/lt}}
+{{/lt}}
 
 // Result:
 Never mind :(
@@ -23,11 +23,11 @@ number = 5
 ```
 ``` html
 // Template
-\{{#lte number 5}}
+{{#lte number 5}}
     Kiss my shiny metal ass!
-\{{else}}
+{{else}}
     Never mind :(
-\{{/lte}}
+{{/lte}}
 
 // Result:
 Kiss my shiny metal ass!
@@ -37,12 +37,12 @@ Kiss my shiny metal ass!
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
 ``` handlebars
-\{{#unless_lt x compare=y}} ... \{{/unless_lt}}
+{{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
 #### unless_lteq 
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
 ``` handlebars
-\{{#unless_lteq x compare=y}} ... \{{/unless_lteq}}
+{{#unless_lteq x compare=y}} ... {{/unless_lteq}}
 ```

@@ -11,8 +11,8 @@ friends = 1
 ```
 ``` html
 // Template
-\{{inflect enemies "enemy" "enemies"}}
-\{{inflect friends "friend" "friends" true}}
+{{inflect enemies "enemy" "enemies"}}
+{{inflect friends "friend" "friends" true}}
 
 // Result:
 enemies
@@ -23,9 +23,9 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 <br>Parameters: `none`
 ``` html
 // Template
-\{{ordinalize 3}}
-\{{ordinalize 1}}
-\{{ordinalize 22}}
+{{ordinalize 3}}
+{{ordinalize 1}}
+{{ordinalize 22}}
 
 // Result:
 3rd

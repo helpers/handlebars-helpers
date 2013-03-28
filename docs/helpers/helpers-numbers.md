@@ -7,7 +7,7 @@ value = 5.53231
 ```
 ``` html
 // Template
-\{{toFixed value 3}}
+{{toFixed value 3}}
 
 // Result:
 5.532
@@ -22,7 +22,7 @@ value = 555.322
 ```
 ``` html
 // Template
-\{{toPrecision value 4}}
+{{toPrecision value 4}}
 
 // Result:
 555.3
@@ -38,7 +38,7 @@ value = 5
 ```
 ``` html
 // Template
-\{{toExponential value 5}}
+{{toExponential value 5}}
 
 // Result:
 5.00000e+0
@@ -53,7 +53,7 @@ value = '22.2abc'
 ```
 ``` html
 // Template
-\{{toInt value}}
+{{toInt value}}
 
 // Result:
 22
@@ -68,7 +68,7 @@ value = '22.2abc'
 ```
 ``` html
 // Template
-\{{toFloat value}}
+{{toFloat value}}
 
 // Result:
 22.2
@@ -84,7 +84,7 @@ value = 2222222
 ```
 ``` html
 // Template
-\{{addCommas value}}
+{{addCommas value}}
 
 // Result:
 2,222,222

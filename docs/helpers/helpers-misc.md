@@ -4,7 +4,7 @@ _Provides a default or fallback value if a value doesn't exist._
 
 ``` html
 // Template
-\{{default title "Not title available."}}
+{{default title "Not title available."}}
 
 // Result:
 Not title available.
@@ -34,10 +34,10 @@ collection = [
 ```
 ``` html
 // Your Partial (planet_express.hbs)
-\{{sort this}}
+{{sort this}}
 
 // Your template
-<p>\{{partial "planet_express" collection}}</p>
+<p>{{partial "planet_express" collection}}</p>
 
 // Result:
 <p>Bender, Fry, Professor Farnsworth</p>

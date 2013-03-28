@@ -7,7 +7,7 @@ value = 5
 ```
 ``` html
 // Template
-\{{add value 5}}
+{{add value 5}}
 
 // Result:
 10
@@ -22,7 +22,7 @@ value = 5
 ```
 ``` html
 // Template
-\{{subtract value 5}}
+{{subtract value 5}}
 
 // Result:
 0
@@ -37,7 +37,7 @@ value = 5
 ```
 ``` html
 // Template
-\{{divide value 5}}
+{{divide value 5}}
 
 // Result:
 1
@@ -53,7 +53,7 @@ value = 5
 ```
 ``` html
 // Template
-\{{multiply value 5}}
+{{multiply value 5}}
 
 // Result:
 25
@@ -68,7 +68,7 @@ value = 5.6
 ```
 ``` html
 // Template
-\{{floor value}}
+{{floor value}}
 
 // Result:
 5
@@ -83,7 +83,7 @@ value = 5.6
 ```
 ``` html
 // Template
-\{{ceil value}}
+{{ceil value}}
 
 // Result:
 6
@@ -98,7 +98,7 @@ value = 5.69
 ```
 ``` html
 // Template
-\{{round value}}
+{{round value}}
 
 // Result:
 6
