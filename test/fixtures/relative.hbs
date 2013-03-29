@@ -1,0 +1,37 @@
+---
+from: test/spec/spec.hbs
+to: test/actual/something.html
+---
+
+One: {{relative from to}}
+
+Two: {{relative "docs/toc.md" "lib"}}
+Three: {{relative "lib" "docs/toc.md"}}
+
+Four: {{relative "." "lib"}}
+Five: {{relative "docs/toc.md" "."}}
+Five: {{relative "docs/toc.md" "js-yaml"}}
+Six: {{relative "js-yaml/bin" "lib"}}
+Seven: {{relative "docs/toc.md" "js-yaml"}}
+Eight: {{relative "./" "js-yaml/bin"}}
+Nine: {{relative "docs/toc.md" "js-yaml"}}
+Nine: {{relative "." "js-yaml/bin"}}
+
+Exension: {{ext "docs/toc.html"}}
+
+Filename: {{filename "docs/toc.md"}}
+
+Basename: {{basename "docs/toc.md"}}
+
+Absolute: {{absolute}}
+
+Root: {{root}}
+
+Context: {{file}}
+
+<a href="{{relative "docs/toc.md" "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "." "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative " " "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "/" "lib"}}/assets/css/styles.css"></a> 
+<a href="{{relative "docs/toc.md" "."}}/assets/css/styles.css"></a> 
+<a href="{{relative "docs/toc.md" "/"}}/assets/css/styles.css"></a> 
