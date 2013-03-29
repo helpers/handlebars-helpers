@@ -1,6 +1,6 @@
+
 /node_modules/
 *.sublime-project
 *.sublime-workspace
 
-/tmp/
-/docs/templates/
+tmp

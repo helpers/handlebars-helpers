@@ -1,17 +1,17 @@
-# [Helper Library v0.1.7](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.7](http://github.com/[object Object]/helper-lib) [![Build Status](https://travis-ci.org/[object Object]/helper-lib.png)](https://travis-ci.org/[object Object]/helper-lib)
 
 > An extensive collection of useful Handlebars helpers.
 
 
 
+
+
+
+
 ## Quick start
-This plugin requires Grunt `~0.4.1` **for linting and testing only**, but you do not require Grunt to use the helpers.
+This plugin requires Grunt `~0.4.1` for linting and testing, but Grunt is **not required** to use the helpers. 
 
-However, you will learn a lot about how to use these helpers if you run the tests and play around with the data yourself. 
-
-So if you want to fire up [Grunt](http://gruntjs.com/) but If you haven't used it before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
-
-#### with `npm`
+If you want to learn more about using Grunt, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
 
 ```shell
 npm install helper-lib --save-dev
@@ -23,32 +23,19 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('helper-lib');
 ```
 
-#### without `npm`
-
-The following quick start alternatives are available:
-
-* [Download the latest release](https://github.com/assemble/helper-lib/zipball/master).
-* Clone the repo: `git clone git://github.com/assemble/helper-lib.git`.
-* Install with Twitter's [Bower](http://twitter.github.com/bower): `bower install helper-lib`.
-
+This plugin was designed to work with _Grunt 0.4.x_. If you're still using grunt _v0.3.x_ it's strongly recommended that you upgrade, but in case you can't please use _v0.3.1_.
 
 ### 
-Before you get started you must first install [the required local dependencies](package.json):
-
-```
-$ npm install
-```
-
 When completed, you'll be able to run the various `grunt` commands provided:
 
 #### build - `grunt`
 Runs the Less.js compiler to rebuild the specified `/test/fixtures/**` files. .
 
 #### test - `grunt test`
-Runs jshint on JavaScripts and nodeunit tests on helpers. 
+Runs jshint on JavaScripts and nodeunit tests on . 
 
 #### watch - `grunt watch`
-This is a convenience method for watching helpers and automatically re-building them whenever you save. Requires the [grunt-contrib-watch](http://github.com/gruntjs/grunt-contrib-watch) Grunt plugin.
+This is a convenience method for watching  and automatically re-building them whenever you save. Requires the [grunt-contrib-watch](http://github.com/gruntjs/grunt-contrib-watch) Grunt plugin.
 
 Should you encounter problems with installing dependencies or running the `grunt` commands, be sure to first uninstall any previous versions (global and local) you may have installed, and then rerun `npm install`.
 
@@ -179,7 +166,8 @@ Path helpers are [node.js](http://nodejs.org/api/path.html#path_path_relative_fr
 
 #### relative
 _Derive the relative path from one absolute path to another._
-Type: `String`
+
+Parameters: `string` (the value to test against)
 Default: `none`
 
 Usage:
@@ -952,11 +940,17 @@ value = 2222222
 
 ### Comparisons: Equal
 #### is
-_Conditionally render a block if the condition is true._
-<br>Parameters: value `string|int` - the value to test against.
+_Conditionally render a block if the condition is true (if x = y)._
+
+Parameters: `string|int` (the value to test against)
+Default: `undefined`
+
+Example #1:
 ``` js
 // Data
-number = 5
+---
+number = 5 
+---
 ```
 ``` html
 // Template
@@ -969,6 +963,28 @@ number = 5
 // Result:
 Kiss my shiny metal ass!
 ```
+
+Example #2:
+
+If you are using [Assemble](), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
+
+``` yaml
+--- # YAML Front Matter
+number = 5 
+---
+```
+``` html
+{{#is number 5}}
+    Kiss my shiny metal ass!
+{{else}}
+    Never mind :(
+{{/is}}
+```
+Result:
+```
+Kiss my shiny metal ass!
+```
+
 #### if_eq
 **Same as `is`, consider consolidating**
 _Conditionally render a block if the condition is true (If x = y)._
@@ -1172,7 +1188,8 @@ Parameters: `none`
 ### Dates
 #### formatDate
 _Formats a date into a string given a format. Accepts any value that can be passed to `new Date()`. This helper is a port of the [formatDate-js](http://https://github.com/michaelbaldry/formatDate-js) library by [Michael Baldry](https://github.com/michaelbaldry)._
-<br>Parameters: format `string` - The format string, according to these tokens: [strftime](http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime) (Required)
+<br>Parameters: format `string`, `required`
+The format string, according to these tokens: [strftime](http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime)
 ``` js
 // Data
 date = new Date()
@@ -1193,7 +1210,7 @@ date = new Date()
 
 #### now
 _Returns the current date._
-<br>Parameters: format `string` - The format string, according to these tokens: http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime (Optional)
+<br>Parameters: format `string` - The format string, according to these tokens: [http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime]() (Optional)
 ``` html
 // Template
 {{now}}
@@ -1275,10 +1292,117 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 
 
 ### HTML
+#### gist
+_Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
+
+Parameters: `String`
+Default: `undefined`
+Usage: `{{ gist [id] }}`
+
+Example:
+``` hbs
+{{gist '5193239'}}
+```
+Result:
+``` html
+<script src="https://gist.github.com/5193239.js"></script>
+```
+
+#### embed
+_Embed Code Snippets_
+
+Embed code snippets from any file with the `embed` variable. You can also pass in a second parameter to force syntax highlighting for a specific language.
+
+Parameters: `String|String (optional)` 
+Default: `undefined`
+Syntax: `{{ embed [filename] [syntax] }}`
+
+Example:
+``` hbs
+{{ embed 'src/test.json' }}
+```
+
+Forced highlighting:
+``` hbs
+{{ embed 'src/test.json' 'javascript' }}
+```
+In the second example, highlighting was forced as `javascript` instead of `json`.
+
+
+#### blockquote
+_Create a blockquote_
+
+Outputs a string with a given attribution as a quote
+
+``` hbs
+{{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
+  This is your quote.
+{{/blockquote}}
+```
+results in:
+
+``` html
+<blockquote>
+  <p>This is your quote.</p>
+  <footer> 
+    <strong>@doowb</strong>
+    <cite> 
+      <a href="http://github.com/source/for/your/quote">This is the title</a>
+    </cite>
+  </footer>
+</blockquote>
+```
+   
+#### stripes
+_Iterates through an array, letting the contents know whether to add an even or odd row._
+
+Parameters:
+
+* `array` to iterate over, 
+* `string`: CSS class name for even rows 
+* `string`: CSS class name for odd rows
+
+Credit: [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Usage:
+``` handlebars
+{{#stripes myArray "even" "odd"}}
+  <div class="{{stripeClass}}">
+    ... code for the row ...
+  </div>
+{{else}}
+  <em>There aren't any people.</em>
+{{/stripes}}
+```
+
+#### timeline
+_Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
+
+Parameters: 
+
+* `array` to iterate over, 
+* `string`: CSS class name for left columns
+* `string`: CSS class name for right columns
+
+Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Usage:
+``` handlebars
+<div class="timeline">
+ {{#timeline myArray "left" "right"}}
+ <div class="{{columnClass}}">
+   {{> entry}}
+ </div>
+ {{else}}
+   <em>There aren't any entries.</em>
+ {{/timeline}}
+</div>
+```
+
 #### ul
 _Creates an unordered list._
 
-Params: `Hash|HTML attributes`, `Optional`
+Parameters: `Hash|HTML attributes`, `Optional`
 
 HTML attributes to use on the `ul` element. 
 ``` js
@@ -1292,8 +1416,8 @@ collection = [
   deliveries: 1
 ]
 ```
-``` hbs
-// Template
+Template:
+``` handlebars
 {{#ul collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
@@ -1309,7 +1433,7 @@ collection = [
 #### ol
 _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
 
-Params: `Hash`, `HTML attributes`, `Optional`
+Parameters: `Hash`, `HTML attributes`, `Optional`
 
 HTML attributes to use on the `ol` element. 
 ``` js
@@ -1323,8 +1447,9 @@ collection = [
   deliveries: 1
 ]
 ```
-``` hbs
-// Template
+
+Template:
+``` handlebars
 {{#ol collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ol}}
@@ -1339,12 +1464,14 @@ collection = [
 ```
 
 #### br
-Params: `Integer|Count`, `Optional`
+_Renders `<br>` elements in the output, based on the number given as a parameter. Not really recommended for general use, but it's here if you need it._
+
+Parameters: `Integer|Count`, `Optional`
 
 The number of `br` elements to render. 
 
 `template.hbs`
-``` hbs
+``` handlebars
 {{br 5}}
 ```
 renders to:
@@ -1382,7 +1509,7 @@ collection = [
 ``` html
 // Template
 {{#withFirst collection}}
-{{debug name}}
+   {{debug name}}
 {{/withFirst}}
 
 // Result:
@@ -1439,10 +1566,7 @@ collection = [
 
 
 ## Contributing
-Want to help make helper-lib even better? All constructive feedback and contributions are welcome, so please consider contributing!  We can always use help creating, tests, documentation or resolving [Issues](https://github.com/assemble/helper-lib/issues), but if you have other ideas for how you can help, Brian and I would love to hear them!
-
-[https://github.com/assemble/helper-lib/issues](http://github.com/assemble/helper-lib/issues)
- In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
 
 
 
@@ -1458,15 +1582,20 @@ Want to help make helper-lib even better? All constructive feedback and contribu
 + [http://twitter.com/doowb](http://twitter.com/doowb)
 + [http://github.com/doowb](http://github.com/doowb)
 
+
+## Credit
+> Many of these helpers come from the following repos:
+
+* [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
+* [Swag v0.2.1, by Elving Rodriguez](http://elving.github.com/swag/)
+
+
 ## Copyright and license
-Copyright 2013 Assemble
+Copyright NaN Object Object
 
 [MIT License](LICENSE-MIT)
 
-
-
 ## Release History
-
 * 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another. 
 * 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty" 
 * 2013-03-15    v0.1.2    Update README.md with documentation, examples. 
@@ -1474,20 +1603,24 @@ Copyright 2013 Assemble
 
 
 ### Roadmap
-* Separate into modules
-* Proper testing for each helper
-* YAML format, use templates for easier maintenance
+_(Big plans in the works)_
 
 ---
+Authored by [assemble](https://github.com/assemble/assemble)
 
-_This README was generated using the Grunt.js plugin, [assemble](http://github.com/assemble/assemble) on Mon Mar 18 2013 22:18:42._
-
-
-
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Mar 28 2013 00:52:55._
 
 
 
-[download]: https://github.com/assemble/helper-lib/zipball/master
+
+[download]: https://github.com/[object Object]/helper-lib/zipball/master
+
+
+[org]: https://github.com/assemble
+[assemble]: https://github.com/assemble/assemble
+[issues]: https://github.com/assemble/assemble/issues
+[wiki]: https://github.com/assemble/assemble/wiki
+
 
 
 [config]: https://github.com/assemble/assemble/wiki/Configuration
@@ -1500,28 +1633,33 @@ _This README was generated using the Grunt.js plugin, [assemble](http://github.c
 [layouts]: https://github.com/assemble/assemble/wiki/Layouts
 [pages]: https://github.com/assemble/assemble/wiki/Pages
 [partials]: https://github.com/assemble/assemble/wiki/Partials
-[helpers]: https://github.com/assemble/assemble/wiki/Helpers
-[collections]: https://github.com/assemble/assemble/wiki/Collections
-[assets]: https://github.com/assemble/assemble/wiki/Assets
 
 
 [content]: https://github.com/assemble/assemble/wiki/Content
 [data]: https://github.com/assemble/assemble/wiki/Data
+[yaml]: https://github.com/assemble/assemble/wiki/YAML-front-matter
 [markdown]: https://github.com/assemble/assemble/wiki/Markdown
 
 
+[helpers]: https://github.com/assemble/assemble/wiki/Helpers
+[assets]: https://github.com/assemble/assemble/wiki/Assets
+[collections]: https://github.com/assemble/assemble/wiki/Collections
+
+
 [examples]: https://github.com/assemble/assemble-examples
-[exampleSite]: https://github.com/assemble/assemble-examples
-[exampleBasic]: https://github.com/assemble/assemble-examples
-[exampleAdvanced]: https://github.com/assemble/assemble-examples
-[exampleGrid]: https://github.com/assemble/assemble-examples
-[exampleTable]: https://github.com/assemble/assemble-examples
-[exampleForm]: https://github.com/assemble/assemble-examples
+[exampleReadme]: https://github.com/assemble/assemble-examples-readme
+[exampleBasic]: https://github.com/assemble/assemble-examples-basic
+[exampleAdvanced]: https://github.com/assemble/assemble-examples-advanced
+[exampleGrid]: https://github.com/assemble/assemble-examples-grid
+[exampleTable]: https://github.com/assemble/assemble-examples-table
+[exampleForm]: https://github.com/assemble/assemble-examples-form
+[exampleSite]: https://github.com/assemble/assemble-examples-site
+[exampleSitemap]: https://github.com/assemble/assemble-examples-sitemap
 
 
 [contribute]: https://github.com/assemble/assemble/wiki/Contributing-to-Assemble
 [extend]: https://github.com/assemble/assemble/wiki/Extending-Assemble
-[helpers-lib]: https://github.com/assemble/helpers-lib
+[helpers-lib]: https://github.com/assemble/assemble/wiki/Helpers
 
 
 [grunt]: http://gruntjs.com/
@@ -1536,10 +1674,9 @@ _This README was generated using the Grunt.js plugin, [assemble](http://github.c
 [assemble-github-com]: https://github.com/assemble/assemble.github.com
 [assemble-examples-bootstrap]: https://github.com/assemble/assemble-examples-bootstrap
 [assemble-internal]: https://github.com/assemble/assemble-internal
-[assemble-styles]: https://github.com/assemble/assemble-styles
+[assemble-less]: https://github.com/assemble/assemble-less
 [assemble-examples-readme]: https://github.com/assemble/assemble-examples-readme
 [grunt-toc]: https://github.com/assemble/grunt-toc
 [helper-lib]: https://github.com/assemble/helper-lib
 [grunt-dry]: https://github.com/assemble/grunt-dry
 [assemble-examples]: https://github.com/assemble/assemble-examples
-
