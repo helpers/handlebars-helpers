@@ -1,0 +1,12 @@
+/node_modules/
+*.sublime-project
+*.sublime-workspace
+
+docs
+temp
+tmp
+
+.jshintrc
+Gruntfile.js
+ROADMAP
+component.json

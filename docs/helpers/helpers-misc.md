@@ -10,35 +10,39 @@ _Provides a default or fallback value if a value doesn't exist._
 Not title available.
 ```
 
-#### partial (**NOT USED IN ASSEMBLE**)
+#### include 
 _Provides an easy way to register and use partials inside your templates._
 
-This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. It was created with [brunch](http://brunch.io) in mind (which I use a lot), because brunch automatically wraps your scripts and templates in common.js modules to use in the browser.
+This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. 
 
+<br>Pattern: `{{include [name] [data]}}`
 <br>Parameters:
 
-* name `string` - The name or path of the file in which your template is defined. (Required)
-* data `int|string|collection` - The data you want to use inside the partial. (Optional)
+* name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
+* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
+
+Data (collection): `planet-express.json`
 
 ``` js
-// Path to your templates from where you override config.partialsPath
-// The path must finish with a foward slash '/'
-config.partialsPath = '../views/templates/'
-
-// Data
-collection = [
-  'Professor Farnsworth', 
-  'Fry', 
-  'Bender'
+[
+  "Professor Farnsworth", 
+  "Fry", 
+  "Bender"
 ]
 ```
+
+Include (partial to be "included"): `planet-express.hbs`
 ``` html
-// Your Partial (planet_express.hbs)
 {{sort this}}
+```
 
-// Your template
-<p>{{partial "planet_express" collection}}</p>
+Template:
+``` html
+<p>{{include "planet-express.hbs" data}}</p>
+```
 
-// Result:
+Result:
+``` html
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
+

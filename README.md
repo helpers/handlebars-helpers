@@ -1,4 +1,4 @@
-# [Helper Library v0.1.7](http://github.com/[object Object]/helper-lib) [![Build Status](https://travis-ci.org/[object Object]/helper-lib.png)](https://travis-ci.org/[object Object]/helper-lib)
+# [Helper Library v0.1.8](http://github.com/[object Object]/helper-lib) [![Build Status](https://travis-ci.org/[object Object]/helper-lib.png)](https://travis-ci.org/[object Object]/helper-lib)
 
 > An extensive collection of useful Handlebars helpers.
 
@@ -1531,38 +1531,43 @@ _Provides a default or fallback value if a value doesn't exist._
 Not title available.
 ```
 
-#### partial (**NOT USED IN ASSEMBLE**)
+#### include 
 _Provides an easy way to register and use partials inside your templates._
 
-This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. It was created with [brunch](http://brunch.io) in mind (which I use a lot), because brunch automatically wraps your scripts and templates in common.js modules to use in the browser.
+This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. 
 
+<br>Pattern: `{{include [name] [data]}}`
 <br>Parameters:
 
-* name `string` - The name or path of the file in which your template is defined. (Required)
-* data `int|string|collection` - The data you want to use inside the partial. (Optional)
+* name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
+* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
+
+Data (collection): `planet-express.json`
 
 ``` js
-// Path to your templates from where you override config.partialsPath
-// The path must finish with a foward slash '/'
-config.partialsPath = '../views/templates/'
-
-// Data
-collection = [
-  'Professor Farnsworth', 
-  'Fry', 
-  'Bender'
+[
+  "Professor Farnsworth", 
+  "Fry", 
+  "Bender"
 ]
 ```
+
+Include (partial to be "included"): `planet-express.hbs`
 ``` html
-// Your Partial (planet_express.hbs)
 {{sort this}}
+```
 
-// Your template
-<p>{{partial "planet_express" collection}}</p>
+Template:
+``` html
+<p>{{include "planet-express.hbs" data}}</p>
+```
 
-// Result:
+Result:
+``` html
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
+
+
 
 
 ## Contributing
@@ -1596,6 +1601,7 @@ Copyright NaN Object Object
 [MIT License](LICENSE-MIT)
 
 ## Release History
+* 2013-03-28    v0.1.8    Gruntfile updated with mocha tests for 71 helpers, bug fixes. 
 * 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another. 
 * 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty" 
 * 2013-03-15    v0.1.2    Update README.md with documentation, examples. 
@@ -1603,12 +1609,14 @@ Copyright NaN Object Object
 
 
 ### Roadmap
-_(Big plans in the works)_
+* Separate into modules
+* YAML format, use templates for easier maintenance
+
 
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Mar 28 2013 00:52:55._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Mar 28 2013 21:49:13._
 
 
 

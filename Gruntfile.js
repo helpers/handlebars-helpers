@@ -1,81 +1,102 @@
-'use strict';
+/*
+ * helper-lib
+ * http://github.com/assemble/helper-lib
+ *
+ * Copyright (c) 2013 Assemble
+ * MIT License
+ */
+
 
 module.exports = function(grunt) {
 
+'use strict';
 
   // Project configuration.
   grunt.initConfig({
     pkg : grunt.file.readJSON('package.json'),
-    docs: grunt.file.readJSON('docs/templates/data/docs.json'),
 
-    nodeunit: {
-      files: ['test/**/*_test.js']
+    // Configuration to be run (and then tested).
+    coffee: {
+      glob: {
+        expand: true,
+        cwd: 'src',
+        src: ['*.coffee', '!helper-lib.coffee'],
+        dest: 'lib/helpers/',
+        ext: '.js'
+      },
+      tests: {
+        expand: true,
+        cwd: 'src/tests',
+        src: ['*.coffee'],
+        dest: 'test/',
+        ext: '.js'
+      },
+      concat: {
+        options: { join: true },
+        files: {
+          'lib/helpers-lib.js': [
+            'src/helpers.coffee',
+            'src/helpers-dates.coffee',
+            'src/helpers-collections.coffee',
+            'src/helpers-comparisons.coffee',
+            'src/helpers-config.coffee',
+            'src/helpers-html.coffee',
+            'src/helpers-inflections.coffee',
+            'src/helpers-logging.coffee',
+            'src/helpers-math.coffee',
+            'src/helpers-numbers.coffee',
+            'src/helpers-strings.coffee',
+            'src/helpers-utils.coffee',
+            'src/helpers-miscellaneous.coffee'
+          ]
+        }
+      }
     },
-    jshint: {
+
+    // Run mocha tests.
+    mochaTest: {
+      files: ['test/*_test.js']
+    },
+    mochaTestConfig: {
       options: {
-        jshintrc: '.jshintrc'
-      },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      lib: {
-        src: ['lib/**/*.js']
-      },
-      test: {
-        src: ['test/**/*.js']
+        reporter: 'nyan'
       }
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      lib: {
-        files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'nodeunit']
-      },
-      test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'nodeunit']
-      }
-    },
+
+    // Build templates to test helpers.
     assemble: {
-      // Run basic tests on templates and data.
       tests: {
         files: {
-          'test/actual': ['test/spec/*.hbs']
-        }
-      },
-      // Internal task to build README, docs.
-      readme: {
-        options: {
-          today: '<%= grunt.template.today() %>',
-          partials: ['docs/*.md','docs/helpers/*.md','docs/templates/sections/*.{md,hbs}'],
-          changelog: grunt.file.readYAML('CHANGELOG'),
-          roadmap: grunt.file.readYAML('ROADMAP'),
-          data: ['docs/templates/data/docs.json', '<%= docs.urls %>','<%= docs.repos %>'],
-          ext: '.md'
-        },
-        files: {
-          '.': ['docs/templates/README.hbs']
+          'test/actual': ['test/fixtures/*.hbs']
         }
       }
+    },
+
+    // Clean test files before building or re-testing.
+    clean: {
+      tests: ['temp', 'test/actual'],
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('assemble');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
-  // Default task.
+  // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
-    'jshint', 
-    'nodeunit'
+    'clean',
+
+    // Compile JavaScript 
+    'coffee'
   ]);
 
-  // Internal task to build docs.
-  grunt.registerTask('readme', [
-    'assemble:readme'
+  // Build templates using helpers and run all tests.
+  grunt.registerTask('test', [
+    // 'assemble',
+    'coffee', 
+    'mochaTest'
   ]);
 };

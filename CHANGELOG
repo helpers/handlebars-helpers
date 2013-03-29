@@ -1,3 +1,7 @@
+v0.1.8:
+  date: "2013-03-28"
+  changes:
+    - Gruntfile updated with mocha tests for 71 helpers, bug fixes.
 v0.1.7:
   date: "2013-03-18"
   changes:
