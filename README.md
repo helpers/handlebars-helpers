@@ -1,4 +1,4 @@
-# [Helper Library v0.1.8](http://github.com/[object Object]/helper-lib) [![Build Status](https://travis-ci.org/[object Object]/helper-lib.png)](https://travis-ci.org/[object Object]/helper-lib)
+# [Helper Library v0.1.8](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > An extensive collection of useful Handlebars helpers.
 
@@ -1596,7 +1596,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## Copyright and license
-Copyright NaN Object Object
+Copyright NaN Assemble
 
 [MIT License](LICENSE-MIT)
 
@@ -1616,12 +1616,12 @@ Copyright NaN Object Object
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Mar 28 2013 21:49:13._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Mar 28 2013 21:57:48._
 
 
 
 
-[download]: https://github.com/[object Object]/helper-lib/zipball/master
+[download]: https://github.com/assemble/helper-lib/zipball/master
 
 
 [org]: https://github.com/assemble
