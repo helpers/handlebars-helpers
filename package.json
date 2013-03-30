@@ -1,7 +1,7 @@
 {
   "name": "helper-lib",
   "description": "An extensive collection of useful Handlebars helpers.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",
@@ -44,7 +44,6 @@
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
     "should": "~1.2.2",
-    "testem": "~0.2.79",
     "chai": "~1.5.0"
   },
   "peerDependencies": {

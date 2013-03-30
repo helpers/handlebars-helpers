@@ -1,12 +1,21 @@
+# Ignore docs on npm
+docs
+
 /node_modules/
+
 *.sublime-project
 *.sublime-workspace
+.editorconfig
 
-docs
+.gitignore
+.jshintrc
 temp
 tmp
 
-.jshintrc
+
 Gruntfile.js
-ROADMAP
 component.json
+
+ROADMAP
+TODO.md
+
