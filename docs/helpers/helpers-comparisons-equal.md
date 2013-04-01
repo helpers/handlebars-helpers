@@ -8,7 +8,7 @@ Example #1:
 ``` js
 // Data
 ---
-number = 5 
+number = 5
 ---
 ```
 ``` html
@@ -25,23 +25,24 @@ Kiss my shiny metal ass!
 
 Example #2:
 
-If you are using [Assemble](), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
+If you are using [Assemble](https://github.com/assemble/assemble), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
 
 ``` yaml
 --- # YAML Front Matter
-number = 5 
+page:
+  title: About Us
 ---
 ```
 ``` html
-{{#is number 5}}
-    Kiss my shiny metal ass!
+{{#is page.title "home"}}
+    <h1> About Us </h1>
 {{else}}
     Never mind :(
 {{/is}}
 ```
 Result:
 ```
-Kiss my shiny metal ass!
+<h1> About Us </h1>
 ```
 
 #### if_eq
