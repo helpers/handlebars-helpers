@@ -1,0 +1,25 @@
+.alert {
+  padding: 8px 35px 8px 14px;
+  margin-bottom: @line-height-base;
+  color: @state-warning-text;
+  background-color: @state-warning-background;
+  border: 1px solid @state-warning-border;
+  border-radius: @border-radius-base;
+
+  // Headings for larger alerts
+  h4 {
+    margin-top: 0;
+    // Specified for the h4 to prevent conflicts of changing @headingsColor
+    color: inherit;
+  }
+  // Match the hr to the border of the alert
+  hr {
+    border-top-color: darken(@state-warning-border, 5%);
+  }
+  // Inherit color for immediate links and bolden them some
+  > a,
+  > p > a {
+    font-weight: 500;
+    color: darken(@state-warning-text, 10%);
+  }
+}

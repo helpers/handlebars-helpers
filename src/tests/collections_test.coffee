@@ -3,8 +3,7 @@ require 'should'
 Handlebars = require 'handlebars'
 Assemble = require '../lib/helpers-lib'
 
-context =
-    collection: [
+context = collection: [
         'Amy Wong'
         'Bender'
         'Dr. Zoidberg'

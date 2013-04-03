@@ -9,12 +9,17 @@ docs
 
 .gitignore
 .jshintrc
+
+/src/
+/test/
 temp
 tmp
 
 
 Gruntfile.js
 component.json
+
+lib/untested
 
 ROADMAP
 TODO.md

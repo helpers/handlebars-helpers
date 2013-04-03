@@ -69,6 +69,25 @@ module.exports = function(grunt) {
         files: {
           'test/actual': ['test/fixtures/*.hbs']
         }
+      },
+      experimental: {
+        files: {
+          'test/actual': [
+            'test/fixtures/templates/authors.hbs',
+            'test/fixtures/templates/basename.hbs'
+          ]
+        }
+      },
+      embed: {
+        options: {
+          ext: '.md',
+          content: './test/fixtures/content'
+        },
+        files: {
+          'test/actual': [
+            'test/fixtures/templates/embed.hbs'
+          ]
+        }
       }
     },
 
@@ -91,6 +110,12 @@ module.exports = function(grunt) {
 
     // Compile JavaScript 
     'coffee'
+  ]);
+
+  // Test helpers in actual templates.
+  grunt.registerTask('default', [
+    'assemble:experimental',
+    'assemble:embed'
   ]);
 
   // Build templates using helpers and run all tests.

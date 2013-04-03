@@ -32,10 +32,10 @@ define [], ->
     
     # if(isServer) {
     assemble = require("../../../assemble.js")
-    fs = require("fs")
-    util = require("util")
-    path = require("path")
-    dest = "./"
+    fs       = require("fs")
+    util     = require("util")
+    path     = require("path")
+    dest     = "./"
     markdown = assemble.Markdown(
       gfm: true
       highlight: "auto"
@@ -671,9 +671,9 @@ define [], ->
     ###
     Handlebars.registerHelper "eachIndex", (context, options) ->
       data = undefined
-      i = undefined
-      j = undefined
-      ret = undefined
+      i    = undefined
+      j    = undefined
+      ret  = undefined
       ret = ""
       data = Handlebars.createFrame(options.data)  if options.data?
       if context and context.length > 0
