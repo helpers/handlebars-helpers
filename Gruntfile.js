@@ -24,10 +24,17 @@ module.exports = function(grunt) {
         dest: 'lib/helpers/',
         ext: '.js'
       },
+      utils: {
+        expand: true,
+        cwd: 'src/utils',
+        src: ['*.coffee'],
+        dest: 'lib/utils/',
+        ext: '.js'
+      },
       tests: {
         expand: true,
         cwd: 'src/tests',
-        src: ['*.coffee'],
+        src: ['**/*.coffee'],
         dest: 'test/',
         ext: '.js'
       },
@@ -55,7 +62,7 @@ module.exports = function(grunt) {
 
     // Run mocha tests.
     mochaTest: {
-      files: ['test/*_test.js']
+      files: ['test/**/*_test.js']
     },
     mochaTestConfig: {
       options: {
@@ -108,7 +115,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', [
     'clean',
 
-    // Compile JavaScript 
+    // Compile JavaScript
     'coffee'
   ]);
 
@@ -121,7 +128,7 @@ module.exports = function(grunt) {
   // Build templates using helpers and run all tests.
   grunt.registerTask('test', [
     // 'assemble',
-    'coffee', 
+    'coffee',
     'mochaTest'
   ]);
 };
