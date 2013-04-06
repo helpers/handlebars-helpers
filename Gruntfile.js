@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       },
       utils: {
         expand: true,
-        cwd: 'src/utils',
+        cwd: 'src-new/utils',
         src: ['*.coffee'],
         dest: 'lib/utils/',
         ext: '.js'
@@ -36,6 +36,20 @@ module.exports = function(grunt) {
         cwd: 'src/tests',
         src: ['**/*.coffee'],
         dest: 'test/',
+        ext: '.js'
+      },
+      'src-new': {
+        expand: true,
+        cwd: 'src-new',
+        src: ['**/*.coffee', '!tests/**/*.coffee'],
+        dest: 'lib/new/',
+        ext: '.js'
+      },
+      'tests-new': {
+        expand: true,
+        cwd: 'src-new/tests',
+        src: ['**/*.coffee'],
+        dest: 'test/new',
         ext: '.js'
       },
       concat: {
@@ -116,16 +130,15 @@ module.exports = function(grunt) {
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
     'clean',
-
     // Compile JavaScript
     'coffee'
   ]);
 
   // Test helpers in actual templates.
-  grunt.registerTask('default', [
-    'assemble:experimental',
-    'assemble:markdown'
-  ]);
+  // grunt.registerTask('default', [
+  //   'assemble:experimental',
+  //   'assemble:markdown'
+  // ]);
 
   // Build templates using helpers and run all tests.
   grunt.registerTask('test', [

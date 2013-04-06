@@ -1,6 +1,6 @@
 require 'should'
 
-Dates = require '../../lib/utils/dates'
+Dates = require '../../../lib/new/utils/dates'
 
 describe 'pad number', ->
   describe 'default padCharacter', ->

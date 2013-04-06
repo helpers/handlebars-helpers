@@ -3,7 +3,7 @@
 
   require('should');
 
-  Utils = require('../../lib/utils/utils');
+  Utils = require('../../../lib/new/utils/utils');
 
   describe('trim', function() {
     return it('should trim off white space', function() {
