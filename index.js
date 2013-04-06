@@ -1,1 +1,1 @@
-require('./lib/new/helpers-lib');
+require('./lib/helper-lib');
