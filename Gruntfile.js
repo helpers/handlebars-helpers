@@ -17,61 +17,20 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     coffee: {
-      glob: {
+      build: {
         expand: true,
         cwd: 'src',
-        src: ['*.coffee', '!helper-lib.coffee'],
-        dest: 'lib/helpers/',
+        src: ['**/*.coffee', '!tests/**/*.coffee'],
+        dest: 'lib/',
         ext: '.js'
       },
-      utils: {
-        expand: true,
-        cwd: 'src-new/utils',
-        src: ['*.coffee'],
-        dest: 'lib/utils/',
-        ext: '.js'
-      },
-      tests: {
+      test: {
         expand: true,
         cwd: 'src/tests',
         src: ['**/*.coffee'],
         dest: 'test/',
         ext: '.js'
       },
-      'src-new': {
-        expand: true,
-        cwd: 'src-new',
-        src: ['**/*.coffee', '!tests/**/*.coffee'],
-        dest: 'lib/new/',
-        ext: '.js'
-      },
-      'tests-new': {
-        expand: true,
-        cwd: 'src-new/tests',
-        src: ['**/*.coffee'],
-        dest: 'test/new',
-        ext: '.js'
-      },
-      concat: {
-        options: { join: true },
-        files: {
-          'lib/helpers-lib.js': [
-            'src/helpers.coffee',
-            'src/helpers-dates.coffee',
-            'src/helpers-collections.coffee',
-            'src/helpers-comparisons.coffee',
-            'src/helpers-config.coffee',
-            'src/helpers-html.coffee',
-            'src/helpers-inflections.coffee',
-            'src/helpers-logging.coffee',
-            'src/helpers-math.coffee',
-            'src/helpers-numbers.coffee',
-            'src/helpers-strings.coffee',
-            'src/helpers-utils.coffee',
-            'src/helpers-miscellaneous.coffee'
-          ]
-        }
-      }
     },
 
     // Run mocha tests.
