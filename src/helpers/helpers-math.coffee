@@ -1,3 +1,5 @@
+Handlebars = require('./helpers').Handlebars
+
 Handlebars.registerHelper 'add', (value, addition) ->
     value + addition
 

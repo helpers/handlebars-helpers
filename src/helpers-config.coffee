@@ -1,2 +1,0 @@
-Assemble.Config =
-    partialsPath: ''

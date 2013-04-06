@@ -1,3 +1,4 @@
+Handlebars = require('../helpers/helpers').Handlebars
 Utils = module.exports = {}
 
 Utils.toString = Object.prototype.toString

@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-Assemble = require '../lib/helpers-lib'
+require '../../lib/helpers/helpers-html'
 
 describe 'ul', ->
     describe '{{#ul list class="list"}} \n

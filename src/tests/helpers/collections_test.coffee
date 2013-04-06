@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-Assemble = require '../lib/helpers-lib'
+require '../../lib/helpers/helpers-collections'
 
 context = collection: [
         'Amy Wong'

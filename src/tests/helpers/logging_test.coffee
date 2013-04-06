@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-Assemble = require '../lib/helpers-lib'
+require '../../lib/helpers/helpers-logging'
 
 # Add History to console.log
 _log = if console then console.log else ->

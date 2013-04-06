@@ -1,3 +1,6 @@
+Handlebars = require('./helpers').Handlebars
+Utils = require '../utils/utils'
+
 Handlebars.registerHelper 'toFixed', (number, digits) ->
     digits = 0 if Utils.isUndefined(digits)
     number.toFixed digits

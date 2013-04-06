@@ -1,3 +1,6 @@
+Handlebars = require('./helpers').Handlebars
+Utils = require '../utils/utils'
+
 Handlebars.registerHelper 'first', (array, count) ->
     if Utils.isUndefined(count) then array[0] else array.slice 0, count
 

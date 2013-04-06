@@ -1,3 +1,6 @@
+Handlebars = require('./helpers').Handlebars
+Utils = require '../utils/utils'
+
 Handlebars.registerHelper 'log', (value) ->
     console.log value
 

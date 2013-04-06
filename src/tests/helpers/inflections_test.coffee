@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-Assemble = require '../lib/helpers-lib'
+require '../../lib/helpers/helpers-inflections'
 
 describe 'inflect', ->
     describe '{{inflect enemies "enemy" "enemies"}}', ->
