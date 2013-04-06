@@ -1,9 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require '../../../lib/new/helpers/helpers-dates'
-
-console.log 'loaded helpers-dates'
+require '../../lib/helpers/helpers-dates'
 
 describe 'formatDate', ->
     describe '{{formatDate date format}}', ->

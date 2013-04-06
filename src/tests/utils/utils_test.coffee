@@ -1,6 +1,6 @@
 require 'should'
 
-Utils = require '../../../lib/new/utils/utils'
+Utils = require '../../lib/utils/utils'
 
 describe 'trim', ->
   it 'should trim off white space', ->
