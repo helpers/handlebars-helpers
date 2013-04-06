@@ -1,8 +1,5 @@
 
-
-<div class="page-name">
-  <h1>Embed Helper</h1>
-</div>
+# Embed Helper
 
 ``` 
 title: Fodder 
@@ -107,7 +104,7 @@ EngineLoader.getEngine(function(err, results) {
   }
 }
 ```
-
+ 
 ``` txt
 title: Fodder 
 description: different file formats for testing helpers
@@ -117,5 +114,3 @@ title: Fodder
 description: different file formats for testing helpers
 
 ```
-
-

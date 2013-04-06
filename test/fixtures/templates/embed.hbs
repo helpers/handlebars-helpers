@@ -12,10 +12,7 @@ lang:
   text: <%= content %>/test.txt
   yml:  <%= content %>/test.yml
 ---
-
-<div class="page-name">
-  <h1>{{ title }}</h1>
-</div>
+# {{ title }}
 
 {{embed lang.none}}
 {{embed lang.css 'css'}}
@@ -24,8 +21,6 @@ lang:
 {{embed lang.js 'javascript'}}
 {{embed lang.json 'json'}}
 {{embed lang.less 'less'}}
-{{!embed lang.md 'md'}}
+{{!embed lang.md 'md'}} {{! currently does not work on markdown. fences need to be escaped }}
 {{embed lang.text 'txt'}}
 {{embed lang.yml 'yml'}}
-
-

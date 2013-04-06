@@ -80,18 +80,20 @@ module.exports = function(grunt) {
       experimental: {
         files: {
           'test/actual': [
-            'test/fixtures/templates/authors.hbs',
+            // 'test/fixtures/templates/fiddle.hbs',
+            'test/fixtures/templates/relative.hbs',
             'test/fixtures/templates/basename.hbs'
           ]
         }
       },
-      embed: {
+      markdown: {
         options: {
           ext: '.md',
           content: './test/fixtures/content'
         },
         files: {
           'test/actual': [
+            'test/fixtures/templates/authors.hbs',
             'test/fixtures/templates/embed.hbs'
           ]
         }
@@ -122,7 +124,7 @@ module.exports = function(grunt) {
   // Test helpers in actual templates.
   grunt.registerTask('default', [
     'assemble:experimental',
-    'assemble:embed'
+    'assemble:markdown'
   ]);
 
   // Build templates using helpers and run all tests.

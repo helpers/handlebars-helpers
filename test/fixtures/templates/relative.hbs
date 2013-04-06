@@ -1,11 +1,11 @@
 ---
-from: test/spec/spec.hbs
-to: test/actual/something.html
+from: test/fixtures/content/test.js
+to: test/fixtures/content/test.html
 ---
 
 One: {{relative from to}}
 
-Two: {{relative "docs/toc.md" "lib"}}
+Two: {{relative "docs/section/toc.md" "lib"}}
 Three: {{relative "lib" "docs/toc.md"}}
 
 Four: {{relative "." "lib"}}
