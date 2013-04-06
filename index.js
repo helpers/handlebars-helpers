@@ -1,1 +1,1 @@
-module.exports = require('./lib/helpers');
+require('./lib/new/helpers-lib');

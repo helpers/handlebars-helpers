@@ -30,7 +30,7 @@
       "url": "https://github.com/assemble/helper-lib/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "lib/helpers",
+  "main": "index.js",
   "engines": {
     "node": ">= 0.8.0"
   },
