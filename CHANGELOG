@@ -1,3 +1,11 @@
+v0.1.21:
+  date: "2013-04-07"
+  changes:
+    - Add markdown helpers back, add more tests.
+v0.1.20:
+  date: "2013-04-06"
+  changes:
+    - Generalized helpers structure, externalized utilities.
 v0.1.11:
   date: "2013-04-05"
   changes:

@@ -1,4 +1,4 @@
-# [Helper Library v0.1.20](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.21](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -1576,6 +1576,8 @@ Copyright NaN Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
+* 2013-04-07    v0.1.21    Add markdown helpers back, add more tests. 
+* 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities. 
 * 2013-04-05    v0.1.11    New authors and gist helpers, general cleanup and new tests. 
 * 2013-04-04    v0.1.10    Externalized utility javascript from helpers.js 
 * 2013-03-28    v0.1.8    Gruntfile updated with mocha tests for 71 helpers, bug fixes. 
@@ -1593,7 +1595,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat Apr 06 2013 23:57:47._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sun Apr 07 2013 16:19:31._
 
 
 
