@@ -159,29 +159,19 @@ Handlebars allows two different kinds of helpers:
 
 ## The Helpers
 
-### Path
-Path helpers are [node.js](http://nodejs.org/api/path.html#path_path_relative_from_to) utilities for handling and transforming file paths. As with node.js: 
-
-> "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
-
-#### relative
-_Derive the relative path from one absolute path to another._
-
-Parameters: `string` (the value to test against)
-Default: `none`
-
-Usage:
-``` html
-{{relative "from" "to"}}
+### Special
+#### formatPhoneNumber
+_Output a formatted phone number_
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+```js
+phoneNumber: 4444444444
 ```
-Example:
 ``` handlebars
-<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
-
+{{formatPhoneNumber phoneNumber}}
 ```
-Renders to: 
-``` html
-<a href="../../dist/assets/css/styles.css"></a> 
+Result:
+```
+(444) 444-4444
 ```
 
 
@@ -1239,22 +1229,6 @@ date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 
 
 
-### Special
-#### formatPhoneNumber
-_Output a formatted phone number_
-Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-```js
-phoneNumber: 4444444444
-```
-``` handlebars
-{{formatPhoneNumber phoneNumber}}
-```
-Result:
-```
-(444) 444-4444
-```
-
-
 ### Inflections
 #### inflect
 _Returns the plural or singular form of a word based on a count._
@@ -1619,7 +1593,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat Apr 06 2013 20:21:59._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat Apr 06 2013 23:57:47._
 
 
 
