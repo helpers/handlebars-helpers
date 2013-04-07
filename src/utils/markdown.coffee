@@ -9,10 +9,12 @@
 # * https://github.com/assemble/assemble/blob/master/LICENSE-MIT
 # * ==========================================================
 
-fs = require("fs")
-_ = require("lodash")
+fs     = require("fs")
+_      = require("lodash")
 marked = require("marked")
-hljs = require("highlight.js")
+hljs   = require("highlight.js")
+
+
 
 ###
 Some of the following code is from grunt-markdown

@@ -1,6 +1,6 @@
 Handlebars = require('./helpers').Handlebars
-Utils = require '../utils/utils'
-markdown = require('../utils/markdown').Markdown(
+Utils      = require '../utils/utils'
+markdown   = require('../utils/markdown').Markdown(
   gfm: true
   highlight: "auto"
 )
@@ -39,3 +39,5 @@ if isServer
   Handlebars.registerHelper "md", (path) ->
     content = markdown.read(path)
     content
+
+

@@ -102,8 +102,8 @@ module.exports = function(grunt) {
 
   // Test helpers in actual templates.
   grunt.registerTask('templates', [
-    'assemble:markdown',
-    'assemble:templates'
+    // 'assemble:markdown',
+    'assemble:handlebars'
   ]);
 
   // Build templates using helpers and run all tests.

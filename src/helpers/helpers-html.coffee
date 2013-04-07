@@ -30,6 +30,23 @@ Handlebars.registerHelper 'br', (count, options) ->
 Convert new line (\n) to <br>
 from http://phpjs.org/functions/nl2br:480
 ###
-Handlebars.registerHelper "nl2br", (text) ->
+Handlebars.registerHelper 'nl2br', (text) ->
   nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
   new Handlebars.SafeString(nl2br)
+
+
+###
+link helper function.
+
+This will escape the passed in parameters, but mark the response as safe,
+so Handlebars will not try to escape it even if the "triple-stash" is not used.
+
+Usage:
+
+{{link 'href' 'title'}}
+###
+Handlebars.registerHelper 'link', (url, text) ->
+  url  = Handlebars.Utils.escapeExpression(url)
+  text = Handlebars.Utils.escapeExpression(text)
+  result = '<a class="" href="' + url + '" title="' + text + '">' + text + '</a>'
+  new Handlebars.SafeString(result)
