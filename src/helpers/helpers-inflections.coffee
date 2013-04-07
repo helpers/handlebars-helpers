@@ -1,6 +1,8 @@
 Handlebars = require('./helpers').Handlebars
 Utils = require '../utils/utils'
 
+
+
 Handlebars.registerHelper 'inflect', (count, singular, plural, include) ->
     word = if count > 1 or count is 0 then plural else singular
     if Utils.isUndefined(include) or include is false then word else "#{count} #{word}"

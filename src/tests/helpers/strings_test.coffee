@@ -91,3 +91,19 @@ describe 'newLineToBr', ->
             template = Handlebars.compile(source)
 
             template().should.equal 'Bender <br> should <br> not <br> be allowed on tv.'
+
+describe "hyphenate", ->
+    describe "{{hyphenate string}}", ->
+        it "should return the string with spaces replaced with hyphens.", ->
+            source = '{{hyphenate "Bender should not be allowed on tv."}}'
+            template = Handlebars.compile(source)
+
+            template().should.equal "Bender-should-not-be-allowed-on-tv."
+
+describe "dashify", ->
+    describe "{{hyphenate string}}", ->
+        it "should return the string with periods replaced with hyphens.", ->
+            source = '{{dashify "Bender.should.not.be.allowed.on.tv."}}'
+            template = Handlebars.compile(source)
+
+            template().should.equal "Bender-should-not-be-allowed-on-tv-"

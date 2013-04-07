@@ -1,4 +1,4 @@
-# [Helper Library v0.1.11](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.20](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -1619,7 +1619,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Fri Apr 05 2013 22:07:42._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat Apr 06 2013 20:21:59._
 
 
 

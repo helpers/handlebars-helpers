@@ -5,8 +5,7 @@ require '../../lib/helpers/helpers-math'
 
 
 
-context =
-    value: 5
+context = value: 5
 
 describe 'add', ->
     describe '{{add value 5}}', ->

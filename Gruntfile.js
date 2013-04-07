@@ -20,7 +20,11 @@ module.exports = function(grunt) {
       build: {
         expand: true,
         cwd: 'src',
-        src: ['**/*.coffee', '!tests/**/*.coffee'],
+        src: [
+          'helper-lib.coffee',
+          'helpers/*.coffee',
+          'utils/*.coffee'
+        ],
         dest: 'lib/',
         ext: '.js'
       },
@@ -30,7 +34,7 @@ module.exports = function(grunt) {
         src: ['**/*.coffee'],
         dest: 'test/',
         ext: '.js'
-      },
+      }
     },
 
     // Run mocha tests.
@@ -45,29 +49,33 @@ module.exports = function(grunt) {
 
     // Build templates to test helpers.
     assemble: {
-      tests: {
+      options: {flatten: true},
+      handlebars: {
         files: {
-          'test/actual': ['test/fixtures/*.hbs']
-        }
-      },
-      experimental: {
-        files: {
-          'test/actual': [
-            // 'test/fixtures/templates/fiddle.hbs',
-            'test/fixtures/templates/relative.hbs',
-            'test/fixtures/templates/basename.hbs'
+          'examples/dist/': [
+            'examples/src/templates/gist.hbs',
+            'examples/src/templates/jsfiddle.hbs',
+            'examples/src/templates/basename.hbs'
           ]
         }
       },
       markdown: {
         options: {
           ext: '.md',
-          content: './test/fixtures/content'
+          content: './examples/src/content'
         },
         files: {
-          'test/actual': [
-            'test/fixtures/templates/authors.hbs',
-            'test/fixtures/templates/embed.hbs'
+          'examples/dist/': [
+            'examples/src/templates/authors.hbs',
+            'examples/src/templates/inspect.hbs',
+            'examples/src/templates/embed.hbs'
+          ]
+        }
+      },
+      templates: {
+        files: {
+          'examples/dist/': [
+            'examples/templates/html/index.hbs',
           ]
         }
       }
@@ -88,20 +96,17 @@ module.exports = function(grunt) {
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
-    'clean',
-    // Compile JavaScript
     'coffee'
   ]);
 
   // Test helpers in actual templates.
-  // grunt.registerTask('default', [
-  //   'assemble:experimental',
-  //   'assemble:markdown'
-  // ]);
+  grunt.registerTask('templates', [
+    'assemble:markdown',
+    'assemble:templates'
+  ]);
 
   // Build templates using helpers and run all tests.
   grunt.registerTask('test', [
-    // 'assemble',
     'coffee',
     'mochaTest'
   ]);

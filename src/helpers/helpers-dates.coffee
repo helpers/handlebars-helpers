@@ -1,7 +1,8 @@
-
 Handlebars = require('./helpers').Handlebars
 Dates = require '../utils/dates'
 Utils = require '../utils/utils'
+
+
 
 # Port of formatDate-js library - https://github.com/michaelbaldry/formatDate-js
 Handlebars.registerHelper 'formatDate', (date, format) ->

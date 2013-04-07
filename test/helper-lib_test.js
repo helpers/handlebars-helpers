@@ -1,6 +1,6 @@
 (function() {
   require('should');
 
-  require('../lib/helpers-lib');
+  require('../lib/helper-lib');
 
 }).call(this);

@@ -136,4 +136,28 @@
     });
   });
 
+  describe("hyphenate", function() {
+    return describe("{{hyphenate string}}", function() {
+      return it("should return the string with spaces replaced with hyphens.", function() {
+        var source, template;
+
+        source = '{{hyphenate "Bender should not be allowed on tv."}}';
+        template = Handlebars.compile(source);
+        return template().should.equal("Bender-should-not-be-allowed-on-tv.");
+      });
+    });
+  });
+
+  describe("dashify", function() {
+    return describe("{{hyphenate string}}", function() {
+      return it("should return the string with periods replaced with hyphens.", function() {
+        var source, template;
+
+        source = '{{dashify "Bender.should.not.be.allowed.on.tv."}}';
+        template = Handlebars.compile(source);
+        return template().should.equal("Bender-should-not-be-allowed-on-tv-");
+      });
+    });
+  });
+
 }).call(this);

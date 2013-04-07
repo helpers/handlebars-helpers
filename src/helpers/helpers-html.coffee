@@ -25,3 +25,11 @@ Handlebars.registerHelper 'br', (count, options) ->
             i++
 
     Utils.safeString br
+
+###
+Convert new line (\n) to <br>
+from http://phpjs.org/functions/nl2br:480
+###
+Handlebars.registerHelper "nl2br", (text) ->
+  nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
+  new Handlebars.SafeString(nl2br)

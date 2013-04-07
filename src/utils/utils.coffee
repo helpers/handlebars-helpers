@@ -1,8 +1,10 @@
 Handlebars = require('../helpers/helpers').Handlebars
+fs         = require 'fs'
+path       = require 'path'
+
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
-
 
 
 Utils.isUndefined = (value) ->

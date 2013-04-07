@@ -1,9 +1,14 @@
 Handlebars = require('./helpers').Handlebars
-Utils = require '../utils/utils'
+Utils      = require '../utils/utils'
 
+
+
+# First: Returns the first item in a collection.
 Handlebars.registerHelper 'first', (array, count) ->
     if Utils.isUndefined(count) then array[0] else array.slice 0, count
 
+
+# With first: Use the first item in a collection inside a block.
 Handlebars.registerHelper 'withFirst', (array, count, options) ->
     if Utils.isUndefined count
         options = count
@@ -14,9 +19,13 @@ Handlebars.registerHelper 'withFirst', (array, count, options) ->
         for item of array then result += options.fn array[item]
         result
 
+
+# Last: Returns the last item in a collection. Opposite of `first`.
 Handlebars.registerHelper 'last', (array, count) ->
     if Utils.isUndefined(count) then array[array.length - 1] else array.slice -count
 
+
+# With Last: Use the last item in a collection inside a block. Opposite of `withFirst`.
 Handlebars.registerHelper 'withLast', (array, count, options) ->
     if Utils.isUndefined count
         options = count
@@ -27,33 +36,50 @@ Handlebars.registerHelper 'withLast', (array, count, options) ->
         for item of array then result += options.fn array[item]
         result
 
+
+# After: Returns all of the items in the collection after the specified count.
 Handlebars.registerHelper 'after', (array, count) ->
     array.slice count
 
+
+# With After: Use all of the items in the collection after the specified 
+# count inside a block.
 Handlebars.registerHelper 'withAfter', (array, count, options) ->
     array = array.slice count
     result = ''
     for item of array then result += options.fn array[item]
     result
 
+
+# Before: Returns all of the items in the collection before the specified count. 
+# Opposite of `after`.
 Handlebars.registerHelper 'before', (array, count) ->
     array.slice 0, -count
 
+
+# With Before: Use all of the items in the collection before the specified 
+# count inside a block. Opposite of `withAfter`.
 Handlebars.registerHelper 'withBefore', (array, count, options) ->
     array = array.slice 0, -count
     result = ''
     for item of array then result += options.fn array[item]
     result
 
+
+# Join: Joins all elements of a collection into a string using a separator if specified.
 Handlebars.registerHelper 'join', (array, separator) ->
     array.join if Utils.isUndefined(separator) then ' ' else separator
 
+
+# 
 Handlebars.registerHelper 'sort', (array, field) ->
     if Utils.isUndefined field
         array.sort()
     else
         array.sort (a, b) -> a[field] > b[field]
 
+
+# 
 Handlebars.registerHelper 'withSort', (array, field, options) ->
     result = ''
 

@@ -6,15 +6,15 @@ require '../../lib/helpers/helpers-collections'
 
 
 context = collection: [
-        'Amy Wong'
-        'Bender'
-        'Dr. Zoidberg'
-        'Fry'
-        'Hermes Conrad'
-        'Leela'
-        'Professor Farnsworth'
-        'Scruffy'
-    ]
+    'Amy Wong'
+    'Bender'
+    'Dr. Zoidberg'
+    'Fry'
+    'Hermes Conrad'
+    'Leela'
+    'Professor Farnsworth'
+    'Scruffy'
+]
 
 describe 'first', ->
     describe '{{first collection}}', ->
