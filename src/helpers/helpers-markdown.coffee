@@ -5,6 +5,7 @@ markdown = require('../utils/markdown').Markdown(
   highlight: "auto"
 )
 
+isServer = (typeof process isnt 'undefined')
 
 ###
 Markdown
