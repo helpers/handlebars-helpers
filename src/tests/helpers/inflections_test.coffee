@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-inflections'
 
+
+
 describe 'inflect', ->
     describe '{{inflect enemies "enemy" "enemies"}}', ->
         it 'should return the plural or singular form of a word based on a value.', ->

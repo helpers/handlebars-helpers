@@ -1,7 +1,9 @@
 Handlebars = require('../helpers/helpers').Handlebars
-Utils = module.exports = {}
 
+Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
+
+
 
 Utils.isUndefined = (value) ->
     value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?

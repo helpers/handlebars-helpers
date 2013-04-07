@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-numbers'
 
+
+
 describe 'toFixed', ->
     describe '{{toFixed value}}', ->
         it 'should return the value rounded to the nearest integer.', ->

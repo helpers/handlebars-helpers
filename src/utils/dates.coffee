@@ -1,5 +1,7 @@
 Dates = module.exports = {}
 
+
+
 Dates.padNumber = (num, count, padCharacter) ->
     padCharacter = '0'  if typeof padCharacter is 'undefined'
     lenDiff = count - String(num).length
@@ -17,7 +19,7 @@ Dates.weekOfYear = (date) ->
 
 Dates.isoWeekOfYear = (date) ->
     target = new Date(date.valueOf())
-    dayNr = (date.getDay() + 6) % 7
+    dayNr  = (date.getDay() + 6) % 7
     target.setDate target.getDate() - dayNr + 3
     jan4 = new Date(target.getFullYear(), 0, 4)
     dayDiff = (target - jan4) / 86400000

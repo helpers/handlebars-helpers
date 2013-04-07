@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-miscellaneous'
 
+
+
 describe 'default', ->
     describe '{{default title "Not title available."}}', ->
         it 'should provide a default or fallback value if a value doesn\'t exist.', ->

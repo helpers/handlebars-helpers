@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-html'
 
+
+
 describe 'ul', ->
     describe '{{#ul list class="list"}} \n
         {{this}} \n

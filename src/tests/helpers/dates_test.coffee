@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-dates'
 
+
+
 describe 'formatDate', ->
     describe '{{formatDate date format}}', ->
         it 'should return the date formated into a string given a specified format.', ->

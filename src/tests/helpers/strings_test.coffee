@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-strings'
 
+
+
 describe 'lowercase', ->
     describe '{{lowercase string}}', ->
         it 'should return the string in lowercase', ->

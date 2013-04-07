@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-logging'
 
+
+
 # Add History to console.log
 _log = if console then console.log else ->
 _log.history = []

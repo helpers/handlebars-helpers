@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-comparisons'
 
+
+
 describe 'is', ->
     describe '{{#is bender "great"}} \n
         Kiss my shiny metal ass! \n

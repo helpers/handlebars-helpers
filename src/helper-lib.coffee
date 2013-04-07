@@ -1,6 +1,9 @@
-fs = require 'fs'
+fs   = require 'fs'
 path = require 'path'
-dir = path.join __dirname, 'helpers'
+
+dir  = path.join __dirname, 'helpers'
+
+
 
 endsWith = (str, search) ->
   result = str.indexOf search, str.length - search.length

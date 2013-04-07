@@ -1,5 +1,7 @@
 Handlebars = require('./helpers').Handlebars
 
+
+
 Handlebars.registerHelper 'default', (value, defaultValue) ->
     value ? defaultValue
 ###

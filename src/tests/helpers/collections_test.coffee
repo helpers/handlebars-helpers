@@ -3,6 +3,8 @@ require 'should'
 Handlebars = require 'handlebars'
 require '../../lib/helpers/helpers-collections'
 
+
+
 context = collection: [
         'Amy Wong'
         'Bender'

@@ -1,5 +1,7 @@
 Handlebars = require('./helpers').Handlebars
-Utils = require '../utils/utils'
+Utils      = require '../utils/utils'
+
+
 
 Handlebars.registerHelper 'lowercase', (str) ->
         str.toLowerCase()
