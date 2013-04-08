@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assemble</title>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css">
+    <style type="text/css">{{{import "./test/fixtures/content/style.css"}}}</style>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <script type="text/javascript">
+      var init = (function() {
+        "use strict";
+
+        var processScroll = (function() {
+          var curr = null,
+            prev = null;
+          return function(nav) {
+            var $win = $(window);
+            $('.subnav').each(function() {
+              var nav = $(this);
+              var navTop = nav.offset().top - 40;
+              var scrollTop = $win.scrollTop();
+              if (scrollTop >= navTop && curr != nav) {
+                if (curr) {
+                  curr.removeClass('subnav-fixed')
+                  prev = curr;
+                }
+                curr = nav;
+                curr.addClass('subnav-fixed')
+              } else if (curr == nav && scrollTop <= navTop) {
+                curr.removeClass('subnav-fixed');
+                prev.addClass('subnav-fixed');
+                curr = prev;
+              } else {
+                nav.removeClass('subnav-fixed');
+              }
+            });
+          };
+        })();
+
+        return function() {
+          window.prettyPrint && prettyPrint();
+          $(".collapse").collapse();
+          // fix sub nav on scroll
+          processScroll();
+          $(window).on('scroll', processScroll)
+        }
+      })();
+    </script>
+  </head>
+  <body onload="init()">
+
+    {{{import "./top-nav"}}}
+    <div class="container-fluid">
+      <a name="top"></a>
+      <div class="container">
+        {{{import "./header"}}}
+          {{{import "./namespaces"}}}
+          {{{import "./classes"}}}
+          {{{import "./footer"}}}
+      </div>
+    </div>
+    
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-transition.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-popover.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-button.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/bootstrap-carousel.js"></script>
+    <script type="text/javascript" src="http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.js"></script>
+  </body>
+</html>

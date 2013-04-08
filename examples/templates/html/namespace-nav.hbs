@@ -1,0 +1,52 @@
+<div class="navbar subnav">
+  <div class="navbar-inner  subnav-inner">
+    <div class="container">
+      <a href="#" class="brand">
+        {{name}} {{#if isFunction}}
+        <span class="label label-label">Function</span>
+        {{/if}} {{#if isPrivate}}
+        <span class="label label-important">Private</span>
+        {{else}} {{#if isProtected}}
+        <span class="label label-warning">Protected</span>
+        {{else}}
+        <span class="label label-success">Public</span>
+        {{/if}} {{/if}}
+      </a>
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+        {{#if methods.length}}
+        <ul class="nav pull-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Methods <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              {{#each methods}}
+              <li>
+                <a href="{{link fullName}}">
+                  {{#if isStatic}}
+                  <span class="label label-info">S</span>
+                  {{/if}} {{#if isFunction}}
+                  <span class="label label-label">F</span>
+                  {{/if}} {{#if isPrivate}}
+                  <span class="label label-important">P</span>
+                  {{else}} {{#if isProtected}}
+                  <span class="label label-warning">P</span>
+                  {{else}}
+                  <span class="label label-success">P</span>
+                  {{/if}} {{/if}} {{name}}
+                </a>
+              </li>
+              {{/each}}
+            </ul>
+          </li>
+        </ul>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>

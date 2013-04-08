@@ -1,0 +1,79 @@
+{{#each classes}}
+<a name="{{escapeLink name}}"></a>
+##{{name}}
+
+[Top](#top)
+
+{{{replaceLinks description}}}
+
+        {{#each examples}}
+*Example*
+
+```javascript
+{{{code}}}
+```
+{{/each}}
+
+{{#if augments.length}}
+*Extends*
+{{#each augments}}
+  * [{{augments}}]({{link augments}})
+{{/each}}
+{{/if}}
+
+{{#if staticProperties}}
+*Static Properties*
+{{{propertyTable staticProperties}}}
+{{/if}}
+{{#if instanceProperties}}
+*Instance Properties*
+{{{propertyTable instanceProperties}}}
+{{/if}}
+
+{{#if staticMethods.length}}
+*Static*
+{{#each staticMethods}}
+  * [{{name}}]({{link fullName}})
+{{/each}}
+{{/if}}
+
+{{#if instanceMethods.length}}
+*Instance*
+{{#each instanceMethods}}
+  * [{{name}}]({{link fullName}})
+{{/each}}
+{{/if}}
+###Constructor
+
+*Defined {{file}}* [Top](#top)
+     {{#if params.length}}
+*Arguments*
+
+        {{#each params}}
+ * _{{{formatParamName name}}}_ {{#if types}}{{{joinTypes types}}}{{/if}} : {{{replaceLinks description}}}
+        {{/each}}
+     {{/if}}
+{{#if throws.length}}
+*Throws*
+
+  {{#each throws}}
+* {{#if types}}{{joinTypes types}}{{/if}} {{{replaceLinks description}}}
+  {{/each}}
+{{/if}}
+{{#if code}}
+    {{#unless ignoreCode}}
+*Source*
+
+```javascript
+{{{code}}}
+```
+      {{/unless}}
+{{/if}}
+
+  {{#each staticMethods}}
+{{{import "./templates/markdown/symbol"}}}
+  {{/each}}
+  {{#each instanceMethods}}
+{{{import "./templates/markdown/symbol"}}}
+  {{/each}}
+{{/each}}

@@ -1,0 +1,16 @@
+{{#each namespaces}}
+<a name="{{escapeLink name}}"></a>
+##{{name}}
+
+[Top](#top)
+
+{{{replaceLinks description}}}
+{{{propertyTable properties}}}
+{{#each methods}}
+  * [{{name}}]({{link fullName}})
+{{/each}}
+
+  {{#each methods}}
+{{{import "./templates/markdown/symbol"}}}
+  {{/each}}
+{{/each}}

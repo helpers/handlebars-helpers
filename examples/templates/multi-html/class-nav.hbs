@@ -1,0 +1,95 @@
+<div class="navbar subnav navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand">
+                {{class.name}}
+                {{#if class.isPrivate}}
+                <span class="label label-important">Private</span>
+                {{else}}
+                {{#if class.isProtected}}
+                <span class="label label-warning">Protected</span>
+                {{else}}
+                <span class="label label-success">Public</span>
+                {{/if}}
+                {{/if}}
+            </a>
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".sub-nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="nav-collapse sub-nav-collapse">
+
+                <ul class="nav pull-right">
+                    <li><a href="#constructor">Constructor</a></li>
+                    {{#if class.instanceProperties}}
+                    <li><a href="#instanceProperties">Instance Properties</a></li>
+                    {{/if}}
+                    {{#if class.staticProperties}}
+                    <li><a href="#staticProperties">Static Properties</a></li>
+                    {{/if}}
+                    {{#if class.staticMethods.length}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Static Methods<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {{#each class.staticMethods}}
+                            <li><a href="{{link fullName}}">
+                                {{#if isStatic}}
+                                <span class="label label-info">S</span>
+                                {{/if}}
+                                {{#if isFunction}}
+                                <span class="label label-label">F</span>
+                                {{/if}}
+                                {{#if isPrivate}}
+                                <span class="label label-important">P</span>
+                                {{else}}
+                                {{#if isProtected}}
+                                <span class="label label-warning">P</span>
+                                {{else}}
+                                <span class="label label-success">P</span>
+                                {{/if}}
+                                {{/if}}
+                                {{name}}
+                            </a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    {{/if}}
+                    {{#if class.instanceMethods.length}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Instance Methods<b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            {{#each class.instanceMethods}}
+                            <li><a href="{{link fullName}}">
+                                {{#if isStatic}}
+                                <span class="label label-info">S</span>
+                                {{/if}}
+                                {{#if isFunction}}
+                                <span class="label label-label">F</span>
+                                {{/if}}
+                                {{#if isPrivate}}
+                                <span class="label label-important">P</span>
+                                {{else}}
+                                {{#if isProtected}}
+                                <span class="label label-warning">P</span>
+                                {{else}}
+                                <span class="label label-success">P</span>
+                                {{/if}}
+                                {{/if}}
+                                {{name}}
+
+                            </a></li>
+                            {{/each}}
+                        </ul>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,30 @@
+
+ <div class="well sidebar-nav sidebar-nav-fixed">
+    <ul id="side-nav" class="nav nav-list">
+       {{#if namespaces.length}}
+            {{#each namespaces}}
+                <li class="nav-header" data-toggle="collapse" data-parent="#side-nav" data-target="{{link name}}_side">{{name}}</li>
+                <div id="{{normalize name}}_side" class="collapse in">
+                {{#if methods.length}}
+                    {{#each methods}}
+                        <li><a href="{{link fullName}}">{{#if isStatic}}<em>{{name}}</em>{{else}}{{name}}{{/if}}</a></li>
+                    {{/each}}
+                {{/if}}
+                </div>
+            {{/each}}
+         {{/if}}
+     {{#if classes.length}}
+        {{#each classes}}
+            <li class="nav-header" data-toggle="collapse" data-parent="#side-nav" data-target="{{link name}}_side">{{name}}</li>
+            <div id="{{normalize name}}_side" class="collapse in">
+
+            {{#if allMethods.length}}
+                {{#each allMethods}}
+                    <li><a href="{{link fullName}}">{{#if isStatic}}<em>{{name}}</em>{{else}}{{name}}{{/if}}</a></li>
+                {{/each}}
+            {{/if}}
+            </div>
+        {{/each}}
+     {{/if}}
+    </ul>
+</div><!--/.well -->

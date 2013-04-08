@@ -1,0 +1,63 @@
+<a name="{{escapeLink fullName}}"></a>
+<h3>
+  {{name}}
+        {{#if isStatic}}
+  <span class="label label-info">Static</span>
+  {{/if}}
+        {{#if isFunction}}
+  <span class="label label-label">Function</span>
+  {{/if}}
+        {{#if isPrivate}}
+  <span class="label label-important">Private</span>
+  {{else}}
+                {{#if isProtected}}
+  <span class="label label-warning">Protected</span>
+  {{else}}
+  <span class="label label-success">Public</span>
+  {{/if}}
+        {{/if}}
+</h3>
+
+<hr/> <em>Defined {{file}}</em>
+
+<p>{{{replaceLinks description}}}</p>
+{{#each examples}} <em>Example</em>
+<pre class="prettyprint linenums lang-js">{{code}}</pre>
+{{/each}}
+{{#if params.length}}
+<em>Arguments</em>
+<ul>
+  {{#each params}}
+  <li>
+    <em>{{{formatParamName name}}}</em>
+    {{#if types}}{{{joinTypes types}}}{{/if}} : {{{replaceLinks description}}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+{{#if returns.length}}
+<em>Returns</em>
+<ul>
+  {{#each returns}}
+  <li>
+    {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinks description}}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+{{#if throws.length}}
+<em>Throws</em>
+<ul>
+  {{#each throws}}
+  <li>
+    {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinks description}}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+{{#if code}}
+    {{#unless ignoreCode}}
+<em>Source</em>
+<pre class="prettyprint linenums lang-js">{{code}}</pre>
+{{/unless}}
+{{/if}}

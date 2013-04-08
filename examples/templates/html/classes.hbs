@@ -1,0 +1,67 @@
+{{#each classes}}
+<a name="{{escapeLink name}}"></a>
+{{{import "./templates/html/class-nav"}}}
+<p>{{{replaceLinks description}}}</p>
+{{#each examples}} <em>Example</em>
+<pre class="prettyprint linenums lang-js">{{code}}</pre>
+{{/each}}
+
+    {{#if augments.length}} <em>Extends</em>
+<ul>
+  {{#each augments}}
+  <li>
+    <a href="{{link augments}}">{{augments}}</a>
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+
+    {{#if staticProperties}}
+<a name="{{escapeLink fullName}}_staticProperties"></a>
+<em>Static Properties</em>
+{{{propertyTable staticProperties}}}
+    {{/if}}
+    {{#if instanceProperties}}
+<a name="{{escapeLink fullName}}_instanceProperties"></a>
+<em>Instance Properties</em>
+{{{propertyTable instanceProperties}}}
+    {{/if}}
+<a name="{{escapeLink fullName}}_constructor"></a>
+<h3>Constructor</h3>
+
+<em>Defined {{file}}</em>
+{{#if params.length}}
+<em>Arguments</em>
+<ul>
+  {{#each params}}
+  <li>
+    <em>{{{formatParamName name}}}</em>
+    {{#if types}}{{{joinTypes types}}}{{/if}} : {{{replaceLinks description}}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+    {{#if throws.length}}
+<em>Throws</em>
+<ul>
+  {{#each throws}}
+  <li>
+    {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinks description}}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+    {{#if code}}
+        {{#unless ignoreCode}}
+<em>Source</em>
+<pre class="prettyprint linenums lang-js">{{code}}</pre>
+{{/unless}}
+    {{/if}}
+
+  {{#each staticMethods}}
+    {{{import "./templates/html/symbol"}}}
+  {{/each}}
+  {{#each instanceMethods}}
+    {{{import "./templates/html/symbol"}}}
+  {{/each}}
+{{/each}}

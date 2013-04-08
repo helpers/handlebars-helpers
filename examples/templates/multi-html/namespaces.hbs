@@ -1,0 +1,49 @@
+{{{import "./templates/multi-html/header.html"}}}
+    <a name="{{escapeLink namespace.name}}"></a>
+    {{{import "./templates/multi-html/namespace-nav"}}}
+<em>Defined {{namespace.file}}</em>
+
+<p>{{{replaceLinksAndParse namespace.description}}}</p>
+{{#each namespace.examples}}
+    <em>Example</em>
+        <pre class="prettyprint linenums lang-js">
+{{code}}
+        </pre>
+{{/each}}
+{{#if namespace.params.length}}
+    <em>Arguments</em>
+    <ul>
+    {{#each namespace.params}}
+        <li> <em>{{{formatParamName name}}}</em> {{#if types}}{{{joinTypes types}}}{{/if}} : {{{replaceLinksAndParse description}}}</li>
+    {{/each}}
+     </ul>
+{{/if}}
+{{#if namespace.returns.length}}
+    <em>Returns</em>
+    <ul>
+    {{#each namespace.returns}}
+        <li> {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinksAndParse description}}}</li>
+    {{/each}}
+    </ul>
+{{/if}}
+{{#if namespace.throws.length}}
+    <em>Throws</em>
+    <ul>
+    {{#each namespace.throws}}
+        <li> {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinksAndParse description}}}</li>
+    {{/each}}
+    </ul>
+{{/if}}
+{{#if namespace.code}}
+    {{#unless namespace.ignoreCode}}
+    <em>Source</em>
+    <pre class="prettyprint linenums lang-js">
+{{namespace.code}}
+    </pre>
+    {{/unless}}
+{{/if}}
+    {{{propertyTable namespace.properties}}}
+    {{#each namespace.methods}}
+        {{{import "./templates/multi-html/symbol"}}}
+    {{/each}}
+{{{import "./templates/multi-html/footer.html"}}}

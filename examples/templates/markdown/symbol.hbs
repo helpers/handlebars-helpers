@@ -1,0 +1,42 @@
+<a name="{{escapeLink fullName}}"></a>
+{{{formatName name}}}
+
+---
+*Defined {{file}}* [Top](#top)
+
+{{{replaceLinks description}}}
+        {{#each examples}}
+*Example*
+
+```javascript
+{{{code}}}
+```
+{{/each}}
+     {{#if params.length}}
+*Arguments*
+
+        {{#each params}}
+ * _{{{formatParamName name}}}_ {{#if types}}{{{joinTypes types}}}{{/if}} : {{{replaceLinks description}}}
+        {{/each}}
+     {{/if}}
+     {{#if returns.length}}
+*Returns*
+        {{#each returns}}
+ * {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinks description}}}
+        {{/each}}
+     {{/if}}
+{{#if throws.length}}
+*Throws*
+  {{#each throws}}
+* {{#if types}}{{{joinTypes types}}}{{/if}} {{{replaceLinks description}}}
+  {{/each}}
+{{/if}}
+{{#if code}}
+    {{#unless ignoreCode}}
+*Source*
+
+```javascript
+{{{code}}}
+```
+    {{/unless}}
+    {{/if}}
