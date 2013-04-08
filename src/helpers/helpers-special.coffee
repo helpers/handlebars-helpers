@@ -3,9 +3,11 @@ Utils      = require '../utils/utils'
 fs         = require 'fs'
 path       = require 'path'
 
+
+
 # Fiddle
 # Usage: {{ jsfiddle [id] [tabs] }}
-Handlebars.registerHelper "jsfiddle", (id, tabs) ->
+Handlebars.registerHelper 'jsfiddle', (id, tabs) ->
   tabs   = "result,js,html,css"  if Utils.isUndefined(tabs)
   result = '<iframe width="100%" height="300" src="http://jsfiddle.net/' + id + '/embedded/' + tabs + '/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
   new Handlebars.SafeString(result)
@@ -16,7 +18,7 @@ Handlebars.registerHelper "jsfiddle", (id, tabs) ->
 # adding only the Id of the Gist.
 #
 # Usage: {{ gist [id] [file] }}
-Handlebars.registerHelper "gist", (id, file) ->
+Handlebars.registerHelper 'gist', (id, file) ->
   id = Handlebars.Utils.escapeExpression(id)
   file = ""  if Utils.isUndefined(file)
   result = '<script src="https://gist.github.com/' + id + '.js"></script>'
@@ -29,7 +31,7 @@ Handlebars.registerHelper "gist", (id, file) ->
 # parameter to a different file than the default.
 #
 # Usage: {{authors [file]}}
-Handlebars.registerHelper "authors", (authors) ->
+Handlebars.registerHelper 'authors', (authors) ->
   if Utils.isUndefined(authors)
     authors = fs.readFileSync("./AUTHORS", "utf8")
   else
@@ -42,7 +44,7 @@ Handlebars.registerHelper "authors", (authors) ->
 #
 # Usage: {{base "docs/toc.md"}}
 # Returns: toc
-Handlebars.registerHelper "basename", (base, ext) ->
+Handlebars.registerHelper 'basename', (base, ext) ->
   fullName = path.basename(base, ext)
   base = path.basename(base, path.extname(fullName))
   base
@@ -62,7 +64,7 @@ Usage:
 
 {{ embed 'src/examples/Gruntfile.js' 'javascript' }}
 ###
-Handlebars.registerHelper "embed", (file, language) ->
+Handlebars.registerHelper 'embed', (file, language) ->
   file = fs.readFileSync(file, "utf8")
   language = ""  if Utils.isUndefined(language)
   result = '``` ' + language + '\n' + file + '\n```'
@@ -70,7 +72,30 @@ Handlebars.registerHelper "embed", (file, language) ->
 
 
 # Inspect
-Handlebars.registerHelper "inspect", (obj, language) ->
+Handlebars.registerHelper 'inspect', (obj, language) ->
   language = ""  if Utils.isUndefined(language)
   result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null) + '\n```'
   new Handlebars.SafeString(result)
+
+
+###
+Changelog
+
+Reads in data from an "CHANGELOG" file to generate markdown formatted
+changelog or list of changelog entries for a README.md. Accepts a
+second optional parameter to change to a different file than the default.
+
+Syntax: {{changelog [src]}}
+###
+Handlebars.registerHelper "changelog", (src) ->
+  src = undefined
+  if Utils.isUndefined(src)
+    src = fs.readFileSync("./CHANGELOG.yml", "utf8")
+  else
+    src = fs.readFileSync(src, "utf8")
+  context = YAML.load(src)
+  source = "{{#if changelog}}{{#each changelog}}* {{{ date }}}    {{{ @key }}}    {{#each changes}}{{{.}}} {{/each}}\n{{/each}}{{else}}_(Nothing yet)_{{/if}}"
+  template = Handlebars.compile(source)
+  
+  # var matches = src.replace(/(v.*)(\:)(\s.*date:\s)\"(.*)(\")(\s.*)(changes:\s)(.+-)(.+)/gm) || [];
+  new Handlebars.SafeString(template(context))
