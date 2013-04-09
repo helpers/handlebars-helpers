@@ -72,14 +72,14 @@ module.exports = function(grunt) {
             './examples/src/templates/embed.hbs'
           ]
         }
-      },
-      templates: {
-        files: {
-          'examples/dist/': [
-            'examples/templates/html/index.hbs',
-          ]
-        }
       }
+      // templates: {
+      //   files: {
+      //     'examples/dist/': [
+      //       'examples/templates/html/index.hbs',
+      //     ]
+      //   }
+      // }
     },
 
     // Clean test files before building or re-testing.
