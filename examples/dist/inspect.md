@@ -3,15 +3,15 @@
 
 
 ``` javascript
-{ none: './test/fixtures/content/TEST',
-  css: './test/fixtures/content/test.css',
-  hbs: './test/fixtures/content/test.hbs',
-  html: './test/fixtures/content/test.html',
-  js: './test/fixtures/content/test.js',
-  json: './test/fixtures/content/test.json',
-  less: './test/fixtures/content/test.less',
-  md: './test/fixtures/content/test.md',
-  text: './test/fixtures/content/test.txt',
-  yml: './test/fixtures/content/test.yml' }
+{ none: './examples/src/content/TEST',
+  css: './examples/src/content/test.css',
+  hbs: './examples/src/content/test.hbs',
+  html: './examples/src/content/test.html',
+  js: './examples/src/content/test.js',
+  json: './examples/src/content/test.json',
+  less: './examples/src/content/test.less',
+  md: './examples/src/content/test.md',
+  text: './examples/src/content/test.txt',
+  yml: './examples/src/content/test.yml' }
 ```
 

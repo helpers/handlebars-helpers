@@ -66,7 +66,7 @@ module.exports = function(grunt) {
         },
         files: {
           'examples/dist/': [
-            './examples/src/templates/authors.hbs',
+            // './examples/src/templates/authors.hbs',
             './examples/src/templates/markdown.hbs',
             './examples/src/templates/inspect.hbs',
             './examples/src/templates/embed.hbs'

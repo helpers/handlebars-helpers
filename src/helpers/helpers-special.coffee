@@ -31,13 +31,13 @@ Handlebars.registerHelper 'gist', (id, file) ->
 # parameter to a different file than the default.
 #
 # Usage: {{authors [file]}}
-Handlebars.registerHelper 'authors', (authors) ->
-  if Utils.isUndefined(authors)
-    authors = fs.readFileSync("./AUTHORS", "utf8")
-  else
-    authors = fs.readFileSync(authors, "utf8")
-  matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
-  new Handlebars.SafeString(matches)
+# Handlebars.registerHelper 'authors', (authors) ->
+#   if Utils.isUndefined(authors)
+#     authors = fs.readFileSync("./AUTHORS", "utf8")
+#   else
+#     authors = fs.readFileSync(authors, "utf8")
+#   matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
+#   new Handlebars.SafeString(matches)
 
 
 # Basename: Returns the basename of a given file.

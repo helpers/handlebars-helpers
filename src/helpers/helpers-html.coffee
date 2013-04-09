@@ -53,6 +53,10 @@ Handlebars.registerHelper "link", (url, text, linkClass) ->
   new Handlebars.SafeString(result)
 
 
+Handlebars.registerHelper "highlight", (value, options) ->
+  escaped = Handlebars.Utils.escapeExpression(value)
+  new Handlebars.SafeString("<span class=\"highlight\">" + escaped + "</span>")
+
 
 Handlebars.registerHelper "icon", (attachment) ->
   extension = attachment.substr((attachment.lastIndexOf(".") + 1))
