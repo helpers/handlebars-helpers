@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require '../../lib/helpers/helpers-math'
+require ('../../lib/helpers/helpers-math').register Handlebars, {}
 
 
 

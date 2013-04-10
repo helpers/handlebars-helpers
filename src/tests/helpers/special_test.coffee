@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require '../../lib/helpers/helpers-special'
+require ('../../lib/helpers/helpers-special').register Handlebars, {}
 
 context = AUTHORS: 'Brian Woodward (http://github.com/doowb)\nJon Schlinkert (http://github.com/jonschlinkert)'
 
