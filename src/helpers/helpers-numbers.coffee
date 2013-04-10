@@ -29,3 +29,5 @@ module.exports.register = (Handlebars, options) ->
   # add commas to numbers
   Handlebars.registerHelper 'addCommas', (number) ->
       number.toString().replace /(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"
+
+  @

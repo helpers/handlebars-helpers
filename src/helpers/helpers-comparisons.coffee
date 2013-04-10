@@ -121,4 +121,4 @@ module.exports.register = (Handlebars, options) ->
     return options.inverse(this)  if context <= options.hash.compare
     options.fn this
 
-
+  @

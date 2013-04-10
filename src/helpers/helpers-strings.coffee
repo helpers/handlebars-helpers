@@ -65,4 +65,4 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "dashify", (tag) ->
       tag.split(".").join "-"
 
-
+  @

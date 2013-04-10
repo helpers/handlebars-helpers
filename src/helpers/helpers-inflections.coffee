@@ -19,3 +19,5 @@ module.exports.register = (Handlebars, options) ->
               when 2 then "#{value}nd"
               when 3 then "#{value}rd"
               else "#{value}th"
+
+  @

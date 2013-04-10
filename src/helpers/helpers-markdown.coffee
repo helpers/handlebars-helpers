@@ -48,3 +48,4 @@ module.exports.register = (Handlebars, options) ->
       content
 
 
+  @

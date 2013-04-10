@@ -83,3 +83,5 @@ module.exports.register = (Handlebars, options) ->
         return new Handlebars.SafeString('<img src="img/audio-icon.png"><span>' + attachment + '</span>')
       else
         new Handlebars.SafeString('<img src="img/other-icon.png"><span>' + attachment + '</span>')
+
+  @

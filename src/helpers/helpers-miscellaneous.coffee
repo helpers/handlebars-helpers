@@ -11,3 +11,5 @@ module.exports.register = (Handlebars, options) ->
       Handlebars.registerPartial(name, require partial) unless Handlebars.partials[name]?
       Utils.safeString Handlebars.partials[name](data)
   ###
+
+  @

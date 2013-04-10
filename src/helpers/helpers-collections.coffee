@@ -124,3 +124,5 @@ module.exports.register = (Handlebars, options) ->
           result += options.fn key: key, value: value
 
       result
+
+  @

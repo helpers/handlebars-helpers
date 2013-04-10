@@ -22,3 +22,5 @@ module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper 'round', (value) ->
       Math.round value
+
+  @

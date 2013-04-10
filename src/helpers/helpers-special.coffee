@@ -100,3 +100,5 @@ module.exports.register = (Handlebars, options) ->
 
     # var matches = src.replace(/(v.*)(\:)(\s.*date:\s)\"(.*)(\")(\s.*)(changes:\s)(.+-)(.+)/gm) || [];
     new Handlebars.SafeString(template(context))
+
+  @
