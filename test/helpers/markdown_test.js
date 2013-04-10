@@ -7,7 +7,9 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-markdown');
+  require('../../lib/helpers/helpers-markdown').register(Handlebars, {
+    gfm: true
+  });
 
   simple = "{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}";
 

@@ -1,43 +1,50 @@
-Handlebars = require('./helpers').Handlebars
-Utils      = require '../utils/utils'
-markdown   = require('../utils/markdown').Markdown(
-  gfm: true
-  highlight: "auto"
-)
 
-isServer = (typeof process isnt 'undefined')
+module.exports.register = (Handlebars, options) ->
 
-###
-Markdown
+  Utils      = require '../utils/utils'
+  _ = require 'lodash'
 
-Markdown helper used to write markdown inside and
-rendered the markdown inline with the HTML
+  opts =
+    gfm: true
+    highlight: 'auto'
 
-Usage:
+  opts = _.extend opts, options
 
-{{#markdown}}
-# This is a title.
-{{/markdown}}
+  markdown   = require('../utils/markdown').Markdown opts
 
-Renders to:
-<h1>This is a title </h1>
-###
-Handlebars.registerHelper "markdown", (options) ->
-  content = options.fn(this)
-  markdown.convert content
-
-if isServer
+  isServer = (typeof process isnt 'undefined')
 
   ###
-  Markdown helper used to read in a file and inject
-  the rendered markdown into the HTML.
+  Markdown
+
+  Markdown helper used to write markdown inside and
+  rendered the markdown inline with the HTML
 
   Usage:
 
-  {{md ../path/to/file.md}}
+  {{#markdown}}
+  # This is a title.
+  {{/markdown}}
+
+  Renders to:
+  <h1>This is a title </h1>
   ###
-  Handlebars.registerHelper "md", (path) ->
-    content = markdown.read(path)
-    content
+  Handlebars.registerHelper "markdown", (options) ->
+    content = options.fn(this)
+    markdown.convert content
+
+  if isServer
+
+    ###
+    Markdown helper used to read in a file and inject
+    the rendered markdown into the HTML.
+
+    Usage:
+
+    {{md ../path/to/file.md}}
+    ###
+    Handlebars.registerHelper "md", (path) ->
+      content = markdown.read(path)
+      content
 
 

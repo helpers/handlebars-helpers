@@ -1,7 +1,7 @@
 require 'should'
 path = require 'path'
 Handlebars = require 'handlebars'
-require '../../lib/helpers/helpers-markdown'
+require('../../lib/helpers/helpers-markdown').register Handlebars, { gfm: true }
 
 simple = "{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}"
 simpleExpected = "<h2>Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href=\"http://github.com\">Click here</a></p>\n"
