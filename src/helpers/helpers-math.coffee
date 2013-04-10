@@ -1,24 +1,24 @@
-Handlebars = require('./helpers').Handlebars
+module.exports.register = (Handlebars, options) ->
 
 
 
-Handlebars.registerHelper 'add', (value, addition) ->
-    value + addition
+  Handlebars.registerHelper 'add', (value, addition) ->
+      value + addition
 
-Handlebars.registerHelper 'subtract', (value, substraction) ->
-    value - substraction
+  Handlebars.registerHelper 'subtract', (value, substraction) ->
+      value - substraction
 
-Handlebars.registerHelper 'divide', (value, divisor) ->
-    value / divisor
+  Handlebars.registerHelper 'divide', (value, divisor) ->
+      value / divisor
 
-Handlebars.registerHelper 'multiply', (value, multiplier) ->
-    value * multiplier
+  Handlebars.registerHelper 'multiply', (value, multiplier) ->
+      value * multiplier
 
-Handlebars.registerHelper 'floor', (value) ->
-    Math.floor value
+  Handlebars.registerHelper 'floor', (value) ->
+      Math.floor value
 
-Handlebars.registerHelper 'ceil', (value) ->
-    Math.ceil value
+  Handlebars.registerHelper 'ceil', (value) ->
+      Math.ceil value
 
-Handlebars.registerHelper 'round', (value) ->
-    Math.round value
+  Handlebars.registerHelper 'round', (value) ->
+      Math.round value
