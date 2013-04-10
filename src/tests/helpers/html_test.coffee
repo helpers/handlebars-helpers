@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require ('../../lib/helpers/helpers-html').register Handlebars, {}
+require('../../lib/helpers/helpers-html').register Handlebars, {}
 
 
 

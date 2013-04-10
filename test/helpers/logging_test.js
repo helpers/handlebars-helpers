@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-logging');
+  require('../../lib/helpers/helpers-logging').register(Handlebars, {});
 
   _log = console ? console.log : function() {};
 

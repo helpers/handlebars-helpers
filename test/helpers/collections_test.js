@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-collections');
+  require('../../lib/helpers/helpers-collections').register(Handlebars, {});
 
   context = {
     collection: ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']

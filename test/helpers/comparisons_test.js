@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-comparisons');
+  require('../../lib/helpers/helpers-comparisons').register(Handlebars, {});
 
   describe('is', function() {
     return describe('{{#is bender "great"}} \n\

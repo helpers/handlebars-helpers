@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-miscellaneous');
+  require('../../lib/helpers/helpers-miscellaneous').register(Handlebars, {});
 
   describe('default', function() {
     return describe('{{default title "Not title available."}}', function() {

@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-dates');
+  require('../../lib/helpers/helpers-dates').register(Handlebars, {});
 
   describe('formatDate', function() {
     return describe('{{formatDate date format}}', function() {

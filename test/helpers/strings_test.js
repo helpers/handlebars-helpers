@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-strings');
+  require('../../lib/helpers/helpers-strings').register(Handlebars, {});
 
   describe('lowercase', function() {
     return describe('{{lowercase string}}', function() {

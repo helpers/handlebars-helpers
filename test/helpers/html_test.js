@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-html');
+  require('../../lib/helpers/helpers-html').register(Handlebars, {});
 
   describe('ul', function() {
     return describe('{{#ul list class="list"}} \n\
