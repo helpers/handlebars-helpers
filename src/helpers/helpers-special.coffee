@@ -60,7 +60,7 @@ module.exports.register = (Handlebars, options) ->
   Returns:
   .md
   ###
-  Handlebars.registerHelper "ext", (ext) ->
+  Handlebars.registerHelper "extension", (ext) ->
     extension = path.extname(ext)
     extension
 

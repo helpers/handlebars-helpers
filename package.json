@@ -45,6 +45,7 @@
     "grunt-mocha-test": "~0.2.0",
     "should": "~1.2.2",
     "chai": "~1.5.0",
+    "mime": "latest",
     "lodash": "~1.1.1",
     "marked": "~0.2.8",
     "highlight.js": "~7.3.0"
@@ -55,6 +56,7 @@
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-copy": "latest",
     "grunt-contrib-nodeunit": "~0.1.2",
     "handlebars": "~1.0.10",
     "amdefine": "0.0.4"

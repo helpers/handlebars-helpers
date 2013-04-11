@@ -1,5 +1,7 @@
 ---
 title: Pages and Ext Variables
+url:
+  assemble: http://github.com/assemble/
 ---
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -8,7 +10,13 @@ title: Pages and Ext Variables
         {{#pages}}<li><a href="./{{lowercase filename}}{{ext}}">{{data.title}}</a></li>
         {{/pages}}
       </ul>
-      <ul class="nav"><li><a href="{{ url.assemble.repo }}">Visit Assemble</a></li></ul>
+      <ul class="nav"><li><a href="{{url.assemble}}">Visit Assemble</a></li></ul>
     </div>
   </div>
 </div>
+
+{{#comment}}
+NOTE: "pages", "filename" and "ext" are build-in variables that require 
+assemble. Also, "title" does not require Assemble, but "data.title" does 
+since it accesses the Assemble "data" object 
+{{/comment}}

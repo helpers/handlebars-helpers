@@ -3,14 +3,14 @@ module.exports.register = (Handlebars, options) ->
   _ = require 'lodash'
 
 
-
-
   opts = (
     gfm: true
     tables: true
     breaks: false
+    highlight: null
     pedantic: false
     sanitize: true
+    silent: false
     smartLists: true
     langPrefix: "lang-"
     highlight: (code, lang) ->

@@ -49,10 +49,43 @@ module.exports = function(grunt) {
 
     // Build templates to test helpers.
     assemble: {
-      options: {flatten: true},
+      options: {
+        assets: 'examples/assets',
+        flatten: true,
+        content: './examples/src/content'
+      },
+      all: {
+        files: {
+          'examples/result/all/': [
+            // "examples/src/templates/CHANGELOG.hbs",
+            "examples/src/templates/absolute.hbs",
+            "examples/src/templates/pages.hbs",
+            "examples/src/templates/authors.hbs",
+            "examples/src/templates/basename.hbs",
+            "examples/src/templates/embed.hbs",
+            "examples/src/templates/extension.hbs",
+            "examples/src/templates/file.hbs",
+            "examples/src/templates/filename.hbs",
+            "examples/src/templates/gist.hbs",
+            "examples/src/templates/icon.hbs",
+            "examples/src/templates/include.hbs",
+            "examples/src/templates/index.hbs",
+            "examples/src/templates/inspect.hbs",
+            "examples/src/templates/jsfiddle.hbs",
+            "examples/src/templates/link.hbs",
+            "examples/src/templates/markdown.hbs",
+            "examples/src/templates/misc.hbs",
+            "examples/src/templates/ordinalize.hbs",
+            "examples/src/templates/relative.hbs",
+            "examples/src/templates/strings.hbs"
+          ]
+        }
+      },
       handlebars: {
         files: {
-          'examples/dist/': [
+          'examples/result/html/': [
+            'examples/src/templates/misc.hbs',
+            'examples/src/templates/strings.hbs',
             'examples/src/templates/gist.hbs',
             'examples/src/templates/jsfiddle.hbs',
             'examples/src/templates/basename.hbs'
@@ -61,13 +94,12 @@ module.exports = function(grunt) {
       },
       markdown: {
         options: {
-          ext: '.md',
-          content: './examples/src/content'
+          ext: '.md'
         },
         files: {
-          'examples/dist/': [
-            // './examples/src/templates/authors.hbs',
+          'examples/result/md/': [
             './examples/src/templates/markdown.hbs',
+            './examples/src/templates/authors.hbs',
             './examples/src/templates/inspect.hbs',
             './examples/src/templates/embed.hbs'
           ]
@@ -75,7 +107,7 @@ module.exports = function(grunt) {
       }
       // templates: {
       //   files: {
-      //     'examples/dist/': [
+      //     'examples/result/': [
       //       'examples/templates/html/index.hbs',
       //     ]
       //   }
@@ -84,7 +116,16 @@ module.exports = function(grunt) {
 
     // Clean test files before building or re-testing.
     clean: {
-      tests: ['temp', 'test/actual'],
+      tests: ['examples/result/**/*.{html,md}'],
+    },
+
+    // Configuration to be run (and then tested).
+    copy: {
+      main: {
+        files: [
+          {expand: true, src: ['lib/**'], dest: './node_modules/assemble/node_modules/helper-lib/'}
+        ]
+      }
     }
   });
 
@@ -92,17 +133,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-mocha-test');
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
-    'coffee'
+    'coffee',
+    'copy',
+    'clean',
+    'templates'
   ]);
 
   // Test helpers in actual templates.
   grunt.registerTask('templates', [
-    'assemble:markdown',
+    'assemble:all'
+    // 'assemble:markdown',
     // 'assemble:handlebars'
   ]);
 
