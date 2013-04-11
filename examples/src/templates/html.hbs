@@ -1,5 +1,20 @@
 ---
 title: HTML Helpers
+links: 
+  - one
+  - two
+  - three
+
+moreLinks:
+  -
+    url: one
+    text: two  
+  -
+    url: three
+    text: four  
+  -
+    url: five
+    text: size
 ---
 
 
@@ -9,3 +24,11 @@ title: HTML Helpers
 
 {{link 'http://github.com' 'GitHub' 'nav-link'}}
 
+
+{{#ul links class="nav"}}
+  {{.}}
+{{/ul}}
+
+{{#ul moreLinks class="nav"}}
+  <a href="{{url}}">{{text}}</a> 
+{{/ul}}

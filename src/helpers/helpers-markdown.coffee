@@ -31,20 +31,15 @@ module.exports.register = (Handlebars, options) ->
 
   isServer = (typeof process isnt 'undefined')
 
-  ###
-  Markdown
 
-  Markdown helper used to write markdown inside and
+
+  ###
+  Markdown: Markdown helper used to write markdown inside and
   rendered the markdown inline with the HTML
 
-  Usage:
+  Usage: {{#markdown}} # This is a title. {{/markdown}}
 
-  {{#markdown}}
-  # This is a title.
-  {{/markdown}}
-
-  Renders to:
-  <h1>This is a title </h1>
+  Renders to: <h1>This is a title </h1>
   ###
   Handlebars.registerHelper "markdown", (options) ->
     content = options.fn(this)
@@ -55,14 +50,10 @@ module.exports.register = (Handlebars, options) ->
     ###
     Markdown helper used to read in a file and inject
     the rendered markdown into the HTML.
-
-    Usage:
-
-    {{md ../path/to/file.md}}
+    Usage: {{md ../path/to/file.md}}
     ###
     Handlebars.registerHelper "md", (path) ->
       content = markdown.read(path)
-      content
-
+      new Handlebars.SafeString(content)
 
   @

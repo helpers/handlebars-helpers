@@ -1,9 +1,9 @@
 module.exports.register = (Handlebars, options) ->
   Utils      = require '../utils/utils'
   fs         = require 'fs'
-  path       = require 'path'
   yaml       = require 'js-yaml'
   _          = require 'lodash'
+
 
 
   ###
@@ -14,6 +14,7 @@ module.exports.register = (Handlebars, options) ->
     tabs   = "result,js,html,css"  if Utils.isUndefined(tabs)
     result = '<iframe width="100%" height="300" src="http://jsfiddle.net/' + id + '/embedded/' + tabs + '/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
     new Handlebars.SafeString(result)
+
 
   ### 
   Gist: Downloads and embeds public GitHub Gists by
@@ -59,73 +60,6 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
-  directory
-  Returns the absolute path to the current directory.
-
-  Usage:
-  {{directory [path]}}
-
-  Returns:
-  C:\path\to\the\current\current\directory
-  ###
-  Handlebars.registerHelper "directory", (file) ->
-    file = path.dirname()
-    
-
-
-  ###
-  absolute
-  Returns the absolute path to the current directory.
-
-  Usage:
-  {{absolute [to]}}
-
-  Returns:
-  C:\path\to\the\current\current\directory
-  ###
-  Handlebars.registerHelper "absolute", (to) ->
-    absolutePath = Utils.urlNormalize(path.normalize(to, path.dirname()))
-    absolutePath
-
-
-  ###
-  Relative: {{relative [from] [to]}}
-  Returns the derived relative path from one to the other.
-  ###
-  Handlebars.registerHelper "relative", (from, to) ->
-    relativePath = Utils.urlNormalize(path.relative(from, to))
-    relativePath
-
-  ###
-  filename: Returns the full-name of a given file.
-  Usage:    {{filename "docs/toc.md"}}
-  Returns:  toc.md
-  ###
-  Handlebars.registerHelper 'filename', (base, ext) ->
-    fullName = path.basename(base, ext)
-    fullName
-
-  ###
-  Basename: Returns the basename of a given file.
-  Usage:    {{base "docs/toc.md"}}
-  Returns:  toc
-  ###
-  Handlebars.registerHelper 'basename', (base, ext) ->
-    fullName = path.basename(base, ext)
-    base = path.basename(base, path.extname(fullName))
-    base
-
-  ###
-  Extension: Returns the extension of a given file.
-  Usage:    {{ext "docs/toc.md"}}
-  Returns:  .md
-  ###
-  Handlebars.registerHelper "extension", (ext) ->
-    extension = path.extname(ext)
-    extension
-
-
-  ###
   Embed: Embeds code from an external file as preformatted text. The first parameter
   requires a path to the file you want to embed. There is a second optional
   parameter to specify (force) syntax highlighting for a specific language.
@@ -137,14 +71,6 @@ module.exports.register = (Handlebars, options) ->
     language = ""  if Utils.isUndefined(language)
     result = '``` ' + language + '\n' + file + '\n```'
     new Handlebars.SafeString(result)
-
-
-  # Inspect
-  Handlebars.registerHelper 'inspect', (obj, language) ->
-    language = ""  if Utils.isUndefined(language)
-    result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null).replace('{', '{\n ').replace('}', '\n}') + '\n```'
-    new Handlebars.SafeString(result)
-
 
 
   @
