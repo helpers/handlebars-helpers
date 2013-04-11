@@ -1,6 +1,10 @@
 (function() {
+  var Handlebars;
+
   require('should');
 
-  require('../lib/helper-lib');
+  Handlebars = require('handlebars');
+
+  require('../lib/helper-lib').register(Handlebars, {});
 
 }).call(this);

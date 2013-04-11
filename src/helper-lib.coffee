@@ -11,6 +11,6 @@ module.exports.register = (Handlebars, options) ->
 
   loadFile = (file) ->
     helper = require file unless endsWith file, 'helpers.js'
-    helper.register Handlebars, options unless typeof helpers.register is 'undefined'
+    helper.register Handlebars, options unless typeof helper is 'undefined' or typeof helper.register is 'undefined'
 
   loadFile path.join(dir, file) for file in fs.readdirSync dir
