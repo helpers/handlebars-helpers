@@ -1,0 +1,14 @@
+---
+title: Pages and Ext Variables
+---
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <ul class="nav">
+        {{#pages}}<li><a href="./{{lowercase filename}}{{ext}}">{{data.title}}</a></li>
+        {{/pages}}
+      </ul>
+      <ul class="nav"><li><a href="{{ url.assemble.repo }}">Visit Assemble</a></li></ul>
+    </div>
+  </div>
+</div>
