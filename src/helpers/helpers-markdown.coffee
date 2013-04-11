@@ -1,16 +1,33 @@
-
 module.exports.register = (Handlebars, options) ->
-
   Utils      = require '../utils/utils'
   _ = require 'lodash'
 
-  opts =
+
+
+
+  opts = (
     gfm: true
-    highlight: 'auto'
-
+    tables: true
+    breaks: false
+    pedantic: false
+    sanitize: true
+    smartLists: true
+    langPrefix: "lang-"
+    highlight: (code, lang) ->
+      res = undefined
+      return code  unless lang
+      switch lang
+        when "js"
+          lang = "javascript"
+      try
+        res = hljs.highlight(lang, code).value
+      finally
+        return res or code
+  )
+  
   opts = _.extend opts, options
-
   markdown   = require('../utils/markdown').Markdown opts
+
 
   isServer = (typeof process isnt 'undefined')
 
