@@ -124,4 +124,15 @@ module.exports.register = (Handlebars, options) ->
 
       result
 
+  # tagsArray gets passed in from *.yml as a string, like "foo, bar, baz"
+  # we need to convert this to an ES Array of strings to avoid reference errors
+  # 
+  # Credit: https://github.com/operasoftware/shinydemos/blob/master/lib/compiler.js
+  Handlebars.registerHelper "arrayify", (tagsArray) ->
+    result = tagsArray.split(",").map((tag) ->
+      "\"" + tag + "\""
+    )
+    result
+
+
   @

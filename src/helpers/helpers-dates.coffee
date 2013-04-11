@@ -35,4 +35,6 @@ module.exports.register = (Handlebars, options) ->
 
       if Math.floor(seconds) is 0 then 'Just now' else Math.floor(seconds) + ' seconds ago'
 
+
   @
+

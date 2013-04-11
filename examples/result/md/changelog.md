@@ -1,4 +1,8 @@
 
+# Changelog Helper
+
+## Default Variable
+
 * 2013-04-07    v0.1.21    Add markdown helpers back, add more tests.
 * 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities.
 * 2013-04-05    v0.1.11    New authors and gist helpers, general cleanup and new tests.
@@ -10,6 +14,11 @@
 * 2013-03-06    v0.1.0    First commit.
 
 
+
+
+## Optional second parameter 
+
+For path of CHANGELOG to use
 
 * 2013-04-07    v0.1.21    Add markdown helpers back, add more tests.
 * 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities.

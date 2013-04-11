@@ -48,6 +48,7 @@
     "mime": "latest",
     "lodash": "~1.1.1",
     "marked": "~0.2.8",
+    "js-yaml": "~2.0.4",
     "highlight.js": "~7.3.0"
   },
   "peerDependencies": {

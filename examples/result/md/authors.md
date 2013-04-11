@@ -1,5 +1,5 @@
 
-## `authors` helper
+## authors helper
 
 ### Default:
 

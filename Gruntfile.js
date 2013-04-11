@@ -54,54 +54,21 @@ module.exports = function(grunt) {
         flatten: true,
         content: './examples/src/content'
       },
-      all: {
+      markdown: {
+        options: {
+          ext: ''
+        },
         files: {
-          'examples/result/all/': [
-            // "examples/src/templates/CHANGELOG.hbs",
-            "examples/src/templates/absolute.hbs",
-            "examples/src/templates/pages.hbs",
-            "examples/src/templates/authors.hbs",
-            "examples/src/templates/basename.hbs",
-            "examples/src/templates/embed.hbs",
-            "examples/src/templates/extension.hbs",
-            "examples/src/templates/file.hbs",
-            "examples/src/templates/filename.hbs",
-            "examples/src/templates/gist.hbs",
-            "examples/src/templates/icon.hbs",
-            "examples/src/templates/include.hbs",
-            "examples/src/templates/index.hbs",
-            "examples/src/templates/inspect.hbs",
-            "examples/src/templates/jsfiddle.hbs",
-            "examples/src/templates/link.hbs",
-            "examples/src/templates/markdown.hbs",
-            "examples/src/templates/misc.hbs",
-            "examples/src/templates/ordinalize.hbs",
-            "examples/src/templates/relative.hbs",
-            "examples/src/templates/strings.hbs"
+          'examples/result/md/': [
+            './examples/src/templates/*.md.hbs'
           ]
         }
       },
       handlebars: {
         files: {
-          'examples/result/html/': [
-            'examples/src/templates/misc.hbs',
-            'examples/src/templates/strings.hbs',
-            'examples/src/templates/gist.hbs',
-            'examples/src/templates/jsfiddle.hbs',
-            'examples/src/templates/basename.hbs'
-          ]
-        }
-      },
-      markdown: {
-        options: {
-          ext: '.md'
-        },
-        files: {
-          'examples/result/md/': [
-            './examples/src/templates/markdown.hbs',
-            './examples/src/templates/authors.hbs',
-            './examples/src/templates/inspect.hbs',
-            './examples/src/templates/embed.hbs'
+          'examples/result/all/': [
+            "examples/src/templates/*.hbs",
+            "!examples/src/templates/*.md.hbs"
           ]
         }
       }
@@ -147,9 +114,8 @@ module.exports = function(grunt) {
 
   // Test helpers in actual templates.
   grunt.registerTask('templates', [
-    'assemble:all'
-    // 'assemble:markdown',
-    // 'assemble:handlebars'
+    'assemble:markdown',
+    'assemble:handlebars'
   ]);
 
   // Build templates using helpers and run all tests.

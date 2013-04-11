@@ -3,6 +3,7 @@ module.exports.register = (Handlebars, options) ->
   fs         = require 'fs'
   path       = require 'path'
   yaml       = require 'js-yaml'
+  _          = require 'lodash'
 
 
   ###
@@ -52,12 +53,57 @@ module.exports.register = (Handlebars, options) ->
       changelog = yaml.load fs.readFileSync('./CHANGELOG', 'utf8').toString()
     else
       changelog = yaml.load fs.readFileSync(changelog, 'utf8').toString()
-
     source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
     template = Handlebars.compile(source)
-
-    # var matches = src.replace(/(v.*)(\:)(\s.*date:\s)\"(.*)(\")(\s.*)(changes:\s)(.+-)(.+)/gm) || [];
     new Handlebars.SafeString(template(changelog))
+
+
+  ###
+  directory
+  Returns the absolute path to the current directory.
+
+  Usage:
+  {{directory [path]}}
+
+  Returns:
+  C:\path\to\the\current\current\directory
+  ###
+  Handlebars.registerHelper "directory", (file) ->
+    file = path.dirname()
+    
+
+
+  ###
+  absolute
+  Returns the absolute path to the current directory.
+
+  Usage:
+  {{absolute [to]}}
+
+  Returns:
+  C:\path\to\the\current\current\directory
+  ###
+  Handlebars.registerHelper "absolute", (to) ->
+    absolutePath = Utils.urlNormalize(path.normalize(to, path.dirname()))
+    absolutePath
+
+
+  ###
+  Relative: {{relative [from] [to]}}
+  Returns the derived relative path from one to the other.
+  ###
+  Handlebars.registerHelper "relative", (from, to) ->
+    relativePath = Utils.urlNormalize(path.relative(from, to))
+    relativePath
+
+  ###
+  filename: Returns the full-name of a given file.
+  Usage:    {{filename "docs/toc.md"}}
+  Returns:  toc.md
+  ###
+  Handlebars.registerHelper 'filename', (base, ext) ->
+    fullName = path.basename(base, ext)
+    fullName
 
   ###
   Basename: Returns the basename of a given file.
@@ -96,7 +142,7 @@ module.exports.register = (Handlebars, options) ->
   # Inspect
   Handlebars.registerHelper 'inspect', (obj, language) ->
     language = ""  if Utils.isUndefined(language)
-    result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null) + '\n```'
+    result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null).replace('{', '{\n ').replace('}', '\n}') + '\n```'
     new Handlebars.SafeString(result)
 
 
