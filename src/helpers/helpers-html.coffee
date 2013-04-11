@@ -1,7 +1,7 @@
 module.exports.register = (Handlebars, options) ->
-
   HTML       = require '../utils/html'
   Utils      = require '../utils/utils'
+
 
 
 

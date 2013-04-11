@@ -1,8 +1,8 @@
 module.exports.register = (Handlebars, options) ->
-
   Utils      = require '../utils/utils'
   fs         = require 'fs'
   path       = require 'path'
+
 
 
 
@@ -32,13 +32,13 @@ module.exports.register = (Handlebars, options) ->
   # parameter to a different file than the default.
   #
   # Usage: {{authors [file]}}
-  # Handlebars.registerHelper 'authors', (authors) ->
-  #   if Utils.isUndefined(authors)
-  #     authors = fs.readFileSync("./AUTHORS", "utf8")
-  #   else
-  #     authors = fs.readFileSync(authors, "utf8")
-  #   matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
-  #   new Handlebars.SafeString(matches)
+  Handlebars.registerHelper 'authors', (authors) ->
+    if Utils.isUndefined(authors)
+      authors = fs.readFileSync("./AUTHORS", "utf8")
+    else
+      authors = fs.readFileSync(authors, "utf8")
+    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
+    new Handlebars.SafeString(matches)
 
 
   # Basename: Returns the basename of a given file.
@@ -49,6 +49,20 @@ module.exports.register = (Handlebars, options) ->
     fullName = path.basename(base, ext)
     base = path.basename(base, path.extname(fullName))
     base
+
+  ###
+  Extension
+  Returns the extension of a given file.
+
+  Usage:
+  {{ext "docs/toc.md"}}
+
+  Returns:
+  .md
+  ###
+  Handlebars.registerHelper "ext", (ext) ->
+    extension = path.extname(ext)
+    extension
 
 
   ###

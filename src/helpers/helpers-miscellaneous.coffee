@@ -2,8 +2,11 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
   Handlebars.registerHelper 'default', (value, defaultValue) ->
       value ? defaultValue
+
+
   ###
   Handlebars.registerHelper 'partial', (name, data) ->
       partial = Assemble.Config.partialsPath + name

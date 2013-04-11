@@ -1,5 +1,4 @@
 module.exports.register = (Handlebars, options) ->
-
   Utils      = require '../utils/utils'
 
 

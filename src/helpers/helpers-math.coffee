@@ -2,6 +2,7 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
   Handlebars.registerHelper 'add', (value, addition) ->
       value + addition
 
