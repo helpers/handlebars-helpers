@@ -3,16 +3,16 @@
 
 
 <h2>Markdown "Include": Escaped</h2>
-&lt;h4&gt;relative&lt;/h4&gt;
-&lt;p&gt;&lt;em&gt;Derive the relative path from one absolute path to another.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Parameters: &lt;code&gt;string&lt;/code&gt; (the value to test against)
-Default: &lt;code&gt;none&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Usage:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;[{{link.text}}]({{link.url}})&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Example:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-handlebars&quot;&gt;&amp;lt;a href=&amp;quot;{{relative &amp;quot;src&amp;quot; &amp;quot;dist&amp;quot;}}/assets/css/styles.css&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Renders to: &lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;lang-html&quot;&gt;&amp;lt;a href=&amp;quot;../../dist/assets/css/styles.css&amp;quot;&amp;gt;&amp;lt;/a&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+<h4>relative</h4>
+<p><em>Derive the relative path from one absolute path to another.</em></p>
+<p>Parameters: <code>string</code> (the value to test against)
+Default: <code>none</code></p>
+<p>Usage:</p>
+<pre><code class="lang-html">[{{link.text}}]({{link.url}})</code></pre>
+<p>Example:</p>
+<pre><code class="lang-handlebars">&lt;a href=&quot;{{relative &quot;src&quot; &quot;dist&quot;}}/assets/css/styles.css&quot;&gt;&lt;/a&gt;</code></pre>
+<p>Renders to: </p>
+<pre><code class="lang-html">&lt;a href=&quot;../../dist/assets/css/styles.css&quot;&gt;&lt;/a&gt;</code></pre>
 
 
 <h2>Markdown "Include": Un-escaped</h2>

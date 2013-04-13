@@ -61,13 +61,6 @@
 
   describe('changelog', function() {
     return describe('{{changelog [optional]}}', function() {
-      it('should return a list of authors in markdown format', function() {
-        var source, template;
-
-        source = '{{changelog}}';
-        template = Handlebars.compile(source);
-        return template(context).should.equal(changelogExpected);
-      });
       return it('should return a list of authors in markdown format, from a user-defined data source', function() {
         var source, template;
 

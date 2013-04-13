@@ -10,14 +10,14 @@ Default: `none`
 
 Usage:
 ``` html
-\{{relative "from" "to"}}
+[{{link.text}}]({{link.url}})
 ```
 Example:
 ``` handlebars
-\<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 
 ```
 Renders to: 
 ``` html
-\<a href="../../dist/assets/css/styles.css"></a> 
+<a href="../../dist/assets/css/styles.css"></a> 
 ```

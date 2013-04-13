@@ -48,9 +48,9 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'authors', (authors) ->
     if Utils.isUndefined(authors)
-      authors = Utils.readSync("./AUTHORS")
+      authors = Utils.read("./AUTHORS")
     else
-      authors = Utils.readSync(authors)
+      authors = Utils.read(authors)
     matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
     Utils.safeString(matches)
 
@@ -63,9 +63,9 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "changelog", (changelog) ->
     if Utils.isUndefined(changelog)
-      changelog = yaml.load Utils.readSync('./CHANGELOG')
+      changelog = Utils.readYAML('./CHANGELOG')
     else
-      changelog = yaml.load Utils.readSync(changelog)
+      changelog = Utils.readYAML(changelog)
     source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
     template = Handlebars.compile(source)
     Utils.safeString(template(changelog))
@@ -77,7 +77,7 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{ section [file] }}
   ###
   Handlebars.registerHelper 'section', (file) ->
-    file = Utils.readSync(file)
+    file = Utils.read(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
 
@@ -88,7 +88,7 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'glob', (file) ->
     file    = glob.find(file)
-    content = Utils.readSync(file)
+    content = Utils.read(file)
     content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
 

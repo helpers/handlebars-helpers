@@ -1,5 +1,9 @@
 ---
 title: Markdown Helpers
+link:
+  -
+    text: Assemble
+    url: http://github.com/assemble/
 ---
 <h1>{{title}}: Includes and Blocks</h1>
 
@@ -34,11 +38,11 @@ Default: `none`
 
 Usage:
 ``` html
-\{{relative "from" "to"}}
+[{{link.text}}]({{link.url}})
 ```
 Example:
 ``` handlebars
-<a href="\{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 
 ```
 Renders to: 

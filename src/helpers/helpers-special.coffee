@@ -74,7 +74,7 @@ module.exports.register = (Handlebars, options) ->
   Usage:   {{ embed 'src/examples/Gruntfile.js' 'javascript' }}
   ###
   Handlebars.registerHelper 'embed', (file, language) ->
-    file = Utils.readSync(file)
+    file = Utils.read(file)
     language = ""  if Utils.isUndefined(language)
     result = '``` ' + language + '\n' + file + '\n```'
     Utils.safeString(result)

@@ -1,7 +1,6 @@
 
 # Inspect Helper
 
-
 ``` json
 {
   none: './examples/src/content/TEST',

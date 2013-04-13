@@ -39,17 +39,17 @@
   },
   "dependencies": {
     "assemble": "https://github.com/assemble/assemble/tarball/master",
+    "chai": "~1.5.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
-    "should": "~1.2.2",
-    "chai": "~1.5.0",
-    "mime": "latest",
+    "highlight.js": "~7.3.0",
+    "js-yaml": "~2.0.4",
     "lodash": "~1.1.1",
     "marked": "~0.2.8",
-    "js-yaml": "~2.0.4",
-    "highlight.js": "~7.3.0"
+    "globule": "~0.1.0",
+    "should": "~1.2.2"
   },
   "peerDependencies": {
     "assemble": "*"
