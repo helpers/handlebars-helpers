@@ -44,6 +44,8 @@ Utils.getRelativePath = (from, to) ->
   relativePath = Utils.urlNormalize(path.relative(from, to))
 
 
+Utils.getPropString = (prop) ->
+  prop = grunt.config.getPropString(prop)
 
 ###
 Globbing

@@ -20,6 +20,7 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
   ###
   directory: Returns the absolute path to the current directory.
   Usage: {{directory [path]}}

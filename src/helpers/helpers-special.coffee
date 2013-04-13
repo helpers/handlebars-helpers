@@ -20,40 +20,6 @@ module.exports.register = (Handlebars, options) ->
     result = '<iframe width="100%" height="300" src="http://jsfiddle.net/' + id + '/embedded/' + tabs + '/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
     Utils.safeString(result)
 
-
-  ###
-  Package.json: get the current version from package.json
-  Usage: {{ pkg-name [pkg] }}
-  ### 
-  Handlebars.registerHelper "pkg-name", (pkg) ->
-    if Utils.isUndefined(pkg)
-      pkg = Utils.readJSON("package.json")
-    else
-      pkg = Utils.readJSON(pkg)
-    name = pkg.name
-
-  ###
-  Version: get the current version from package.json
-  Usage: {{ pkg-version [pkg] }}
-  ### 
-  Handlebars.registerHelper "pkg-version", (pkg) ->
-    if Utils.isUndefined(pkg)
-      pkg = Utils.readJSON("package.json")
-    else
-      pkg = Utils.readJSON(pkg)
-    version = pkg.version
-
-  ###
-  Version: get the current version from package.json
-  Usage: {{ pkg-description [pkg] }}
-  ### 
-  Handlebars.registerHelper "pkg-description", (pkg) ->
-    if Utils.isUndefined(pkg)
-      pkg = Utils.readJSON("package.json")
-    else
-      pkg = Utils.readJSON(pkg)
-    description = pkg.description
-
   ### 
   Gist: Downloads and embeds public GitHub Gists by
   adding only the Id of the Gist.
