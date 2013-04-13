@@ -17,21 +17,25 @@
 
   describe("Converting Markdown Files in Handlebars", function() {
     it("{{#markdown}}", function(done) {
-      var template;
+      var results, template;
 
       template = Handlebars.compile(simple);
-      template().should.equal(simpleExpected);
+      results = template();
+      console.log(results);
+      results.should.equal(simpleExpected);
       return done();
     });
     return it("{{#md simple1.md}}", function(done) {
-      var filename, source, template;
+      var filename, results, source, template;
 
       filename = path.join(__dirname, '../files/simple1.md');
-      source = "{{{md filename}}}";
+      source = "{{md filename}}";
       template = Handlebars.compile(source);
-      template({
+      results = template({
         filename: filename
-      }).should.equal(simpleExpected);
+      });
+      console.log(results);
+      results.should.equal(simpleExpected);
       return done();
     });
   });

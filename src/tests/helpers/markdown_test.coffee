@@ -10,12 +10,16 @@ describe "Converting Markdown Files in Handlebars", ->
 
   it "{{#markdown}}", (done) ->
     template = Handlebars.compile(simple)
-    template().should.equal simpleExpected
+    results = template()
+
+    results.should.equal simpleExpected
     done()
 
   it "{{#md simple1.md}}", (done) ->
     filename = path.join __dirname, '../files/simple1.md'
-    source = "{{{md filename}}}"
+    source = "{{md filename}}"
     template = Handlebars.compile(source)
-    template({filename: filename}).should.equal simpleExpected
+    results = template({filename: filename})
+
+    results.should.equal simpleExpected
     done()
