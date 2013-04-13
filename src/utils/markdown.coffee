@@ -9,7 +9,10 @@
 # * https://github.com/assemble/assemble/blob/master/LICENSE-MIT
 # * ==========================================================
 
+# Nodejs libs.
 fs     = require("fs")
+
+# Npm libs.
 _      = require("lodash")
 marked = require("marked")
 hljs   = require("highlight.js")
