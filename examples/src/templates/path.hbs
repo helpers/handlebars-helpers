@@ -4,12 +4,20 @@ from: ./examples/result/md/authors.md
 to: ./examples/result/md/changelog.md
 ---
 # {{title}}
+
+## `basename`
 Basename: {{basename "docs/toc.md"}}
+
+## `filename`
 File name: {{filename "docs/toc.md"}}
+
+## `ext`
+File name: {{!ext "docs/toc.md"}}
+
+
 
 ## relative
 One: {{relative from to}}
-
 Two: {{relative 'C:\\orandea\\test\\aaa' 'C:\\orandea\\impl\\bbb'}}
 Three: {{relative "lib" "docs/toc.md"}}
 
