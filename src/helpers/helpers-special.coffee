@@ -1,7 +1,6 @@
 module.exports.register = (Handlebars, options) ->
   Utils      = require '../utils/utils'
   fs         = require 'fs'
-  yaml       = require 'js-yaml'
   _          = require 'lodash'
 
 
@@ -26,37 +25,6 @@ module.exports.register = (Handlebars, options) ->
     file = ""  if Utils.isUndefined(file)
     result = '<script src="https://gist.github.com/' + id + '.js"></script>'
     new Handlebars.SafeString(result)
-
-
-  ###
-  Authors: reads in data from an "AUTHORS" file to generate markdown formtted
-  author or list of authors for a README.md. Accepts a second optional
-  parameter to a different file than the default.
-  Usage: {{authors}} or {{ authors [file] }}
-  ###
-  Handlebars.registerHelper 'authors', (authors) ->
-    if Utils.isUndefined(authors)
-      authors = fs.readFileSync("./AUTHORS", "utf8")
-    else
-      authors = fs.readFileSync(authors, "utf8")
-    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
-    new Handlebars.SafeString(matches)
-
-
-  ###
-  Changelog: Reads in data from an "CHANGELOG" file to generate markdown formatted
-  changelog or list of changelog entries for a README.md. Accepts a
-  second optional parameter to change to a different file than the default.
-  Syntax: {{changelog [src]}}
-  ###
-  Handlebars.registerHelper "changelog", (changelog) ->
-    if Utils.isUndefined(changelog)
-      changelog = yaml.load fs.readFileSync('./CHANGELOG', 'utf8').toString()
-    else
-      changelog = yaml.load fs.readFileSync(changelog, 'utf8').toString()
-    source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
-    template = Handlebars.compile(source)
-    new Handlebars.SafeString(template(changelog))
 
 
   ###
