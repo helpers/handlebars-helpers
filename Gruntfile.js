@@ -64,6 +64,13 @@ module.exports = function(grunt) {
           ]
         }
       },
+      pkg: {
+        files: {
+          'examples/result/html/': [
+            './examples/src/templates/misc.hbs'
+          ]
+        }
+      },
       handlebars: {
         files: {
           'examples/result/html/': [
