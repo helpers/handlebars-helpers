@@ -7,10 +7,8 @@ Basename: toc
 ## `filename`
 File name: toc.md
 
-## `ext`
-File name: 
-
-
+## `extname`
+File name: md
 
 ## relative
 One: ../changelog.md
