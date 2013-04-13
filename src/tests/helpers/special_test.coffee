@@ -35,12 +35,3 @@ describe 'gist', ->
 #             template = Handlebars.compile(source)
 
 #             template().should.equal 'toc'
-
-# describe 'authors', ->
-#     describe '{{authors string}}', ->
-#         it 'should return a list of authors in markdown format', ->
-#             source   = '{{authors AUTHORS}}'
-#             template = Handlebars.compile(source)
-
-#             template(context).should.equal '[Brian Woodward](http://github.com/doowb)\n[Jon Schlinkert](http://github.com/jonschlinkert)'
-
