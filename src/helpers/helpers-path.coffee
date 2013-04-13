@@ -1,11 +1,24 @@
 module.exports.register = (Handlebars, options) ->
-  Utils      = require '../utils/utils'
-  path       = require 'path'
+
+  # Node deps
+  path  = require 'path'
+
+  # Local deps
+  Utils = require '../utils/utils'
+
+
 
   ###
-  WARNING!!! These are not stable, do not use them 
+  WARNING!!! WARNING!!! WARNING!!!
+  These are not stable, do not use them 
   in production yet!!!
   ###
+
+
+
+
+
+
 
 
   ###

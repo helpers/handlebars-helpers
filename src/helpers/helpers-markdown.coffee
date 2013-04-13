@@ -1,11 +1,16 @@
 module.exports.register = (Handlebars, options) ->
-  Utils = require '../utils/utils'
-  fs    = require 'fs'
-  path  = require 'path'
-  _     = require 'lodash'
-  yaml  = require 'js-yaml'
-  glob  = require 'globule'
+  
+  # Node deps
+  fs   = require 'fs'
+  path = require 'path'
 
+  # npm deps
+  _    = require 'lodash'
+  yaml = require 'js-yaml'
+  glob = require 'globule'
+
+  # Local deps
+  Utils = require '../utils/utils'
 
 
   opts = (
@@ -30,10 +35,8 @@ module.exports.register = (Handlebars, options) ->
         return res or code
   )
   
-  opts = _.extend opts, options
-  markdown   = require('../utils/markdown').Markdown opts
-
-
+  opts     = _.extend opts, options
+  markdown = require('../utils/markdown').Markdown opts
   isServer = (typeof process isnt 'undefined')
 
 
@@ -45,9 +48,9 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'authors', (authors) ->
     if Utils.isUndefined(authors)
-      authors = fs.readFileSync("./AUTHORS", "utf8")
+      authors = Utils.readFile("./AUTHORS")
     else
-      authors = fs.readFileSync(authors, "utf8")
+      authors = Utils.readFile(authors)
     matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
     new Handlebars.SafeString(matches)
 
@@ -60,9 +63,9 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "changelog", (changelog) ->
     if Utils.isUndefined(changelog)
-      changelog = yaml.load fs.readFileSync('./CHANGELOG', 'utf8').toString()
+      changelog = yaml.load Utils.readFile('./CHANGELOG', 'utf8')
     else
-      changelog = yaml.load fs.readFileSync(changelog, 'utf8').toString()
+      changelog = yaml.load Utils.readFile(changelog, 'utf8')
     source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
     template = Handlebars.compile(source)
     new Handlebars.SafeString(template(changelog))
@@ -74,7 +77,7 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{{ section [file] }}
   ###
   Handlebars.registerHelper 'section', (file) ->
-    file = fs.readFileSync(file, "utf8")
+    file = Utils.readFile(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     new Handlebars.SafeString(content)
 
@@ -86,10 +89,10 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'glob', (file) ->
     file = glob.find(file)
-    content = path.normalize(file) 
-    content = fs.readFileSync(content, "utf8")
+    content = Utils.readFile(file)
     content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     new Handlebars.SafeString(content)
+
 
   ###
   Markdown: Markdown helper used to write markdown inside and

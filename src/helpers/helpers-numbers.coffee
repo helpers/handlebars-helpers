@@ -1,6 +1,8 @@
 module.exports.register = (Handlebars, options) ->
-  Utils      = require '../utils/utils'
 
+  # Local deps
+  Utils = require '../utils/utils'
+  
 
 
 

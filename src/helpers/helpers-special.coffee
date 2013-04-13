@@ -1,7 +1,13 @@
 module.exports.register = (Handlebars, options) ->
-  Utils      = require '../utils/utils'
-  fs         = require 'fs'
-  _          = require 'lodash'
+
+  # Node deps
+  fs = require 'fs'
+  
+  # npm deps
+  _ = require 'lodash'
+
+  # Local deps
+  Utils = require '../utils/utils'
 
 
 
@@ -35,7 +41,7 @@ module.exports.register = (Handlebars, options) ->
   Usage:   {{ embed 'src/examples/Gruntfile.js' 'javascript' }}
   ###
   Handlebars.registerHelper 'embed', (file, language) ->
-    file = fs.readFileSync(file, "utf8")
+    file = Utils.readSync(file)
     language = ""  if Utils.isUndefined(language)
     result = '``` ' + language + '\n' + file + '\n```'
     new Handlebars.SafeString(result)

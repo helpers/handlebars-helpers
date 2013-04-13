@@ -1,6 +1,8 @@
 module.exports.register = (Handlebars, options) ->
-  Dates = require '../utils/dates'
+
+  # Local deps
   Utils = require '../utils/utils'
+  Dates = require '../utils/dates'
 
 
 
