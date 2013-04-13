@@ -10,7 +10,7 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'inspect', (obj, language) ->
     language = ""  if Utils.isUndefined(language)
     result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null).replace('{', '{\n ').replace('}', '\n}') + '\n```'
-    new Handlebars.SafeString(result)
+    Utils.safeString(result)
 
 
   # Log

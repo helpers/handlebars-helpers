@@ -42,7 +42,7 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'nl2br', (text) ->
       nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
-      new Handlebars.SafeString(nl2br)
+      Utils.safeString(nl2br)
 
 
   ###
@@ -60,12 +60,12 @@ module.exports.register = (Handlebars, options) ->
       text = Handlebars.Utils.escapeExpression(text)
       linkClass = ""  if Utils.isUndefined(linkClass)
       result = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
-      new Handlebars.SafeString(result)
+      Utils.safeString(result)
 
 
   Handlebars.registerHelper "highlight", (value, options) ->
       escaped = Handlebars.Utils.escapeExpression(value)
-      new Handlebars.SafeString("<span class=\"highlight\">" + escaped + "</span>")
+      Utils.safeString("<span class=\"highlight\">" + escaped + "</span>")
 
 
   Handlebars.registerHelper "icon", (attachment) ->
@@ -73,24 +73,24 @@ module.exports.register = (Handlebars, options) ->
       value = Handlebars.Utils.escapeExpression(extension)
       switch value
         when "jpg", "jpeg", "png", "gif"
-          return new Handlebars.SafeString('<img src="img/img-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/img-icon.png"><span>' + attachment + '</span>')
         when "zip", "rar"
-          return new Handlebars.SafeString('<img src="img/archive-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/archive-icon.png"><span>' + attachment + '</span>')
         when "pdf"
-          return new Handlebars.SafeString('<img src="img/pdf-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/pdf-icon.png"><span>' + attachment + '</span>')
         when "txt"
-          return new Handlebars.SafeString('<img src="img/txt-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/txt-icon.png"><span>' + attachment + '</span>')
         when "doc", "docx"
-          return new Handlebars.SafeString('<img src="img/word-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/word-icon.png"><span>' + attachment + '</span>')
         when "xls", "xlsx"
-          return new Handlebars.SafeString('<img src="img/xls-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/xls-icon.png"><span>' + attachment + '</span>')
         when "csv"
-          return new Handlebars.SafeString('<img src="img/csv-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/csv-icon.png"><span>' + attachment + '</span>')
         when "ppt", "pptx"
-          return new Handlebars.SafeString('<img src="img/ppt-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/ppt-icon.png"><span>' + attachment + '</span>')
         when "mp3"
-          return new Handlebars.SafeString('<img src="img/audio-icon.png"><span>' + attachment + '</span>')
+          return Utils.safeString('<img src="img/audio-icon.png"><span>' + attachment + '</span>')
         else
-          new Handlebars.SafeString('<img src="img/other-icon.png"><span>' + attachment + '</span>')
+          Utils.safeString('<img src="img/other-icon.png"><span>' + attachment + '</span>')
 
   @
