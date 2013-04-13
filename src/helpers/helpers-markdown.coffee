@@ -48,11 +48,11 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper 'authors', (authors) ->
     if Utils.isUndefined(authors)
-      authors = Utils.readFile("./AUTHORS")
+      authors = Utils.readSync("./AUTHORS")
     else
-      authors = Utils.readFile(authors)
+      authors = Utils.readSync(authors)
     matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
-    new Handlebars.SafeString(matches)
+    Utils.safeString(matches)
 
 
   ###
@@ -63,43 +63,39 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "changelog", (changelog) ->
     if Utils.isUndefined(changelog)
-      changelog = yaml.load Utils.readFile('./CHANGELOG', 'utf8')
+      changelog = yaml.load Utils.readSync('./CHANGELOG')
     else
-      changelog = yaml.load Utils.readFile(changelog, 'utf8')
+      changelog = yaml.load Utils.readSync(changelog)
     source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
     template = Handlebars.compile(source)
-    new Handlebars.SafeString(template(changelog))
+    Utils.safeString(template(changelog))
 
 
   ###
   Section: reads in data from a markdown file, and uses the first heading
   as a section heading, and then copies the rest of the content inline.
-  Usage: {{{ section [file] }}
+  Usage: {{ section [file] }}
   ###
   Handlebars.registerHelper 'section', (file) ->
-    file = Utils.readFile(file)
+    file = Utils.readSync(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    new Handlebars.SafeString(content)
-
+    Utils.safeString(content)
 
   ###
   Glob: reads in data from a markdown file, and uses the first heading
   as a section heading, and then copies the rest of the content inline.
-  Usage: {{{ section [file] }}
+  Usage: {{{ glob [file] }}
   ###
   Handlebars.registerHelper 'glob', (file) ->
-    file = glob.find(file)
-    content = Utils.readFile(file)
+    file    = glob.find(file)
+    content = Utils.readSync(file)
     content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    new Handlebars.SafeString(content)
-
+    Utils.safeString(content)
 
   ###
   Markdown: Markdown helper used to write markdown inside and
   rendered the markdown inline with the HTML
-
   Usage: {{#markdown}} # This is a title. {{/markdown}}
-
   Renders to: <h1>This is a title </h1>
   ###
   Handlebars.registerHelper "markdown", (options) ->
@@ -115,6 +111,6 @@ module.exports.register = (Handlebars, options) ->
     ###
     Handlebars.registerHelper "md", (path) ->
       content = markdown.read(path)
-      new Handlebars.SafeString(content)
+      Utils.safeString(content)
 
   @
