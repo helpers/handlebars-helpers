@@ -342,24 +342,4 @@
     });
   });
 
-  describe('eachProperty', function() {
-    return describe('{{#eachProperty collection}} \n\
-        {{key}}: {{value}} \n\
-    {{/eachProperty}}', function() {
-      return it('should use the key and value of each property in an object inside a block.', function() {
-        var source, template, _context;
-
-        source = '{{#eachProperty collection}}{{key}}: {{value}} {{/eachProperty}}';
-        template = Handlebars.compile(source);
-        _context = {
-          collection: {
-            fry: 3,
-            bender: 120
-          }
-        };
-        return template(_context).should.equal('fry: 3 bender: 120 ');
-      });
-    });
-  });
-
 }).call(this);
