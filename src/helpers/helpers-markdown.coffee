@@ -1,5 +1,5 @@
 module.exports.register = (Handlebars, options) ->
-  
+
   # Node deps
   fs   = require 'fs'
   path = require 'path'
@@ -34,7 +34,7 @@ module.exports.register = (Handlebars, options) ->
       finally
         return res or code
   )
-  
+
   opts     = _.extend opts, options
   markdown = require('../utils/markdown').Markdown opts
   isServer = (typeof process isnt 'undefined')
@@ -110,7 +110,10 @@ module.exports.register = (Handlebars, options) ->
     Usage: {{md ../path/to/file.md}}
     ###
     Handlebars.registerHelper "md", (path) ->
-      content = markdown.read(path)
-      Utils.safeString(content)
+      content = Utils.read path
+      tmpl = Handlebars.compile content
+      md = tmpl this
+      html = markdown.convert md
+      Utils.safeString html
 
   @

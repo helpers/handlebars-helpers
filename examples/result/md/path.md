@@ -27,9 +27,9 @@ Nine: js-yaml/bin
 <a href="../../lib/assets/css/styles.css"></a> 
 <a href="lib/assets/css/styles.css"></a> 
 <a href="../lib/assets/css/styles.css"></a> 
-<a href="Dropbox/Development/generate/assemble/helpers/lib/assets/css/styles.css"></a> 
+<a href="Work/assemble/helpers/lib/assets/css/styles.css"></a> 
 <a href="../../assets/css/styles.css"></a> 
-<a href="../../../../../../../assets/css/styles.css"></a> 
+<a href="../../../../../assets/css/styles.css"></a> 
 
 
 ## absolutes
