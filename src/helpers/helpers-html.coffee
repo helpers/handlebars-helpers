@@ -10,56 +10,72 @@ module.exports.register = (Handlebars, options) ->
   <!DOCTYPE>
   Same as the `ul` helper but creates and ordered list.
   ###
-  Handlebars.registerHelper "doctype", (doctype, type) ->
+  Handlebars.registerHelper "DOCTYPE", (type) ->
+    type = type.toLowerCase()
     switch type
+
+      # HTML 5
       when "5", "html", "html5"
         return Utils.safeString('<!DOCTYPE1 html>')
+
+      # XML
       when "xml"
         return Utils.safeString('<?xml version="1.0" encoding="utf-8" ?>')
+
+      # XHTML
       when "strict"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">')
       when "transitional"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">')
       when "frameset"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">')
-      when "1.1"
+      when "1.1", "xhtml 1.1"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">')
       when "basic"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">')
       when "mobile"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">')
 
-      when "4-strict"
+      # HTML 4.01
+      when "4.01 strict"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">')
-      when "4-transitional"
+      when "4.01 trans"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">')
-      when "4-frameset"
+      when "4.01 frameset"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">')
+
+      # SVG
+      when "svg 1.1", "svg1.1"
+        return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">')
+      when "svg 1.0", "svg1.0", "svg1"
+        return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">')
+
+      # Default to HTML 5
       else
         Utils.safeString('<!DOCTYPE html>')
 
 
-  Handlebars.registerHelper "FormatHeading", (data) ->
-    switch data
-      when "N"
-        "North"
-      when "NE"
-        "North-East"
-      when "E"
-        "East"
-      when "SE"
-        "South-East"
-      when "S"
-        "South"
-      when "SW"
-        "South-West"
-      when "W"
-        "West"
-      when "NW"
-        "North-West"
-      else
-        "--"
+  ###
+  encode URI
+  Encodes a Uniform Resource Identifier (URI) component by replacing each instance of 
+  certain characters by one, two, three, or four escape sequences representing the 
+  UTF-8 encoding of the character 
+  ###
+  Handlebars.registerHelper "encodeURI", (uri) ->
+    encodeURIComponent(uri)
 
+  ###
+  Decode URI
+  Decodes a Uniform Resource Identifier (URI) component previously created 
+  by encodeURIComponent or by a similar routine.
+  ###
+  Handlebars.registerHelper "decodeURI", (encodedURI) ->
+    decodeURIComponent(encodedURI)
+
+
+  ###
+  List: <ul>
+  ###
   Handlebars.registerHelper "ul", (context, options) ->
       ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
         "<li>" + (options.fn(item)) + "</li>"
@@ -67,8 +83,8 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
-  <ol>
-  Same as the `ul` helper but creates and ordered list.
+  List: <ol>
+  Same as the `ul` helper but creates ordered lists.
   ###
   Handlebars.registerHelper "ol", (context, options) ->
       ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
@@ -79,15 +95,13 @@ module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper 'br', (count, options) ->
       br = '<br>'
-
       unless Utils.isUndefined count
           i = 0
-
           while i < count - 1
               br += '<br>'
               i++
-
       Utils.safeString br
+
 
   ###
   Convert new line (\n) to <br>
