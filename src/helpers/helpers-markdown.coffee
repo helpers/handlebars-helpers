@@ -76,10 +76,22 @@ module.exports.register = (Handlebars, options) ->
   as a section heading, and then copies the rest of the content inline.
   Usage: {{ section [file] }}
   ###
-  Handlebars.registerHelper 'section', (file) ->
-    file = Utils.read(file)
-    content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    Utils.safeString(content)
+  Handlebars.registerHelper 'section', (options) ->
+    # file = Utils.read(file)
+    # content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
+    # Utils.safeString(content)
+    if Handlebars.sections
+      Handlebars.sections.push options.fn(this)
+
+    Utils.safeString ''
+
+  Handlebars.registerHelper 'renderSection', (section, options) ->
+    if Handlebars.sections and Handlebars.sections[section]
+      content = Handlebars.sections[section]
+    else
+      content = options.fn this
+
+    Utils.safeString content
 
   ###
   Glob: reads in data from a markdown file, and uses the first heading
