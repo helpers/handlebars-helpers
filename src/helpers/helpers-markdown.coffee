@@ -82,13 +82,11 @@ module.exports.register = (Handlebars, options) ->
     Utils.safeString(content)
 
   Handlebars.registerHelper 'defineSection', (section, options) ->
-    console.log require('util').inspect(this, 10, null)
     if Handlebars.sections
       Handlebars.sections[section] = options.fn(this)
     Utils.safeString ''
 
   Handlebars.registerHelper 'renderSection', (section, options) ->
-    console.log require('util').inspect(this, 10, null)
     if Handlebars.sections and Handlebars.sections[section]
       content = Handlebars.sections[section]
     else
