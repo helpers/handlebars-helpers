@@ -4,15 +4,15 @@
 ``` json
 {
   md: './examples/src/content/test.md',
-  js: './examples/src/content/test.js',
-  text: './examples/src/content/test.txt',
-  yml: './examples/src/content/test.yml',
-  html: './examples/src/content/test.html',
-  less: './examples/src/content/test.less',
-  css: './examples/src/content/test.css',
   hbs: './examples/src/content/test.hbs',
-  none: './examples/src/content/TEST',
-  json: './examples/src/content/test.json' 
+  js: './examples/src/content/test.js',
+  less: './examples/src/content/test.less',
+  html: './examples/src/content/test.html',
+  json: './examples/src/content/test.json',
+  yml: './examples/src/content/test.yml',
+  css: './examples/src/content/test.css',
+  text: './examples/src/content/test.txt',
+  none: './examples/src/content/TEST' 
 }
 ```
 

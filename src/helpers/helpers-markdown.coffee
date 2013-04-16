@@ -76,13 +76,14 @@ module.exports.register = (Handlebars, options) ->
   as a section heading, and then copies the rest of the content inline.
   Usage: {{ section [file] }}
   ###
-  Handlebars.registerHelper 'section', (options) ->
-    # file = Utils.read(file)
-    # content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    # Utils.safeString(content)
+  Handlebars.registerHelper 'section', (file) ->
+    file = Utils.read(file)
+    content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
+    Utils.safeString(content)
+
+  Handlebars.registerHelper 'defineSection', (options) ->
     if Handlebars.sections
       Handlebars.sections.push options.fn(this)
-
     Utils.safeString ''
 
   Handlebars.registerHelper 'renderSection', (section, options) ->
@@ -90,7 +91,6 @@ module.exports.register = (Handlebars, options) ->
       content = Handlebars.sections[section]
     else
       content = options.fn this
-
     Utils.safeString content
 
   ###
