@@ -1,3 +1,7 @@
+v0.1.25:
+  date: "2013-04-16"
+  changes:
+    - Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
 v0.1.21:
   date: "2013-04-07"
   changes:

@@ -81,9 +81,9 @@ module.exports.register = (Handlebars, options) ->
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
 
-  Handlebars.registerHelper 'defineSection', (options) ->
+  Handlebars.registerHelper 'defineSection', (section, options) ->
     if Handlebars.sections
-      Handlebars.sections.push options.fn(this)
+      Handlebars.sections[section] = options.fn(this)
     Utils.safeString ''
 
   Handlebars.registerHelper 'renderSection', (section, options) ->
