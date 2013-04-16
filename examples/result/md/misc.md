@@ -33,7 +33,7 @@ helper-lib
 {
   "name": "helper-lib",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",

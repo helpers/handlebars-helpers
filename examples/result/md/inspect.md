@@ -3,16 +3,16 @@
 
 ``` json
 {
-  text: './examples/src/content/test.txt',
   js: './examples/src/content/test.js',
-  md: './examples/src/content/test.md',
-  json: './examples/src/content/test.json',
+  none: './examples/src/content/TEST',
   yml: './examples/src/content/test.yml',
   hbs: './examples/src/content/test.hbs',
+  less: './examples/src/content/test.less',
   css: './examples/src/content/test.css',
-  html: './examples/src/content/test.html',
-  none: './examples/src/content/TEST',
-  less: './examples/src/content/test.less' 
+  md: './examples/src/content/test.md',
+  json: './examples/src/content/test.json',
+  text: './examples/src/content/test.txt',
+  html: './examples/src/content/test.html' 
 }
 ```
 

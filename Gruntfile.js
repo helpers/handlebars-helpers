@@ -75,7 +75,8 @@ module.exports = function(grunt) {
         files: {
           'examples/result/html/': [
             "examples/src/templates/*.hbs",
-            "!examples/src/templates/*.md.hbs"
+            "!examples/src/templates/*.md.hbs",
+            "!examples/src/templates/defineSections.hbs"
           ]
         }
       },
