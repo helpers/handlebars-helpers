@@ -78,6 +78,17 @@ module.exports = function(grunt) {
             "!examples/src/templates/*.md.hbs"
           ]
         }
+      },
+      sections: {
+        options: {
+          layout: 'examples/src/templates/layouts/layout.hbs'
+        },
+        files: {
+          'examples/result/sections/': [
+            'examples/src/templates/*.hbs',
+            '!examples/src/templates/*.md.hbs'
+          ]
+        }
       }
       // templates: {
       //   files: {
