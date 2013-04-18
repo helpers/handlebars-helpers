@@ -3,6 +3,7 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
   Handlebars.registerHelper 'default', (value, defaultValue) ->
       value ? defaultValue
 
