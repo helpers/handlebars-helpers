@@ -70,7 +70,6 @@ helper-lib
     "test": "grunt test"
   },
   "dependencies": {
-    "assemble": "https://github.com/assemble/assemble/tarball/master",
     "chai": "~1.5.0",
     "globule": "~0.1.0",
     "grunt-contrib-clean": "~0.4.0",
@@ -84,10 +83,8 @@ helper-lib
     "mime": "latest",
     "should": "~1.2.2"
   },
-  "peerDependencies": {
-    "assemble": "*"
-  },
   "devDependencies": {
+    "assemble": "https://github.com/assemble/assemble/tarball/master",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.2.0",
     "grunt-contrib-copy": "latest",

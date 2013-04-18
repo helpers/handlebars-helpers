@@ -3,15 +3,15 @@
 
 ``` json
 {
-  hbs: './examples/src/content/test.hbs',
-  json: './examples/src/content/test.json',
-  yml: './examples/src/content/test.yml',
   text: './examples/src/content/test.txt',
-  css: './examples/src/content/test.css',
-  js: './examples/src/content/test.js',
-  none: './examples/src/content/TEST',
-  md: './examples/src/content/test.md',
   less: './examples/src/content/test.less',
+  none: './examples/src/content/TEST',
+  hbs: './examples/src/content/test.hbs',
+  js: './examples/src/content/test.js',
+  json: './examples/src/content/test.json',
+  css: './examples/src/content/test.css',
+  md: './examples/src/content/test.md',
+  yml: './examples/src/content/test.yml',
   html: './examples/src/content/test.html' 
 }
 ```
