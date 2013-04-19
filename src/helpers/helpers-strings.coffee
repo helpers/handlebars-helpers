@@ -7,11 +7,11 @@ module.exports.register = (Handlebars, options) ->
 
 
   Handlebars.registerHelper "safeString", (value) ->
-    Utils.safeString(value)
+      Utils.safeString(value)
 
-  # Make all letters lowercase
+   # Make all letters lowercase
   Handlebars.registerHelper 'lowercase', (str) ->
-          str.toLowerCase()
+      str.toLowerCase()
 
   # Make all letters uppercase
   Handlebars.registerHelper 'uppercase', (str) ->

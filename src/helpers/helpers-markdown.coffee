@@ -72,6 +72,22 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
+  Roadmap: Reads in data from an "ROADMAP" file to generate markdown formatted
+  roadmap or list of roadmap entries for a README.md. Accepts a
+  second optional parameter to change to a different file than the default.
+  Syntax: {{roadmap [src]}}
+  ###
+  Handlebars.registerHelper "roadmap", (roadmap) ->
+    if Utils.isUndefined(roadmap)
+      roadmap = Utils.readYAML('./ROADMAP')
+    else
+      roadmap = Utils.readYAML(roadmap)
+    source = "{{#each .}}* {{eta}}    {{{@key}}}    {{#each goals}}{{{.}}}{{/each}}\n{{/each}}"
+    template = Handlebars.compile(source)
+    Utils.safeString(template(roadmap))
+
+
+  ###
   Section: reads in data from a markdown file, and uses the first heading
   as a section heading, and then copies the rest of the content inline.
   Usage: {{ section [file] }}
