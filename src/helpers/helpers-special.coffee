@@ -20,6 +20,7 @@ module.exports.register = (Handlebars, options) ->
     result = '<iframe width="100%" height="300" src="http://jsfiddle.net/' + id + '/embedded/' + tabs + '/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
     Utils.safeString(result)
 
+
   ### 
   Gist: Downloads and embeds public GitHub Gists by
   adding only the Id of the Gist.
@@ -33,16 +34,12 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
-  Embed: Embeds code from an external file as preformatted text. The first parameter
-  requires a path to the file you want to embed. There is a second optional
-  parameter to specify (force) syntax highlighting for a specific language.
-  Syntax:  {{ embed [file] [lang] }}
-  Usage:   {{ embed 'src/examples/Gruntfile.js' 'javascript' }}
+  Highlight: wraps the output in a span with the class "highlight". 
+  Usage: {{highlight 'value' 'class'}}
   ###
-  Handlebars.registerHelper 'embed', (file, language) ->
-    file = Utils.read(file)
-    language = ""  if Utils.isUndefined(language)
-    result = '``` ' + language + '\n' + file + '\n```'
+  Handlebars.registerHelper 'highlight', (text, modifier) ->
+    modifier   = "highlight"  if Utils.isUndefined(modifier)
+    result = '<span class="' + modifier + '">' + text + '</span>'
     Utils.safeString(result)
 
 

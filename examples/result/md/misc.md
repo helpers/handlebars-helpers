@@ -9,7 +9,8 @@
 <img src="img/csv-icon.png"><span>test.csv</span>
 
 ## Highlight text
-<span class="highlight">something</span>
+<span class="highlight">This is content</span>
+<span class="alert-info">This is content</span>
 
 ## JSON
 
@@ -33,7 +34,7 @@ helper-lib
 {
   "name": "helper-lib",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.1.25",
+  "version": "0.1.3",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",
