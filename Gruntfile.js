@@ -50,8 +50,8 @@ module.exports = function(grunt) {
     // Build templates to test helpers.
     assemble: {
       options: {
-        assets: 'examples/assets',
         flatten: true,
+        assets: 'examples/assets',
         content: './examples/src/content'
       },
       markdown: {
@@ -61,13 +61,6 @@ module.exports = function(grunt) {
         files: {
           'examples/result/md/': [
             './examples/src/templates/*.md.hbs'
-          ]
-        }
-      },
-      pkg: {
-        files: {
-          'examples/result/html/': [
-            './examples/src/templates/misc.hbs'
           ]
         }
       },
@@ -86,18 +79,10 @@ module.exports = function(grunt) {
         },
         files: {
           'examples/result/sections/': [
-            'examples/src/templates/*.hbs',
-            '!examples/src/templates/*.md.hbs'
+            'examples/src/templates/sections.hbs'
           ]
         }
       }
-      // templates: {
-      //   files: {
-      //     'examples/result/': [
-      //       'examples/templates/html/index.hbs',
-      //     ]
-      //   }
-      // }
     },
 
     // Clean test files before building or re-testing.
@@ -134,7 +119,8 @@ module.exports = function(grunt) {
   // Test helpers in actual templates.
   grunt.registerTask('templates', [
     'assemble:markdown',
-    'assemble:handlebars'
+    'assemble:handlebars',
+    'assemble:sections'
   ]);
 
   // Build templates using helpers and run all tests.

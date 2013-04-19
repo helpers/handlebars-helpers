@@ -7,8 +7,6 @@ module.exports.register = (Handlebars, options) ->
 
 
 
-
-
   # Handlebars.registerHelper "value", (file, prop) ->
   #   if Utils.isUndefined(file)
   #     file = Utils.readJSON("./package.json")
@@ -17,6 +15,7 @@ module.exports.register = (Handlebars, options) ->
   #     prop = _.pick(file, prop)
   #     prop = _.pluck(prop)
   #   new Handlebars.SafeString(prop)
+
 
   Handlebars.registerHelper "value", (file, prop) ->
     file = Utils.readJSON(file)

@@ -50,16 +50,10 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'center', (str, spaces) ->
       space = ''
       i = 0
-
       while i < spaces
           space += '&nbsp;'
           i++
-
       "#{space}#{str}#{space}"
-
-  # Newline to break
-  Handlebars.registerHelper 'newLineToBr', (str) ->
-      str.replace /\r?\n|\r/g, '<br>'
 
   # Hyphenate
   # Replace spaces in string with hyphens.
@@ -70,5 +64,6 @@ module.exports.register = (Handlebars, options) ->
   # Replace periods in string with hyphens.
   Handlebars.registerHelper "dashify", (tag) ->
       tag.split(".").join "-"
+
 
   @

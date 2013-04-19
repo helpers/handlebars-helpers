@@ -6,6 +6,69 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
+  ###
+  Link helper: This will escape the passed in parameters, but mark the response as safe,
+  so Handlebars will not try to escape it even if the "triple-stash" is not used.
+  Usage: {{link 'href' 'title' 'class'}}
+  ###
+  Handlebars.registerHelper "link", (url, text, linkClass) ->
+      url = Handlebars.Utils.escapeExpression(url)
+      text = Handlebars.Utils.escapeExpression(text)
+      linkClass = ""  if Utils.isUndefined(linkClass)
+      result = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
+      Utils.safeString(result)
+
+
+  ###
+  List: <ul>
+  ###
+  Handlebars.registerHelper "ul", (context, options) ->
+      ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
+        "<li>" + (options.fn(item)) + "</li>"
+      ).join("\n") + "</ul>"
+
+
+  ###
+  List: <ol>
+  Same as the `ul` helper but creates ordered lists.
+  ###
+  Handlebars.registerHelper "ol", (context, options) ->
+      ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
+        "<li>" + (options.fn(item)) + "</li>"
+      ).join("\n") + "</ol>"
+
+
+
+  ###
+  Break helper: Add the specified number of br tags
+  Usage: {{br 5}}
+  ###
+  Handlebars.registerHelper 'br', (count, options) ->
+      br = '<br>'
+      unless Utils.isUndefined count
+          i = 0
+          while i < count - 1
+              br += '<br>'
+              i++
+      Utils.safeString br
+
+
+  ###
+  Convert new line (\n) to <br>
+  from http://phpjs.org/functions/nl2br:480
+  ###
+  Handlebars.registerHelper 'nl2br', (text) ->
+      nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
+      Utils.safeString(nl2br)
+
+
+
+  # Newline to break
+  Handlebars.registerHelper 'newLineToBr', (str) ->
+      str.replace /\r?\n|\r/g, '<br>'
+
+
   ###
   <!DOCTYPE>
   Same as the `ul` helper but creates and ordered list.
@@ -54,68 +117,6 @@ module.exports.register = (Handlebars, options) ->
       else
         Utils.safeString('<!DOCTYPE html>')
 
-
- 
-  ###
-  List: <ul>
-  ###
-  Handlebars.registerHelper "ul", (context, options) ->
-      ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
-        "<li>" + (options.fn(item)) + "</li>"
-      ).join("\n") + "</ul>"
-
-
-  ###
-  List: <ol>
-  Same as the `ul` helper but creates ordered lists.
-  ###
-  Handlebars.registerHelper "ol", (context, options) ->
-      ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
-        "<li>" + (options.fn(item)) + "</li>"
-      ).join("\n") + "</ol>"
-
-
-
-  Handlebars.registerHelper 'br', (count, options) ->
-      br = '<br>'
-      unless Utils.isUndefined count
-          i = 0
-          while i < count - 1
-              br += '<br>'
-              i++
-      Utils.safeString br
-
-
-  ###
-  Convert new line (\n) to <br>
-  from http://phpjs.org/functions/nl2br:480
-  ###
-  Handlebars.registerHelper 'nl2br', (text) ->
-      nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
-      Utils.safeString(nl2br)
-
-
-  ###
-  link helper function.
-
-  This will escape the passed in parameters, but mark the response as safe,
-  so Handlebars will not try to escape it even if the "triple-stash" is not used.
-
-  Usage:
-
-  {{link 'href' 'title' 'class'}}
-  ###
-  Handlebars.registerHelper "link", (url, text, linkClass) ->
-      url = Handlebars.Utils.escapeExpression(url)
-      text = Handlebars.Utils.escapeExpression(text)
-      linkClass = ""  if Utils.isUndefined(linkClass)
-      result = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
-      Utils.safeString(result)
-
-
-  Handlebars.registerHelper "highlight", (value, options) ->
-      escaped = Handlebars.Utils.escapeExpression(value)
-      Utils.safeString("<span class=\"highlight\">" + escaped + "</span>")
 
 
   Handlebars.registerHelper "icon", (attachment) ->
