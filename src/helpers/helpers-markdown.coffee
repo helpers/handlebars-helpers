@@ -88,26 +88,15 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
-  Section: reads in data from a markdown file, and uses the first heading
-  as a section heading, and then copies the rest of the content inline.
-  Usage: {{ section [file] }}
+  chapter: reads in data from a markdown file, and uses the first heading
+  as a chapter heading, and then copies the rest of the content inline.
+  Usage: {{ chapter [file] }}
   ###
-  Handlebars.registerHelper 'section', (file) ->
+  Handlebars.registerHelper 'chapter', (file) ->
     file = Utils.read(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
 
-  Handlebars.registerHelper 'defineSection', (section, options) ->
-    if Handlebars.sections
-      Handlebars.sections[section] = options.fn(this)
-    Utils.safeString ''
-
-  Handlebars.registerHelper 'renderSection', (section, options) ->
-    if Handlebars.sections and Handlebars.sections[section]
-      content = Handlebars.sections[section]
-    else
-      content = options.fn this
-    Utils.safeString content
 
   ###
   Glob: reads in data from a markdown file, and uses the first heading
@@ -119,6 +108,23 @@ module.exports.register = (Handlebars, options) ->
     content = Utils.read(file)
     content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
+
+
+
+  ###
+  Embed: Embeds code from an external file as preformatted text. The first parameter
+  requires a path to the file you want to embed. There second second optional
+  parameter is for specifying (forcing) syntax highlighting for language of choice.
+  Syntax:  {{ embed [file] [lang] }}
+  Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
+  ###
+  Handlebars.registerHelper 'embed', (file, language) ->
+    file = Utils.read(file)
+    language = ""  if Utils.isUndefined(language)
+    result = '``` ' + language + '\n' + file + '\n```'
+    Utils.safeString(result)
+
+
 
   ###
   Markdown: Markdown helper used to write markdown inside and

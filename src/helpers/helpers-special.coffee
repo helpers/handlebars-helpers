@@ -11,6 +11,41 @@ module.exports.register = (Handlebars, options) ->
 
 
 
+
+  ###
+  Include: Include content from an external source.
+  Usage: {{ include [file] }}
+  ###
+  Handlebars.registerHelper 'include', (file) ->
+    file = Utils.read(file)
+    Utils.safeString(file)
+
+
+
+  ###
+  "section": block helper.
+  Usage: {{#section [file] }}
+  ###
+  Handlebars.registerHelper 'section', (section, options) ->
+    if Handlebars.sections
+      Handlebars.sections[section] = options.fn(this)
+    Utils.safeString ''
+
+
+  ###
+  "override" block helper.
+  Usage: {{#override [file] }}
+  ###
+  Handlebars.registerHelper 'override', (section, options) ->
+    if Handlebars.sections and Handlebars.sections[section]
+      content = Handlebars.sections[section]
+    else
+      content = options.fn this
+    Utils.safeString content
+
+
+
+
   ###
   jsFiddle: Embed a jsFiddle, second parameter sets tabs
   Usage: {{ jsfiddle [id] [tabs] }}

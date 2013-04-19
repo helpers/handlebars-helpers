@@ -1,12 +1,12 @@
 ---
 title: Defining sections from inside a page.
 url:
-  assemble: http://github.com/assemble/
+  repo: http://github.com/assemble/
 ---
 
-{{#defineSection 'before'}}
+{{#section 'before'}}
 <h1>{{title}}</h1>
-{{/defineSection}}
+{{/section}}
 
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
@@ -15,15 +15,15 @@ url:
         {{#pages}}<li><a href="{{lowercase basename}}{{ext}}">{{data.title}}</a></li>
         {{/pages}}
       </ul>
-      <ul class="nav"><li><a href="{{url.assemble}}">Visit Assemble</a></li></ul>
+      <ul class="nav"><li><a href="{{url.repo}}">Visit Assemble</a></li></ul>
     </div>
   </div>
 </div>
 
-{{#defineSection 'after'}}
+{{#section 'after'}}
 {{#comment}}
 NOTE: "pages", "filename" and "ext" are build-in variables that require
 assemble. Also, "title" does not require Assemble, but "data.title" does
 since it accesses the Assemble "data" object
 {{/comment}}
-{{/defineSection}}
+{{/section}}

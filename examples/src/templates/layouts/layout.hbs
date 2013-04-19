@@ -6,15 +6,15 @@
     <h1>Top of the page</h1>
 
     <h2>Section before body</h2>
-    {{#renderSection 'before'}}
+    {{#override 'before'}}
       <p>Default before section content</p>
-    {{/renderSection}}
+    {{/override}}
 
     {{>body}}
 
-    {{#renderSection 'after'}}
+    {{#override 'after'}}
       <p>Default after section content</p>
-    {{/renderSection}}
+    {{/override}}
 
   </body>
 </html>
