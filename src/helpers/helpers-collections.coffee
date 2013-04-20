@@ -1,13 +1,13 @@
+# Local deps
+Utils = require '../utils/utils'
+
+module.exports.first = first = (array, count) ->
+  if Utils.isUndefined(count) then array[0] else array.slice 0, count
+
 module.exports.register = (Handlebars, options) ->
 
-  # Local deps
-  Utils = require '../utils/utils'
-
-
   # First: Returns the first item in a collection.
-  Handlebars.registerHelper 'first', (array, count) ->
-      if Utils.isUndefined(count) then array[0] else array.slice 0, count
-
+  Handlebars.registerHelper 'first', first
 
   # With first: Use the first item in a collection inside a block.
   Handlebars.registerHelper 'withFirst', (array, count, options) ->
@@ -91,7 +91,7 @@ module.exports.register = (Handlebars, options) ->
   #
   # Use with arrays:
   # {{join jobs delimiter=", " start="1" end="2"}}
-  # 
+  #
   # Handlebars.registerHelper "join", (items, block) ->
   #   delimiter = block.hash.delimiter or ","
   #   start = start = block.hash.start or 0
@@ -144,7 +144,7 @@ module.exports.register = (Handlebars, options) ->
 
 
   ###
-  Similar to #each helper, but treats array-like objects as arrays 
+  Similar to #each helper, but treats array-like objects as arrays
   (i.e. objects with a `.length` property which is a number)
   rather than objects. This lets us iterate over our Collection's.
   ###
@@ -178,7 +178,7 @@ module.exports.register = (Handlebars, options) ->
 
 
 
-  # 
+  #
   Handlebars.registerHelper 'eachIndex', (array, options) ->
       result = ''
       for value, index in array
@@ -196,7 +196,7 @@ module.exports.register = (Handlebars, options) ->
 
   # Arrayify: data gets passed in from *.yml as a string, like "foo, bar, baz"
   # we need to convert this to an ES Array of strings to avoid reference errors
-  # 
+  #
   # Credit: https://github.com/operasoftware/shinydemos/blob/master/lib/compiler.js
   Handlebars.registerHelper "arrayify", (data) ->
     result = data.split(",").map((tag) ->
