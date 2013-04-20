@@ -23,7 +23,7 @@ describe "markdown", ->
         done()
 
 
-authorsExpected = "[Brian Woodward](http://github.com/doowb)\n[Jon Schlinkert](http://github.com/jonschlinkert)"
+authorsExpected = "* [Brian Woodward](http://github.com/doowb)  \n* [Jon Schlinkert](http://github.com/jonschlinkert)  "
 describe "authors", ->
   describe "{{authors [string]}}", ->
     it "should return a list of authors in markdown format, from a user-defined data source", ->

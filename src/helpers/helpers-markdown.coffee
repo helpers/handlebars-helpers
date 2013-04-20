@@ -1,15 +1,15 @@
 module.exports.register = (Handlebars, options) ->
 
-  # Node deps
+  # Node libs
   fs   = require 'fs'
   path = require 'path'
 
-  # npm deps
+  # NPM libs
   _    = require 'lodash'
   yaml = require 'js-yaml'
   glob = require 'globule'
 
-  # Local deps
+  # Local libs
   Utils = require '../utils/utils'
 
 
@@ -51,7 +51,7 @@ module.exports.register = (Handlebars, options) ->
       authors = Utils.read("./AUTHORS")
     else
       authors = Utils.read(authors)
-    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '[$1]' + '($2)') or []
+    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '* [$1]' + '($2)  ') or []
     Utils.safeString(matches)
 
 

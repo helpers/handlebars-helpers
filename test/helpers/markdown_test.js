@@ -42,7 +42,7 @@
     });
   });
 
-  authorsExpected = "[Brian Woodward](http://github.com/doowb)\n[Jon Schlinkert](http://github.com/jonschlinkert)";
+  authorsExpected = "* [Brian Woodward](http://github.com/doowb)  \n* [Jon Schlinkert](http://github.com/jonschlinkert)  ";
 
   describe("authors", function() {
     return describe("{{authors [string]}}", function() {
