@@ -1,7 +1,7 @@
 {
   "name": "helpers",
   "description": "Collection of useful Handlebars helpers.",
-  "version": "0.1.3",
+  "version": "0.1.30",
   "main": "./lib/helpers.js",
   "dependencies": {
     "type": "git",

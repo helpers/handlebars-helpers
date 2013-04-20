@@ -1,3 +1,7 @@
+v0.1.30:
+  date: "2013-04-20"
+  changes:
+    - Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
 v0.1.25:
   date: "2013-04-16"
   changes:
