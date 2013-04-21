@@ -11,8 +11,8 @@ module.exports.register = (Handlebars, options) ->
   ###
   WARNING!!! WARNING!!! WARNING!!!
   These are not correct orstable, feel free to test
-  or submit pull requests for fixes, but do not 
-  use them in projects yet!!! 
+  or submit pull requests for fixes, but do not
+  use them in projects yet!!!
   ###
 
 
@@ -26,8 +26,8 @@ module.exports.register = (Handlebars, options) ->
   Returns: C:\path\to\the\current\current\directory
   ###
   Handlebars.registerHelper "directory", (dir) ->
-    dir = path.dirname()
-    
+    path.dirname()
+
 
   ###
   absolute: Returns the absolute path to the current directory.
@@ -42,7 +42,7 @@ module.exports.register = (Handlebars, options) ->
   Returns the derived relative path from one to the other.
   ###
   Handlebars.registerHelper "relative", (from, to) ->
-    relativePath = Utils.getRelativePath(from, to)
+    Utils.getRelativePath(from, to)
 
   ###
   filename: Returns the full-name of a given file.
@@ -50,7 +50,7 @@ module.exports.register = (Handlebars, options) ->
   Returns:  toc.md
   ###
   Handlebars.registerHelper 'filename', (base, ext) ->
-    fullName = path.basename(base, ext)
+    path.basename(base, ext)
 
   ###
   Basename: Returns the basename of a given file.
@@ -58,7 +58,7 @@ module.exports.register = (Handlebars, options) ->
   Returns:  toc
   ###
   Handlebars.registerHelper 'basename', (base, ext) ->
-    basename = Utils.getBasename(base, ext)
+    Utils.getBasename(base, ext)
 
   ###
   Extension: Returns the extension of a given file.
@@ -66,7 +66,7 @@ module.exports.register = (Handlebars, options) ->
   Returns:  .md
   ###
   Handlebars.registerHelper "extname", (ext) ->
-    extname = Utils.getExt(ext)
+    Utils.getExt(ext)
 
 
   @
