@@ -11,25 +11,25 @@ File name: toc.md
 File name: md
 
 ## relative
-One: ../changelog.md
-Two: ../../impl/bbb
-Three: ../docs/toc.md
+One: changelog.md
+Two: ../impl/bbb
+Three: docs/toc.md
 
 Four: lib
-Five: ../..
-Five: ../../js-yaml
-Six: ../../lib
-Seven: ../../js-yaml
+Five: ..
+Five: ../js-yaml
+Six: ../lib
+Seven: ../js-yaml
 Eight: js-yaml/bin
-Nine: ../../js-yaml
+Nine: ../js-yaml
 Nine: js-yaml/bin
 
-<a href="../../lib/assets/css/styles.css"></a> 
-<a href="lib/assets/css/styles.css"></a> 
 <a href="../lib/assets/css/styles.css"></a> 
+<a href="lib/assets/css/styles.css"></a> 
+<a href="lib/assets/css/styles.css"></a> 
 <a href="Work/assemble/helpers/lib/assets/css/styles.css"></a> 
-<a href="../../assets/css/styles.css"></a> 
-<a href="../../../../../assets/css/styles.css"></a> 
+<a href="../assets/css/styles.css"></a> 
+<a href="../../../../assets/css/styles.css"></a> 
 
 
 ## absolutes

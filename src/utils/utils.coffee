@@ -45,7 +45,7 @@ Utils.getRelativePath = (from, to) ->
   toDirname = path.normalize(path.dirname(to))
   toBasename = path.basename(to)
   relativePath = path.relative(fromDirname, toDirname)
-  Util.urlNormalize(path.join(relativePath, toBasename))
+  Utils.urlNormalize(path.join(relativePath, toBasename))
 
 
 
