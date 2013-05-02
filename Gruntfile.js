@@ -47,7 +47,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     // Build templates to test helpers.
     assemble: {
       options: {
@@ -65,11 +64,44 @@ module.exports = function(grunt) {
           ]
         }
       },
+      relative: {
+        options: {
+          flatten: false,
+          assets: 'examples/assets'
+        },
+        files: {
+          'examples/result/html/relative/': [
+            './examples/src/templates/path.hbs',
+            './examples/src/templates/nested/**/*.hbs'
+          ]
+        }
+      },
+      less: {
+        files: {
+          'examples/result/html/less.html': [
+            './examples/src/templates/less.hbs'
+          ]
+        }
+      },
       handlebars: {
+        options: {
+          partials: 'examples/src/content/test.hbs'
+        },
         files: {
           'examples/result/html/': [
-            "examples/src/templates/*.hbs",
-            "!examples/src/templates/*.md.hbs",
+            'examples/src/templates/*.hbs',
+            '!examples/src/templates/*.md.hbs',
+            '!examples/src/templates/defineSections.hbs'
+          ]
+        }
+      },
+      sections: {
+        options: {
+          layout: 'examples/src/templates/layouts/layout.hbs'
+        },
+        files: {
+          'examples/result/sections/': [
+            'examples/src/templates/sections.hbs'
           ]
         }
       }
@@ -103,7 +135,15 @@ module.exports = function(grunt) {
     'coffee',
     'copy',
     'clean',
-    'assemble'
+    'templates'
+  ]);
+
+  // Test helpers in actual templates.
+  grunt.registerTask('templates', [
+    'assemble:markdown',
+    'assemble:handlebars',
+    'assemble:sections',
+    'assemble:less'
   ]);
 
   // Build templates using helpers and run all tests.

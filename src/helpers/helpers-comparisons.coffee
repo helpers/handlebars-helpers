@@ -26,6 +26,20 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'and', (testA, testB, options) ->
       if testA and testB then options.fn(@) else options.inverse(@)
 
+  ###
+  Similar to {{#if}} block helper but accepts multiple arguments.
+  ###
+  Handlebars.registerHelper "ifAny", ->
+    argLength = arguments_.length - 2
+    content = arguments_[argLength + 1]
+    success = true
+    i = 0
+    while i < argLength
+      unless arguments_[i]
+        success = false
+        break
+      i += 1
+    (if success then content(this) else content.inverse(this))
 
   # Handlebars Helpers - Dan Harper (http://github.com/danharper)
   #   

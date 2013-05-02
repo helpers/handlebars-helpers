@@ -6,6 +6,11 @@ module.exports.register = (Handlebars, options) ->
       value ? defaultValue
 
 
+  # http://handlebarsjs.com/block_helpers.html
+  Handlebars.registerHelper "noop", (options) ->
+    options.fn this
+
+
   ###
   Handlebars.registerHelper 'partial', (name, data) ->
       partial = Assemble.Config.partialsPath + name

@@ -10,7 +10,7 @@ module.exports.register = (Handlebars, options) ->
   so Handlebars will not try to escape it even if the "triple-stash" is not used.
   Usage: {{link 'href' 'title' 'class'}}
   ###
-  Handlebars.registerHelper "link", (url, text, linkClass) ->
+  Handlebars.registerHelper "href", (url, text, linkClass) ->
       url = Handlebars.Utils.escapeExpression(url)
       text = Handlebars.Utils.escapeExpression(text)
       linkClass = ""  if Utils.isUndefined(linkClass)
@@ -18,13 +18,38 @@ module.exports.register = (Handlebars, options) ->
       Utils.safeString(result)
 
 
+  Handlebars.registerHelper "css", (context) ->
+      ext  = Utils.getExt(context)
+      css  = Utils.safeString('<link rel="stylesheet" href="' + options.assets + '/css/' + context + '">')
+      less = Utils.safeString('<link rel="stylesheet/less" href="' + options.assets + '/less/' + context + '">\n' +
+             '<script src="' + options.assets + 'js/less.js" type="text/javascript"></script>\n')
+      switch ext
+        when "less"
+          return less
+        when "css"
+          return css
+        else css
+
+
+
+  Handlebars.registerHelper "js", (context) ->
+      ext = Utils.getExt(context)
+      js  = Utils.safeString('<script src="' + options.assets + '/js/' + context + '"></script>')
+      coffee = Utils.safeString('<script type="text/coffeescript" src="' + options.assets + '/js/' + context + '"></script>')
+      switch ext
+        when "js"
+          return js
+        when "coffee"
+          return coffee
+        else js
+
   ###
   List: <ul>
   ###
   Handlebars.registerHelper "ul", (context, options) ->
-      ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
-        "<li>" + (options.fn(item)) + "</li>"
-      ).join("\n") + "</ul>"
+      ("<ul " + (HTML.parseAttributes(options.hash)) + ">" + "\n") + context.map((item) ->
+        "  <li>" + (options.fn(item)) + "  </li>"
+      ).join("\n") + "\n" + "</ul>"
 
 
   ###
@@ -32,9 +57,9 @@ module.exports.register = (Handlebars, options) ->
   Same as the `ul` helper but creates ordered lists.
   ###
   Handlebars.registerHelper "ol", (context, options) ->
-      ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
-        "<li>" + (options.fn(item)) + "</li>"
-      ).join("\n") + "</ol>"
+      ("<ol " + (HTML.parseAttributes(options.hash)) + ">" + "\n") + context.map((item) ->
+        "  <li>" + (options.fn(item)) + "  </li>"
+      ).join("\n") + "\n" + "</ol>"
 
 
 

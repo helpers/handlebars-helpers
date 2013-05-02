@@ -1,0 +1,13 @@
+## `relative`
+One: {{relative currentPage assets}}
+
+
+{{#each pages}}
+  {{relative ../currentPage.dest this.dest}}
+{{/each}}
+
+
+
+{{#each pages}}
+  {{relative ../currentPage.dest ../assets}}
+{{/each}}

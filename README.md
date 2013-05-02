@@ -1,4 +1,4 @@
-# [Helper Library v0.1.32](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.33](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -1619,19 +1619,19 @@ Copyright NaN Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-05-02    v0.1.32    Updated utils and a number of helpers, including value, property, and stringify.
-* 2013-04-21    v0.1.31    Fixing relative helper
-* 2013-04-20    v0.1.30    Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
-* 2013-04-16    v0.1.25    Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
-* 2013-04-07    v0.1.21    Add markdown helpers back, add more tests.
-* 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities.
-* 2013-04-05    v0.1.11    New authors and gist helpers, general cleanup and new tests.
-* 2013-04-04    v0.1.10    Externalized utility javascript from helpers.js
-* 2013-03-28    v0.1.8    Gruntfile updated with mocha tests for 71 helpers, bug fixes.
-* 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another.
-* 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty"
-* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
-* 2013-03-06    v0.1.0    First commit.
+* 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.
+* 2013-04-21			v0.1.31			Fixing relative helper
+* 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
+* 2013-04-16			v0.1.25			Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
+* 2013-04-07			v0.1.21			Add markdown helpers back, add more tests.
+* 2013-04-06			v0.1.20			Generalized helpers structure, externalized utilities.
+* 2013-04-05			v0.1.11			New authors and gist helpers, general cleanup and new tests.
+* 2013-04-04			v0.1.10			Externalized utility javascript from helpers.js
+* 2013-03-28			v0.1.8			Gruntfile updated with mocha tests for 71 helpers, bug fixes.
+* 2013-03-18			v0.1.7			New path helper "relative", for resolving relative path from one absolute path to another.
+* 2013-03-16			v0.1.3			New helpers, "formatPhoneNumber" and "eachProperty"
+* 2013-03-15			v0.1.2			Update README.md with documentation, examples.
+* 2013-03-06			v0.1.0			First commit.
 
 
 
@@ -1640,7 +1640,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu May 02 2013 02:28:18._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu May 02 2013 06:58:44._
 
 
 

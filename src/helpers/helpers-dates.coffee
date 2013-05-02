@@ -5,6 +5,7 @@ module.exports.register = (Handlebars, options) ->
 
 
   # Port of formatDate-js library - https://github.com/michaelbaldry/formatDate-js
+  # Docs: http://www.ruby-doc.org/core-2.0/Time.html#M000392
   Handlebars.registerHelper 'formatDate', (date, format) ->
       date = new Date date
       Dates.format date, format

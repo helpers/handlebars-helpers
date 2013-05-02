@@ -1,6 +1,6 @@
 ---
 title: HTML Helpers
-links: 
+list: 
   - one
   - two
   - three
@@ -17,18 +17,42 @@ moreLinks:
     text: size
 ---
 
+<h2>Scripts</h2>
+<h4>JavaScript</h4>
+{{js 'script.js'}}
+<h4>Coffee-script</h4>
+{{js 'script.coffee'}}
+
+<h2>Stylesheets</h2>
+<h4>CSS</h4>
+{{css 'styles.css'}}
+<h4>LESS</h4>
+{{css 'styles.less'}}
+
+
 
 <h2><pre>link</pre> Helper</h2>
-{{link 'http://github.com' 'GitHub'}}
+{{href 'http://github.com' 'GitHub'}}
 
 
-{{link 'http://github.com' 'GitHub' 'nav-link'}}
+{{! [url] [text] [optional class]}}
+{{href 'http://github.com' 'GitHub' 'nav-link'}}
 
 
-{{#ul links class="nav"}}
+<h2>Unordered Lists</h2>
+{{#ul list class="nav"}}
   {{.}}
 {{/ul}}
 
 {{#ul moreLinks class="nav"}}
   <a href="{{url}}">{{text}}</a> 
 {{/ul}}
+
+<h2>Ordered Lists</h2>
+{{#ol list class="nav"}}
+  {{.}}
+{{/ol}}
+
+{{#ol moreLinks class="nav"}}
+  <a href="{{url}}">{{text}}</a> 
+{{/ol}}

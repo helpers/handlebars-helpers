@@ -34,7 +34,7 @@ helper-lib
 {
   "name": "helper-lib",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",
@@ -72,7 +72,6 @@ helper-lib
   },
   "dependencies": {
     "chai": "~1.5.0",
-    "globule": "~0.1.0",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-uglify": "~0.2.0",
@@ -81,14 +80,15 @@ helper-lib
     "js-yaml": "~2.0.4",
     "lodash": "~1.1.1",
     "marked": "~0.2.8",
-    "mime": "latest",
+    "coffee-script": "~1.6.2",
+    "mime": "~1.2.9",
     "should": "~1.2.2"
   },
   "devDependencies": {
     "assemble": "https://github.com/assemble/assemble/tarball/master",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.2.0",
-    "grunt-contrib-copy": "latest",
+    "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-nodeunit": "~0.1.2",
     "handlebars": "~1.0.10",
     "amdefine": "0.0.4"

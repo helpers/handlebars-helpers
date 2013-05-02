@@ -36,6 +36,22 @@ module.exports.register = (Handlebars, options) ->
   isServer = (typeof process isnt 'undefined')
 
   ###
+  Travis CI: 
+  Syntax: {{travis [src]}}
+  ###
+  Handlebars.registerHelper "travis", (pkg) ->
+    travis = "./.travis.yml"
+    source = undefined
+    template = undefined
+    if grunt.file.exists(travis)
+      pkg = Utils.readJSON("./package.json")
+    else if pkg
+      pkg = Utils.readJSON(pkg)
+    source = "# [{{ name }} v{{ version }}]({{ homepage }})[![Build Status](https://travis-ci.org/{{ author.name }}/{{ name }}.png)](https://travis-ci.org/{{ author.name }}/{{ name }})"
+    template = Handlebars.compile(source)
+    Utils.safeString(template(pkg))
+
+  ###
   Authors: reads in data from an "AUTHORS" file to generate markdown formtted
   author or list of authors for a README.md. Accepts a second optional
   parameter to a different file than the default.
@@ -107,6 +123,18 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'chapter', (file) ->
     file = grunt.file.read(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
+    Utils.safeString(content)
+
+
+  ###
+  Glob: reads in data from a markdown file, and uses the first heading
+  as a section heading, and then copies the rest of the content inline.
+  Usage: {{{ glob [file] }}
+  ###
+  Handlebars.registerHelper 'glob', (file) ->
+    file    = file.match(file)
+    content = grunt.file.read(file)
+    content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
 
   ###
