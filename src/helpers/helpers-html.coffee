@@ -47,9 +47,9 @@ module.exports.register = (Handlebars, options) ->
   List: <ul>
   ###
   Handlebars.registerHelper "ul", (context, options) ->
-      ("<ul " + (HTML.parseAttributes(options.hash)) + ">" + "\n") + context.map((item) ->
-        "  <li>" + (options.fn(item)) + "  </li>"
-      ).join("\n") + "\n" + "</ul>"
+      ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
+        "<li>" + (options.fn(item)) + "</li>"
+      ).join("\n") + "</ul>"
 
 
   ###
@@ -57,9 +57,9 @@ module.exports.register = (Handlebars, options) ->
   Same as the `ul` helper but creates ordered lists.
   ###
   Handlebars.registerHelper "ol", (context, options) ->
-      ("<ol " + (HTML.parseAttributes(options.hash)) + ">" + "\n") + context.map((item) ->
-        "  <li>" + (options.fn(item)) + "  </li>"
-      ).join("\n") + "\n" + "</ol>"
+      ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
+        "<li>" + (options.fn(item)) + "</li>"
+      ).join("\n") + "</ol>"
 
 
 
