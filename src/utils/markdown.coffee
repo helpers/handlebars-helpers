@@ -1,13 +1,11 @@
-# ==========================================================
-# * markdown.js
-# *
-# * Assemble
-# * http://assemble.io
-# *
-# * Copyright (c) 2012 Upstage
-# * Licensed under the MIT license.
-# * https://github.com/assemble/assemble/blob/master/LICENSE-MIT
-# * ==========================================================
+# ============================================
+# Assemble
+# http://assemble.io
+# 
+# Copyright (c) 2012 Upstage
+# Licensed under the MIT license.
+# https://github.com/assemble/assemble/blob/master/LICENSE-MIT
+# ============================================
 
 # Nodejs libs.
 fs     = require("fs")

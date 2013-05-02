@@ -1,3 +1,3 @@
-todo:
+tasks:
   - Separate into modules
   - YAML format, use templates for easier maintenance

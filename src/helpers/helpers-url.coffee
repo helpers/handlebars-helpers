@@ -3,10 +3,8 @@ module.exports.register = (Handlebars, options) ->
 
 
 
-
   Handlebars.registerHelper "stripQuerystring", (url) ->
     url.split("?")[0]
-
 
   ###
   encode URI

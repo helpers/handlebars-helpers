@@ -2,6 +2,35 @@ module.exports.register = (Handlebars, options) ->
 
   # Local deps
   Utils = require '../utils/utils'
+  _     = require 'lodash'
+
+
+
+  # Handlebars.registerHelper "value", (file, prop) ->
+  #   if Utils.isUndefined(file)
+  #     file = Utils.readJSON("./package.json")
+  #   else
+  #     file = Utils.readJSON(file)
+  #     prop = _.pick(file, prop)
+  #     prop = _.pluck(prop)
+  #   new Handlebars.SafeString(prop)
+
+  Handlebars.registerHelper "value", (file, prop) ->
+    file = Utils.readJSON(file)
+    prop = _.pick(file, prop)
+    prop = _.pluck(prop)
+    new Handlebars.SafeString(prop)
+
+
+  Handlebars.registerHelper "property", (file, prop) ->
+    file = Utils.readJSON(file)
+    prop = _.pick(file, prop)
+    new Handlebars.SafeString(JSON.stringify(prop, null, 2))
+
+
+  Handlebars.registerHelper "stringify", (file, props) ->
+    file = Utils.readJSON(file)
+    new Handlebars.SafeString(JSON.stringify(file, null, 2))
 
 
   # First: Returns the first item in a collection.
@@ -66,20 +95,18 @@ module.exports.register = (Handlebars, options) ->
       for item of array then result += options.fn array[item]
       result
 
-
-  # Join: Joins all elements of a collection into a string using a separator if specified.
-  Handlebars.registerHelper 'join', (array, separator) ->
-      array.join if Utils.isUndefined(separator) then ' ' else separator
-
-
-  #
+  # Sort
   Handlebars.registerHelper 'sort', (array, field) ->
       if Utils.isUndefined field
           array.sort()
       else
           array.sort (a, b) -> a[field] > b[field]
 
-  #
+  # Join: Joins all elements of a collection into a string using a separator if specified.
+  Handlebars.registerHelper 'join', (array, separator) ->
+      array.join if Utils.isUndefined(separator) then ' ' else separator
+
+
   # Handlebars "join" block helper that supports arrays of objects or strings.
   # (implementation found here: https://github.com/wycats/handlebars.js/issues/133)
   #
@@ -92,28 +119,27 @@ module.exports.register = (Handlebars, options) ->
   # Use with arrays:
   # {{join jobs delimiter=", " start="1" end="2"}}
   # 
-  # Handlebars.registerHelper "join", (items, block) ->
-  #   delimiter = block.hash.delimiter or ","
-  #   start = start = block.hash.start or 0
-  #   len = (if items then items.length else 0)
-  #   end = block.hash.end or len
-  #   out = ""
-  #   end = len  if end > len
-  #   if "function" is typeof block
-  #     i = start
-  #     while i < end
-  #       out += delimiter  if i > start
-  #       if "string" is typeof items[i]
-  #         out += items[i]
-  #       else
-  #         out += block(items[i])
-  #       i++
-  #     out
-  #   else
-  #     [].concat(items).slice(start, end).join delimiter
+  Handlebars.registerHelper "joinAny", (items, block) ->
+    delimiter = block.hash.delimiter or ","
+    start = start = block.hash.start or 0
+    len = (if items then items.length else 0)
+    end = block.hash.end or len
+    out = ""
+    end = len  if end > len
+    if "function" is typeof block
+      i = start
+      while i < end
+        out += delimiter  if i > start
+        if "string" is typeof items[i]
+          out += items[i]
+        else
+          out += block(items[i])
+        i++
+      out
+    else
+      [].concat(items).slice(start, end).join delimiter
 
 
-  #
   Handlebars.registerHelper 'withSort', (array, field, options) ->
       result = ''
 
@@ -124,7 +150,6 @@ module.exports.register = (Handlebars, options) ->
       else
           array = array.sort (a, b) -> a[field] > b[field]
           result += options.fn(array[item]) for item of array
-
       result
 
   Handlebars.registerHelper 'length', (array) ->
@@ -148,37 +173,35 @@ module.exports.register = (Handlebars, options) ->
   (i.e. objects with a `.length` property which is a number)
   rather than objects. This lets us iterate over our Collection's.
   ###
-  # Handlebars.registerHelper "iterate", (context, options) ->
-  #     fn = options.fn
-  #     inverse = options.inverse
-  #     i = 0
-  #     ret = ""
-  #     data = undefined
-  #     data = Handlebars.createFrame(options.data)  if options.data
-  #     if context and typeof context is "object"
-  #       if typeof context.length is "number"
-  #         j = context.length
+  Handlebars.registerHelper "iterate", (context, options) ->
+      fn = options.fn
+      inverse = options.inverse
+      i = 0
+      ret = ""
+      data = undefined
+      data = Handlebars.createFrame(options.data)  if options.data
+      if context and typeof context is "object"
+        if typeof context.length is "number"
+          j = context.length
 
-  #         while i < j
-  #           data.index = i  if data
-  #           ret = ret + fn(context[i],
-  #             data: data
-  #           )
-  #           i++
-  #       else
-  #         for key of context
-  #           if context.hasOwnProperty(key)
-  #             data.key = key  if data
-  #             ret = ret + fn(context[key],
-  #               data: data
-  #             )
-  #             i++
-  #     ret = inverse(this)  if i is 0
-  #     ret
+          while i < j
+            data.index = i  if data
+            ret = ret + fn(context[i],
+              data: data
+            )
+            i++
+        else
+          for key of context
+            if context.hasOwnProperty(key)
+              data.key = key  if data
+              ret = ret + fn(context[key],
+                data: data
+              )
+              i++
+      ret = inverse(this)  if i is 0
+      ret
 
-
-
-  # 
+  # eachIndex
   Handlebars.registerHelper 'eachIndex', (array, options) ->
       result = ''
       for value, index in array
@@ -193,7 +216,6 @@ module.exports.register = (Handlebars, options) ->
           result += options.fn key: key, value: value
       result
 
-
   # Arrayify: data gets passed in from *.yml as a string, like "foo, bar, baz"
   # we need to convert this to an ES Array of strings to avoid reference errors
   # 
@@ -203,7 +225,5 @@ module.exports.register = (Handlebars, options) ->
       "\"" + tag + "\""
     )
     result
-
-
 
   @

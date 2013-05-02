@@ -1,9 +1,5 @@
 module.exports.register = (Handlebars, options) ->
-
-  # Nodejs libs.
   path  = require 'path'
-
-  # Local deps
   Utils = require '../utils/utils'
 
 
@@ -16,10 +12,6 @@ module.exports.register = (Handlebars, options) ->
   ###
 
 
-
-
-
-
   ###
   directory: Returns the absolute path to the current directory.
   Usage: {{directory [path]}}
@@ -28,7 +20,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "directory", (dir) ->
     dir = path.dirname()
     
-
   ###
   absolute: Returns the absolute path to the current directory.
   Usage: {{absolute [to]}}

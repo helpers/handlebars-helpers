@@ -1,16 +1,12 @@
 module.exports.register = (Handlebars, options) ->
-
-  # Node libs
-  fs   = require 'fs'
-  path = require 'path'
-
-  # NPM libs
-  _    = require 'lodash'
-  yaml = require 'js-yaml'
-  glob = require 'globule'
-
-  # Local libs
+  fs    = require 'fs'
+  path  = require 'path'
+  yaml  = require 'js-yaml'
+  grunt = require 'grunt'
+  file  = grunt.file
+  _     = require 'lodash'
   Utils = require '../utils/utils'
+
 
 
   opts = (
@@ -39,7 +35,6 @@ module.exports.register = (Handlebars, options) ->
   markdown = require('../utils/markdown').Markdown opts
   isServer = (typeof process isnt 'undefined')
 
-
   ###
   Authors: reads in data from an "AUTHORS" file to generate markdown formtted
   author or list of authors for a README.md. Accepts a second optional
@@ -47,11 +42,26 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{authors}} or {{ authors [file] }}
   ###
   Handlebars.registerHelper 'authors', (authors) ->
+    source = undefined
+    template = undefined
     if Utils.isUndefined(authors)
       authors = Utils.read("./AUTHORS")
     else
       authors = Utils.read(authors)
-    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '* [$1]' + '($2)  ') or []
+    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '* [$1]($2)  ') or []
+    Utils.safeString(matches)
+
+  ###
+  AUTHORS: (case senstitive) Same as `{{authors}}`, but outputs a different format.
+  ###
+  Handlebars.registerHelper 'AUTHORS', (authors) ->
+    source = undefined
+    template = undefined
+    if Utils.isUndefined(authors)
+      authors = Utils.read("./AUTHORS")
+    else
+      authors = Utils.read(authors)
+    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '\n**[$1]**\n  \n+ [$2]($2)  ') or [] 
     Utils.safeString(matches)
 
 
@@ -59,33 +69,35 @@ module.exports.register = (Handlebars, options) ->
   Changelog: Reads in data from an "CHANGELOG" file to generate markdown formatted
   changelog or list of changelog entries for a README.md. Accepts a
   second optional parameter to change to a different file than the default.
-  Syntax: {{changelog [src]}}
+  Usage: {{changelog}} or {{changelog [src]}}
   ###
   Handlebars.registerHelper "changelog", (changelog) ->
+    source = undefined
+    template = undefined
     if Utils.isUndefined(changelog)
       changelog = Utils.readYAML('./CHANGELOG')
     else
       changelog = Utils.readYAML(changelog)
-    source = "{{#each .}}* {{date}}    {{{@key}}}    {{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
+    source = "{{#each .}}* {{date}}\t\t\t{{{@key}}}\t\t\t{{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
     template = Handlebars.compile(source)
     Utils.safeString(template(changelog))
-
 
   ###
   Roadmap: Reads in data from an "ROADMAP" file to generate markdown formatted
   roadmap or list of roadmap entries for a README.md. Accepts a
   second optional parameter to change to a different file than the default.
-  Syntax: {{roadmap [src]}}
+  Usage: {{roadmap}} or {{roadmap [src]}}
   ###
   Handlebars.registerHelper "roadmap", (roadmap) ->
+    source = undefined
+    template = undefined
     if Utils.isUndefined(roadmap)
       roadmap = Utils.readYAML('./ROADMAP')
     else
       roadmap = Utils.readYAML(roadmap)
-    source = "{{#each .}}* {{eta}}    {{{@key}}}    {{#each goals}}{{{.}}}{{/each}}\n{{/each}}"
+    source = "{{#each .}}* {{eta}}\t\t\t{{{@key}}}\t\t\t{{#each goals}}{{{.}}}{{/each}}\n{{else}}_(Big plans in the works)_{{/each}}"
     template = Handlebars.compile(source)
     Utils.safeString(template(roadmap))
-
 
   ###
   chapter: reads in data from a markdown file, and uses the first heading
@@ -93,23 +105,9 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{ chapter [file] }}
   ###
   Handlebars.registerHelper 'chapter', (file) ->
-    file = Utils.read(file)
+    file = grunt.file.read(file)
     content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
     Utils.safeString(content)
-
-
-  ###
-  Glob: reads in data from a markdown file, and uses the first heading
-  as a section heading, and then copies the rest of the content inline.
-  Usage: {{{ glob [file] }}
-  ###
-  Handlebars.registerHelper 'glob', (file) ->
-    file    = glob.find(file)
-    content = Utils.read(file)
-    content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    Utils.safeString(content)
-
-
 
   ###
   Embed: Embeds code from an external file as preformatted text. The first parameter
@@ -119,22 +117,20 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
   ###
   Handlebars.registerHelper 'embed', (file, language) ->
-    file = Utils.read(file)
+    file = grunt.file.read(file)
     language = ""  if Utils.isUndefined(language)
     result = '``` ' + language + '\n' + file + '\n```'
     Utils.safeString(result)
 
-
-
   ###
-  Markdown: Markdown helper used to write markdown inside and
-  rendered the markdown inline with the HTML
+  Markdown: markdown helper enables writing markdown inside HTML 
+  and then renders the markdown as HTML inline with the rest of the page.
   Usage: {{#markdown}} # This is a title. {{/markdown}}
   Renders to: <h1>This is a title </h1>
   ###
   Handlebars.registerHelper "markdown", (options) ->
     content = options.fn(this)
-    markdown.convert content
+    markdown.convert(content)
 
   if isServer
 
@@ -144,10 +140,10 @@ module.exports.register = (Handlebars, options) ->
     Usage: {{md ../path/to/file.md}}
     ###
     Handlebars.registerHelper "md", (path) ->
-      content = Utils.read path
-      tmpl = Handlebars.compile content
-      md = tmpl this
-      html = markdown.convert md
-      Utils.safeString html
+      content = Utils.read(path)
+      tmpl = Handlebars.compile(content)
+      md = tmpl(this)
+      html = markdown.convert(md)
+      Utils.safeString(html)
 
   @

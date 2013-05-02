@@ -1,12 +1,9 @@
-This plugin requires Grunt `~0.4.1` for linting and testing, but Grunt is **not required** to use the helpers. 
-
-If you want to learn more about using Grunt, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
+For linting and testing this project uses Grunt `~0.4.1`, but Grunt is **not required** to use the helpers. Check out the [Getting Started](http://gruntjs.com/getting-started) guide to learn more about Grunt.
 
 ```shell
 npm install helper-lib --save-dev
 ```
-
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once helper-lib has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
 grunt.loadNpmTasks('helper-lib');

@@ -47,6 +47,7 @@ module.exports = function(grunt) {
       }
     },
 
+
     // Build templates to test helpers.
     assemble: {
       options: {
@@ -113,14 +114,7 @@ module.exports = function(grunt) {
     'coffee',
     'copy',
     'clean',
-    'templates'
-  ]);
-
-  // Test helpers in actual templates.
-  grunt.registerTask('templates', [
-    'assemble:markdown',
-    'assemble:handlebars',
-    'assemble:sections'
+    'assemble'
   ]);
 
   // Build templates using helpers and run all tests.

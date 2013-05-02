@@ -1,14 +1,7 @@
 module.exports.register = (Handlebars, options) ->
-
-  # Nodejs libs.
-  fs = require 'fs'
-  
-  # npm deps
-  _ = require 'lodash'
-
-  # Local deps
+  fs    = require 'fs'
+  _     = require 'lodash'
   Utils = require '../utils/utils'
-
 
 
 
@@ -20,8 +13,6 @@ module.exports.register = (Handlebars, options) ->
     file = Utils.read(file)
     Utils.safeString(file)
 
-
-
   ###
   "section": block helper.
   Usage: {{#section [file] }}
@@ -30,7 +21,6 @@ module.exports.register = (Handlebars, options) ->
     if Handlebars.sections
       Handlebars.sections[section] = options.fn(this)
     Utils.safeString ''
-
 
   ###
   "override" block helper.
@@ -43,9 +33,6 @@ module.exports.register = (Handlebars, options) ->
       content = options.fn this
     Utils.safeString content
 
-
-
-
   ###
   jsFiddle: Embed a jsFiddle, second parameter sets tabs
   Usage: {{ jsfiddle [id] [tabs] }}
@@ -54,7 +41,6 @@ module.exports.register = (Handlebars, options) ->
     tabs   = "result,js,html,css"  if Utils.isUndefined(tabs)
     result = '<iframe width="100%" height="300" src="http://jsfiddle.net/' + id + '/embedded/' + tabs + '/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
     Utils.safeString(result)
-
 
   ### 
   Gist: Downloads and embeds public GitHub Gists by
@@ -67,7 +53,6 @@ module.exports.register = (Handlebars, options) ->
     result = '<script src="https://gist.github.com/' + id + '.js"></script>'
     Utils.safeString(result)
 
-
   ###
   Highlight: wraps the output in a span with the class "highlight". 
   Usage: {{highlight 'value' 'class'}}
@@ -76,7 +61,6 @@ module.exports.register = (Handlebars, options) ->
     modifier   = "highlight"  if Utils.isUndefined(modifier)
     result = '<span class="' + modifier + '">' + text + '</span>'
     Utils.safeString(result)
-
 
   ###
   Format Phone Number
@@ -87,7 +71,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "formatPhoneNumber", (phoneNumber) ->
     phoneNumber = phoneNumber.toString()
     "(" + phoneNumber.substr(0, 3) + ") " + phoneNumber.substr(3, 3) + "-" + phoneNumber.substr(6, 4)
-
 
 
   @
