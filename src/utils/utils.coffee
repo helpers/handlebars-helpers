@@ -2,7 +2,6 @@ Handlebars = require('../helpers/helpers').Handlebars
 fs    = require 'fs'
 path  = require 'path'
 grunt = require "grunt"
-mout  = require 'mout'
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
@@ -19,12 +18,11 @@ Utils.trim = (str) ->
   trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
   str.toString().replace trim, ''
 
-Utils.pluck = mout.collection.pluck
-
 Utils.propagate = (callback, func) ->
   (err, args...) ->
     return callback(err) if err
     func.apply(this, args)
+
 
 ###
 # Detect and return the indentation.
