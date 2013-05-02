@@ -1,4 +1,4 @@
-# [Helper Library v0.1.31](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.1.32](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -9,15 +9,12 @@
 
 
 ## Quick start
-This plugin requires Grunt `~0.4.1` for linting and testing, but Grunt is **not required** to use the helpers. 
-
-If you want to learn more about using Grunt, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins.
+For linting and testing this project uses Grunt `~0.4.1`, but Grunt is **not required** to use the helpers. Check out the [Getting Started](http://gruntjs.com/getting-started) guide to learn more about Grunt.
 
 ```shell
 npm install helper-lib --save-dev
 ```
-
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+Once helper-lib has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
 grunt.loadNpmTasks('helper-lib');
@@ -139,11 +136,12 @@ Should you encounter problems with installing dependencies or running the `grunt
 ## Overview
 Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space). 
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
 * Each parameter is a Handlebars expression. 
 * Handlebars helpers can be accessed from any context in a template.
 
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
+
 
 
 #### Custom Helpers
@@ -160,6 +158,59 @@ Handlebars allows two different kinds of helpers:
 ## The Helpers
 
 ### Special
+
+
+### YAML Helpers
+
+A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
+
+**NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
+
+A couple things to keep in mind about YAML:
+
+* YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
+* Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
+
+More info here: [js-yaml](https://github.com/nodeca/js-yaml)
+
+
+#### changelog
+Here is the format to follow in your `CHANGELOG` file:
+
+``` yaml
+v0.1.2
+  date: "2014-04-09"
+  changes:
+    - The future sucks.
+    - This is my third and last commmit from the future.
+v0.1.1
+  date: "2014-04-08"
+  changes:
+    - Second commit from the future.
+    - The future is more boring that I thought it would be.
+v0.1.0
+  date: "2014-03-07"
+  changes:
+    - First commit... from the future. Yes!
+```
+Of coure, you are under no obligation to make your changelog entries as interesting as these, and you may record your entries at any point in whatever timeline you prefer, but whatever you write must be valid YAML when you do it.
+
+And the output will look like this:
+
+``` md
+* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
+* 2013-03-06    v0.1.0    First commit.
+```
+
+
+
+ 
+
+
+
+
+
+
 #### formatPhoneNumber
 _Output a formatted phone number_
 Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
@@ -1551,16 +1602,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## Authors
-
-**Jon Schlinkert**
-
-+ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
-+ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
-
-**Brian Woodward**
-
-+ [http://twitter.com/doowb](http://twitter.com/doowb)
-+ [http://github.com/doowb](http://github.com/doowb)
+* [Brian Woodward](http://github.com/doowb)  
+* [Jon Schlinkert](http://github.com/jonschlinkert)  
 
 
 ## Credit
@@ -1576,26 +1619,28 @@ Copyright NaN Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-04-07    v0.1.21    Add markdown helpers back, add more tests. 
-* 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities. 
-* 2013-04-05    v0.1.11    New authors and gist helpers, general cleanup and new tests. 
-* 2013-04-04    v0.1.10    Externalized utility javascript from helpers.js 
-* 2013-03-28    v0.1.8    Gruntfile updated with mocha tests for 71 helpers, bug fixes. 
-* 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another. 
-* 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty" 
-* 2013-03-15    v0.1.2    Update README.md with documentation, examples. 
-* 2013-03-06    v0.1.0    First commit. 
+* 2013-05-02    v0.1.32    Updated utils and a number of helpers, including value, property, and stringify.
+* 2013-04-21    v0.1.31    Fixing relative helper
+* 2013-04-20    v0.1.30    Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
+* 2013-04-16    v0.1.25    Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
+* 2013-04-07    v0.1.21    Add markdown helpers back, add more tests.
+* 2013-04-06    v0.1.20    Generalized helpers structure, externalized utilities.
+* 2013-04-05    v0.1.11    New authors and gist helpers, general cleanup and new tests.
+* 2013-04-04    v0.1.10    Externalized utility javascript from helpers.js
+* 2013-03-28    v0.1.8    Gruntfile updated with mocha tests for 71 helpers, bug fixes.
+* 2013-03-18    v0.1.7    New path helper "relative", for resolving relative path from one absolute path to another.
+* 2013-03-16    v0.1.3    New helpers, "formatPhoneNumber" and "eachProperty"
+* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
+* 2013-03-06    v0.1.0    First commit.
 
 
-### Roadmap
-* Separate into modules
-* YAML format, use templates for easier maintenance
+
 
 
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sun Apr 21 2013 15:24:24._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu May 02 2013 02:28:18._
 
 
 

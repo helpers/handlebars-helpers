@@ -1,21 +1,6 @@
 module.exports.register = (Handlebars, options) ->
-
-  # Nodejs libs.
   path  = require 'path'
-
-  # Local deps
   Utils = require '../utils/utils'
-
-
-
-  ###
-  WARNING!!! WARNING!!! WARNING!!!
-  These are not correct orstable, feel free to test
-  or submit pull requests for fixes, but do not
-  use them in projects yet!!!
-  ###
-
-
 
 
 
@@ -27,7 +12,6 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "directory", (dir) ->
     path.dirname()
-
 
   ###
   absolute: Returns the absolute path to the current directory.
@@ -50,7 +34,7 @@ module.exports.register = (Handlebars, options) ->
   Returns:  toc.md
   ###
   Handlebars.registerHelper 'filename', (base, ext) ->
-    path.basename(base, ext)
+    Utils.getBasename(base, ext)
 
   ###
   Basename: Returns the basename of a given file.

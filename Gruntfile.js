@@ -70,17 +70,6 @@ module.exports = function(grunt) {
           'examples/result/html/': [
             "examples/src/templates/*.hbs",
             "!examples/src/templates/*.md.hbs",
-            "!examples/src/templates/defineSections.hbs"
-          ]
-        }
-      },
-      sections: {
-        options: {
-          layout: 'examples/src/templates/layouts/layout.hbs'
-        },
-        files: {
-          'examples/result/sections/': [
-            'examples/src/templates/sections.hbs'
           ]
         }
       }
@@ -91,7 +80,7 @@ module.exports = function(grunt) {
       tests: ['examples/result/**/*.{html,md}'],
     },
 
-    // Configuration to be run (and then tested).
+    // Copy helpers to assemble in node_modules for dev.
     copy: {
       main: {
         files: [

@@ -1,5 +1,35 @@
 # Local deps
 Utils = require '../utils/utils'
+_     = require 'lodash'
+
+
+# module.exports.value = value = (file, prop) ->
+#   if Utils.isUndefined(file)
+#     file = Utils.readJSON("./package.json")
+#   else
+#     file = Utils.readJSON(file)
+#     prop = _.pick(file, prop)
+#     prop = _.pluck(prop)
+#   new Handlebars.SafeString(prop)
+
+# Value: extracts a value from a specific property
+module.exports.value = value = (file, prop) ->
+  file = Utils.readJSON(file)
+  prop = _.pick(file, prop)
+  prop = _.pluck(prop)
+  Utils.safeString(prop)
+
+# Property: extracts a specific property
+module.exports.property = property = (file, prop) ->
+  file = Utils.readJSON(file)
+  prop = _.pick(file, prop)
+  Utils.safeString(JSON.stringify(prop, null, 2))
+
+# Stringify: stringifies to JSON
+module.exports.stringify = stringify = (file, props) ->
+  file = Utils.readJSON(file)
+  Utils.safeString(JSON.stringify(file, null, 2))
+
 
 # First: Returns the first item in a collection.
 module.exports.first = first = (array, count) ->
@@ -59,6 +89,39 @@ module.exports.withBefore = withBefore = (array, count, options) ->
 # Join: Joins all elements of a collection into a string using a separator if specified.
 module.exports.join = join = (array, separator) ->
   array.join if Utils.isUndefined(separator) then ' ' else separator
+
+# Handlebars "joinAny" block helper that supports arrays of objects or strings.
+# (implementation found here: https://github.com/wycats/handlebars.js/issues/133)
+#
+# If "delimiter" is not speficified, then it defaults to ",".
+# You can use "start", and "end" to do a "slice" of the array.
+#
+# Use with objects:
+# {{#join people delimiter=" and "}}{{name}}, {{age}}{{/join}}
+#
+# Use with arrays:
+# {{join jobs delimiter=", " start="1" end="2"}}
+# 
+module.exports.joinAny = joinAny = (items, block) ->
+  delimiter = block.hash.delimiter or ","
+  start = start = block.hash.start or 0
+  len = (if items then items.length else 0)
+  end = block.hash.end or len
+  out = ""
+  end = len  if end > len
+  if "function" is typeof block
+    i = start
+    while i < end
+      out += delimiter  if i > start
+      if "string" is typeof items[i]
+        out += items[i]
+      else
+        out += block(items[i])
+      i++
+    out
+  else
+    [].concat(items).slice(start, end).join delimiter
+
 
 module.exports.sort = sort = (array, field) ->
   if Utils.isUndefined field
@@ -140,7 +203,6 @@ module.exports.eachProperty = eachProperty = (obj, options) ->
 
 # Arrayify: data gets passed in from *.yml as a string, like "foo, bar, baz"
 # we need to convert this to an ES Array of strings to avoid reference errors
-#
 # Credit: https://github.com/operasoftware/shinydemos/blob/master/lib/compiler.js
 module.exports.arrayify = arrayify = (data) ->
   result = data.split(",").map((tag) ->
@@ -150,25 +212,29 @@ module.exports.arrayify = arrayify = (data) ->
 
 module.exports.register = (Handlebars, options) ->
 
-  Handlebars.registerHelper 'first', first
-  Handlebars.registerHelper 'withFirst', withFirst
-  Handlebars.registerHelper 'last', last
-  Handlebars.registerHelper 'withLast', withLast
-  Handlebars.registerHelper 'after', after
-  Handlebars.registerHelper 'withAfter', withAfter
-  Handlebars.registerHelper 'before', before
-  Handlebars.registerHelper 'withBefore', withBefore
-  Handlebars.registerHelper 'join', join
-  Handlebars.registerHelper 'sort', sort
-  Handlebars.registerHelper 'withSort', withSort
-  Handlebars.registerHelper 'length', length
-  Handlebars.registerHelper 'lengthEqual', lengthEqual
-  Handlebars.registerHelper 'empty', empty
-  Handlebars.registerHelper 'any', any
-  Handlebars.registerHelper 'inArray', inArray
   # Handlebars.registerHelper "iterate", iterate
+  Handlebars.registerHelper "arrayify", arrayify
+  Handlebars.registerHelper 'after', after
+  Handlebars.registerHelper 'any', any
+  Handlebars.registerHelper 'before', before
   Handlebars.registerHelper 'eachIndex', eachIndex
   Handlebars.registerHelper 'eachProperty', eachProperty
-  Handlebars.registerHelper "arrayify", arrayify
+  Handlebars.registerHelper 'empty', empty
+  Handlebars.registerHelper 'first', first
+  Handlebars.registerHelper 'inArray', inArray
+  Handlebars.registerHelper 'join', join
+  Handlebars.registerHelper 'joinAny', join
+  Handlebars.registerHelper 'last', last
+  Handlebars.registerHelper 'length', length
+  Handlebars.registerHelper 'lengthEqual', lengthEqual
+  Handlebars.registerHelper 'property', property
+  Handlebars.registerHelper 'sort', sort
+  Handlebars.registerHelper 'stringify', stringify
+  Handlebars.registerHelper 'value', value
+  Handlebars.registerHelper 'withAfter', withAfter
+  Handlebars.registerHelper 'withBefore', withBefore
+  Handlebars.registerHelper 'withFirst', withFirst
+  Handlebars.registerHelper 'withLast', withLast
+  Handlebars.registerHelper 'withSort', withSort
 
   @

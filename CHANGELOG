@@ -1,3 +1,7 @@
+v0.1.32:
+  date: "2013-05-02"
+  changes:
+    - Updated utils and a number of helpers, including value, property, and stringify.
 v0.1.31:
   date: "2013-04-21"
   changes:
