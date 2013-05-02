@@ -68,7 +68,12 @@ Utils.getBasename = (base, ext) ->
   base     = path.basename(base, path.extname(fullName))
 
 Utils.getRelativePath = (from, to) ->
-  relativePath = Utils.urlNormalize(path.relative(from, to))
+  fromDirname = path.normalize(path.dirname(from))
+  toDirname = path.normalize(path.dirname(to))
+  toBasename = path.basename(to)
+  relativePath = path.relative(fromDirname, toDirname)
+  Utils.urlNormalize(path.join(relativePath, toBasename))
+
 
 
 Utils.getPropString = (prop) ->
@@ -150,7 +155,7 @@ Utils.expandMapping = (patterns, destBase, options) ->
 # Read a file, parse its contents, return an object.
 Utils.readJSON = (filepath, options) ->
   src = grunt.file.readJSON(filepath, options)
-  
+
 # Read a YAML file, parse its contents, return an object.
 Utils.readYAML = (filepath, options) ->
   src = grunt.file.readYAML(filepath, options)
@@ -172,13 +177,10 @@ Utils.mkDir = (dirpath, mode) ->
 Utils.normalizelf = (str) ->
   src = grunt.util.normalizelf(str)
 
-# Normalize \\ paths to / paths.
+# Ensures that a url path is returned instead
+# of a filesystem path.
 Utils.urlNormalize = (filepath) ->
-  win32 = process.platform is "win32"
-  if win32
-    filepath.replace /\\/g, "/"
-  else
-    filepath
+  filepath.replace /\\/g, "/"
 
 
 
