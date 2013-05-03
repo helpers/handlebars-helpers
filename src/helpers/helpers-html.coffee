@@ -11,11 +11,22 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{link 'href' 'title' 'class'}}
   ###
   Handlebars.registerHelper "href", (url, text, linkClass) ->
-      url = Handlebars.Utils.escapeExpression(url)
+      url  = Handlebars.Utils.escapeExpression(url)
       text = Handlebars.Utils.escapeExpression(text)
       linkClass = ""  if Utils.isUndefined(linkClass)
-      result = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
+      md   = '[' + text + '](' + url + ')'
+      html = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
+      result = Utils.switchOutput(options.ext, md, html)
       Utils.safeString(result)
+
+  ###
+  List: <ul>
+  ###
+  Handlebars.registerHelper "switch", (src) ->
+    md = '# ' + src
+    html = '<h1>' + src + '</h1>'
+    output = Utils.switchOutput(options.ext, md, html)
+    Utils.safeString(output)
 
 
   Handlebars.registerHelper "css", (context) ->
@@ -30,11 +41,9 @@ module.exports.register = (Handlebars, options) ->
           return css
         else css
 
-
-
   Handlebars.registerHelper "js", (context) ->
-      ext = Utils.getExt(context)
-      js  = Utils.safeString('<script src="' + options.assets + '/js/' + context + '"></script>')
+      ext    = Utils.getExt(context)
+      js     = Utils.safeString('<script src="' + options.assets + '/js/' + context + '"></script>')
       coffee = Utils.safeString('<script type="text/coffeescript" src="' + options.assets + '/js/' + context + '"></script>')
       switch ext
         when "js"
