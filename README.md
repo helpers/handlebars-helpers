@@ -86,6 +86,7 @@ Should you encounter problems with installing dependencies or running the `grunt
     - [toExponential](#toexponential)
     - [toInt](#toint)
     - [toFloat](#tofloat)
+    - [toAbbr](#toabbr)
     - [addCommas](#addcommas)
   - [Comparisons](#comparisons)
   - [Equal](#equal)
@@ -960,6 +961,23 @@ value = '22.2abc'
 
 // Result:
 22.2
+```
+
+#### toAbbr
+_Returns the number in abbreviation formats based on a value. The number is rounded to a particular decimal place._
+<br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+<br>Default: `2`
+``` js
+// Data
+value = 123456789
+
+```
+``` html
+// Template
+{{toAbbr value}}
+
+// Result:
+123.457m
 ```
 
 #### addCommas
