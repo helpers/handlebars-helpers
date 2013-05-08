@@ -133,4 +133,31 @@
     });
   });
 
+  describe('toAbbr', function() {
+    describe('{{toAbbr value}}', function() {
+      return it('should formats (and approximates) a number into abbreviation based on a value.', function() {
+        var context, source, template;
+
+        source = '{{toAbbr value}}';
+        template = Handlebars.compile(source);
+        context = {
+          value: 123456789
+        };
+        return template(context).should.equal('123.46m');
+      });
+    });
+    return describe('{{toAbbr value 3}}', function() {
+      return it('should formats (and approximates) a number into abbreviation based on a value and include decimal.', function() {
+        var context, source, template;
+
+        source = '{{toAbbr value 3}}';
+        template = Handlebars.compile(source);
+        context = {
+          value: 123456789
+        };
+        return template(context).should.equal('123.457m');
+      });
+    });
+  });
+
 }).call(this);

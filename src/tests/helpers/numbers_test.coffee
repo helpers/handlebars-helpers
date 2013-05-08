@@ -82,3 +82,20 @@ describe 'addCommas', ->
             context  = value: 2222222
 
             template(context).should.equal '2,222,222'
+
+describe 'toAbbr', ->
+    describe '{{toAbbr value}}', ->
+        it 'should formats (and approximates) a number into abbreviation based on a value.', ->
+            source   = '{{toAbbr value}}'
+            template = Handlebars.compile(source)
+            context  = value: 123456789
+
+            template(context).should.equal '123.46m'
+    
+    describe '{{toAbbr value 3}}', ->
+        it 'should formats (and approximates) a number into abbreviation based on a value and include decimal.', ->
+            source   = '{{toAbbr value 3}}'
+            template = Handlebars.compile(source)
+            context  = value: 123456789
+
+            template(context).should.equal '123.457m'

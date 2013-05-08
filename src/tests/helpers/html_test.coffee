@@ -4,7 +4,7 @@ Handlebars = require 'handlebars'
 require('../../lib/helpers/helpers-html').register Handlebars, {}
 
 
-# TODO: 
+# TODO:
 # encodeURI
 # decodeURI
 # link
@@ -12,6 +12,12 @@ require('../../lib/helpers/helpers-html').register Handlebars, {}
 # icon
 # nl2br
 
+describe 'href', ->
+    describe "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}", ->
+        it 'should create an href tag.', ->
+            source = "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}"
+            template = Handlebars.compile(source);
+            template({}).should.equal '<a class="" href="https://github.com/assemble/helper-lib" title="Awesome helpers">Awesome helpers</a>'
 
 describe 'ul', ->
     describe '{{#ul list class="list"}} \n
