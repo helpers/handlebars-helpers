@@ -6,7 +6,4 @@ require('../../lib/helpers/helpers-html').register Handlebars, {}
 
 # TODO:
 # include
-# value
-# property
-# stringify
 # copy

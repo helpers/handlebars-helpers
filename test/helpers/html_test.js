@@ -7,22 +7,10 @@
 
   require('../../lib/helpers/helpers-html').register(Handlebars, {});
 
-  describe('href', function() {
-    return describe("{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}", function() {
-      return it('should create an href tag.', function() {
-        var source, template;
-
-        source = "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}";
-        template = Handlebars.compile(source);
-        return template({}).should.equal('<a class="" href="https://github.com/assemble/helper-lib" title="Awesome helpers">Awesome helpers</a>');
-      });
-    });
-  });
-
   describe('ul', function() {
     return describe('{{#ul list class="list"}} \n\
-        {{this}} \n\
-    {{/ul}}', function() {
+    {{this}} \n\
+  {{/ul}}', function() {
       return it('should create an unordered list.', function() {
         var context, source, template;
 
@@ -38,8 +26,8 @@
 
   describe('ol', function() {
     return describe('{{#ol list class="list"}} \n\
-        {{this}} \n\
-    {{/ol}}', function() {
+    {{this}} \n\
+  {{/ol}}', function() {
       return it('should create an ordered list.', function() {
         var context, source, template;
 

@@ -9,10 +9,10 @@
 
   describe('is', function() {
     return describe('{{#is bender "great"}} \n\
-        Kiss my shiny metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/is}}', function() {
+    Kiss my shiny metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/is}}', function() {
       return it('should render a block if the condition is true.', function() {
         var context, source, template;
 
@@ -28,10 +28,10 @@
 
   describe('isnt', function() {
     return describe('{{#isnt number 2}} \n\
-        Kiss my great metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/isnt}}', function() {
+    Kiss my great metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/isnt}}', function() {
       return it('should render a block if the condition is not true.', function() {
         var context, source, template;
 
@@ -47,10 +47,10 @@
 
   describe('gt', function() {
     return describe('{{#gt number 8}} \n\
-        Kiss my glorious metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/gt}}', function() {
+    Kiss my glorious metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/gt}}', function() {
       return it('should render a block if the value is greater than a given number.', function() {
         var context, source, template;
 
@@ -66,10 +66,10 @@
 
   describe('gte', function() {
     return describe('{{#gte number 8}} \n\
-        Kiss my perfect metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/gte}}', function() {
+    Kiss my perfect metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/gte}}', function() {
       return it('should render a block if the value is greater or equal than a given number.', function() {
         var context, source, template;
 
@@ -85,10 +85,10 @@
 
   describe('lt', function() {
     return describe('{{#lt number 8}} \n\
-        Kiss my golden metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/lt}}', function() {
+    Kiss my golden metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/lt}}', function() {
       return it('should render a block if the value is less than a given number.', function() {
         var context, source, template;
 
@@ -104,10 +104,10 @@
 
   describe('lte', function() {
     return describe('{{#lte number 8}} \n\
-        Kiss my big metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/lte}}', function() {
+    Kiss my big metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/lte}}', function() {
       return it('should render a block if the value is less or equal than a given number.', function() {
         var context, source, template;
 
@@ -123,10 +123,10 @@
 
   describe('or', function() {
     return describe('{{#or great magnificent}} \n\
-        Kiss my perfect metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/or}}', function() {
+    Kiss my perfect metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/or}}', function() {
       return it('should render a block if one of the values is truthy.', function() {
         var context, source, template;
 
@@ -143,10 +143,10 @@
 
   describe('and', function() {
     return describe('{{#and great magnificent}} \n\
-        Kiss my glorious metal ass! \n\
-    {{else}} \n\
-        Never mind :( \n\
-    {{/and}}', function() {
+    Kiss my glorious metal ass! \n\
+  {{else}} \n\
+    Never mind :( \n\
+  {{/and}}', function() {
       return it('should render a block if both values are truthy.', function() {
         var context, source, template;
 

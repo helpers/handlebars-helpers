@@ -1,15 +1,19 @@
 (function() {
-  var Handlebars, authorsExpected, changelogExpected, path, simple, simpleExpected;
+  var Handlebars, authorsExpected, changelogExpected, grunt, path, pkg, readmeTitleExpected, simple, simpleExpected, travisBadgeExpected;
 
   require("should");
 
   path = require("path");
+
+  grunt = require("grunt");
 
   Handlebars = require("handlebars");
 
   require("../../lib/helpers/helpers-markdown").register(Handlebars, {
     gfm: true
   });
+
+  pkg = grunt.file.readJSON('package.json');
 
   simple = "{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}";
 
@@ -45,11 +49,20 @@
   authorsExpected = "* [Brian Woodward](http://github.com/doowb)  \n* [Jon Schlinkert](http://github.com/jonschlinkert)  ";
 
   describe("authors", function() {
-    return describe("{{authors [string]}}", function() {
+    describe("{{authors [string]}}", function() {
       return it("should return a list of authors in markdown format, from a user-defined data source", function() {
         var source, template;
 
         source = "{{authors 'test/files/AUTHORS'}}";
+        template = Handlebars.compile(source);
+        return template(context).should.equal(authorsExpected);
+      });
+    });
+    return describe("{{authors}}", function() {
+      return it("should return a list of authors in markdown format, from the default data source", function() {
+        var source, template;
+
+        source = "{{authors}}";
         template = Handlebars.compile(source);
         return template(context).should.equal(authorsExpected);
       });
@@ -66,6 +79,62 @@
         source = "{{changelog 'test/files/CHANGELOG'}}";
         template = Handlebars.compile(source);
         return template(context).should.equal(changelogExpected);
+      });
+    });
+  });
+
+  readmeTitleExpected = "[helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib)";
+
+  describe("readme-title", function() {
+    return describe("should generate a README title in markdown format, including version from package.json.", function() {
+      return it("{{readme-title}}", function(done) {
+        var source, template;
+
+        source = "{{readme-title}}";
+        template = Handlebars.compile(source);
+        template().should.equal(readmeTitleExpected);
+        return done();
+      });
+    });
+  });
+
+  travisBadgeExpected = "[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)";
+
+  describe("travis-badge", function() {
+    return describe("should create a Travis CI link and badge in markdown format.", function() {
+      return it("{{travis-badge}}", function(done) {
+        var source, template;
+
+        source = "{{travis-badge}}";
+        template = Handlebars.compile(source);
+        template().should.equal(travisBadgeExpected);
+        return done();
+      });
+    });
+  });
+
+  describe("travis", function() {
+    return describe("should create a Travis CI link in markdown format.", function() {
+      return it("{{travis}}", function(done) {
+        var source, template;
+
+        source = "{{travis}}";
+        template = Handlebars.compile(source);
+        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)");
+        return done();
+      });
+    });
+  });
+
+  describe("travis with branch", function() {
+    return describe("should create a Travis CI link with branch in markdown format.", function() {
+      return it("{{travis 'master'}}", function(done) {
+        var source, template;
+
+        source = "{{travis 'wip-1.0.0'}}";
+        template = Handlebars.compile(source);
+        template().should.equal("# [helper-lib v0.2.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/helper-lib)");
+        return done();
       });
     });
   });

@@ -34,8 +34,8 @@
 
   describe('withFirst', function() {
     describe('{{#withFirst collection}} \n\
-        <p>{{this}} is smart.</p> \n\
-    {{/withFirst}}', function() {
+    <p>{{this}} is smart.</p> \n\
+  {{/withFirst}}', function() {
       return it('should use the first item in a collection inside a block.', function() {
         var source, template;
 
@@ -45,8 +45,8 @@
       });
     });
     return describe('{{#withFirst collection 2}} \n\
-        <p>{{this}} is smart.</p> \n\
-    {{/withFirst}}', function() {
+    <p>{{this}} is smart.</p> \n\
+  {{/withFirst}}', function() {
       return it('should use the first two items in a collection inside a block.', function() {
         var source, template;
 
@@ -80,8 +80,8 @@
 
   describe('withLast', function() {
     describe('{{#withLast collection}} \n\
-        <p>{{this}} is dumb.</p> \n\
-    {{/withLast}}', function() {
+    <p>{{this}} is dumb.</p> \n\
+  {{/withLast}}', function() {
       return it('should use the last item in a collection inside a block.', function() {
         var source, template;
 
@@ -91,8 +91,8 @@
       });
     });
     return describe('{{#withLast collection 2}} \n\
-        <p>{{this}} is dumb.</p> \n\
-    {{/withLast}}', function() {
+    <p>{{this}} is dumb.</p> \n\
+  {{/withLast}}', function() {
       return it('should use the last two items in a collection inside a block.', function() {
         var source, template;
 
@@ -117,8 +117,8 @@
 
   describe('withAfter', function() {
     return describe('{{#withAfter collection 5}} \n\
-        <{{this}}> \n\
-    {{/withAfter}}', function() {
+    <{{this}}> \n\
+  {{/withAfter}}', function() {
       return it('should use all of the items in a collection after the specified count inside a block.', function() {
         var source, template;
 
@@ -143,8 +143,8 @@
 
   describe('withBefore', function() {
     return describe('{{#withBefore collection 5}} \n\
-        <{{this}}> \n\
-    {{/withBefore}}', function() {
+    <{{this}}> \n\
+  {{/withBefore}}', function() {
       return it('should use all of the items in a collection before the specified count inside a block.', function() {
         var source, template;
 
@@ -215,8 +215,8 @@
 
   describe('withSort', function() {
     describe('{{#withSort collection}} \n\
-        <p>{{this}}</p> \n\
-    {{/withSort}}', function() {
+    <p>{{this}}</p> \n\
+  {{/withSort}}', function() {
       return it('should sort the collection in lexicographical order and use it in a block.', function() {
         var source, template;
 
@@ -226,8 +226,8 @@
       });
     });
     return describe('{{#withSort collection "deliveries"}} \n\
-        {{name}}: {{deliveries}} <br> \n\
-    {{/withSort}}', function() {
+    {{name}}: {{deliveries}} <br> \n\
+  {{/withSort}}', function() {
       return it('should sort the collection by deliveries and use it in a block.', function() {
         var source, template, _context;
 
@@ -266,10 +266,10 @@
 
   describe('lengthEqual', function() {
     return describe('{{#lengthEqual collection 3}} \n\
-        There are 3 people in Planet Express. \n\
-    {{else}} \n\
-        This is not Planet Express. \n\
-    {{/lengthEqual}}', function() {
+    There are 3 people in Planet Express. \n\
+  {{else}} \n\
+    This is not Planet Express. \n\
+  {{/lengthEqual}}', function() {
       return it('should conditionally render a block based on the length of a collection.', function() {
         var source, template;
 
@@ -282,10 +282,10 @@
 
   describe('empty', function() {
     return describe('{{#empty collection}} \n\
-        Bad news everyone! \n\
-    {{else}} \n\
-        Good news everyone! \n\
-    {{/empty}}', function() {
+    Bad news everyone! \n\
+  {{else}} \n\
+    Good news everyone! \n\
+  {{/empty}}', function() {
       return it('should conditionally render a block the collection is empty.', function() {
         var source, template;
 
@@ -298,10 +298,10 @@
 
   describe('any', function() {
     return describe('{{#any collection}} \n\
-        Bad news everyone! \n\
-    {{else}} \n\
-        Good news everyone! \n\
-    {{/any}}', function() {
+    Bad news everyone! \n\
+  {{else}} \n\
+    Good news everyone! \n\
+  {{/any}}', function() {
       return it('should conditionally render a block the collection isn\'t empty.', function() {
         var source, template;
 
@@ -314,10 +314,10 @@
 
   describe('inArray', function() {
     return describe('{{#inArray collection "Fry"}} \n\
-        I\'m walking on sunshine! \n\
-    {{else}} \n\
-        I\'m walking in darkness. \n\
-    {{/inArray}}', function() {
+    I\'m walking on sunshine! \n\
+  {{else}} \n\
+    I\'m walking in darkness. \n\
+  {{/inArray}}', function() {
       return it('should conditionally render a block if a specified value is in the collection.', function() {
         var source, template;
 
@@ -330,8 +330,8 @@
 
   describe('eachIndex', function() {
     return describe('{{#eachIndex collection}} \n\
-        {{item}} is {{index}} \n\
-    {{/eachIndex}}', function() {
+    {{item}} is {{index}} \n\
+  {{/eachIndex}}', function() {
       return it('should render the block using the array and each item\'s index.', function() {
         var source, template;
 

@@ -5,7 +5,7 @@
 Basename: toc
 
 ## `filename`
-File name: toc
+File name: toc.md
 
 ## `extname`
 File name: md
