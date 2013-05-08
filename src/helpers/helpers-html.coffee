@@ -1,26 +1,15 @@
 module.exports.register = (Handlebars, options) ->
+
   Utils = require '../utils/utils'
   HTML  = require '../utils/html'
 
 
 
-
   ###
-  Link helper: This will escape the passed in parameters, but mark the response as safe,
-  so Handlebars will not try to escape it even if the "triple-stash" is not used.
-  Usage: {{link 'href' 'title' 'class'}}
-  ###
-  Handlebars.registerHelper "href", (url, text, linkClass) ->
-      url  = Handlebars.Utils.escapeExpression(url)
-      text = Handlebars.Utils.escapeExpression(text)
-      linkClass = ""  if Utils.isUndefined(linkClass)
-      md   = '[' + text + '](' + url + ')'
-      html = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
-      result = Utils.switchOutput(options.ext, md, html)
-      Utils.safeString(result)
-
-  ###
-  List: <ul>
+  Switch (proof of concept), not intended for use in production code.
+  This helper demonstrates a simple example of how to switch the output
+  format based on the extension of the destination file(s) in the
+  'assemble' grunt task.
   ###
   Handlebars.registerHelper "switch", (src) ->
     md = '# ' + src
@@ -28,7 +17,7 @@ module.exports.register = (Handlebars, options) ->
     output = Utils.switchOutput(options.ext, md, html)
     Utils.safeString(output)
 
-
+  # css: proof of concept. will be updated to handle multiple stylesheets.
   Handlebars.registerHelper "css", (context) ->
       ext  = Utils.getExt(context)
       css  = Utils.safeString('<link rel="stylesheet" href="' + options.assets + '/css/' + context + '">')
@@ -41,6 +30,7 @@ module.exports.register = (Handlebars, options) ->
           return css
         else css
 
+  # js: proof of concept. will be updated to handle multiple scripts.
   Handlebars.registerHelper "js", (context) ->
       ext    = Utils.getExt(context)
       js     = Utils.safeString('<script src="' + options.assets + '/js/' + context + '"></script>')
@@ -53,29 +43,32 @@ module.exports.register = (Handlebars, options) ->
         else js
 
   ###
-  List: <ul>
+  href: This will escape the passed in parameters, but mark the response as safe,
+  so Handlebars will not try to escape it even if the "triple-stash" is not used.
+  Usage: {{href 'url' 'title/text' 'class'}}
   ###
+  Handlebars.registerHelper "href", (url, text, linkClass) ->
+      url  = Handlebars.Utils.escapeExpression(url)
+      text = Handlebars.Utils.escapeExpression(text)
+      linkClass = ""  if Utils.isUndefined(linkClass)
+      md   = '[' + text + '](' + url + ')'
+      html = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
+      result = Utils.switchOutput(options.ext, md, html)
+      Utils.safeString(result)
+
+  # List: <ul>
   Handlebars.registerHelper "ul", (context, options) ->
       ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
         "<li>" + (options.fn(item)) + "</li>"
       ).join("\n") + "</ul>"
 
-
-  ###
-  List: <ol>
-  Same as the `ul` helper but creates ordered lists.
-  ###
+  # List: <ol>: Same as the `ul` helper but creates ordered lists.
   Handlebars.registerHelper "ol", (context, options) ->
       ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
         "<li>" + (options.fn(item)) + "</li>"
       ).join("\n") + "</ol>"
 
-
-
-  ###
-  Break helper: Add the specified number of br tags
-  Usage: {{br 5}}
-  ###
+  # Break helper: Add the specified number of br tags.  Usage: {{br 5}}
   Handlebars.registerHelper 'br', (count, options) ->
       br = '<br>'
       unless Utils.isUndefined count
@@ -85,31 +78,21 @@ module.exports.register = (Handlebars, options) ->
               i++
       Utils.safeString br
 
-
-  ###
-  Convert new line (\n) to <br>
-  from http://phpjs.org/functions/nl2br:480
-  ###
+  # Convert new line (\n) to <br>. From http://phpjs.org/functions/nl2br:480
   Handlebars.registerHelper 'nl2br', (text) ->
       nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
       Utils.safeString(nl2br)
-
-
 
   # Newline to break
   Handlebars.registerHelper 'newLineToBr', (str) ->
       str.replace /\r?\n|\r/g, '<br>'
 
-
-  ###
-  <!DOCTYPE>
-  Same as the `ul` helper but creates and ordered list.
-  ###
+  # <!DOCTYPE>: Example: {{DOCTYPE 'svg 1.1'}}
   Handlebars.registerHelper "DOCTYPE", (type) ->
     type = type.toLowerCase()
     switch type
 
-      # HTML 5
+      # HTML 5 (default)
       when "5", "html", "html5"
         return Utils.safeString('<!DOCTYPE1 html>')
 
@@ -132,7 +115,7 @@ module.exports.register = (Handlebars, options) ->
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">')
 
       # HTML 4.01
-      when "4.01 strict"
+      when "4", "4.01", "4.01 strict"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">')
       when "4.01 trans"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">')
@@ -140,17 +123,16 @@ module.exports.register = (Handlebars, options) ->
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">')
 
       # SVG
-      when "svg 1.1", "svg1.1"
+      when "svg", "svg 1.1", "svg1.1"
         return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">')
       when "svg 1.0", "svg1.0", "svg1"
         return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">')
 
       # Default to HTML 5
       else
-        Utils.safeString('<!DOCTYPE html>')
+        Utils.safeString('<!DOCTYPE1 html>')
 
-
-
+  # icon: proof of concept.
   Handlebars.registerHelper "icon", (attachment) ->
       extension = attachment.substr((attachment.lastIndexOf(".") + 1))
       value = Handlebars.Utils.escapeExpression(extension)
