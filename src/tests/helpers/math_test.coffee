@@ -62,3 +62,11 @@ describe 'round', ->
             template = Handlebars.compile(source)
 
             template(context = value: 5.69).should.equal 6
+
+describe 'sum', ->
+    describe '{{sum value 67 80}}', ->
+        it 'should return the sum of multiple numbers.', ->
+            source   = '{{sum value 67 80}}'
+            template = Handlebars.compile(source)
+
+            template(context = value: 20).should.equal 167

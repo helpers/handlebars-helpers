@@ -101,4 +101,18 @@
     });
   });
 
+  describe('sum', function() {
+    return describe('{{sum value 67 80}}', function() {
+      return it('should return the sum of multiple numbers.', function() {
+        var source, template;
+
+        source = '{{sum value 67 80}}';
+        template = Handlebars.compile(source);
+        return template(context = {
+          value: 20
+        }).should.equal(167);
+      });
+    });
+  });
+
 }).call(this);
