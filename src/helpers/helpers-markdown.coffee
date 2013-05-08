@@ -7,8 +7,6 @@ module.exports.register = (Handlebars, options) ->
   _     = require 'lodash'
   Utils = require '../utils/utils'
 
-
-
   opts = (
     gfm: true
     tables: true
@@ -36,18 +34,67 @@ module.exports.register = (Handlebars, options) ->
   isServer = (typeof process isnt 'undefined')
 
   ###
-  Travis CI: 
+  readme-title: Generates a title and Travis CI badge for a README.md.
   Syntax: {{travis [src]}}
   ###
-  Handlebars.registerHelper "travis", (pkg) ->
-    travis = "./.travis.yml"
-    source = undefined
-    template = undefined
-    if grunt.file.exists(travis)
-      pkg = Utils.readJSON("./package.json")
-    else if pkg
-      pkg = Utils.readJSON(pkg)
-    source = "# [{{ name }} v{{ version }}]({{ homepage }})[![Build Status](https://travis-ci.org/{{ author.name }}/{{ name }}.png)](https://travis-ci.org/{{ author.name }}/{{ name }})"
+  Handlebars.registerHelper "readme-title", (branch) ->
+    pkg     = Utils.readJSON("./package.json")
+    repo    = Utils.repoUrl('https://github.com/$1')
+    name    = pkg.name
+    version = pkg.version
+    source   = '[' + name + ' v' + version + '](' + repo + ')'
+    template = Handlebars.compile(source)
+    Utils.safeString(template(pkg))
+
+  ###
+  Travis CI: Generates a title and Travis CI badge for a README.md.
+  Syntax: {{travis [src]}}
+  ###
+  Handlebars.registerHelper "travis-badge", (branch) ->
+    pkg       = Utils.readJSON("./package.json")
+    travisUrl = Utils.repoUrl('https://travis-ci.org/$1')
+    # pass in data from assemble task options
+    travis    = options.travis || {}
+    curBranch = ''
+    if Utils.isUndefined(branch)
+      curBranch = ''
+    else if travis.branch
+      curBranch = '?branch=' + travis.branch
+    else 
+      curBranch = '?branch=' + branch
+    if travis.name
+      pkg.name = travis.name
+    else
+      pkg.name
+    source   = '[![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
+    template = Handlebars.compile(source)
+    Utils.safeString(template(pkg))
+
+  ###
+  Travis CI: Generates a title and Travis CI badge for a README.md.
+  Syntax: {{travis [src]}}
+  ###
+  Handlebars.registerHelper "travis", (branch) ->
+    pkg       = Utils.readJSON("./package.json")
+    repo      = Utils.repoUrl('https://github.com/$1')
+    travisUrl = Utils.repoUrl('https://travis-ci.org/$1')
+    # pass in data from assemble task options
+    travis    = options.travis || {}
+    curBranch = ''
+    if Utils.isUndefined(branch)
+      curBranch = ''
+    else if travis.branch
+      curBranch = '?branch=' + travis.branch
+    else 
+      curBranch = '?branch=' + branch
+    if travis.name
+      pkg.name = travis.name
+    else
+      pkg.name
+
+    unless travis.title is false
+      title = '# [' + pkg.name + ' v' + pkg.version + '](' + repo + ')'
+    source   = title + '[![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
     template = Handlebars.compile(source)
     Utils.safeString(template(pkg))
 
@@ -58,8 +105,6 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{authors}} or {{ authors [file] }}
   ###
   Handlebars.registerHelper 'authors', (authors) ->
-    source = undefined
-    template = undefined
     if Utils.isUndefined(authors)
       authors = Utils.read("./AUTHORS")
     else
@@ -71,8 +116,6 @@ module.exports.register = (Handlebars, options) ->
   AUTHORS: (case senstitive) Same as `{{authors}}`, but outputs a different format.
   ###
   Handlebars.registerHelper 'AUTHORS', (authors) ->
-    source = undefined
-    template = undefined
     if Utils.isUndefined(authors)
       authors = Utils.read("./AUTHORS")
     else
@@ -88,8 +131,6 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{changelog}} or {{changelog [src]}}
   ###
   Handlebars.registerHelper "changelog", (changelog) ->
-    source = undefined
-    template = undefined
     if Utils.isUndefined(changelog)
       changelog = Utils.readYAML('./CHANGELOG')
     else
@@ -105,8 +146,6 @@ module.exports.register = (Handlebars, options) ->
   Usage: {{roadmap}} or {{roadmap [src]}}
   ###
   Handlebars.registerHelper "roadmap", (roadmap) ->
-    source = undefined
-    template = undefined
     if Utils.isUndefined(roadmap)
       roadmap = Utils.readYAML('./ROADMAP')
     else
@@ -114,17 +153,6 @@ module.exports.register = (Handlebars, options) ->
     source = "{{#each .}}* {{eta}}\t\t\t{{{@key}}}\t\t\t{{#each goals}}{{{.}}}{{/each}}\n{{else}}_(Big plans in the works)_{{/each}}"
     template = Handlebars.compile(source)
     Utils.safeString(template(roadmap))
-
-  ###
-  chapter: reads in data from a markdown file, and uses the first heading
-  as a chapter heading, and then copies the rest of the content inline.
-  Usage: {{ chapter [file] }}
-  ###
-  Handlebars.registerHelper 'chapter', (file) ->
-    file = grunt.file.read(file)
-    content = file.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    Utils.safeString(content)
-
 
   ###
   Glob: reads in data from a markdown file, and uses the first heading
@@ -147,8 +175,8 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'embed', (file, language) ->
     file = grunt.file.read(file)
     language = ""  if Utils.isUndefined(language)
-    result = '``` ' + language + '\n' + file + '\n```'
-    Utils.safeString(result)
+    content = '``` ' + language + '\n' + file + '\n```'
+    Utils.safeString(content)
 
   ###
   Markdown: markdown helper enables writing markdown inside HTML 
