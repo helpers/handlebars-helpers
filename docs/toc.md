@@ -48,6 +48,7 @@
     - [toExponential](#toexponential)
     - [toInt](#toint)
     - [toFloat](#tofloat)
+    - [toAbbr](#toabbr)
     - [addCommas](#addcommas)
   - [Comparisons](#comparisons)
   - [Equal](#equal)

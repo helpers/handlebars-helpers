@@ -161,8 +161,43 @@ Handlebars allows two different kinds of helpers:
 ### Special
 
 
-### YAML Helpers
+### README Helpers
 
+#### authors
+TODO...
+
+### Travis CI
+
+#### travis
+Creates a "full" Travis CI link in markdown format.
+Params: `branch`
+Type: `String`
+Usage: `{{travis [branch]}}`
+
+Example using default: `{{travis}}`
+
+``` md
+# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+```
+
+Example with branch: `{{travis 'master'}}`
+
+``` md
+# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
+```
+
+#### travis-badge
+Creates a Travis CI link in markdown format.
+Params: `none`
+Usage: `{{travis-badge}}`
+
+Example:
+
+``` md
+[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+```
+
+#### changelog
 A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
 
 **NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
@@ -172,11 +207,7 @@ A couple things to keep in mind about YAML:
 * YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
 * Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
 
-More info here: [js-yaml](https://github.com/nodeca/js-yaml)
-
-
-#### changelog
-Here is the format to follow in your `CHANGELOG` file:
+Here is an example of the format to follow in your `CHANGELOG` file:
 
 ``` yaml
 v0.1.2
@@ -196,21 +227,19 @@ v0.1.0
 ```
 Of coure, you are under no obligation to make your changelog entries as interesting as these, and you may record your entries at any point in whatever timeline you prefer, but whatever you write must be valid YAML when you do it.
 
-And the output will look like this:
+The output will look like this:
 
 ``` md
 * 2013-03-15    v0.1.2    Update README.md with documentation, examples.
 * 2013-03-06    v0.1.0    First commit.
 ```
 
-
-
- 
-
-
+* More info here: [js-yaml](https://github.com/nodeca/js-yaml)
+* See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
 
 
 
+### Other
 
 #### formatPhoneNumber
 _Output a formatted phone number_
@@ -1637,6 +1666,7 @@ Copyright NaN Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
+* 2013-05-07			v0.2.0			A bunch of new tests for markdown and special helpers.Refactored most of the rest of the helpers to separate functions from Handlebars registration.
 * 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.
 * 2013-04-21			v0.1.31			Fixing relative helper
 * 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
@@ -1658,7 +1688,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Tue May 07 2013 22:23:19._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed May 08 2013 00:17:27._
 
 
 

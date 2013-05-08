@@ -1,3 +1,8 @@
+v0.2.0:
+  date: "2013-05-07"
+  changes:
+    - A bunch of new tests for markdown and special helpers.
+    - Refactored most of the rest of the helpers to separate functions from Handlebars registration.
 v0.1.32:
   date: "2013-05-02"
   changes:
