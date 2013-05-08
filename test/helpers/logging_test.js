@@ -17,14 +17,14 @@
   };
 
   describe('log', function() {
-    return describe('{{log "Hi console :)"}}', function() {
+    return describe('{{log "Log helper worked!"}}', function() {
       return it('should log a message to the console.', function() {
         var source, template;
 
-        source = '{{log "Hi console :)"}}';
+        source = '{{log "Log helper worked!"}}';
         template = Handlebars.compile(source);
         template();
-        return _log.history.should.include('Hi console :)');
+        return _log.history.should.include('Log helper worked!');
       });
     });
   });
@@ -38,9 +38,9 @@
 
         source = '{{debug this}}';
         template = Handlebars.compile(source);
-        context = 'elving';
+        context = 'assemble';
         template(context);
-        return _log.history.should.include('elving');
+        return _log.history.should.include('assemble');
       });
     });
   });
