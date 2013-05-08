@@ -1,13 +1,8 @@
 ---
-title: Defining sections from inside a page.
+title: helper-lib example
 url:
   repo: http://github.com/assemble/
 ---
-
-{{#section 'before'}}
-<h1>{{title}}</h1>
-{{/section}}
-
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -15,15 +10,23 @@ url:
         {{#pages}}<li><a href="{{lowercase basename}}{{ext}}">{{data.title}}</a></li>
         {{/pages}}
       </ul>
-      <ul class="nav"><li><a href="{{url.repo}}">Visit Assemble</a></li></ul>
+      <ul class="nav pull-right"><li><a href="{{url.repo}}">Visit Assemble</a></li></ul>
     </div>
   </div>
 </div>
 
-{{#section 'after'}}
-{{#comment}}
-NOTE: "pages", "filename" and "ext" are build-in variables that require
-assemble. Also, "title" does not require Assemble, but "data.title" does
-since it accesses the Assemble "data" object
-{{/comment}}
-{{/section}}
+<h4> {{ title }}</h4>
+
+{{#renderSection 'a'}}
+  <div class="alert alert-success"><strong>Replacement "a" section</strong> Replacement "a" section content</div>
+{{/renderSection}}
+
+{{#renderSection 'c'}}
+  <div class="alert alert-success"><strong>Replacement "c" section</strong> Replacement "c" section content</div>
+{{/renderSection}}
+
+{{#renderSection 'b'}}
+  <div class="alert alert-success"><strong>Replacement "b" section</strong> Replacement "b" section content</div>
+{{/renderSection}}
+
+

@@ -1,24 +1,4 @@
-<html>
-  <head>
-    <title>HTML Helpers</title>
-    <link rel="stylesheet" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css">
-  </head>
-  <body style="padding-top: 80px;">
-    <div class="container">
-      <h1>"defineSection" and "renderSection" Example</h1>
 
-
-      <hr>
-      
-      
-
-      <hr>
-      
-
-
-      <hr>
-      <h4>Body</h4>
-      
 
 <h2>Scripts</h2>
 <h4>JavaScript</h4>
@@ -36,11 +16,11 @@
 
 
 <h2><pre>link</pre> Helper</h2>
-<a class="" href="http://github.com" title="GitHub">GitHub</a>
+[GitHub](http://github.com)
 
 
 
-<a class="nav-link" href="http://github.com" title="GitHub">GitHub</a>
+[GitHub](http://github.com)
 
 
 <h2>Unordered Lists</h2>
@@ -84,12 +64,3 @@
 <li>
   <a href="five">size</a> 
 </li></ol>
-
-
-      <hr>
-      
-
-
-    </div>
-  </body>
-</html>

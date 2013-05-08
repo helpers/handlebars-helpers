@@ -34,7 +34,7 @@ helper-lib
 {
   "name": "helper-lib",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.1.33",
+  "version": "0.2.0",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",
@@ -52,7 +52,7 @@ helper-lib
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/assemble/helper-lib"
+    "url": "git://github.com/assemble/helper-lib.git"
   },
   "bugs": {
     "url": "git://github.com/assemble/helper-lib/isues"

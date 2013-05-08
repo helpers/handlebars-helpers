@@ -4,7 +4,7 @@ _Provides a default or fallback value if a value doesn't exist._
 
 ``` html
 // Template
-{{default title "Not title available."}}
+{{default title "No title available."}}
 
 // Result:
 Not title available.

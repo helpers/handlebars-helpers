@@ -1,4 +1,4 @@
-# [Helper Library v0.1.33](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.2.0](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -1329,7 +1329,7 @@ Example:
 ``` hbs
 {{gist '5193239'}}
 ```
-Result:
+Output:
 ``` html
 <script src="https://gist.github.com/5193239.js"></script>
 ```
@@ -1355,7 +1355,7 @@ Forced highlighting:
 In the second example, highlighting was forced as `javascript` instead of `json`.
 
 
-#### blockquote
+#### blockquote (planned...)
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -1365,7 +1365,7 @@ Outputs a string with a given attribution as a quote
   This is your quote.
 {{/blockquote}}
 ```
-results in:
+Output:
 
 ``` html
 <blockquote>
@@ -1401,7 +1401,7 @@ Usage:
 {{/stripes}}
 ```
 
-#### timeline
+#### timeline (planned...)
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -1449,7 +1449,7 @@ Template:
 {{/ul}}
 ```
 ``` html
-// Result:
+// Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
   <li> Bender - 239 deliveries </li>
@@ -1481,7 +1481,7 @@ Template:
 {{/ol}}
 ```
 ``` html
-// Result:
+// Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
   <li> Bender - 239 deliveries </li>
@@ -1551,7 +1551,7 @@ _Provides a default or fallback value if a value doesn't exist._
 
 ``` html
 // Template
-{{default title "Not title available."}}
+{{default title "No title available."}}
 
 // Result:
 Not title available.
@@ -1640,7 +1640,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu May 02 2013 07:09:49._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Tue May 07 2013 22:23:19._
 
 
 

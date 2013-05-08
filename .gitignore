@@ -3,5 +3,7 @@
 *.sublime-project
 *.sublime-workspace
 
+src/docs
+
 tmp
 TODO.md

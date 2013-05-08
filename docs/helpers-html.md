@@ -9,7 +9,7 @@ Example:
 ``` hbs
 {{gist '5193239'}}
 ```
-Result:
+Output:
 ``` html
 <script src="https://gist.github.com/5193239.js"></script>
 ```
@@ -35,7 +35,7 @@ Forced highlighting:
 In the second example, highlighting was forced as `javascript` instead of `json`.
 
 
-#### blockquote
+#### blockquote (planned...)
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -45,7 +45,7 @@ Outputs a string with a given attribution as a quote
   This is your quote.
 {{/blockquote}}
 ```
-results in:
+Output:
 
 ``` html
 <blockquote>
@@ -81,7 +81,7 @@ Usage:
 {{/stripes}}
 ```
 
-#### timeline
+#### timeline (planned...)
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -129,7 +129,7 @@ Template:
 {{/ul}}
 ```
 ``` html
-// Result:
+// Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
   <li> Bender - 239 deliveries </li>
@@ -161,7 +161,7 @@ Template:
 {{/ol}}
 ```
 ``` html
-// Result:
+// Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
   <li> Bender - 239 deliveries </li>

@@ -1,20 +1,36 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <link rel="stylesheet" href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css">
   </head>
-  <body>
-    <h1>Top of the page</h1>
+  <body style="padding-top: 80px;">
+    <div class="container">
+      <h1>"defineSection" and "renderSection" Example</h1>
 
-    <h2>Section before body</h2>
-    {{#override 'before'}}
-      <p>Default before section content</p>
-    {{/override}}
 
-    {{>body}}
+      <hr>
+      {{#defineSection 'a'}}
+        <div class="alert alert-info"><strong>Default "a" section</strong> Default "a" section content</div>
+      {{/defineSection}}
+      
 
-    {{#override 'after'}}
-      <p>Default after section content</p>
-    {{/override}}
+      <hr>
+      {{#defineSection 'b'}}
+        <div class="alert alert-info"><strong>Default "b" section</strong> Default "b" section content</div>
+      {{/defineSection}}
 
+
+      <hr>
+      <h4>Body</h4>
+      {{>body}}
+
+
+      <hr>
+      {{#defineSection 'c'}}
+        <div class="alert alert-info"><strong>Default "c" section</strong> Default "c" section content</div>
+      {{/defineSection}}
+
+
+    </div>
   </body>
 </html>

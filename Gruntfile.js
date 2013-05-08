@@ -13,11 +13,11 @@ module.exports = function(grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    pkg : grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON('package.json'),
 
     // Configuration to be run (and then tested).
     coffee: {
-      build: {
+      helpers: {
         expand: true,
         cwd: 'src',
         src: [
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         dest: 'lib/',
         ext: '.js'
       },
-      test: {
+      tests: {
         expand: true,
         cwd: 'src/tests',
         src: ['**/*.coffee'],
@@ -64,6 +64,26 @@ module.exports = function(grunt) {
           ]
         }
       },
+      travis1: {
+        options: {
+          travis: {
+            name: 'Assemble',
+            branch: 'wip'
+          },
+          ext: ''
+        },
+        files: {'examples/result/md/travis1/': ['./examples/src/templates/travis.md.hbs']}
+      },
+      travis2: {
+        options: {
+          travis: {
+            name: 'Upstage',
+            branch: 'master'
+          },
+          ext: ''
+        },
+        files: {'examples/result/md/travis2/': ['./examples/src/templates/travis.md.hbs']}
+      },
       relative: {
         options: {
           flatten: false,
@@ -85,13 +105,14 @@ module.exports = function(grunt) {
       },
       handlebars: {
         options: {
+          layout: 'examples/src/templates/layouts/layout.hbs',
           partials: 'examples/src/content/test.hbs'
         },
         files: {
           'examples/result/html/': [
             'examples/src/templates/*.hbs',
             '!examples/src/templates/*.md.hbs',
-            '!examples/src/templates/defineSections.hbs'
+            '!examples/src/templates/sections.hbs'
           ]
         }
       },
@@ -109,7 +130,8 @@ module.exports = function(grunt) {
 
     // Clean test files before building or re-testing.
     clean: {
-      tests: ['examples/result/**/*.{html,md}'],
+      helpers: '<%= coffee.helpers.dest %>/**/*.js',
+      tests:  ['examples/result/**/*.{html,md}']
     },
 
     // Copy helpers to assemble in node_modules for dev.
@@ -132,15 +154,17 @@ module.exports = function(grunt) {
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
+    'clean',
     'coffee',
     'copy',
-    'clean',
     'templates'
   ]);
 
   // Test helpers in actual templates.
   grunt.registerTask('templates', [
     'assemble:markdown',
+    'assemble:travis1',
+    'assemble:travis2',
     'assemble:handlebars',
     'assemble:sections',
     'assemble:less'
