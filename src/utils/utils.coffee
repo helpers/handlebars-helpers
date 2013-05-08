@@ -1,4 +1,5 @@
 Handlebars = require('../helpers/helpers').Handlebars
+
 fs    = require 'fs'
 path  = require 'path'
 grunt = require "grunt"
@@ -14,6 +15,9 @@ Utils.isUndefined = (value) ->
 Utils.safeString = (str) ->
   new Handlebars.SafeString str
 
+Utils.escapeExpression = (str) ->
+  Handlebars.Utils.escapeExpression
+
 Utils.trim = (str) ->
   trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
   str.toString().replace trim, ''
@@ -24,12 +28,16 @@ Utils.propagate = (callback, func) ->
     func.apply(this, args)
 
 
+# Convenience for extracting repo url from package.json
+Utils.repoUrl = (str) ->
+  pkg = grunt.file.readJSON("./package.json")
+  url = pkg.repository.url
+  str = url.replace(/.*:\/\/github.com\/(.*?)(?:\.git|$)/, str)
+
 ###
 # Detect and return the indentation.
-#
-# @param  {String} string
-#
-# @return {Mixed} Indentation used, or undefined.
+# param  {String} string
+# return {Mixed} Indentation used, or undefined.
 ###
 Utils.detectIndentation = (string) ->
   tabs = string.match(/^[\t]+/g) or []
@@ -57,9 +65,9 @@ Utils.getBasename = (base, ext) ->
   base     = path.basename(base, path.extname(fullName))
 
 Utils.getRelativePath = (from, to) ->
-  fromDirname = path.normalize(path.dirname(from))
-  toDirname = path.normalize(path.dirname(to))
-  toBasename = path.basename(to)
+  fromDirname  = path.normalize(path.dirname(from))
+  toDirname    = path.normalize(path.dirname(to))
+  toBasename   = path.basename(to)
   relativePath = path.relative(fromDirname, toDirname)
   Utils.urlNormalize(path.join(relativePath, toBasename))
 
@@ -77,8 +85,21 @@ Utils.detectType = (value) ->
     else
       "other"
 
-Utils.readBasedOnType = (ext) ->
-  ext = options.ext
+Utils.toggleOutput = (ext, md, html) ->
+  if ext is ''
+    output = md
+  else
+    output = html
+
+Utils.switchOutput = (ext, md, html) ->
+  switch ext
+    when "", ".md"
+      output = md
+    when ".html", ".htm"
+      output = html
+  output
+
+Utils.switchType = (ext) ->
   reader = grunt.file.readJSON
   switch ext
     when ".json"
@@ -149,11 +170,11 @@ Utils.mkDir = (dirpath, mode) ->
 Utils.normalizelf = (str) ->
   src = grunt.util.normalizelf(str)
 
+
 # Ensures that a url path is returned instead
 # of a filesystem path.
 Utils.urlNormalize = (filepath) ->
   filepath.replace /\\/g, "/"
-
 
 
 
