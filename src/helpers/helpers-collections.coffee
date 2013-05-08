@@ -3,14 +3,7 @@ Utils = require '../utils/utils'
 _     = require 'lodash'
 
 
-# module.exports.value = value = (file, prop) ->
-#   if Utils.isUndefined(file)
-#     file = Utils.readJSON("./package.json")
-#   else
-#     file = Utils.readJSON(file)
-#     prop = _.pick(file, prop)
-#     prop = _.pluck(prop)
-#   new Handlebars.SafeString(prop)
+
 
 # Value: extracts a value from a specific property
 module.exports.value = value = (file, prop) ->
