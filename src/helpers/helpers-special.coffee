@@ -1,43 +1,48 @@
 Handlebars = require('../helpers/helpers').Handlebars
 
 fs    = require 'fs'
+Utils = require '../utils/utils'
 _     = require 'lodash'
 
-Utils = require '../utils/utils'
 
 
+
+# Value: extracts a value from a specific property
+module.exports.value = value = (file, prop) ->
+  file = Utils.readJSON(file)
+  prop = _.pick(file, prop)
+  prop = _.pluck(prop)
+  Utils.safeString(prop)
+
+# Property: extracts a specific property
+module.exports.property = property = (file, prop) ->
+  file = Utils.readJSON(file)
+  prop = _.pick(file, prop)
+  Utils.safeString(JSON.stringify(prop, null, 2))
+
+# Stringify: stringifies to JSON
+module.exports.stringify = stringify = (file, props) ->
+  file = Utils.readJSON(file)
+  Utils.safeString(JSON.stringify(file, null, 2))
 
 # Include: Include content from an external source.
 # Usage: {{ include [file] }}
 module.exports.include = include = (file) ->
   Utils.safeString(Utils.read(file))
 
-# # "block": block helper. Usage: {{#block [file] }}
-# module.exports.block = block = (block, options) ->
-#   if Handlebars.sections
-#     Handlebars.sections[block] = options.fn(this)
-#   Utils.safeString ''
-
-# # "section" block helper. Usage: {{#section [file] }}
-# module.exports.section = section = (section, options) ->
-#   if Handlebars.sections and Handlebars.sections[section]
-#     content = Handlebars.sections[section]
-#   else
-#     content = options.fn this
-#   Utils.safeString content
-
+# Define Section:
 module.exports.section = defineSection = (section, options) ->
   if Handlebars.sections
     Handlebars.sections[section] = options.fn(this)
   Utils.safeString ''
 
+# Render Section
 module.exports.section = renderSection = (section, options) ->
   if Handlebars.sections and Handlebars.sections[section]
     content = Handlebars.sections[section]
   else
     content = options.fn this
   Utils.safeString content
-
 
 module.exports.disqus = disqus = (slug, options) ->
   return "" 
@@ -78,6 +83,9 @@ module.exports.formatPhoneNumber = formatPhoneNumber = (phoneNumber) ->
 
 module.exports.register = (Handlebars, options) ->
 
+  Handlebars.registerHelper 'property', property
+  Handlebars.registerHelper 'stringify', stringify
+  Handlebars.registerHelper 'value', value
   Handlebars.registerHelper "disqus", disqus
   Handlebars.registerHelper "gist", gist
   Handlebars.registerHelper "highlight", highlight

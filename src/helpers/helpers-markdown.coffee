@@ -94,7 +94,7 @@ module.exports.register = (Handlebars, options) ->
 
     unless travis.title is false
       title = '# [' + pkg.name + ' v' + pkg.version + '](' + repo + ')'
-    source   = title + '[![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
+    source   = title + ' [![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
     template = Handlebars.compile(source)
     Utils.safeString(template(pkg))
 

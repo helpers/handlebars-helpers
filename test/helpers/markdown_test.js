@@ -120,7 +120,7 @@
 
         source = "{{travis}}";
         template = Handlebars.compile(source);
-        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)");
+        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)");
         return done();
       });
     });
@@ -133,7 +133,7 @@
 
         source = "{{travis 'wip-1.0.0'}}";
         template = Handlebars.compile(source);
-        template().should.equal("# [helper-lib v0.2.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/helper-lib)");
+        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/helper-lib)");
         return done();
       });
     });

@@ -5,25 +5,6 @@ _     = require 'lodash'
 
 
 
-# Value: extracts a value from a specific property
-module.exports.value = value = (file, prop) ->
-  file = Utils.readJSON(file)
-  prop = _.pick(file, prop)
-  prop = _.pluck(prop)
-  Utils.safeString(prop)
-
-# Property: extracts a specific property
-module.exports.property = property = (file, prop) ->
-  file = Utils.readJSON(file)
-  prop = _.pick(file, prop)
-  Utils.safeString(JSON.stringify(prop, null, 2))
-
-# Stringify: stringifies to JSON
-module.exports.stringify = stringify = (file, props) ->
-  file = Utils.readJSON(file)
-  Utils.safeString(JSON.stringify(file, null, 2))
-
-
 # First: Returns the first item in a collection.
 module.exports.first = first = (array, count) ->
   if Utils.isUndefined(count) then array[0] else array.slice 0, count
@@ -181,6 +162,46 @@ rather than objects. This lets us iterate over our Collection's.
 #   ret = inverse(this)  if i is 0
 #   ret
 
+###
+adds an a bunch of item prefixed logic to the object
+
+{{#each_with_classes records prefix="record"}}
+<li class="record_{{item_index}}{{item_position}} {{item_alt}}">{{item_index}}</li>
+{{/each_with_classes}}
+
+results in the following html
+
+<li class="record_0 record_first">0</li>
+<li class="record_1 record_alt">1</li>
+<li class="record_2">2</li>
+<li class="record_3 record_last record_alt">3</li>
+###
+module.exports.each_with_classes = each_with_classes = (array, fn) ->
+  buffer = ""
+  i = 0
+  j = array.length
+
+  while i < j
+    item = array[i]
+    
+    # position related information
+    item.item_position = ""
+    item.item_position = " " + fn.hash.prefix + "-first"  if i is 0
+    item.item_position += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
+    
+    # add alt if needed
+    item.item_alt = (if i % 2 then fn.hash.prefix + "-alt" else "")
+    
+    # stick an index property onto the item, starting with 1, may make configurable later
+    item.item_index = i
+    
+    # show the inside of the block
+    buffer += fn(item)
+    i++
+  
+  # return the finished buffer
+  buffer
+
 module.exports.eachIndex = eachIndex = (array, options) ->
   result = ''
   for value, index in array
@@ -212,6 +233,7 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'before', before
   Handlebars.registerHelper 'eachIndex', eachIndex
   Handlebars.registerHelper 'eachProperty', eachProperty
+  Handlebars.registerHelper 'each_with_classes', each_with_classes
   Handlebars.registerHelper 'empty', empty
   Handlebars.registerHelper 'first', first
   Handlebars.registerHelper 'inArray', inArray
@@ -220,10 +242,7 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'last', last
   Handlebars.registerHelper 'length', length
   Handlebars.registerHelper 'lengthEqual', lengthEqual
-  Handlebars.registerHelper 'property', property
   Handlebars.registerHelper 'sort', sort
-  Handlebars.registerHelper 'stringify', stringify
-  Handlebars.registerHelper 'value', value
   Handlebars.registerHelper 'withAfter', withAfter
   Handlebars.registerHelper 'withBefore', withBefore
   Handlebars.registerHelper 'withFirst', withFirst
