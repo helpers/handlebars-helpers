@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require('../../lib/helpers/helpers-html').register Handlebars, {}
+require('../../lib/helpers/helpers-html').register Handlebars, {assets: 'assets'}
 
 
 # TODO:
@@ -17,6 +17,96 @@ require('../../lib/helpers/helpers-html').register Handlebars, {}
 #       source = "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}"
 #       template = Handlebars.compile(source);
 #       template({}).should.equal '<a class="" href="https://github.com/assemble/helper-lib" title="Awesome helpers">Awesome helpers</a>'
+
+describe 'css', ->
+  describe '{{css myStylesFile}}', ->
+    it 'should create a style tag for the css file', ->
+      source = '{{css myStylesFile}}'
+      template = Handlebars.compile source
+      context = myStylesFile: 'myStyles.css'
+      template(context).should.equal '<link rel="stylesheet" href="assets/css/myStyles.css">'
+
+  describe '{{css myStylesFile}}', ->
+    it 'should create a style tag for the less file', ->
+      source = '{{css myStylesFile}}'
+      template = Handlebars.compile source
+      context = myStylesFile: 'myStyles.less'
+      template(context).should.equal '<link rel="stylesheet/less" href="assets/less/myStyles.less">'
+
+  describe '{{css myStylesList}}', ->
+    it 'should create a list of style tags for the css files', ->
+      source = '{{css myStylesList}}'
+      template = Handlebars.compile source
+      context = myStylesList: ['myStyles1.css', 'myStyles2.css', 'myStyles3.css']
+      template(context).should.equal '<link rel="stylesheet" href="assets/css/myStyles1.css">\n
+<link rel="stylesheet" href="assets/css/myStyles2.css">\n
+<link rel="stylesheet" href="assets/css/myStyles3.css">'
+
+  describe '{{css myStylesList}}', ->
+    it 'should create a list of style tags for the less files', ->
+      source = '{{css myStylesList}}'
+      template = Handlebars.compile source
+      context = myStylesList: ['myStyles1.less', 'myStyles2.less', 'myStyles3.less']
+      template(context).should.equal '<link rel="stylesheet/less" href="assets/less/myStyles1.less">\n
+<link rel="stylesheet/less" href="assets/less/myStyles2.less">\n
+<link rel="stylesheet/less" href="assets/less/myStyles3.less">'
+
+  describe '{{css myStylesList}}', ->
+    it 'should create a list of style tags for the mixed css and less files', ->
+      source = '{{css myStylesList}}'
+      template = Handlebars.compile source
+      context = myStylesList: ['myStyles1.less', 'myStyles2.css', 'myStyles3.css', 'myStyles1.css', 'myStyles2.less', 'myStyles3.less']
+      template(context).should.equal '<link rel="stylesheet/less" href="assets/less/myStyles1.less">\n
+<link rel="stylesheet" href="assets/css/myStyles2.css">\n
+<link rel="stylesheet" href="assets/css/myStyles3.css">\n
+<link rel="stylesheet" href="assets/css/myStyles1.css">\n
+<link rel="stylesheet/less" href="assets/less/myStyles2.less">\n
+<link rel="stylesheet/less" href="assets/less/myStyles3.less">'
+
+describe 'js', ->
+  describe '{{js myScriptFile}}', ->
+    it 'should create a script tag for the javascript file', ->
+      source = '{{js myScriptFile}}'
+      template = Handlebars.compile source
+      context = myScriptFile: 'myScript.js'
+      template(context).should.equal '<script src="assets/js/myScript.js"></script>'
+
+  describe '{{js myScriptFile}}', ->
+    it 'should create a script tag for the coffee script file', ->
+      source = '{{js myScriptFile}}'
+      template = Handlebars.compile source
+      context = myScriptFile: 'myScript.coffee'
+      template(context).should.equal '<script type="text/coffeescript" src="assets/js/myScript.coffee"></script>'
+
+  describe '{{js myScriptList}}', ->
+    it 'should create a list of script tags for the javascript files', ->
+      source = '{{js myScriptList}}'
+      template = Handlebars.compile source
+      context = myScriptList: ['myScript1.js', 'myScript2.js', 'myScript3.js']
+      template(context).should.equal '<script src="assets/js/myScript1.js"></script>\n
+<script src="assets/js/myScript2.js"></script>\n
+<script src="assets/js/myScript3.js"></script>'
+
+  describe '{{js myScriptList}}', ->
+    it 'should create a list of script tags for the coffee script files', ->
+      source = '{{js myScriptList}}'
+      template = Handlebars.compile source
+      context = myScriptList: ['myScript1.coffee', 'myScript2.coffee', 'myScript3.coffee']
+      template(context).should.equal '<script type="text/coffeescript" src="assets/js/myScript1.coffee"></script>\n
+<script type="text/coffeescript" src="assets/js/myScript2.coffee"></script>\n
+<script type="text/coffeescript" src="assets/js/myScript3.coffee"></script>'
+
+  describe '{{js myScriptList}}', ->
+    it 'should create a list of script tags for the mixed javascript and coffee script files', ->
+      source = '{{js myScriptList}}'
+      template = Handlebars.compile source
+      context = myScriptList: ['myScript1.coffee', 'myScript2.js', 'myScript3.js', 'myScript1.js', 'myScript2.coffee', 'myScript3.coffee']
+      template(context).should.equal '<script type="text/coffeescript" src="assets/js/myScript1.coffee"></script>\n
+<script src="assets/js/myScript2.js"></script>\n
+<script src="assets/js/myScript3.js"></script>\n
+<script src="assets/js/myScript1.js"></script>\n
+<script type="text/coffeescript" src="assets/js/myScript2.coffee"></script>\n
+<script type="text/coffeescript" src="assets/js/myScript3.coffee"></script>'
 
 describe 'ul', ->
   describe '{{#ul list class="list"}} \n
