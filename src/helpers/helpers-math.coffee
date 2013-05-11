@@ -1,4 +1,4 @@
-
+_     = require 'lodash'
 
 module.exports.add = add = (value, addition) ->
   value + addition
@@ -22,15 +22,16 @@ module.exports.round = round = (value) ->
   Math.round value
 
 module.exports.sum = sum = () ->
-  argLength = arguments.length - 1
+  args = _.flatten(arguments)
   sum = 0
-  i = 0
+  i = args.length - 1
 
-  while i < argLength
-    v = parseFloat(arguments[i])
-    sum += v  unless isNaN(v)
-    i++
+  while i--
+      if "number" is typeof args[i]
+        sum += args[i]
+
   sum
+
 
 module.exports.register = (Handlebars, options) ->
 

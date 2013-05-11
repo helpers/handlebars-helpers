@@ -70,3 +70,27 @@ describe 'sum', ->
             template = Handlebars.compile(source)
 
             template(context = value: 20).should.equal 167
+
+describe 'sum', ->
+    describe '{{sum 1 2 3}}', ->
+        it 'should return the sum of multiple numbers.', ->
+            source   = '{{sum 1 2 3}}'
+            template = Handlebars.compile(source)
+
+            template().should.equal 6
+
+describe 'sum', ->
+    describe '{{sum value}}', ->
+        it 'should return the total sum of array.', ->
+            source   = '{{sum value}}'
+            template = Handlebars.compile(source)
+
+            template(context = value: [1,2,3]).should.equal 6
+
+describe 'sum', ->
+    describe '{{sum value 5}}', ->
+        it 'should return the total sum of array and numbers.', ->
+            source   = '{{sum value 5}}'
+            template = Handlebars.compile(source)
+
+            template(context = value: [1,2,3]).should.equal 11
