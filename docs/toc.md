@@ -3,8 +3,6 @@
 ## [The Helpers](#the-helpers)
 
 ### [Special](#special)
-
-### [YAML Helpers](#yaml-helpers)
 * [{{changelog}}](#changelog)
 * [{{formatPhoneNumber}}](#formatphonenumber)
 
