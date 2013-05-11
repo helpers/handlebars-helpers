@@ -5,7 +5,6 @@ grunt = require 'grunt'
 path  = require 'path'
 to    = require 'to'
 _     = require 'lodash'
-less = require 'less'
 
 
 # NOTE: Most of these helpers are experimental. 
@@ -61,11 +60,6 @@ module.exports.expMappingYAML = expMappingYAML = (src) ->
   list = grunt.file.expandMapping(src)
   yml  = to.format.yaml.stringify(list)
   Utils.safeString(yml)
-
-# module.exports.expMappingYAML = expMappingYAML = (src) ->
-#   list = grunt.file.expandMapping(src)
-#   yml  = to.format.yaml.stringify(list)
-#   Utils.safeString(yml)
 
 module.exports.expMappingJSON = expMappingJSON = (src) ->
   list = grunt.file.expandMapping(src)

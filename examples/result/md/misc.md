@@ -91,7 +91,8 @@ helper-lib
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-nodeunit": "~0.1.2",
     "handlebars": "~1.0.10",
-    "amdefine": "0.0.4"
+    "amdefine": "0.0.4",
+    "to": "~0.2.9"
   },
   "keywords": [
     "assemble",

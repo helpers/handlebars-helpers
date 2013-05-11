@@ -1,7 +1,7 @@
 {
   "name": "helper-lib",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "homepage": "https://github.com/assemble/helper-lib",
   "author": {
     "name": "assemble",

@@ -1,4 +1,4 @@
-# [Helper Library v0.2.0](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.2.2](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -22,24 +22,33 @@ grunt.loadNpmTasks('helper-lib');
 
 This plugin was designed to work with _Grunt 0.4.x_. If you're still using grunt _v0.3.x_ it's strongly recommended that you upgrade, but in case you can't please use _v0.3.1_.
 
-###
+### 
 When completed, you'll be able to run the various `grunt` commands provided:
 
 #### build - `grunt`
 Runs the Less.js compiler to rebuild the specified `/test/fixtures/**` files. .
 
 #### test - `grunt test`
-Runs jshint on JavaScripts and nodeunit tests on .
+Runs jshint on JavaScripts and nodeunit tests on . 
 
 #### watch - `grunt watch`
 This is a convenience method for watching  and automatically re-building them whenever you save. Requires the [grunt-contrib-watch](http://github.com/gruntjs/grunt-contrib-watch) Grunt plugin.
 
 Should you encounter problems with installing dependencies or running the `grunt` commands, be sure to first uninstall any previous versions (global and local) you may have installed, and then rerun `npm install`.
 
-**Table of Contents**
+**Table of Contents** 
 
+- [Quick start](#quick-start)
+    - [build - grunt](#build---grunt)
+    - [test - grunt test](#test---grunt-test)
+    - [watch - grunt watch](#watch---grunt-watch)
+- [Overview](#overview)
+    - [Custom Helpers](#custom-helpers)
 - [The Helpers](#the-helpers)
-  - [Path](#path)
+  - [Special](#special)
+  - [YAML Helpers](#yaml-helpers)
+    - [changelog](#changelog)
+    - [formatPhoneNumber](#formatphonenumber)
   - [Strings](#strings)
     - [hyphenate](#hyphenate)
     - [dashify](#dashify)
@@ -80,6 +89,7 @@ Should you encounter problems with installing dependencies or running the `grunt
     - [floor](#floor)
     - [ceil](#ceil)
     - [round](#round)
+    - [sum](#sum)
   - [Numbers](#numbers)
     - [toFixed](#tofixed)
     - [toPrecision](#toprecision)
@@ -88,28 +98,25 @@ Should you encounter problems with installing dependencies or running the `grunt
     - [toFloat](#tofloat)
     - [toAbbr](#toabbr)
     - [addCommas](#addcommas)
-  - [Comparisons](#comparisons)
-  - [Equal](#equal)
+  - [Comparisons: Equal](#comparisons-equal)
     - [is](#is)
     - [if_eq](#if_eq)
     - [isnt](#isnt)
     - [or](#or)
     - [and](#and)
     - [unless_eq](#unless_eq)
-  - [Greater Than](#greater-than)
+  - [Comparisons: Greater Than](#comparisons-greater-than)
     - [if_gt](#if_gt)
     - [gt](#gt)
     - [unless_gt](#unless_gt)
     - [if_gteq](#if_gteq)
     - [gte](#gte)
     - [unless_gteq](#unless_gteq)
-  - [Less Than](#less-than)
+  - [Comparisons: Less Than](#comparisons-less-than)
     - [lt](#lt)
     - [lte](#lte)
     - [unless_lt](#unless_lt)
     - [unless_lteq](#unless_lteq)
-  - [Special](#special)
-    - [formatPhoneNumber](#formatphonenumber)
   - [Dates](#dates)
     - [formatDate](#formatdate)
     - [now](#now)
@@ -118,6 +125,11 @@ Should you encounter problems with installing dependencies or running the `grunt
     - [inflect](#inflect)
     - [ordinalize](#ordinalize)
   - [HTML](#html)
+    - [gist](#gist)
+    - [embed](#embed)
+    - [blockquote](#blockquote)
+    - [stripes](#stripes)
+    - [timeline](#timeline)
     - [ul](#ul)
     - [ol](#ol)
     - [br](#br)
@@ -126,19 +138,18 @@ Should you encounter problems with installing dependencies or running the `grunt
     - [debug](#debug)
   - [Miscellaneous](#miscellaneous)
     - [default](#default)
-    - [partial (**NOT USED IN ASSEMBLE**)](#partial-not-used-in-assemble)
+    - [include](#include)
 - [Contributing](#contributing)
-    - [Adding Custom Helpers](#adding-custom-helpers)
-- [Release History](#release-history)
-- [Roadmap](#roadmap)
 - [Authors](#authors)
 - [Credit](#credit)
+- [Copyright and license](#copyright-and-license)
+- [Release History](#release-history)
 
 ## Overview
 Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).
-* Each parameter is a Handlebars expression.
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
+* Each parameter is a Handlebars expression. 
 * Handlebars helpers can be accessed from any context in a template.
 
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
@@ -149,7 +160,7 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 
 > Contributions welcome! Please consider adding your own helpers to this library.
 
-Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
+Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
 
 Handlebars allows two different kinds of helpers:
 
@@ -198,7 +209,7 @@ Example:
 ```
 
 #### changelog
-A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting.
+A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
 
 **NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
 
@@ -263,7 +274,7 @@ _Replace spaces in string with hyphens._
 ``` handlebars
 {{hyphenate "make this all hyphenated"}}
 
-// Result
+// Result 
 make-this-all-hyphenated
 ```
 
@@ -349,10 +360,10 @@ _Reverses a string._
 
 #### truncate
 _Truncates a string given a specified `length`, providing a custom string to denote an `omission`._
-<br>Parameters:
+<br>Parameters: 
 
-* length: `int`- The number of characters to keep (Required).
-* omission: `string` - A string to denote an omission (Optional).
+* length: `int`- The number of characters to keep (Required). 
+* omission: `string` - A string to denote an omission (Optional). 
 
 ``` handlebars
 {{truncate "Bender should not be allowed on tv." 31 "..."}}
@@ -377,7 +388,7 @@ _Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks_
 ``` handlebars
 {{nl2br <br>description}}
 
-// Result:
+// Result: 
 <br>
 ```
 
@@ -390,13 +401,13 @@ _Returns the first item in a collection._
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 
@@ -415,13 +426,13 @@ _Use the first item in a collection inside a block._
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -441,13 +452,13 @@ _Returns the last item in a collection. Opposite of `first`._
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -465,13 +476,13 @@ _Use the last item in a collection inside a block. Opposite of `withFirst`._
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -491,13 +502,13 @@ _Returns all of the items in the collection after the specified count._
 ```
 // Date
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -515,13 +526,13 @@ _Use all of the items in the collection after the specified count inside a block
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -541,13 +552,13 @@ _Returns all of the items in the collection before the specified count. Opposite
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -565,13 +576,13 @@ _Use all of the items in the collection before the specified count inside a bloc
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -591,13 +602,13 @@ _Joins all elements of a collection into a string using a separator if specified
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -615,13 +626,13 @@ Parameters: `none`
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 ```
@@ -668,13 +679,13 @@ _Returns the length of the collection._
 ``` js
 // Data
 collection = [
-  'Amy Wong',
-  'Bender',
-  'Dr. Zoidberg',
-  'Fry',
-  'Hermes Conrad',
-  'Leela',
-  'Professor Farnsworth',
+  'Amy Wong', 
+  'Bender', 
+  'Dr. Zoidberg', 
+  'Fry', 
+  'Hermes Conrad', 
+  'Leela', 
+  'Professor Farnsworth', 
   'Scruffy'
 ]
 
@@ -923,7 +934,6 @@ value = {
   b: 2,
   c: 3
 }
-
 ```
 ``` html
 // Template
@@ -932,7 +942,6 @@ value = {
 // Result:
 6
 ```
-
 
 
 ### Numbers
@@ -1278,14 +1287,14 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
-#### unless_lt
+#### unless_lt 
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
 ``` handlebars
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
-#### unless_lteq
+#### unless_lteq 
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
 ``` handlebars
@@ -1406,7 +1415,7 @@ _Embed Code Snippets_
 
 Embed code snippets from any file with the `embed` variable. You can also pass in a second parameter to force syntax highlighting for a specific language.
 
-Parameters: `String|String (optional)`
+Parameters: `String|String (optional)` 
 Default: `undefined`
 Syntax: `{{ embed [filename] [syntax] }}`
 
@@ -1437,22 +1446,22 @@ Output:
 ``` html
 <blockquote>
   <p>This is your quote.</p>
-  <footer>
+  <footer> 
     <strong>@doowb</strong>
-    <cite>
+    <cite> 
       <a href="http://github.com/source/for/your/quote">This is the title</a>
     </cite>
   </footer>
 </blockquote>
 ```
-
+   
 #### stripes
 _Iterates through an array, letting the contents know whether to add an even or odd row._
 
 Parameters:
 
-* `array` to iterate over,
-* `string`: CSS class name for even rows
+* `array` to iterate over, 
+* `string`: CSS class name for even rows 
 * `string`: CSS class name for odd rows
 
 Credit: [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
@@ -1471,9 +1480,9 @@ Usage:
 #### timeline (planned...)
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
-Parameters:
+Parameters: 
 
-* `array` to iterate over,
+* `array` to iterate over, 
 * `string`: CSS class name for left columns
 * `string`: CSS class name for right columns
 
@@ -1497,7 +1506,7 @@ _Creates an unordered list._
 
 Parameters: `Hash|HTML attributes`, `Optional`
 
-HTML attributes to use on the `ul` element.
+HTML attributes to use on the `ul` element. 
 ``` js
 // Data
 collection = [
@@ -1528,7 +1537,7 @@ _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based
 
 Parameters: `Hash`, `HTML attributes`, `Optional`
 
-HTML attributes to use on the `ol` element.
+HTML attributes to use on the `ol` element. 
 ``` js
 // Data
 collection = [
@@ -1561,7 +1570,7 @@ _Renders `<br>` elements in the output, based on the number given as a parameter
 
 Parameters: `Integer|Count`, `Optional`
 
-The number of `br` elements to render.
+The number of `br` elements to render. 
 
 `template.hbs`
 ``` handlebars
@@ -1624,23 +1633,23 @@ _Provides a default or fallback value if a value doesn't exist._
 Not title available.
 ```
 
-#### include
+#### include 
 _Provides an easy way to register and use partials inside your templates._
 
-This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`.
+This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. 
 
 <br>Pattern: `{{include [name] [data]}}`
 <br>Parameters:
 
 * name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
-* data (optional): `[int|string|collection]` - Data you want to use inside the include.
+* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
 
 Data (collection): `planet-express.json`
 
 ``` js
 [
-  "Professor Farnsworth",
-  "Fry",
+  "Professor Farnsworth", 
+  "Fry", 
   "Bender"
 ]
 ```
@@ -1669,8 +1678,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## Authors
-* [Brian Woodward](http://github.com/doowb)
-* [Jon Schlinkert](http://github.com/jonschlinkert)
+* [Brian Woodward](http://github.com/doowb)  
+* [Jon Schlinkert](http://github.com/jonschlinkert)  
 
 
 ## Credit
@@ -1708,7 +1717,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed May 08 2013 00:17:27._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat May 11 2013 13:00:58._
 
 
 

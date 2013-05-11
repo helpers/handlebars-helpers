@@ -754,6 +754,24 @@ value = 5.69
 6
 ```
 
+#### sum
+_Returns the sum of multiple numbers. Similar to `{{#add}}` block helper but accepts multiple arguments._
+<br>Parameters: `none`
+``` js
+// Data
+value = {
+  a: 1,
+  b: 2,
+  c: 3
+}
+```
+``` html
+// Template
+{{sum value.a value.b value.c}}
+
+// Result:
+6
+```
 
 
 ### Numbers
