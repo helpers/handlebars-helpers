@@ -200,11 +200,38 @@ Utils.normalizelf = (str) ->
   src = grunt.util.normalizelf(str)
 
 
+###
+Markdown Utils
+###
+Utils.lowerCase = (str) ->
+  str = toString(str)
+  str.toLowerCase()
+
+Utils.linkify = (str) ->
+  str = Utils.lowerCase(str)
+  str.split(" ").join "-"
+
+Utils.getHeadings = (str) ->
+  headings = str.match(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm).join('')
+  headings
+
+  # headings = content.match(Utils.findh1).join('')
+  # output   = headings.replace(Utils.findh1, '$1 [$2](#' + '$2' + ')\n')
+
+# Regex: all markdown headings
+Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
+# Regex: all markdown h1 headings
+Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
+# Utils.findh1 = /^#[ \t]+(.*)/gm
+# Regex: all markdown h2 headings
+Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
+
+Utils.findParens = /\(([^)]+)\)/g
+
+
 # Ensures that a url path is returned instead
 # of a filesystem path.
 Utils.urlNormalize = (filepath) ->
   filepath.replace /\\/g, "/"
-
-
 
 

@@ -1,12 +1,15 @@
 module.exports.register = (Handlebars, options) ->
   fs    = require 'fs'
   path  = require 'path'
-  yaml  = require 'js-yaml'
   grunt = require 'grunt'
   file  = grunt.file
   _     = require 'lodash'
-  Utils = require '../utils/utils'
+  yaml  = require 'js-yaml'
 
+  # Internal libs.
+  Utils    = require '../utils/utils'
+  Markdown = require('../utils/markdown').Markdown opts
+  
   opts = (
     gfm: true
     tables: true
@@ -28,9 +31,8 @@ module.exports.register = (Handlebars, options) ->
       finally
         return res or code
   )
-
   opts     = _.extend opts, options
-  markdown = require('../utils/markdown').Markdown opts
+
   isServer = (typeof process isnt 'undefined')
 
   ###
@@ -184,7 +186,7 @@ module.exports.register = (Handlebars, options) ->
     # leadingws = text.match(/^\n?(\s*)/)[1].length
     # regex     = new RegExp("\\n?\\s{" + leadingws + "}", "g")
     # md        = text.replace(regex, "\n")
-    markdown.convert(content)
+    Markdown.convert(content)
 
   if isServer
 
@@ -197,7 +199,7 @@ module.exports.register = (Handlebars, options) ->
       content = Utils.globFiles(path)
       tmpl = Handlebars.compile(content)
       md = tmpl(this)
-      html = markdown.convert(md)
+      html = Markdown.convert(md)
       Utils.safeString(html)
 
   @
