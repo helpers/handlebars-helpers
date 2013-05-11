@@ -19,28 +19,34 @@ module.exports.register = (Handlebars, options) ->
 
   # css: proof of concept. will be updated to handle multiple stylesheets.
   Handlebars.registerHelper "css", (context) ->
-      ext  = Utils.getExt(context)
-      css  = Utils.safeString('<link rel="stylesheet" href="' + options.assets + '/css/' + context + '">')
-      less = Utils.safeString('<link rel="stylesheet/less" href="' + options.assets + '/less/' + context + '">\n' +
-             '<script src="' + options.assets + 'js/less.js" type="text/javascript"></script>\n')
+    context = [context] unless Array.isArray context
+    Utils.safeString(context.map((item) ->
+      ext  = Utils.getExt(item)
+      css  = '<link rel="stylesheet" href="' + options.assets + '/css/' + item + '">'
+      less = '<link rel="stylesheet/less" href="' + options.assets + '/less/' + item + '">'
+             #'<script src="' + options.assets + 'js/less.js" type="text/javascript"></script>\n')
       switch ext
         when "less"
           return less
         when "css"
           return css
         else css
+    ).join("\n"))
 
   # js: proof of concept. will be updated to handle multiple scripts.
   Handlebars.registerHelper "js", (context) ->
-      ext    = Utils.getExt(context)
-      js     = Utils.safeString('<script src="' + options.assets + '/js/' + context + '"></script>')
-      coffee = Utils.safeString('<script type="text/coffeescript" src="' + options.assets + '/js/' + context + '"></script>')
+    context = [context] unless Array.isArray context
+    Utils.safeString(context.map((item) ->
+      ext    = Utils.getExt(item)
+      js     = '<script src="' + options.assets + '/js/' + item + '"></script>'
+      coffee = '<script type="text/coffeescript" src="' + options.assets + '/js/' + item + '"></script>'
       switch ext
         when "js"
           return js
         when "coffee"
           return coffee
         else js
+    ).join("\n"))
 
   ###
   href: This will escape the passed in parameters, but mark the response as safe,

@@ -5,7 +5,153 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-html').register(Handlebars, {});
+  require('../../lib/helpers/helpers-html').register(Handlebars, {
+    assets: 'assets'
+  });
+
+  describe('css', function() {
+    describe('{{css myStylesFile}}', function() {
+      return it('should create a style tag for the css file', function() {
+        var context, source, template;
+
+        source = '{{css myStylesFile}}';
+        template = Handlebars.compile(source);
+        context = {
+          myStylesFile: 'myStyles.css'
+        };
+        return template(context).should.equal('<link rel="stylesheet" href="assets/css/myStyles.css">');
+      });
+    });
+    describe('{{css myStylesFile}}', function() {
+      return it('should create a style tag for the less file', function() {
+        var context, source, template;
+
+        source = '{{css myStylesFile}}';
+        template = Handlebars.compile(source);
+        context = {
+          myStylesFile: 'myStyles.less'
+        };
+        return template(context).should.equal('<link rel="stylesheet/less" href="assets/less/myStyles.less">');
+      });
+    });
+    describe('{{css myStylesList}}', function() {
+      return it('should create a list of style tags for the css files', function() {
+        var context, source, template;
+
+        source = '{{css myStylesList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myStylesList: ['myStyles1.css', 'myStyles2.css', 'myStyles3.css']
+        };
+        return template(context).should.equal('<link rel="stylesheet" href="assets/css/myStyles1.css">\n\
+<link rel="stylesheet" href="assets/css/myStyles2.css">\n\
+<link rel="stylesheet" href="assets/css/myStyles3.css">');
+      });
+    });
+    describe('{{css myStylesList}}', function() {
+      return it('should create a list of style tags for the less files', function() {
+        var context, source, template;
+
+        source = '{{css myStylesList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myStylesList: ['myStyles1.less', 'myStyles2.less', 'myStyles3.less']
+        };
+        return template(context).should.equal('<link rel="stylesheet/less" href="assets/less/myStyles1.less">\n\
+<link rel="stylesheet/less" href="assets/less/myStyles2.less">\n\
+<link rel="stylesheet/less" href="assets/less/myStyles3.less">');
+      });
+    });
+    return describe('{{css myStylesList}}', function() {
+      return it('should create a list of style tags for the mixed css and less files', function() {
+        var context, source, template;
+
+        source = '{{css myStylesList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myStylesList: ['myStyles1.less', 'myStyles2.css', 'myStyles3.css', 'myStyles1.css', 'myStyles2.less', 'myStyles3.less']
+        };
+        return template(context).should.equal('<link rel="stylesheet/less" href="assets/less/myStyles1.less">\n\
+<link rel="stylesheet" href="assets/css/myStyles2.css">\n\
+<link rel="stylesheet" href="assets/css/myStyles3.css">\n\
+<link rel="stylesheet" href="assets/css/myStyles1.css">\n\
+<link rel="stylesheet/less" href="assets/less/myStyles2.less">\n\
+<link rel="stylesheet/less" href="assets/less/myStyles3.less">');
+      });
+    });
+  });
+
+  describe('js', function() {
+    describe('{{js myScriptFile}}', function() {
+      return it('should create a script tag for the javascript file', function() {
+        var context, source, template;
+
+        source = '{{js myScriptFile}}';
+        template = Handlebars.compile(source);
+        context = {
+          myScriptFile: 'myScript.js'
+        };
+        return template(context).should.equal('<script src="assets/js/myScript.js"></script>');
+      });
+    });
+    describe('{{js myScriptFile}}', function() {
+      return it('should create a script tag for the coffee script file', function() {
+        var context, source, template;
+
+        source = '{{js myScriptFile}}';
+        template = Handlebars.compile(source);
+        context = {
+          myScriptFile: 'myScript.coffee'
+        };
+        return template(context).should.equal('<script type="text/coffeescript" src="assets/js/myScript.coffee"></script>');
+      });
+    });
+    describe('{{js myScriptList}}', function() {
+      return it('should create a list of script tags for the javascript files', function() {
+        var context, source, template;
+
+        source = '{{js myScriptList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myScriptList: ['myScript1.js', 'myScript2.js', 'myScript3.js']
+        };
+        return template(context).should.equal('<script src="assets/js/myScript1.js"></script>\n\
+<script src="assets/js/myScript2.js"></script>\n\
+<script src="assets/js/myScript3.js"></script>');
+      });
+    });
+    describe('{{js myScriptList}}', function() {
+      return it('should create a list of script tags for the coffee script files', function() {
+        var context, source, template;
+
+        source = '{{js myScriptList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myScriptList: ['myScript1.coffee', 'myScript2.coffee', 'myScript3.coffee']
+        };
+        return template(context).should.equal('<script type="text/coffeescript" src="assets/js/myScript1.coffee"></script>\n\
+<script type="text/coffeescript" src="assets/js/myScript2.coffee"></script>\n\
+<script type="text/coffeescript" src="assets/js/myScript3.coffee"></script>');
+      });
+    });
+    return describe('{{js myScriptList}}', function() {
+      return it('should create a list of script tags for the mixed javascript and coffee script files', function() {
+        var context, source, template;
+
+        source = '{{js myScriptList}}';
+        template = Handlebars.compile(source);
+        context = {
+          myScriptList: ['myScript1.coffee', 'myScript2.js', 'myScript3.js', 'myScript1.js', 'myScript2.coffee', 'myScript3.coffee']
+        };
+        return template(context).should.equal('<script type="text/coffeescript" src="assets/js/myScript1.coffee"></script>\n\
+<script src="assets/js/myScript2.js"></script>\n\
+<script src="assets/js/myScript3.js"></script>\n\
+<script src="assets/js/myScript1.js"></script>\n\
+<script type="text/coffeescript" src="assets/js/myScript2.coffee"></script>\n\
+<script type="text/coffeescript" src="assets/js/myScript3.coffee"></script>');
+      });
+    });
+  });
 
   describe('ul', function() {
     return describe('{{#ul list class="list"}} \n\
