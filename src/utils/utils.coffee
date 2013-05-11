@@ -15,6 +15,12 @@ Utils.isUndefined = (value) ->
 Utils.safeString = (str) ->
   new Handlebars.SafeString str
 
+Utils.escapeString = (str, except) -> #String
+  #String?
+  str.replace /([\.$?*|{}\(\)\[\]\\\/\+\^])/g, (ch) ->
+    return ch  if except and except.indexOf(ch) isnt -1
+    "\\" + ch
+
 Utils.escapeExpression = (str) ->
   Handlebars.Utils.escapeExpression
 
@@ -26,6 +32,27 @@ Utils.propagate = (callback, func) ->
   (err, args...) ->
     return callback(err) if err
     func.apply(this, args)
+
+
+Utils.isFunction = (obj) ->
+  typeof obj is "function"
+
+Utils.isBoolean = (obj) ->
+  undef = undefined
+  type = typeof obj
+  obj isnt undef and type is "boolean" or type is "Boolean"
+
+Utils.isNumber = (obj) ->
+  undef = undefined
+  obj isnt undef and obj isnt null and (typeof obj is "number" or obj instanceof Number)
+
+Utils.isObject = (obj) ->
+  undef = undefined
+  obj isnt null and obj isnt undef and typeof obj is "object"
+
+Utils.isRegExp = (obj) ->
+  undef = undefined
+  obj isnt undef and obj isnt null and (obj instanceof RegExp)
 
 
 # Convenience for extracting repo url from package.json
@@ -130,6 +157,15 @@ Utils.detectDestType = (dest) ->
   else
     "file"
 
+# Return an array of all file paths that match 
+# the given wildcard patterns, then read each file
+# and return its contents as a string, and last  
+# normalize all line linefeeds in the string
+Utils.globFiles = (src) ->
+  content = grunt.file.expand(src)
+  .map(grunt.file.read)
+  .join(grunt.util.normalizelf(grunt.util.linefeed))
+
 # Grunt.file.exists True if the file path exists.
 Utils.exists = (file) ->
   src = grunt.file.exists(file)
@@ -137,13 +173,6 @@ Utils.exists = (file) ->
 # Read a file, return its contents.
 Utils.read = (filepath, options) ->
   src = grunt.file.read(filepath, options)
-
-# Return an array of all file paths that match the given wildcard patterns.
-Utils.expand = (filepath, options) ->
-  src = grunt.file.expand(filepath, options)
-
-Utils.expandMapping = (patterns, destBase, options) ->
-  src = grunt.file.expandMapping(patterns, destBase, options)
 
 # Read a file, parse its contents, return an object.
 Utils.readJSON = (filepath, options) ->
