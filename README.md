@@ -1672,7 +1672,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## Copyright and license
-Copyright NaN Assemble
+Copyright 2013 Assemble
 
 [MIT License](LICENSE-MIT)
 
@@ -1699,7 +1699,7 @@ Copyright NaN Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat May 11 2013 13:09:45._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat May 11 2013 13:11:53._
 
 
 
