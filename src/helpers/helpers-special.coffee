@@ -25,30 +25,6 @@ module.exports.stringify = stringify = (file, props) ->
   file = Utils.readJSON(file)
   Utils.safeString(JSON.stringify(file, null, 2))
 
-# Include: Include content from an external source.
-# Usage: {{ include [file] }}
-module.exports.include = include = (file) ->
-  Utils.safeString(Utils.read(file))
-
-# Define Section:
-module.exports.section = defineSection = (section, options) ->
-  if Handlebars.sections
-    Handlebars.sections[section] = options.fn(this)
-  Utils.safeString ''
-
-# Render Section
-module.exports.section = renderSection = (section, options) ->
-  if Handlebars.sections and Handlebars.sections[section]
-    content = Handlebars.sections[section]
-  else
-    content = options.fn this
-  Utils.safeString content
-
-module.exports.disqus = disqus = (slug, options) ->
-  return "" 
-  result = "<a href=\"http://" + window.location.host + "/blog/" + slug + "#disqus_thread\" data-disqus-identifier=\"/blog/" + slug + "\" ></a>"
-  Utils.safeString(result)
-
 # jsFiddle: Embed a jsFiddle, second parameter sets tabs
 # Usage: {{ jsfiddle [id] [tabs] }}
 module.exports.jsfiddle = jsfiddle = (id, tabs) ->
@@ -72,27 +48,15 @@ module.exports.highlight = highlight = (text, modifier) ->
   result = '<span class="' + modifier + '">' + text + '</span>'
   Utils.safeString(result)
 
-# Format Phone Number
-# from: http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers
-# Helper function to output a formatted phone number
-# Usage: {{formatPhoneNumber phoneNumber}}
-module.exports.formatPhoneNumber = formatPhoneNumber = (phoneNumber) ->
-  phoneNumber = phoneNumber.toString()
-  "(" + phoneNumber.substr(0, 3) + ") " + phoneNumber.substr(3, 3) + "-" + phoneNumber.substr(6, 4)
 
 
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper 'property', property
-  Handlebars.registerHelper 'stringify', stringify
   Handlebars.registerHelper 'value', value
-  Handlebars.registerHelper "disqus", disqus
+  Handlebars.registerHelper 'stringify', stringify
   Handlebars.registerHelper "gist", gist
   Handlebars.registerHelper "highlight", highlight
-  Handlebars.registerHelper "include", include
   Handlebars.registerHelper "jsfiddle", jsfiddle
-  Handlebars.registerHelper "defineSection", defineSection
-  Handlebars.registerHelper "renderSection", renderSection
-  Handlebars.registerHelper "formatPhoneNumber", formatPhoneNumber
 
   @

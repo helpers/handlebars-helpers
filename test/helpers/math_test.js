@@ -143,7 +143,7 @@
 
   describe('sum', function() {
     return describe('{{sum value 5}}', function() {
-      return it('should return the total sum of array.', function() {
+      return it('should return the total sum of array and numbers.', function() {
         var source, template;
 
         source = '{{sum value 5}}';

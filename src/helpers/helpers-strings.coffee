@@ -50,6 +50,14 @@ module.exports.center = center = (str, spaces) ->
       i++
   "#{space}#{str}#{space}"
 
+# Format Phone Number
+# from: http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers
+# Helper function to output a formatted phone number
+# Usage: {{formatPhoneNumber phoneNumber}}
+module.exports.formatPhoneNumber = formatPhoneNumber = (phoneNumber) ->
+  phoneNumber = phoneNumber.toString()
+  "(" + phoneNumber.substr(0, 3) + ") " + phoneNumber.substr(3, 3) + "-" + phoneNumber.substr(6, 4)
+
 # Hyphenate
 # Replace spaces in string with hyphens.
 module.exports.hyphenate = hyphenate = (str) ->
@@ -60,8 +68,8 @@ module.exports.hyphenate = hyphenate = (str) ->
 module.exports.dashify = dashify = (str) ->
   str.split(".").join "-"
 
-# Join
-# Replace periods in string with hyphens.
+# Replace
+# Replace string "A" with string "B"
 module.exports.dashify = replace = (str, a, b) ->
   str.split(a).join b
 
@@ -81,5 +89,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "hyphenate", hyphenate
   Handlebars.registerHelper "dashify", dashify
   Handlebars.registerHelper "replace", replace
+  Handlebars.registerHelper "formatPhoneNumber", formatPhoneNumber
 
   @

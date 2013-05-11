@@ -1,3 +1,5 @@
+Handlebars = require('../helpers/helpers').Handlebars
+
 # Local deps
 Utils = require '../utils/utils'
 _     = require 'lodash'
@@ -134,33 +136,45 @@ Similar to #each helper, but treats array-like objects as arrays
 (i.e. objects with a `.length` property which is a number)
 rather than objects. This lets us iterate over our Collection's.
 ###
-# module.exports.iterate = iterate = (context, options) ->
-#   fn = options.fn
-#   inverse = options.inverse
-#   i = 0
-#   ret = ""
-#   data = undefined
-#   data = Handlebars.createFrame(options.data)  if options.data
-#   if context and typeof context is "object"
-#     if typeof context.length is "number"
-#       j = context.length
+module.exports.iterate = iterate = (context, options) ->
+  fn = options.fn
+  inverse = options.inverse
+  i = 0
+  ret = ""
+  data = undefined
+  data = Handlebars.createFrame(options.data)  if options.data
+  if context and typeof context is "object"
+    if typeof context.length is "number"
+      j = context.length
 
-#       while i < j
-#         data.index = i  if data
-#         ret = ret + fn(context[i],
-#           data: data
-#         )
-#         i++
-#     else
-#       for key of context
-#         if context.hasOwnProperty(key)
-#           data.key = key  if data
-#           ret = ret + fn(context[key],
-#             data: data
-#           )
-#           i++
-#   ret = inverse(this)  if i is 0
-#   ret
+      while i < j
+        data.index = i  if data
+        ret = ret + fn(context[i],
+          data: data
+        )
+        i++
+    else
+      for key of context
+        if context.hasOwnProperty(key)
+          data.key = key  if data
+          ret = ret + fn(context[key],
+            data: data
+          )
+          i++
+  ret = inverse(this)  if i is 0
+  ret
+
+
+module.exports.foreach = foreach = (arr, options) ->
+  return options.inverse(this)  if options.inverse and not arr.length
+  arr.map((item, index) ->
+    item.$index = index
+    item.$notlast = (index isnt arr.length - 1)
+    item.$first = index is 0
+    item.$last = index is arr.length - 1
+    options.fn item
+  ).join ""
+
 
 ###
 adds an a bunch of item prefixed logic to the object
@@ -226,17 +240,18 @@ module.exports.arrayify = arrayify = (data) ->
 
 module.exports.register = (Handlebars, options) ->
 
-  # Handlebars.registerHelper "iterate", iterate
-  Handlebars.registerHelper "arrayify", arrayify
   Handlebars.registerHelper 'after', after
   Handlebars.registerHelper 'any', any
+  Handlebars.registerHelper 'arrayify', arrayify
   Handlebars.registerHelper 'before', before
+  Handlebars.registerHelper 'each_with_classes', each_with_classes
   Handlebars.registerHelper 'eachIndex', eachIndex
   Handlebars.registerHelper 'eachProperty', eachProperty
-  Handlebars.registerHelper 'each_with_classes', each_with_classes
   Handlebars.registerHelper 'empty', empty
   Handlebars.registerHelper 'first', first
+  Handlebars.registerHelper 'foreach', foreach
   Handlebars.registerHelper 'inArray', inArray
+  Handlebars.registerHelper 'iterate', iterate
   Handlebars.registerHelper 'join', join
   Handlebars.registerHelper 'joinAny', join
   Handlebars.registerHelper 'last', last

@@ -154,16 +154,6 @@ module.exports.register = (Handlebars, options) ->
     template = Handlebars.compile(source)
     Utils.safeString(template(roadmap))
 
-  ###
-  Glob: reads in data from a markdown file, and uses the first heading
-  as a section heading, and then copies the rest of the content inline.
-  Usage: {{{ glob [file] }}
-  ###
-  Handlebars.registerHelper 'glob', (file) ->
-    file    = file.match(file)
-    content = grunt.file.read(file)
-    content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-    Utils.safeString(content)
 
   ###
   Embed: Embeds code from an external file as preformatted text. The first parameter
@@ -186,6 +176,14 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "markdown", (options) ->
     content = options.fn(this)
+    # https://gist.github.com/paulirish/1343518
+    # This works, but only for the first expression.
+    # RegEx needs to be tweaked.
+    # text = content.replace(/\n\s*\n/g, "\n")
+    # # set indentation level so your markdown can be indented within your HTML
+    # leadingws = text.match(/^\n?(\s*)/)[1].length
+    # regex     = new RegExp("\\n?\\s{" + leadingws + "}", "g")
+    # md        = text.replace(regex, "\n")
     markdown.convert(content)
 
   if isServer
@@ -196,7 +194,7 @@ module.exports.register = (Handlebars, options) ->
     Usage: {{md ../path/to/file.md}}
     ###
     Handlebars.registerHelper "md", (path) ->
-      content = Utils.read(path)
+      content = Utils.globFiles(path)
       tmpl = Handlebars.compile(content)
       md = tmpl(this)
       html = markdown.convert(md)
