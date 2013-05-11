@@ -1,10 +1,18 @@
 # README
 
+{{include './examples/src/content/test.md'}}
+
+
 
 ## Single file explicit
-{{!glob './examples/src/content/test.md'}}
+{{glob './examples/src/content/test.md'}}
+
 
 
 ## Glob pattern
-{{!glob './examples/src/content/*.{md,html}'}}
+{{glob './examples/src/content/*.{md,html,less}'}}
+{{glob './examples/src/content/*.{md,html}'}}
 
+
+## Markdown
+{{chapter './examples/src/markdown/*.md'}}

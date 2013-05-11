@@ -54,6 +54,16 @@ module.exports = function(grunt) {
         assets: 'examples/assets',
         content: './examples/src/content'
       },
+      glob: {
+        options: {
+          ext: ''
+        },
+        files: {
+          'examples/result/md/glob/': [
+            './examples/src/templates/glob.md.hbs'
+          ]
+        }
+      },
       markdown: {
         options: {
           ext: ''
