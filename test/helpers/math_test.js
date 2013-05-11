@@ -101,4 +101,58 @@
     });
   });
 
+  describe('sum', function() {
+    return describe('{{sum value 67 80}}', function() {
+      return it('should return the sum of multiple numbers.', function() {
+        var source, template;
+
+        source = '{{sum value 67 80}}';
+        template = Handlebars.compile(source);
+        return template(context = {
+          value: 20
+        }).should.equal(167);
+      });
+    });
+  });
+
+  describe('sum', function() {
+    return describe('{{sum 1 2 3}}', function() {
+      return it('should return the sum of multiple numbers.', function() {
+        var source, template;
+
+        source = '{{sum 1 2 3}}';
+        template = Handlebars.compile(source);
+        return template().should.equal(6);
+      });
+    });
+  });
+
+  describe('sum', function() {
+    return describe('{{sum value}}', function() {
+      return it('should return the total sum of array.', function() {
+        var source, template;
+
+        source = '{{sum value}}';
+        template = Handlebars.compile(source);
+        return template(context = {
+          value: [1, 2, 3]
+        }).should.equal(6);
+      });
+    });
+  });
+
+  describe('sum', function() {
+    return describe('{{sum value 5}}', function() {
+      return it('should return the total sum of array.', function() {
+        var source, template;
+
+        source = '{{sum value 5}}';
+        template = Handlebars.compile(source);
+        return template(context = {
+          value: [1, 2, 3]
+        }).should.equal(11);
+      });
+    });
+  });
+
 }).call(this);
