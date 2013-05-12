@@ -3,7 +3,6 @@
 *.sublime-project
 *.sublime-workspace
 
-src/docs
-
+*-refactor.*
 tmp
 TODO.md

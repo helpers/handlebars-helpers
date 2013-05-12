@@ -12,6 +12,7 @@ docs
 /test/
 temp
 tmp
+*-refactor.*
 
 Gruntfile.js
 component.json
