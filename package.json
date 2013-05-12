@@ -49,7 +49,8 @@
     "marked": "~0.2.8",
     "coffee-script": "~1.6.2",
     "mime": "~1.2.9",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "minimatch": "~0.2.12"
   },
   "devDependencies": {
     "assemble": "https://github.com/assemble/assemble/tarball/master",

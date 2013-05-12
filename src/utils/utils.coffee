@@ -1,8 +1,10 @@
 Handlebars = require('../helpers/helpers').Handlebars
 
-fs    = require 'fs'
-path  = require 'path'
-grunt = require "grunt"
+fs        = require 'fs'
+path      = require 'path'
+grunt     = require "grunt"
+_         = require "lodash"
+minimatch = require "minimatch"
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
@@ -69,7 +71,7 @@ Utils.repoUrl = (str) ->
 Utils.detectIndentation = (string) ->
   tabs = string.match(/^[\t]+/g) or []
   spaces = string.match(/^[ ]+/g) or []
-  
+
   # Pick the smallest indentation level of a prevalent type
   prevalent = (if tabs.length >= spaces.length then tabs else spaces)
   indentation = undefined
@@ -157,9 +159,9 @@ Utils.detectDestType = (dest) ->
   else
     "file"
 
-# Return an array of all file paths that match 
+# Return an array of all file paths that match
 # the given wildcard patterns, then read each file
-# and return its contents as a string, and last  
+# and return its contents as a string, and last
 # normalize all line linefeeds in the string
 Utils.globFiles = (src) ->
   content = grunt.file.expand(src)
@@ -228,10 +230,55 @@ Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
 
 Utils.findParens = /\(([^)]+)\)/g
 
+Utils.buildObjectPaths = (obj) ->
+  files = []
+  _.forOwn obj, (value, key) ->
+    file = key
+    recurse = (obj) ->
+      _.forOwn obj, (value, key) ->
+        file += '/' unless file.length == 0
+        file += key
+        if _.isObject(value)
+          recurse value
+
+    if _.isObject(value)
+      recurse value
+
+    files.push file
+
+  files
+
+Utils.globObject = (obj, pattern) ->
+  files = Utils.buildObjectPaths obj
+  matches = files.filter(minimatch.filter(pattern))
+  rtn = {}
+
+  getValue = (obj, path) ->
+    keys = path.split '/'
+    value = _.cloneDeep obj
+    _.forEach keys, (key) ->
+      if _.has value, key
+        value = _.cloneDeep value[key]
+    value
+
+  setValue = (obj, path, value) ->
+    keys = path.split '/'
+    key = keys.shift()
+    if keys.length
+      obj[key] = setValue {}, keys.join('/'), value
+    else
+      obj[key] = value
+    obj
+
+
+  _.forEach matches, (match) ->
+    value = getValue obj, match
+    rtn = setValue rtn, match, value
+
+  rtn
+
 
 # Ensures that a url path is returned instead
 # of a filesystem path.
 Utils.urlNormalize = (filepath) ->
   filepath.replace /\\/g, "/"
-
-

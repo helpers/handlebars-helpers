@@ -16,4 +16,37 @@
     });
   });
 
+  describe('object globbing', function() {
+    describe('buildObjectPaths', function() {
+      return it('should return an array of paths that look like file paths but with object keys', function() {
+        var actual, expected, input;
+
+        input = {
+          foo: 'bar',
+          baz: {
+            foo2: 'bar2'
+          }
+        };
+        expected = ['foo', 'baz/foo2'];
+        actual = Utils.buildObjectPaths(input);
+        return console.log(actual);
+      });
+    });
+    return describe('globObject', function() {
+      return it('should return a new object only containing keys that match the given pattern', function() {
+        var actual, expected, input;
+
+        input = {
+          foo: 'bar',
+          baz: {
+            foo2: 'bar2'
+          }
+        };
+        expected = ['baz/foo2'];
+        actual = Utils.globObject(input, '**');
+        return console.log(actual);
+      });
+    });
+  });
+
 }).call(this);
