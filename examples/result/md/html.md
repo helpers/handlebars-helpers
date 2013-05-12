@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="examples/assets/css/styles.css">
 <h4>LESS</h4>
 <link rel="stylesheet/less" href="examples/assets/less/styles.less">
-<script src="examples/assetsjs/less.js" type="text/javascript"></script>
-
 
 
 <h2><pre>link</pre> Helper</h2>

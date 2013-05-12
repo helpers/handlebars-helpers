@@ -209,17 +209,6 @@ Utils.lowerCase = (str) ->
   str = toString(str)
   str.toLowerCase()
 
-Utils.linkify = (str) ->
-  str = Utils.lowerCase(str)
-  str.split(" ").join "-"
-
-Utils.getHeadings = (str) ->
-  headings = str.match(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm).join('')
-  headings
-
-  # headings = content.match(Utils.findh1).join('')
-  # output   = headings.replace(Utils.findh1, '$1 [$2](#' + '$2' + ')\n')
-
 # Regex: all markdown headings
 Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
 # Regex: all markdown h1 headings

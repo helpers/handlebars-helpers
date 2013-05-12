@@ -81,13 +81,12 @@ module.exports.dir = dirJSON = (src) ->
 #     .replace(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm, '$1 [$2]($2)\n')
 #   Utils.safeString(headings)
 
-
 module.exports.toc = toc = (src) ->
   content = grunt.file.expand(src)
   .map(grunt.file.read)
   .join(grunt.util.normalizelf(grunt.util.linefeed))
   headings = content.match(Utils.findHeadings).join('')
-  # output   = headings.replace(Utils.findHeadings, '$1 [$2](#' + Utils.linkify('$2') + ')\n')
+  # output   = headings.replace(Utils.findHeadings, '$1 [$2](#$2)\n')
   output = headings.replace(Utils.findHeadings, '$1 [$2](#' + '$2' + ')\n')
   output = Utils.safeString(output)
 
