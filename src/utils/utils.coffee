@@ -11,6 +11,16 @@ Utils.toString = Object.prototype.toString
 
 
 
+###
+# String Utils
+###
+toString = (val) ->
+  (if not val? then "" else val.toString())
+  
+Utils.lowerCase = (str) ->
+  str = toString(str)
+  str.toLowerCase()
+
 Utils.isUndefined = (value) ->
   value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?
 
@@ -159,15 +169,6 @@ Utils.detectDestType = (dest) ->
   else
     "file"
 
-# Return an array of all file paths that match
-# the given wildcard patterns, then read each file
-# and return its contents as a string, and last
-# normalize all line linefeeds in the string
-Utils.globFiles = (src) ->
-  content = grunt.file.expand(src)
-  .map(grunt.file.read)
-  .join(grunt.util.normalizelf(grunt.util.linefeed))
-
 # Grunt.file.exists True if the file path exists.
 Utils.exists = (file) ->
   src = grunt.file.exists(file)
@@ -203,11 +204,8 @@ Utils.normalizelf = (str) ->
 
 
 ###
-Markdown Utils
+# Markdown Utils
 ###
-Utils.lowerCase = (str) ->
-  str = toString(str)
-  str.toLowerCase()
 
 # Regex: all markdown headings
 Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
@@ -218,6 +216,20 @@ Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
 Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
 
 Utils.findParens = /\(([^)]+)\)/g
+
+
+###
+# Globbing Utils
+###
+
+# Return an array of all file paths that match
+# the given wildcard patterns, then read each file
+# and return its contents as a string, and last
+# normalize all line linefeeds in the string
+Utils.globFiles = (src) ->
+  content = grunt.file.expand(src)
+  .map(grunt.file.read)
+  .join(grunt.util.normalizelf(grunt.util.linefeed))
 
 Utils.buildObjectPaths = (obj) ->
   files = []
@@ -258,7 +270,6 @@ Utils.globObject = (obj, pattern) ->
     else
       obj[key] = value
     obj
-
 
   _.forEach matches, (match) ->
     value = getValue obj, match

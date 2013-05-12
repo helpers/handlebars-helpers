@@ -6,7 +6,6 @@ _     = require 'lodash'
 
 
 
-
 # Value: extracts a value from a specific property
 module.exports.value = value = (file, prop) ->
   file = Utils.readJSON(file)

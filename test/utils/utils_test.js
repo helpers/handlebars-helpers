@@ -16,6 +16,17 @@
     });
   });
 
+  describe('lowercase', function() {
+    return it('should convert a string to lowercase', function() {
+      var actual, before, expected;
+
+      before = "This IS a TEST StRiNg";
+      expected = "this is a test string";
+      actual = Utils.lowerCase(before);
+      return actual.should.equal(expected);
+    });
+  });
+
   describe('object globbing', function() {
     describe('buildObjectPaths', function() {
       return it('should return an array of paths that look like file paths but with object keys', function() {
