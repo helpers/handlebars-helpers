@@ -35,13 +35,18 @@ module.exports.include = include = (src) ->
   Utils.safeString(Utils.read(src))
 
 ###
-Concat: reads in data from a markdown file, and uses the first heading
+Glob: reads in data from a markdown file, and uses the first heading
 as a section heading, and then copies the rest of the content inline.
 Usage: {{{ glob [file] }}
 ###
 module.exports.glob = glob = (src) ->
   content = Utils.globFiles(src)
   Utils.safeString(content)
+# module.exports.glob = glob = (file) ->
+#   file    = file.match(file)
+#   content = grunt.file.read(file)
+#   content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
+#   Utils.safeString(content)
 
 module.exports.chapter = chapter = (src) ->
   content = Utils.globFiles(src)

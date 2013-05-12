@@ -11,6 +11,13 @@ describe 'trim', ->
     actual = Utils.trim before
     actual.should.equal expected
 
+describe 'lowercase', ->
+  it 'should convert a string to lowercase', ->
+    before = "This IS a TEST StRiNg"
+    expected = "this is a test string"
+    actual = Utils.lowerCase before
+    actual.should.equal expected
+
 
 describe 'object globbing', ->
   describe 'buildObjectPaths', ->

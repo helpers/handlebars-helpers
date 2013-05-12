@@ -93,7 +93,9 @@ helper-lib
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
     "handlebars": "~1.0.10",
-    "should": "~1.2.2"
+    "minimatch": "~0.2.12",
+    "should": "~1.2.2",
+    "to": "~0.2.9"
   },
   "keywords": [
     "assemble",
