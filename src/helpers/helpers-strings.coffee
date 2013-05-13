@@ -1,6 +1,23 @@
 Utils = require '../utils/utils'
 
 
+
+
+module.exports.occurrences = occurrences = (string, substring) ->
+  n = 0
+  pos = 0
+  l = substring.length
+  loop
+    pos = string.indexOf(substring, pos)
+    if pos > -1
+      n++
+      pos += l
+    else
+      break
+  n
+  # n = occurrences(text, subText)
+
+
 module.exports.safeString = safeString = (value) ->
   Utils.safeString(value)
 
@@ -73,9 +90,9 @@ module.exports.dashify = dashify = (str) ->
 module.exports.dashify = replace = (str, a, b) ->
   str.split(a).join b
 
-
 module.exports.register = (Handlebars, options) ->
 
+  Handlebars.registerHelper "occurrences", occurrences
   Handlebars.registerHelper "safeString", safeString
   Handlebars.registerHelper "lowercase", lowercase
   Handlebars.registerHelper "uppercase", uppercase
