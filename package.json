@@ -48,7 +48,6 @@
   },
   "devDependencies": {
     "amdefine": "0.0.4",
-    "assemble": "https://github.com/assemble/assemble/tarball/master",
     "chai": "~1.5.0",
     "coffee-script": "~1.6.2",
     "grunt": "~0.4.1",
