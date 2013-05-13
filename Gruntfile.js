@@ -18,21 +18,21 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     coffee: {
       helpers: {
-        expand: true,
-        cwd: 'src',
+        expand: true, 
+        cwd: 'src', 
         src: [
-          'helper-lib.coffee',
-          'helpers/*.coffee',
+          'helper-lib.coffee', 
+          'helpers/*.coffee', 
           'utils/*.coffee'
-        ],
-        dest: 'lib/',
+        ], 
+        dest: 'lib/', 
         ext: '.js'
       },
       tests: {
-        expand: true,
-        cwd: 'src/tests',
-        src: ['**/*.coffee'],
-        dest: 'test/',
+        expand: true, 
+        cwd: 'src/tests', 
+        src: ['**/*.coffee'], 
+        dest: 'test/', 
         ext: '.js'
       }
     },
@@ -47,115 +47,29 @@ module.exports = function(grunt) {
       }
     },
 
-    // Build templates to test helpers.
-    assemble: {
-      options: {
-        flatten: true,
-        assets: 'examples/assets',
-        content: './examples/src/content'
-      },
-      glob: {
-        options: {
-          ext: ''
-        },
-        files: {
-          'examples/result/md/glob/': [
-            './examples/src/templates/glob.md.hbs'
-          ]
-        }
-      },
-      markdown: {
-        options: {
-          ext: ''
-        },
-        files: {
-          'examples/result/md/': [
-            './examples/src/templates/*.md.hbs'
-          ]
-        }
-      },
-      travis1: {
-        options: {
-          travis: {
-            name: 'Assemble',
-            branch: 'wip'
-          },
-          ext: ''
-        },
-        files: {'examples/result/md/travis1/': ['./examples/src/templates/travis.md.hbs']}
-      },
-      travis2: {
-        options: {
-          travis: {
-            name: 'Upstage',
-            branch: 'master'
-          },
-          ext: ''
-        },
-        files: {'examples/result/md/travis2/': ['./examples/src/templates/travis.md.hbs']}
-      },
-      relative: {
-        options: {
-          flatten: false,
-          assets: 'examples/assets'
-        },
-        files: {
-          'examples/result/html/relative/': [
-            './examples/src/templates/path.hbs',
-            './examples/src/templates/nested/**/*.hbs'
-          ]
-        }
-      },
-      less: {
-        files: {
-          'examples/result/html/less.html': [
-            './examples/src/templates/less.hbs'
-          ]
-        }
-      },
-      handlebars: {
-        options: {
-          layout: 'examples/src/templates/layouts/layout.hbs',
-          partials: 'examples/src/content/test.hbs'
-        },
-        files: {
-          'examples/result/html/': [
-            'examples/src/templates/*.hbs',
-            '!examples/src/templates/*.md.hbs',
-            '!examples/src/templates/sections.hbs'
-          ]
-        }
-      },
-      sections: {
-        options: {
-          layout: 'examples/src/templates/layouts/layout.hbs'
-        },
-        files: {
-          'examples/result/sections/': [
-            'examples/src/templates/sections.hbs'
-          ]
-        }
-      }
-    },
-
     // Clean test files before building or re-testing.
     clean: {
       helpers: '<%= coffee.helpers.dest %>/**/*.js',
       tests:  ['examples/result/**/*.{html,md}']
     },
 
-    // Copy helpers to assemble in node_modules for dev.
+    // Copy helpers to assemble in node_modules and
+    // helper-lib-examples for testing
     copy: {
       main: {
-        files: [
-          {expand: true, src: ['lib/**'], dest: './node_modules/assemble/node_modules/helper-lib/'}
-        ]
+        files: { 
+          '../helper-lib-examples/node_modules/assemble/node_modules/helper-lib/': ['lib/**'],
+          './node_modules/assemble/node_modules/helper-lib/': ['lib/**']
+        }
       }
+    },
+
+    subgrunt: {
+      examples: '../helper-lib-examples/Gruntfile.js'
     }
   });
 
   // These plugins provide necessary tasks.
-  grunt.loadNpmTasks('assemble');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -167,17 +81,7 @@ module.exports = function(grunt) {
     'clean',
     'coffee',
     'copy',
-    'templates'
-  ]);
-
-  // Test helpers in actual templates.
-  grunt.registerTask('templates', [
-    'assemble:markdown',
-    'assemble:travis1',
-    'assemble:travis2',
-    'assemble:handlebars',
-    'assemble:sections',
-    'assemble:less'
+    'subgrunt'
   ]);
 
   // Build templates using helpers and run all tests.
@@ -185,4 +89,25 @@ module.exports = function(grunt) {
     'coffee',
     'mochaTest'
   ]);
+
+
+  // Run Gruntfiles in given directories.
+  grunt.registerMultiTask('subgrunt', 'Run a sub-gruntfile.', function() {
+    var path = require('path');
+    grunt.util.async.forEachSeries(this.filesSrc, function(gruntfile, next) {
+      grunt.util.spawn({
+        grunt: true,
+        args: ['--gruntfile', path.resolve(gruntfile)]
+      }, function(error, result) {
+        if (error) {
+          grunt.log.error(result.stdout).writeln();
+          next(new Error('Error running sub-gruntfile "' + gruntfile + '".'));
+        } else {
+          grunt.verbose.ok(result.stdout);
+          next();
+        }
+      });
+    }, this.async());
+  });
 };
+
