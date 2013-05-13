@@ -1,5 +1,4 @@
-.npmignore
-/node_modules/
+node_modules
 *.sublime-project
 *.sublime-workspace
 
