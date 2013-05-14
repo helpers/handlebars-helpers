@@ -29,7 +29,6 @@ module.exports.register = (Handlebars, options) ->
         return res or code
   )
   opts     = _.extend opts, options
-
   isServer = (typeof process isnt 'undefined')
 
   ###
@@ -40,14 +39,6 @@ module.exports.register = (Handlebars, options) ->
   ###
   Handlebars.registerHelper "markdown", (options) ->
     content = options.fn(this)
-    # https://gist.github.com/paulirish/1343518
-    # This works, but only for the first expression.
-    # RegEx needs to be tweaked.
-    # text = content.replace(/\n\s*\n/g, "\n")
-    # # set indentation level so your markdown can be indented within your HTML
-    # leadingws = text.match(/^\n?(\s*)/)[1].length
-    # regex     = new RegExp("\\n?\\s{" + leadingws + "}", "g")
-    # md        = text.replace(regex, "\n")
     Markdown.convert(content)
 
   if isServer
