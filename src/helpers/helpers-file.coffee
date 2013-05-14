@@ -32,7 +32,8 @@ module.exports.section = renderSection = (section, options) ->
 # Include: Include content from an external source.
 # Usage: {{ include [file] }}
 module.exports.include = include = (src) ->
-  Utils.safeString(Utils.read(src))
+  content = Utils.globFiles(src)
+  Utils.safeString(content)
 
 ###
 Glob: reads in data from a markdown file, and uses the first heading
@@ -42,12 +43,6 @@ Usage: {{{ glob [file] }}
 module.exports.glob = glob = (src, compare_fn) ->
   content = Utils.globFiles(src, compare_fn)
   Utils.safeString(content)
-
-# module.exports.glob = glob = (file) ->
-#   file    = file.match(file)
-#   content = grunt.file.read(file)
-#   content = content.replace(/(^[^ ]*\s)(.+)([^#]+(?=.*)$)/gim, '$2\n' + '$3') or []
-#   Utils.safeString(content)
 
 module.exports.chapter = chapter = (src) ->
   content = Utils.globFiles(src)
@@ -62,6 +57,11 @@ module.exports.dir = dir = (src) ->
   yml = to.format.yaml.stringify(list)
   Utils.safeString(yml)
 
+module.exports.dir = dirJSON = (src) ->
+  list = grunt.file.expand(src)
+  json = JSON.stringify(list, null, 2)
+  Utils.safeString(json)
+
 module.exports.expMappingYAML = expMappingYAML = (src) ->
   list = grunt.file.expandMapping(src)
   yml  = to.format.yaml.stringify(list)
@@ -69,11 +69,6 @@ module.exports.expMappingYAML = expMappingYAML = (src) ->
 
 module.exports.expMappingJSON = expMappingJSON = (src) ->
   list = grunt.file.expandMapping(src)
-  json = JSON.stringify(list, null, 2)
-  Utils.safeString(json)
-
-module.exports.dir = dirJSON = (src) ->
-  list = grunt.file.expand(src)
   json = JSON.stringify(list, null, 2)
   Utils.safeString(json)
 
@@ -92,9 +87,16 @@ module.exports.toc = toc = (src) ->
   .map(grunt.file.read)
   .join(grunt.util.normalizelf(grunt.util.linefeed))
   headings = content.match(Utils.findHeadings).join('')
-  # output   = headings.replace(Utils.findHeadings, '$1 [$2](#$2)\n')
   output = headings.replace(Utils.findHeadings, '$1 [$2](#' + '$2' + ')\n')
   output = Utils.safeString(output)
+
+module.exports.listHelpers = listHelpers = (src) ->
+  content = grunt.file.expand(src)
+  # .map(grunt.file.read)
+  # .join(grunt.util.normalizelf(grunt.util.linefeed))
+  # helpers = content.match(Utils.findHelpers).join('')
+  # output = helpers.replace(Utils.findHelpers, 'yes')
+  # output = Utils.safeString(output)
 
 
 module.exports.register = (Handlebars, options) ->
@@ -110,5 +112,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "toc", toc
   Handlebars.registerHelper "defineSection", defineSection
   Handlebars.registerHelper "renderSection", renderSection
+  Handlebars.registerHelper "listHelpers", listHelpers
 
   @
