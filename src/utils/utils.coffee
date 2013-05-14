@@ -222,14 +222,38 @@ Utils.findParens = /\(([^)]+)\)/g
 # Globbing Utils
 ###
 
+###
 # Return an array of all file paths that match
 # the given wildcard patterns, then read each file
 # and return its contents as a string, and last
 # normalize all line linefeeds in the string
-Utils.globFiles = (src) ->
-  content = grunt.file.expand(src)
-  .map(grunt.file.read)
-  .join(grunt.util.normalizelf(grunt.util.linefeed))
+
+# @param {String|Array} src Globbing pattern(s).
+# @param {Function=} compare_fn Function accepting two objects (a,b)
+# and returning 1 if a >= b otherwise -1.
+
+# Note: Objects passed to compare_fn are:
+# {
+# index: original index of file strating with 1
+# path: full file path
+# content: content of file
+# }
+###
+Utils.globFiles = (src, compare_fn) ->
+  content = undefined
+  compare_fn = compare_fn or (a, b) ->
+    (if a.index >= b.index then 1 else -1)
+
+  index = 0
+  content = grunt.file.expand(src).map((path) ->
+    index += 1
+    index: index
+    path: path
+    content: grunt.file.read(path)
+  ).sort(compare_fn).map((obj) ->
+    obj.content
+  ).join(grunt.util.normalizelf(grunt.util.linefeed))
+
 
 Utils.buildObjectPaths = (obj) ->
   files = []
