@@ -39,9 +39,10 @@ Glob: reads in data from a markdown file, and uses the first heading
 as a section heading, and then copies the rest of the content inline.
 Usage: {{{ glob [file] }}
 ###
-module.exports.glob = glob = (src) ->
-  content = Utils.globFiles(src)
+module.exports.glob = glob = (src, compare_fn) ->
+  content = Utils.globFiles(src, compare_fn)
   Utils.safeString(content)
+
 # module.exports.glob = glob = (file) ->
 #   file    = file.match(file)
 #   content = grunt.file.read(file)
