@@ -157,10 +157,16 @@ module.exports.register = (Handlebars, options) ->
   # Syntax:  {{ embed [file] [lang] }}
   # Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
   Handlebars.registerHelper 'embed', (file, language) ->
-    file = grunt.file.read(file)
+    content = grunt.file.read(file)
+    switch language
+      when "md", "markdown"
+        output = content.replace(/^(```)/gm, '\\$1')
+      else
+        output = content
     language = ""  if Utils.isUndefined(language)
-    content = '``` ' + language + '\n' + file + '\n```'
-    Utils.safeString(content)
+    result = '``` ' + language + '\n' + output + '\n```'
+    Utils.safeString(result)
+
 
   # href: This will escape the passed in parameters, but mark the response as safe,
   # so Handlebars will not try to escape it even if the "triple-stash" is not used.
