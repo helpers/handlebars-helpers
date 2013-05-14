@@ -1,28 +1,44 @@
 Handlebars = require('../helpers/helpers').Handlebars
 
-fs    = require 'fs'
 Utils = require '../utils/utils'
-_     = require 'lodash'
+grunt = require 'grunt'
+path = require 'path'
 
 
+# Embed: Embeds code from an external file as preformatted text. The first parameter
+# requires a path to the file you want to embed. There second second optional
+# parameter is for specifying (forcing) syntax highlighting for language of choice.
+# Syntax:  {{ embed [file] [lang] }}
+# Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
+module.exports.embed = embed = (src, lang) ->
+  content = Utils.globFiles(src)
+  ext = path.extname(src).replace(/^(\.)/gm, '');
+  if Utils.isUndefined(lang)
+    lang = ext
+  else 
+    lang = lang
+  switch ext
+    when "md", "markdown", "mdown"
+      output = content.replace(/^(```)/gm, '&#x60;&#x60;&#x60;')
+      ext = "md"
+    when "txt"
+      ext = "text"
+      output = content
+    when "hbs", "hbars"
+      output = content.replace(/^(---)/gm, '---')
+      ext = "html"
+    when "less"
+      ext = "scss"
+      output = content
+    when undefined
+      ext = ""
+      output = content
+    else
+      ext = ""
+      output = content
+  result = '``` ' + lang + '\n' + output + '\n```\n'
+  Utils.safeString(result)
 
-# Value: extracts a value from a specific property
-module.exports.value = value = (file, prop) ->
-  file = Utils.readJSON(file)
-  prop = _.pick(file, prop)
-  prop = _.pluck(prop)
-  Utils.safeString(prop)
-
-# Property: extracts a specific property
-module.exports.property = property = (file, prop) ->
-  file = Utils.readJSON(file)
-  prop = _.pick(file, prop)
-  Utils.safeString(JSON.stringify(prop, null, 2))
-
-# Stringify: stringifies to JSON
-module.exports.stringify = stringify = (file, props) ->
-  file = Utils.readJSON(file)
-  Utils.safeString(JSON.stringify(file, null, 2))
 
 # jsFiddle: Embed a jsFiddle, second parameter sets tabs
 # Usage: {{ jsfiddle [id] [tabs] }}
@@ -51,9 +67,7 @@ module.exports.highlight = highlight = (text, modifier) ->
 
 module.exports.register = (Handlebars, options) ->
 
-  Handlebars.registerHelper 'property', property
-  Handlebars.registerHelper 'value', value
-  Handlebars.registerHelper 'stringify', stringify
+  Handlebars.registerHelper "embed", embed
   Handlebars.registerHelper "gist", gist
   Handlebars.registerHelper "highlight", highlight
   Handlebars.registerHelper "jsfiddle", jsfiddle
