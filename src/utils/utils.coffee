@@ -11,41 +11,7 @@ Utils.toString = Object.prototype.toString
 
 
 
-###
-# String Utils
-###
-toString = (val) ->
-  (if not val? then "" else val.toString())
-  
-Utils.lowerCase = (str) ->
-  str = toString(str)
-  str.toLowerCase()
-
-Utils.isUndefined = (value) ->
-  value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?
-
-Utils.safeString = (str) ->
-  new Handlebars.SafeString str
-
-Utils.escapeString = (str, except) -> #String
-  #String?
-  str.replace /([\.$?*|{}\(\)\[\]\\\/\+\^])/g, (ch) ->
-    return ch  if except and except.indexOf(ch) isnt -1
-    "\\" + ch
-
-Utils.escapeExpression = (str) ->
-  Handlebars.Utils.escapeExpression
-
-Utils.trim = (str) ->
-  trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
-  str.toString().replace trim, ''
-
-Utils.propagate = (callback, func) ->
-  (err, args...) ->
-    return callback(err) if err
-    func.apply(this, args)
-
-
+# Type check
 Utils.isFunction = (obj) ->
   typeof obj is "function"
 
@@ -65,6 +31,152 @@ Utils.isObject = (obj) ->
 Utils.isRegExp = (obj) ->
   undef = undefined
   obj isnt undef and obj isnt null and (obj instanceof RegExp)
+
+Utils.detectType = (value) ->
+  switch typeof value
+    when "string"
+      "str"
+    when "number"
+      "num"
+    when "object"
+      "obj"
+    else
+      "other"
+
+###
+# String Utils
+###
+
+toString = (val) ->
+  (if not val? then "" else val.toString())
+  
+Utils.lowerCase = (str) ->
+  str = toString(str)
+  str.toLowerCase()
+
+Utils.isUndefined = (value) ->
+  value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?
+
+Utils.trim = (str) ->
+  trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
+  str.toString().replace trim, ''
+
+Utils.safeString = (str) ->
+  new Handlebars.SafeString str
+
+Utils.escapeString = (str, except) -> #String
+  #String?
+  str.replace /([\.$?*|{}\(\)\[\]\\\/\+\^])/g, (ch) ->
+    return ch  if except and except.indexOf(ch) isnt -1
+    "\\" + ch
+
+Utils.escapeExpression = (str) ->
+  Handlebars.Utils.escapeExpression
+
+
+
+### 
+# Object Utils
+###
+
+Utils.prop = (name) ->
+  (obj) ->
+    obj[name]
+
+Utils.showProps = (obj, objName) ->
+  result = ""
+  for i of obj
+    result += objName + "." + i + " = " + obj[i] + "\n"  if obj.hasOwnProperty(i)
+  result
+
+Utils.listAllProperties = (obj) ->
+  objectToInspect = undefined
+  result = []
+  objectToInspect = obj
+  while objectToInspect isnt null
+    result = result.concat(Object.getOwnPropertyNames(objectToInspect))
+    objectToInspect = Object.getPrototypeOf(objectToInspect)
+  result
+
+Utils.listProps = (obj) ->
+  key = undefined
+  value = undefined
+  result = []
+  return []  unless obj
+  for key of obj
+    if obj.hasOwnProperty(key)
+      value = obj[key]
+      result.push value
+  result
+
+
+
+###
+# Node.js Path Utils
+###
+
+Utils.getExt = (str) ->
+  extname = path.extname(str)
+  str = extname  if extname
+  str = str.substring(1)  if str[0] is "."
+  str
+
+Utils.getBasename = (base, ext) ->
+  fullName = path.basename(base, ext)
+  base     = path.basename(base, path.extname(fullName))
+
+Utils.getRelativePath = (from, to) ->
+  fromDirname  = path.normalize(path.dirname(from))
+  toDirname    = path.normalize(path.dirname(to))
+  toBasename   = path.basename(to)
+  relativePath = path.relative(fromDirname, toDirname)
+  Utils.urlNormalize(path.join(relativePath, toBasename))
+
+
+
+###
+# Conditional 
+###
+
+Utils.toggleOutput = (ext, md, html) ->
+  if ext is ''
+    output = md
+  else
+    output = html
+
+Utils.switchOutput = (ext, md, html) ->
+  switch ext
+    when "", ".md"
+      output = md
+    when ".html", ".htm"
+      output = html
+  output
+
+Utils.switchType = (ext) ->
+  reader = grunt.file.readJSON
+  Utils.getExt(ext)
+  switch ext
+    when ".json"
+      reader = grunt.file.readJSON
+    when ".yml", ".yaml"
+      reader = grunt.file.readYAML
+  reader
+
+# 'Optional' JSON
+Utils.readOptionalJSON = (filepath) ->
+  data = {}
+  try
+    data = grunt.file.readJSON(filepath)
+    grunt.verbose.write("Reading " + filepath + "...").ok()
+  data
+
+# 'Optional' YAML
+Utils.readOptionalYAML = (filepath) ->
+  data = {}
+  try
+    data = grunt.file.readYAML(filepath)
+    grunt.verbose.write("Reading " + filepath + "...").ok()
+  data
 
 
 # Convenience for extracting repo url from package.json
@@ -93,75 +205,10 @@ Utils.detectIndentation = (string) ->
     i++
   indentation
 
-Utils.getExt = (str) ->
-  extname = path.extname(str)
-  str = extname  if extname
-  str = str.substring(1)  if str[0] is "."
-  str
 
-Utils.getBasename = (base, ext) ->
-  fullName = path.basename(base, ext)
-  base     = path.basename(base, path.extname(fullName))
-
-Utils.getRelativePath = (from, to) ->
-  fromDirname  = path.normalize(path.dirname(from))
-  toDirname    = path.normalize(path.dirname(to))
-  toBasename   = path.basename(to)
-  relativePath = path.relative(fromDirname, toDirname)
-  Utils.urlNormalize(path.join(relativePath, toBasename))
-
-Utils.getPropString = (prop) ->
-  prop = grunt.config.getPropString(prop)
-
-Utils.detectType = (value) ->
-  switch typeof value
-    when "string"
-      "str"
-    when "number"
-      "num"
-    when "object"
-      "obj"
-    else
-      "other"
-
-Utils.toggleOutput = (ext, md, html) ->
-  if ext is ''
-    output = md
-  else
-    output = html
-
-Utils.switchOutput = (ext, md, html) ->
-  switch ext
-    when "", ".md"
-      output = md
-    when ".html", ".htm"
-      output = html
-  output
-
-Utils.switchType = (ext) ->
-  reader = grunt.file.readJSON
-  switch ext
-    when ".json"
-      reader = grunt.file.readJSON
-    when ".yml", ".yaml"
-      reader = grunt.file.readYAML
-  reader
-
-# 'Optional' JSON
-Utils.readOptionalJSON = (filepath) ->
-  data = {}
-  try
-    data = grunt.file.readJSON(filepath)
-    grunt.verbose.write("Reading " + filepath + "...").ok()
-  data
-
-# 'Optional' YAML
-Utils.readOptionalYAML = (filepath) ->
-  data = {}
-  try
-    data = grunt.file.readYAML(filepath)
-    grunt.verbose.write("Reading " + filepath + "...").ok()
-  data
+###
+# Grunt.js Utils
+###
 
 Utils.detectDestType = (dest) ->
   if grunt.util._.endsWith(dest, "/")
@@ -203,20 +250,6 @@ Utils.normalizelf = (str) ->
   src = grunt.util.normalizelf(str)
 
 
-###
-# Markdown Utils
-###
-
-# Regex: all markdown headings
-Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Regex: all markdown h1 headings
-Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Utils.findh1 = /^#[ \t]+(.*)/gm
-# Regex: all markdown h2 headings
-Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
-
-Utils.findParens = /\(([^)]+)\)/g
-
 
 ###
 # Globbing Utils
@@ -234,9 +267,9 @@ Utils.findParens = /\(([^)]+)\)/g
 
 # Note: Objects passed to compare_fn are:
 # {
-# index: original index of file strating with 1
-# path: full file path
-# content: content of file
+#   index: original index of file strating with 1
+#   path: full file path
+#   content: content of file
 # }
 ###
 Utils.globFiles = (src, compare_fn) ->
@@ -301,6 +334,22 @@ Utils.globObject = (obj, pattern) ->
 
   rtn
 
+
+###
+# Regex
+###
+
+# Regex: all markdown headings
+Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
+# Regex: all markdown h1 headings
+Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
+# Utils.findh1 = /^#[ \t]+(.*)/gm
+# Regex: all markdown h2 headings
+Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
+
+Utils.findParens = /\(([^)]+)\)/g
+
+Utils.findHelpers = /^(  Handlebars.registerHelper ")(.*", )(.*)/gm
 
 # Ensures that a url path is returned instead
 # of a filesystem path.
