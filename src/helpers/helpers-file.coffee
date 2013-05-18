@@ -1,3 +1,5 @@
+###! fs helpers ###
+
 Handlebars = require('../helpers/helpers').Handlebars
 
 Utils = require '../utils/utils'
@@ -15,41 +17,11 @@ _     = require 'lodash'
 module.exports.copy = copy = (a, b) ->
   Utils.copyFile(a, b)
 
-# Define Section:
-module.exports.section = defineSection = (section, options) ->
-  if Handlebars.sections
-    Handlebars.sections[section] = options.fn(this)
-  Utils.safeString ''
-
-# Render Section
-module.exports.section = renderSection = (section, options) ->
-  if Handlebars.sections and Handlebars.sections[section]
-    content = Handlebars.sections[section]
-  else
-    content = options.fn this
-  Utils.safeString content
-
-# Include: Include content from an external source.
-# Usage: {{ include [file] }}
-module.exports.include = include = (src) ->
-  content = Utils.globFiles(src)
-  Utils.safeString(content)
-
-###
-Glob: reads in data from a markdown file, and uses the first heading
-as a section heading, and then copies the rest of the content inline.
-Usage: {{{ glob [file] }}
-###
+# Glob: reads in data from a markdown file, and uses the first heading
+# as a section heading, and then copies the rest of the content inline.
+# Usage: {{{ glob [file] }}
 module.exports.glob = glob = (src, compare_fn) ->
   content = Utils.globFiles(src, compare_fn)
-  Utils.safeString(content)
-
-module.exports.chapter = chapter = (src) ->
-  content = Utils.globFiles(src)
-  Utils.safeString(content)
-
-module.exports.extract = extract = (str) ->
-  content = Utils.globFiles(src)
   Utils.safeString(content)
 
 module.exports.dir = dir = (src) ->
@@ -72,46 +44,76 @@ module.exports.expMappingJSON = expMappingJSON = (src) ->
   json = JSON.stringify(list, null, 2)
   Utils.safeString(json)
 
-# module.exports.toc = toc = (src) ->
-#   content = grunt.file.expand(src)
-#   .map(grunt.file.read)
-#   .join(grunt.util.normalizelf(grunt.util.linefeed))
-
-#   # headings = content.match(/(^#{1,}?)([ \t]+(.*))/gm).join('\n')
-#   headings = content.match(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm).join('\n')
-#     .replace(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm, '$1 [$2]($2)\n')
-#   Utils.safeString(headings)
-
+# Experimental helper to build a Table of Contents. Currently
+# builds a list from the headers found in markdown files.
 module.exports.toc = toc = (src) ->
   content = grunt.file.expand(src)
-  .map(grunt.file.read)
-  .join(grunt.util.normalizelf(grunt.util.linefeed))
-  headings = content.match(Utils.findHeadings).join('')
-  output = headings.replace(Utils.findHeadings, '$1 [$2](#' + '$2' + ')\n')
-  output = Utils.safeString(output)
+  .map(grunt.file.read).join('')
+  .match(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm).join('')
+  .replace(/^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm, '$1 [$2](#' + '$2' + ')\n')
+  Utils.safeString(content)
 
-module.exports.listHelpers = listHelpers = (src) ->
-  content = grunt.file.expand(src)
-  # .map(grunt.file.read)
-  # .join(grunt.util.normalizelf(grunt.util.linefeed))
-  # helpers = content.match(Utils.findHelpers).join('')
-  # output = helpers.replace(Utils.findHelpers, 'yes')
-  # output = Utils.safeString(output)
+# Define Section
+module.exports.section = defineSection = (section, options) ->
+  if Handlebars.sections
+    Handlebars.sections[section] = options.fn(this)
+  Utils.safeString ''
+
+# Render Section
+module.exports.section = renderSection = (section, options) ->
+  if Handlebars.sections and Handlebars.sections[section]
+    content = Handlebars.sections[section]
+  else
+    content = options.fn this
+  Utils.safeString content
+
+# Usage: {{ include [partial] }}
+module.exports.include = include = (template, options) ->
+  partial = Handlebars.partials[template]
+  if (typeof partial is "string")
+    partial = Handlebars.compile(partial)
+    Handlebars.partials[template] = partial
+  return Utils.safeString('Partial **' + template + '** not found.')  unless partial
+  context = _.extend({}, this, options.hash)
+  Utils.safeString partial(context)
+
+# Adds support for passing arguments to partials. Arguments are merged with 
+# the context for rendering only (non destructive). 
+# Use `:token` syntax to replace parts of the template path. 
+# Tokens are replaced in order.
+# USAGE: {{partial 'path.to.partial' context=newContext foo='bar' }}
+# USAGE: {{partial 'path.:1.:2' replaceOne replaceTwo foo='bar' }}
+module.exports.partial = partial = (template) ->
+  values = Array::slice.call(arguments, 1)
+  opts = values.pop()
+  until done
+    value = values.pop()
+    if value
+      template = template.replace(/:[^\.]+/, value)
+    else
+      done = true
+  partial = Handlebars.partials[template]
+  if (typeof partial is "string")
+    partial = Handlebars.compile(partial)
+    Handlebars.partials[template] = partial
+  return Utils.safeString('Partial **' + template + '** not found.')  unless partial
+  context = _.extend({}, opts.context or this, _.omit(opts, "context", "fn", "inverse"))
+  Utils.safeString partial(context)
 
 
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper "copy", copy
   Handlebars.registerHelper "dir", dir
-  Handlebars.registerHelper "include", include
+  Handlebars.registerHelper "dirJSON", dirJSON
   Handlebars.registerHelper "expMappingYAML", expMappingYAML
   Handlebars.registerHelper "expMappingJSON", expMappingJSON
   Handlebars.registerHelper "glob", glob
-  Handlebars.registerHelper "extract", extract
-  Handlebars.registerHelper "chapter", chapter
   Handlebars.registerHelper "toc", toc
   Handlebars.registerHelper "defineSection", defineSection
   Handlebars.registerHelper "renderSection", renderSection
-  Handlebars.registerHelper "listHelpers", listHelpers
+
+  Handlebars.registerHelper "include", include
+  Handlebars.registerHelper "partial", partial
 
   @
