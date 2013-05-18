@@ -49,7 +49,7 @@ module.exports = function(grunt) {
 
     // Clean test files before building or re-testing.
     clean: {
-      helpers: '<%= coffee.helpers.dest %>/**/*.js',
+      helpers: ['<%= coffee.helpers.dest %>/**/*.js'],
       tests:  ['examples/result/**/*.{html,md}']
     },
 
@@ -78,6 +78,11 @@ module.exports = function(grunt) {
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', [
+    'clean',
+    'coffee',
+    'copy'
+  ]);
+  grunt.registerTask('helpers', [
     'clean',
     'coffee',
     'copy',

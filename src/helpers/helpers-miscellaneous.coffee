@@ -1,4 +1,4 @@
-
+###! miscellaneous helpers ###
 
 
 module.exports.default = _default = (value, defaultValue) ->

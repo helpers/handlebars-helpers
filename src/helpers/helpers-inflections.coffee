@@ -1,6 +1,6 @@
+###! inflection helpers ###
+
 Utils = require '../utils/utils'
-
-
 
 module.exports.inflect = inflect = (count, singular, plural, include) ->
   word = if count > 1 or count is 0 then plural else singular

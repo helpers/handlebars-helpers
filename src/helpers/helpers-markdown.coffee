@@ -1,3 +1,5 @@
+###! markdown helpers ###
+
 module.exports.register = (Handlebars, options) ->
   fs    = require 'fs'
   path  = require 'path'
@@ -31,23 +33,19 @@ module.exports.register = (Handlebars, options) ->
   opts     = _.extend opts, options
   isServer = (typeof process isnt 'undefined')
 
-  ###
-  Markdown: markdown helper enables writing markdown inside HTML 
-  and then renders the markdown as HTML inline with the rest of the page.
-  Usage: {{#markdown}} # This is a title. {{/markdown}}
-  Renders to: <h1>This is a title </h1>
-  ###
+  # Markdown: markdown helper enables writing markdown inside HTML 
+  # and then renders the markdown as HTML inline with the rest of the page.
+  # Usage: {{#markdown}} # This is a title. {{/markdown}}
+  # Renders to: <h1>This is a title </h1>
   Handlebars.registerHelper "markdown", (options) ->
     content = options.fn(this)
     Markdown.convert(content)
 
   if isServer
 
-    ###
-    Markdown helper used to read in a file and inject
-    the rendered markdown into the HTML.
-    Usage: {{md ../path/to/file.md}}
-    ###
+    # Markdown helper used to read in a file and inject
+    # the rendered markdown into the HTML.
+    # Usage: {{md ../path/to/file.md}}
     Handlebars.registerHelper "md", (path) ->
       content = Utils.globFiles(path)
       tmpl = Handlebars.compile(content)

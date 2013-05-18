@@ -1,3 +1,5 @@
+###! math helpers ###
+
 _     = require 'lodash'
 
 module.exports.add = add = (value, addition) ->

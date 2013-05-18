@@ -1,8 +1,11 @@
+###! special helpers ###
+
 Handlebars = require('../helpers/helpers').Handlebars
 
 Utils = require '../utils/utils'
 grunt = require 'grunt'
-path = require 'path'
+path  = require 'path'
+_     = require 'lodash'
 
 
 # Embed: Embeds code from an external file as preformatted text. The first parameter
