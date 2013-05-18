@@ -1,4 +1,4 @@
-# [Helper Library v0.2.3](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [Helper Library v0.2.4](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -155,6 +155,27 @@ Handlebars allows two different kinds of helpers:
 
 ### Special
 
+#### embed
+_Embed code from given file_
+
+Parameters: 
+* `String|File` : path to the file you want to embed
+* `String (optional)`: Optional second parameter to "force" a specific language to use fo syntax highlighting.
+
+Syntax: `{{ embed [file] [syntax] }}`
+
+Helper also:
+* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
+* When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
+
+Example:
+``` hbs
+{{ embed 'src/test.json' }}
+
+
+// Force highlighting as `javascript` instead of `json`
+{{ embed 'src/test.json' 'javascript' }}
+```
 
 ### README Helpers
 
@@ -251,7 +272,84 @@ Result:
 ```
 
 
+### File
+
+#### include 
+_Include external files._
+
+<br>Pattern: `{{include [name] [data]}}`
+<br>Parameters:
+
+* name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
+* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
+
+Data (collection): `planet-express.json`
+
+``` js
+[
+  "Professor Farnsworth", 
+  "Fry", 
+  "Bender"
+]
+```
+
+Include (partial to be "included"): `planet-express.hbs`
+``` html
+{{sort this}}
+```
+
+Template:
+``` html
+<p>{{include "planet-express.hbs" data}}</p>
+```
+
+Result:
+``` html
+<p>Bender, Fry, Professor Farnsworth</p>
+```
+
+
+### example helpers, not for actual use!
+
+Why do this? The goal is to inspire other concepts that build from this one.
+
+#### glob
+_Use globbing patterns to embed content from specified file or files._
+<br>Parameters: `String`
+<br> Default: `undefined`
+
+Examples:
+``` html
+{{glob 'src/files/*.md'}}
+{{glob 'src/files/*.{txt,md}'}}
+```
+
+#### copy
+_Example helper, copies file A to path B._
+<br>Parameters: `String`
+<br> Default: `undefined`
+
+Example:
+``` html
+{{copy 'a.html' '../dir/b.txt'}}
+```
+
+
 ### Strings
+#### occurrences 
+_Evaluate string A, and count the occurrences of string B within string A_
+<br>Default: `undefined`
+<br>Parameters:
+* `String A` (required): The string to evaluate
+* `String B` (required): The string to look for and count in "string A"
+
+``` handlebars
+{{occurrences "evaluate this string" "evaluate"}}
+
+// Result 
+1
+```
+
 #### hyphenate
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
@@ -1394,27 +1492,6 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### embed
-_Embed Code Snippets_
-
-Embed code snippets from any file with the `embed` variable. You can also pass in a second parameter to force syntax highlighting for a specific language.
-
-Parameters: `String|String (optional)` 
-Default: `undefined`
-Syntax: `{{ embed [filename] [syntax] }}`
-
-Example:
-``` hbs
-{{ embed 'src/test.json' }}
-```
-
-Forced highlighting:
-``` hbs
-{{ embed 'src/test.json' 'javascript' }}
-```
-In the second example, highlighting was forced as `javascript` instead of `json`.
-
-
 #### blockquote (planned...)
 _Create a blockquote_
 
@@ -1603,6 +1680,67 @@ Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
 ```
 
+#### expandJSON
+_Return a unique, JSON-formatted array of all file or directory paths that match the given globbing pattern(s)_
+<br>Parameters: `String`
+<br> Default: `undefined`
+
+Example:
+``` html
+{{expandJSON './src/**/*.md'}}
+
+// returns
+[
+  "./src/content/blockquotes.md",
+  "./src/content/chapters/01-getting-started.md",
+  "./src/content/chapters/02-language-features.md",
+  "./src/content/chapters/03-advanced-materials.md",
+  "./src/content/code.md",
+  "./src/content/emphasis.md",
+  "./src/content/headings.md",
+  "./src/content/images.md",
+  "./src/content/links.md",
+  "./src/content/lists.md",
+  "./src/content/markdown-here.md",
+  "./src/content/paragraphs.md",
+  "./src/content/post.md",
+  "./src/content/reference-links.md",
+  "./src/content/reference.md",
+  "./src/content/tables.md",
+  "./src/content/test.md"
+]
+```
+
+#### expandYAML
+_Return a unique, YAML-formatted array of all file or directory paths that match the given globbing pattern(s)_
+<br>Parameters: `String`
+<br> Default: `undefined`
+
+Example:
+``` html
+{{expandYAML './src/**/*.md'}}
+
+// returns
+- "./src/content/blockquotes.md"
+- "./src/content/chapters/01-getting-started.md"
+- "./src/content/chapters/02-language-features.md"
+- "./src/content/chapters/03-advanced-materials.md"
+- "./src/content/code.md"
+- "./src/content/emphasis.md"
+- "./src/content/headings.md"
+- "./src/content/images.md"
+- "./src/content/links.md"
+- "./src/content/lists.md"
+- "./src/content/markdown-here.md"
+- "./src/content/paragraphs.md"
+- "./src/content/post.md"
+- "./src/content/reference-links.md"
+- "./src/content/reference.md"
+- "./src/content/tables.md"
+- "./src/content/test.md"
+```
+
+
 
 ### Miscellaneous
 #### default
@@ -1614,45 +1752,8 @@ _Provides a default or fallback value if a value doesn't exist._
 {{default title "No title available."}}
 
 // Result:
-Not title available.
+No title available.
 ```
-
-#### include 
-_Provides an easy way to register and use partials inside your templates._
-
-This helper only works if you define your templates as common.js modules, since it uses the common.js `require` function to find and register your templates with `Handlebars.registerPartial`. 
-
-<br>Pattern: `{{include [name] [data]}}`
-<br>Parameters:
-
-* name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
-* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
-
-Data (collection): `planet-express.json`
-
-``` js
-[
-  "Professor Farnsworth", 
-  "Fry", 
-  "Bender"
-]
-```
-
-Include (partial to be "included"): `planet-express.hbs`
-``` html
-{{sort this}}
-```
-
-Template:
-``` html
-<p>{{include "planet-express.hbs" data}}</p>
-```
-
-Result:
-``` html
-<p>Bender, Fry, Professor Farnsworth</p>
-```
-
 
 
 
@@ -1702,7 +1803,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sat May 11 2013 18:37:01._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Fri May 17 2013 23:44:14._
 
 
 

@@ -1,5 +1,5 @@
 (function() {
-  var Handlebars, authorsExpected, changelogExpected, grunt, path, pkg, readmeTitleExpected, simple, simpleExpected, travisBadgeExpected;
+  var Handlebars, authorsExpected, grunt, path, pkg, readmeTitleExpected, simple, simpleExpected, travisBadgeExpected;
 
   require("should");
 
@@ -65,20 +65,6 @@
         source = "{{authors}}";
         template = Handlebars.compile(source);
         return template(context).should.equal(authorsExpected);
-      });
-    });
-  });
-
-  changelogExpected = "* 2013-04-07\t\t\tv0.1.21\t\t\tAdd markdown helpers back, add more tests.\n* 2013-04-06\t\t\tv0.1.20\t\t\tGeneralized helpers structure, externalized utilities.\n* 2013-04-05\t\t\tv0.1.11\t\t\tNew authors and gist helpers, general cleanup and new tests.\n* 2013-04-04\t\t\tv0.1.10\t\t\tExternalized utility javascript from helpers.js\n* 2013-03-28\t\t\tv0.1.8\t\t\tGruntfile updated with mocha tests for 71 helpers, bug fixes.\n* 2013-03-18\t\t\tv0.1.7\t\t\tNew path helper \"relative\", for resolving relative path from one absolute path to another.\n* 2013-03-16\t\t\tv0.1.3\t\t\tNew helpers, \"formatPhoneNumber\" and \"eachProperty\"\n* 2013-03-15\t\t\tv0.1.2\t\t\tUpdate README.md with documentation, examples.\n* 2013-03-06\t\t\tv0.1.0\t\t\tFirst commit.\n";
-
-  describe("changelog", function() {
-    return describe("{{changelog [string]}}", function() {
-      return it("should return a list of authors in markdown format, from a user-defined data source", function() {
-        var source, template;
-
-        source = "{{changelog 'test/files/CHANGELOG'}}";
-        template = Handlebars.compile(source);
-        return template(context).should.equal(changelogExpected);
       });
     });
   });

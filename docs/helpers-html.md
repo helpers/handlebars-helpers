@@ -14,27 +14,6 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### embed
-_Embed Code Snippets_
-
-Embed code snippets from any file with the `embed` variable. You can also pass in a second parameter to force syntax highlighting for a specific language.
-
-Parameters: `String|String (optional)` 
-Default: `undefined`
-Syntax: `{{ embed [filename] [syntax] }}`
-
-Example:
-``` hbs
-{{ embed 'src/test.json' }}
-```
-
-Forced highlighting:
-``` hbs
-{{ embed 'src/test.json' 'javascript' }}
-```
-In the second example, highlighting was forced as `javascript` instead of `json`.
-
-
 #### blockquote (planned...)
 _Create a blockquote_
 

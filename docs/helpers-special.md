@@ -1,4 +1,25 @@
 
+#### embed
+_Embed code from given file_
+
+Parameters: 
+* `String|File` : path to the file you want to embed
+* `String (optional)`: Optional second parameter to "force" a specific language to use fo syntax highlighting.
+
+Syntax: `{{ embed [file] [syntax] }}`
+
+Helper also:
+* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
+* When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
+
+Example:
+``` hbs
+{{ embed 'src/test.json' }}
+
+
+// Force highlighting as `javascript` instead of `json`
+{{ embed 'src/test.json' 'javascript' }}
+```
 
 ### README Helpers
 
