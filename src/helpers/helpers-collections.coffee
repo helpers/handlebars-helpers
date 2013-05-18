@@ -1,3 +1,5 @@
+###! collection helpers ###
+
 Handlebars = require('../helpers/helpers').Handlebars
 
 # Local deps
@@ -131,11 +133,9 @@ module.exports.any = any = (array, options) ->
 module.exports.inArray = inArray = (array, value, options) ->
   if array.indexOf(value) isnt -1  then options.fn(@) else options.inverse(@)
 
-###
-Similar to #each helper, but treats array-like objects as arrays
-(i.e. objects with a `.length` property which is a number)
-rather than objects. This lets us iterate over our Collection's.
-###
+# Similar to #each helper, but treats array-like objects as arrays
+# (i.e. objects with a `.length` property which is a number)
+# rather than objects. This lets us iterate over our Collection's.
 module.exports.iterate = iterate = (context, options) ->
   fn = options.fn
   inverse = options.inverse
@@ -165,54 +165,68 @@ module.exports.iterate = iterate = (context, options) ->
   ret
 
 
-module.exports.foreach = foreach = (arr, options) ->
-  return options.inverse(this)  if options.inverse and not arr.length
-  arr.map((item, index) ->
-    item.$index = index
-    item.$notlast = (index isnt arr.length - 1)
-    item.$first = index is 0
-    item.$last = index is arr.length - 1
-    options.fn item
-  ).join ""
+# foreach: 
+# http://stackoverflow.com/questions/13861007/loop-over-and-array-and-add-a-separator-except-for-the-last
+# Usage:
+# Data:
+#     accounts = [
+#          {'name': 'John', 'email': 'john@example.com'},
+#          {'name': 'Malcolm', 'email': 'malcolm@example.com'},
+#          {'name': 'David', 'email': 'david@example.com'}
+#     ];
+# Templates:
+#     {{#foreach accounts}}
+#         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">{{ name }}</a>{{#unless _isLast}}, {{/unless}}
+#     {{/foreach}}
+module.exports.foreach = foreach = (array, fn) ->
+  total = array.length
+  buffer = ""
+  #Better performance: http://jsperf.com/for-vs-foreach/2
+  i = 0
+  j = total
+  while i < j
+    item = array[i]
+    # stick an index property onto the item, starting with 1, may make configurable later
+    item["_index"] = i + 1
+    item["_total"] = total
+    item["_isFirst"] = (i is 0)
+    item["_isLast"] = (i is (total - 1))
+    # show the inside of the block
+    buffer += fn.fn(item)
+    i++
+  # return the finished buffer
+  buffer
 
 
-###
-adds an a bunch of item prefixed logic to the object
+# adds an a bunch of item prefixed logic to the object
+# Credit: https://gist.github.com/icodeforlove/1429324
+# 
+#   {{#each_with_classes records prefix="record"}}
+#     <li class="record_{{item_index}}{{item_position}} {{item_alt}}">{{item_index}}</li>
+#   {{/each_with_classes}}
 
-{{#each_with_classes records prefix="record"}}
-<li class="record_{{item_index}}{{item_position}} {{item_alt}}">{{item_index}}</li>
-{{/each_with_classes}}
-
-results in the following html
-
-<li class="record_0 record_first">0</li>
-<li class="record_1 record_alt">1</li>
-<li class="record_2">2</li>
-<li class="record_3 record_last record_alt">3</li>
-###
+# Result:
+#     <li class="record_0 record_first">0</li>
+#     <li class="record_1 record_alt">1</li>
+#     <li class="record_2">2</li>
+#     <li class="record_3 record_last record_alt">3</li>
 module.exports.each_with_classes = each_with_classes = (array, fn) ->
   buffer = ""
   i = 0
   j = array.length
-
   while i < j
     item = array[i]
-    
     # position related information
     item.item_position = ""
     item.item_position = " " + fn.hash.prefix + "-first"  if i is 0
     item.item_position += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
-    
     # add alt if needed
     item.item_alt = (if i % 2 then fn.hash.prefix + "-alt" else "")
-    
     # stick an index property onto the item, starting with 1, may make configurable later
     item.item_index = i
-    
     # show the inside of the block
     buffer += fn(item)
     i++
-  
   # return the finished buffer
   buffer
 
