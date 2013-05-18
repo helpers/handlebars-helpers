@@ -5,7 +5,6 @@ Handlebars = require('../helpers/helpers').Handlebars
 Utils = require '../utils/utils'
 grunt = require 'grunt'
 path  = require 'path'
-to    = require 'to'
 _     = require 'lodash'
 
 
@@ -23,26 +22,6 @@ module.exports.copy = copy = (a, b) ->
 module.exports.glob = glob = (src, compare_fn) ->
   content = Utils.globFiles(src, compare_fn)
   Utils.safeString(content)
-
-module.exports.dir = dir = (src) ->
-  list = grunt.file.expandMapping(src)
-  yml = to.format.yaml.stringify(list)
-  Utils.safeString(yml)
-
-module.exports.dir = dirJSON = (src) ->
-  list = grunt.file.expand(src)
-  json = JSON.stringify(list, null, 2)
-  Utils.safeString(json)
-
-module.exports.expMappingYAML = expMappingYAML = (src) ->
-  list = grunt.file.expandMapping(src)
-  yml  = to.format.yaml.stringify(list)
-  Utils.safeString(yml)
-
-module.exports.expMappingJSON = expMappingJSON = (src) ->
-  list = grunt.file.expandMapping(src)
-  json = JSON.stringify(list, null, 2)
-  Utils.safeString(json)
 
 # Experimental helper to build a Table of Contents. Currently
 # builds a list from the headers found in markdown files.
@@ -104,10 +83,6 @@ module.exports.partial = partial = (template) ->
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper "copy", copy
-  Handlebars.registerHelper "dir", dir
-  Handlebars.registerHelper "dirJSON", dirJSON
-  Handlebars.registerHelper "expMappingYAML", expMappingYAML
-  Handlebars.registerHelper "expMappingJSON", expMappingJSON
   Handlebars.registerHelper "glob", glob
   Handlebars.registerHelper "toc", toc
   Handlebars.registerHelper "defineSection", defineSection
