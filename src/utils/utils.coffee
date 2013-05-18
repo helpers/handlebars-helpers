@@ -162,7 +162,7 @@ Utils.switchType = (ext) ->
       reader = grunt.file.readYAML
   reader
 
-# 'Optional' JSON
+# Read 'Optional' JSON
 Utils.readOptionalJSON = (filepath) ->
   data = {}
   try
@@ -170,7 +170,7 @@ Utils.readOptionalJSON = (filepath) ->
     grunt.verbose.write("Reading " + filepath + "...").ok()
   data
 
-# 'Optional' YAML
+# Read 'Optional' YAML
 Utils.readOptionalYAML = (filepath) ->
   data = {}
   try
@@ -178,18 +178,16 @@ Utils.readOptionalYAML = (filepath) ->
     grunt.verbose.write("Reading " + filepath + "...").ok()
   data
 
-
-# Convenience for extracting repo url from package.json
+# Extract repo url from package.json, convenience util
+# @param {none}
 Utils.repoUrl = (str) ->
   pkg = grunt.file.readJSON("./package.json")
   url = pkg.repository.url
   str = url.replace(/.*:\/\/github.com\/(.*?)(?:\.git|$)/, str)
 
-###
 # Detect and return the indentation.
-# param  {String} string
-# return {Mixed} Indentation used, or undefined.
-###
+# @param  {String} string
+# @return {Mixed} Indentation used, or undefined.
 Utils.detectIndentation = (string) ->
   tabs = string.match(/^[\t]+/g) or []
   spaces = string.match(/^[ ]+/g) or []
@@ -255,7 +253,6 @@ Utils.normalizelf = (str) ->
 # Globbing Utils
 ###
 
-###
 # Return an array of all file paths that match
 # the given wildcard patterns, then read each file
 # and return its contents as a string, and last
@@ -271,7 +268,6 @@ Utils.normalizelf = (str) ->
 #   path: full file path
 #   content: content of file
 # }
-###
 Utils.globFiles = (src, compare_fn) ->
   content = undefined
   compare_fn = compare_fn or (a, b) ->
@@ -339,17 +335,19 @@ Utils.globObject = (obj, pattern) ->
 # Regex
 ###
 
-# Regex: all markdown headings
-Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Regex: all markdown h1 headings
-Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Utils.findh1 = /^#[ \t]+(.*)/gm
-# Regex: all markdown h2 headings
-Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
+Utils.getMatches = (string, regex, index) ->
+  index or (index = 1) # default to the first capturing group
+  matches = []
+  match = undefined
+  matches.push match[index]  while match = regex.exec(string)
+  matches
 
-Utils.findParens = /\(([^)]+)\)/g
-
-Utils.findHelpers = /^(  Handlebars.registerHelper ")(.*", )(.*)/gm
+# Return all pattern matches with captured groups
+RegExp::execAll = (string) ->
+  matches = []
+  while match = @exec string
+    matches.push(group for group in match)
+  matches
 
 # Ensures that a url path is returned instead
 # of a filesystem path.
