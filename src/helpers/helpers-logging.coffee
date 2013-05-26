@@ -6,10 +6,10 @@ to    = require 'to'
 
 
 # Inspect
-module.exports.inspect = inspect = (obj, language) ->
-  language = ""  if Utils.isUndefined(language)
-  result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null).replace('{', '{\n ').replace('}', '\n}') + '\n```'
-  Utils.safeString(result)
+# module.exports.inspect = inspect = (obj, language) ->
+#   language = ""  if Utils.isUndefined(language)
+#   result = '``` ' + language + '\n' + require('util').inspect(obj, 10, null).replace('{', '{\n ').replace('}', '\n}') + '\n```'
+#   Utils.safeString(result)
 
 # Log
 module.exports.log = log = (value) ->
@@ -20,6 +20,11 @@ module.exports.debug = debug = (value) ->
   console.log 'Context: ', @
   console.log('Value: ', value) unless Utils.isUndefined value
   console.log '-----------------------------------------------'
+
+module.exports.expandMapping = expandMapping = (src) ->
+  list = Utils.expandMapping(src)
+  yml = to.format.yaml.stringify(list)
+  Utils.safeString(yml)
 
 module.exports.expandYAML = expandYAML = (src) ->
   list = grunt.file.expand(src)
@@ -34,9 +39,10 @@ module.exports.expandJSON = expandJSON = (src) ->
 
 module.exports.register = (Handlebars, options) ->
 
+  Handlebars.registerHelper "expandMapping", expandMapping
   Handlebars.registerHelper "expandYAML", expandYAML
   Handlebars.registerHelper "expandJSON", expandJSON
-  Handlebars.registerHelper "inspect", inspect
+  # Handlebars.registerHelper "inspect", inspect
   Handlebars.registerHelper "log", log
   Handlebars.registerHelper "debug", debug
 

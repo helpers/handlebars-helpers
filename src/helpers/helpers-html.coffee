@@ -2,10 +2,21 @@
 
 module.exports.register = (Handlebars, options) ->
   grunt = require 'grunt'
+  util  = require 'util'
   Utils = require '../utils/utils'
   HTML  = require '../utils/html'
 
 
+
+  Handlebars.registerHelper "inspect", (obj, ext) ->
+    if Utils.isUndefined(options.ext)
+      ext = ".html"
+    else
+      ext = options.ext
+    md = "``` " + "json" + "\n" + (util.inspect(obj, true, null)) + "\n```"
+    html = '<pre class="json">' + '\n' + (util.inspect(obj, true, null)) + '\n</pre>'
+    result = Utils.switchOutput(ext, md, html)
+    Utils.safeString result
   
   # temporary 
   Handlebars.registerHelper "_link", (url, text, linkClass) ->
