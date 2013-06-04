@@ -1,10 +1,8 @@
-###! fs helpers ###
-
+###! content helpers ###
 Handlebars = require('../helpers/helpers').Handlebars
 
 Utils = require '../utils/utils'
 grunt = require 'grunt'
-path  = require 'path'
 _     = require 'lodash'
 
 
@@ -33,13 +31,13 @@ module.exports.toc = toc = (src) ->
   Utils.safeString(content)
 
 # Define Section
-module.exports.section = defineSection = (section, options) ->
+module.exports.defineSection = defineSection = (section, options) ->
   if Handlebars.sections
     Handlebars.sections[section] = options.fn(this)
   Utils.safeString ''
 
 # Render Section
-module.exports.section = renderSection = (section, options) ->
+module.exports.renderSection = renderSection = (section, options) ->
   if Handlebars.sections and Handlebars.sections[section]
     content = Handlebars.sections[section]
   else
@@ -80,11 +78,13 @@ module.exports.partial = partial = (template) ->
   Utils.safeString partial(context)
 
 
+# module.exports.sections = {}
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper "copy", copy
   Handlebars.registerHelper "glob", glob
   Handlebars.registerHelper "toc", toc
+
   Handlebars.registerHelper "defineSection", defineSection
   Handlebars.registerHelper "renderSection", renderSection
 
