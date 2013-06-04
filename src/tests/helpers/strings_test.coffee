@@ -74,13 +74,6 @@ describe 'center', ->
       template = Handlebars.compile(source)
       template().should.equal '&amp;nbsp;&amp;nbsp;Bender should not be allowed on tv.&amp;nbsp;&amp;nbsp;'
 
-describe 'newLineToBr', ->
-  describe '{{newLineToBr string}}', ->
-    it 'should return the string with new line characters converted to <br>.', ->
-      source   = '{{{newLineToBr "Bender \n should \n not \n be allowed on tv."}}}'
-      template = Handlebars.compile(source)
-      template().should.equal 'Bender <br> should <br> not <br> be allowed on tv.'
-
 describe "hyphenate", ->
   describe "{{hyphenate string}}", ->
     it "should return the string with spaces replaced with hyphens.", ->
