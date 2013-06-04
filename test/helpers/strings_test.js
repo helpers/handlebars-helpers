@@ -124,18 +124,6 @@
     });
   });
 
-  describe('newLineToBr', function() {
-    return describe('{{newLineToBr string}}', function() {
-      return it('should return the string with new line characters converted to <br>.', function() {
-        var source, template;
-
-        source = '{{{newLineToBr "Bender \n should \n not \n be allowed on tv."}}}';
-        template = Handlebars.compile(source);
-        return template().should.equal('Bender <br> should <br> not <br> be allowed on tv.');
-      });
-    });
-  });
-
   describe("hyphenate", function() {
     return describe("{{hyphenate string}}", function() {
       return it("should return the string with spaces replaced with hyphens.", function() {
