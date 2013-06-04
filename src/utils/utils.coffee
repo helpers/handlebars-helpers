@@ -5,6 +5,7 @@ path      = require 'path'
 grunt     = require "grunt"
 _         = require "lodash"
 minimatch = require "minimatch"
+to        = require "to" 
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
@@ -73,6 +74,19 @@ Utils.escapeString = (str, except) -> #String
 Utils.escapeExpression = (str) ->
   Handlebars.Utils.escapeExpression
 
+Utils.stringifyYAML = (src) ->
+  YAML = to.format.yaml
+  stringifyFile = YAML.stringify(src)
+
+Utils.stringifyObj = (src, type) ->
+  YAML = to.format.yaml
+  output = JSON.stringify(src, null, 2)
+  switch type
+    when "json"
+      output = JSON.stringify(src)
+    when "yml", "yaml"
+      output = YAML.stringify(src)
+  output
 
 
 ### 
@@ -135,7 +149,7 @@ Utils.getRelativePath = (from, to) ->
 
 
 ###
-# Conditional 
+# File type
 ###
 
 Utils.toggleOutput = (ext, md, html) ->
@@ -178,6 +192,15 @@ Utils.readOptionalYAML = (filepath) ->
     grunt.verbose.write("Reading " + filepath + "...").ok()
   data
 
+Utils.readPackageJSON = (filepath) ->
+  data = {}
+  try
+    data = grunt.file.readJSON(filepath)
+  try
+    data = grunt.file.readJSON('package.json')
+    grunt.verbose.write("Reading " + filepath + "...").ok()
+  data
+
 # Extract repo url from package.json, convenience util
 # @param {none}
 Utils.repoUrl = (str) ->
@@ -202,7 +225,6 @@ Utils.detectIndentation = (string) ->
     indentation = prevalent[i]  if not indentation or prevalent[i].length < indentation.length
     i++
   indentation
-
 
 ###
 # Grunt.js Utils
@@ -327,7 +349,6 @@ Utils.globObject = (obj, pattern) ->
   _.forEach matches, (match) ->
     value = getValue obj, match
     rtn = setValue rtn, match, value
-
   rtn
 
 
