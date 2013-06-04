@@ -254,6 +254,94 @@ The output will look like this:
 * See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
 
 
+### jsfiddle
+Credit: [octopress](http://octopress.org/docs/plugins/jsfiddle-tag/)
+
+All you need is the fiddle’s id and you can easily embed it in your page.
+
+Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
+
+#### Embedding the fiddle
+
+``` html
+http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
+```
+Example:
+
+``` handlebars
+{{ jsfiddle 'ccWP7' }}
+```
+
+**id**
+
+Full URL to the fiddle without `http://jsfiddle.net`
+
+**tabs**
+
+Selected tabs in the order you want them to be displayed. 
+
+Default: `js,resources,html,css,result`
+
+Options: 
+
+* `js`, `html`, `css`: tab with the corresponding code
+* `result`: result tab 
+* `resources`: list of external resources, it will not be displayed if no resources were used
+
+_Adjusting Tabs_
+
+It’s possible to easily adjust the display order of the tabs. In this case, I’m moving the result to be the first item shown.
+
+``` handlebars
+{{ jsfiddle 'ccWP7' 'result,js,html,css' }}
+```
+
+**skin**
+
+The skin to be used. 
+
+Default: `light`
+
+_Adjusting the Skin_
+
+A third (optional) parameter is available to set the "skin" for the fiddle. Currently, the only skins available are `light` and `presentation`.  However, if or when jsFiddle announces new options they may be used immediately.
+
+``` handlebars
+{{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
+```
+
+#### Examples
+
+``` html
+<iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+// or
+<iframe style="width: 100%; height: 300px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/"></iframe>
+```
+
+#### Optional tabs
+If you wish to make the "result" tab display first, then just add `result` and any other secondary tabs you wish to include to your URL:
+
+```
+{{jsfiddle "http://jsfiddle.net/abc123/embedded/result,js,html,css/"}}
+```
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/"></iframe>
+```
+
+If there is no need to show all the tabs, you may remove the tabs you don't need: 
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
+```
+
+### Changing skins
+Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
+```
 
 ### Other
 
@@ -269,6 +357,107 @@ phoneNumber: 4444444444
 Result:
 ```
 (444) 444-4444
+```
+
+
+
+### Path
+Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js: 
+
+> "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
+
+#### relative (from, to)
+_Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
+<br>Parameters: `string` (the value to test against)
+<br>Default: `none`
+<br>Usage:
+``` html
+{{relative "from" "to"}}
+```
+Example:
+``` handlebars
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+
+// returns
+<a href="../../dist/assets/css/styles.css"></a> 
+```
+
+#### extname
+_"Return the extension of the path, from the last '.' to end of string in the last portion of the path. If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string."_
+<br>Parameters: `string` (the value to test against)
+<br>Default: `none`
+<br>Usage:
+``` html
+{{extname 'index.html'}}
+
+// returns
+'.html'
+
+{{extname 'index.'}}
+
+// returns
+'.'
+
+{{extname 'index'}}
+
+// returns
+''
+```
+
+#### dirname
+_Return the directory name of a path. Similar to the Unix dirname command._
+
+Example:
+
+``` html
+{{dirname '/foo/bar/baz/asdf/quux'}}
+
+// returns
+'/foo/bar/baz/asdf'
+```
+
+
+
+### URL
+URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for URL resolution and parsing. As with node.js: 
+
+> "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
+
+#### url_resolve (url, href)
+_Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
+
+<br>Usage:
+``` html
+{{url_resolve url href}}
+```
+Example:
+``` handlebars
+<a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
+
+// returns
+<a href="http://example.com/two"></a> 
+```
+
+
+#### url_parse (url)
+_Take a URL string, and return an object._
+
+Params: 
+* `url`
+* Pass `true` as the second argument to also parse the query string using the querystring module. 
+
+Defaults to false.
+
+<br>Usage:
+``` html
+{{url_resolve url href}}
+```
+Example:
+``` handlebars
+<a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
+
+// returns
+<a href="http://example.com/two"></a> 
 ```
 
 
@@ -1780,21 +1969,21 @@ Copyright 2013 Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-05-11			v0.2.3			File globbing added to some helpers. Including md and some file helpers.
-* 2013-05-07			v0.2.0			A bunch of new tests for markdown and special helpers.Refactored most of the rest of the helpers to separate functions from Handlebars registration.
-* 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.
-* 2013-04-21			v0.1.31			Fixing relative helper
-* 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
-* 2013-04-16			v0.1.25			Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
-* 2013-04-07			v0.1.21			Add markdown helpers back, add more tests.
-* 2013-04-06			v0.1.20			Generalized helpers structure, externalized utilities.
-* 2013-04-05			v0.1.11			New authors and gist helpers, general cleanup and new tests.
-* 2013-04-04			v0.1.10			Externalized utility javascript from helpers.js
-* 2013-03-28			v0.1.8			Gruntfile updated with mocha tests for 71 helpers, bug fixes.
-* 2013-03-18			v0.1.7			New path helper "relative", for resolving relative path from one absolute path to another.
-* 2013-03-16			v0.1.3			New helpers, "formatPhoneNumber" and "eachProperty"
-* 2013-03-15			v0.1.2			Update README.md with documentation, examples.
-* 2013-03-06			v0.1.0			First commit.
+* 2013-05-11			v0.2.3			File globbing added to some helpers. Including md and some file helpers.  
+* 2013-05-07			v0.2.0			A bunch of new tests for markdown and special helpers.  Refactored most of the rest of the helpers to separate functions from Handlebars registration.  
+* 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.  
+* 2013-04-21			v0.1.31			Fixing relative helper  
+* 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.  
+* 2013-04-16			v0.1.25			Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.  
+* 2013-04-07			v0.1.21			Add markdown helpers back, add more tests.  
+* 2013-04-06			v0.1.20			Generalized helpers structure, externalized utilities.  
+* 2013-04-05			v0.1.11			New authors and gist helpers, general cleanup and new tests.  
+* 2013-04-04			v0.1.10			Externalized utility javascript from helpers.js  
+* 2013-03-28			v0.1.8			Gruntfile updated with mocha tests for 71 helpers, bug fixes.  
+* 2013-03-18			v0.1.7			New path helper "relative", for resolving relative path from one absolute path to another.  
+* 2013-03-16			v0.1.3			New helpers, "formatPhoneNumber" and "eachProperty"  
+* 2013-03-15			v0.1.2			Update README.md with documentation, examples.  
+* 2013-03-06			v0.1.0			First commit.  
 
 
 
@@ -1803,7 +1992,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sun May 26 2013 10:24:06._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sun Jun 02 2013 11:02:54._
 
 
 
