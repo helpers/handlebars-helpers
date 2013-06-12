@@ -167,9 +167,10 @@ Lots more...
 * [{{noop}}](#noop)
 
 
-## The Helpers
+---
 
-### Special
+# The Helpers
+## Special helpers
 #### {{embed}}
 _Embed code from given file_
 
@@ -389,7 +390,7 @@ Fiddles also allow "skins". In the following example, `presentation` is the name
 ```
 
 
-### Path
+## Path helpers
 Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js: 
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
@@ -446,7 +447,7 @@ Example:
 
 
 
-### URL
+## URL helpers
 URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for URL resolution and parsing. As with node.js: 
 
 > "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
@@ -523,7 +524,7 @@ parseHost:
 ```
 
 
-### File
+## File helpers
 #### {{include}}
 _Include external files._
 
@@ -586,7 +587,7 @@ Example:
 ```
 
 
-### Strings
+## Strings helpers
 #### {{occurrences}}
 _Evaluate string A, and count the occurrences of string B within string A_
 <br>Default: `undefined`
@@ -736,7 +737,7 @@ The result would be:
 
 
 
-### HTML
+## HTML helpers
 #### {{gist}}
 _Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
 
@@ -910,7 +911,7 @@ renders to:
 ```
 
 
-### Collections
+## Collections helpers
 #### {{first}}
 _Returns the first item in a collection._
 <br>Parameters: `none`
@@ -1333,7 +1334,7 @@ TODO...
 ```
 
 
-### Math
+## Math helpers
 #### {{add}}
 _Returns the sum of two numbers._
 <br>Parameters: value `int` - The number to add to the expression. (Required)
@@ -1460,7 +1461,7 @@ value = {
 ```
 
 
-### Numbers
+## Numbers helpers
 #### {{toFixed}}
 _Returns exactly `digits` after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length._
 <br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
@@ -1571,7 +1572,7 @@ value = 2222222
 ```
 
 
-### Comparisons: Equal
+## Comparisons: Equal helpers
 #### {{is}}
 _Conditionally render a block if the condition is true (if x = y)._
 
@@ -1695,7 +1696,7 @@ Parameters: `none`
 
 
 
-### Comparisons: Greater Than
+## Comparisons: Greater Than helpers
 #### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
@@ -1767,7 +1768,7 @@ _Unless x >= y_
 ```
 
 
-### Comparisons: Less Than
+## Comparisons: Less Than helpers
 #### {{lt}}
 _Conditionally render a block if the value is less than a given number. Opposite of `gt`._
 <br>Parameters: value `string|int` - the value to test against.
@@ -1819,7 +1820,7 @@ Parameters: `none`
 
 
 
-### Dates
+## Dates helpers
 #### {{formatDate}}
 _Formats a date into a string given a format. Accepts any value that can be passed to `new Date()`. This helper is a port of the [formatDate-js](http://https://github.com/michaelbaldry/formatDate-js) library by [Michael Baldry](https://github.com/michaelbaldry)._
 <br>Parameters: format `string`, `required`
@@ -1872,7 +1873,7 @@ date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 
 
 
-### Inflections
+## Inflections helpers
 #### {{inflect}}
 _Returns the plural or singular form of a word based on a count._
 <br>Parameters:
@@ -1909,7 +1910,7 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 ```
 
 
-### Logging
+## Logging helpers
 #### {{log}}
 _Simple `console.log()`_
 <br>Parameters: `none`
@@ -2008,7 +2009,7 @@ Example:
 
 
 
-### Miscellaneous
+## Miscellaneous helpers
 #### {{default}}
 _Provides a default or fallback value if a value doesn't exist._
 <br>Parameters: defaultValue `string|int` - The default value to use. `title = ''`
@@ -2026,6 +2027,8 @@ No title available.
 TODO...
 
 
+
+---
 
 ## How Handlebars Helpers Work
 Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
@@ -2096,7 +2099,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 01:21:18._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 01:26:06._
 
 
 
