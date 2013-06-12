@@ -125,3 +125,22 @@ _Centers a string using non-breaking spaces._
 // Result:
 |              Bender should not be allowed on tv.              |
 ```
+
+#### {{formatPhoneNumber}}
+_Output a formatted phone number_
+
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Given:
+```js
+number: 4444444444
+```
+and the template:
+
+``` handlebars
+{{formatPhoneNumber number}}
+```
+The result would be:
+```
+(444) 444-4444
+```

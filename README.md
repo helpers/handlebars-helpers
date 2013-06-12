@@ -11,22 +11,43 @@ npm install helper-lib --save
 Once helper-lib has been installed, it may be used within your application with the following JavaScript:
 
 ```js
-var handlebars = require('handlebars');
+var handlebars = require('Handlebars');
 var helpers = require('helper-lib');
-helpers.register(handlebars);
+helpers.register(Handlebars);
 ```
 
 Now your handlebars instance will have access to the helpers.
+
+### Features unique to helper-lib
+
+Some helpers offer useful functionality that is unique to this project, such as:
+
+* File globbing using [minimatch](https://github.com/isaacs/minimatch) patterns
+* Access to [assemble](https://github.com/assemble/assemble) options.
+* Ability to render either markdown or HTML conditionally based on the file extension of the generated file.
+
+Lots more...
 
 **Table of Contents** 
 
 ## [The Helpers](#the-helpers)
 
-### [Special](#special)
-* [{{changelog}}](#changelog)
-* [{{formatPhoneNumber}}](#formatphonenumber)
+### [Path](#path)
+* [{{relative}}](#relative)
+* [{{extname}}](#extname)
+* [{{dirname}}](#dirname)
+
+### [URL](#url)
+* [{{url_resolve}}](#url_resolve)
+* [{{url_parse}}](#url_parse)
+
+### [File](#file)
+* [{{include}}](#include)
+* [{{glob}}](#glob)
+* [{{copy}}](#copy)
 
 ### [Strings](#strings)
+* [{{occurrences}}](#occurrences)
 * [{{hyphenate}}](#hyphenate)
 * [{{dashify}}](#dashify)
 * [{{lowercase}}](#lowercase)
@@ -38,7 +59,16 @@ Now your handlebars instance will have access to the helpers.
 * [{{reverse}}](#reverse)
 * [{{truncate}}](#truncate)
 * [{{center}}](#center)
-* [{{nl2br}}](#nl2br)
+* [{{formatPhoneNumber}}](#formatphonenumber)
+
+### [HTML](#html)
+* [{{gist}}](#gist)
+* [{{blockquote}}](#blockquote)
+* [{{timeline}}](#timeline)
+* [{{exticon}}](#exticon)
+* [{{ul}}](#ul)
+* [{{ol}}](#ol)
+* [{{br}}](#br)
 
 ### [Collections](#collections)
 * [{{first}}](#first)
@@ -110,55 +140,31 @@ Now your handlebars instance will have access to the helpers.
 * [{{inflect}}](#inflect)
 * [{{ordinalize}}](#ordinalize)
 
-### [HTML](#html)
-* [{{gist}}](#gist)
-* [{{embed}}](#embed)
-* [{{blockquote}}](#blockquote)
-* [{{stripes}}](#stripes)
-* [{{timeline}}](#timeline)
-* [{{ul}}](#ul)
-* [{{ol}}](#ol)
-* [{{br}}](#br)
-
 ### [Logging](#logging)
 * [{{log}}](#log)
 * [{{debug}}](#debug)
+* [{{expandJSON}}](#expandjson)
+* [{{expandYAML}}](#expandyaml)
+
+### [Special](#special)
+* [{{embed}}](#embed)
+
+#### [README Helpers](#readme-helpers)
+* [{{authors}}](#authors)
+
+#### [Travis CI](#travis-ci)
+* [{{travis}}](#travis)
+* [{{travis-badge}}](#travis-badge)
+* [{{changelog}}](#changelog)
+* [{{jsfiddle}}](#jsfiddle)
+  - [Embedding the fiddle](#embedding-the-fiddle)
+  - [Examples](#examples)
+  - [Optional tabs](#optional-tabs)
+* [Changing skins](#changing-skins)
 
 ### [Miscellaneous](#miscellaneous)
 * [{{default}}](#default)
-* [{{include}}](#include)
-
-
-## Overview
-Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
-
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
-* Each parameter is a Handlebars expression. 
-* Handlebars helpers can be accessed from any context in a template.
-
-[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
-
-
-#### Special features
-
-Some helpers feature the following enhancements, which are unique to this project:
-
-* File globbing
-* Access to [assemble](https://github.com/assemble/assemble) options.
-* Some helpers will render either markdown or HTML based on the file extension of the generated file.
-
-
-#### Custom Helpers
-
-> Contributions welcome! Please consider adding your own helpers to this library.
-
-Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
-
-Handlebars allows two different kinds of helpers:
-
-* **Expression helpers** are basically regular functions that take the name of the helper and the helper function as arguments. Once an expression helper is registered, it can be called anywhere in your templates, then Handlebars takes the expression's return value and writes it into the template.
-* **Block helpers** There are a few block helpers included by default with Handlebars, `{{#each}}`, `{{#if}}` and `{{#unless}}`. Custom block helpers are registered the same way as exptression helpers, but the difference is that Handlebars will pass the contents of the block compiled into a function to the helper.
-
+* [{{noop}}](#noop)
 
 
 ## The Helpers
@@ -382,35 +388,13 @@ Fiddles also allow "skins". In the following example, `presentation` is the name
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
 ```
 
-### Other
-
-#### {{formatPhoneNumber}}
-_Output a formatted phone number_
-
-Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Given:
-```js
-number: 4444444444
-```
-and the template:
-
-``` handlebars
-{{formatPhoneNumber number}}
-```
-The result would be:
-```
-(444) 444-4444
-```
-
-
 
 ### Path
 Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js: 
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
 
-#### {{relative (from, to)}}
+#### {{relative}}
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
@@ -467,7 +451,7 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 
 > "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
 
-#### {{url_resolve}} (url, href)
+#### {{url_resolve}}
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
 <br>Usage:
@@ -483,30 +467,64 @@ Example:
 ```
 
 
-#### {{url_parse}} (url)
+#### {{url_parse}}
 _Take a URL string, and return an object._
 
 Params: 
 * `url`
-* Pass `true` as the second argument to also parse the query string using the querystring module. 
-
-Defaults to false.
+* Output format: `yaml` or `json`. Default: `json`
 
 <br>Usage:
 ``` html
-{{url_resolve url href}}
+{{url_parse "http://example.com/one"}} 
 ```
-Example:
-``` handlebars
-<a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
+Renders to:
+``` html
+{
+  "protocol": "http:",
+  "slashes": true,
+  "auth": null,
+  "host": "example.com",
+  "port": null,
+  "hostname": "example.com",
+  "hash": null,
+  "search": null,
+  "query": null,
+  "pathname": "/one",
+  "path": "/one",
+  "href": "http://example.com/one"
+} 
+```
 
-// returns
-<a href="http://example.com/two"></a> 
+Or with `yaml` as the second param:
+
+``` html
+{{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
+```
+Renders to:
+``` html
+protocol: "http:"
+slashes: true
+auth: null
+host: "foo.com"
+port: null
+hostname: "foo.com"
+hash: null
+search: "?key=value"
+query: "key=value"
+pathname: "/bar/baz"
+path: "/bar/baz?key=value"
+href: "http://foo.com/bar/baz?key=value"
+parse: 
+format: 
+resolve: 
+resolveObject: 
+parseHost: 
 ```
 
 
 ### File
-#### {{include }}
+#### {{include}}
 _Include external files._
 
 <br>Pattern: `{{include [name] [data]}}`
@@ -540,12 +558,10 @@ Result:
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
-
-### example helpers, not for actual use!
-
+#### {{glob}}
+**example helpers, not for actual use!**
 Why do this? The goal is to inspire other concepts that build from this one.
 
-#### {{glob}}
 _Use globbing patterns to embed content from specified file or files._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -557,6 +573,9 @@ Examples:
 ```
 
 #### {{copy}}
+**example helpers, not for actual use!**
+Why do this? The goal is to inspire other concepts that build from this one.
+
 _Example helper, copies file A to path B._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -696,6 +715,25 @@ _Centers a string using non-breaking spaces._
 |              Bender should not be allowed on tv.              |
 ```
 
+#### {{formatPhoneNumber}}
+_Output a formatted phone number_
+
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Given:
+```js
+number: 4444444444
+```
+and the template:
+
+``` handlebars
+{{formatPhoneNumber number}}
+```
+The result would be:
+```
+(444) 444-4444
+```
+
 
 
 ### HTML
@@ -715,7 +753,9 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### {{blockquote}} (planned...)
+#### {{blockquote}}
+**Planned...**
+
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -739,7 +779,9 @@ Output:
 </blockquote>
 ```
 
-#### {{timeline}} (planned...)
+#### {{timeline}}
+**Planned...**
+
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -1761,14 +1803,14 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
-#### {{unless_lt }}
+#### {{unless_lt}}
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
 ``` handlebars
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
-#### {{unless_lteq }}
+#### {{unless_lteq}}
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
 ``` handlebars
@@ -1985,6 +2027,29 @@ TODO...
 
 
 
+## How Handlebars Helpers Work
+Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
+
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
+* Each parameter is a Handlebars expression. 
+* Handlebars helpers can be accessed from any context in a template.
+
+[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
+
+### Creating Helpers
+
+> Contributions welcome! Please consider adding your own helpers to this library.
+
+Handlebars is advantageous over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
+
+Handlebars allows two different kinds of helpers:
+
+* **Expression helpers** are basically regular functions that take the name of the helper and the helper function as arguments. Once an expression helper is registered, it can be called anywhere in your templates, then Handlebars takes the expression's return value and writes it into the template.
+* **Block helpers** There are a few block helpers included by default with Handlebars, `{{#each}}`, `{{#if}}` and `{{#unless}}`. Custom block helpers are registered the same way as exptression helpers, but the difference is that Handlebars will pass the contents of the block compiled into a function to the helper.
+
+Also, if you use Assemble be sure to visit the [assemble docs](https://github.com/assemble/assemble/wiki/Helpers) to learn about registering custom helpers.
+
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using Grunt.
 
@@ -2031,7 +2096,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 00:48:36._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 01:21:18._
 
 
 

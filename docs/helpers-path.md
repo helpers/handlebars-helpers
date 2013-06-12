@@ -2,7 +2,7 @@ Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handli
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
 
-#### {{relative (from, to)}}
+#### {{relative}}
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`

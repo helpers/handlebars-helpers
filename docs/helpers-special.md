@@ -215,24 +215,3 @@ Fiddles also allow "skins". In the following example, `presentation` is the name
 ``` html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
 ```
-
-### Other
-
-#### {{formatPhoneNumber}}
-_Output a formatted phone number_
-
-Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Given:
-```js
-number: 4444444444
-```
-and the template:
-
-``` handlebars
-{{formatPhoneNumber number}}
-```
-The result would be:
-```
-(444) 444-4444
-```

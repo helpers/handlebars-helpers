@@ -33,14 +33,14 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
-#### {{unless_lt }}
+#### {{unless_lt}}
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
 ``` handlebars
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
-#### {{unless_lteq }}
+#### {{unless_lteq}}
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
 ``` handlebars

@@ -1,4 +1,4 @@
-#### {{include }}
+#### {{include}}
 _Include external files._
 
 <br>Pattern: `{{include [name] [data]}}`
@@ -32,12 +32,10 @@ Result:
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
-
-### example helpers, not for actual use!
-
+#### {{glob}}
+**example helpers, not for actual use!**
 Why do this? The goal is to inspire other concepts that build from this one.
 
-#### {{glob}}
 _Use globbing patterns to embed content from specified file or files._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -49,6 +47,9 @@ Examples:
 ```
 
 #### {{copy}}
+**example helpers, not for actual use!**
+Why do this? The goal is to inspire other concepts that build from this one.
+
 _Example helper, copies file A to path B._
 <br>Parameters: `String`
 <br> Default: `undefined`

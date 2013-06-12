@@ -218,35 +218,13 @@ Fiddles also allow "skins". In the following example, `presentation` is the name
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
 ```
 
-### Other
-
-#### {{formatPhoneNumber}}
-_Output a formatted phone number_
-
-Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Given:
-```js
-number: 4444444444
-```
-and the template:
-
-``` handlebars
-{{formatPhoneNumber number}}
-```
-The result would be:
-```
-(444) 444-4444
-```
-
-
 
 ### Path
 Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js: 
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
 
-#### {{relative (from, to)}}
+#### {{relative}}
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
@@ -303,7 +281,7 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 
 > "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
 
-#### {{url_resolve}} (url, href)
+#### {{url_resolve}}
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
 <br>Usage:
@@ -319,30 +297,64 @@ Example:
 ```
 
 
-#### {{url_parse}} (url)
+#### {{url_parse}}
 _Take a URL string, and return an object._
 
 Params: 
 * `url`
-* Pass `true` as the second argument to also parse the query string using the querystring module. 
-
-Defaults to false.
+* Output format: `yaml` or `json`. Default: `json`
 
 <br>Usage:
 ``` html
-{{url_resolve url href}}
+{{url_parse "http://example.com/one"}} 
 ```
-Example:
-``` handlebars
-<a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
+Renders to:
+``` html
+{
+  "protocol": "http:",
+  "slashes": true,
+  "auth": null,
+  "host": "example.com",
+  "port": null,
+  "hostname": "example.com",
+  "hash": null,
+  "search": null,
+  "query": null,
+  "pathname": "/one",
+  "path": "/one",
+  "href": "http://example.com/one"
+} 
+```
 
-// returns
-<a href="http://example.com/two"></a> 
+Or with `yaml` as the second param:
+
+``` html
+{{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
+```
+Renders to:
+``` html
+protocol: "http:"
+slashes: true
+auth: null
+host: "foo.com"
+port: null
+hostname: "foo.com"
+hash: null
+search: "?key=value"
+query: "key=value"
+pathname: "/bar/baz"
+path: "/bar/baz?key=value"
+href: "http://foo.com/bar/baz?key=value"
+parse: 
+format: 
+resolve: 
+resolveObject: 
+parseHost: 
 ```
 
 
 ### File
-#### {{include }}
+#### {{include}}
 _Include external files._
 
 <br>Pattern: `{{include [name] [data]}}`
@@ -376,12 +388,10 @@ Result:
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
-
-### example helpers, not for actual use!
-
+#### {{glob}}
+**example helpers, not for actual use!**
 Why do this? The goal is to inspire other concepts that build from this one.
 
-#### {{glob}}
 _Use globbing patterns to embed content from specified file or files._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -393,6 +403,9 @@ Examples:
 ```
 
 #### {{copy}}
+**example helpers, not for actual use!**
+Why do this? The goal is to inspire other concepts that build from this one.
+
 _Example helper, copies file A to path B._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -532,6 +545,25 @@ _Centers a string using non-breaking spaces._
 |              Bender should not be allowed on tv.              |
 ```
 
+#### {{formatPhoneNumber}}
+_Output a formatted phone number_
+
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Given:
+```js
+number: 4444444444
+```
+and the template:
+
+``` handlebars
+{{formatPhoneNumber number}}
+```
+The result would be:
+```
+(444) 444-4444
+```
+
 
 
 ### HTML
@@ -551,7 +583,9 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### {{blockquote}} (planned...)
+#### {{blockquote}}
+**Planned...**
+
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -575,7 +609,9 @@ Output:
 </blockquote>
 ```
 
-#### {{timeline}} (planned...)
+#### {{timeline}}
+**Planned...**
+
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -1597,14 +1633,14 @@ number = 5
 Kiss my shiny metal ass!
 ```
 
-#### {{unless_lt }}
+#### {{unless_lt}}
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
 ``` handlebars
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
-#### {{unless_lteq }}
+#### {{unless_lteq}}
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
 ``` handlebars

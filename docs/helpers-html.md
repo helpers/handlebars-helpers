@@ -14,7 +14,9 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### {{blockquote}} (planned...)
+#### {{blockquote}}
+**Planned...**
+
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -38,7 +40,9 @@ Output:
 </blockquote>
 ```
 
-#### {{timeline}} (planned...)
+#### {{timeline}}
+**Planned...**
+
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
