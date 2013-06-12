@@ -8,6 +8,7 @@ module.exports.default = _default = (value, defaultValue) ->
 module.exports.noop = noop = (options) ->
   options.fn this
 
+
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper "default", _default

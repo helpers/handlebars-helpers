@@ -170,10 +170,10 @@ module.exports.iterate = iterate = (context, options) ->
 # Usage:
 # Data:
 #     accounts = [
-#          {'name': 'John', 'email': 'john@example.com'},
-#          {'name': 'Malcolm', 'email': 'malcolm@example.com'},
-#          {'name': 'David', 'email': 'david@example.com'}
-#     ];
+#        {'name': 'John', 'email': 'john@example.com'},
+#        {'name': 'Malcolm', 'email': 'malcolm@example.com'},
+#        {'name': 'David', 'email': 'david@example.com'}
+#     ]
 # Templates:
 #     {{#foreach accounts}}
 #         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">{{ name }}</a>{{#unless _isLast}}, {{/unless}}

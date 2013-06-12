@@ -5,11 +5,18 @@ module.exports.register = (Handlebars, options) ->
   # Internal libs.
   Utils    = require '../utils/utils'
   HTML     = require '../utils/html'
-  
+
+  # NPM libs.
   fs       = require 'fs'
   path     = require 'path'
   grunt    = require 'grunt'
   _        = require 'lodash'
+
+
+  # For the most part, helpers in this file are specifically 
+  # designed for use with Assemble. If you want to use them
+  # without Assemble, you'll need to customize them for your 
+  # own needs.
 
 
   # Switch (proof of concept), not intended for use in production code.
@@ -39,7 +46,7 @@ module.exports.register = (Handlebars, options) ->
     pkg       = Utils.readJSON("./package.json")
     travisUrl = Utils.repoUrl('https://travis-ci.org/$1')
     # pass in data from assemble task options
-    travis    = options.travis || {}
+    travis    = options.travis or {}
     curBranch = ''
     if Utils.isUndefined(branch)
       curBranch = ''
@@ -56,7 +63,7 @@ module.exports.register = (Handlebars, options) ->
     Utils.safeString(template(pkg))
 
   # Travis CI: Generates a title and Travis CI badge for a README.md.
-  # Syntax: {{travis [src]}}
+  # Syntax: {{travis branch}}
   Handlebars.registerHelper "travis", (branch) ->
     pkg       = Utils.readJSON("./package.json")
     repo      = Utils.repoUrl('https://github.com/$1')
@@ -80,7 +87,6 @@ module.exports.register = (Handlebars, options) ->
     source   = title + ' [![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
     template = Handlebars.compile(source)
     Utils.safeString(template(pkg))
-
 
   # Authors: reads in data from an "AUTHORS" file to generate markdown formtted
   # author or list of authors for a README.md. Accepts a second optional
@@ -128,7 +134,5 @@ module.exports.register = (Handlebars, options) ->
     source = "{{#each .}}* {{eta}}\t\t\t{{{@key}}}\t\t\t{{#each goals}}{{{.}}}  {{/each}}\n{{else}}_(Big plans in the works)_{{/each}}"
     template = Handlebars.compile(source)
     Utils.safeString(template(roadmap))
-
-
 
   @

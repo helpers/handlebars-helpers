@@ -16,20 +16,21 @@ module.exports.relative = relative = (a, b) ->
   Utils.getRelativePath(a, b)
 
 # Basename: Returns the basename of a given file.
-# Usage:    {{base "docs/toc.md"}}. Returns:  toc
+# Usage:    {{basename "docs/toc.md"}}. Returns:  toc
 module.exports.basename = basename = (file) ->
   Utils.getBasename(file)
   # Utils.basename(file, path.extname(file))
 
-# Basename: Returns the basename of a given file.
-# Usage:    {{base "docs/toc.md"}}. Returns:  toc
+# Basename: Returns the filename of a given file.
+# Usage:    {{filename "docs/toc.md"}}. Returns:  toc
 module.exports.filename = filename = (file) ->
   path.basename(file)
 
 # Extension: Returns the extension of a given file.
-# Usage:    {{ext "docs/toc.md"}}. Returns:  .md
+# Usage:    {{extname "docs/toc.md"}}. Returns:  .md
 module.exports.extname = extname = (ext) ->
   Utils.getExt(ext)
+
 
 module.exports.register = (Handlebars, options) ->
 
@@ -38,5 +39,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "basename", basename
   Handlebars.registerHelper "filename", filename
   Handlebars.registerHelper "extname", extname
+
 
   @
