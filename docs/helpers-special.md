@@ -98,6 +98,94 @@ The output will look like this:
 * See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
 
 
+### jsfiddle
+Credit: [octopress](http://octopress.org/docs/plugins/jsfiddle-tag/)
+
+All you need is the fiddle’s id and you can easily embed it in your page.
+
+Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
+
+#### Embedding the fiddle
+
+``` html
+http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
+```
+Example:
+
+``` handlebars
+{{ jsfiddle 'ccWP7' }}
+```
+
+**id**
+
+Full URL to the fiddle without `http://jsfiddle.net`
+
+**tabs**
+
+Selected tabs in the order you want them to be displayed. 
+
+Default: `js,resources,html,css,result`
+
+Options: 
+
+* `js`, `html`, `css`: tab with the corresponding code
+* `result`: result tab 
+* `resources`: list of external resources, it will not be displayed if no resources were used
+
+_Adjusting Tabs_
+
+It’s possible to easily adjust the display order of the tabs. In this case, I’m moving the result to be the first item shown.
+
+``` handlebars
+{{ jsfiddle 'ccWP7' 'result,js,html,css' }}
+```
+
+**skin**
+
+The skin to be used. 
+
+Default: `light`
+
+_Adjusting the Skin_
+
+A third (optional) parameter is available to set the "skin" for the fiddle. Currently, the only skins available are `light` and `presentation`.  However, if or when jsFiddle announces new options they may be used immediately.
+
+``` handlebars
+{{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
+```
+
+#### Examples
+
+``` html
+<iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+// or
+<iframe style="width: 100%; height: 300px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/"></iframe>
+```
+
+#### Optional tabs
+If you wish to make the "result" tab display first, then just add `result` and any other secondary tabs you wish to include to your URL:
+
+```
+{{jsfiddle "http://jsfiddle.net/abc123/embedded/result,js,html,css/"}}
+```
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/"></iframe>
+```
+
+If there is no need to show all the tabs, you may remove the tabs you don't need: 
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
+```
+
+### Changing skins
+Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
+
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
+```
 
 ### Other
 

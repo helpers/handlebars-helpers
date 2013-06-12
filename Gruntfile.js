@@ -57,14 +57,14 @@ module.exports = function(grunt) {
     // helper-lib-examples for testing
     copy: {
       main: {
-        files: { 
-          '../helper-lib-examples/node_modules/assemble/node_modules/helper-lib/': ['lib/**'],
-          './node_modules/assemble/node_modules/helper-lib/': ['lib/**']
-        }
+        files: [
+          { expand: true, cwd: './lib', src: ['**'], dest: 'node_modules/assemble/node_modules/helper-lib/'}
+        ]
       }
     },
 
     subgrunt: {
+      copy: 'Gruntfile.js',
       examples: '../helper-lib-examples/Gruntfile.js'
     }
   });

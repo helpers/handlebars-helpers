@@ -125,13 +125,3 @@ _Centers a string using non-breaking spaces._
 // Result:
 |              Bender should not be allowed on tv.              |
 ```
-
-#### nl2br
-_Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks_
-<br>Parameters: `none`
-``` handlebars
-{{nl2br <br>description}}
-
-// Result: 
-<br>
-```
