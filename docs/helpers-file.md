@@ -1,5 +1,4 @@
-
-#### include 
+#### {{include }}
 _Include external files._
 
 <br>Pattern: `{{include [name] [data]}}`
@@ -38,7 +37,7 @@ Result:
 
 Why do this? The goal is to inspire other concepts that build from this one.
 
-#### glob
+#### {{glob}}
 _Use globbing patterns to embed content from specified file or files._
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -49,7 +48,7 @@ Examples:
 {{glob 'src/files/*.{txt,md}'}}
 ```
 
-#### copy
+#### {{copy}}
 _Example helper, copies file A to path B._
 <br>Parameters: `String`
 <br> Default: `undefined`

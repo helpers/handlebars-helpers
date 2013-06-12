@@ -1,4 +1,4 @@
-#### is
+#### {{is}}
 _Conditionally render a block if the condition is true (if x = y)._
 
 Parameters: `string|int` (the value to test against)
@@ -45,7 +45,7 @@ Result:
 <h1> About Us </h1>
 ```
 
-#### if_eq
+#### {{if_eq}}
 **Same as `is`, consider consolidating**
 _Conditionally render a block if the condition is true (If x = y)._
 Parameters: `none`
@@ -53,7 +53,7 @@ Parameters: `none`
 {{#if_eq x compare=y}} ... {{/if_eq}}
 ```
 
-#### isnt
+#### {{isnt}}
 _Conditionally render a block if the condition is false. Opposite of `is`._
 <br>Parameters: value `string|int` - the value to test against.
 ``` js
@@ -72,7 +72,7 @@ number = 5
 Never mind :(
 ```
 
-#### or
+#### {{or}}
 _Conditionally render a block if one of the values is truthy._
 <br>Parameters: values `string|int` - the values to test against.
 ``` js
@@ -91,7 +91,7 @@ magnificent = true
 Kiss my shiny metal ass!
 ```
 
-#### and
+#### {{and}}
 _Conditionally render a block if both values are truthy._
 <br>Parameters: values `string|int` - the values to test against.
 ``` js
@@ -111,7 +111,7 @@ magnificent = true
 Kiss my shiny metal ass!
 ```
 
-#### unless_eq
+#### {{unless_eq}}
 **Same as `isnt`, consider consolidating**
 _Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
 Parameters: `none`

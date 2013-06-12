@@ -100,6 +100,33 @@ module.exports.register = (Handlebars, options) ->
               i++
       Utils.safeString br
 
+  # exticon
+  Handlebars.registerHelper "exticon", (attachment) ->
+    extension = attachment.substr(attachment.lastIndexOf(".") + 1)
+    value = Handlebars.Utils.escapeExpression(extension)
+    switch value
+      when "jpg", "jpeg", "png", "gif"
+        Utils.safeString "<img src=\"img/img-icon.png\"><i>" + attachment + "</i>"
+      when "zip", "rar"
+        Utils.safeString "<img src=\"img/archive-icon.png\"><i>" + attachment + "</i>"
+      when "pdf"
+        Utils.safeString "<img src=\"img/pdf-icon.png\"><i>" + attachment + "</i>"
+      when "txt"
+        Utils.safeString "<img src=\"img/txt-icon.png\"><i>" + attachment + "</i>"
+      when "doc", "docx"
+        Utils.safeString "<img src=\"img/word-icon.png\"><i>" + attachment + "</i>"
+      when "xls", "xlsx"
+        Utils.safeString "<img src=\"img/xls-icon.png\"><i>" + attachment + "</i>"
+      when "csv"
+        Utils.safeString "<img src=\"img/csv-icon.png\"><i>" + attachment + "</i>"
+      when "ppt", "pptx"
+        Utils.safeString "<img src=\"img/ppt-icon.png\"><i>" + attachment + "</i>"
+      when "mp3"
+        Utils.safeString "<img src=\"img/audio-icon.png\"><i>" + attachment + "</i>"
+      else
+        Utils.safeString "<img src=\"img/other-icon.png\"><i>" + attachment + "</i>"
+
+
   # <!DOCTYPE>: Example: {{DOCTYPE 'svg 1.1'}}
   Handlebars.registerHelper "DOCTYPE", (type) ->
     type = type.toLowerCase()

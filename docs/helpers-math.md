@@ -1,4 +1,4 @@
-#### add
+#### {{add}}
 _Returns the sum of two numbers._
 <br>Parameters: value `int` - The number to add to the expression. (Required)
 ``` js
@@ -13,7 +13,7 @@ value = 5
 10
 ```
 
-#### subtract
+#### {{subtract}}
 _Returns the difference of two numbers. Opposite of `add`_
 <br>Parameters: value `int` - The number to subtract from the expression. (Required)_
 ``` js
@@ -28,7 +28,7 @@ value = 5
 0
 ```
 
-#### divide
+#### {{divide}}
 _Returns the division of two numbers._
 <br>Parameters: value `int` - The number to divide the expression. (Required)
 ``` js
@@ -43,7 +43,7 @@ value = 5
 1
 ```
 
-#### multiply
+#### {{multiply}}
 _Returns the multiplication of two numbers._
 <br>Parameters: value `int` - The number to multiply the expression. (Required)
 ``` js
@@ -59,7 +59,7 @@ value = 5
 25
 ```
 
-#### floor
+#### {{floor}}
 _Returns the value rounded down to the nearest integer._
 <br>Parameters: `none`
 ``` js
@@ -74,7 +74,7 @@ value = 5.6
 5
 ```
 
-#### ceil
+#### {{ceil}}
 _Returns the value rounded up to the nearest integer._
 <br>Parameters: `none`
 ``` js
@@ -89,7 +89,7 @@ value = 5.6
 6
 ```
 
-#### round
+#### {{round}}
 _Returns the value rounded to the nearest integer._
 <br>Parameters: `none`
 ``` js
@@ -104,7 +104,7 @@ value = 5.69
 6
 ```
 
-#### sum
+#### {{sum}}
 _Returns the sum of multiple numbers. Similar to `{{#add}}` block helper but accepts multiple arguments._
 <br>Parameters: `none`
 ``` js

@@ -1,4 +1,4 @@
-#### log
+#### {{log}}
 _Simple `console.log()`_
 <br>Parameters: `none`
 ``` html
@@ -9,7 +9,7 @@ _Simple `console.log()`_
 Hi console :)
 ```
 
-#### debug
+#### {{debug}}
 _Simple `console.debug()` that shows the current context._
 <br>Parameters: `none`
 ``` js
@@ -34,7 +34,7 @@ Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
 ```
 
-#### expandJSON
+#### {{expandJSON}}
 _Return a unique, JSON-formatted array of all file or directory paths that match the given globbing pattern(s)_
 <br>Parameters: `String`
 <br> Default: `undefined`
@@ -65,7 +65,7 @@ Example:
 ]
 ```
 
-#### expandYAML
+#### {{expandYAML}}
 _Return a unique, YAML-formatted array of all file or directory paths that match the given globbing pattern(s)_
 <br>Parameters: `String`
 <br> Default: `undefined`

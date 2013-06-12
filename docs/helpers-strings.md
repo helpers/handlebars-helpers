@@ -1,4 +1,4 @@
-#### occurrences 
+#### {{occurrences}}
 _Evaluate string A, and count the occurrences of string B within string A_
 <br>Default: `undefined`
 <br>Parameters:
@@ -12,7 +12,7 @@ _Evaluate string A, and count the occurrences of string B within string A_
 1
 ```
 
-#### hyphenate
+#### {{hyphenate}}
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
@@ -22,7 +22,7 @@ _Replace spaces in string with hyphens._
 make-this-all-hyphenated
 ```
 
-#### dashify
+#### {{dashify}}
 _Same as `hyphenate`, but replaces dots in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
@@ -32,7 +32,7 @@ _Same as `hyphenate`, but replaces dots in string with hyphens._
 make-this-all-hyphenated
 ```
 
-#### lowercase
+#### {{lowercase}}
 _Turns a string to lowercase._
 <br>Parameters: `none`
 ``` handlebars
@@ -42,7 +42,7 @@ _Turns a string to lowercase._
 make this all lowercase
 ```
 
-#### uppercase
+#### {{uppercase}}
 _Turns a string to uppercase. Opposite of `{{lowercase}}`._
 <br>Parameters: `none`
 ``` handlebars
@@ -52,7 +52,7 @@ _Turns a string to uppercase. Opposite of `{{lowercase}}`._
 MAKE THIS ALL UPPERCASE
 ```
 
-#### capitalizeFirst
+#### {{capitalizeFirst}}
 _Capitalizes the first word in a string._
 <br>Parameters: `none`
 ``` handlebars
@@ -62,7 +62,7 @@ _Capitalizes the first word in a string._
 Capitalize first word in this sentence
 ```
 
-#### capitalizeEach
+#### {{capitalizeEach}}
 _Capitalizes each word in a string._
 <br>Parameters: `none`
 ``` handlebars
@@ -72,7 +72,7 @@ _Capitalizes each word in a string._
 Capitalize EACH Word In This Sentence
 ```
 
-#### titleize
+#### {{titleize}}
 _Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
 ``` handlebars
@@ -82,7 +82,7 @@ _Capitalizes all words within a string. Taken from the templating library [Walru
 Capitalize Each Word In This Sentence.
 ```
 
-#### sentence
+#### {{sentence}}
 _Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase._
 Parameters: `none`
 ``` handlebars
@@ -92,7 +92,7 @@ Parameters: `none`
 Capitalize the first word in each sentence. But make the other words lowercase.
 ```
 
-#### reverse
+#### {{reverse}}
 _Reverses a string._
 <br>Parameters: `none`
 ``` handlebars
@@ -102,7 +102,7 @@ _Reverses a string._
 .VT no dewolla eb TON dluohs redneb
 ```
 
-#### truncate
+#### {{truncate}}
 _Truncates a string given a specified `length`, providing a custom string to denote an `omission`._
 <br>Parameters: 
 
@@ -116,7 +116,7 @@ _Truncates a string given a specified `length`, providing a custom string to den
 Bender should not be allowed...
 ```
 
-#### center
+#### {{center}}
 _Centers a string using non-breaking spaces._
 <br>Parameters: spaces: `int` - The number of spaces. (Required)
 ``` handlebars

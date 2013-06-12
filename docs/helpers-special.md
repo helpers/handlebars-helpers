@@ -1,5 +1,4 @@
-
-#### embed
+#### {{embed}}
 _Embed code from given file_
 
 Parameters: 
@@ -23,12 +22,42 @@ Example:
 
 ### README Helpers
 
-#### authors
-TODO...
+#### {{authors}}
+Params: `none`
+Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
+
+Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
+
+For example, given we have the `AUTHORS` file in the root of our project, and it contains: 
+
+```
+Brian Woodward (http://github.com/doowb)
+Jon Schlinkert (http://github.com/jonschlinkert)
+```
+Using the lowercase version of the helper, `{{authors}}`, the output will be:
+
+``` md
+* [Brian Woodward](http://github.com/doowb)  
+* [Jon Schlinkert](http://github.com/jonschlinkert)  
+```
+
+Or using uppercase version, `{{AUTHORS}}`, the output will be:
+
+``` md
+**Jon Schlinkert**
+
++ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
++ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
+
+**Brian Woodward**
+
++ [http://twitter.com/doowb](http://twitter.com/doowb)
++ [http://github.com/doowb](http://github.com/doowb)
+```
 
 ### Travis CI
 
-#### travis
+#### {{travis}}
 Creates a "full" Travis CI link in markdown format.
 Params: `branch`
 Type: `String`
@@ -46,7 +75,7 @@ Example with branch: `{{travis 'master'}}`
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
 ```
 
-#### travis-badge
+#### {{travis-badge}}
 Creates a Travis CI link in markdown format.
 Params: `none`
 Usage: `{{travis-badge}}`
@@ -57,7 +86,7 @@ Example:
 [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
-#### changelog
+#### {{changelog}}
 A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
 
 **NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
@@ -98,14 +127,14 @@ The output will look like this:
 * See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
 
 
-### jsfiddle
+#### {{jsfiddle}}
 Credit: [octopress](http://octopress.org/docs/plugins/jsfiddle-tag/)
 
 All you need is the fiddle’s id and you can easily embed it in your page.
 
 Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
 
-#### Embedding the fiddle
+##### Embedding the fiddle
 
 ``` html
 http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
@@ -154,7 +183,7 @@ A third (optional) parameter is available to set the "skin" for the fiddle. Curr
 {{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
 ```
 
-#### Examples
+##### Examples
 
 ``` html
 <iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
@@ -163,7 +192,7 @@ A third (optional) parameter is available to set the "skin" for the fiddle. Curr
 <iframe style="width: 100%; height: 300px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/"></iframe>
 ```
 
-#### Optional tabs
+##### Optional tabs
 If you wish to make the "result" tab display first, then just add `result` and any other secondary tabs you wish to include to your URL:
 
 ```
@@ -180,7 +209,7 @@ If there is no need to show all the tabs, you may remove the tabs you don't need
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
 ```
 
-### Changing skins
+#### Changing skins
 Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
 
 ``` html
@@ -189,16 +218,21 @@ Fiddles also allow "skins". In the following example, `presentation` is the name
 
 ### Other
 
-#### formatPhoneNumber
+#### {{formatPhoneNumber}}
 _Output a formatted phone number_
+
 Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Given:
 ```js
-phoneNumber: 4444444444
+number: 4444444444
 ```
+and the template:
+
 ``` handlebars
-{{formatPhoneNumber phoneNumber}}
+{{formatPhoneNumber number}}
 ```
-Result:
+The result would be:
 ```
 (444) 444-4444
 ```

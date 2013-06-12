@@ -2,7 +2,7 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 
 > "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
 
-#### url_resolve (url, href)
+#### {{url_resolve}} (url, href)
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
 <br>Usage:
@@ -18,7 +18,7 @@ Example:
 ```
 
 
-#### url_parse (url)
+#### {{url_parse}} (url)
 _Take a URL string, and return an object._
 
 Params: 

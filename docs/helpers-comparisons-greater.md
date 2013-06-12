@@ -1,11 +1,11 @@
-#### if_gt
+#### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
 ``` handlebars
 {{#if_gt x compare=y}} ... {{/if_gt}}
 ```
 
-#### gt
+#### {{gt}}
 **Same as `if_gt`, consider consolidating**
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 <br>Parameters: value `string|int` - the value to test against.
@@ -25,21 +25,21 @@ number = 5
 Never mind :(
 ```
 
-#### unless_gt
+#### {{unless_gt}}
 _Unless greater than (Unless x > y)_
 Parameters: `none`
 ``` handlebars
 {{#unless_gt x compare=y}} ... {{/unless_gt}}
 ```
 
-#### if_gteq
+#### {{if_gteq}}
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 Parameters: `none`
 ``` handlebars
 {{#if_gteq x compare=y}} ... {{/if_gteq}}
 ```
 
-#### gte
+#### {{gte}}
 **Same as `if_gteq`, consider consolidating**
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 <br>Parameters: value `string|int` - the value to test against.
@@ -60,7 +60,7 @@ Kiss my shiny metal ass!
 ```
 
 
-#### unless_gteq
+#### {{unless_gteq}}
 _Render block, unless given value is greater than or equal to._
 Parameters: `none`
 _Unless x >= y_

@@ -1,4 +1,4 @@
-#### first
+#### {{first}}
 _Returns the first item in a collection._
 <br>Parameters: `none`
 ``` js
@@ -23,7 +23,7 @@ collection = [
 Amy Wong
 ```
 
-#### withFirst
+#### {{withFirst}}
 _Use the first item in a collection inside a block._
 <br>Parameters: `none`
 ``` js
@@ -49,7 +49,7 @@ collection = [
 <p>Amy Wong is smart.</p>
 ```
 
-#### last
+#### {{last}}
 _Returns the last item in a collection. Opposite of `first`._
 <br>Parameters: `none`
 ``` js
@@ -73,7 +73,7 @@ collection = [
 Scruffy
 ```
 
-#### withLast
+#### {{withLast}}
 _Use the last item in a collection inside a block. Opposite of `withFirst`._
 <br>Parameters: `none`
 ``` js
@@ -99,7 +99,7 @@ collection = [
 <p>Scruffy is lazy.</p>
 ```
 
-#### after
+#### {{after}}
 _Returns all of the items in the collection after the specified count._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
 ```
@@ -123,7 +123,7 @@ collection = [
 Leela, Professor Farnsworth, Scruffy
 ```
 
-#### withAfter
+#### {{withAfter}}
 _Use all of the items in the collection after the specified count inside a block._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
 ``` js
@@ -149,7 +149,7 @@ collection = [
 Leela Professor Farnsworth Scruffy
 ```
 
-#### before
+#### {{before}}
 _Returns all of the items in the collection before the specified count. Opposite of `after`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
 ``` js
@@ -173,7 +173,7 @@ collection = [
 Amy Wong, Bender, Dr. Zoidberg
 ```
 
-#### withBefore
+#### {{withBefore}}
 _Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
 ``` js
@@ -199,7 +199,7 @@ collection = [
 gnoW ymA redneB grebdioZ .rD
 ```
 
-#### join
+#### {{join}}
 _Joins all elements of a collection into a string using a separator if specified._
 <br>Parameters: separator `string` - A string to use as a separator between the items. (Optional)
 ``` js
@@ -223,7 +223,7 @@ collection = [
 Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
 ```
 
-#### sort
+#### {{sort}}
 _Returns the collection sorted._
 Parameters: `none`
 ``` js
@@ -247,7 +247,7 @@ collection = [
 Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
 ```
 
-#### withSort
+#### {{withSort}}
 _Uses the sorted collection inside the block._
 <br>Parameters: field `string` - String name of the field or property to sort by. (Optional)
 ``` js
@@ -276,7 +276,7 @@ Bender: 239
 Leela: 8021
 ```
 
-#### length
+#### {{length}}
 _Returns the length of the collection._
 <br>Parameters: `none`
 ``` js
@@ -301,7 +301,7 @@ collection = [
 8
 ```
 
-#### lengthEqual
+#### {{lengthEqual}}
 _Conditionally render a block based on the length of a collection._
 <br>Parameters: length `int` - The value to test against. (Required)
 ``` js
@@ -329,7 +329,7 @@ collection = [
 There are 3 people in Planet Express.
 ```
 
-#### empty
+#### {{empty}}
 _Conditionally render a block if the collection is empty._
 <br>Parameters: `none`
 ``` js
@@ -347,7 +347,7 @@ collection = []
 // Result:
 Good news everyone!
 ```
-#### any
+#### {{any}}
 _Conditionally render a block if the collection isn't empty. Opposite of `empty`_
 <br>Parameters: `none`
 ``` js
@@ -366,7 +366,7 @@ collection = ['Professor Farnsworth']
 Good news everyone!
 ```
 
-#### inArray
+#### {{inArray}}
 _Conditionally render a block if a specified value is in the collection._
 <br>Parameters: value `string|int` - A value to test against. (Required)
 ``` js
@@ -385,7 +385,7 @@ collection = ['Professor Farnsworth', 'Fry', 'Bender']
 I'm walking on sunshine!
 ```
 
-#### eachIndex
+#### {{eachIndex}}
 _Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context._
 <br>Parameters: `none`
 ``` js
@@ -402,7 +402,7 @@ collection = ['Professor Farnsworth', 'Fry', 'Bender']
 Professor Farnsworth is 0, Fry is 1, Bender is 2
 ```
 
-#### eachProperty
+#### {{eachProperty}}
 _Loop through an objects properties_
 <br>Parameters: `none`
 ``` js

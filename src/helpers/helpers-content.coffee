@@ -77,7 +77,7 @@ module.exports.partial = partial = (template) ->
   Utils.safeString partial(context)
 
 
-# module.exports.sections = {}
+module.exports.sections = {}
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper "copy", copy

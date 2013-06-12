@@ -2,7 +2,7 @@ Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handli
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
 
-#### relative (from, to)
+#### {{relative (from, to)}}
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
@@ -18,7 +18,7 @@ Example:
 <a href="../../dist/assets/css/styles.css"></a> 
 ```
 
-#### extname
+#### {{extname}}
 _"Return the extension of the path, from the last '.' to end of string in the last portion of the path. If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string."_
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
@@ -40,7 +40,7 @@ _"Return the extension of the path, from the last '.' to end of string in the la
 ''
 ```
 
-#### dirname
+#### {{dirname}}
 _Return the directory name of a path. Similar to the Unix dirname command._
 
 Example:

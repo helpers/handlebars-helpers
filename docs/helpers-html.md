@@ -1,4 +1,4 @@
-#### gist
+#### {{gist}}
 _Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
 
 Parameters: `String`
@@ -14,7 +14,7 @@ Output:
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
-#### blockquote (planned...)
+#### {{blockquote}} (planned...)
 _Create a blockquote_
 
 Outputs a string with a given attribution as a quote
@@ -37,30 +37,8 @@ Output:
   </footer>
 </blockquote>
 ```
-   
-#### stripes
-_Iterates through an array, letting the contents know whether to add an even or odd row._
 
-Parameters:
-
-* `array` to iterate over, 
-* `string`: CSS class name for even rows 
-* `string`: CSS class name for odd rows
-
-Credit: [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Usage:
-``` handlebars
-{{#stripes myArray "even" "odd"}}
-  <div class="{{stripeClass}}">
-    ... code for the row ...
-  </div>
-{{else}}
-  <em>There aren't any people.</em>
-{{/stripes}}
-```
-
-#### timeline (planned...)
+#### {{timeline}} (planned...)
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -84,7 +62,7 @@ Usage:
 </div>
 ```
 
-#### exticon
+#### {{exticon}}
 _Generate the appropriate icon based on the extension of the given file._
 
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
@@ -108,7 +86,7 @@ Output:
 <img src="img/other-icon.png"><i>file</i>
 ```
 
-#### ul
+#### {{ul}}
 _Creates an unordered list._
 
 Parameters: `Hash|HTML attributes`, `Optional`
@@ -139,7 +117,7 @@ Template:
   <li> Fry - 1 delivery </li>
 </ul>
 ```
-#### ol
+#### {{ol}}
 _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
 
 Parameters: `Hash`, `HTML attributes`, `Optional`
@@ -172,7 +150,7 @@ Template:
 </ol>
 ```
 
-#### br
+#### {{br}}
 _Renders `<br>` elements in the output, based on the number given as a parameter. Not really recommended for general use, but it's here if you need it._
 
 Parameters: `Integer|Count`, `Optional`
