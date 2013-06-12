@@ -1572,7 +1572,7 @@ value = 2222222
 ```
 
 
-## Comparisons: Equal helpers
+## Comparisons: "equal" helpers
 #### {{is}}
 _Conditionally render a block if the condition is true (if x = y)._
 
@@ -1696,7 +1696,7 @@ Parameters: `none`
 
 
 
-## Comparisons: Greater Than helpers
+## Comparisons: "greater than" helpers
 #### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
@@ -1768,7 +1768,7 @@ _Unless x >= y_
 ```
 
 
-## Comparisons: Less Than helpers
+## Comparisons: "less than" helpers
 #### {{lt}}
 _Conditionally render a block if the value is less than a given number. Opposite of `gt`._
 <br>Parameters: value `string|int` - the value to test against.
@@ -2099,7 +2099,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 01:26:06._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 01:28:09._
 
 
 
