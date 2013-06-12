@@ -12,6 +12,7 @@ Utils.toString = Object.prototype.toString
 
 
 
+
 # Type check
 Utils.isFunction = (obj) ->
   typeof obj is "function"
