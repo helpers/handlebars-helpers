@@ -4,7 +4,7 @@ _Conditionally render a block if the value is less than a given number. Opposite
 ``` js
 number = 5
 ```
-``` html
+``` xml
 {{#lt number 3}}
     Kiss my shiny metal ass!
 {{else}}
@@ -21,7 +21,7 @@ _Conditionally render a block if the value is less or equal than a given number.
 ``` js
 number = 5
 ```
-``` html
+``` xml
 // Template
 {{#lte number 5}}
     Kiss my shiny metal ass!
@@ -36,13 +36,13 @@ Kiss my shiny metal ass!
 #### {{unless_lt}}
 _Render block, unless value is less than a given number (Unless x < y)_
 Parameters: `none`
-``` handlebars
+``` erlang
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
 #### {{unless_lteq}}
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_
 Parameters: `none`
-``` handlebars
+``` erlang
 {{#unless_lteq x compare=y}} ... {{/unless_lteq}}
 ```

@@ -5,7 +5,7 @@ _Returns exactly `digits` after the decimal place. The number is rounded if nece
 // Data
 value = 5.53231
 ```
-``` html
+``` xml
 // Template
 {{toFixed value 3}}
 
@@ -20,7 +20,7 @@ _Returns the number in fixed-point or exponential notation rounded to `precision
 // Data
 value = 555.322
 ```
-``` html
+``` xml
 // Template
 {{toPrecision value 4}}
 
@@ -36,7 +36,7 @@ _Returns the number in exponential notation with one digit before the decimal po
 value = 5
 
 ```
-``` html
+``` xml
 // Template
 {{toExponential value 5}}
 
@@ -51,7 +51,7 @@ _Returns an integer._
 // Data
 value = '22.2abc'
 ```
-``` html
+``` xml
 // Template
 {{toInt value}}
 
@@ -66,7 +66,7 @@ _Returns a floating point number._
 // Data
 value = '22.2abc'
 ```
-``` html
+``` xml
 // Template
 {{toFloat value}}
 
@@ -83,7 +83,7 @@ _Returns the number in abbreviation formats based on a value. The number is roun
 value = 123456789
 
 ```
-``` html
+``` xml
 // Template
 {{toAbbr value}}
 
@@ -99,7 +99,7 @@ _Adds commas to a number._
 value = 2222222
 
 ```
-``` html
+``` xml
 // Template
 {{addCommas value}}
 

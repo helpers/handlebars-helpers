@@ -2,7 +2,7 @@
 _Provides a default or fallback value if a value doesn't exist._
 <br>Parameters: defaultValue `string|int` - The default value to use. `title = ''`
 
-``` html
+``` xml
 // Template
 {{default title "No title available."}}
 

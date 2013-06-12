@@ -7,11 +7,11 @@ _Derive the relative path from one **absolute path** to another (e.g from path A
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
 <br>Usage:
-``` html
+``` xml
 {{relative "from" "to"}}
 ```
 Example:
-``` handlebars
+``` erlang
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 
 // returns
@@ -23,7 +23,7 @@ _"Return the extension of the path, from the last '.' to end of string in the la
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
 <br>Usage:
-``` html
+``` xml
 {{extname 'index.html'}}
 
 // returns
@@ -45,7 +45,7 @@ _Return the directory name of a path. Similar to the Unix dirname command._
 
 Example:
 
-``` html
+``` xml
 {{dirname '/foo/bar/baz/asdf/quux'}}
 
 // returns

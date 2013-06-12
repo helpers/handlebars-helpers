@@ -10,7 +10,7 @@ Example:
 {{gist '5193239'}}
 ```
 Output:
-``` html
+``` xml
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
@@ -28,7 +28,7 @@ Outputs a string with a given attribution as a quote
 ```
 Output:
 
-``` html
+``` xml
 <blockquote>
   <p>This is your quote.</p>
   <footer> 
@@ -54,7 +54,7 @@ Parameters:
 Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
 
 Usage:
-``` handlebars
+``` erlang
 <div class="timeline">
  {{#timeline myArray "left" "right"}}
  <div class="{{columnClass}}">
@@ -72,7 +72,7 @@ _Generate the appropriate icon based on the extension of the given file._
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
 
 Usage: 
-``` handlebars
+``` erlang
 {{exticon 'file.png'}}
 {{exticon 'file.pdf'}}
 {{exticon 'file.doc'}}
@@ -81,7 +81,7 @@ Usage:
 {{exticon 'file'}}
 ```
 Output:
-``` html
+``` xml
 <img src="img/img-icon.png"><i>file.png</i>
 <img src="img/pdf-icon.png"><i>file.pdf</i>
 <img src="img/word-icon.png"><i>file.doc</i>
@@ -108,12 +108,12 @@ collection = [
 ]
 ```
 Template:
-``` handlebars
+``` erlang
 {{#ul collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
 ```
-``` html
+``` xml
 // Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -140,12 +140,12 @@ collection = [
 ```
 
 Template:
-``` handlebars
+``` erlang
 {{#ol collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ol}}
 ```
-``` html
+``` xml
 // Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -162,10 +162,10 @@ Parameters: `Integer|Count`, `Optional`
 The number of `br` elements to render. 
 
 `template.hbs`
-``` handlebars
+``` erlang
 {{br 5}}
 ```
 renders to:
-``` html
+``` xml
 `<br><br><br><br><br>`
 ```

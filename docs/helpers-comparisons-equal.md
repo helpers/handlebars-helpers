@@ -11,7 +11,7 @@ Example #1:
 number = 5
 ---
 ```
-``` html
+``` xml
 // Template
 {{#is number 5}}
     Kiss my shiny metal ass!
@@ -33,7 +33,7 @@ page:
   title: About Us
 ---
 ```
-``` html
+``` xml
 {{#is page.title "home"}}
     <h1> About Us </h1>
 {{else}}
@@ -49,7 +49,7 @@ Result:
 **Same as `is`, consider consolidating**
 _Conditionally render a block if the condition is true (If x = y)._
 Parameters: `none`
-``` handlebars
+``` erlang
 {{#if_eq x compare=y}} ... {{/if_eq}}
 ```
 
@@ -60,7 +60,7 @@ _Conditionally render a block if the condition is false. Opposite of `is`._
 // Data
 number = 5
 ```
-``` html
+``` xml
 // Template
 {{#isnt number 5}}
     Kiss my shiny metal ass!
@@ -79,7 +79,7 @@ _Conditionally render a block if one of the values is truthy._
 great = no
 magnificent = true
 ```
-``` html
+``` xml
 // Template
 {{#or great magnificent}}
     Kiss my shiny metal ass!
@@ -99,7 +99,7 @@ _Conditionally render a block if both values are truthy._
 great = true
 magnificent = true
 ```
-``` html
+``` xml
 // Template
 {{#and great magnificent}}
     Kiss my shiny metal ass!
@@ -115,6 +115,6 @@ Kiss my shiny metal ass!
 **Same as `isnt`, consider consolidating**
 _Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
 Parameters: `none`
-``` handlebars
+``` erlang
 {{#unless_eq x compare=y}} ... {{/unless_eq}}
 ```

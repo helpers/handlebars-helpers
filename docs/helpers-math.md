@@ -5,7 +5,7 @@ _Returns the sum of two numbers._
 // Data
 value = 5
 ```
-``` html
+``` xml
 // Template
 {{add value 5}}
 
@@ -20,7 +20,7 @@ _Returns the difference of two numbers. Opposite of `add`_
 // Data
 value = 5
 ```
-``` html
+``` xml
 // Template
 {{subtract value 5}}
 
@@ -35,7 +35,7 @@ _Returns the division of two numbers._
 // Data
 value = 5
 ```
-``` html
+``` xml
 // Template
 {{divide value 5}}
 
@@ -51,7 +51,7 @@ _Returns the multiplication of two numbers._
 value = 5
 
 ```
-``` html
+``` xml
 // Template
 {{multiply value 5}}
 
@@ -66,7 +66,7 @@ _Returns the value rounded down to the nearest integer._
 // Data
 value = 5.6
 ```
-``` html
+``` xml
 // Template
 {{floor value}}
 
@@ -81,7 +81,7 @@ _Returns the value rounded up to the nearest integer._
 // Data
 value = 5.6
 ```
-``` html
+``` xml
 // Template
 {{ceil value}}
 
@@ -96,7 +96,7 @@ _Returns the value rounded to the nearest integer._
 // Data
 value = 5.69
 ```
-``` html
+``` xml
 // Template
 {{round value}}
 
@@ -115,7 +115,7 @@ value = {
   c: 3
 }
 ```
-``` html
+``` xml
 // Template
 {{sum value.a value.b value.c}}
 

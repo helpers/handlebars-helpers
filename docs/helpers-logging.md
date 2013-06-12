@@ -1,7 +1,7 @@
 #### {{log}}
 _Simple `console.log()`_
 <br>Parameters: `none`
-``` html
+``` xml
 // Template
 {{log "Hi console :)"}}
 
@@ -23,7 +23,7 @@ collection = [
   deliveries: 1
 ]
 ```
-``` html
+``` xml
 // Template
 {{#withFirst collection}}
    {{debug name}}
@@ -40,7 +40,7 @@ _Return a unique, JSON-formatted array of all file or directory paths that match
 <br> Default: `undefined`
 
 Example:
-``` html
+``` xml
 {{expandJSON './src/**/*.md'}}
 
 // returns
@@ -71,7 +71,7 @@ _Return a unique, YAML-formatted array of all file or directory paths that match
 <br> Default: `undefined`
 
 Example:
-``` html
+``` xml
 {{expandYAML './src/**/*.md'}}
 
 // returns

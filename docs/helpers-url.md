@@ -6,14 +6,15 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
 <br>Usage:
-``` html
+``` haskell
 {{url_resolve url href}}
 ```
 Example:
-``` handlebars
+``` xml
 <a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
-
-// returns
+```
+returns:
+``` xml
 <a href="http://example.com/two"></a> 
 ```
 
@@ -26,11 +27,14 @@ Params:
 * Output format: `yaml` or `json`. Default: `json`
 
 <br>Usage:
-``` html
+
+``` 
 {{url_parse "http://example.com/one"}} 
 ```
+
 Renders to:
-``` html
+
+``` json
 {
   "protocol": "http:",
   "slashes": true,
@@ -49,11 +53,12 @@ Renders to:
 
 Or with `yaml` as the second param:
 
-``` html
+``` haskell
 {{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
 ```
 Renders to:
-``` html
+
+``` coffeescript
 protocol: "http:"
 slashes: true
 auth: null

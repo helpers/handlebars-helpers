@@ -8,7 +8,7 @@ Parameters:
 Syntax: `{{ embed [file] [syntax] }}`
 
 Helper also:
-* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
+* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` xml`) in the output.
 * When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
 
 Example:
@@ -136,12 +136,12 @@ Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
 
 ##### Embedding the fiddle
 
-``` html
+``` xml
 http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
 ```
 Example:
 
-``` handlebars
+``` erlang
 {{ jsfiddle 'ccWP7' }}
 ```
 
@@ -165,7 +165,7 @@ _Adjusting Tabs_
 
 It’s possible to easily adjust the display order of the tabs. In this case, I’m moving the result to be the first item shown.
 
-``` handlebars
+``` erlang
 {{ jsfiddle 'ccWP7' 'result,js,html,css' }}
 ```
 
@@ -179,13 +179,13 @@ _Adjusting the Skin_
 
 A third (optional) parameter is available to set the "skin" for the fiddle. Currently, the only skins available are `light` and `presentation`.  However, if or when jsFiddle announces new options they may be used immediately.
 
-``` handlebars
+``` erlang
 {{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
 ```
 
 ##### Examples
 
-``` html
+``` xml
 <iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
 // or
@@ -199,19 +199,19 @@ If you wish to make the "result" tab display first, then just add `result` and a
 {{jsfiddle "http://jsfiddle.net/abc123/embedded/result,js,html,css/"}}
 ```
 
-``` html
+``` xml
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/"></iframe>
 ```
 
 If there is no need to show all the tabs, you may remove the tabs you don't need: 
 
-``` html
+``` xml
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
 ```
 
 #### Changing skins
 Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
 
-``` html
+``` xml
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
 ```

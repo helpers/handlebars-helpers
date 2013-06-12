@@ -15,7 +15,7 @@ collection = [
 ]
 
 ```
-``` html
+``` xml
 // Template
 {{first collection}}
 
@@ -39,7 +39,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{#withFirst collection}}
   <p>{{this}} is smart.</p>
@@ -65,7 +65,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{last collection}}
 
@@ -89,7 +89,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{#withLast collection}}
   <p>{{this}} is lazy.</p>
@@ -115,7 +115,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{after collection 5}}
 
@@ -139,7 +139,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{#withAfter collection 5}}
     {{titleize this}}
@@ -165,7 +165,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{before collection 5}}
 
@@ -189,7 +189,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{#withBefore collection 5}}
     {{reverse this}}
@@ -215,7 +215,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{join collection " & "}}
 
@@ -239,7 +239,7 @@ collection = [
   'Scruffy'
 ]
 ```
-``` html
+``` xml
 // Template
 {{sort collection}}
 
@@ -264,7 +264,7 @@ collection = [
 ]
 
 ```
-``` html
+``` xml
 // Template
 {{#withSort collection "deliveries"}}
     {{name}}: {{deliveries}} <br>
@@ -293,7 +293,7 @@ collection = [
 ]
 
 ```
-``` html
+``` xml
 // Template
 {{length collection}}
 
@@ -317,7 +317,7 @@ collection = [
   deliveries: -12
 ]
 ```
-``` html
+``` xml
 // Template
 {{#lengthEqual collection 3}}
         There are 3 people in Planet Express.
@@ -336,7 +336,7 @@ _Conditionally render a block if the collection is empty._
 // Data
 collection = []
 ```
-``` html
+``` xml
 // Template
 {{#empty collection}}
         Good news everyone!
@@ -354,7 +354,7 @@ _Conditionally render a block if the collection isn't empty. Opposite of `empty`
 // Data
 collection = ['Professor Farnsworth']
 ```
-``` html
+``` xml
 // Templates
 {{#any collection}}
         Good news everyone!
@@ -373,7 +373,7 @@ _Conditionally render a block if a specified value is in the collection._
 // Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` html
+``` xml
 // Templates
 {{#inArray collection "Fry"}}
         I'm walking on sunshine!
@@ -392,7 +392,7 @@ _Current implementation of the default Handlebars loop helper {{#each}} adding i
 // Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` html
+``` xml
 // Templates
 {{#eachIndex collection}}
     {{this}} is {{index}}
@@ -409,7 +409,7 @@ _Loop through an objects properties_
 // Data
 TODO...
 ```
-``` html
+``` xml
 // Templates
 {{#eachProperty object}}
     {{property}}: {{value}}<br/>

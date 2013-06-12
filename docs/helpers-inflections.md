@@ -9,7 +9,7 @@ _Returns the plural or singular form of a word based on a count._
 enemies = 0
 friends = 1
 ```
-``` html
+``` xml
 // Template
 {{inflect enemies "enemy" "enemies"}}
 {{inflect friends "friend" "friends" true}}
@@ -21,7 +21,7 @@ enemies
 #### {{ordinalize}}
 _Turns a number into an ordinal string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
-``` html
+``` xml
 // Template
 {{ordinalize 3}}
 {{ordinalize 1}}
