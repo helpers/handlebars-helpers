@@ -8,7 +8,6 @@ _     = require 'lodash'
 
 # NOTE: Most of these helpers are experimental. 
 # Please do not use in production. 
-# 
 
 # Copy: copies src file from A to B. USE WITH CAUTION!!! Usage: {{copy [a] [b]}}
 module.exports.copy = copy = (a, b) ->
