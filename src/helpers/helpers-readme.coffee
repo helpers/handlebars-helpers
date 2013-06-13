@@ -18,17 +18,6 @@ module.exports.register = (Handlebars, options) ->
   # without Assemble, you'll need to customize them for your 
   # own needs.
 
-
-  # Switch (proof of concept), not intended for use in production code.
-  # This helper demonstrates a simple example of how to switch the output
-  # format based on the extension of the destination file(s) in the
-  # 'assemble' grunt task.
-  Handlebars.registerHelper "switch", (src) ->
-    md = '# ' + src
-    html = '<h1>' + src + '</h1>'
-    output = Utils.switchOutput(options.ext, md, html)
-    Utils.safeString(output)
-
   # readme-title: Generates a title and Travis CI badge for a README.md.
   # Syntax: {{travis [src]}}
   Handlebars.registerHelper "readme-title", (branch) ->

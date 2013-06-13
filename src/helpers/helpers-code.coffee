@@ -43,11 +43,16 @@ module.exports =
     result = '``` ' + lang + '\n' + output + '\n```\n'
     Utils.safeString(result)
 
-  # jsFiddle: Embed a jsFiddle, second parameter sets tabs
-  # Usage: {{ jsfiddle [id] [tabs] }}
-  jsfiddle: jsfiddle = (id, tabs) ->
-    tabs = "result,js,html,css"  if Utils.isUndefined(tabs)
-    result = "<iframe width=\"100%\" height=\"300\" src=\"http://jsfiddle.net/" + id + "/embedded/" + tabs + "/presentation/\" allowfullscreen=\"allowfullscreen\" frameborder=\"0\"></iframe>"
+  # jsFiddle: Embed a jsFiddle, first param sets the id of the 
+  # fiddle, second param defines tabs to be shown...
+  # Usage: {{ jsfiddle [id] [tabs] [skin] [height] [width] }}
+  jsfiddle: jsfiddle = (id, tabs, skin, height, width) ->
+    tabs   = "result,js,html,css"  if Utils.isUndefined(tabs)
+    skin   = "light"  if Utils.isUndefined(skin)
+    width  = "210px"  if Utils.isUndefined(width)
+    height = "100%"  if Utils.isUndefined(height)
+
+    result = "<iframe width=" + width + " height=" + height + " src=\"http://jsfiddle.net/" + id + "/embedded/" + tabs + "/" + skin + "/\" allowfullscreen=\"allowfullscreen\" frameborder=\"0\"></iframe>"
     Utils.safeString result
 
   # Gist: Downloads and embeds public GitHub Gists by
@@ -61,7 +66,7 @@ module.exports =
 
 module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "embed", embed
-  Handlebars.registerHelper "gist", gist
   Handlebars.registerHelper "jsfiddle", jsfiddle
+  Handlebars.registerHelper "gist", gist
 
   @
