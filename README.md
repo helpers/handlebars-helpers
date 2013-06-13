@@ -181,7 +181,7 @@ Parameters:
 Syntax: `{{ embed [file] [syntax] }}`
 
 Helper also:
-* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` xml`) in the output.
+* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
 * When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
 
 Example:
@@ -196,27 +196,36 @@ Example:
 ### README Helpers
 
 #### {{authors}}
+Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
+
 Params: `none`
 Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
 
-Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
-
-For example, given we have the `AUTHORS` file in the root of our project, and it contains: 
+Data (`AUTHORS` file in the root of our project): 
 
 ```
 Brian Woodward (http://github.com/doowb)
 Jon Schlinkert (http://github.com/jonschlinkert)
 ```
-Using the lowercase version of the helper, `{{authors}}`, the output will be:
 
+Template (lowercase version):
+``` handlebars
+{{authors}}
+```
+
+Renders to:
 ``` md
 * [Brian Woodward](http://github.com/doowb)  
 * [Jon Schlinkert](http://github.com/jonschlinkert)  
 ```
 
-Or using uppercase version, `{{AUTHORS}}`, the output will be:
+Or the uppercase version:
+``` handlebars
+{{AUTHORS}}
+```
 
-``` md
+Renders to:
+``` 
 **Jon Schlinkert**
 
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
@@ -228,34 +237,49 @@ Or using uppercase version, `{{AUTHORS}}`, the output will be:
 + [http://github.com/doowb](http://github.com/doowb)
 ```
 
+
 ### Travis CI
 
 #### {{travis}}
-Creates a "full" Travis CI link in markdown format.
+_Creates a "full" Travis CI link in markdown format_.
+
 Params: `branch`
 Type: `String`
 Usage: `{{travis [branch]}}`
 
-Example using default: `{{travis}}`
+Template:
+``` handlebars
+{{travis}}`
+```
 
-``` md
+Renders to:
+``` markdown
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
-Example with branch: `{{travis 'master'}}`
+Template with branch: 
+``` handlebars
+{{travis 'master'}}
+```
 
-``` md
+Renders to:
+``` markdown
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
 ```
 
 #### {{travis-badge}}
-Creates a Travis CI link in markdown format.
+_Creates a Travis CI link in markdown format_.
+
 Params: `none`
 Usage: `{{travis-badge}}`
 
-Example:
+Template
+``` handlebars
+{{travis}}`
+```
 
-``` md
+Renders to:
+``` markdown
 [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
@@ -269,7 +293,7 @@ A couple things to keep in mind about YAML:
 * YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
 * Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
 
-Here is an example of the format to follow in your `CHANGELOG` file:
+Example of the format to follow in your `CHANGELOG` file:
 
 ``` yaml
 v0.1.2
@@ -301,93 +325,69 @@ The output will look like this:
 
 
 #### {{jsfiddle}}
+_Easily embed a [jsFiddle](http://jsfiddle.net) in a page, requiring only the ID of the fiddle._
+
 Credit: [octopress](http://octopress.org/docs/plugins/jsfiddle-tag/)
 
-All you need is the fiddle’s id and you can easily embed it in your page.
+Parameters: `{{ jsfiddle "id" "tabs" "skin" "height" "width" }}`
+  * `id`: full URL to the fiddle excluding `http://jsfiddle.net`
+  * `tabs`: tabs to be displayed, and the order specified
+  * `skin`: the skin to be used, `light` or `presentation` are the only options available.
+  * `height`: the height of the rendered `<iframe>`
+  * `width`: the width of the rendered `<iframe>`
 
-Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
-
-##### Embedding the fiddle
-
-``` xml
-http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
-```
-Example:
-
-``` erlang
+Template:
+``` handlebars
 {{ jsfiddle 'ccWP7' }}
 ```
 
-**id**
+##### Fiddle tabs
+You may also adjust the tabs shown and/or the order in which tabs are displayed. 
 
-Full URL to the fiddle without `http://jsfiddle.net`
-
-**tabs**
-
-Selected tabs in the order you want them to be displayed. 
-
-Default: `js,resources,html,css,result`
+Default tabs and display order: `js,resources,html,css,result`
 
 Options: 
+* `js`, `html`, `css`: tabs for displaying code
+* `result`: tab for displaying the rendered result of the code
+* `resources`: tabs for displaying the list of external resources used. This tab will not be displayed if no resources were used.
 
-* `js`, `html`, `css`: tab with the corresponding code
-* `result`: result tab 
-* `resources`: list of external resources, it will not be displayed if no resources were used
-
-_Adjusting Tabs_
-
-It’s possible to easily adjust the display order of the tabs. In this case, I’m moving the result to be the first item shown.
-
-``` erlang
-{{ jsfiddle 'ccWP7' 'result,js,html,css' }}
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'result,js,html,css'}}
 ```
 
-**skin**
-
-The skin to be used. 
-
-Default: `light`
-
-_Adjusting the Skin_
-
-A third (optional) parameter is available to set the "skin" for the fiddle. Currently, the only skins available are `light` and `presentation`.  However, if or when jsFiddle announces new options they may be used immediately.
-
-``` erlang
-{{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
+Renders to:
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/result,js,html,css/"></iframe>
 ```
 
-##### Examples
+You may remove the tabs you don't need:
 
-``` xml
-<iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-// or
-<iframe style="width: 100%; height: 300px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/"></iframe>
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'js,result'}}
 ```
 
-##### Optional tabs
-If you wish to make the "result" tab display first, then just add `result` and any other secondary tabs you wish to include to your URL:
-
-```
-{{jsfiddle "http://jsfiddle.net/abc123/embedded/result,js,html,css/"}}
-```
-
-``` xml
-<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/"></iframe>
-```
-
-If there is no need to show all the tabs, you may remove the tabs you don't need: 
-
-``` xml
+Renders to:
+``` html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
 ```
 
-#### Changing skins
-Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
+#### Fiddle skins
+A third _optional_ parameter may be used to specify the "skin" for the fiddle. At time of writing, the only skins available are `light` and `presentation`. However as [jsFiddle](http://jsfiddle.net) announces new skins they may be used immediately.
 
-``` xml
-<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
+Default: `light`
+
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'result,js,html,css' 'presentation'}}
 ```
+
+Renders to:
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/js,result/presentation/"></iframe> 
+```
+
 
 
 ## Path helpers
@@ -399,49 +399,66 @@ Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handli
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
-<br>Usage:
-``` xml
+
+Example:
+``` handlebars
 {{relative "from" "to"}}
 ```
-Example:
-``` erlang
+Usage:
+``` html
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+```
 
-// returns
+Renders to:
+``` html
 <a href="../../dist/assets/css/styles.css"></a> 
 ```
 
 #### {{extname}}
 _"Return the extension of the path, from the last '.' to end of string in the last portion of the path. If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string."_
-<br>Parameters: `string` (the value to test against)
-<br>Default: `none`
-<br>Usage:
-``` xml
+
+Parameters: `string` (the value to test against). 
+Default: `none`
+
+Template:
+``` html
 {{extname 'index.html'}}
-
-// returns
-'.html'
-
-{{extname 'index.'}}
-
-// returns
-'.'
-
-{{extname 'index'}}
-
-// returns
-''
 ```
+
+Renders to:
+```
+.html
+```
+
+Template: 
+```
+{{extname 'index.'}}
+```
+
+Renders to:
+```
+.
+```
+
+Template: 
+```
+{{extname 'index'}}
+```
+
+Returns nothing.
+
+
 
 #### {{dirname}}
 _Return the directory name of a path. Similar to the Unix dirname command._
 
-Example:
+Template:
 
-``` xml
+``` html
 {{dirname '/foo/bar/baz/asdf/quux'}}
 
-// returns
+Renders to:
+```
 '/foo/bar/baz/asdf'
 ```
 
@@ -455,16 +472,16 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 #### {{url_resolve}}
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
-<br>Usage:
+<br>Template:
 ``` haskell
 {{url_resolve url href}}
 ```
 Example:
-``` xml
+``` html
 <a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
 ```
-returns:
-``` xml
+Renders to:
+``` html
 <a href="http://example.com/two"></a> 
 ```
 
@@ -472,18 +489,16 @@ returns:
 #### {{url_parse}}
 _Take a URL string, and return an object._
 
-Params: 
+Params:
 * `url`
 * Output format: `yaml` or `json`. Default: `json`
 
-<br>Usage:
-
+Template:
 ``` 
 {{url_parse "http://example.com/one"}} 
 ```
 
 Renders to:
-
 ``` json
 {
   "protocol": "http:",
@@ -502,12 +517,11 @@ Renders to:
 ```
 
 Or with `yaml` as the second param:
-
 ``` haskell
 {{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
 ```
-Renders to:
 
+Renders to:
 ``` coffeescript
 protocol: "http:"
 slashes: true
@@ -550,17 +564,17 @@ Data (collection): `planet-express.json`
 ```
 
 Include (partial to be "included"): `planet-express.hbs`
-``` xml
+``` html
 {{sort this}}
 ```
 
 Template:
-``` xml
+``` html
 <p>{{include "planet-express.hbs" data}}</p>
 ```
 
-Result:
-``` xml
+Renders to:
+``` html
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
@@ -573,7 +587,7 @@ _Use globbing patterns to embed content from specified file or files._
 <br> Default: `undefined`
 
 Examples:
-``` xml
+``` html
 {{glob 'src/files/*.md'}}
 {{glob 'src/files/*.{txt,md}'}}
 ```
@@ -587,7 +601,7 @@ _Example helper, copies file A to path B._
 <br> Default: `undefined`
 
 Example:
-``` xml
+``` html
 {{copy 'a.html' '../dir/b.txt'}}
 ```
 
@@ -600,100 +614,110 @@ _Evaluate string A, and count the occurrences of string B within string A_
 * `String A` (required): The string to evaluate
 * `String B` (required): The string to look for and count in "string A"
 
-``` erlang
+``` handlebars
 {{occurrences "evaluate this string" "evaluate"}}
-
-// Result 
+```
+Result :
+```
 1
 ```
 
 #### {{hyphenate}}
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{hyphenate "make this all hyphenated"}}
-
-// Result 
+```
+Result :
+```
 make-this-all-hyphenated
 ```
 
 #### {{dashify}}
 _Same as `hyphenate`, but replaces dots in string with hyphens._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{dashify "make.this.all.hyphenated"}}
-
-// Result
+```
+Renders to:
+```
 make-this-all-hyphenated
 ```
 
 #### {{lowercase}}
 _Turns a string to lowercase._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{lowercase "MAKE THIS ALL LOWERCASE"}}
-
-// Result
+```
+Renders to:
+```
 make this all lowercase
 ```
 
 #### {{uppercase}}
 _Turns a string to uppercase. Opposite of `{{lowercase}}`._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
  {{uppercase "make this all uppercase"}}
-
-// Result
+```
+Renders to:
+```
 MAKE THIS ALL UPPERCASE
 ```
 
 #### {{capitalizeFirst}}
 _Capitalizes the first word in a string._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{capitalizeFirst "capitalize first word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize first word in this sentence
 ```
 
 #### {{capitalizeEach}}
 _Capitalizes each word in a string._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{capitalizeEach "capitalize EACH word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize EACH Word In This Sentence
 ```
 
 #### {{titleize}}
 _Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{titleize "capitalize EACH word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize Each Word In This Sentence.
 ```
 
 #### {{sentence}}
 _Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase._
 Parameters: `none`
-``` erlang
+``` handlebars
 {{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
-
-// Result
+```
+Renders to:
+```
 Capitalize the first word in each sentence. But make the other words lowercase.
 ```
 
 #### {{reverse}}
 _Reverses a string._
 <br>Parameters: `none`
-``` erlang
+``` handlebars
 {{reverse "bender should NOT be allowed on TV."}}
-
-// Result
+```
+Renders to:
+```
 .VT no dewolla eb TON dluohs redneb
 ```
 
@@ -704,20 +728,22 @@ _Truncates a string given a specified `length`, providing a custom string to den
 * length: `int`- The number of characters to keep (Required). 
 * omission: `string` - A string to denote an omission (Optional). 
 
-``` erlang
+``` handlebars
 {{truncate "Bender should not be allowed on tv." 31 "..."}}
-
-// Result
+```
+Renders to:
+```
 Bender should not be allowed...
 ```
 
 #### {{center}}
 _Centers a string using non-breaking spaces._
 <br>Parameters: spaces: `int` - The number of spaces. (Required)
-``` erlang
+``` handlebars
 {{center "Bender should not be allowed on tv." 10}}
-
-// Result:
+```
+Renders to:
+```
 |              Bender should not be allowed on tv.              |
 ```
 
@@ -726,16 +752,15 @@ _Output a formatted phone number_
 
 Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
 
-Given:
+Data:
 ```js
 number: 4444444444
 ```
-and the template:
-
-``` erlang
+Template:
+``` handlebars
 {{formatPhoneNumber number}}
 ```
-The result would be:
+Renders to:
 ```
 (444) 444-4444
 ```
@@ -755,25 +780,26 @@ Example:
 {{gist '5193239'}}
 ```
 Output:
-``` xml
+``` html
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
 #### {{blockquote}}
 **Planned...**
 
-_Create a blockquote_
+_Create a blockquote. Outputs a string with a given attribution as a quote._
 
-Outputs a string with a given attribution as a quote
+Template:
 
-``` hbs
+``` handlebars
 {{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
   This is your quote.
 {{/blockquote}}
 ```
-Output:
 
-``` xml
+Renders to:
+
+``` html
 <blockquote>
   <p>This is your quote.</p>
   <footer> 
@@ -799,7 +825,7 @@ Parameters:
 Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
 
 Usage:
-``` erlang
+``` handlebars
 <div class="timeline">
  {{#timeline myArray "left" "right"}}
  <div class="{{columnClass}}">
@@ -817,7 +843,7 @@ _Generate the appropriate icon based on the extension of the given file._
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
 
 Usage: 
-``` erlang
+``` handlebars
 {{exticon 'file.png'}}
 {{exticon 'file.pdf'}}
 {{exticon 'file.doc'}}
@@ -826,7 +852,7 @@ Usage:
 {{exticon 'file'}}
 ```
 Output:
-``` xml
+``` html
 <img src="img/img-icon.png"><i>file.png</i>
 <img src="img/pdf-icon.png"><i>file.pdf</i>
 <img src="img/word-icon.png"><i>file.doc</i>
@@ -853,12 +879,12 @@ collection = [
 ]
 ```
 Template:
-``` erlang
+``` handlebars
 {{#ul collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
 ```
-``` xml
+``` html
 // Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -885,12 +911,12 @@ collection = [
 ```
 
 Template:
-``` erlang
+``` handlebars
 {{#ol collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ol}}
 ```
-``` xml
+``` html
 // Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -907,11 +933,11 @@ Parameters: `Integer|Count`, `Optional`
 The number of `br` elements to render. 
 
 `template.hbs`
-``` erlang
+``` handlebars
 {{br 5}}
 ```
 renders to:
-``` xml
+``` html
 `<br><br><br><br><br>`
 ```
 
@@ -920,8 +946,9 @@ renders to:
 #### {{first}}
 _Returns the first item in a collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -932,21 +959,24 @@ collection = [
   'Professor Farnsworth', 
   'Scruffy'
 ]
-
 ```
-``` xml
-// Template
+Template:
+``` html
 {{first collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong
 ```
 
 #### {{withFirst}}
 _Use the first item in a collection inside a block._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -958,21 +988,25 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withFirst collection}}
   <p>{{this}} is smart.</p>
 {{/withFirst}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Amy Wong is smart.</p>
 ```
 
 #### {{last}}
 _Returns the last item in a collection. Opposite of `first`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -984,19 +1018,23 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{last collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Scruffy
 ```
 
 #### {{withLast}}
 _Use the last item in a collection inside a block. Opposite of `withFirst`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1008,13 +1046,16 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withLast collection}}
   <p>{{this}} is lazy.</p>
 {{/withLast}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Scruffy is lazy.</p>
 ```
 
@@ -1034,19 +1075,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{after collection 5}}
+```
 
-// Result:
+Renders to:
+``` html
 Leela, Professor Farnsworth, Scruffy
 ```
 
 #### {{withAfter}}
 _Use all of the items in the collection after the specified count inside a block._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1058,21 +1102,25 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withAfter collection 5}}
     {{titleize this}}
 {{/withAfter}}
 
-// Result:
+```
+
+Renders to:
+```
 Leela Professor Farnsworth Scruffy
 ```
 
 #### {{before}}
 _Returns all of the items in the collection before the specified count. Opposite of `after`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1084,19 +1132,23 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{before collection 5}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg
 ```
 
 #### {{withBefore}}
 _Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1108,21 +1160,24 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withBefore collection 5}}
     {{reverse this}}
 {{/withBefore}}
+```
 
-// Result:
+Renders to:
+```
 gnoW ymA redneB grebdioZ .rD
 ```
 
 #### {{join}}
 _Joins all elements of a collection into a string using a separator if specified._
 <br>Parameters: separator `string` - A string to use as a separator between the items. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1134,19 +1189,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{join collection " & "}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
 ```
 
 #### {{sort}}
 _Returns the collection sorted._
 Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1158,19 +1216,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{sort collection}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
 ```
 
 #### {{withSort}}
 _Uses the sorted collection inside the block._
 <br>Parameters: field `string` - String name of the field or property to sort by. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -1183,13 +1244,15 @@ collection = [
 ]
 
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withSort collection "deliveries"}}
-    {{name}}: {{deliveries}} <br>
+  {{name}}: {{deliveries}} <br>
 {{/withSort}}
+```
 
-// Result:
+Renders to:
+```
 Fry: -12
 Bender: 239
 Leela: 8021
@@ -1198,8 +1261,9 @@ Leela: 8021
 #### {{length}}
 _Returns the length of the collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -1212,19 +1276,22 @@ collection = [
 ]
 
 ```
-``` xml
-// Template
+Template:
+``` html
 {{length collection}}
+```
 
-// Result:
+Renders to:
+```
 8
 ```
 
 #### {{lengthEqual}}
 _Conditionally render a block based on the length of a collection._
 <br>Parameters: length `int` - The value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -1236,105 +1303,122 @@ collection = [
   deliveries: -12
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#lengthEqual collection 3}}
-        There are 3 people in Planet Express.
+    There are 3 people in Planet Express.
 {{else}}
-        This is not Planet Express.
+    This is not Planet Express.
 {{/lengthEqual}}
+```
 
-// Result:
+Renders to:
+```
 There are 3 people in Planet Express.
 ```
 
 #### {{empty}}
 _Conditionally render a block if the collection is empty._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = []
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#empty collection}}
-        Good news everyone!
+    Good news everyone!
 {{else}}
-        Bad news everyone!
+    Bad news everyone!
 {{/empty}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
 #### {{any}}
 _Conditionally render a block if the collection isn't empty. Opposite of `empty`_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#any collection}}
-        Good news everyone!
+  Good news everyone!
 {{else}}
-        Bad news everyone!
+  Bad news everyone!
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
 
 #### {{inArray}}
 _Conditionally render a block if a specified value is in the collection._
 <br>Parameters: value `string|int` - A value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#inArray collection "Fry"}}
-        I'm walking on sunshine!
+  I'm walking on sunshine!
 {{else}}
-        I'm walking on darkness.
+  I'm walking on darkness.
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 I'm walking on sunshine!
 ```
 
 #### {{eachIndex}}
 _Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#eachIndex collection}}
-    {{this}} is {{index}}
+  {{this}} is {{index}}
 {{/eachIndex}}
+```
 
-// Result:
+Renders to:
+```
 Professor Farnsworth is 0, Fry is 1, Bender is 2
 ```
 
 #### {{eachProperty}}
 _Loop through an objects properties_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 TODO...
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#eachProperty object}}
     {{property}}: {{value}}<br/>
 {{/eachProperty }}
+```
 
-// Result
+Renders to:
+```
 TODO...
 ```
 
@@ -1343,125 +1427,141 @@ TODO...
 #### {{add}}
 _Returns the sum of two numbers._
 <br>Parameters: value `int` - The number to add to the expression. (Required)
+
+Data:
 ``` js
-// Data
 value = 5
 ```
-``` xml
-// Template
+Template:
+``` html
 {{add value 5}}
-
-// Result:
+```
+Renders to:
+```
 10
 ```
 
 #### {{subtract}}
 _Returns the difference of two numbers. Opposite of `add`_
 <br>Parameters: value `int` - The number to subtract from the expression. (Required)_
+
+Data:
 ``` js
-// Data
 value = 5
 ```
-``` xml
-// Template
+Template:
+``` html
 {{subtract value 5}}
-
-// Result:
+```
+Renders to:
+```
 0
 ```
 
 #### {{divide}}
 _Returns the division of two numbers._
 <br>Parameters: value `int` - The number to divide the expression. (Required)
+
+Data:
 ``` js
-// Data
 value = 5
 ```
-``` xml
-// Template
+Template:
+``` html
 {{divide value 5}}
-
-// Result:
+```
+Renders to:
+```
 1
 ```
 
 #### {{multiply}}
 _Returns the multiplication of two numbers._
 <br>Parameters: value `int` - The number to multiply the expression. (Required)
+
+Data:
 ``` js
-// Data
 value = 5
 
 ```
-``` xml
-// Template
+Template:
+``` html
 {{multiply value 5}}
-
-// Result:
+```
+Renders to:
+```
 25
 ```
 
 #### {{floor}}
 _Returns the value rounded down to the nearest integer._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = 5.6
 ```
-``` xml
-// Template
+Template:
+``` html
 {{floor value}}
-
-// Result:
+```
+Renders to:
+```
 5
 ```
 
 #### {{ceil}}
 _Returns the value rounded up to the nearest integer._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = 5.6
 ```
-``` xml
-// Template
+Template:
+``` html
 {{ceil value}}
-
-// Result:
+```
+Renders to:
+```
 6
 ```
 
 #### {{round}}
 _Returns the value rounded to the nearest integer._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = 5.69
 ```
-``` xml
-// Template
+Template:
+``` html
 {{round value}}
-
-// Result:
+```
+Renders to:
+```
 6
 ```
 
 #### {{sum}}
 _Returns the sum of multiple numbers. Similar to `{{#add}}` block helper but accepts multiple arguments._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = {
   a: 1,
   b: 2,
   c: 3
 }
 ```
-``` xml
-// Template
+Template:
+``` html
 {{sum value.a value.b value.c}}
-
-// Result:
+```
+Renders to:
+```
 6
 ```
 
@@ -1469,110 +1569,143 @@ value = {
 ## Numbers helpers
 #### {{toFixed}}
 _Returns exactly `digits` after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length._
-<br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Data:
 ``` js
-// Data
 value = 5.53231
 ```
-``` xml
-// Template
-{{toFixed value 3}}
 
-// Result:
+Template:
+``` html
+{{toFixed value 3}}
+```
+
+Renders to:
+```
 5.532
 ```
 
 #### {{toPrecision}}
 _Returns the number in fixed-point or exponential notation rounded to `precision` significant digits._
-<br>Parameters: precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
+
+Parameters: precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
+
+Data:
 ``` js
-// Data
 value = 555.322
 ```
-``` xml
-// Template
-{{toPrecision value 4}}
 
-// Result:
+Template:
+``` html
+{{toPrecision value 4}}
+```
+
+Renders to:
+```
 555.3
 ```
 
 #### {{toExponential}}
 _Returns the number in exponential notation with one digit before the decimal point, rounded to `fractions` digits after the decimal point._
-<br>Parameters: fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
+
+Parameters: fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
+
+Data:
 ``` js
-// Data
 value = 5
-
 ```
-``` xml
-// Template
-{{toExponential value 5}}
 
-// Result:
+Template:
+``` html
+{{toExponential value 5}}
+```
+
+Renders to:
+```
 5.00000e+0
 ```
 
 #### {{toInt}}
 _Returns an integer._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = '22.2abc'
 ```
-``` xml
-// Template
-{{toInt value}}
 
-// Result:
+Template:
+``` html
+{{toInt value}}
+```
+
+Renders to:
+```
 22
 ```
 
 #### {{toFloat}}
 _Returns a floating point number._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = '22.2abc'
 ```
-``` xml
-// Template
-{{toFloat value}}
 
-// Result:
+Template:
+``` html
+{{toFloat value}}
+```
+
+Renders to:
+```
 22.2
 ```
 
 #### {{toAbbr}}
 _Returns the number in abbreviation formats based on a value. The number is rounded to a particular decimal place._
-<br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
-<br>Default: `2`
+
+Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Default: `2`
+
+Data:
 ``` js
-// Data
 value = 123456789
-
 ```
-``` xml
-// Template
-{{toAbbr value}}
 
-// Result:
+Template:
+``` html
+{{toAbbr value}}
+```
+
+Renders to:
+```
 123.457m
 ```
 
 #### {{addCommas}}
 _Adds commas to a number._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = 2222222
-
 ```
-``` xml
-// Template
-{{addCommas value}}
 
-// Result:
+Template:
+``` html
+{{addCommas value}}
+```
+
+Renders to:
+```
 2,222,222
 ```
 
@@ -1585,21 +1718,25 @@ Parameters: `string|int` (the value to test against)
 Default: `undefined`
 
 Example #1:
+
+Data:
 ``` js
-// Data
 ---
 number = 5
 ---
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#is number 5}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/is}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
@@ -1607,20 +1744,21 @@ Example #2:
 
 If you are using [Assemble](https://github.com/assemble/assemble), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
 
+Data and Templates: 
 ``` yaml
---- # YAML Front Matter
+---
 page:
   title: About Us
 ---
-```
-``` xml
-{{#is page.title "home"}}
+
+{{#is page.title "Home"}}
     <h1> About Us </h1>
 {{else}}
-    Never mind :(
+    <h1> My Blog </h1>
 {{/is}}
 ```
-Result:
+
+Renders to:
 ```
 <h1> About Us </h1>
 ```
@@ -1628,74 +1766,91 @@ Result:
 #### {{if_eq}}
 **Same as `is`, consider consolidating**
 _Conditionally render a block if the condition is true (If x = y)._
+
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#if_eq x compare=y}} ... {{/if_eq}}
 ```
 
 #### {{isnt}}
 _Conditionally render a block if the condition is false. Opposite of `is`._
 <br>Parameters: value `string|int` - the value to test against.
+
+Data:
 ``` js
-// Data
 number = 5
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#isnt number 5}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/isnt}}
+```
 
-// Result:
+Renders to:
+```
 Never mind :(
 ```
 
 #### {{or}}
 _Conditionally render a block if one of the values is truthy._
-<br>Parameters: values `string|int` - the values to test against.
+
+Parameters: values `string|int` - the values to test against.
+
+Data:
 ``` js
 great = no
 magnificent = true
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#or great magnificent}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/or}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
 #### {{and}}
 _Conditionally render a block if both values are truthy._
-<br>Parameters: values `string|int` - the values to test against.
+
+Parameters: values `string|int` - the values to test against.
+
+Data:
 ``` js
-// Data
 great = true
 magnificent = true
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#and great magnificent}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/and}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
 #### {{unless_eq}}
 **Same as `isnt`, consider consolidating**
 _Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
+
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#unless_eq x compare=y}} ... {{/unless_eq}}
 ```
 
@@ -1705,7 +1860,7 @@ Parameters: `none`
 #### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#if_gt x compare=y}} ... {{/if_gt}}
 ```
 
@@ -1713,33 +1868,37 @@ Parameters: `none`
 **Same as `if_gt`, consider consolidating**
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 <br>Parameters: value `string|int` - the value to test against.
+
+Data:
 ``` js
-// Data
 number = 5
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#gt number 8}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/gt}}
+```
 
-// Result:
+Renders to:
+```
 Never mind :(
 ```
 
 #### {{unless_gt}}
 _Unless greater than (Unless x > y)_
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#unless_gt x compare=y}} ... {{/unless_gt}}
 ```
 
 #### {{if_gteq}}
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#if_gteq x compare=y}} ... {{/if_gteq}}
 ```
 
@@ -1751,24 +1910,27 @@ _Conditionally render a block if the value is greater or equal than a given numb
 ``` js
 number = 5
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#gte number 5}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/gte}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
 
 #### {{unless_gteq}}
-_Render block, unless given value is greater than or equal to._
+_"Unless x >= y". Render block, unless given value is greater than or equal to._
 Parameters: `none`
-_Unless x >= y_
-``` erlang
+
+``` handlebars
 {{#unless_gteq x compare=y}} ... {{/unless_gteq}}
 ```
 
@@ -1780,14 +1942,16 @@ _Conditionally render a block if the value is less than a given number. Opposite
 ``` js
 number = 5
 ```
-``` xml
+``` html
 {{#lt number 3}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/lt}}
+```
 
-// Result:
+Renders to:
+```
 Never mind :(
 ```
 
@@ -1797,29 +1961,33 @@ _Conditionally render a block if the value is less or equal than a given number.
 ``` js
 number = 5
 ```
-``` xml
+``` html
 // Template
 {{#lte number 5}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/lte}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
 #### {{unless_lt}}
-_Render block, unless value is less than a given number (Unless x < y)_
+_Render block, unless value is less than a given number (Unless x < y)_.
+
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
 #### {{unless_lteq}}
-_Render block, unless value is less than or equal to a given number (Unless x <= y)_
+_Render block, unless value is less than or equal to a given number (Unless x <= y)_.
+
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#unless_lteq x compare=y}} ... {{/unless_lteq}}
 ```
 
@@ -1836,7 +2004,7 @@ Given this data:
 date = new Date()
 ```
 And these templates:
-``` erlang
+``` handlebars
 {{formatDate date "%m/%d/%Y"}}
 {{formatDate date "%I:%M%p"}}
 {{formatDate date "%F"}}
@@ -1854,12 +2022,12 @@ The output would be:
 _Returns the current date._
 <br>Parameters: format `string` - The format string, according to these tokens: [http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime]() (Optional)
 
-Template
-``` erlang
+Template:
+``` handlebars
 {{now}}
 {{now "%m/%d/%Y"}}
 ```
-Result:
+Renders to:
 ```
 Thu Jul 26 2012 23:41:02 GMT-0400 (AST)
 07/26/2012
@@ -1874,11 +2042,10 @@ Data:
 date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 ```
 Template:
-``` erlang
+``` handlebars
 {{timeago date}}
 ```
-
-Result:
+Renders to:
 ``` 
 4 days ago
 ```
@@ -1888,34 +2055,41 @@ Result:
 ## Inflections helpers
 #### {{inflect}}
 _Returns the plural or singular form of a word based on a count._
-<br>Parameters:
+
+Parameters:
 * singular `string` - The singular form of the word. (Required)
 * plural `string` - The plural form of the word. (Required)
 * include `boolean` - whether or not to include the count before the word. (Optional)
+
+Data:
 ``` js
-// Data
 enemies = 0
 friends = 1
 ```
-``` xml
-// Template
+Template:
+``` html
 {{inflect enemies "enemy" "enemies"}}
 {{inflect friends "friend" "friends" true}}
-
-// Result:
+```
+Renders to:
+```
 enemies
 1 friend
+```
 
 #### {{ordinalize}}
 _Turns a number into an ordinal string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
-<br>Parameters: `none`
-``` xml
-// Template
+
+Parameters: `none`
+
+Template:
+``` html
 {{ordinalize 3}}
 {{ordinalize 1}}
 {{ordinalize 22}}
-
-// Result:
+```
+Renders to:
+```
 3rd
 1st
 22nd
@@ -1925,20 +2099,26 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 ## Logging helpers
 #### {{log}}
 _Simple `console.log()`_
-<br>Parameters: `none`
-``` xml
+
+Parameters: `none`
+
+``` html
 // Template
 {{log "Hi console :)"}}
+```
 
-// Result:
+Renders to:
+``` bash
 Hi console :)
 ```
 
 #### {{debug}}
 _Simple `console.debug()` that shows the current context._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -1948,27 +2128,33 @@ collection = [
   deliveries: 1
 ]
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#withFirst collection}}
    {{debug name}}
 {{/withFirst}}
+```
 
-// Result:
+Renders to:
+``` json
 Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
 ```
 
 #### {{expandJSON}}
 _Return a unique, JSON-formatted array of all file or directory paths that match the given globbing pattern(s)_
-<br>Parameters: `String`
-<br> Default: `undefined`
 
-Example:
-``` xml
+Parameters: `String`
+Default: `undefined`
+
+Template:
+``` html
 {{expandJSON './src/**/*.md'}}
+```
 
-// returns
+Renders to:
+``` json
 [
   "./src/content/blockquotes.md",
   "./src/content/chapters/01-getting-started.md",
@@ -1992,14 +2178,18 @@ Example:
 
 #### {{expandYAML}}
 _Return a unique, YAML-formatted array of all file or directory paths that match the given globbing pattern(s)_
-<br>Parameters: `String`
-<br> Default: `undefined`
 
-Example:
-``` xml
+Parameters: `String`
+
+ Default: `undefined`
+
+Template:
+``` html
 {{expandYAML './src/**/*.md'}}
+```
 
-// returns
+Renders to:
+``` yaml
 - "./src/content/blockquotes.md"
 - "./src/content/chapters/01-getting-started.md"
 - "./src/content/chapters/02-language-features.md"
@@ -2026,11 +2216,12 @@ Example:
 _Provides a default or fallback value if a value doesn't exist._
 <br>Parameters: defaultValue `string|int` - The default value to use. `title = ''`
 
-``` xml
-// Template
+Template:
+``` html
 {{default title "No title available."}}
-
-// Result:
+```
+Renders to:
+```
 No title available.
 ```
 
@@ -2111,7 +2302,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Wed Jun 12 2013 02:24:01._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Jun 13 2013 10:04:41._
 
 
 

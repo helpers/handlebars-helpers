@@ -8,6 +8,18 @@ module.exports.register = (Handlebars, options) ->
   _     = require 'lodash'
 
 
+
+  # Switch (proof of concept), not intended for actual use in projects.
+  # This helper demonstrates a the simple idea that the syntax of 
+  # content rendered by the helper can be "switched" based on a condition, 
+  # such as, in this case, the extension of the destination file(s) in the
+  # 'assemble' grunt task.
+  Handlebars.registerHelper "switch", (src) ->
+    md = '# ' + src
+    html = '<h1>' + src + '</h1>'
+    output = Utils.switchOutput(options.ext, md, html)
+    Utils.safeString(output)
+
   # sections
   Handlebars.sections = {}
   Handlebars.registerHelper "section", (name, options) ->

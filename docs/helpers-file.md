@@ -18,17 +18,17 @@ Data (collection): `planet-express.json`
 ```
 
 Include (partial to be "included"): `planet-express.hbs`
-``` xml
+``` html
 {{sort this}}
 ```
 
 Template:
-``` xml
+``` html
 <p>{{include "planet-express.hbs" data}}</p>
 ```
 
-Result:
-``` xml
+Renders to:
+``` html
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
@@ -41,7 +41,7 @@ _Use globbing patterns to embed content from specified file or files._
 <br> Default: `undefined`
 
 Examples:
-``` xml
+``` html
 {{glob 'src/files/*.md'}}
 {{glob 'src/files/*.{txt,md}'}}
 ```
@@ -55,6 +55,6 @@ _Example helper, copies file A to path B._
 <br> Default: `undefined`
 
 Example:
-``` xml
+``` html
 {{copy 'a.html' '../dir/b.txt'}}
 ```

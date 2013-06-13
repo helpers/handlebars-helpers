@@ -10,25 +10,26 @@ Example:
 {{gist '5193239'}}
 ```
 Output:
-``` xml
+``` html
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
 #### {{blockquote}}
 **Planned...**
 
-_Create a blockquote_
+_Create a blockquote. Outputs a string with a given attribution as a quote._
 
-Outputs a string with a given attribution as a quote
+Template:
 
-``` hbs
+``` handlebars
 {{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
   This is your quote.
 {{/blockquote}}
 ```
-Output:
 
-``` xml
+Renders to:
+
+``` html
 <blockquote>
   <p>This is your quote.</p>
   <footer> 
@@ -54,7 +55,7 @@ Parameters:
 Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
 
 Usage:
-``` erlang
+``` handlebars
 <div class="timeline">
  {{#timeline myArray "left" "right"}}
  <div class="{{columnClass}}">
@@ -72,7 +73,7 @@ _Generate the appropriate icon based on the extension of the given file._
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
 
 Usage: 
-``` erlang
+``` handlebars
 {{exticon 'file.png'}}
 {{exticon 'file.pdf'}}
 {{exticon 'file.doc'}}
@@ -81,7 +82,7 @@ Usage:
 {{exticon 'file'}}
 ```
 Output:
-``` xml
+``` html
 <img src="img/img-icon.png"><i>file.png</i>
 <img src="img/pdf-icon.png"><i>file.pdf</i>
 <img src="img/word-icon.png"><i>file.doc</i>
@@ -108,12 +109,12 @@ collection = [
 ]
 ```
 Template:
-``` erlang
+``` handlebars
 {{#ul collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
 ```
-``` xml
+``` html
 // Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -140,12 +141,12 @@ collection = [
 ```
 
 Template:
-``` erlang
+``` handlebars
 {{#ol collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ol}}
 ```
-``` xml
+``` html
 // Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -162,10 +163,10 @@ Parameters: `Integer|Count`, `Optional`
 The number of `br` elements to render. 
 
 `template.hbs`
-``` erlang
+``` handlebars
 {{br 5}}
 ```
 renders to:
-``` xml
+``` html
 `<br><br><br><br><br>`
 ```

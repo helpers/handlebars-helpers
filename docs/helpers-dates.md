@@ -8,7 +8,7 @@ Given this data:
 date = new Date()
 ```
 And these templates:
-``` erlang
+``` handlebars
 {{formatDate date "%m/%d/%Y"}}
 {{formatDate date "%I:%M%p"}}
 {{formatDate date "%F"}}
@@ -26,12 +26,12 @@ The output would be:
 _Returns the current date._
 <br>Parameters: format `string` - The format string, according to these tokens: [http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime]() (Optional)
 
-Template
-``` erlang
+Template:
+``` handlebars
 {{now}}
 {{now "%m/%d/%Y"}}
 ```
-Result:
+Renders to:
 ```
 Thu Jul 26 2012 23:41:02 GMT-0400 (AST)
 07/26/2012
@@ -46,11 +46,10 @@ Data:
 date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 ```
 Template:
-``` erlang
+``` handlebars
 {{timeago date}}
 ```
-
-Result:
+Renders to:
 ``` 
 4 days ago
 ```

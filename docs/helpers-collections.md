@@ -1,8 +1,9 @@
 #### {{first}}
 _Returns the first item in a collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -13,21 +14,24 @@ collection = [
   'Professor Farnsworth', 
   'Scruffy'
 ]
-
 ```
-``` xml
-// Template
+Template:
+``` html
 {{first collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong
 ```
 
 #### {{withFirst}}
 _Use the first item in a collection inside a block._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -39,21 +43,25 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withFirst collection}}
   <p>{{this}} is smart.</p>
 {{/withFirst}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Amy Wong is smart.</p>
 ```
 
 #### {{last}}
 _Returns the last item in a collection. Opposite of `first`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -65,19 +73,23 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{last collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Scruffy
 ```
 
 #### {{withLast}}
 _Use the last item in a collection inside a block. Opposite of `withFirst`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -89,13 +101,16 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withLast collection}}
   <p>{{this}} is lazy.</p>
 {{/withLast}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Scruffy is lazy.</p>
 ```
 
@@ -115,19 +130,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{after collection 5}}
+```
 
-// Result:
+Renders to:
+``` html
 Leela, Professor Farnsworth, Scruffy
 ```
 
 #### {{withAfter}}
 _Use all of the items in the collection after the specified count inside a block._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -139,21 +157,25 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withAfter collection 5}}
     {{titleize this}}
 {{/withAfter}}
 
-// Result:
+```
+
+Renders to:
+```
 Leela Professor Farnsworth Scruffy
 ```
 
 #### {{before}}
 _Returns all of the items in the collection before the specified count. Opposite of `after`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -165,19 +187,23 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{before collection 5}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg
 ```
 
 #### {{withBefore}}
 _Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -189,21 +215,24 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withBefore collection 5}}
     {{reverse this}}
 {{/withBefore}}
+```
 
-// Result:
+Renders to:
+```
 gnoW ymA redneB grebdioZ .rD
 ```
 
 #### {{join}}
 _Joins all elements of a collection into a string using a separator if specified._
 <br>Parameters: separator `string` - A string to use as a separator between the items. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -215,19 +244,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{join collection " & "}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
 ```
 
 #### {{sort}}
 _Returns the collection sorted._
 Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -239,19 +271,22 @@ collection = [
   'Scruffy'
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{sort collection}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
 ```
 
 #### {{withSort}}
 _Uses the sorted collection inside the block._
 <br>Parameters: field `string` - String name of the field or property to sort by. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -264,13 +299,15 @@ collection = [
 ]
 
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#withSort collection "deliveries"}}
-    {{name}}: {{deliveries}} <br>
+  {{name}}: {{deliveries}} <br>
 {{/withSort}}
+```
 
-// Result:
+Renders to:
+```
 Fry: -12
 Bender: 239
 Leela: 8021
@@ -279,8 +316,9 @@ Leela: 8021
 #### {{length}}
 _Returns the length of the collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -293,19 +331,22 @@ collection = [
 ]
 
 ```
-``` xml
-// Template
+Template:
+``` html
 {{length collection}}
+```
 
-// Result:
+Renders to:
+```
 8
 ```
 
 #### {{lengthEqual}}
 _Conditionally render a block based on the length of a collection._
 <br>Parameters: length `int` - The value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -317,104 +358,121 @@ collection = [
   deliveries: -12
 ]
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#lengthEqual collection 3}}
-        There are 3 people in Planet Express.
+    There are 3 people in Planet Express.
 {{else}}
-        This is not Planet Express.
+    This is not Planet Express.
 {{/lengthEqual}}
+```
 
-// Result:
+Renders to:
+```
 There are 3 people in Planet Express.
 ```
 
 #### {{empty}}
 _Conditionally render a block if the collection is empty._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = []
 ```
-``` xml
-// Template
+Template:
+``` html
 {{#empty collection}}
-        Good news everyone!
+    Good news everyone!
 {{else}}
-        Bad news everyone!
+    Bad news everyone!
 {{/empty}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
 #### {{any}}
 _Conditionally render a block if the collection isn't empty. Opposite of `empty`_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#any collection}}
-        Good news everyone!
+  Good news everyone!
 {{else}}
-        Bad news everyone!
+  Bad news everyone!
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
 
 #### {{inArray}}
 _Conditionally render a block if a specified value is in the collection._
 <br>Parameters: value `string|int` - A value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#inArray collection "Fry"}}
-        I'm walking on sunshine!
+  I'm walking on sunshine!
 {{else}}
-        I'm walking on darkness.
+  I'm walking on darkness.
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 I'm walking on sunshine!
 ```
 
 #### {{eachIndex}}
 _Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#eachIndex collection}}
-    {{this}} is {{index}}
+  {{this}} is {{index}}
 {{/eachIndex}}
+```
 
-// Result:
+Renders to:
+```
 Professor Farnsworth is 0, Fry is 1, Bender is 2
 ```
 
 #### {{eachProperty}}
 _Loop through an objects properties_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 TODO...
 ```
-``` xml
-// Templates
+Template:s
+``` html
 {{#eachProperty object}}
     {{property}}: {{value}}<br/>
 {{/eachProperty }}
+```
 
-// Result
+Renders to:
+```
 TODO...
 ```

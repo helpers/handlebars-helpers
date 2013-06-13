@@ -6,48 +6,65 @@ Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handli
 _Derive the relative path from one **absolute path** to another (e.g from path A, to path B)._
 <br>Parameters: `string` (the value to test against)
 <br>Default: `none`
-<br>Usage:
-``` xml
+
+Example:
+``` handlebars
 {{relative "from" "to"}}
 ```
-Example:
-``` erlang
+Usage:
+``` html
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+```
 
-// returns
+Renders to:
+``` html
 <a href="../../dist/assets/css/styles.css"></a> 
 ```
 
 #### {{extname}}
 _"Return the extension of the path, from the last '.' to end of string in the last portion of the path. If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string."_
-<br>Parameters: `string` (the value to test against)
-<br>Default: `none`
-<br>Usage:
-``` xml
+
+Parameters: `string` (the value to test against). 
+Default: `none`
+
+Template:
+``` html
 {{extname 'index.html'}}
-
-// returns
-'.html'
-
-{{extname 'index.'}}
-
-// returns
-'.'
-
-{{extname 'index'}}
-
-// returns
-''
 ```
+
+Renders to:
+```
+.html
+```
+
+Template: 
+```
+{{extname 'index.'}}
+```
+
+Renders to:
+```
+.
+```
+
+Template: 
+```
+{{extname 'index'}}
+```
+
+Returns nothing.
+
+
 
 #### {{dirname}}
 _Return the directory name of a path. Similar to the Unix dirname command._
 
-Example:
+Template:
 
-``` xml
+``` html
 {{dirname '/foo/bar/baz/asdf/quux'}}
 
-// returns
+Renders to:
+```
 '/foo/bar/baz/asdf'
 ```

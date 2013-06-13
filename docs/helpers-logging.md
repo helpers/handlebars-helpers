@@ -1,19 +1,25 @@
 #### {{log}}
 _Simple `console.log()`_
-<br>Parameters: `none`
-``` xml
+
+Parameters: `none`
+
+``` html
 // Template
 {{log "Hi console :)"}}
+```
 
-// Result:
+Renders to:
+``` bash
 Hi console :)
 ```
 
 #### {{debug}}
 _Simple `console.debug()` that shows the current context._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -23,27 +29,33 @@ collection = [
   deliveries: 1
 ]
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#withFirst collection}}
    {{debug name}}
 {{/withFirst}}
+```
 
-// Result:
+Renders to:
+``` json
 Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
 ```
 
 #### {{expandJSON}}
 _Return a unique, JSON-formatted array of all file or directory paths that match the given globbing pattern(s)_
-<br>Parameters: `String`
-<br> Default: `undefined`
 
-Example:
-``` xml
+Parameters: `String`
+Default: `undefined`
+
+Template:
+``` html
 {{expandJSON './src/**/*.md'}}
+```
 
-// returns
+Renders to:
+``` json
 [
   "./src/content/blockquotes.md",
   "./src/content/chapters/01-getting-started.md",
@@ -67,14 +79,18 @@ Example:
 
 #### {{expandYAML}}
 _Return a unique, YAML-formatted array of all file or directory paths that match the given globbing pattern(s)_
-<br>Parameters: `String`
-<br> Default: `undefined`
 
-Example:
-``` xml
+Parameters: `String`
+
+ Default: `undefined`
+
+Template:
+``` html
 {{expandYAML './src/**/*.md'}}
+```
 
-// returns
+Renders to:
+``` yaml
 - "./src/content/blockquotes.md"
 - "./src/content/chapters/01-getting-started.md"
 - "./src/content/chapters/02-language-features.md"

@@ -1,108 +1,141 @@
 #### {{toFixed}}
 _Returns exactly `digits` after the decimal place. The number is rounded if necessary, and the fractional part is padded with zeros if necessary so that it has the specified length._
-<br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Data:
 ``` js
-// Data
 value = 5.53231
 ```
-``` xml
-// Template
-{{toFixed value 3}}
 
-// Result:
+Template:
+``` html
+{{toFixed value 3}}
+```
+
+Renders to:
+```
 5.532
 ```
 
 #### {{toPrecision}}
 _Returns the number in fixed-point or exponential notation rounded to `precision` significant digits._
-<br>Parameters: precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
+
+Parameters: precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
+
+Data:
 ``` js
-// Data
 value = 555.322
 ```
-``` xml
-// Template
-{{toPrecision value 4}}
 
-// Result:
+Template:
+``` html
+{{toPrecision value 4}}
+```
+
+Renders to:
+```
 555.3
 ```
 
 #### {{toExponential}}
 _Returns the number in exponential notation with one digit before the decimal point, rounded to `fractions` digits after the decimal point._
-<br>Parameters: fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
+
+Parameters: fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
+
+Data:
 ``` js
-// Data
 value = 5
-
 ```
-``` xml
-// Template
-{{toExponential value 5}}
 
-// Result:
+Template:
+``` html
+{{toExponential value 5}}
+```
+
+Renders to:
+```
 5.00000e+0
 ```
 
 #### {{toInt}}
 _Returns an integer._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = '22.2abc'
 ```
-``` xml
-// Template
-{{toInt value}}
 
-// Result:
+Template:
+``` html
+{{toInt value}}
+```
+
+Renders to:
+```
 22
 ```
 
 #### {{toFloat}}
 _Returns a floating point number._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = '22.2abc'
 ```
-``` xml
-// Template
-{{toFloat value}}
 
-// Result:
+Template:
+``` html
+{{toFloat value}}
+```
+
+Renders to:
+```
 22.2
 ```
 
 #### {{toAbbr}}
 _Returns the number in abbreviation formats based on a value. The number is rounded to a particular decimal place._
-<br>Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
-<br>Default: `2`
+
+Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
+
+Default: `2`
+
+Data:
 ``` js
-// Data
 value = 123456789
-
 ```
-``` xml
-// Template
-{{toAbbr value}}
 
-// Result:
+Template:
+``` html
+{{toAbbr value}}
+```
+
+Renders to:
+```
 123.457m
 ```
 
 #### {{addCommas}}
 _Adds commas to a number._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 value = 2222222
-
 ```
-``` xml
-// Template
-{{addCommas value}}
 
-// Result:
+Template:
+``` html
+{{addCommas value}}
+```
+
+Renders to:
+```
 2,222,222
 ```

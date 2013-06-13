@@ -5,16 +5,16 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 #### {{url_resolve}}
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
-<br>Usage:
+<br>Template:
 ``` haskell
 {{url_resolve url href}}
 ```
 Example:
-``` xml
+``` html
 <a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
 ```
-returns:
-``` xml
+Renders to:
+``` html
 <a href="http://example.com/two"></a> 
 ```
 
@@ -22,18 +22,16 @@ returns:
 #### {{url_parse}}
 _Take a URL string, and return an object._
 
-Params: 
+Params:
 * `url`
 * Output format: `yaml` or `json`. Default: `json`
 
-<br>Usage:
-
+Template:
 ``` 
 {{url_parse "http://example.com/one"}} 
 ```
 
 Renders to:
-
 ``` json
 {
   "protocol": "http:",
@@ -52,12 +50,11 @@ Renders to:
 ```
 
 Or with `yaml` as the second param:
-
 ``` haskell
 {{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
 ```
-Renders to:
 
+Renders to:
 ``` coffeescript
 protocol: "http:"
 slashes: true

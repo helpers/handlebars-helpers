@@ -8,7 +8,7 @@ Parameters:
 Syntax: `{{ embed [file] [syntax] }}`
 
 Helper also:
-* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` xml`) in the output.
+* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
 * When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
 
 Example:
@@ -23,27 +23,36 @@ Example:
 ### README Helpers
 
 #### {{authors}}
+Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
+
 Params: `none`
 Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
 
-Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
-
-For example, given we have the `AUTHORS` file in the root of our project, and it contains: 
+Data (`AUTHORS` file in the root of our project): 
 
 ```
 Brian Woodward (http://github.com/doowb)
 Jon Schlinkert (http://github.com/jonschlinkert)
 ```
-Using the lowercase version of the helper, `{{authors}}`, the output will be:
 
+Template (lowercase version):
+``` handlebars
+{{authors}}
+```
+
+Renders to:
 ``` md
 * [Brian Woodward](http://github.com/doowb)  
 * [Jon Schlinkert](http://github.com/jonschlinkert)  
 ```
 
-Or using uppercase version, `{{AUTHORS}}`, the output will be:
+Or the uppercase version:
+``` handlebars
+{{AUTHORS}}
+```
 
-``` md
+Renders to:
+``` 
 **Jon Schlinkert**
 
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
@@ -55,34 +64,49 @@ Or using uppercase version, `{{AUTHORS}}`, the output will be:
 + [http://github.com/doowb](http://github.com/doowb)
 ```
 
+
 ### Travis CI
 
 #### {{travis}}
-Creates a "full" Travis CI link in markdown format.
+_Creates a "full" Travis CI link in markdown format_.
+
 Params: `branch`
 Type: `String`
 Usage: `{{travis [branch]}}`
 
-Example using default: `{{travis}}`
+Template:
+``` handlebars
+{{travis}}`
+```
 
-``` md
+Renders to:
+``` markdown
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
-Example with branch: `{{travis 'master'}}`
+Template with branch: 
+``` handlebars
+{{travis 'master'}}
+```
 
-``` md
+Renders to:
+``` markdown
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
 ```
 
 #### {{travis-badge}}
-Creates a Travis CI link in markdown format.
+_Creates a Travis CI link in markdown format_.
+
 Params: `none`
 Usage: `{{travis-badge}}`
 
-Example:
+Template
+``` handlebars
+{{travis}}`
+```
 
-``` md
+Renders to:
+``` markdown
 [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
@@ -96,7 +120,7 @@ A couple things to keep in mind about YAML:
 * YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
 * Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
 
-Here is an example of the format to follow in your `CHANGELOG` file:
+Example of the format to follow in your `CHANGELOG` file:
 
 ``` yaml
 v0.1.2
@@ -128,90 +152,65 @@ The output will look like this:
 
 
 #### {{jsfiddle}}
+_Easily embed a [jsFiddle](http://jsfiddle.net) in a page, requiring only the ID of the fiddle._
+
 Credit: [octopress](http://octopress.org/docs/plugins/jsfiddle-tag/)
 
-All you need is the fiddle’s id and you can easily embed it in your page.
+Parameters: `{{ jsfiddle "id" "tabs" "skin" "height" "width" }}`
+  * `id`: full URL to the fiddle excluding `http://jsfiddle.net`
+  * `tabs`: tabs to be displayed, and the order specified
+  * `skin`: the skin to be used, `light` or `presentation` are the only options available.
+  * `height`: the height of the rendered `<iframe>`
+  * `width`: the width of the rendered `<iframe>`
 
-Syntax: `{{ jsfiddle id [tabs] [skin] [height] [width] }}`
-
-##### Embedding the fiddle
-
-``` xml
-http://[id-of-the-fiddle]/embedded/[tabs]/[style]]/
-```
-Example:
-
-``` erlang
+Template:
+``` handlebars
 {{ jsfiddle 'ccWP7' }}
 ```
 
-**id**
+##### Fiddle tabs
+You may also adjust the tabs shown and/or the order in which tabs are displayed. 
 
-Full URL to the fiddle without `http://jsfiddle.net`
-
-**tabs**
-
-Selected tabs in the order you want them to be displayed. 
-
-Default: `js,resources,html,css,result`
+Default tabs and display order: `js,resources,html,css,result`
 
 Options: 
+* `js`, `html`, `css`: tabs for displaying code
+* `result`: tab for displaying the rendered result of the code
+* `resources`: tabs for displaying the list of external resources used. This tab will not be displayed if no resources were used.
 
-* `js`, `html`, `css`: tab with the corresponding code
-* `result`: result tab 
-* `resources`: list of external resources, it will not be displayed if no resources were used
-
-_Adjusting Tabs_
-
-It’s possible to easily adjust the display order of the tabs. In this case, I’m moving the result to be the first item shown.
-
-``` erlang
-{{ jsfiddle 'ccWP7' 'result,js,html,css' }}
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'result,js,html,css'}}
 ```
 
-**skin**
-
-The skin to be used. 
-
-Default: `light`
-
-_Adjusting the Skin_
-
-A third (optional) parameter is available to set the "skin" for the fiddle. Currently, the only skins available are `light` and `presentation`.  However, if or when jsFiddle announces new options they may be used immediately.
-
-``` erlang
-{{ jsfiddle 'ccWP7' 'result,js,html,css' 'light' }}
+Renders to:
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/result,js,html,css/"></iframe>
 ```
 
-##### Examples
+You may remove the tabs you don't need:
 
-``` xml
-<iframe width="100%" height="300" src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
-
-// or
-<iframe style="width: 100%; height: 300px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/presentation/"></iframe>
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'js,result'}}
 ```
 
-##### Optional tabs
-If you wish to make the "result" tab display first, then just add `result` and any other secondary tabs you wish to include to your URL:
-
-```
-{{jsfiddle "http://jsfiddle.net/abc123/embedded/result,js,html,css/"}}
-```
-
-``` xml
-<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/result,js,html,css/"></iframe>
-```
-
-If there is no need to show all the tabs, you may remove the tabs you don't need: 
-
-``` xml
+Renders to:
+``` html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
 ```
 
-#### Changing skins
-Fiddles also allow "skins". In the following example, `presentation` is the name of the skin:
+#### Fiddle skins
+A third _optional_ parameter may be used to specify the "skin" for the fiddle. At time of writing, the only skins available are `light` and `presentation`. However as [jsFiddle](http://jsfiddle.net) announces new skins they may be used immediately.
 
-``` xml
-<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/presentation/"></iframe> 
+Default: `light`
+
+Template:
+``` handlebars
+{{jsfiddle 'ccWP7' 'result,js,html,css' 'presentation'}}
+```
+
+Renders to:
+``` html
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/js,result/presentation/"></iframe> 
 ```

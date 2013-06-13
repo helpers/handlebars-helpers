@@ -1,7 +1,7 @@
 #### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#if_gt x compare=y}} ... {{/if_gt}}
 ```
 
@@ -9,33 +9,37 @@ Parameters: `none`
 **Same as `if_gt`, consider consolidating**
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 <br>Parameters: value `string|int` - the value to test against.
+
+Data:
 ``` js
-// Data
 number = 5
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#gt number 8}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/gt}}
+```
 
-// Result:
+Renders to:
+```
 Never mind :(
 ```
 
 #### {{unless_gt}}
 _Unless greater than (Unless x > y)_
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#unless_gt x compare=y}} ... {{/unless_gt}}
 ```
 
 #### {{if_gteq}}
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 Parameters: `none`
-``` erlang
+``` handlebars
 {{#if_gteq x compare=y}} ... {{/if_gteq}}
 ```
 
@@ -47,23 +51,26 @@ _Conditionally render a block if the value is greater or equal than a given numb
 ``` js
 number = 5
 ```
-``` xml
-// Template
+
+Template:
+``` html
 {{#gte number 5}}
     Kiss my shiny metal ass!
 {{else}}
     Never mind :(
 {{/gte}}
+```
 
-// Result:
+Renders to:
+```
 Kiss my shiny metal ass!
 ```
 
 
 #### {{unless_gteq}}
-_Render block, unless given value is greater than or equal to._
+_"Unless x >= y". Render block, unless given value is greater than or equal to._
 Parameters: `none`
-_Unless x >= y_
-``` erlang
+
+``` handlebars
 {{#unless_gteq x compare=y}} ... {{/unless_gteq}}
 ```
