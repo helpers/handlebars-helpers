@@ -1,18 +1,59 @@
-#### {{gist}}
-_Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
+#### {{doctype}}
+_Easy way to add an uncommonly used doctype._
 
-Parameters: `String`
-Default: `undefined`
-Usage: `{{ gist [id] }}`
+Default: HTML 5 (`<!DOCTYPE html>`), although tThis is probably only useful on projects that use anything besides HTML 5. 
 
-Example:
-``` hbs
-{{gist '5193239'}}
+Template: 
 ```
-Output:
+{{DOCTYPE 'svg 1.1'}}
+```
+Renders to: 
 ``` html
-<script src="https://gist.github.com/5193239.js"></script>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 ```
+
+Available doctypes:
+
+**HTML 5 (default)**
+* `<!DOCTYPE html>`
+* examples: `{{doctype '5'}}`, `{{doctype 'html5'}}`
+* aliases: `5`, `html`, `html5`
+
+**XML**
+* `<?xml version="1.0" encoding="utf-8" ?>`
+* example: `{{doctype 'xml'}}`
+* aliases: `xml`
+
+**XHTML**
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">`
+* example: `{{doctype 'strict'}}`
+* aliases: `strict`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`
+* aliases: `transitional`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">`
+* aliases: `frameset`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">`
+* aliases: `1.1`, `xhtml 1.1`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">`
+* aliases: `basic`
+* `<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">`
+* aliases: `mobile`
+
+**HTML 4.01**
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">`
+* aliases: `4`, `4.01`, `4.01 strict`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`
+* aliases: `4.01 trans`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">`
+* aliases: `4.01 frameset`
+
+**SVG**
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`
+* aliases: `svg`, `svg 1.1`, `svg1.1`
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">`
+* aliases: `svg 1.0`, `svg1.0`, `svg1`
+
+
 
 #### {{blockquote}}
 **Planned...**

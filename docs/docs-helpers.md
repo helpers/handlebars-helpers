@@ -1,155 +1,101 @@
-## Special helpers
-#### {{embed}}
-_Embed code from given file_
+## Markdown helpers
 
-Parameters: 
-* `String|File` : path to the file you want to embed
-* `String (optional)`: Optional second parameter to "force" a specific language to use fo syntax highlighting.
+> Markdown helpers only work with [assemble](https://github.com/assemble/assemble), Grunt.js plugin for generating sites.
 
-Syntax: `{{ embed [file] [syntax] }}`
-
-Helper also:
-* Unless overridden by a given extension, the helper will automatically apply the extension of the given file next to the first "code fence" (` ``` html`) in the output.
-* When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
-
-Example:
-``` hbs
-{{ embed 'src/test.json' }}
-
-
-// Force highlighting as `javascript` instead of `json`
-{{ embed 'src/test.json' 'javascript' }}
-```
-
-### README Helpers
-
-#### {{authors}}
-Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
-
-Params: `none`
-Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
-
-Data (`AUTHORS` file in the root of our project): 
-
-```
-Brian Woodward (http://github.com/doowb)
-Jon Schlinkert (http://github.com/jonschlinkert)
-```
-
-Template (lowercase version):
-``` handlebars
-{{authors}}
-```
-
-Renders to:
-``` md
-* [Brian Woodward](http://github.com/doowb)  
-* [Jon Schlinkert](http://github.com/jonschlinkert)  
-```
-
-Or the uppercase version:
-``` handlebars
-{{AUTHORS}}
-```
-
-Renders to:
-``` 
-**Jon Schlinkert**
-
-+ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
-+ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
-
-**Brian Woodward**
-
-+ [http://twitter.com/doowb](http://twitter.com/doowb)
-+ [http://github.com/doowb](http://github.com/doowb)
-```
-
-
-### Travis CI
-
-#### {{travis}}
-_Creates a "full" Travis CI link in markdown format_.
-
-Params: `branch`
-Type: `String`
-Usage: `{{travis [branch]}}`
+#### {{md}}
+_Include markdown from specified file(s), and render it to HTML_
 
 Template:
 ``` handlebars
-{{travis}}`
+{{md "file/to/include/post.md"}}
 ```
+Any content inside the "included" markdown file will be rendered as HTML. 
 
-Renders to:
-``` markdown
-# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
-```
 
-Template with branch: 
+#### {{markdown}}
+_Block helper for embedding markdown content inside HTML, and rendering it to HTML at build time._
+
+Template:
 ``` handlebars
-{{travis 'master'}}
+<h1>My Blog</h1>
+
+{{#markdown}}
+## Post of the day
+
+Vestibulum posuere, quam sed bibendum posuere
+Pellentesque habitant morbi tristique senectus
+Pellentesque nulla augue, volutpat vitae
+
+[Read more...](https://github.com/assemble/jonschlinkert)
+
+In hac habitasse platea dictumst. Morbi non rutrum risus.
+
+{{/markdown}}
 ```
 
 Renders to:
-``` markdown
-# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
+``` html
+<h1>My Blog</h1>
+
+<h2>Post of the day</h2>
+
+<p>Vestibulum posuere, quam sed bibendum posuere
+Pellentesque habitant morbi tristique senectus
+Pellentesque nulla augue, volutpat vitae</p>
+
+<a href="https://github.com/assemble/jonschlinkert">Read more...</a>
+
+<p>In hac habitasse platea dictumst. Morbi non rutrum risus.</p>
 ```
 
-#### {{travis-badge}}
-_Creates a Travis CI link in markdown format_.
 
-Params: `none`
-Usage: `{{travis-badge}}`
 
-Template
-``` handlebars
-{{travis}}`
+## Code helpers
+#### {{embed}}
+_Embed code from specified file(s)_
+
+Parameters: 
+* `String|File` : path to the file you want to embed
+* `String|Language (optional)`: Optional second parameter to "force" a specific language to use fo syntax highlighting.
+
+Unless overridden by a given extension, the helper will automatically use the extension of the specified file as the language to use for syntax highlighting. You may also force the helper to use a language that is different than the extension of the file. 
+
+For example, here we will force highlighting as `javascript` instead of `json`
+``` hbs
+{{ embed 'src/example.json' 'js' }}
 ```
 
-Renders to:
-``` markdown
-[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+When embedding a markdown snippet (`.md|markdown|markd`), the helper automatically converts any code fences inside the snippet their unicode equivalent (`&#x60;&#x60;&#x60;`)
+```
+{{embed 'src/example.md'}}
 ```
 
-#### {{changelog}}
-A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
+**File globbing**
 
-**NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
-
-A couple things to keep in mind about YAML:
-
-* YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
-* Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
-
-Example of the format to follow in your `CHANGELOG` file:
-
-``` yaml
-v0.1.2
-  date: "2014-04-09"
-  changes:
-    - The future sucks.
-    - This is my third and last commmit from the future.
-v0.1.1
-  date: "2014-04-08"
-  changes:
-    - Second commit from the future.
-    - The future is more boring that I thought it would be.
-v0.1.0
-  date: "2014-03-07"
-  changes:
-    - First commit... from the future. Yes!
+The `embed` helper also accepts globbing patterns: 
 ```
-Of coure, you are under no obligation to make your changelog entries as interesting as these, and you may record your entries at any point in whatever timeline you prefer, but whatever you write must be valid YAML when you do it.
-
-The output will look like this:
-
-``` md
-* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
-* 2013-03-06    v0.1.0    First commit.
+{{embed 'src/code-examples/*.*'}}
 ```
+When globbing file is used, the code from each file will be embedded separately, and the file extension of each file will be used to identify the language to use for syntax highlighting. You may of course override the language, but whatever language you use will be applied to every embedded file. 
 
-* More info here: [js-yaml](https://github.com/nodeca/js-yaml)
-* See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
+_use globbing carefully! Until you have the hang of it try to be on the safe side and be more specific with your patterns_
+
+
+#### {{gist}}
+_Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
+
+Parameters: `String`
+Default: `undefined`
+Usage: `{{ gist [id] }}`
+
+Example:
+``` hbs
+{{gist '5193239'}}
+```
+Output:
+``` html
+<script src="https://gist.github.com/5193239.js"></script>
+```
 
 
 #### {{jsfiddle}}
@@ -434,7 +380,354 @@ Example:
 ```
 
 
-## Strings helpers
+## README helpers
+#### {{authors}}
+Generates a list of markdown-formatted project authors from the AUTHORS file in the root of a project. Since Handlebars enforces case sensitivity with helper names, this helper comes in two different flavors: `{{AUTHORS}}` or `{{authors}}`.
+
+Params: `none`
+Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
+
+Data (`AUTHORS` file in the root of our project): 
+
+```
+Brian Woodward (http://github.com/doowb)
+Jon Schlinkert (http://github.com/jonschlinkert)
+```
+
+Template (lowercase version):
+``` handlebars
+{{authors}}
+```
+
+Renders to:
+``` md
+* [Brian Woodward](http://github.com/doowb)  
+* [Jon Schlinkert](http://github.com/jonschlinkert)  
+```
+
+Or the uppercase version:
+``` handlebars
+{{AUTHORS}}
+```
+
+Renders to:
+``` 
+**Jon Schlinkert**
+
++ [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
++ [http://github.com/jonschlinkert](http://github.com/jonschlinkert)
+
+**Brian Woodward**
+
++ [http://twitter.com/doowb](http://twitter.com/doowb)
++ [http://github.com/doowb](http://github.com/doowb)
+```
+
+
+### Travis CI
+
+#### {{travis}}
+_Creates a "full" Travis CI link in markdown format_.
+
+Params: `branch`
+Type: `String`
+Usage: `{{travis [branch]}}`
+
+Template:
+``` handlebars
+{{travis}}`
+```
+
+Renders to:
+``` markdown
+# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+```
+
+Template with branch: 
+``` handlebars
+{{travis 'master'}}
+```
+
+Renders to:
+``` markdown
+# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
+```
+
+#### {{travis-badge}}
+_Creates a Travis CI link in markdown format_.
+
+Params: `none`
+Usage: `{{travis-badge}}`
+
+Template
+``` handlebars
+{{travis}}`
+```
+
+Renders to:
+``` markdown
+[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+```
+
+#### {{changelog}}
+A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
+
+**NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
+
+A couple things to keep in mind about YAML:
+
+* YAML is picky, so don't be surprised if the parser throws an error from improperly placed quotation marks.
+* Seriously, don't be surprised. If you even come onto the issues and act surprised when it happens, an automated message will tell you to read the first bullet.
+
+Example of the format to follow in your `CHANGELOG` file:
+
+``` yaml
+v0.1.2
+  date: "2014-04-09"
+  changes:
+    - The future sucks.
+    - This is my third and last commmit from the future.
+v0.1.1
+  date: "2014-04-08"
+  changes:
+    - Second commit from the future.
+    - The future is more boring that I thought it would be.
+v0.1.0
+  date: "2014-03-07"
+  changes:
+    - First commit... from the future. Yes!
+```
+Of coure, you are under no obligation to make your changelog entries as interesting as these, and you may record your entries at any point in whatever timeline you prefer, but whatever you write must be valid YAML when you do it.
+
+The output will look like this:
+
+``` md
+* 2013-03-15    v0.1.2    Update README.md with documentation, examples.
+* 2013-03-06    v0.1.0    First commit.
+```
+
+* More info here: [js-yaml](https://github.com/nodeca/js-yaml)
+* See the tests here: [test/helpers/special_test.js](test/helpers/special_test.js)
+
+
+
+## HTML helpers
+#### {{doctype}}
+_Easy way to add an uncommonly used doctype._
+
+Default: HTML 5 (`<!DOCTYPE html>`), although tThis is probably only useful on projects that use anything besides HTML 5. 
+
+Template: 
+```
+{{DOCTYPE 'svg 1.1'}}
+```
+Renders to: 
+``` html
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+```
+
+Available doctypes:
+
+**HTML 5 (default)**
+* `<!DOCTYPE html>`
+* examples: `{{doctype '5'}}`, `{{doctype 'html5'}}`
+* aliases: `5`, `html`, `html5`
+
+**XML**
+* `<?xml version="1.0" encoding="utf-8" ?>`
+* example: `{{doctype 'xml'}}`
+* aliases: `xml`
+
+**XHTML**
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">`
+* example: `{{doctype 'strict'}}`
+* aliases: `strict`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`
+* aliases: `transitional`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">`
+* aliases: `frameset`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">`
+* aliases: `1.1`, `xhtml 1.1`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">`
+* aliases: `basic`
+* `<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">`
+* aliases: `mobile`
+
+**HTML 4.01**
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">`
+* aliases: `4`, `4.01`, `4.01 strict`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`
+* aliases: `4.01 trans`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">`
+* aliases: `4.01 frameset`
+
+**SVG**
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`
+* aliases: `svg`, `svg 1.1`, `svg1.1`
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">`
+* aliases: `svg 1.0`, `svg1.0`, `svg1`
+
+
+
+#### {{blockquote}}
+**Planned...**
+
+_Create a blockquote. Outputs a string with a given attribution as a quote._
+
+Template:
+
+``` handlebars
+{{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
+  This is your quote.
+{{/blockquote}}
+```
+
+Renders to:
+
+``` html
+<blockquote>
+  <p>This is your quote.</p>
+  <footer> 
+    <strong>@doowb</strong>
+    <cite> 
+      <a href="http://github.com/source/for/your/quote">This is the title</a>
+    </cite>
+  </footer>
+</blockquote>
+```
+
+#### {{timeline}}
+**Planned...**
+
+_Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
+
+Parameters: 
+
+* `array` to iterate over, 
+* `string`: CSS class name for left columns
+* `string`: CSS class name for right columns
+
+Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Usage:
+``` handlebars
+<div class="timeline">
+ {{#timeline myArray "left" "right"}}
+ <div class="{{columnClass}}">
+   {{> entry}}
+ </div>
+ {{else}}
+   <em>There aren't any entries.</em>
+ {{/timeline}}
+</div>
+```
+
+#### {{exticon}}
+_Generate the appropriate icon based on the extension of the given file._
+
+Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
+
+Usage: 
+``` handlebars
+{{exticon 'file.png'}}
+{{exticon 'file.pdf'}}
+{{exticon 'file.doc'}}
+{{exticon 'file.txt'}}
+{{exticon 'file.csv'}}
+{{exticon 'file'}}
+```
+Output:
+``` html
+<img src="img/img-icon.png"><i>file.png</i>
+<img src="img/pdf-icon.png"><i>file.pdf</i>
+<img src="img/word-icon.png"><i>file.doc</i>
+<img src="img/txt-icon.png"><i>file.txt</i>
+<img src="img/csv-icon.png"><i>file.csv</i>
+<img src="img/other-icon.png"><i>file</i>
+```
+
+#### {{ul}}
+_Creates an unordered list._
+
+Parameters: `Hash|HTML attributes`, `Optional`
+
+HTML attributes to use on the `ul` element. 
+``` js
+// Data
+collection = [
+  name: 'Leela'
+  deliveries: 8021,
+  name: 'Bender'
+  deliveries: 239,
+  name: 'Fry'
+  deliveries: 1
+]
+```
+Template:
+``` handlebars
+{{#ul collection class="deliveries-list"}}
+  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
+{{/ul}}
+```
+``` html
+// Output:
+<ul class="deliveries-list">
+  <li> Leela - 8021 deliveries </li>
+  <li> Bender - 239 deliveries </li>
+  <li> Fry - 1 delivery </li>
+</ul>
+```
+#### {{ol}}
+_Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
+
+Parameters: `Hash`, `HTML attributes`, `Optional`
+
+HTML attributes to use on the `ol` element. 
+``` js
+// Data
+collection = [
+  name: 'Leela'
+  deliveries: 8021,
+  name: 'Bender'
+  deliveries: 239,
+  name: 'Fry'
+  deliveries: 1
+]
+```
+
+Template:
+``` handlebars
+{{#ol collection class="deliveries-list"}}
+  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
+{{/ol}}
+```
+``` html
+// Output:
+<ol class="deliveries-list">
+  <li> Leela - 8021 deliveries </li>
+  <li> Bender - 239 deliveries </li>
+  <li> Fry - 1 delivery </li>
+</ol>
+```
+
+#### {{br}}
+_Renders `<br>` elements in the output, based on the number given as a parameter. Not really recommended for general use, but it's here if you need it._
+
+Parameters: `Integer|Count`, `Optional`
+
+The number of `br` elements to render. 
+
+`template.hbs`
+``` handlebars
+{{br 5}}
+```
+renders to:
+``` html
+`<br><br><br><br><br>`
+```
+
+
+## String helpers
 #### {{occurrences}}
 _Evaluate string A, and count the occurrences of string B within string A_
 <br>Default: `undefined`
@@ -593,181 +886,6 @@ Renders to:
 (444) 444-4444
 ```
 
-
-
-## HTML helpers
-#### {{gist}}
-_Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
-
-Parameters: `String`
-Default: `undefined`
-Usage: `{{ gist [id] }}`
-
-Example:
-``` hbs
-{{gist '5193239'}}
-```
-Output:
-``` html
-<script src="https://gist.github.com/5193239.js"></script>
-```
-
-#### {{blockquote}}
-**Planned...**
-
-_Create a blockquote. Outputs a string with a given attribution as a quote._
-
-Template:
-
-``` handlebars
-{{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
-  This is your quote.
-{{/blockquote}}
-```
-
-Renders to:
-
-``` html
-<blockquote>
-  <p>This is your quote.</p>
-  <footer> 
-    <strong>@doowb</strong>
-    <cite> 
-      <a href="http://github.com/source/for/your/quote">This is the title</a>
-    </cite>
-  </footer>
-</blockquote>
-```
-
-#### {{timeline}}
-**Planned...**
-
-_Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
-
-Parameters: 
-
-* `array` to iterate over, 
-* `string`: CSS class name for left columns
-* `string`: CSS class name for right columns
-
-Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Usage:
-``` handlebars
-<div class="timeline">
- {{#timeline myArray "left" "right"}}
- <div class="{{columnClass}}">
-   {{> entry}}
- </div>
- {{else}}
-   <em>There aren't any entries.</em>
- {{/timeline}}
-</div>
-```
-
-#### {{exticon}}
-_Generate the appropriate icon based on the extension of the given file._
-
-Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
-
-Usage: 
-``` handlebars
-{{exticon 'file.png'}}
-{{exticon 'file.pdf'}}
-{{exticon 'file.doc'}}
-{{exticon 'file.txt'}}
-{{exticon 'file.csv'}}
-{{exticon 'file'}}
-```
-Output:
-``` html
-<img src="img/img-icon.png"><i>file.png</i>
-<img src="img/pdf-icon.png"><i>file.pdf</i>
-<img src="img/word-icon.png"><i>file.doc</i>
-<img src="img/txt-icon.png"><i>file.txt</i>
-<img src="img/csv-icon.png"><i>file.csv</i>
-<img src="img/other-icon.png"><i>file</i>
-```
-
-#### {{ul}}
-_Creates an unordered list._
-
-Parameters: `Hash|HTML attributes`, `Optional`
-
-HTML attributes to use on the `ul` element. 
-``` js
-// Data
-collection = [
-  name: 'Leela'
-  deliveries: 8021,
-  name: 'Bender'
-  deliveries: 239,
-  name: 'Fry'
-  deliveries: 1
-]
-```
-Template:
-``` handlebars
-{{#ul collection class="deliveries-list"}}
-  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
-{{/ul}}
-```
-``` html
-// Output:
-<ul class="deliveries-list">
-  <li> Leela - 8021 deliveries </li>
-  <li> Bender - 239 deliveries </li>
-  <li> Fry - 1 delivery </li>
-</ul>
-```
-#### {{ol}}
-_Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
-
-Parameters: `Hash`, `HTML attributes`, `Optional`
-
-HTML attributes to use on the `ol` element. 
-``` js
-// Data
-collection = [
-  name: 'Leela'
-  deliveries: 8021,
-  name: 'Bender'
-  deliveries: 239,
-  name: 'Fry'
-  deliveries: 1
-]
-```
-
-Template:
-``` handlebars
-{{#ol collection class="deliveries-list"}}
-  {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
-{{/ol}}
-```
-``` html
-// Output:
-<ol class="deliveries-list">
-  <li> Leela - 8021 deliveries </li>
-  <li> Bender - 239 deliveries </li>
-  <li> Fry - 1 delivery </li>
-</ol>
-```
-
-#### {{br}}
-_Renders `<br>` elements in the output, based on the number given as a parameter. Not really recommended for general use, but it's here if you need it._
-
-Parameters: `Integer|Count`, `Optional`
-
-The number of `br` elements to render. 
-
-`template.hbs`
-``` handlebars
-{{br 5}}
-```
-renders to:
-``` html
-`<br><br><br><br><br>`
-```
 
 
 ## Collections helpers
