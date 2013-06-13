@@ -12,7 +12,7 @@ Any content inside the "included" markdown file will be rendered as HTML.
 _Block helper for embedding markdown content inside HTML, and rendering it to HTML at build time._
 
 Template:
-``` handlebars
+``` html
 <h1>My Blog</h1>
 
 {{#markdown}}

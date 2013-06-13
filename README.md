@@ -187,7 +187,7 @@ Any content inside the "included" markdown file will be rendered as HTML.
 _Block helper for embedding markdown content inside HTML, and rendering it to HTML at build time._
 
 Template:
-``` handlebars
+``` html
 <h1>My Blog</h1>
 
 {{#markdown}}
@@ -2419,7 +2419,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Jun 13 2013 16:49:02._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Jun 13 2013 16:52:04._
 
 
 

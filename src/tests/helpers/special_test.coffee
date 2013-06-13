@@ -16,14 +16,14 @@ describe 'jsfiddle', ->
       source   = '{{jsfiddle "UXbas"}}'
       template = Handlebars.compile(source)
 
-      template().should.equal '<iframe width="100%" height="210px" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
+      template().should.equal '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
 
   describe '{{jsfiddle id tabs}}', ->
     it 'should return a jsfiddle embed link, with custom tabs assigned', ->
       source   = '{{jsfiddle "UXbas" "html,css"}}'
       template = Handlebars.compile(source)
 
-      template().should.equal '<iframe width="100%" height="210px" src="http://jsfiddle.net/UXbas/embedded/html,css/light/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
+      template().should.equal '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>'
 
 describe 'gist', ->
   describe '{{gist id}}', ->
