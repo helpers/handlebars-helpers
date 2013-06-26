@@ -118,7 +118,13 @@ module.exports.withSort = withSort = (array, field, options) ->
     array = array.sort()
     result += options.fn(item) for item in array
   else
-    array = array.sort (a, b) -> getDescendantProp(a, field) > getDescendantProp(b, field)
+    array = array.sort (a, b) -> 
+      aProp = getDescendantProp(a, field)
+      bProp = getDescendantProp(b, field)
+      if aProp > bProp
+        return 1
+      else return -1  if aProp < bProp
+      0
     result += options.fn(array[item]) for item of array
   result
 
