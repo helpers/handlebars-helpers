@@ -11,7 +11,7 @@ Example:
 ``` handlebars
 {{relative "from" "to"}}
 ```
-Usage:
+Template:
 ``` html
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 ```

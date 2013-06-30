@@ -349,7 +349,7 @@ Example:
 ``` handlebars
 {{relative "from" "to"}}
 ```
-Usage:
+Template:
 ``` html
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
 ```
@@ -2419,7 +2419,7 @@ Copyright 2013 Assemble
 ---
 Authored by [assemble](https://github.com/assemble/assemble)
 
-_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Thu Jun 13 2013 16:52:04._
+_This file was generated using Grunt and [assemble](http://github.com/assemble/assemble) on Sun Jun 23 2013 18:44:17._
 
 
 

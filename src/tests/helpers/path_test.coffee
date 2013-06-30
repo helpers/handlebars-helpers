@@ -1,7 +1,7 @@
 require 'should'
 
 Handlebars = require 'handlebars'
-require('../../lib/helpers/helpers-special').register Handlebars, {}
+require('../../lib/helpers/helpers-path').register Handlebars, {}
 
 ## TODO
 # relative using {{assets}} variable

@@ -5,7 +5,7 @@
 
   Handlebars = require('handlebars');
 
-  require('../../lib/helpers/helpers-special').register(Handlebars, {});
+  require('../../lib/helpers/helpers-path').register(Handlebars, {});
 
   describe('extname', function() {
     return describe('{{extname src}}', function() {
