@@ -1,11 +1,11 @@
 {
-  "name": "helper-lib",
+  "name": "handlebars-helpers",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.2.4",
-  "homepage": "https://github.com/assemble/helper-lib",
+  "version": "0.2.6",
+  "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "assemble",
-    "url": "https://github.com/assemble/assemble"
+    "url": "https://github.com/assemble/assemble/handlebars-helpers"
   },
   "contributors": [
     {
@@ -19,15 +19,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/assemble/helper-lib.git"
+    "url": "git://github.com/assemble/handlebars-helpers.git"
   },
   "bugs": {
-    "url": "git://github.com/assemble/helper-lib/isues"
+    "url": "https://github.com/assemble/handlebars-helpers/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/assemble/helper-lib/blob/master/LICENSE-MIT"
+      "url": "https://github.com/assemble/handlebars-helpers/blob/master/LICENSE-MIT"
     }
   ],
   "main": "index.js",
@@ -48,7 +48,6 @@
   },
   "devDependencies": {
     "amdefine": "0.0.4",
-    "assemble": "https://github.com/assemble/assemble/tarball/master",
     "chai": "~1.5.0",
     "coffee-script": "~1.6.2",
     "grunt": "~0.4.1",
@@ -59,7 +58,7 @@
     "grunt-contrib-nodeunit": "~0.1.2",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
-    "handlebars": "~1.0.10",
+    "handlebars": "1.0.10",
     "minimatch": "~0.2.12",
     "should": "~1.2.2",
     "to": "~0.2.9"

@@ -1,19 +1,25 @@
-#### log
+#### {{log}}
 _Simple `console.log()`_
-<br>Parameters: `none`
+
+Parameters: `none`
+
 ``` html
 // Template
 {{log "Hi console :)"}}
+```
 
-// Result:
+Renders to:
+``` bash
 Hi console :)
 ```
 
-#### debug
+#### {{debug}}
 _Simple `console.debug()` that shows the current context._
-<br>Parameters: `none`
+
+Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -23,13 +29,83 @@ collection = [
   deliveries: 1
 ]
 ```
+
+Template:
 ``` html
-// Template
 {{#withFirst collection}}
    {{debug name}}
 {{/withFirst}}
+```
 
-// Result:
+Renders to:
+``` json
 Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
+```
+
+#### {{expandJSON}}
+_Return a unique, JSON-formatted array of all file or directory paths that match the given globbing pattern(s)_
+
+Parameters: `String`
+Default: `undefined`
+
+Template:
+``` html
+{{expandJSON './src/**/*.md'}}
+```
+
+Renders to:
+``` json
+[
+  "./src/content/blockquotes.md",
+  "./src/content/chapters/01-getting-started.md",
+  "./src/content/chapters/02-language-features.md",
+  "./src/content/chapters/03-advanced-materials.md",
+  "./src/content/code.md",
+  "./src/content/emphasis.md",
+  "./src/content/headings.md",
+  "./src/content/images.md",
+  "./src/content/links.md",
+  "./src/content/lists.md",
+  "./src/content/markdown-here.md",
+  "./src/content/paragraphs.md",
+  "./src/content/post.md",
+  "./src/content/reference-links.md",
+  "./src/content/reference.md",
+  "./src/content/tables.md",
+  "./src/content/test.md"
+]
+```
+
+#### {{expandYAML}}
+_Return a unique, YAML-formatted array of all file or directory paths that match the given globbing pattern(s)_
+
+Parameters: `String`
+
+ Default: `undefined`
+
+Template:
+``` html
+{{expandYAML './src/**/*.md'}}
+```
+
+Renders to:
+``` yaml
+- "./src/content/blockquotes.md"
+- "./src/content/chapters/01-getting-started.md"
+- "./src/content/chapters/02-language-features.md"
+- "./src/content/chapters/03-advanced-materials.md"
+- "./src/content/code.md"
+- "./src/content/emphasis.md"
+- "./src/content/headings.md"
+- "./src/content/images.md"
+- "./src/content/links.md"
+- "./src/content/lists.md"
+- "./src/content/markdown-here.md"
+- "./src/content/paragraphs.md"
+- "./src/content/post.md"
+- "./src/content/reference-links.md"
+- "./src/content/reference.md"
+- "./src/content/tables.md"
+- "./src/content/test.md"
 ```

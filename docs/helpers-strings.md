@@ -1,94 +1,118 @@
-#### hyphenate
+#### {{occurrences}}
+_Evaluate string A, and count the occurrences of string B within string A_
+<br>Default: `undefined`
+<br>Parameters:
+* `String A` (required): The string to evaluate
+* `String B` (required): The string to look for and count in "string A"
+
+``` handlebars
+{{occurrences "evaluate this string" "evaluate"}}
+```
+Result :
+```
+1
+```
+
+#### {{hyphenate}}
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
 {{hyphenate "make this all hyphenated"}}
-
-// Result 
+```
+Result :
+```
 make-this-all-hyphenated
 ```
 
-#### dashify
+#### {{dashify}}
 _Same as `hyphenate`, but replaces dots in string with hyphens._
 <br>Parameters: `none`
 ``` handlebars
 {{dashify "make.this.all.hyphenated"}}
-
-// Result
+```
+Renders to:
+```
 make-this-all-hyphenated
 ```
 
-#### lowercase
+#### {{lowercase}}
 _Turns a string to lowercase._
 <br>Parameters: `none`
 ``` handlebars
 {{lowercase "MAKE THIS ALL LOWERCASE"}}
-
-// Result
+```
+Renders to:
+```
 make this all lowercase
 ```
 
-#### uppercase
+#### {{uppercase}}
 _Turns a string to uppercase. Opposite of `{{lowercase}}`._
 <br>Parameters: `none`
 ``` handlebars
  {{uppercase "make this all uppercase"}}
-
-// Result
+```
+Renders to:
+```
 MAKE THIS ALL UPPERCASE
 ```
 
-#### capitalizeFirst
+#### {{capitalizeFirst}}
 _Capitalizes the first word in a string._
 <br>Parameters: `none`
 ``` handlebars
 {{capitalizeFirst "capitalize first word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize first word in this sentence
 ```
 
-#### capitalizeEach
+#### {{capitalizeEach}}
 _Capitalizes each word in a string._
 <br>Parameters: `none`
 ``` handlebars
 {{capitalizeEach "capitalize EACH word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize EACH Word In This Sentence
 ```
 
-#### titleize
+#### {{titleize}}
 _Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
 ``` handlebars
 {{titleize "capitalize EACH word in this sentence"}}
-
-// Result
+```
+Renders to:
+```
 Capitalize Each Word In This Sentence.
 ```
 
-#### sentence
+#### {{sentence}}
 _Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase._
 Parameters: `none`
 ``` handlebars
 {{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
-
-// Result
+```
+Renders to:
+```
 Capitalize the first word in each sentence. But make the other words lowercase.
 ```
 
-#### reverse
+#### {{reverse}}
 _Reverses a string._
 <br>Parameters: `none`
 ``` handlebars
 {{reverse "bender should NOT be allowed on TV."}}
-
-// Result
+```
+Renders to:
+```
 .VT no dewolla eb TON dluohs redneb
 ```
 
-#### truncate
+#### {{truncate}}
 _Truncates a string given a specified `length`, providing a custom string to denote an `omission`._
 <br>Parameters: 
 
@@ -97,27 +121,37 @@ _Truncates a string given a specified `length`, providing a custom string to den
 
 ``` handlebars
 {{truncate "Bender should not be allowed on tv." 31 "..."}}
-
-// Result
+```
+Renders to:
+```
 Bender should not be allowed...
 ```
 
-#### center
+#### {{center}}
 _Centers a string using non-breaking spaces._
 <br>Parameters: spaces: `int` - The number of spaces. (Required)
 ``` handlebars
 {{center "Bender should not be allowed on tv." 10}}
-
-// Result:
+```
+Renders to:
+```
 |              Bender should not be allowed on tv.              |
 ```
 
-#### nl2br
-_Convert new lines (`\r\n`, `\n\r`, `\r`, `\n`) to line breaks_
-<br>Parameters: `none`
-``` handlebars
-{{nl2br <br>description}}
+#### {{formatPhoneNumber}}
+_Output a formatted phone number_
 
-// Result: 
-<br>
+Credit: [Treehouse Blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
+
+Data:
+```js
+number: 4444444444
+```
+Template:
+``` handlebars
+{{formatPhoneNumber number}}
+```
+Renders to:
+```
+(444) 444-4444
 ```

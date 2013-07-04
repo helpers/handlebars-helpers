@@ -1,51 +1,74 @@
-#### gist
-_Embed public GitHub Gists by adding only the Id of the Gist. The helper also accepts an optional second parameter for targeting a specific file on the Gist.._
+#### {{doctype}}
+_Easy way to add an uncommonly used doctype._
 
-Parameters: `String`
-Default: `undefined`
-Usage: `{{ gist [id] }}`
+Default: HTML 5 (`<!DOCTYPE html>`), although tThis is probably only useful on projects that use anything besides HTML 5. 
 
-Example:
-``` hbs
-{{gist '5193239'}}
+Template: 
 ```
-Output:
+{{DOCTYPE 'svg 1.1'}}
+```
+Renders to: 
 ``` html
-<script src="https://gist.github.com/5193239.js"></script>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 ```
 
-#### embed
-_Embed Code Snippets_
+Available doctypes:
 
-Embed code snippets from any file with the `embed` variable. You can also pass in a second parameter to force syntax highlighting for a specific language.
+**HTML 5 (default)**
+* `<!DOCTYPE html>`
+* examples: `{{doctype '5'}}`, `{{doctype 'html5'}}`
+* aliases: `5`, `html`, `html5`
 
-Parameters: `String|String (optional)` 
-Default: `undefined`
-Syntax: `{{ embed [filename] [syntax] }}`
+**XML**
+* `<?xml version="1.0" encoding="utf-8" ?>`
+* example: `{{doctype 'xml'}}`
+* aliases: `xml`
 
-Example:
-``` hbs
-{{ embed 'src/test.json' }}
-```
+**XHTML**
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">`
+* example: `{{doctype 'strict'}}`
+* aliases: `strict`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">`
+* aliases: `transitional`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">`
+* aliases: `frameset`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">`
+* aliases: `1.1`, `xhtml 1.1`
+* `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">`
+* aliases: `basic`
+* `<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">`
+* aliases: `mobile`
 
-Forced highlighting:
-``` hbs
-{{ embed 'src/test.json' 'javascript' }}
-```
-In the second example, highlighting was forced as `javascript` instead of `json`.
+**HTML 4.01**
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">`
+* aliases: `4`, `4.01`, `4.01 strict`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">`
+* aliases: `4.01 trans`
+* `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">`
+* aliases: `4.01 frameset`
+
+**SVG**
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">`
+* aliases: `svg`, `svg 1.1`, `svg1.1`
+* `<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">`
+* aliases: `svg 1.0`, `svg1.0`, `svg1`
 
 
-#### blockquote (planned...)
-_Create a blockquote_
 
-Outputs a string with a given attribution as a quote
+#### {{blockquote}}
+**Planned...**
 
-``` hbs
+_Create a blockquote. Outputs a string with a given attribution as a quote._
+
+Template:
+
+``` handlebars
 {{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
   This is your quote.
 {{/blockquote}}
 ```
-Output:
+
+Renders to:
 
 ``` html
 <blockquote>
@@ -58,30 +81,10 @@ Output:
   </footer>
 </blockquote>
 ```
-   
-#### stripes
-_Iterates through an array, letting the contents know whether to add an even or odd row._
 
-Parameters:
+#### {{timeline}}
+**Planned...**
 
-* `array` to iterate over, 
-* `string`: CSS class name for even rows 
-* `string`: CSS class name for odd rows
-
-Credit: [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
-
-Usage:
-``` handlebars
-{{#stripes myArray "even" "odd"}}
-  <div class="{{stripeClass}}">
-    ... code for the row ...
-  </div>
-{{else}}
-  <em>There aren't any people.</em>
-{{/stripes}}
-```
-
-#### timeline (planned...)
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
 Parameters: 
@@ -105,7 +108,31 @@ Usage:
 </div>
 ```
 
-#### ul
+#### {{exticon}}
+_Generate the appropriate icon based on the extension of the given file._
+
+Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
+
+Usage: 
+``` handlebars
+{{exticon 'file.png'}}
+{{exticon 'file.pdf'}}
+{{exticon 'file.doc'}}
+{{exticon 'file.txt'}}
+{{exticon 'file.csv'}}
+{{exticon 'file'}}
+```
+Output:
+``` html
+<img src="img/img-icon.png"><i>file.png</i>
+<img src="img/pdf-icon.png"><i>file.pdf</i>
+<img src="img/word-icon.png"><i>file.doc</i>
+<img src="img/txt-icon.png"><i>file.txt</i>
+<img src="img/csv-icon.png"><i>file.csv</i>
+<img src="img/other-icon.png"><i>file</i>
+```
+
+#### {{ul}}
 _Creates an unordered list._
 
 Parameters: `Hash|HTML attributes`, `Optional`
@@ -136,7 +163,7 @@ Template:
   <li> Fry - 1 delivery </li>
 </ul>
 ```
-#### ol
+#### {{ol}}
 _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based on a count._
 
 Parameters: `Hash`, `HTML attributes`, `Optional`
@@ -169,7 +196,7 @@ Template:
 </ol>
 ```
 
-#### br
+#### {{br}}
 _Renders `<br>` elements in the output, based on the number given as a parameter. Not really recommended for general use, but it's here if you need it._
 
 Parameters: `Integer|Count`, `Optional`

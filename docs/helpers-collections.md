@@ -1,8 +1,9 @@
-#### first
+#### {{first}}
 _Returns the first item in a collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -13,21 +14,24 @@ collection = [
   'Professor Farnsworth', 
   'Scruffy'
 ]
-
 ```
+Template:
 ``` html
-// Template
 {{first collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong
 ```
 
-#### withFirst
+#### {{withFirst}}
 _Use the first item in a collection inside a block._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -39,21 +43,25 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{#withFirst collection}}
   <p>{{this}} is smart.</p>
 {{/withFirst}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Amy Wong is smart.</p>
 ```
 
-#### last
+#### {{last}}
 _Returns the last item in a collection. Opposite of `first`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -65,19 +73,23 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{last collection}}
 
-// Result:
+```
+
+Renders to:
+```
 Scruffy
 ```
 
-#### withLast
+#### {{withLast}}
 _Use the last item in a collection inside a block. Opposite of `withFirst`._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -89,17 +101,20 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{#withLast collection}}
   <p>{{this}} is lazy.</p>
 {{/withLast}}
 
-// Result:
+```
+
+Renders to:
+``` html
 <p>Scruffy is lazy.</p>
 ```
 
-#### after
+#### {{after}}
 _Returns all of the items in the collection after the specified count._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
 ```
@@ -115,19 +130,22 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{after collection 5}}
+```
 
-// Result:
+Renders to:
+``` html
 Leela, Professor Farnsworth, Scruffy
 ```
 
-#### withAfter
+#### {{withAfter}}
 _Use all of the items in the collection after the specified count inside a block._
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -139,21 +157,25 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{#withAfter collection 5}}
     {{titleize this}}
 {{/withAfter}}
 
-// Result:
+```
+
+Renders to:
+```
 Leela Professor Farnsworth Scruffy
 ```
 
-#### before
+#### {{before}}
 _Returns all of the items in the collection before the specified count. Opposite of `after`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -165,19 +187,23 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{before collection 5}}
 
-// Result:
+```
+
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg
 ```
 
-#### withBefore
+#### {{withBefore}}
 _Use all of the items in the collection before the specified count inside a block. Opposite of `withAfter`._
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -189,21 +215,24 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{#withBefore collection 5}}
     {{reverse this}}
 {{/withBefore}}
+```
 
-// Result:
+Renders to:
+```
 gnoW ymA redneB grebdioZ .rD
 ```
 
-#### join
+#### {{join}}
 _Joins all elements of a collection into a string using a separator if specified._
 <br>Parameters: separator `string` - A string to use as a separator between the items. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -215,19 +244,22 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{join collection " & "}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong & Bender & Dr. Zoidberg & Fry & Hermes Conrad & Leela & Professor Farnsworth & Scruffy
 ```
 
-#### sort
+#### {{sort}}
 _Returns the collection sorted._
 Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -239,19 +271,22 @@ collection = [
   'Scruffy'
 ]
 ```
+Template:
 ``` html
-// Template
 {{sort collection}}
+```
 
-// Result:
+Renders to:
+```
 Amy Wong, Bender, Dr. Zoidberg, Fry, Hermes Conrad, Leela, Professor Farnsworth, Scruffy
 ```
 
-#### withSort
+#### {{withSort}}
 _Uses the sorted collection inside the block._
 <br>Parameters: field `string` - String name of the field or property to sort by. (Optional)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -264,23 +299,26 @@ collection = [
 ]
 
 ```
+Template:
 ``` html
-// Template
 {{#withSort collection "deliveries"}}
-    {{name}}: {{deliveries}} <br>
+  {{name}}: {{deliveries}} <br>
 {{/withSort}}
+```
 
-// Result:
+Renders to:
+```
 Fry: -12
 Bender: 239
 Leela: 8021
 ```
 
-#### length
+#### {{length}}
 _Returns the length of the collection._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = [
   'Amy Wong', 
   'Bender', 
@@ -293,19 +331,22 @@ collection = [
 ]
 
 ```
+Template:
 ``` html
-// Template
 {{length collection}}
+```
 
-// Result:
+Renders to:
+```
 8
 ```
 
-#### lengthEqual
+#### {{lengthEqual}}
 _Conditionally render a block based on the length of a collection._
 <br>Parameters: length `int` - The value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -317,104 +358,121 @@ collection = [
   deliveries: -12
 ]
 ```
+Template:
 ``` html
-// Template
 {{#lengthEqual collection 3}}
-        There are 3 people in Planet Express.
+    There are 3 people in Planet Express.
 {{else}}
-        This is not Planet Express.
+    This is not Planet Express.
 {{/lengthEqual}}
+```
 
-// Result:
+Renders to:
+```
 There are 3 people in Planet Express.
 ```
 
-#### empty
+#### {{empty}}
 _Conditionally render a block if the collection is empty._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = []
 ```
+Template:
 ``` html
-// Template
 {{#empty collection}}
-        Good news everyone!
+    Good news everyone!
 {{else}}
-        Bad news everyone!
+    Bad news everyone!
 {{/empty}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
-#### any
+#### {{any}}
 _Conditionally render a block if the collection isn't empty. Opposite of `empty`_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth']
 ```
+Template:s
 ``` html
-// Templates
 {{#any collection}}
-        Good news everyone!
+  Good news everyone!
 {{else}}
-        Bad news everyone!
+  Bad news everyone!
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 Good news everyone!
 ```
 
-#### inArray
+#### {{inArray}}
 _Conditionally render a block if a specified value is in the collection._
 <br>Parameters: value `string|int` - A value to test against. (Required)
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
+Template:s
 ``` html
-// Templates
 {{#inArray collection "Fry"}}
-        I'm walking on sunshine!
+  I'm walking on sunshine!
 {{else}}
-        I'm walking on darkness.
+  I'm walking on darkness.
 {{/any}}
+```
 
-// Result:
+Renders to:
+```
 I'm walking on sunshine!
 ```
 
-#### eachIndex
+#### {{eachIndex}}
 _Current implementation of the default Handlebars loop helper {{#each}} adding index (0-based index) to the loop context._
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
+Template:s
 ``` html
-// Templates
 {{#eachIndex collection}}
-    {{this}} is {{index}}
+  {{this}} is {{index}}
 {{/eachIndex}}
+```
 
-// Result:
+Renders to:
+```
 Professor Farnsworth is 0, Fry is 1, Bender is 2
 ```
 
-#### eachProperty
+#### {{eachProperty}}
 _Loop through an objects properties_
 <br>Parameters: `none`
+
+Data:
 ``` js
-// Data
 TODO...
 ```
+Template:s
 ``` html
-// Templates
 {{#eachProperty object}}
     {{property}}: {{value}}<br/>
 {{/eachProperty }}
+```
 
-// Result
+Renders to:
+```
 TODO...
 ```

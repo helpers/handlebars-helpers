@@ -1,6 +1,4 @@
-###
-Comparison Helpers
-###
+###! comparison helpers ###
 
 module.exports.and = _and = (testA, testB, options) ->
   if testA and testB then options.fn(@) else options.inverse(@)

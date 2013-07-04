@@ -1,12 +1,18 @@
+###! html helpers ###
+
 module.exports.register = (Handlebars, options) ->
   grunt = require 'grunt'
+  util  = require 'util'
   Utils = require '../utils/utils'
   HTML  = require '../utils/html'
+  _     = require 'lodash'
 
 
-  # Switch (proof of concept), not intended for use in production code.
-  # This helper demonstrates a simple example of how to switch the output
-  # format based on the extension of the destination file(s) in the
+
+  # Switch (proof of concept), not intended for actual use in projects.
+  # This helper demonstrates a the simple idea that the syntax of 
+  # content rendered by the helper can be "switched" based on a condition, 
+  # such as, in this case, the extension of the destination file(s) in the
   # 'assemble' grunt task.
   Handlebars.registerHelper "switch", (src) ->
     md = '# ' + src
@@ -14,7 +20,46 @@ module.exports.register = (Handlebars, options) ->
     output = Utils.switchOutput(options.ext, md, html)
     Utils.safeString(output)
 
-  # css: proof of concept. will be updated to handle multiple stylesheets.
+  # sections
+  Handlebars.sections = {}
+  Handlebars.registerHelper "section", (name, options) ->
+    console.log "inside section", name
+    Handlebars.sections[name] = {}  unless Handlebars.sections[name]
+    html = ""
+    _.forOwn Handlebars.sections[name], (value, key) ->
+      console.log "item", key, value
+      data = Handlebars.createFrame(item: value)
+      console.log "data", data
+      html += options.fn(data)
+    #html += value
+    new Handlebars.SafeString(html)
+
+  # push
+  Handlebars.registerHelper "push", (options) ->
+    console.log "inside push", options.hash.section, options.hash.name
+    section = options.hash.section
+    name = options.hash.name
+    if section
+      Handlebars.sections[section] = {}  unless Handlebars.sections[section]
+      item = new Handlebars.SafeString(options.fn(this))
+      if name
+        Handlebars.sections[section][name] = item
+      else
+        Handlebars.sections[section]["item" + (Handlebars.sections[section].length + 1)] = item
+
+  # {{link "/index.html" "Click here" "home-link"}} 
+  Handlebars.registerHelper "link", (url, text, linkClass) ->
+    url  = Handlebars.Utils.escapeExpression(url)
+    text = Handlebars.Utils.escapeExpression(text)
+    linkClass = ""  if Utils.isUndefined(linkClass)
+    md   = '[' + text + '](' + url + ')'
+    html = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
+    result = Utils.switchOutput(options.ext, md, html)
+    Utils.safeString(result)
+
+  # css: proof of concept. add <link></link> tags, 
+  # automatically resolves relative path to 
+  # options.assets
   Handlebars.registerHelper "css", (context) ->
     context = [context] unless Array.isArray context
     Utils.safeString(context.map((item) ->
@@ -45,135 +90,6 @@ module.exports.register = (Handlebars, options) ->
         else js
     ).join("\n"))
 
-  # readme-title: Generates a title and Travis CI badge for a README.md.
-  # Syntax: {{travis [src]}}
-  Handlebars.registerHelper "readme-title", (branch) ->
-    pkg     = Utils.readJSON("./package.json")
-    repo    = Utils.repoUrl('https://github.com/$1')
-    name    = pkg.name
-    version = pkg.version
-    source   = '[' + name + ' v' + version + '](' + repo + ')'
-    template = Handlebars.compile(source)
-    Utils.safeString(template(pkg))
-
-  # Travis CI: Generates a title and Travis CI badge for a README.md.
-  # Syntax: {{travis [src]}}
-  Handlebars.registerHelper "travis-badge", (branch) ->
-    pkg       = Utils.readJSON("./package.json")
-    travisUrl = Utils.repoUrl('https://travis-ci.org/$1')
-    # pass in data from assemble task options
-    travis    = options.travis || {}
-    curBranch = ''
-    if Utils.isUndefined(branch)
-      curBranch = ''
-    else if travis.branch
-      curBranch = '?branch=' + travis.branch
-    else 
-      curBranch = '?branch=' + branch
-    if travis.name
-      pkg.name = travis.name
-    else
-      pkg.name
-    source   = '[![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
-    template = Handlebars.compile(source)
-    Utils.safeString(template(pkg))
-
-  # Travis CI: Generates a title and Travis CI badge for a README.md.
-  # Syntax: {{travis [src]}}
-  Handlebars.registerHelper "travis", (branch) ->
-    pkg       = Utils.readJSON("./package.json")
-    repo      = Utils.repoUrl('https://github.com/$1')
-    travisUrl = Utils.repoUrl('https://travis-ci.org/$1')
-    # pass in data from assemble task options
-    travis    = options.travis || {}
-    curBranch = ''
-    if Utils.isUndefined(branch)
-      curBranch = ''
-    else if travis.branch
-      curBranch = '?branch=' + travis.branch
-    else 
-      curBranch = '?branch=' + branch
-    if travis.name
-      pkg.name = travis.name
-    else
-      pkg.name
-
-    unless travis.title is false
-      title = '# [' + pkg.name + ' v' + pkg.version + '](' + repo + ')'
-    source   = title + ' [![Build Status](' + travisUrl + '.png' + curBranch + ')](' + travisUrl + ')'
-    template = Handlebars.compile(source)
-    Utils.safeString(template(pkg))
-
-  # Authors: reads in data from an "AUTHORS" file to generate markdown formtted
-  # author or list of authors for a README.md. Accepts a second optional
-  # parameter to a different file than the default.
-  # Usage: {{authors}} or {{ authors [file] }}
-  Handlebars.registerHelper 'authors', (authors) ->
-    if Utils.isUndefined(authors)
-      authors = Utils.read("./AUTHORS")
-    else
-      authors = Utils.read(authors)
-    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '* [$1]($2)  ') or []
-    Utils.safeString(matches)
-
-  # AUTHORS: (case senstitive) Same as `{{authors}}`, but outputs a different format.
-  Handlebars.registerHelper 'AUTHORS', (authors) ->
-    if Utils.isUndefined(authors)
-      authors = Utils.read("./AUTHORS")
-    else
-      authors = Utils.read(authors)
-    matches = authors.replace(/(.*?)\s*\((.*)\)/g, '\n**[$1]**\n  \n+ [$2]($2)  ') or [] 
-    Utils.safeString(matches)
-
-  # Changelog: Reads in data from an "CHANGELOG" file to generate markdown formatted
-  # changelog or list of changelog entries for a README.md. Accepts a
-  # second optional parameter to change to a different file than the default.
-  # Usage: {{changelog}} or {{changelog [src]}}
-  Handlebars.registerHelper "changelog", (changelog) ->
-    if Utils.isUndefined(changelog)
-      changelog = Utils.readYAML('./CHANGELOG')
-    else
-      changelog = Utils.readYAML(changelog)
-    source = "{{#each .}}* {{date}}\t\t\t{{{@key}}}\t\t\t{{#each changes}}{{{.}}}{{/each}}\n{{/each}}"
-    template = Handlebars.compile(source)
-    Utils.safeString(template(changelog))
-
-  # Roadmap: Reads in data from an "ROADMAP" file to generate markdown formatted
-  # roadmap or list of roadmap entries for a README.md. Accepts a
-  # second optional parameter to change to a different file than the default.
-  # Usage: {{roadmap}} or {{roadmap [src]}}
-  Handlebars.registerHelper "roadmap", (roadmap) ->
-    if Utils.isUndefined(roadmap)
-      roadmap = Utils.readYAML('./ROADMAP')
-    else
-      roadmap = Utils.readYAML(roadmap)
-    source = "{{#each .}}* {{eta}}\t\t\t{{{@key}}}\t\t\t{{#each goals}}{{{.}}}{{/each}}\n{{else}}_(Big plans in the works)_{{/each}}"
-    template = Handlebars.compile(source)
-    Utils.safeString(template(roadmap))
-
-  # Embed: Embeds code from an external file as preformatted text. The first parameter
-  # requires a path to the file you want to embed. There second second optional
-  # parameter is for specifying (forcing) syntax highlighting for language of choice.
-  # Syntax:  {{ embed [file] [lang] }}
-  # Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
-  Handlebars.registerHelper 'embed', (file, language) ->
-    file = grunt.file.read(file)
-    language = ""  if Utils.isUndefined(language)
-    content = '``` ' + language + '\n' + file + '\n```'
-    Utils.safeString(content)
-
-  # href: This will escape the passed in parameters, but mark the response as safe,
-  # so Handlebars will not try to escape it even if the "triple-stash" is not used.
-  # Usage: {{href 'url' 'title/text' 'class'}}
-  Handlebars.registerHelper "href", (url, text, linkClass) ->
-      url  = Handlebars.Utils.escapeExpression(url)
-      text = Handlebars.Utils.escapeExpression(text)
-      linkClass = ""  if Utils.isUndefined(linkClass)
-      md   = '[' + text + '](' + url + ')'
-      html = '<a class="' + linkClass + '" href="' + url + '" title="' + text + '">' + text + '</a>'
-      result = Utils.switchOutput(options.ext, md, html)
-      Utils.safeString(result)
-
   # List: <ul>
   Handlebars.registerHelper "ul", (context, options) ->
       ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map((item) ->
@@ -196,14 +112,32 @@ module.exports.register = (Handlebars, options) ->
               i++
       Utils.safeString br
 
-  # Convert new line (\n) to <br>. From http://phpjs.org/functions/nl2br:480
-  Handlebars.registerHelper 'nl2br', (text) ->
-      nl2br = (text + "").replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, "$1" + "<br>" + "$2")
-      Utils.safeString(nl2br)
+  # exticon
+  Handlebars.registerHelper "exticon", (attachment) ->
+    extension = attachment.substr(attachment.lastIndexOf(".") + 1)
+    value = Handlebars.Utils.escapeExpression(extension)
+    switch value
+      when "jpg", "jpeg", "png", "gif"
+        Utils.safeString "<img src=\"img/img-icon.png\"><i>" + attachment + "</i>"
+      when "zip", "rar"
+        Utils.safeString "<img src=\"img/archive-icon.png\"><i>" + attachment + "</i>"
+      when "pdf"
+        Utils.safeString "<img src=\"img/pdf-icon.png\"><i>" + attachment + "</i>"
+      when "txt"
+        Utils.safeString "<img src=\"img/txt-icon.png\"><i>" + attachment + "</i>"
+      when "doc", "docx"
+        Utils.safeString "<img src=\"img/word-icon.png\"><i>" + attachment + "</i>"
+      when "xls", "xlsx"
+        Utils.safeString "<img src=\"img/xls-icon.png\"><i>" + attachment + "</i>"
+      when "csv"
+        Utils.safeString "<img src=\"img/csv-icon.png\"><i>" + attachment + "</i>"
+      when "ppt", "pptx"
+        Utils.safeString "<img src=\"img/ppt-icon.png\"><i>" + attachment + "</i>"
+      when "mp3"
+        Utils.safeString "<img src=\"img/audio-icon.png\"><i>" + attachment + "</i>"
+      else
+        Utils.safeString "<img src=\"img/other-icon.png\"><i>" + attachment + "</i>"
 
-  # Newline to break
-  Handlebars.registerHelper 'newLineToBr', (str) ->
-      str.replace /\r?\n|\r/g, '<br>'
 
   # <!DOCTYPE>: Example: {{DOCTYPE 'svg 1.1'}}
   Handlebars.registerHelper "DOCTYPE", (type) ->
@@ -213,11 +147,9 @@ module.exports.register = (Handlebars, options) ->
       # HTML 5 (default)
       when "5", "html", "html5"
         return Utils.safeString('<!DOCTYPE1 html>')
-
       # XML
       when "xml"
         return Utils.safeString('<?xml version="1.0" encoding="utf-8" ?>')
-
       # XHTML
       when "strict"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">')
@@ -231,7 +163,6 @@ module.exports.register = (Handlebars, options) ->
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">')
       when "mobile"
         return Utils.safeString('<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">')
-
       # HTML 4.01
       when "4", "4.01", "4.01 strict"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">')
@@ -239,41 +170,13 @@ module.exports.register = (Handlebars, options) ->
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">')
       when "4.01 frameset"
         return Utils.safeString('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">')
-
       # SVG
       when "svg", "svg 1.1", "svg1.1"
         return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">')
       when "svg 1.0", "svg1.0", "svg1"
         return Utils.safeString('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">')
-
       # Default to HTML 5
       else
         Utils.safeString('<!DOCTYPE1 html>')
-
-  # icon: proof of concept.
-  Handlebars.registerHelper "icon", (attachment) ->
-      extension = attachment.substr((attachment.lastIndexOf(".") + 1))
-      value = Handlebars.Utils.escapeExpression(extension)
-      switch value
-        when "jpg", "jpeg", "png", "gif"
-          return Utils.safeString('<img src="img/img-icon.png"><span>' + attachment + '</span>')
-        when "zip", "rar"
-          return Utils.safeString('<img src="img/archive-icon.png"><span>' + attachment + '</span>')
-        when "pdf"
-          return Utils.safeString('<img src="img/pdf-icon.png"><span>' + attachment + '</span>')
-        when "txt"
-          return Utils.safeString('<img src="img/txt-icon.png"><span>' + attachment + '</span>')
-        when "doc", "docx"
-          return Utils.safeString('<img src="img/word-icon.png"><span>' + attachment + '</span>')
-        when "xls", "xlsx"
-          return Utils.safeString('<img src="img/xls-icon.png"><span>' + attachment + '</span>')
-        when "csv"
-          return Utils.safeString('<img src="img/csv-icon.png"><span>' + attachment + '</span>')
-        when "ppt", "pptx"
-          return Utils.safeString('<img src="img/ppt-icon.png"><span>' + attachment + '</span>')
-        when "mp3"
-          return Utils.safeString('<img src="img/audio-icon.png"><span>' + attachment + '</span>')
-        else
-          Utils.safeString('<img src="img/other-icon.png"><span>' + attachment + '</span>')
 
   @

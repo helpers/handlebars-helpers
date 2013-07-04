@@ -5,47 +5,15 @@ path      = require 'path'
 grunt     = require "grunt"
 _         = require "lodash"
 minimatch = require "minimatch"
+to        = require "to" 
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
 
 
 
-###
-# String Utils
-###
-toString = (val) ->
-  (if not val? then "" else val.toString())
-  
-Utils.lowerCase = (str) ->
-  str = toString(str)
-  str.toLowerCase()
 
-Utils.isUndefined = (value) ->
-  value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?
-
-Utils.safeString = (str) ->
-  new Handlebars.SafeString str
-
-Utils.escapeString = (str, except) -> #String
-  #String?
-  str.replace /([\.$?*|{}\(\)\[\]\\\/\+\^])/g, (ch) ->
-    return ch  if except and except.indexOf(ch) isnt -1
-    "\\" + ch
-
-Utils.escapeExpression = (str) ->
-  Handlebars.Utils.escapeExpression
-
-Utils.trim = (str) ->
-  trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
-  str.toString().replace trim, ''
-
-Utils.propagate = (callback, func) ->
-  (err, args...) ->
-    return callback(err) if err
-    func.apply(this, args)
-
-
+# Type check
 Utils.isFunction = (obj) ->
   typeof obj is "function"
 
@@ -66,32 +34,101 @@ Utils.isRegExp = (obj) ->
   undef = undefined
   obj isnt undef and obj isnt null and (obj instanceof RegExp)
 
-
-# Convenience for extracting repo url from package.json
-Utils.repoUrl = (str) ->
-  pkg = grunt.file.readJSON("./package.json")
-  url = pkg.repository.url
-  str = url.replace(/.*:\/\/github.com\/(.*?)(?:\.git|$)/, str)
+Utils.detectType = (value) ->
+  switch typeof value
+    when "string"
+      "str"
+    when "number"
+      "num"
+    when "object"
+      "obj"
+    else
+      "other"
 
 ###
-# Detect and return the indentation.
-# param  {String} string
-# return {Mixed} Indentation used, or undefined.
+# String Utils
 ###
-Utils.detectIndentation = (string) ->
-  tabs = string.match(/^[\t]+/g) or []
-  spaces = string.match(/^[ ]+/g) or []
 
-  # Pick the smallest indentation level of a prevalent type
-  prevalent = (if tabs.length >= spaces.length then tabs else spaces)
-  indentation = undefined
-  i = 0
-  il = prevalent.length
+toString = (val) ->
+  (if not val? then "" else val.toString())
+  
+Utils.lowerCase = (str) ->
+  str = toString(str)
+  str.toLowerCase()
 
-  while i < il
-    indentation = prevalent[i]  if not indentation or prevalent[i].length < indentation.length
-    i++
-  indentation
+Utils.isUndefined = (value) ->
+  value is 'undefined' or Utils.toString.call(value) is '[object Function]' or value.hash?
+
+Utils.trim = (str) ->
+  trim = if /\S/.test("\xA0") then /^[\s\xA0]+|[\s\xA0]+$/g else /^\s+|\s+$/g
+  str.toString().replace trim, ''
+
+Utils.safeString = (str) ->
+  new Handlebars.SafeString str
+
+Utils.escapeString = (str, except) -> #String
+  #String?
+  str.replace /([\.$?*|{}\(\)\[\]\\\/\+\^])/g, (ch) ->
+    return ch  if except and except.indexOf(ch) isnt -1
+    "\\" + ch
+
+Utils.escapeExpression = (str) ->
+  Handlebars.Utils.escapeExpression
+
+Utils.stringifyYAML = (src) ->
+  YAML = to.format.yaml
+  stringifyFile = YAML.stringify(src)
+
+Utils.stringifyObj = (src, type) ->
+  YAML = to.format.yaml
+  output = JSON.stringify(src, null, 2)
+  switch type
+    when "json"
+      output = JSON.stringify(src)
+    when "yml", "yaml"
+      output = YAML.stringify(src)
+  output
+
+
+### 
+# Object Utils
+###
+
+Utils.prop = (name) ->
+  (obj) ->
+    obj[name]
+
+Utils.showProps = (obj, objName) ->
+  result = ""
+  for i of obj
+    result += objName + "." + i + " = " + obj[i] + "\n"  if obj.hasOwnProperty(i)
+  result
+
+Utils.listAllProperties = (obj) ->
+  objectToInspect = undefined
+  result = []
+  objectToInspect = obj
+  while objectToInspect isnt null
+    result = result.concat(Object.getOwnPropertyNames(objectToInspect))
+    objectToInspect = Object.getPrototypeOf(objectToInspect)
+  result
+
+Utils.listProps = (obj) ->
+  key = undefined
+  value = undefined
+  result = []
+  return []  unless obj
+  for key of obj
+    if obj.hasOwnProperty(key)
+      value = obj[key]
+      result.push value
+  result
+
+
+
+###
+# Node.js Path Utils
+###
 
 Utils.getExt = (str) ->
   extname = path.extname(str)
@@ -110,19 +147,11 @@ Utils.getRelativePath = (from, to) ->
   relativePath = path.relative(fromDirname, toDirname)
   Utils.urlNormalize(path.join(relativePath, toBasename))
 
-Utils.getPropString = (prop) ->
-  prop = grunt.config.getPropString(prop)
 
-Utils.detectType = (value) ->
-  switch typeof value
-    when "string"
-      "str"
-    when "number"
-      "num"
-    when "object"
-      "obj"
-    else
-      "other"
+
+###
+# File type
+###
 
 Utils.toggleOutput = (ext, md, html) ->
   if ext is ''
@@ -140,6 +169,7 @@ Utils.switchOutput = (ext, md, html) ->
 
 Utils.switchType = (ext) ->
   reader = grunt.file.readJSON
+  Utils.getExt(ext)
   switch ext
     when ".json"
       reader = grunt.file.readJSON
@@ -147,7 +177,7 @@ Utils.switchType = (ext) ->
       reader = grunt.file.readYAML
   reader
 
-# 'Optional' JSON
+# Read 'Optional' JSON
 Utils.readOptionalJSON = (filepath) ->
   data = {}
   try
@@ -155,13 +185,51 @@ Utils.readOptionalJSON = (filepath) ->
     grunt.verbose.write("Reading " + filepath + "...").ok()
   data
 
-# 'Optional' YAML
+# Read 'Optional' YAML
 Utils.readOptionalYAML = (filepath) ->
   data = {}
   try
     data = grunt.file.readYAML(filepath)
     grunt.verbose.write("Reading " + filepath + "...").ok()
   data
+
+Utils.readPackageJSON = (filepath) ->
+  data = {}
+  try
+    data = grunt.file.readJSON(filepath)
+  try
+    data = grunt.file.readJSON('package.json')
+    grunt.verbose.write("Reading " + filepath + "...").ok()
+  data
+
+# Extract repo url from package.json, convenience util
+# @param {none}
+Utils.repoUrl = (str) ->
+  pkg = grunt.file.readJSON("./package.json")
+  url = pkg.repository.url
+  str = url.replace(/.*:\/\/github.com\/(.*?)(?:\.git|$)/, str)
+
+# Detect and return the indentation.
+# @param  {String} string
+# @return {Mixed} Indentation used, or undefined.
+Utils.detectIndentation = (string) ->
+  tabs = string.match(/^[\t]+/g) or []
+  spaces = string.match(/^[ ]+/g) or []
+
+  # Pick the smallest indentation level of a prevalent type
+  prevalent = (if tabs.length >= spaces.length then tabs else spaces)
+  indentation = undefined
+  i = 0
+  il = prevalent.length
+
+  while i < il
+    indentation = prevalent[i]  if not indentation or prevalent[i].length < indentation.length
+    i++
+  indentation
+
+###
+# Grunt.js Utils
+###
 
 Utils.detectDestType = (dest) ->
   if grunt.util._.endsWith(dest, "/")
@@ -203,20 +271,6 @@ Utils.normalizelf = (str) ->
   src = grunt.util.normalizelf(str)
 
 
-###
-# Markdown Utils
-###
-
-# Regex: all markdown headings
-Utils.findHeadings = /^(#{1,6})\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Regex: all markdown h1 headings
-Utils.findh1 = /^(#{1} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
-# Utils.findh1 = /^#[ \t]+(.*)/gm
-# Regex: all markdown h2 headings
-Utils.findh2 = /^(#{2} )\s*(.*?)\s*#*\s*(?:\n|$)/gm
-
-Utils.findParens = /\(([^)]+)\)/g
-
 
 ###
 # Globbing Utils
@@ -226,10 +280,32 @@ Utils.findParens = /\(([^)]+)\)/g
 # the given wildcard patterns, then read each file
 # and return its contents as a string, and last
 # normalize all line linefeeds in the string
-Utils.globFiles = (src) ->
-  content = grunt.file.expand(src)
-  .map(grunt.file.read)
-  .join(grunt.util.normalizelf(grunt.util.linefeed))
+
+# @param {String|Array} src Globbing pattern(s).
+# @param {Function=} compare_fn Function accepting two objects (a,b)
+# and returning 1 if a >= b otherwise -1.
+
+# Note: Objects passed to compare_fn are:
+# {
+#   index: original index of file strating with 1
+#   path: full file path
+#   content: content of file
+# }
+Utils.globFiles = (src, compare_fn) ->
+  content = undefined
+  compare_fn = compare_fn or (a, b) ->
+    (if a.index >= b.index then 1 else -1)
+
+  index = 0
+  content = grunt.file.expand(src).map((path) ->
+    index += 1
+    index: index
+    path: path
+    content: grunt.file.read(path)
+  ).sort(compare_fn).map((obj) ->
+    obj.content
+  ).join(grunt.util.normalizelf(grunt.util.linefeed))
+
 
 Utils.buildObjectPaths = (obj) ->
   files = []
@@ -274,9 +350,26 @@ Utils.globObject = (obj, pattern) ->
   _.forEach matches, (match) ->
     value = getValue obj, match
     rtn = setValue rtn, match, value
-
   rtn
 
+
+###
+# Regex
+###
+
+Utils.getMatches = (string, regex, index) ->
+  index or (index = 1) # default to the first capturing group
+  matches = []
+  match = undefined
+  matches.push match[index]  while match = regex.exec(string)
+  matches
+
+# Return all pattern matches with captured groups
+RegExp::execAll = (string) ->
+  matches = []
+  while match = @exec string
+    matches.push(group for group in match)
+  matches
 
 # Ensures that a url path is returned instead
 # of a filesystem path.

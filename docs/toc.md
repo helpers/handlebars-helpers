@@ -2,11 +2,22 @@
 
 ## [The Helpers](#the-helpers)
 
-### [Special](#special)
-* [{{changelog}}](#changelog)
-* [{{formatPhoneNumber}}](#formatphonenumber)
+### [Path](#path)
+* [{{relative}}](#relative)
+* [{{extname}}](#extname)
+* [{{dirname}}](#dirname)
+
+### [URL](#url)
+* [{{url_resolve}}](#url_resolve)
+* [{{url_parse}}](#url_parse)
+
+### [File](#file)
+* [{{include}}](#include)
+* [{{glob}}](#glob)
+* [{{copy}}](#copy)
 
 ### [Strings](#strings)
+* [{{occurrences}}](#occurrences)
 * [{{hyphenate}}](#hyphenate)
 * [{{dashify}}](#dashify)
 * [{{lowercase}}](#lowercase)
@@ -18,7 +29,16 @@
 * [{{reverse}}](#reverse)
 * [{{truncate}}](#truncate)
 * [{{center}}](#center)
-* [{{nl2br}}](#nl2br)
+* [{{formatPhoneNumber}}](#formatphonenumber)
+
+### [HTML](#html)
+* [{{gist}}](#gist)
+* [{{blockquote}}](#blockquote)
+* [{{timeline}}](#timeline)
+* [{{exticon}}](#exticon)
+* [{{ul}}](#ul)
+* [{{ol}}](#ol)
+* [{{br}}](#br)
 
 ### [Collections](#collections)
 * [{{first}}](#first)
@@ -90,20 +110,28 @@
 * [{{inflect}}](#inflect)
 * [{{ordinalize}}](#ordinalize)
 
-### [HTML](#html)
-* [{{gist}}](#gist)
-* [{{embed}}](#embed)
-* [{{blockquote}}](#blockquote)
-* [{{stripes}}](#stripes)
-* [{{timeline}}](#timeline)
-* [{{ul}}](#ul)
-* [{{ol}}](#ol)
-* [{{br}}](#br)
-
 ### [Logging](#logging)
 * [{{log}}](#log)
 * [{{debug}}](#debug)
+* [{{expandJSON}}](#expandjson)
+* [{{expandYAML}}](#expandyaml)
+
+### [Special](#special)
+* [{{embed}}](#embed)
+
+#### [README Helpers](#readme-helpers)
+* [{{authors}}](#authors)
+
+#### [Travis CI](#travis-ci)
+* [{{travis}}](#travis)
+* [{{travis-badge}}](#travis-badge)
+* [{{changelog}}](#changelog)
+* [{{jsfiddle}}](#jsfiddle)
+  - [Embedding the fiddle](#embedding-the-fiddle)
+  - [Examples](#examples)
+  - [Optional tabs](#optional-tabs)
+* [Changing skins](#changing-skins)
 
 ### [Miscellaneous](#miscellaneous)
 * [{{default}}](#default)
-* [{{include}}](#include)
+* [{{noop}}](#noop)

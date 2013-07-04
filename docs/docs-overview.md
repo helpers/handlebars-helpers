@@ -7,6 +7,14 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
 
 
+#### Special features
+
+Some helpers feature the following enhancements, which are unique to this project:
+
+* File globbing
+* Access to [assemble](https://github.com/assemble/assemble) options.
+* Some helpers will render either markdown or HTML based on the file extension of the generated file.
+
 
 #### Custom Helpers
 
@@ -18,3 +26,4 @@ Handlebars allows two different kinds of helpers:
 
 * **Expression helpers** are basically regular functions that take the name of the helper and the helper function as arguments. Once an expression helper is registered, it can be called anywhere in your templates, then Handlebars takes the expression's return value and writes it into the template.
 * **Block helpers** There are a few block helpers included by default with Handlebars, `{{#each}}`, `{{#if}}` and `{{#unless}}`. Custom block helpers are registered the same way as exptression helpers, but the difference is that Handlebars will pass the contents of the block compiled into a function to the helper.
+
