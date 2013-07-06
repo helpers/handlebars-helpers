@@ -131,7 +131,7 @@ module.exports.any = any = (array, options) ->
   if array.length > 0 then options.fn(@) else options.inverse(@)
 
 module.exports.inArray = inArray = (array, value, options) ->
-  if array.indexOf(value) then options.fn(@) else options.inverse(@)
+  if value in array then options.fn(@) else options.inverse(@)
 
 
 # Similar to #each helper, but treats array-like objects as arrays
@@ -232,7 +232,11 @@ module.exports.each_with_classes = eachWithClasses = (array, fn) ->
   # return the finished buffer
   buffer
 
-
+# eachIndex
+# 
+#  {{#eachIndex collection}}
+#    {{item}} is {{index}}
+#  {{/eachIndex}} 
 module.exports.eachIndex = eachIndex = (array, options) ->
   result = ''
   for value, index in array
@@ -240,6 +244,9 @@ module.exports.eachIndex = eachIndex = (array, options) ->
   result
 
 # Handlebars block helper to enumerate properties in an object
+#    {{#eachProperty collection}}
+#       {{key}} - {{value}}
+#    {{/eachProperty}}
 module.exports.eachProperty = eachProperty = (obj, options) ->
   result = ''
   for key, value of obj

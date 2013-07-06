@@ -3,8 +3,6 @@ require 'should'
 Handlebars = require 'handlebars'
 require('../../lib/helpers/helpers-collections').register Handlebars, {}
 
-
-
 context = collection: [
   'Amy Wong'
   'Bender'
@@ -252,12 +250,12 @@ describe 'eachIndex', ->
       template(context).should.equal ' Amy Wong is 0  Bender is 1  Dr. Zoidberg is 2  Fry is 3  Hermes Conrad is 4  Leela is 5  Professor Farnsworth is 6  Scruffy is 7 '
 
 # describe 'eachProperty', ->
-#     describe '{{#eachProperty collection}} \n
-#         {{key}}: {{value}} \n
-#     {{/eachProperty}}', ->
-#         it 'should use the key and value of each property in an object inside a block.', ->
-#             source = '{{#eachProperty collection}}{{key}}: {{value}} {{/eachProperty}}'
-#             template = Handlebars.compile(source)
-#             _context = collection: fry: 3, bender: 120
+#   describe '{{#eachProperty collection}} \n
+#     {{key}}: {{value}} \n
+#   {{/eachProperty}}', ->
+#       it 'should use the key and value of each property in an object inside a block.', ->
+#         source = '{{#eachProperty collection}}{{key}}: {{value}} {{/eachProperty}}'
+#         template = Handlebars.compile(source)
+#         context = collection: fry: 3, bender: 120
 
-#             template(_context).should.equal 'fry: 3 bender: 120 '
+#         template(context).should.equal 'fry: 3 bender: 120'
