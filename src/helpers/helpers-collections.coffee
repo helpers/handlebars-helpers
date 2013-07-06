@@ -131,7 +131,8 @@ module.exports.any = any = (array, options) ->
   if array.length > 0 then options.fn(@) else options.inverse(@)
 
 module.exports.inArray = inArray = (array, value, options) ->
-  if array.indexOf(value) isnt -1  then options.fn(@) else options.inverse(@)
+  if array.indexOf(value) then options.fn(@) else options.inverse(@)
+
 
 # Similar to #each helper, but treats array-like objects as arrays
 # (i.e. objects with a `.length` property which is a number)
@@ -178,7 +179,7 @@ module.exports.iterate = iterate = (context, options) ->
 #     {{#foreach accounts}}
 #         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">{{ name }}</a>{{#unless _isLast}}, {{/unless}}
 #     {{/foreach}}
-module.exports.foreach = foreach = (array, fn) ->
+module.exports.foreach = forEach = (array, fn) ->
   total = array.length
   buffer = ""
   #Better performance: http://jsperf.com/for-vs-foreach/2
@@ -186,7 +187,8 @@ module.exports.foreach = foreach = (array, fn) ->
   j = total
   while i < j
     item = array[i]
-    # stick an index property onto the item, starting with 1, may make configurable later
+    # stick an index property onto the item, 
+    # starting with 1, may make configurable later
     item["_index"] = i + 1
     item["_total"] = total
     item["_isFirst"] = (i is 0)
@@ -201,16 +203,16 @@ module.exports.foreach = foreach = (array, fn) ->
 # adds an a bunch of item prefixed logic to the object
 # Credit: https://gist.github.com/icodeforlove/1429324
 # 
-#   {{#each_with_classes records prefix="record"}}
+#   {{#eachWithClasses records prefix="record"}}
 #     <li class="record_{{item_index}}{{item_position}} {{item_alt}}">{{item_index}}</li>
-#   {{/each_with_classes}}
-
+#   {{/eachWithClasses}}
+#
 # Result:
 #     <li class="record_0 record_first">0</li>
 #     <li class="record_1 record_alt">1</li>
 #     <li class="record_2">2</li>
 #     <li class="record_3 record_last record_alt">3</li>
-module.exports.each_with_classes = each_with_classes = (array, fn) ->
+module.exports.each_with_classes = eachWithClasses = (array, fn) ->
   buffer = ""
   i = 0
   j = array.length
@@ -229,6 +231,7 @@ module.exports.each_with_classes = each_with_classes = (array, fn) ->
     i++
   # return the finished buffer
   buffer
+
 
 module.exports.eachIndex = eachIndex = (array, options) ->
   result = ''
@@ -253,17 +256,16 @@ module.exports.arrayify = arrayify = (data) ->
   result
 
 module.exports.register = (Handlebars, options) ->
-
   Handlebars.registerHelper 'after', after
   Handlebars.registerHelper 'any', any
   Handlebars.registerHelper 'arrayify', arrayify
   Handlebars.registerHelper 'before', before
-  Handlebars.registerHelper 'each_with_classes', each_with_classes
+  Handlebars.registerHelper 'eachWithClasses', eachWithClasses
   Handlebars.registerHelper 'eachIndex', eachIndex
   Handlebars.registerHelper 'eachProperty', eachProperty
   Handlebars.registerHelper 'empty', empty
   Handlebars.registerHelper 'first', first
-  Handlebars.registerHelper 'foreach', foreach
+  Handlebars.registerHelper 'forEach', forEach
   Handlebars.registerHelper 'inArray', inArray
   Handlebars.registerHelper 'iterate', iterate
   Handlebars.registerHelper 'join', join
