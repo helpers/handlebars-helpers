@@ -12,11 +12,11 @@ require('../../lib/helpers/helpers-html').register Handlebars, {assets: 'assets'
 # nl2br
 
 # describe 'href', ->
-#   describe "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}", ->
+#   describe "{{href 'https://github.com/assemble/handlebars-helpers' 'Awesome helpers'}}", ->
 #     it 'should create an href tag.', ->
-#       source = "{{href 'https://github.com/assemble/helper-lib' 'Awesome helpers'}}"
+#       source = "{{href 'https://github.com/assemble/handlebars-helpers' 'Awesome helpers'}}"
 #       template = Handlebars.compile(source);
-#       template({}).should.equal '<a class="" href="https://github.com/assemble/helper-lib" title="Awesome helpers">Awesome helpers</a>'
+#       template({}).should.equal '<a class="" href="https://github.com/assemble/handlebars-helpers" title="Awesome helpers">Awesome helpers</a>'
 
 describe 'css', ->
   describe '{{css myStylesFile}}', ->

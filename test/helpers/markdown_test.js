@@ -69,7 +69,7 @@
     });
   });
 
-  readmeTitleExpected = "[helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib)";
+  readmeTitleExpected = "[handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers)";
 
   describe("readme-title", function() {
     return describe("should generate a README title in markdown format, including version from package.json.", function() {
@@ -84,7 +84,7 @@
     });
   });
 
-  travisBadgeExpected = "[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)";
+  travisBadgeExpected = "[![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)";
 
   describe("travis-badge", function() {
     return describe("should create a Travis CI link and badge in markdown format.", function() {
@@ -106,7 +106,7 @@
 
         source = "{{travis}}";
         template = Handlebars.compile(source);
-        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)");
+        template().should.equal("# [handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)");
         return done();
       });
     });
@@ -119,7 +119,7 @@
 
         source = "{{travis 'wip-1.0.0'}}";
         template = Handlebars.compile(source);
-        template().should.equal("# [helper-lib v" + pkg.version + "](https://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/helper-lib)");
+        template().should.equal("# [handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/handlebars-helpers)");
         return done();
       });
     });
