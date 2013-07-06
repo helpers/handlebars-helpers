@@ -54,8 +54,6 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-jshint": "~0.2.0",
-    "grunt-contrib-nodeunit": "~0.1.2",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
     "handlebars": "1.0.10",
