@@ -8,7 +8,6 @@ _     = require 'lodash'
 
 
 
-
 # First: Returns the first item in a collection.
 module.exports.first = first = (array, count) ->
   if Utils.isUndefined(count) then array[0] else array.slice 0, count
@@ -166,7 +165,7 @@ module.exports.iterate = iterate = (context, options) ->
   ret
 
 
-# foreach: 
+# forEach: 
 # http://stackoverflow.com/questions/13861007/loop-over-and-array-and-add-a-separator-except-for-the-last
 # Usage:
 # Data:
@@ -176,13 +175,13 @@ module.exports.iterate = iterate = (context, options) ->
 #        {'name': 'David', 'email': 'david@example.com'}
 #     ]
 # Templates:
-#     {{#foreach accounts}}
+#     {{#forEach accounts}}
 #         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">{{ name }}</a>{{#unless _isLast}}, {{/unless}}
-#     {{/foreach}}
-module.exports.foreach = forEach = (array, fn) ->
+#     {{/forEach}}
+module.exports.forEach = forEach = (array, fn) ->
   total = array.length
   buffer = ""
-  #Better performance: http://jsperf.com/for-vs-foreach/2
+  #Better performance: http://jsperf.com/for-vs-forEach/2
   i = 0
   j = total
   while i < j
@@ -204,7 +203,7 @@ module.exports.foreach = forEach = (array, fn) ->
 # Credit: https://gist.github.com/icodeforlove/1429324
 # 
 #   {{#eachWithClasses records prefix="record"}}
-#     <li class="record_{{item_index}}{{item_position}} {{item_alt}}">{{item_index}}</li>
+#     <li class="record_{{itemIndex}} {{itemPosition}} {{itemAlt}}">{{itemIndex}}</li>
 #   {{/eachWithClasses}}
 #
 # Result:
@@ -212,20 +211,20 @@ module.exports.foreach = forEach = (array, fn) ->
 #     <li class="record_1 record_alt">1</li>
 #     <li class="record_2">2</li>
 #     <li class="record_3 record_last record_alt">3</li>
-module.exports.each_with_classes = eachWithClasses = (array, fn) ->
+module.exports.eachWithClasses = eachWithClasses = (array, fn) ->
   buffer = ""
   i = 0
   j = array.length
   while i < j
     item = array[i]
     # position related information
-    item.item_position = ""
-    item.item_position = " " + fn.hash.prefix + "-first"  if i is 0
-    item.item_position += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
+    item.itemPosition = ""
+    item.itemPosition = " " + fn.hash.prefix + "-first"  if i is 0
+    item.itemPosition += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
     # add alt if needed
-    item.item_alt = (if i % 2 then fn.hash.prefix + "-alt" else "")
+    item.itemAlt = (if i % 2 then fn.hash.prefix + "-alt" else "")
     # stick an index property onto the item, starting with 1, may make configurable later
-    item.item_index = i
+    item.itemIndex = i
     # show the inside of the block
     buffer += fn(item)
     i++
@@ -233,7 +232,6 @@ module.exports.each_with_classes = eachWithClasses = (array, fn) ->
   buffer
 
 # eachIndex
-# 
 #  {{#eachIndex collection}}
 #    {{item}} is {{index}}
 #  {{/eachIndex}} 
@@ -241,16 +239,6 @@ module.exports.eachIndex = eachIndex = (array, options) ->
   result = ''
   for value, index in array
     result += options.fn item: value, index: index
-  result
-
-# Handlebars block helper to enumerate properties in an object
-#    {{#eachProperty collection}}
-#       {{key}} - {{value}}
-#    {{/eachProperty}}
-module.exports.eachProperty = eachProperty = (obj, options) ->
-  result = ''
-  for key, value of obj
-    result += options.fn key: key, value: value
   result
 
 # Arrayify: data gets passed in from *.yml as a string, like "foo, bar, baz"
@@ -269,7 +257,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'before', before
   Handlebars.registerHelper 'eachWithClasses', eachWithClasses
   Handlebars.registerHelper 'eachIndex', eachIndex
-  Handlebars.registerHelper 'eachProperty', eachProperty
   Handlebars.registerHelper 'empty', empty
   Handlebars.registerHelper 'first', first
   Handlebars.registerHelper 'forEach', forEach
