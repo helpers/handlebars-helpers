@@ -113,7 +113,11 @@ module.exports.withSort = withSort = (array, field, options) ->
     array = array.sort()
     result += options.fn(item) for item in array
   else
-    array = array.sort (a, b) -> a[field] > b[field]
+    array = array.sort (a, b) -> 
+      if a[field] > b[field]
+        return 1
+      else return -1  if a[field] < b[field]
+      0
     result += options.fn(array[item]) for item of array
   result
 
