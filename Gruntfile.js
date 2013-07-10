@@ -52,7 +52,6 @@ module.exports = function(grunt) {
       helpers: ['<%= coffee.helpers.dest %>/**/*.js'],
       tests:  ['examples/result/**/*.{html,md}']
     }
-
   });
 
   // These plugins provide necessary tasks.
@@ -63,9 +62,6 @@ module.exports = function(grunt) {
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', ['clean', 'coffee']);
-
-  // Build templates using helpers and run all tests.
   grunt.registerTask('test',    ['default', 'mochaTest']);
-
 };
 

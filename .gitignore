@@ -4,5 +4,6 @@ node_modules
 
 *-refactor.*
 tmp
+vendor
 TODO.md
 *.rar
