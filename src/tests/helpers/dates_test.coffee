@@ -21,7 +21,7 @@ describe 'now', ->
       source   = '{{now}}'
       template = Handlebars.compile(source)
 
-      template().should.be.within date - 10, date + 10
+      new Date(template()).getTime().should.be.within date - 1000, date + 1000
 
 describe 'timeago', ->
   describe '{{timeago date}}', ->
