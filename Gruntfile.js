@@ -18,21 +18,21 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     coffee: {
       helpers: {
-        expand: true, 
-        cwd: 'src', 
+        expand: true,
+        cwd: 'src',
         src: [
-          'helper-lib.coffee', 
-          'helpers/*.coffee', 
+          'helper-lib.coffee',
+          'helpers/*.coffee',
           'utils/*.coffee'
-        ], 
-        dest: 'lib/', 
+        ],
+        dest: 'lib/',
         ext: '.js'
       },
       tests: {
-        expand: true, 
-        cwd: 'src/tests', 
-        src: ['**/*.coffee'], 
-        dest: 'test/', 
+        expand: true,
+        cwd: 'src/tests',
+        src: ['**/*.coffee'],
+        dest: 'test/',
         ext: '.js'
       }
     },
@@ -47,6 +47,29 @@ module.exports = function(grunt) {
       }
     },
 
+    jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
+      helpers: ['lib/helpers/*.js'],
+      utils:   ['lib/utils/*.js'],
+      lib:     ['lib/**/*.js']
+    },
+
+    coffeelint: {
+      options: grunt.file.readJSON('.coffeerc'),
+      helpers: {
+        files: {
+          src: ['src/helpers/**/*.coffee']
+        }
+      },
+      tests: {
+        files: {
+          src: ['src/tests/**/*.coffee']
+        }
+      }
+    },
+
     // Clean test files before building or re-testing.
     clean: {
       helpers: ['<%= coffee.helpers.dest %>/**/*.js'],
@@ -55,8 +78,10 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-mocha-test');
 
