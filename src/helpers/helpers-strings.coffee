@@ -16,16 +16,18 @@ module.exports.center = center = (str, spaces) ->
   space = ''
   i = 0
   while i < spaces
-      space += '&nbsp;'
-      i++
+    space += '&nbsp;'
+    i++
   "#{space}#{str}#{space}"
 
-# Format Phone Number: from: http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers
+# Format Phone Number: from:
+# http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers
 # Helper function to output a formatted phone number
 # Usage: {{formatPhoneNumber phoneNumber}}
 module.exports.formatPhoneNumber = formatPhoneNumber = (phoneNumber) ->
   phoneNumber = phoneNumber.toString()
-  "(" + phoneNumber.substr(0, 3) + ") " + phoneNumber.substr(3, 3) + "-" + phoneNumber.substr(6, 4)
+  "(" + phoneNumber.substr(0, 3) + ") " + phoneNumber.substr(3, 3) +
+  "-" + phoneNumber.substr(6, 4)
 
 # Dashify: Replace periods in string with hyphens.
 module.exports.dashify = dashify = (str) ->
@@ -45,7 +47,8 @@ module.exports.safeString = safeString = (value) ->
 
 # Sentence case
 module.exports.sentence = sentence = (str) ->
-  str.replace /((?:\S[^\.\?\!]*)[\.\?\!]*)/g, (txt) -> txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  str.replace /((?:\S[^\.\?\!]*)[\.\?\!]*)/g, (txt) -> txt.charAt(0)
+    .toUpperCase() + txt.substr(1).toLowerCase()
 
 # Titlelize
 module.exports.titleize = titleize = (str) ->
@@ -92,8 +95,8 @@ module.exports.ellipsis = ellipsis = (text, length) ->
 # providing a custom string to denote an `omission`.
 module.exports.truncate = truncate = (str, length, omission) ->
   omission = '' if Utils.isUndefined omission
-  if str.length > length then str.substring(0, length - omission.length) + omission else str
-
+  if str.length > length then str.substring(0, length - omission.length) +
+    omission else str
 
 
 module.exports.register = (Handlebars, options) ->

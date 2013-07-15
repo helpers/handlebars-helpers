@@ -21,17 +21,4 @@
     });
   });
 
-  /*
-  Assemble.Config.partialsPath = '../test/templates/'
-  
-  describe 'partial', ->
-      describe '{{partial "some_template"}}', ->
-          it 'should register and render a partial.', ->
-              source   = '{{partial "some_template"}}'
-              template = Handlebars.compile(source)
-  
-              template().should.equal 'A partial.'
-  */
-
-
 }).call(this);

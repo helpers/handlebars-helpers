@@ -7,7 +7,7 @@ _     = require 'lodash'
 pkg = grunt.file.readJSON('package.json')
 
 # Value: extracts a value from a specific property
-module.exports = 
+module.exports =
   value: value = (file, prop) ->
     file = Utils.readJSON(file)
     prop = _.pick(file, prop)
@@ -21,18 +21,23 @@ module.exports =
     Utils.safeString("\n" + JSON.stringify(prop, null, 2))
 
   # Stringify: stringifies to JSON
-  stringify: stringify = (file, props) ->
+  stringify: stringify = (file) ->
     file = Utils.readJSON(file)
     Utils.safeString(JSON.stringify(file, null, 2))
+
+  # https://github.com/assemble/assemble/issues/228#issuecomment-20855238
+  parseJSON: parseJSON = (data, options) ->
+    options.fn JSON.parse(data)
 
 
 module.exports.register = (Handlebars, options) ->
 
   Handlebars.registerHelper 'stringify', stringify
+  Handlebars.registerHelper 'parseJSON', parseJSON
   Handlebars.registerHelper 'value', value
   Handlebars.registerHelper 'prop', prop
 
-  # Return a property from the `assemble.options` object 
+  # Return a property from the `assemble.options` object
   Handlebars.registerHelper "opt", (key) ->
     options[key] or ""
 

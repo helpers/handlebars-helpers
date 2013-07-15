@@ -1,5 +1,5 @@
 (function() {
-  var Handlebars, authorsExpected, grunt, path, pkg, readmeTitleExpected, simple, simpleExpected, travisBadgeExpected;
+  var Handlebars, grunt, path, pkg, simple, simpleExpected;
 
   require("should");
 
@@ -40,79 +40,6 @@
           }).should.equal(simpleExpected);
           return done();
         });
-      });
-    });
-  });
-
-  authorsExpected = "* [Brian Woodward](http://github.com/doowb)  \n* [Jon Schlinkert](http://github.com/jonschlinkert)  ";
-
-  describe("authors", function() {
-    describe("{{authors [string]}}", function() {
-      return it("should return a list of authors in markdown format, from a user-defined data source", function() {
-        var source, template;
-        source = "{{authors 'test/files/AUTHORS'}}";
-        template = Handlebars.compile(source);
-        return template(context).should.equal(authorsExpected);
-      });
-    });
-    return describe("{{authors}}", function() {
-      return it("should return a list of authors in markdown format, from the default data source", function() {
-        var source, template;
-        source = "{{authors}}";
-        template = Handlebars.compile(source);
-        return template(context).should.equal(authorsExpected);
-      });
-    });
-  });
-
-  readmeTitleExpected = "[handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers)";
-
-  describe("readme-title", function() {
-    return describe("should generate a README title in markdown format, including version from package.json.", function() {
-      return it("{{readme-title}}", function(done) {
-        var source, template;
-        source = "{{readme-title}}";
-        template = Handlebars.compile(source);
-        template().should.equal(readmeTitleExpected);
-        return done();
-      });
-    });
-  });
-
-  travisBadgeExpected = "[![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)";
-
-  describe("travis-badge", function() {
-    return describe("should create a Travis CI link and badge in markdown format.", function() {
-      return it("{{travis-badge}}", function(done) {
-        var source, template;
-        source = "{{travis-badge}}";
-        template = Handlebars.compile(source);
-        template().should.equal(travisBadgeExpected);
-        return done();
-      });
-    });
-  });
-
-  describe("travis", function() {
-    return describe("should create a Travis CI link in markdown format.", function() {
-      return it("{{travis}}", function(done) {
-        var source, template;
-        source = "{{travis}}";
-        template = Handlebars.compile(source);
-        template().should.equal("# [handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)");
-        return done();
-      });
-    });
-  });
-
-  describe("travis with branch", function() {
-    return describe("should create a Travis CI link with branch in markdown format.", function() {
-      return it("{{travis 'master'}}", function(done) {
-        var source, template;
-        source = "{{travis 'wip-1.0.0'}}";
-        template = Handlebars.compile(source);
-        template().should.equal("# [handlebars-helpers v" + pkg.version + "](https://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png?branch=wip-1.0.0)](https://travis-ci.org/assemble/handlebars-helpers)");
-        return done();
       });
     });
   });

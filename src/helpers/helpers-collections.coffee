@@ -27,7 +27,8 @@ module.exports.withFirst = withFirst = (array, count, options) ->
 module.exports.last = last = (array, count) ->
   if Utils.isUndefined(count) then array[array.length - 1] else array.slice -count
 
-# With Last: Use the last item in a collection inside a block. Opposite of `withFirst`.
+# With Last: Use the last item in a collection inside a block.
+# Opposite of `withFirst`.
 module.exports.withLast = withLast = (array, count, options) ->
   if Utils.isUndefined count
     options = count
@@ -38,11 +39,13 @@ module.exports.withLast = withLast = (array, count, options) ->
     for item of array then result += options.fn array[item]
     result
 
-# After: Returns all of the items in the collection after the specified count.
+# After: Returns all of the items in the collection
+# after the specified count.
 module.exports.after = after = (array, count) ->
   array.slice count
 
-# With After: Use all of the items in the collection after the specified
+# With After: Use all of the items in the collection
+# after the specified
 # count inside a block.
 module.exports.withAfter = withAfter = (array, count, options) ->
   array = array.slice count
@@ -50,25 +53,27 @@ module.exports.withAfter = withAfter = (array, count, options) ->
   for item of array then result += options.fn array[item]
   result
 
-# Before: Returns all of the items in the collection before the specified count.
-# Opposite of `after`.
+# Before: Returns all of the items in the collection
+# before the specified count. Opposite of `after`.
 module.exports.before = before = (array, count) ->
   array.slice 0, -count
 
-# With Before: Use all of the items in the collection before the specified
-# count inside a block. Opposite of `withAfter`.
+# With Before: Use all of the items in the collection
+# before the specified count inside a block. Opposite of `withAfter`.
 module.exports.withBefore = withBefore = (array, count, options) ->
   array = array.slice 0, -count
   result = ''
   for item of array then result += options.fn array[item]
   result
 
-# Join: Joins all elements of a collection into a string using a separator if specified.
+# Join: Joins all elements of a collection into a
+# string using a separator if specified.
 module.exports.join = join = (array, separator) ->
   array.join if Utils.isUndefined(separator) then ' ' else separator
 
-# Handlebars "joinAny" block helper that supports arrays of objects or strings.
-# (implementation found here: https://github.com/wycats/handlebars.js/issues/133)
+# Handlebars "joinAny" block helper that supports
+# arrays of objects or strings. implementation found here:
+# https://github.com/wycats/handlebars.js/issues/133
 #
 # If "delimiter" is not speficified, then it defaults to ",".
 # You can use "start", and "end" to do a "slice" of the array.
@@ -78,7 +83,7 @@ module.exports.join = join = (array, separator) ->
 #
 # Use with arrays:
 # {{join jobs delimiter=", " start="1" end="2"}}
-# 
+#
 module.exports.joinAny = joinAny = (items, block) ->
   delimiter = block.hash.delimiter or ","
   start = start = block.hash.start or 0
@@ -113,7 +118,7 @@ module.exports.withSort = withSort = (array, field, options) ->
     array = array.sort()
     result += options.fn(item) for item in array
   else
-    array = array.sort (a, b) -> 
+    array = array.sort (a, b) ->
       if a[field] > b[field]
         return 1
       else return -1  if a[field] < b[field]
@@ -169,8 +174,9 @@ module.exports.iterate = iterate = (context, options) ->
   ret
 
 
-# forEach: 
-# http://stackoverflow.com/questions/13861007/loop-over-and-array-and-add-a-separator-except-for-the-last
+# forEach:
+# http://stackoverflow.com/questions/13861007/
+#   loop-over-and-array-and-add-a-separator-except-for-the-last
 # Usage:
 # Data:
 #     accounts = [
@@ -180,7 +186,10 @@ module.exports.iterate = iterate = (context, options) ->
 #     ]
 # Templates:
 #     {{#forEach accounts}}
-#         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">{{ name }}</a>{{#unless _isLast}}, {{/unless}}
+#         <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
+#           {{ name }}
+#         </a>
+#         {{#unless _isLast}}, {{/unless}}
 #     {{/forEach}}
 module.exports.forEach = forEach = (array, fn) ->
   total = array.length
@@ -190,7 +199,7 @@ module.exports.forEach = forEach = (array, fn) ->
   j = total
   while i < j
     item = array[i]
-    # stick an index property onto the item, 
+    # stick an index property onto the item,
     # starting with 1, may make configurable later
     item["_index"] = i + 1
     item["_total"] = total
@@ -205,9 +214,11 @@ module.exports.forEach = forEach = (array, fn) ->
 
 # adds an a bunch of item prefixed logic to the object
 # Credit: https://gist.github.com/icodeforlove/1429324
-# 
+#
 #   {{#eachWithClasses records prefix="record"}}
-#     <li class="record_{{itemIndex}} {{itemPosition}} {{itemAlt}}">{{itemIndex}}</li>
+#     <li class="record_{{itemIndex}} {{itemPosition}} {{itemAlt}}">
+#       {{itemIndex}}
+#      </li>
 #   {{/eachWithClasses}}
 #
 # Result:
@@ -227,7 +238,8 @@ module.exports.eachWithClasses = eachWithClasses = (array, fn) ->
     item.itemPosition += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
     # add alt if needed
     item.itemAlt = (if i % 2 then fn.hash.prefix + "-alt" else "")
-    # stick an index property onto the item, starting with 1, may make configurable later
+    # stick an index property onto the item, starting with 1,
+    # may make configurable later
     item.itemIndex = i
     # show the inside of the block
     buffer += fn(item)
@@ -238,16 +250,17 @@ module.exports.eachWithClasses = eachWithClasses = (array, fn) ->
 # eachIndex
 #  {{#eachIndex collection}}
 #    {{item}} is {{index}}
-#  {{/eachIndex}} 
+#  {{/eachIndex}}
 module.exports.eachIndex = eachIndex = (array, options) ->
   result = ''
   for value, index in array
     result += options.fn item: value, index: index
   result
 
-# Arrayify: data gets passed in from *.yml as a string, like "foo, bar, baz"
-# we need to convert this to an ES Array of strings to avoid reference errors
-# Credit: https://github.com/operasoftware/shinydemos/blob/master/lib/compiler.js
+# Arrayify: data gets passed in from *.yml as a string,
+# like "foo, bar, baz" we need to convert this to an ES
+# Array of strings to avoid reference errors. Credit:
+# https://github.com/operasoftware/shinydemos/blob/master/lib/compiler.js
 module.exports.arrayify = arrayify = (data) ->
   result = data.split(",").map((tag) ->
     "\"" + tag + "\""

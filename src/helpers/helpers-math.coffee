@@ -27,11 +27,9 @@ module.exports.sum = sum = () ->
   args = _.flatten(arguments)
   sum = 0
   i = args.length - 1
-
   while i--
-      if "number" is typeof args[i]
-        sum += args[i]
-
+    if "number" is typeof args[i]
+      sum += args[i]
   sum
 
 
