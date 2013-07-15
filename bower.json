@@ -1,8 +1,9 @@
 {
   "name": "helpers",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "main": "./lib/helper-lib.js",
   "dependencies": {
+    "handlebars": "1.0.10",
     "highlight.js": "~7.3.0",
     "js-yaml": "~2.0.4",
     "lodash": "~1.1.1",
