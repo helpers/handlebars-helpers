@@ -30,15 +30,15 @@
     });
   });
 
-  describe('url_parse', function() {
-    return describe('{{url_parse base href}}', function() {
-      return it('should take a URL string, and return an object stringified to JSON.', function() {
-        var source, template;
-        source = '{{url_parse "http://foo.com/bar/baz?key=value" "json"}}';
-        template = Handlebars.compile(source);
-        return template().should.equal("{\"protocol\":\"http:\",\"slashes\":true,\"auth\":null,\"host\":\"foo.com\",\"port\":null,\"hostname\":\"foo.com\",\"hash\":null,\"search\":\"?key=value\",\"query\":\"key=value\",\"pathname\":\"/bar/baz\",\"path\":\"/bar/baz?key=value\",\"href\":\"http://foo.com/bar/baz?key=value\"}");
-      });
-    });
-  });
+  // describe('url_parse', function() {
+  //   return describe('{{url_parse base href}}', function() {
+  //     return it('should take a URL string, and return an object stringified to JSON.', function() {
+  //       var source, template;
+  //       source = '{{url_parse "http://foo.com/bar/baz?key=value" "json"}}';
+  //       template = Handlebars.compile(source);
+  //       return template().should.equal("{\"protocol\":\"http:\",\"slashes\":true,\"auth\":null,\"host\":\"foo.com\",\"port\":null,\"hostname\":\"foo.com\",\"hash\":null,\"search\":\"?key=value\",\"query\":\"key=value\",\"pathname\":\"/bar/baz\",\"path\":\"/bar/baz?key=value\",\"href\":\"http://foo.com/bar/baz?key=value\"}");
+  //     });
+  //   });
+  // });
 
 }).call(this);
