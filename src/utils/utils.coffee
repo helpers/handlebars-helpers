@@ -73,8 +73,9 @@ Utils.escapeString = (str, except) -> #String
     "\\" + ch
 
 Utils.escapeExpression = (str) ->
-  Handlebars.Utils.escapeExpression
-
+  str = Handlebars.Utils.escapeExpression(str)
+  return str 
+  
 Utils.stringifyYAML = (src) ->
   YAML = to.format.yaml
   stringifyFile = YAML.stringify(src)
