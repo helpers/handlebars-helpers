@@ -28,7 +28,7 @@ module.exports.toFloat = toFloat = (number) ->
 
 # to abbreviate numbers
 module.exports.toAbbr = toAbbr = (number, digits) ->
-  # Default = 2 decimal places => 100, 3 => 1000, etc. 
+  # Default = 2 decimal places => 100, 3 => 1000, etc.
   digits = 2  if Utils.isUndefined(digits)
   digits = Math.pow(10, digits)
   abbr = ["k", "m", "b", "t"]
@@ -36,7 +36,7 @@ module.exports.toAbbr = toAbbr = (number, digits) ->
   while i >= 0
     size = Math.pow(10, (i + 1) * 3)
     if size <= number
-      number = Math.round(number * digits / size) / digits        
+      number = Math.round(number * digits / size) / digits
       # Handle special case where we round up to the next abbreviation
       if (number is 1000) and (i < abbr.length - 1)
         number = 1
@@ -57,7 +57,7 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "toPrecision", toPrecision
   Handlebars.registerHelper "toExponential", toExponential
   Handlebars.registerHelper "toInt", toInt
-  Handlebars.registerHelper "toFloat", toFloat  
+  Handlebars.registerHelper "toFloat", toFloat
   Handlebars.registerHelper "toAbbr", toAbbr
   Handlebars.registerHelper "addCommas", addCommas
 

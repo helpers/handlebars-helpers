@@ -1,4 +1,4 @@
-# [helper-lib v0.2.6](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [helper-lib v0.2.8](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 
 > Extensive collection of Handlebars helpers.
 
@@ -28,7 +28,7 @@ Some helpers offer useful functionality that is unique to this project, such as:
 
 Lots more...
 
-**Table of Contents** 
+**Table of Contents**
 
 ## [The Helpers](#the-helpers)
 
@@ -180,7 +180,7 @@ Template:
 ``` handlebars
 {{md "file/to/include/post.md"}}
 ```
-Any content inside the "included" markdown file will be rendered as HTML. 
+Any content inside the "included" markdown file will be rendered as HTML.
 
 
 #### {{markdown}}
@@ -225,11 +225,11 @@ Pellentesque nulla augue, volutpat vitae</p>
 #### {{embed}}
 _Embed code from specified file(s)_
 
-Parameters: 
+Parameters:
 * `String|File` : path to the file you want to embed
 * `String|Language (optional)`: Optional second parameter to "force" a specific language to use fo syntax highlighting.
 
-Unless overridden by a given extension, the helper will automatically use the extension of the specified file as the language to use for syntax highlighting. You may also force the helper to use a language that is different than the extension of the file. 
+Unless overridden by a given extension, the helper will automatically use the extension of the specified file as the language to use for syntax highlighting. You may also force the helper to use a language that is different than the extension of the file.
 
 For example, here we will force highlighting as `javascript` instead of `json`
 ``` hbs
@@ -243,11 +243,11 @@ When embedding a markdown snippet (`.md|markdown|markd`), the helper automatical
 
 **File globbing**
 
-The `embed` helper also accepts globbing patterns: 
+The `embed` helper also accepts globbing patterns:
 ```
 {{embed 'src/code-examples/*.*'}}
 ```
-When globbing file is used, the code from each file will be embedded separately, and the file extension of each file will be used to identify the language to use for syntax highlighting. You may of course override the language, but whatever language you use will be applied to every embedded file. 
+When globbing file is used, the code from each file will be embedded separately, and the file extension of each file will be used to identify the language to use for syntax highlighting. You may of course override the language, but whatever language you use will be applied to every embedded file.
 
 _use globbing carefully! Until you have the hang of it try to be on the safe side and be more specific with your patterns_
 
@@ -287,11 +287,11 @@ Template:
 ```
 
 ##### Fiddle tabs
-You may also adjust the tabs shown and/or the order in which tabs are displayed. 
+You may also adjust the tabs shown and/or the order in which tabs are displayed.
 
 Default tabs and display order: `js,resources,html,css,result`
 
-Options: 
+Options:
 * `js`, `html`, `css`: tabs for displaying code
 * `result`: tab for displaying the rendered result of the code
 * `resources`: tabs for displaying the list of external resources used. This tab will not be displayed if no resources were used.
@@ -330,13 +330,13 @@ Template:
 
 Renders to:
 ``` html
-<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/js,result/presentation/"></iframe> 
+<iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/js,result/presentation/"></iframe>
 ```
 
 
 
 ## Path helpers
-Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js: 
+Path helpers are [node.js](http://nodejs.org/api/path.html) utilities for handling and transforming file paths. As with node.js:
 
 > "these helpers perform only string transformations. The file system is not consulted to check whether paths are valid."
 
@@ -351,18 +351,18 @@ Example:
 ```
 Template:
 ``` html
-<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a> 
+<a href="{{relative "src" "dist"}}/assets/css/styles.css"></a>
 ```
 
 Renders to:
 ``` html
-<a href="../../dist/assets/css/styles.css"></a> 
+<a href="../../dist/assets/css/styles.css"></a>
 ```
 
 #### {{extname}}
 _"Return the extension of the path, from the last '.' to end of string in the last portion of the path. If there is no '.' in the last portion of the path or the first character of it is '.', then it returns an empty string."_
 
-Parameters: `string` (the value to test against). 
+Parameters: `string` (the value to test against).
 Default: `none`
 
 Template:
@@ -375,7 +375,7 @@ Renders to:
 .html
 ```
 
-Template: 
+Template:
 ```
 {{extname 'index.'}}
 ```
@@ -385,7 +385,7 @@ Renders to:
 .
 ```
 
-Template: 
+Template:
 ```
 {{extname 'index'}}
 ```
@@ -410,7 +410,7 @@ Renders to:
 
 
 ## URL helpers
-URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for URL resolution and parsing. As with node.js: 
+URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for URL resolution and parsing. As with node.js:
 
 > "Parsed URL objects have some or all of the following fields, depending on whether or not they exist in the URL string. Any parts that are not in the URL string will not be in the parsed object."
 
@@ -423,11 +423,11 @@ _Take a base URL, and a href URL, and resolve them as a browser would for an anc
 ```
 Example:
 ``` html
-<a href="{{url_resolve "http://example.com/one" "/two"}}"></a> 
+<a href="{{url_resolve "http://example.com/one" "/two"}}"></a>
 ```
 Renders to:
 ``` html
-<a href="http://example.com/two"></a> 
+<a href="http://example.com/two"></a>
 ```
 
 
@@ -439,8 +439,8 @@ Params:
 * Output format: `yaml` or `json`. Default: `json`
 
 Template:
-``` 
-{{url_parse "http://example.com/one"}} 
+```
+{{url_parse "http://example.com/one"}}
 ```
 
 Renders to:
@@ -458,7 +458,7 @@ Renders to:
   "pathname": "/one",
   "path": "/one",
   "href": "http://example.com/one"
-} 
+}
 ```
 
 Or with `yaml` as the second param:
@@ -480,11 +480,11 @@ query: "key=value"
 pathname: "/bar/baz"
 path: "/bar/baz?key=value"
 href: "http://foo.com/bar/baz?key=value"
-parse: 
-format: 
-resolve: 
-resolveObject: 
-parseHost: 
+parse:
+format:
+resolve:
+resolveObject:
+parseHost:
 ```
 
 
@@ -496,14 +496,14 @@ _Include external files._
 <br>Parameters:
 
 * name (required): `[string]` - The name or path of the file in which your template is defined. (Required)
-* data (optional): `[int|string|collection]` - Data you want to use inside the include. 
+* data (optional): `[int|string|collection]` - Data you want to use inside the include.
 
 Data (collection): `planet-express.json`
 
 ``` js
 [
-  "Professor Farnsworth", 
-  "Fry", 
+  "Professor Farnsworth",
+  "Fry",
   "Bender"
 ]
 ```
@@ -558,7 +558,7 @@ Generates a list of markdown-formatted project authors from the AUTHORS file in 
 Params: `none`
 Usage: `{{authors}}` or `{{authors "path/to/AUTHORS"}}`
 
-Data (`AUTHORS` file in the root of our project): 
+Data (`AUTHORS` file in the root of our project):
 
 ```
 Brian Woodward (http://github.com/doowb)
@@ -572,8 +572,8 @@ Template (lowercase version):
 
 Renders to:
 ``` md
-* [Brian Woodward](http://github.com/doowb)  
-* [Jon Schlinkert](http://github.com/jonschlinkert)  
+* [Brian Woodward](http://github.com/doowb)
+* [Jon Schlinkert](http://github.com/jonschlinkert)
 ```
 
 Or the uppercase version:
@@ -582,7 +582,7 @@ Or the uppercase version:
 ```
 
 Renders to:
-``` 
+```
 **Jon Schlinkert**
 
 + [http://twitter.com/jonschlinkert](http://twitter.com/jonschlinkert)
@@ -614,7 +614,7 @@ Renders to:
 # [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
-Template with branch: 
+Template with branch:
 ``` handlebars
 {{travis 'master'}}
 ```
@@ -641,7 +641,7 @@ Renders to:
 ```
 
 #### {{changelog}}
-A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting. 
+A few convenience helpers that read data in YAML format, and do interesting things with the data. Well... they "do things" with the data. Anyway I guess only nerds like me find it interesting.
 
 **NOTE**: These helpers will throw an error if the source files are not  valid YAML format, using the following conventions:
 
@@ -686,13 +686,13 @@ The output will look like this:
 #### {{doctype}}
 _Easy way to add an uncommonly used doctype._
 
-Default: HTML 5 (`<!DOCTYPE html>`), although tThis is probably only useful on projects that use anything besides HTML 5. 
+Default: HTML 5 (`<!DOCTYPE html>`), although tThis is probably only useful on projects that use anything besides HTML 5.
 
-Template: 
+Template:
 ```
 {{DOCTYPE 'svg 1.1'}}
 ```
-Renders to: 
+Renders to:
 ``` html
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 ```
@@ -758,9 +758,9 @@ Renders to:
 ``` html
 <blockquote>
   <p>This is your quote.</p>
-  <footer> 
+  <footer>
     <strong>@doowb</strong>
-    <cite> 
+    <cite>
       <a href="http://github.com/source/for/your/quote">This is the title</a>
     </cite>
   </footer>
@@ -772,9 +772,9 @@ Renders to:
 
 _Iterates through an array, letting the contents know whether a timeline entry belongs in the left or right column._
 
-Parameters: 
+Parameters:
 
-* `array` to iterate over, 
+* `array` to iterate over,
 * `string`: CSS class name for left columns
 * `string`: CSS class name for right columns
 
@@ -798,7 +798,7 @@ _Generate the appropriate icon based on the extension of the given file._
 
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
 
-Usage: 
+Usage:
 ``` handlebars
 {{exticon 'file.png'}}
 {{exticon 'file.pdf'}}
@@ -822,7 +822,7 @@ _Creates an unordered list._
 
 Parameters: `Hash|HTML attributes`, `Optional`
 
-HTML attributes to use on the `ul` element. 
+HTML attributes to use on the `ul` element.
 ``` js
 // Data
 collection = [
@@ -853,7 +853,7 @@ _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based
 
 Parameters: `Hash`, `HTML attributes`, `Optional`
 
-HTML attributes to use on the `ol` element. 
+HTML attributes to use on the `ol` element.
 ``` js
 // Data
 collection = [
@@ -886,7 +886,7 @@ _Renders `<br>` elements in the output, based on the number given as a parameter
 
 Parameters: `Integer|Count`, `Optional`
 
-The number of `br` elements to render. 
+The number of `br` elements to render.
 
 `template.hbs`
 ``` handlebars
@@ -1015,10 +1015,10 @@ Renders to:
 
 #### {{truncate}}
 _Truncates a string given a specified `length`, providing a custom string to denote an `omission`._
-<br>Parameters: 
+<br>Parameters:
 
-* length: `int`- The number of characters to keep (Required). 
-* omission: `string` - A string to denote an omission (Optional). 
+* length: `int`- The number of characters to keep (Required).
+* omission: `string` - A string to denote an omission (Optional).
 
 ``` handlebars
 {{truncate "Bender should not be allowed on tv." 31 "..."}}
@@ -1067,13 +1067,13 @@ _Returns the first item in a collection._
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1095,13 +1095,13 @@ _Use the first item in a collection inside a block._
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1125,13 +1125,13 @@ _Returns the last item in a collection. Opposite of `first`._
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1153,13 +1153,13 @@ _Use the last item in a collection inside a block. Opposite of `withFirst`._
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1182,13 +1182,13 @@ _Returns all of the items in the collection after the specified count._
 ```
 // Date
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1209,13 +1209,13 @@ _Use all of the items in the collection after the specified count inside a block
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1239,13 +1239,13 @@ _Returns all of the items in the collection before the specified count. Opposite
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1267,13 +1267,13 @@ _Use all of the items in the collection before the specified count inside a bloc
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1296,13 +1296,13 @@ _Joins all elements of a collection into a string using a separator if specified
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1323,13 +1323,13 @@ Parameters: `none`
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 ```
@@ -1382,13 +1382,13 @@ _Returns the length of the collection._
 Data:
 ``` js
 collection = [
-  'Amy Wong', 
-  'Bender', 
-  'Dr. Zoidberg', 
-  'Fry', 
-  'Hermes Conrad', 
-  'Leela', 
-  'Professor Farnsworth', 
+  'Amy Wong',
+  'Bender',
+  'Dr. Zoidberg',
+  'Fry',
+  'Hermes Conrad',
+  'Leela',
+  'Professor Farnsworth',
   'Scruffy'
 ]
 
@@ -1861,7 +1861,7 @@ Example #2:
 
 If you are using [Assemble](https://github.com/assemble/assemble), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
 
-Data and Templates: 
+Data and Templates:
 ``` yaml
 ---
 page:
@@ -2163,7 +2163,7 @@ Template:
 {{timeago date}}
 ```
 Renders to:
-``` 
+```
 4 days ago
 ```
 
@@ -2353,8 +2353,8 @@ TODO...
 ## How Handlebars Helpers Work
 Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
-* Each parameter is a Handlebars expression. 
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).
+* Each parameter is a Handlebars expression.
 * Handlebars helpers can be accessed from any context in a template.
 
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
@@ -2363,7 +2363,7 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 
 > Contributions welcome! Please consider adding your own helpers to this library.
 
-Handlebars is advantageous over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
+Handlebars is advantageous over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
 
 Handlebars allows two different kinds of helpers:
 
@@ -2379,8 +2379,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 
 ## Authors
-* [Brian Woodward](http://github.com/doowb)  
-* [Jon Schlinkert](http://github.com/jonschlinkert)  
+* [Brian Woodward](http://github.com/doowb)
+* [Jon Schlinkert](http://github.com/jonschlinkert)
 
 
 ## Credit
@@ -2396,21 +2396,21 @@ Copyright 2013 Assemble
 [MIT License](LICENSE-MIT)
 
 ## Release History
-* 2013-05-11			v0.2.3			File globbing added to some helpers. Including md and some file helpers.  
-* 2013-05-07			v0.2.0			A bunch of new tests for markdown and special helpers.  Refactored most of the rest of the helpers to separate functions from Handlebars registration.  
-* 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.  
-* 2013-04-21			v0.1.31			Fixing relative helper  
-* 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.  
-* 2013-04-16			v0.1.25			Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.  
-* 2013-04-07			v0.1.21			Add markdown helpers back, add more tests.  
-* 2013-04-06			v0.1.20			Generalized helpers structure, externalized utilities.  
-* 2013-04-05			v0.1.11			New authors and gist helpers, general cleanup and new tests.  
-* 2013-04-04			v0.1.10			Externalized utility javascript from helpers.js  
-* 2013-03-28			v0.1.8			Gruntfile updated with mocha tests for 71 helpers, bug fixes.  
-* 2013-03-18			v0.1.7			New path helper "relative", for resolving relative path from one absolute path to another.  
-* 2013-03-16			v0.1.3			New helpers, "formatPhoneNumber" and "eachProperty"  
-* 2013-03-15			v0.1.2			Update README.md with documentation, examples.  
-* 2013-03-06			v0.1.0			First commit.  
+* 2013-05-11			v0.2.3			File globbing added to some helpers. Including md and some file helpers.
+* 2013-05-07			v0.2.0			A bunch of new tests for markdown and special helpers.  Refactored most of the rest of the helpers to separate functions from Handlebars registration.
+* 2013-05-02			v0.1.32			Updated utils and a number of helpers, including value, property, and stringify.
+* 2013-04-21			v0.1.31			Fixing relative helper
+* 2013-04-20			v0.1.30			Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
+* 2013-04-16			v0.1.25			Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
+* 2013-04-07			v0.1.21			Add markdown helpers back, add more tests.
+* 2013-04-06			v0.1.20			Generalized helpers structure, externalized utilities.
+* 2013-04-05			v0.1.11			New authors and gist helpers, general cleanup and new tests.
+* 2013-04-04			v0.1.10			Externalized utility javascript from helpers.js
+* 2013-03-28			v0.1.8			Gruntfile updated with mocha tests for 71 helpers, bug fixes.
+* 2013-03-18			v0.1.7			New path helper "relative", for resolving relative path from one absolute path to another.
+* 2013-03-16			v0.1.3			New helpers, "formatPhoneNumber" and "eachProperty"
+* 2013-03-15			v0.1.2			Update README.md with documentation, examples.
+* 2013-03-06			v0.1.0			First commit.
 
 
 

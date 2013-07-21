@@ -3,8 +3,6 @@ require 'should'
 Handlebars = require 'handlebars'
 require('../../lib/helpers/helpers-collections').register Handlebars, {}
 
-
-
 context = collection: [
   'Amy Wong'
   'Bender'
@@ -241,6 +239,17 @@ describe 'inArray', ->
 
       template(context).should.equal 'I\'m walking on sunshine!'
 
+#   {{#eachWithClasses records prefix="record"}}
+#     <li class="record_{{itemIndex}}{{itemPosition}} {{itemAlt}}">{{itemIndex}}</li>
+#   {{/eachWithClasses}}
+# describe 'eachWithClasses', ->
+#   describe '{{#eachWithClasses records prefix="record"}} {{itemIndex}} {{itemPosition}} {{itemAlt}} {{itemIndex}} {{/eachWithClasses}}', ->
+#     it 'should render the block using the array and each item\'s index.', ->
+#       source = '{{#eachWithClasses collection}} {{item}} is {{index}} {{/eachWithClasses}}'
+#       template = Handlebars.compile(source)
+
+#       template(context).should.equal ''
+
 describe 'eachIndex', ->
   describe '{{#eachIndex collection}} \n
     {{item}} is {{index}} \n
@@ -251,13 +260,10 @@ describe 'eachIndex', ->
 
       template(context).should.equal ' Amy Wong is 0  Bender is 1  Dr. Zoidberg is 2  Fry is 3  Hermes Conrad is 4  Leela is 5  Professor Farnsworth is 6  Scruffy is 7 '
 
-# describe 'eachProperty', ->
-#     describe '{{#eachProperty collection}} \n
-#         {{key}}: {{value}} \n
-#     {{/eachProperty}}', ->
-#         it 'should use the key and value of each property in an object inside a block.', ->
-#             source = '{{#eachProperty collection}}{{key}}: {{value}} {{/eachProperty}}'
-#             template = Handlebars.compile(source)
-#             _context = collection: fry: 3, bender: 120
-
-#             template(_context).should.equal 'fry: 3 bender: 120 '
+describe 'each', ->
+  describe '{{#each collection}} {{@key}}: {{this}} {{/each}}', ->
+      it 'should use the key and value of each property in an object inside a block.', ->
+        context = collection: fry: 3, bender: 120
+        source = '{{#each collection}}{{@key}}: {{this}} {{/each}}'
+        template = Handlebars.compile(source)
+        template(context).should.equal 'fry: 3 bender: 120 '

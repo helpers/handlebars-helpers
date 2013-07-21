@@ -8,18 +8,25 @@ path  = require 'path'
 _     = require 'lodash'
 
 
-module.exports = 
-  # Embed: Embeds code from an external file as preformatted text. The first parameter
-  # requires a path to the file you want to embed. There second second optional
-  # parameter is for specifying (forcing) syntax highlighting for language of choice.
-  # Syntax:  {{ embed [file] [lang] }}
-  # Usage: {{embed 'path/to/file.js'}} or {{embed 'path/to/file.hbs' 'html'}}
+module.exports =
+
+  # Embed: Embeds code from an external file as preformatted
+  # text. The first parameter requires a path to the file
+  # you want to embed. There second second optional parameter
+  # is for specifying (forcing) syntax highlighting for
+  # language of choice.
+  #
+  # Syntax:
+  #   {{ embed [file] [lang] }}
+  # Usage:
+  #   {{embed 'path/to/file.js'}} or
+  #   {{embed 'path/to/file.hbs' 'html'}}
   embed: embed = (src, lang) ->
     content = Utils.globFiles(src)
-    ext = path.extname(src).replace(/^(\.)/gm, '');
+    ext = path.extname(src).replace(/^(\.)/gm, '')
     if Utils.isUndefined(lang)
       lang = ext
-    else 
+    else
       lang = lang
     switch ext
       when "md", "markdown", "mdown"

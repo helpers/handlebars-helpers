@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.2.6",
+  "version": "0.2.9",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "assemble",
@@ -38,6 +38,7 @@
     "test": "grunt test"
   },
   "dependencies": {
+    "handlebars": "1.0.10",
     "highlight.js": "~7.3.0",
     "js-yaml": "~2.0.4",
     "lodash": "~1.1.1",
@@ -51,22 +52,18 @@
     "chai": "~1.5.0",
     "coffee-script": "~1.6.2",
     "grunt": "~0.4.1",
+    "grunt-coffeelint": "0.0.7",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-jshint": "~0.2.0",
-    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
-    "handlebars": "1.0.10",
-    "minimatch": "~0.2.12",
-    "should": "~1.2.2",
-    "to": "~0.2.9"
+    "should": "~1.2.2"
   },
   "keywords": [
-    "assemble",
+    "assemble helpers",
     "block helper",
-    "client-side templates",
     "example helper",
     "handle bars js",
     "handlebar helper",
@@ -86,16 +83,8 @@
     "helper library",
     "helper",
     "helpers",
-    "javascript templates",
-    "jst",
     "loop handlebars",
-    "mustache or handlebars",
-    "mustaches template",
-    "mustaches templates",
-    "site builder",
     "template helpers",
-    "templates",
-    "use handlebars",
     "utilities"
   ]
 }

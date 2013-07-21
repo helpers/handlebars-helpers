@@ -1,6 +1,15 @@
 {
   "name": "helpers",
-  "version": "0.2.6",
+  "version": "0.2.9",
   "main": "./lib/helper-lib.js",
-  "ignore": ["*.sublime-*", "node_modules", "tmp", "TODO.md", "temp", "*-refactor.*"],
+  "dependencies": {
+    "handlebars": "1.0.10",
+    "highlight.js": "~7.3.0",
+    "js-yaml": "~2.0.4",
+    "lodash": "~1.1.1",
+    "marked": "~0.2.8",
+    "mime": "~1.2.9",
+    "minimatch": "~0.2.12",
+    "to": "~0.2.9"
+  }
 }

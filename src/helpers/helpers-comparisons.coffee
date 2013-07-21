@@ -88,12 +88,12 @@ module.exports.unless_lteq = unless_lteq = (context, options) ->
 # Credit: Dan Harper (http://github.com/danharper)
 # Similar to {{#if}} block helper but accepts multiple arguments.
 module.exports.ifAny = ifAny = ->
-  argLength = arguments_.length - 2
-  content = arguments_[argLength + 1]
+  argLength = arguments.length - 2
+  content = arguments[argLength + 1]
   success = true
   i = 0
   while i < argLength
-    unless arguments_[i]
+    unless arguments[i]
       success = false
       break
     i += 1
