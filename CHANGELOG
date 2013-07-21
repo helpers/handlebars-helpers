@@ -1,3 +1,7 @@
+v0.2.4:
+  date: "2013-05-11"
+  changes:
+    - Adding object globbing utility functions to be used in helpers later.
 v0.2.3:
   date: "2013-05-11"
   changes:
