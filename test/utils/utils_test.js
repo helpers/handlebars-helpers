@@ -8,6 +8,7 @@
   describe('trim', function() {
     return it('should trim off white space', function() {
       var actual, before, expected;
+
       before = "  test  ";
       expected = "test";
       actual = Utils.trim(before);
@@ -18,6 +19,7 @@
   describe('lowercase', function() {
     return it('should convert a string to lowercase', function() {
       var actual, before, expected;
+
       before = "This IS a TEST StRiNg";
       expected = "this is a test string";
       actual = Utils.lowerCase(before);
@@ -29,6 +31,7 @@
     describe('buildObjectPaths', function() {
       return it('should return an array of paths that look like file paths but with object keys', function() {
         var actual, expected, input;
+
         input = {
           foo: 'bar',
           baz: {
@@ -43,6 +46,7 @@
     return describe('globObject', function() {
       return it('should return a new object only containing keys that match the given pattern', function() {
         var actual, expected, input;
+
         input = {
           foo: 'bar',
           baz: {

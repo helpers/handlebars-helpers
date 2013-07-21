@@ -23,6 +23,7 @@
     describe("should convert a block of markdown to HTML", function() {
       return it("{{#markdown}}", function(done) {
         var template;
+
         template = Handlebars.compile(simple);
         template().should.equal(simpleExpected);
         return done();
@@ -32,6 +33,7 @@
       return describe("should convert an imported markdown file to HTML", function() {
         return it("{{md simple1.md}}", function(done) {
           var filename, source, template;
+
           filename = path.join(__dirname, "../files/simple1.md");
           source = "{{md filename}}";
           template = Handlebars.compile(source);
