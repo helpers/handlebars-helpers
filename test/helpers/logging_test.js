@@ -20,6 +20,7 @@
     return describe('{{log "Log helper worked!"}}', function() {
       return it('should log a message to the console.', function() {
         var source, template;
+
         source = '{{log "Log helper worked!"}}';
         template = Handlebars.compile(source);
         template();
@@ -34,6 +35,7 @@
     return describe('{{debug value}}', function() {
       return it('should log current context.', function() {
         var context, source, template;
+
         source = '{{debug this}}';
         template = Handlebars.compile(source);
         context = 'assemble';
