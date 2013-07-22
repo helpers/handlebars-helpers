@@ -30,11 +30,11 @@ module.exports.register = (Handlebars, options) ->
       finally
         return res or code
   )
-  opts     = _.extend opts, options
+  opts     = _.extend opts, options.marked
   isServer = (typeof process isnt 'undefined')
 
   Markdown = require('../utils/markdown').Markdown opts
-  
+
   # Markdown: markdown helper enables writing markdown inside HTML
   # and then renders the markdown as HTML inline with the rest of the page.
   # Usage: {{#markdown}} # This is a title. {{/markdown}}

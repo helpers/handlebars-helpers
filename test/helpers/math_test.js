@@ -15,7 +15,6 @@
     return describe('{{add value 5}}', function() {
       return it('should return the sum of two numbers.', function() {
         var source, template;
-
         source = '{{add value 5}}';
         template = Handlebars.compile(source);
         return template(context).should.equal(10);
@@ -27,7 +26,6 @@
     return describe('{{subtract value 5}}', function() {
       return it('should return the difference of two numbers.', function() {
         var source, template;
-
         source = '{{subtract value 5}}';
         template = Handlebars.compile(source);
         return template(context).should.equal(0);
@@ -39,7 +37,6 @@
     return describe('{{divide value 5}}', function() {
       return it('should return the division of two numbers.', function() {
         var source, template;
-
         source = '{{divide value 5}}';
         template = Handlebars.compile(source);
         return template(context).should.equal(1);
@@ -51,7 +48,6 @@
     return describe('{{multiply value 5}}', function() {
       return it('should return the multiplication of two numbers.', function() {
         var source, template;
-
         source = '{{multiply value 5}}';
         template = Handlebars.compile(source);
         return template(context).should.equal(25);
@@ -63,7 +59,6 @@
     return describe('{{floor 5}}', function() {
       return it('should return the value rounded down to the nearest integer.', function() {
         var source, template;
-
         source = '{{floor value}}';
         template = Handlebars.compile(source);
         return template(context = {
@@ -77,7 +72,6 @@
     return describe('{{ceil 5}}', function() {
       return it('should return the value rounded up to the nearest integer.', function() {
         var source, template;
-
         source = '{{ceil value}}';
         template = Handlebars.compile(source);
         return template(context = {
@@ -91,7 +85,6 @@
     return describe('{{round 5}}', function() {
       return it('should return the value rounded to the nearest integer.', function() {
         var source, template;
-
         source = '{{round value}}';
         template = Handlebars.compile(source);
         return template(context = {
@@ -105,7 +98,6 @@
     return describe('{{sum value 67 80}}', function() {
       return it('should return the sum of multiple numbers.', function() {
         var source, template;
-
         source = '{{sum value 67 80}}';
         template = Handlebars.compile(source);
         return template(context = {
@@ -119,7 +111,6 @@
     return describe('{{sum 1 2 3}}', function() {
       return it('should return the sum of multiple numbers.', function() {
         var source, template;
-
         source = '{{sum 1 2 3}}';
         template = Handlebars.compile(source);
         return template().should.equal(6);
@@ -131,7 +122,6 @@
     return describe('{{sum value}}', function() {
       return it('should return the total sum of array.', function() {
         var source, template;
-
         source = '{{sum value}}';
         template = Handlebars.compile(source);
         return template(context = {
@@ -145,7 +135,6 @@
     return describe('{{sum value 5}}', function() {
       return it('should return the total sum of array and numbers.', function() {
         var source, template;
-
         source = '{{sum value 5}}';
         template = Handlebars.compile(source);
         return template(context = {
