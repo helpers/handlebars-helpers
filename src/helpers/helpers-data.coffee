@@ -25,7 +25,10 @@ module.exports =
     file = Utils.readJSON(file)
     Utils.safeString(JSON.stringify(file, null, 2))
 
+  ###
+  # From: Keegan Street (@keeganstreet)
   # https://github.com/assemble/assemble/issues/228#issuecomment-20855238
+  ###
   parseJSON: parseJSON = (data, options) ->
     options.fn JSON.parse(data)
 
