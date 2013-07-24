@@ -2,7 +2,9 @@ require "should"
 path = require("path")
 grunt = require("grunt")
 Handlebars = require("handlebars")
-require("../../lib/helpers/helpers-markdown").register Handlebars, gfm: true
+require("../../lib/helpers/helpers-markdown").register Handlebars, 
+  marked:
+    gfm: true
 
 pkg = grunt.file.readJSON('package.json')
 
@@ -24,4 +26,17 @@ describe "markdown", ->
         template = Handlebars.compile(source)
         template(filename: filename).should.equal simpleExpected
         done()
+
+describe "markdown options", ->
+  it "langPrefix", (done) ->
+    require("../../lib/helpers/helpers-markdown").register Handlebars, 
+      marked:
+        gfm: true
+        langPrefix: 'language-'
+
+    codeExample = "{{#markdown}}\n## Some Markdown\n\n```js\nvar foo='bar';\n```{{/markdown}}"
+    codeExampleExpected = "<h2>Some Markdown</h2>\n<pre><code class=\"language-js\"><span class=\"keyword\">var</span> foo=<span class=\"string\">'bar'</span>;</code></pre>\n"
+    template = Handlebars.compile(codeExample)
+    template().should.equal codeExampleExpected
+    done()
 
