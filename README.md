@@ -1,4 +1,4 @@
-# [helper-lib v0.2.9](http://github.com/assemble/helper-lib) [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+# [handlebars-helpers v0.2.9](http://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
 > Extensive collection of Handlebars helpers.
 
@@ -6,19 +6,19 @@
 For linting and testing this project uses Grunt `~0.4.1`, but Grunt is **not required** to use the helpers. Check out the [Getting Started](http://gruntjs.com/getting-started) guide to learn more about Grunt.
 
 ```shell
-npm install helper-lib --save
+npm install handlebars-helpers --save
 ```
-Once helper-lib has been installed, it may be used within your application with the following JavaScript:
+Once handlebars-helpers has been installed, it may be used within your application with the following JavaScript:
 
 ```js
 var handlebars = require('Handlebars');
-var helpers = require('helper-lib');
+var helpers = require('handlebars-helpers');
 helpers.register(Handlebars);
 ```
 
 Now your handlebars instance will have access to the helpers.
 
-### Features unique to helper-lib
+### Features unique to handlebars-helpers
 
 Some helpers offer useful functionality that is unique to this project, such as:
 
@@ -167,7 +167,7 @@ Lots more...
 * [{{noop}}](#noop)
 
 
----
+***
 
 ## Markdown helpers
 
@@ -177,7 +177,8 @@ Lots more...
 _Include markdown from specified file(s), and render it to HTML_
 
 Template:
-``` handlebars
+
+```html
 {{md "file/to/include/post.md"}}
 ```
 Any content inside the "included" markdown file will be rendered as HTML.
@@ -187,7 +188,8 @@ Any content inside the "included" markdown file will be rendered as HTML.
 _Block helper for embedding markdown content inside HTML, and rendering it to HTML at build time._
 
 Template:
-``` html
+
+```html
 <h1>My Blog</h1>
 
 {{#markdown}}
@@ -205,7 +207,9 @@ In hac habitasse platea dictumst. Morbi non rutrum risus.
 ```
 
 Renders to:
-``` html
+
+
+```html
 <h1>My Blog</h1>
 
 <h2>Post of the day</h2>
@@ -232,7 +236,8 @@ Parameters:
 Unless overridden by a given extension, the helper will automatically use the extension of the specified file as the language to use for syntax highlighting. You may also force the helper to use a language that is different than the extension of the file.
 
 For example, here we will force highlighting as `javascript` instead of `json`
-``` hbs
+
+```html
 {{ embed 'src/example.json' 'js' }}
 ```
 
@@ -260,11 +265,13 @@ Default: `undefined`
 Usage: `{{ gist [id] }}`
 
 Example:
-``` hbs
+
+```html
 {{gist '5193239'}}
 ```
 Output:
-``` html
+
+```html
 <script src="https://gist.github.com/5193239.js"></script>
 ```
 
@@ -282,7 +289,8 @@ Parameters: `{{ jsfiddle "id" "tabs" "skin" "height" "width" }}`
   * `width`: the width of the rendered `<iframe>`
 
 Template:
-``` handlebars
+
+```html
 {{ jsfiddle 'ccWP7' }}
 ```
 
@@ -297,24 +305,28 @@ Options:
 * `resources`: tabs for displaying the list of external resources used. This tab will not be displayed if no resources were used.
 
 Template:
-``` handlebars
+
+```html
 {{jsfiddle 'ccWP7' 'result,js,html,css'}}
 ```
 
 Renders to:
-``` html
+
+```html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/result,js,html,css/"></iframe>
 ```
 
 You may remove the tabs you don't need:
 
 Template:
-``` handlebars
+
+```html
 {{jsfiddle 'ccWP7' 'js,result'}}
 ```
 
 Renders to:
-``` html
+
+```html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/abc123/embedded/js,result/"></iframe>
 ```
 
@@ -324,12 +336,14 @@ A third _optional_ parameter may be used to specify the "skin" for the fiddle. A
 Default: `light`
 
 Template:
-``` handlebars
+
+```html
 {{jsfiddle 'ccWP7' 'result,js,html,css' 'presentation'}}
 ```
 
 Renders to:
-``` html
+
+```html
 <iframe style="width: 100%; height: 210px"src="http://jsfiddle.net/ccWP7/embedded/js,result/presentation/"></iframe>
 ```
 
@@ -346,16 +360,19 @@ _Derive the relative path from one **absolute path** to another (e.g from path A
 <br>Default: `none`
 
 Example:
-``` handlebars
+
+```html
 {{relative "from" "to"}}
 ```
 Template:
-``` html
+
+```html
 <a href="{{relative "src" "dist"}}/assets/css/styles.css"></a>
 ```
 
 Renders to:
-``` html
+
+```html
 <a href="../../dist/assets/css/styles.css"></a>
 ```
 
@@ -366,7 +383,8 @@ Parameters: `string` (the value to test against).
 Default: `none`
 
 Template:
-``` html
+
+```html
 {{extname 'index.html'}}
 ```
 
@@ -399,7 +417,8 @@ _Return the directory name of a path. Similar to the Unix dirname command._
 
 Template:
 
-``` html
+
+```html
 {{dirname '/foo/bar/baz/asdf/quux'}}
 
 Renders to:
@@ -418,15 +437,17 @@ URL helpers are [node.js](http://nodejs.org/api/url.html) `url` utilities for UR
 _Take a base URL, and a href URL, and resolve them as a browser would for an anchor tag._
 
 <br>Template:
-``` haskell
+```html
 {{url_resolve url href}}
 ```
 Example:
-``` html
+
+```html
 <a href="{{url_resolve "http://example.com/one" "/two"}}"></a>
 ```
 Renders to:
-``` html
+
+```html
 <a href="http://example.com/two"></a>
 ```
 
@@ -439,12 +460,14 @@ Params:
 * Output format: `yaml` or `json`. Default: `json`
 
 Template:
+
 ```
 {{url_parse "http://example.com/one"}}
 ```
 
 Renders to:
-``` json
+
+```json
 {
   "protocol": "http:",
   "slashes": true,
@@ -462,12 +485,14 @@ Renders to:
 ```
 
 Or with `yaml` as the second param:
-``` haskell
+
+```html
 {{url_parse "http://foo.com/bar/baz?key=value" "yaml"}}
 ```
 
 Renders to:
-``` coffeescript
+
+```yaml
 protocol: "http:"
 slashes: true
 auth: null
@@ -500,7 +525,7 @@ _Include external files._
 
 Data (collection): `planet-express.json`
 
-``` js
+```js
 [
   "Professor Farnsworth",
   "Fry",
@@ -509,17 +534,20 @@ Data (collection): `planet-express.json`
 ```
 
 Include (partial to be "included"): `planet-express.hbs`
-``` html
+
+```html
 {{sort this}}
 ```
 
 Template:
-``` html
+
+```html
 <p>{{include "planet-express.hbs" data}}</p>
 ```
 
 Renders to:
-``` html
+
+```html
 <p>Bender, Fry, Professor Farnsworth</p>
 ```
 
@@ -532,7 +560,8 @@ _Use globbing patterns to embed content from specified file or files._
 <br> Default: `undefined`
 
 Examples:
-``` html
+
+```html
 {{glob 'src/files/*.md'}}
 {{glob 'src/files/*.{txt,md}'}}
 ```
@@ -546,7 +575,8 @@ _Example helper, copies file A to path B._
 <br> Default: `undefined`
 
 Example:
-``` html
+
+```html
 {{copy 'a.html' '../dir/b.txt'}}
 ```
 
@@ -566,18 +596,20 @@ Jon Schlinkert (http://github.com/jonschlinkert)
 ```
 
 Template (lowercase version):
-``` handlebars
+
+```html
 {{authors}}
 ```
 
 Renders to:
-``` md
+```md
 * [Brian Woodward](http://github.com/doowb)
 * [Jon Schlinkert](http://github.com/jonschlinkert)
 ```
 
 Or the uppercase version:
-``` handlebars
+
+```html
 {{AUTHORS}}
 ```
 
@@ -605,23 +637,25 @@ Type: `String`
 Usage: `{{travis [branch]}}`
 
 Template:
-``` handlebars
+
+```html
 {{travis}}`
 ```
 
 Renders to:
-``` markdown
-# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
+```markdown
+# [handlebars-helpers v2.0.0](https://github.com/assemble/handlebars-helpers)[![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 ```
 
 Template with branch:
-``` handlebars
+
+```html
 {{travis 'master'}}
 ```
 
 Renders to:
-``` markdown
-# [helper-lib v2.0.0](https://github.com/assemble/helper-lib)[![Build Status](https://travis-ci.org/assemble/helper-lib.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
+```markdown
+# [handlebars-helpers v2.0.0](https://github.com/assemble/handlebars-helpers)[![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png?branch=master)](https://travis-ci.org/assemble/helper-lib)
 ```
 
 #### {{travis-badge}}
@@ -631,12 +665,13 @@ Params: `none`
 Usage: `{{travis-badge}}`
 
 Template
-``` handlebars
+
+```html
 {{travis}}`
 ```
 
 Renders to:
-``` markdown
+```markdown
 [![Build Status](https://travis-ci.org/assemble/helper-lib.png)](https://travis-ci.org/assemble/helper-lib)
 ```
 
@@ -652,7 +687,7 @@ A couple things to keep in mind about YAML:
 
 Example of the format to follow in your `CHANGELOG` file:
 
-``` yaml
+```yaml
 v0.1.2
   date: "2014-04-09"
   changes:
@@ -672,7 +707,7 @@ Of coure, you are under no obligation to make your changelog entries as interest
 
 The output will look like this:
 
-``` md
+```md
 * 2013-03-15    v0.1.2    Update README.md with documentation, examples.
 * 2013-03-06    v0.1.0    First commit.
 ```
@@ -693,7 +728,8 @@ Template:
 {{DOCTYPE 'svg 1.1'}}
 ```
 Renders to:
-``` html
+
+```html
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 ```
 
@@ -747,7 +783,8 @@ _Create a blockquote. Outputs a string with a given attribution as a quote._
 
 Template:
 
-``` handlebars
+
+```html
 {{#blockquote '@doowb' 'http://github.com/source/for/your/quote' 'This is the title' }}
   This is your quote.
 {{/blockquote}}
@@ -755,7 +792,8 @@ Template:
 
 Renders to:
 
-``` html
+
+```html
 <blockquote>
   <p>This is your quote.</p>
   <footer>
@@ -781,7 +819,8 @@ Parameters:
 Credit: by [@jonschlinkert](http://github.com/jonschlinkert), and based on striped helper from [treehouse blog](http://blog.teamtreehouse.com/handlebars-js-part-2-partials-and-helpers)
 
 Usage:
-``` handlebars
+
+```html
 <div class="timeline">
  {{#timeline myArray "left" "right"}}
  <div class="{{columnClass}}">
@@ -799,7 +838,8 @@ _Generate the appropriate icon based on the extension of the given file._
 Since this helper generates classes that are very specific, feel free to copy the code and use it as inspiration for your a helper that works for you.
 
 Usage:
-``` handlebars
+
+```html
 {{exticon 'file.png'}}
 {{exticon 'file.pdf'}}
 {{exticon 'file.doc'}}
@@ -808,7 +848,8 @@ Usage:
 {{exticon 'file'}}
 ```
 Output:
-``` html
+
+```html
 <img src="img/img-icon.png"><i>file.png</i>
 <img src="img/pdf-icon.png"><i>file.pdf</i>
 <img src="img/word-icon.png"><i>file.doc</i>
@@ -823,7 +864,7 @@ _Creates an unordered list._
 Parameters: `Hash|HTML attributes`, `Optional`
 
 HTML attributes to use on the `ul` element.
-``` js
+```js
 // Data
 collection = [
   name: 'Leela'
@@ -835,12 +876,14 @@ collection = [
 ]
 ```
 Template:
-``` handlebars
+
+```html
 {{#ul collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ul}}
 ```
-``` html
+
+```html
 // Output:
 <ul class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -854,7 +897,7 @@ _Same as the `ul` helper but creates and ordered list. Returns `<br>` tags based
 Parameters: `Hash`, `HTML attributes`, `Optional`
 
 HTML attributes to use on the `ol` element.
-``` js
+```js
 // Data
 collection = [
   name: 'Leela'
@@ -867,12 +910,14 @@ collection = [
 ```
 
 Template:
-``` handlebars
+
+```html
 {{#ol collection class="deliveries-list"}}
   {{name}} - {{inflect deliveries "delivery" "deliveries" true}}
 {{/ol}}
 ```
-``` html
+
+```html
 // Output:
 <ol class="deliveries-list">
   <li> Leela - 8021 deliveries </li>
@@ -889,11 +934,13 @@ Parameters: `Integer|Count`, `Optional`
 The number of `br` elements to render.
 
 `template.hbs`
-``` handlebars
+
+```html
 {{br 5}}
 ```
 renders to:
-``` html
+
+```html
 `<br><br><br><br><br>`
 ```
 
@@ -906,7 +953,8 @@ _Evaluate string A, and count the occurrences of string B within string A_
 * `String A` (required): The string to evaluate
 * `String B` (required): The string to look for and count in "string A"
 
-``` handlebars
+
+```html
 {{occurrences "evaluate this string" "evaluate"}}
 ```
 Result :
@@ -917,7 +965,8 @@ Result :
 #### {{hyphenate}}
 _Replace spaces in string with hyphens._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{hyphenate "make this all hyphenated"}}
 ```
 Result :
@@ -928,7 +977,8 @@ make-this-all-hyphenated
 #### {{dashify}}
 _Same as `hyphenate`, but replaces dots in string with hyphens._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{dashify "make.this.all.hyphenated"}}
 ```
 Renders to:
@@ -939,7 +989,8 @@ make-this-all-hyphenated
 #### {{lowercase}}
 _Turns a string to lowercase._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{lowercase "MAKE THIS ALL LOWERCASE"}}
 ```
 Renders to:
@@ -950,7 +1001,8 @@ make this all lowercase
 #### {{uppercase}}
 _Turns a string to uppercase. Opposite of `{{lowercase}}`._
 <br>Parameters: `none`
-``` handlebars
+
+```html
  {{uppercase "make this all uppercase"}}
 ```
 Renders to:
@@ -961,7 +1013,8 @@ MAKE THIS ALL UPPERCASE
 #### {{capitalizeFirst}}
 _Capitalizes the first word in a string._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{capitalizeFirst "capitalize first word in this sentence"}}
 ```
 Renders to:
@@ -972,7 +1025,8 @@ Capitalize first word in this sentence
 #### {{capitalizeEach}}
 _Capitalizes each word in a string._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{capitalizeEach "capitalize EACH word in this sentence"}}
 ```
 Renders to:
@@ -983,7 +1037,8 @@ Capitalize EACH Word In This Sentence
 #### {{titleize}}
 _Capitalizes all words within a string. Taken from the templating library [Walrus](https://github.com/jeremyruppel/walrus) by [Jeremy Ruppel](https://github.com/jeremyruppel)._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{titleize "capitalize EACH word in this sentence"}}
 ```
 Renders to:
@@ -994,7 +1049,8 @@ Capitalize Each Word In This Sentence.
 #### {{sentence}}
 _Capitalizes the first word of each sentence in a string and converts the rest of the sentence to lowercase._
 Parameters: `none`
-``` handlebars
+
+```html
 {{sentence "capitalize the FIRST word in each sentence. but make the OTHER words lowercase."}}
 ```
 Renders to:
@@ -1005,7 +1061,8 @@ Capitalize the first word in each sentence. But make the other words lowercase.
 #### {{reverse}}
 _Reverses a string._
 <br>Parameters: `none`
-``` handlebars
+
+```html
 {{reverse "bender should NOT be allowed on TV."}}
 ```
 Renders to:
@@ -1020,7 +1077,8 @@ _Truncates a string given a specified `length`, providing a custom string to den
 * length: `int`- The number of characters to keep (Required).
 * omission: `string` - A string to denote an omission (Optional).
 
-``` handlebars
+
+```html
 {{truncate "Bender should not be allowed on tv." 31 "..."}}
 ```
 Renders to:
@@ -1031,7 +1089,8 @@ Bender should not be allowed...
 #### {{center}}
 _Centers a string using non-breaking spaces._
 <br>Parameters: spaces: `int` - The number of spaces. (Required)
-``` handlebars
+
+```html
 {{center "Bender should not be allowed on tv." 10}}
 ```
 Renders to:
@@ -1049,7 +1108,8 @@ Data:
 number: 4444444444
 ```
 Template:
-``` handlebars
+
+```html
 {{formatPhoneNumber number}}
 ```
 Renders to:
@@ -1065,7 +1125,7 @@ _Returns the first item in a collection._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1078,7 +1138,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{first collection}}
 
 ```
@@ -1093,7 +1154,7 @@ _Use the first item in a collection inside a block._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1106,7 +1167,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{#withFirst collection}}
   <p>{{this}} is smart.</p>
 {{/withFirst}}
@@ -1114,7 +1176,8 @@ Template:
 ```
 
 Renders to:
-``` html
+
+```html
 <p>Amy Wong is smart.</p>
 ```
 
@@ -1123,7 +1186,7 @@ _Returns the last item in a collection. Opposite of `first`._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1136,7 +1199,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{last collection}}
 
 ```
@@ -1151,7 +1215,7 @@ _Use the last item in a collection inside a block. Opposite of `withFirst`._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1164,7 +1228,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{#withLast collection}}
   <p>{{this}} is lazy.</p>
 {{/withLast}}
@@ -1172,7 +1237,8 @@ Template:
 ```
 
 Renders to:
-``` html
+
+```html
 <p>Scruffy is lazy.</p>
 ```
 
@@ -1193,12 +1259,14 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{after collection 5}}
 ```
 
 Renders to:
-``` html
+
+```html
 Leela, Professor Farnsworth, Scruffy
 ```
 
@@ -1207,7 +1275,7 @@ _Use all of the items in the collection after the specified count inside a block
 <br>Parameters: count `int` - How many items to omit from the beginning. (Required)
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1220,7 +1288,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{#withAfter collection 5}}
     {{titleize this}}
 {{/withAfter}}
@@ -1237,7 +1306,7 @@ _Returns all of the items in the collection before the specified count. Opposite
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1250,7 +1319,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{before collection 5}}
 
 ```
@@ -1265,7 +1335,7 @@ _Use all of the items in the collection before the specified count inside a bloc
 <br>Parameters: count `int` - How many items to omit from the end. (Required)
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1278,7 +1348,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{#withBefore collection 5}}
     {{reverse this}}
 {{/withBefore}}
@@ -1294,7 +1365,7 @@ _Joins all elements of a collection into a string using a separator if specified
 <br>Parameters: separator `string` - A string to use as a separator between the items. (Optional)
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1307,7 +1378,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{join collection " & "}}
 ```
 
@@ -1321,7 +1393,7 @@ _Returns the collection sorted._
 Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1334,7 +1406,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{sort collection}}
 ```
 
@@ -1348,7 +1421,7 @@ _Uses the sorted collection inside the block._
 <br>Parameters: field `string` - String name of the field or property to sort by. (Optional)
 
 Data:
-``` js
+```js
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -1362,7 +1435,8 @@ collection = [
 
 ```
 Template:
-``` html
+
+```html
 {{#withSort collection "deliveries"}}
   {{name}}: {{deliveries}} <br>
 {{/withSort}}
@@ -1380,7 +1454,7 @@ _Returns the length of the collection._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   'Amy Wong',
   'Bender',
@@ -1394,7 +1468,8 @@ collection = [
 
 ```
 Template:
-``` html
+
+```html
 {{length collection}}
 ```
 
@@ -1408,7 +1483,7 @@ _Conditionally render a block based on the length of a collection._
 <br>Parameters: length `int` - The value to test against. (Required)
 
 Data:
-``` js
+```js
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -1421,7 +1496,8 @@ collection = [
 ]
 ```
 Template:
-``` html
+
+```html
 {{#lengthEqual collection 3}}
     There are 3 people in Planet Express.
 {{else}}
@@ -1439,11 +1515,12 @@ _Conditionally render a block if the collection is empty._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = []
 ```
 Template:
-``` html
+
+```html
 {{#empty collection}}
     Good news everyone!
 {{else}}
@@ -1460,11 +1537,12 @@ _Conditionally render a block if the collection isn't empty. Opposite of `empty`
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = ['Professor Farnsworth']
 ```
 Template:s
-``` html
+
+```html
 {{#any collection}}
   Good news everyone!
 {{else}}
@@ -1482,11 +1560,12 @@ _Conditionally render a block if a specified value is in the collection._
 <br>Parameters: value `string|int` - A value to test against. (Required)
 
 Data:
-``` js
+```js
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
 Template:s
-``` html
+
+```html
 {{#inArray collection "Fry"}}
   I'm walking on sunshine!
 {{else}}
@@ -1504,11 +1583,12 @@ _Current implementation of the default Handlebars loop helper {{#each}} adding i
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 collection = ['Professor Farnsworth', 'Fry', 'Bender']
 ```
 Template:s
-``` html
+
+```html
 {{#eachIndex collection}}
   {{this}} is {{index}}
 {{/eachIndex}}
@@ -1524,11 +1604,12 @@ _Loop through an objects properties_
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 TODO...
 ```
 Template:s
-``` html
+
+```html
 {{#eachProperty object}}
     {{property}}: {{value}}<br/>
 {{/eachProperty }}
@@ -1546,11 +1627,12 @@ _Returns the sum of two numbers._
 <br>Parameters: value `int` - The number to add to the expression. (Required)
 
 Data:
-``` js
+```js
 value = 5
 ```
 Template:
-``` html
+
+```html
 {{add value 5}}
 ```
 Renders to:
@@ -1563,11 +1645,12 @@ _Returns the difference of two numbers. Opposite of `add`_
 <br>Parameters: value `int` - The number to subtract from the expression. (Required)_
 
 Data:
-``` js
+```js
 value = 5
 ```
 Template:
-``` html
+
+```html
 {{subtract value 5}}
 ```
 Renders to:
@@ -1580,11 +1663,12 @@ _Returns the division of two numbers._
 <br>Parameters: value `int` - The number to divide the expression. (Required)
 
 Data:
-``` js
+```js
 value = 5
 ```
 Template:
-``` html
+
+```html
 {{divide value 5}}
 ```
 Renders to:
@@ -1597,12 +1681,13 @@ _Returns the multiplication of two numbers._
 <br>Parameters: value `int` - The number to multiply the expression. (Required)
 
 Data:
-``` js
+```js
 value = 5
 
 ```
 Template:
-``` html
+
+```html
 {{multiply value 5}}
 ```
 Renders to:
@@ -1615,11 +1700,12 @@ _Returns the value rounded down to the nearest integer._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 value = 5.6
 ```
 Template:
-``` html
+
+```html
 {{floor value}}
 ```
 Renders to:
@@ -1632,11 +1718,12 @@ _Returns the value rounded up to the nearest integer._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 value = 5.6
 ```
 Template:
-``` html
+
+```html
 {{ceil value}}
 ```
 Renders to:
@@ -1649,11 +1736,12 @@ _Returns the value rounded to the nearest integer._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 value = 5.69
 ```
 Template:
-``` html
+
+```html
 {{round value}}
 ```
 Renders to:
@@ -1666,7 +1754,7 @@ _Returns the sum of multiple numbers. Similar to `{{#add}}` block helper but acc
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 value = {
   a: 1,
   b: 2,
@@ -1674,7 +1762,8 @@ value = {
 }
 ```
 Template:
-``` html
+
+```html
 {{sum value.a value.b value.c}}
 ```
 Renders to:
@@ -1690,12 +1779,13 @@ _Returns exactly `digits` after the decimal place. The number is rounded if nece
 Parameters: digits `int` - The number of digits to appear after the decimal point. (Optional)
 
 Data:
-``` js
+```js
 value = 5.53231
 ```
 
 Template:
-``` html
+
+```html
 {{toFixed value 3}}
 ```
 
@@ -1710,12 +1800,13 @@ _Returns the number in fixed-point or exponential notation rounded to `precision
 Parameters: precision `int` - The number of digits. If omitted, it returns the entire number (without any formatting). (Optional)
 
 Data:
-``` js
+```js
 value = 555.322
 ```
 
 Template:
-``` html
+
+```html
 {{toPrecision value 4}}
 ```
 
@@ -1730,12 +1821,13 @@ _Returns the number in exponential notation with one digit before the decimal po
 Parameters: fractions `int` - An integer specifying the number of digits after the decimal point. (Optional)
 
 Data:
-``` js
+```js
 value = 5
 ```
 
 Template:
-``` html
+
+```html
 {{toExponential value 5}}
 ```
 
@@ -1750,12 +1842,13 @@ _Returns an integer._
 Parameters: `none`
 
 Data:
-``` js
+```js
 value = '22.2abc'
 ```
 
 Template:
-``` html
+
+```html
 {{toInt value}}
 ```
 
@@ -1770,12 +1863,13 @@ _Returns a floating point number._
 Parameters: `none`
 
 Data:
-``` js
+```js
 value = '22.2abc'
 ```
 
 Template:
-``` html
+
+```html
 {{toFloat value}}
 ```
 
@@ -1792,12 +1886,13 @@ Parameters: digits `int` - The number of digits to appear after the decimal poin
 Default: `2`
 
 Data:
-``` js
+```js
 value = 123456789
 ```
 
 Template:
-``` html
+
+```html
 {{toAbbr value}}
 ```
 
@@ -1812,12 +1907,13 @@ _Adds commas to a number._
 Parameters: `none`
 
 Data:
-``` js
+```js
 value = 2222222
 ```
 
 Template:
-``` html
+
+```html
 {{addCommas value}}
 ```
 
@@ -1837,14 +1933,15 @@ Default: `undefined`
 Example #1:
 
 Data:
-``` js
+```js
 ---
 number = 5
 ---
 ```
 
 Template:
-``` html
+
+```html
 {{#is number 5}}
     Kiss my shiny metal ass!
 {{else}}
@@ -1862,7 +1959,7 @@ Example #2:
 If you are using [Assemble](https://github.com/assemble/assemble), data from _YAML front matter_ or any specified `JSON` and/or `YAML` source files will get passed through to the context in your templates.
 
 Data and Templates:
-``` yaml
+```yaml
 ---
 page:
   title: About Us
@@ -1885,7 +1982,8 @@ Renders to:
 _Conditionally render a block if the condition is true (If x = y)._
 
 Parameters: `none`
-``` handlebars
+
+```html
 {{#if_eq x compare=y}} ... {{/if_eq}}
 ```
 
@@ -1894,12 +1992,13 @@ _Conditionally render a block if the condition is false. Opposite of `is`._
 <br>Parameters: value `string|int` - the value to test against.
 
 Data:
-``` js
+```js
 number = 5
 ```
 
 Template:
-``` html
+
+```html
 {{#isnt number 5}}
     Kiss my shiny metal ass!
 {{else}}
@@ -1918,13 +2017,14 @@ _Conditionally render a block if one of the values is truthy._
 Parameters: values `string|int` - the values to test against.
 
 Data:
-``` js
+```js
 great = no
 magnificent = true
 ```
 
 Template:
-``` html
+
+```html
 {{#or great magnificent}}
     Kiss my shiny metal ass!
 {{else}}
@@ -1943,13 +2043,14 @@ _Conditionally render a block if both values are truthy._
 Parameters: values `string|int` - the values to test against.
 
 Data:
-``` js
+```js
 great = true
 magnificent = true
 ```
 
 Template:
-``` html
+
+```html
 {{#and great magnificent}}
     Kiss my shiny metal ass!
 {{else}}
@@ -1967,7 +2068,8 @@ Kiss my shiny metal ass!
 _Conditionally render a block if the condition is false (Unless x = y). Opposite of `is`._
 
 Parameters: `none`
-``` handlebars
+
+```html
 {{#unless_eq x compare=y}} ... {{/unless_eq}}
 ```
 
@@ -1977,7 +2079,8 @@ Parameters: `none`
 #### {{if_gt}}
 _Conditionally render a block if the value is greater than a given number (If x > y)._
 Parameters: `none`
-``` handlebars
+
+```html
 {{#if_gt x compare=y}} ... {{/if_gt}}
 ```
 
@@ -1987,12 +2090,13 @@ _Conditionally render a block if the value is greater than a given number (If x 
 <br>Parameters: value `string|int` - the value to test against.
 
 Data:
-``` js
+```js
 number = 5
 ```
 
 Template:
-``` html
+
+```html
 {{#gt number 8}}
     Kiss my shiny metal ass!
 {{else}}
@@ -2008,14 +2112,16 @@ Never mind :(
 #### {{unless_gt}}
 _Unless greater than (Unless x > y)_
 Parameters: `none`
-``` handlebars
+
+```html
 {{#unless_gt x compare=y}} ... {{/unless_gt}}
 ```
 
 #### {{if_gteq}}
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 Parameters: `none`
-``` handlebars
+
+```html
 {{#if_gteq x compare=y}} ... {{/if_gteq}}
 ```
 
@@ -2024,12 +2130,13 @@ Parameters: `none`
 _Conditionally render a block if the value is greater or equal than a given number (If x >= y)._
 <br>Parameters: value `string|int` - the value to test against.
 
-``` js
+```js
 number = 5
 ```
 
 Template:
-``` html
+
+```html
 {{#gte number 5}}
     Kiss my shiny metal ass!
 {{else}}
@@ -2047,7 +2154,8 @@ Kiss my shiny metal ass!
 _"Unless x >= y". Render block, unless given value is greater than or equal to._
 Parameters: `none`
 
-``` handlebars
+
+```html
 {{#unless_gteq x compare=y}} ... {{/unless_gteq}}
 ```
 
@@ -2056,10 +2164,11 @@ Parameters: `none`
 #### {{lt}}
 _Conditionally render a block if the value is less than a given number. Opposite of `gt`._
 <br>Parameters: value `string|int` - the value to test against.
-``` js
+```js
 number = 5
 ```
-``` html
+
+```html
 {{#lt number 3}}
     Kiss my shiny metal ass!
 {{else}}
@@ -2075,10 +2184,11 @@ Never mind :(
 #### {{lte}}
 _Conditionally render a block if the value is less or equal than a given number. Opposite of `gte`._
 <br>Parameters: value `string|int` - the value to test against.
-``` js
+```js
 number = 5
 ```
-``` html
+
+```html
 // Template
 {{#lte number 5}}
     Kiss my shiny metal ass!
@@ -2096,7 +2206,8 @@ Kiss my shiny metal ass!
 _Render block, unless value is less than a given number (Unless x < y)_.
 
 Parameters: `none`
-``` handlebars
+
+```html
 {{#unless_lt x compare=y}} ... {{/unless_lt}}
 ```
 
@@ -2104,7 +2215,8 @@ Parameters: `none`
 _Render block, unless value is less than or equal to a given number (Unless x <= y)_.
 
 Parameters: `none`
-``` handlebars
+
+```html
 {{#unless_lteq x compare=y}} ... {{/unless_lteq}}
 ```
 
@@ -2117,11 +2229,12 @@ _Formats a date into a string given a format. Accepts any value that can be pass
 The format string, according to these tokens: [strftime](http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime)
 
 Given this data:
-``` js
+```js
 date = new Date()
 ```
 And these templates:
-``` handlebars
+
+```html
 {{formatDate date "%m/%d/%Y"}}
 {{formatDate date "%I:%M%p"}}
 {{formatDate date "%F"}}
@@ -2140,7 +2253,8 @@ _Returns the current date._
 <br>Parameters: format `string` - The format string, according to these tokens: [http://www.ruby-doc.org/core-1.9.3/Time.html#method-i-strftime]() (Optional)
 
 Template:
-``` handlebars
+
+```html
 {{now}}
 {{now "%m/%d/%Y"}}
 ```
@@ -2155,11 +2269,12 @@ _Returns a human-readable time phrase from the given date._
 <br>Parameters: `none`
 
 Data:
-``` js
+```js
 date = 'Thu Jul 22 2012 23:41:02 GMT-0400 (AST)'
 ```
 Template:
-``` handlebars
+
+```html
 {{timeago date}}
 ```
 Renders to:
@@ -2179,12 +2294,13 @@ Parameters:
 * include `boolean` - whether or not to include the count before the word. (Optional)
 
 Data:
-``` js
+```js
 enemies = 0
 friends = 1
 ```
 Template:
-``` html
+
+```html
 {{inflect enemies "enemy" "enemies"}}
 {{inflect friends "friend" "friends" true}}
 ```
@@ -2200,7 +2316,8 @@ _Turns a number into an ordinal string. Taken from the templating library [Walru
 Parameters: `none`
 
 Template:
-``` html
+
+```html
 {{ordinalize 3}}
 {{ordinalize 1}}
 {{ordinalize 22}}
@@ -2219,13 +2336,14 @@ _Simple `console.log()`_
 
 Parameters: `none`
 
-``` html
+
+```html
 // Template
 {{log "Hi console :)"}}
 ```
 
 Renders to:
-``` bash
+```bash
 Hi console :)
 ```
 
@@ -2235,7 +2353,7 @@ _Simple `console.debug()` that shows the current context._
 Parameters: `none`
 
 Data:
-``` js
+```js
 collection = [
   name: 'Leela'
   deliveries: 8021,
@@ -2247,14 +2365,15 @@ collection = [
 ```
 
 Template:
-``` html
+
+```html
 {{#withFirst collection}}
    {{debug name}}
 {{/withFirst}}
 ```
 
 Renders to:
-``` json
+```json
 Context: { deliveries: 8021, name: "Leela" }
 Value: Leela
 ```
@@ -2266,12 +2385,13 @@ Parameters: `String`
 Default: `undefined`
 
 Template:
-``` html
+
+```html
 {{expandJSON './src/**/*.md'}}
 ```
 
 Renders to:
-``` json
+```json
 [
   "./src/content/blockquotes.md",
   "./src/content/chapters/01-getting-started.md",
@@ -2301,12 +2421,13 @@ Parameters: `String`
  Default: `undefined`
 
 Template:
-``` html
+
+```html
 {{expandYAML './src/**/*.md'}}
 ```
 
 Renders to:
-``` yaml
+```yaml
 - "./src/content/blockquotes.md"
 - "./src/content/chapters/01-getting-started.md"
 - "./src/content/chapters/02-language-features.md"
@@ -2334,7 +2455,8 @@ _Provides a default or fallback value if a value doesn't exist._
 <br>Parameters: defaultValue `string|int` - The default value to use. `title = ''`
 
 Template:
-``` html
+
+```html
 {{default title "No title available."}}
 ```
 Renders to:
