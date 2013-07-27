@@ -6,31 +6,32 @@ util  = require 'util'
 to    = require 'to'
 
 
+module.exports =
 
-# Debug
-module.exports.debug = debug = (value) ->
-  console.log 'Context: ', @
-  console.log('Value: ', value) unless Utils.isUndefined value
-  console.log '-----------------------------------------------'
+  # Debug
+  debug: debug = (value) ->
+    console.log 'Context: ', @
+    console.log('Value: ', value) unless Utils.isUndefined value
+    console.log '-----------------------------------------------'
 
-module.exports.expandJSON = expandJSON = (src) ->
-  list = grunt.file.expand(src)
-  json = JSON.stringify(list, null, 2)
-  Utils.safeString(json)
+  expandJSON: expandJSON = (src) ->
+    list = grunt.file.expand(src)
+    json = JSON.stringify(list, null, 2)
+    Utils.safeString(json)
 
-module.exports.expandMapping = expandMapping = (src) ->
-  list = Utils.expandMapping(src)
-  yml = to.format.yaml.stringify(list)
-  Utils.safeString(yml)
+  expandMapping: expandMapping = (src) ->
+    list = Utils.expandMapping(src)
+    yml = to.format.yaml.stringify(list)
+    Utils.safeString(yml)
 
-module.exports.expandYAML = expandYAML = (src) ->
-  list = grunt.file.expand(src)
-  yml = to.format.yaml.stringify(list)
-  Utils.safeString(yml)
+  expandYAML: expandYAML = (src) ->
+    list = grunt.file.expand(src)
+    yml = to.format.yaml.stringify(list)
+    Utils.safeString(yml)
 
-# Log
-module.exports.log = log = (value) ->
-  console.log value
+  # Log
+  log: log = (value) ->
+    console.log value
 
 
 module.exports.register = (Handlebars, options) ->

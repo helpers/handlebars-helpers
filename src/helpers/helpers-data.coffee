@@ -8,6 +8,7 @@ pkg = grunt.file.readJSON('package.json')
 
 # Value: extracts a value from a specific property
 module.exports =
+
   value: value = (file, prop) ->
     file = Utils.readJSON(file)
     prop = _.pick(file, prop)

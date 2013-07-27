@@ -15,10 +15,10 @@ module.exports.register = (Handlebars, options) ->
     tables: true
     breaks: false
     pedantic: false
-    sanitize: true
+    sanitize: false
     silent: false
     smartLists: true
-    langPrefix: "lang-"
+    langPrefix: "language-"
     highlight: (code, lang) ->
       res = undefined
       return code  unless lang

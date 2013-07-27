@@ -2,35 +2,37 @@
 
 _     = require 'lodash'
 
-module.exports.add = add = (value, addition) ->
-  value + addition
+module.exports =
 
-module.exports.subtract = subtract = (value, substraction) ->
-  value - substraction
+  add: add = (value, addition) ->
+    value + addition
 
-module.exports.divide = divide = (value, divisor) ->
-  value / divisor
+  subtract: subtract = (value, substraction) ->
+    value - substraction
 
-module.exports.multiply = multiply = (value, multiplier) ->
-  value * multiplier
+  divide: divide = (value, divisor) ->
+    value / divisor
 
-module.exports.floor = floor = (value) ->
-  Math.floor value
+  multiply: multiply = (value, multiplier) ->
+    value * multiplier
 
-module.exports.ceil = ceil = (value) ->
-  Math.ceil value
+  floor: floor = (value) ->
+    Math.floor value
 
-module.exports.round = round = (value) ->
-  Math.round value
+  ceil: ceil = (value) ->
+    Math.ceil value
 
-module.exports.sum = sum = () ->
-  args = _.flatten(arguments)
-  sum = 0
-  i = args.length - 1
-  while i--
-    if "number" is typeof args[i]
-      sum += args[i]
-  sum
+  round: round = (value) ->
+    Math.round value
+
+  sum: sum = () ->
+    args = _.flatten(arguments)
+    sum = 0
+    i = args.length - 1
+    while i--
+      if "number" is typeof args[i]
+        sum += args[i]
+    sum
 
 
 module.exports.register = (Handlebars, options) ->
