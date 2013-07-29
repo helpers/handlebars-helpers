@@ -1,4 +1,4 @@
-# [handlebars-helpers v0.3.0](http://github.com/assemble/handlebars-helpers) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
+# [handlebars-helpers v0.3.0](http://assemble.io/docs/helpers/index.html) [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
 > Extensive collection of Handlebars helpers.
 
