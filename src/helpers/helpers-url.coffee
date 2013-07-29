@@ -23,13 +23,13 @@ module.exports =
 
   # Take a base URL, and a href URL, and resolve them as a
   # browser would for an anchor tag.
-  url_resolve: url_resolve = (base, href) ->
+  urlresolve: urlresolve = (base, href) ->
     url.resolve(base, href)
 
   # Take a URL string, and return an object.
   # Pass true as the second argument to also parse the query
   # string using the querystring module. Defaults to false.
-  url_parse: url_parse = (uri, type, query) ->
+  urlparse: urlparse = (uri, type, query) ->
     uri = url.parse(uri)
     result = Utils.stringifyObj(uri, type, query)
     Utils.safeString(result)
@@ -37,8 +37,8 @@ module.exports =
 
 module.exports.register = (Handlebars, options) ->
 
-  Handlebars.registerHelper "url_parse", url_parse
-  Handlebars.registerHelper "url_resolve", url_resolve
+  Handlebars.registerHelper "urlparse", urlparse
+  Handlebars.registerHelper "urlresolve", urlresolve
   Handlebars.registerHelper "stripQuerystring", stripQuerystring
   Handlebars.registerHelper "encodeURI", _encodeURI
   Handlebars.registerHelper "decodeURI", _decodeURI
