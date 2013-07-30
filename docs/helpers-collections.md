@@ -313,6 +313,35 @@ Bender: 239
 Leela: 8021
 ```
 
+Also, if you have the sortable variable inside another variable, you can use the ```.```-notation to sort by them like this:
+Data:
+``` js
+collection = [
+  name: 'Leela'
+  deliveries: { value:8021, priority:'high' },
+
+  name: 'Bender'
+  deliveries: { value:239, priority:'normal' },
+
+  name: 'Fry'
+  deliveries: { value:-12, priority:'low'}
+]
+
+```
+Template:
+``` html
+{{#withSort collection "deliveries.value"}}
+  {{name}}: {{deliveries.value}} <br>
+{{/withSort}}
+```
+
+Renders to:
+```
+Fry: -12
+Bender: 239
+Leela: 8021
+```
+
 #### {{length}}
 _Returns the length of the collection._
 <br>Parameters: `none`
