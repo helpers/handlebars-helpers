@@ -113,6 +113,10 @@ module.exports =
       array.sort (a, b) -> a[field] > b[field]
 
   withSort: withSort = (array, field, options) ->
+    getDescendantProp = (obj, desc) ->
+      arr = desc.split(".")
+      continue  while arr.length and (obj = obj[arr.shift()])
+      obj
     result = ''
     if Utils.isUndefined field
       options = field
@@ -120,9 +124,11 @@ module.exports =
       result += options.fn(item) for item in array
     else
       array = array.sort (a, b) ->
-        if a[field] > b[field]
+        aProp = getDescendantProp(a, field)
+        bProp = getDescendantProp(b, field)
+        if aProp > bProp
           return 1
-        else return -1  if a[field] < b[field]
+        else return -1  if aProp < bProp
         0
       result += options.fn(array[item]) for item of array
     result
