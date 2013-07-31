@@ -2,7 +2,7 @@
 
 > Extensive collection of Handlebars helpers.
 
-### [Visit the live docs →]([assemble](http://assemble.io/docs/helpers/index.html)
+### [Visit the live docs →](http://assemble.io/docs/helpers/index.html)
 
 ## Getting Started
 
