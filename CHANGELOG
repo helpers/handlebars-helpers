@@ -1,3 +1,7 @@
+v0.3.0:
+  date: "2013-07-30"
+  changes:
+    - The project has been refactored, cleaned up, and full documentataion has bee put up at http://assemble.io
 v0.2.4:
   date: "2013-05-11"
   changes:

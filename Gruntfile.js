@@ -78,6 +78,7 @@ module.exports = function(grunt) {
   });
 
   // These plugins provide necessary tasks.
+  grunt.loadNpmTasks('assemble-internal');
   grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-coffee');
@@ -88,5 +89,6 @@ module.exports = function(grunt) {
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', ['clean', 'coffee']);
   grunt.registerTask('test',    ['default', 'mochaTest']);
+  grunt.registerTask('docs',    ['assemble-internal']);
 };
 

@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "Extensive collection of Handlebars helpers.",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "assemble",
@@ -9,12 +9,12 @@
   },
   "contributors": [
     {
-      "name": "Brian Woodward",
-      "url": "https://github.com/doowb"
-    },
-    {
       "name": "Jon Schlinkert",
       "url": "https://github.com/jonschlinkert"
+    },
+    {
+      "name": "Brian Woodward",
+      "url": "https://github.com/doowb"
     }
   ],
   "repository": {
@@ -48,6 +48,7 @@
     "to": "~0.2.9"
   },
   "devDependencies": {
+    "assemble-internal": "0.2.0",
     "amdefine": "0.0.4",
     "chai": "~1.5.0",
     "coffee-script": "~1.6.2",
