@@ -1,10 +1,12 @@
+### [Visit the docs →]([assemble](http://assemble.io/docs/helpers/index.html)
+
 Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
-* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).  
-* Each parameter is a Handlebars expression. 
+* A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).
+* Each parameter is a Handlebars expression.
 * Handlebars helpers can be accessed from any context in a template.
 
-[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://github.com/assemble/assemble).
+[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://assemble.io/).
 
 
 #### Special features
@@ -12,7 +14,7 @@ Handlebars.js ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` a
 Some helpers feature the following enhancements, which are unique to this project:
 
 * File globbing
-* Access to [assemble](https://github.com/assemble/assemble) options.
+* Access to [assemble](http://assemble.io/docs/Options.html) options.
 * Some helpers will render either markdown or HTML based on the file extension of the generated file.
 
 
@@ -20,7 +22,7 @@ Some helpers feature the following enhancements, which are unique to this projec
 
 > Contributions welcome! Please consider adding your own helpers to this library.
 
-Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards. 
+Handlebars accels over other templating libraries when it comes to creating your own custom helpers. Just register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
 
 Handlebars allows two different kinds of helpers:
 
