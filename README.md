@@ -10,6 +10,13 @@
 npm install handlebars-helpers --save
 ```
 
+## Big thanks!
+
+> Many of these helpers come from the following projects
+
+* [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
+* [Swag v0.2.1, by Elving Rodriguez](http://elving.github.com/swag/)
+
 
 ## Release History
 
@@ -33,6 +40,6 @@ npm install handlebars-helpers --save
 
 ***
 
-Project authored by [Jon Schlinkert](http://github.com/jonschlinkert).
+Project authored by [Jon Schlinkert](http://github.com/jonschlinkert) and [Brian Woodward](http://github.com/doowb).
 
 _This file was generated on Tue Jul 30 2013 20:24:12._
