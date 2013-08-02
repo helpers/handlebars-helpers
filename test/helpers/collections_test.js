@@ -323,7 +323,7 @@
     return describe('{{#eachIndexPlusOne collection}} \n\
     {{item}} is {{index}} \n\
   {{/eachIndexPlusOne}}', function() {
-      return it('should render the block using the array and each item\'s 1-based index.', function() {
+      return it('should render the block using the array and each item\'s index + 1.', function() {
         var source, template;
         source = '{{#eachIndexPlusOne collection}} {{item}} is {{index}} {{/eachIndexPlusOne}}';
         template = Handlebars.compile(source);
