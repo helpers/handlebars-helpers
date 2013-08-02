@@ -319,6 +319,19 @@
     });
   });
 
+  describe('eachIndexPlusOne', function() {
+    return describe('{{#eachIndexPlusOne collection}} \n\
+    {{item}} is {{index}} \n\
+  {{/eachIndexPlusOne}}', function() {
+      return it('should render the block using the array and each item\'s 1-based index.', function() {
+        var source, template;
+        source = '{{#eachIndexPlusOne collection}} {{item}} is {{index}} {{/eachIndexPlusOne}}';
+        template = Handlebars.compile(source);
+        return template(context).should.equal(' Amy Wong is 1  Bender is 2  Dr. Zoidberg is 3  Fry is 4  Hermes Conrad is 5  Leela is 6  Professor Farnsworth is 7  Scruffy is 8 ');
+      });
+    });
+  });
+
   describe('each', function() {
     return describe('{{#each collection}} {{@key}}: {{this}} {{/each}}', function() {
       return it('should use the key and value of each property in an object inside a block.', function() {

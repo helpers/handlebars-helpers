@@ -260,6 +260,16 @@ describe 'eachIndex', ->
 
       template(context).should.equal ' Amy Wong is 0  Bender is 1  Dr. Zoidberg is 2  Fry is 3  Hermes Conrad is 4  Leela is 5  Professor Farnsworth is 6  Scruffy is 7 '
 
+describe 'eachIndexPlusOne', ->
+  describe '{{#eachIndexPlusOne collection}} \n
+    {{item}} is {{index}} \n
+  {{/eachIndexPlusOne}}', ->
+    it 'should render the block using the array and each item\'s index.', ->
+      source = '{{#eachIndexPlusOne collection}} {{item}} is {{index}} {{/eachIndexPlusOne}}'
+      template = Handlebars.compile(source)
+
+      template(context).should.equal ' Amy Wong is 1  Bender is 2  Dr. Zoidberg is 3  Fry is 4  Hermes Conrad is 5  Leela is 6  Professor Farnsworth is 7  Scruffy is 8 '
+
 describe 'each', ->
   describe '{{#each collection}} {{@key}}: {{this}} {{/each}}', ->
       it 'should use the key and value of each property in an object inside a block.', ->
