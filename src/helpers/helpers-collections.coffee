@@ -264,6 +264,16 @@ module.exports =
       result += options.fn item: value, index: index
     result
 
+  # eachIndexPlusOne
+  #  {{#eachIndexPlusOne collection}}
+  #    {{item}} is {{index}}
+  #  {{/eachIndexPlusOne}}
+  eachIndexPlusOne: eachIndexPlusOne = (array, options) ->
+    result = ''
+    for value, index in array
+      result += options.fn item: value, index: index+1
+    result
+
   # Arrayify: data gets passed in from *.yml as a string,
   # like "foo, bar, baz" we need to convert this to an ES
   # Array of strings to avoid reference errors. Credit:
@@ -281,6 +291,7 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'before', before
   Handlebars.registerHelper 'eachWithClasses', eachWithClasses
   Handlebars.registerHelper 'eachIndex', eachIndex
+  Handlebars.registerHelper 'eachIndexPlusOne', eachIndexPlusOne
   Handlebars.registerHelper 'empty', empty
   Handlebars.registerHelper 'first', first
   Handlebars.registerHelper 'forEach', forEach
