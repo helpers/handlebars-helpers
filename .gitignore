@@ -1,5 +1,7 @@
 node_modules
 *.sublime-*
+_gh_pages
+_gh-pages
 
 tmp
 vendor

@@ -5,7 +5,7 @@ path      = require 'path'
 grunt     = require "grunt"
 _         = require "lodash"
 minimatch = require "minimatch"
-to        = require "to" 
+to        = require "to"
 
 Utils          = module.exports = {}
 Utils.toString = Object.prototype.toString
@@ -51,7 +51,7 @@ Utils.detectType = (value) ->
 
 toString = (val) ->
   (if not val? then "" else val.toString())
-  
+
 Utils.lowerCase = (str) ->
   str = toString(str)
   str.toLowerCase()
@@ -74,8 +74,8 @@ Utils.escapeString = (str, except) -> #String
 
 Utils.escapeExpression = (str) ->
   str = Handlebars.Utils.escapeExpression(str)
-  return str 
-  
+  return str
+
 Utils.stringifyYAML = (src) ->
   YAML = to.format.yaml
   stringifyFile = YAML.stringify(src)
@@ -91,7 +91,7 @@ Utils.stringifyObj = (src, type) ->
   output
 
 
-### 
+###
 # Object Utils
 ###
 
@@ -210,12 +210,19 @@ Utils.repoUrl = (str) ->
   url = pkg.repository.url
   str = url.replace(/.*:\/\/github.com\/(.*?)(?:\.git|$)/, str)
 
+
 # Detect and return the indentation.
 # @param  {String} string
 # @return {Mixed} Indentation used, or undefined.
-Utils.detectIndentation = (string) ->
-  tabs = string.match(/^[\t]+/g) or []
-  spaces = string.match(/^[ ]+/g) or []
+
+###*
+ * Detect and return the indentation of a string.
+ * @param   {String} str [description]
+ * @returns {[type]}     [description]
+###
+Utils.detectIndentation = (str) ->
+  tabs = str.match(/^[\t]+/g) or []
+  spaces = str.match(/^[ ]+/g) or []
 
   # Pick the smallest indentation level of a prevalent type
   prevalent = (if tabs.length >= spaces.length then tabs else spaces)

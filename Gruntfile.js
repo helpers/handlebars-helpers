@@ -9,31 +9,29 @@
 
 module.exports = function(grunt) {
 
-'use strict';
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+
     // Configuration to be run (and then tested).
     coffee: {
-      helpers: {
-        expand: true,
-        cwd: 'src',
-        src: [
-          'helper-lib.coffee',
-          'helpers/*.coffee',
-          'utils/*.coffee'
-        ],
-        dest: 'lib/',
-        ext: '.js'
-      },
       tests: {
-        expand: true,
-        cwd: 'src/tests',
-        src: ['**/*.coffee'],
-        dest: 'test/',
-        ext: '.js'
+        files: [{
+          expand: true,
+          cwd: 'src',
+          src: ['helper-lib.coffee', 'helpers/*.coffee', 'utils/*.coffee'],
+          dest: 'lib/',
+          ext: '.js'
+        }, {
+          expand: true,
+          cwd: 'src/tests',
+          src: ['**/*.coffee'],
+          dest: 'test/',
+          ext: '.js'
+        }]
       }
     },
 
@@ -51,9 +49,11 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      helpers: ['lib/helpers/*.js'],
-      utils:   ['lib/utils/*.js'],
-      lib:     ['lib/**/*.js']
+      helpers: [
+          'lib/helpers/*.js',
+          'lib/utils/*.js',
+          'lib/**/*.js'
+      ]
     },
 
     coffeelint: {
@@ -70,25 +70,19 @@ module.exports = function(grunt) {
       }
     },
 
+
     // Clean test files before building or re-testing.
     clean: {
-      helpers: ['<%= coffee.helpers.dest %>/**/*.js'],
-      tests:  ['examples/result/**/*.{html,md}']
+      helpers: ['lib/**/*']
     }
   });
 
-  // These plugins provide necessary tasks.
+  // Load plugins to provide the necessary tasks
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.loadNpmTasks('assemble-internal');
-  grunt.loadNpmTasks('grunt-coffeelint');
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-mocha-test');
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', ['clean', 'coffee']);
   grunt.registerTask('test',    ['default', 'mochaTest']);
   grunt.registerTask('docs',    ['assemble-internal']);
 };
-
