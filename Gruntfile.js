@@ -1,6 +1,6 @@
 /*
- * helper-lib
- * http://github.com/assemble/helper-lib
+ * handlebars-helpers
+ * http://github.com/assemble/handlebars-helpers
  *
  * Copyright (c) 2013 Assemble
  * MIT License

@@ -1,6 +1,6 @@
 {
   "name": "helpers",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "./lib/helper-lib.js",
   "dependencies": {
     "handlebars": "1.0.10",
