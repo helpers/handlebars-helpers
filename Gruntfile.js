@@ -47,17 +47,17 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: 'test/.jshintrc'
       },
       helpers: [
-          'lib/helpers/*.js',
-          'lib/utils/*.js',
-          'lib/**/*.js'
+        'lib/helpers/*.js',
+        'lib/utils/*.js',
+        'lib/**/*.js'
       ]
     },
 
     coffeelint: {
-      options: grunt.file.readJSON('.coffeerc'),
+      options: grunt.file.readJSON('src/.coffeerc'),
       helpers: {
         files: {
           src: ['src/helpers/**/*.coffee']
