@@ -218,41 +218,17 @@ module.exports =
     # return the finished buffer
     buffer
 
-
-  # adds an a bunch of item prefixed logic to the object
-  # Credit: https://gist.github.com/icodeforlove/1429324
-  #
-  #   {{#eachWithClasses records prefix="record"}}
-  #     <li class="record_{{itemIndex}} {{itemPosition}} {{itemAlt}}">
-  #       {{itemIndex}}
-  #      </li>
-  #   {{/eachWithClasses}}
-  #
-  # Result:
-  #     <li class="record_0 record_first">0</li>
-  #     <li class="record_1 record_alt">1</li>
-  #     <li class="record_2">2</li>
-  #     <li class="record_3 record_last record_alt">3</li>
-  eachWithClasses: eachWithClasses = (array, fn) ->
-    buffer = ""
-    i = 0
-    j = array.length
-    while i < j
-      item = array[i]
-      # position related information
-      item.itemPosition = ""
-      item.itemPosition = " " + fn.hash.prefix + "-first"  if i is 0
-      item.itemPosition += " " + fn.hash.prefix + "-last"  if i is (array.length - 1)
-      # add alt if needed
-      item.itemAlt = (if i % 2 then fn.hash.prefix + "-alt" else "")
-      # stick an index property onto the item, starting with 1,
-      # may make configurable later
-      item.itemIndex = i
-      # show the inside of the block
-      buffer += fn(item)
-      i++
-    # return the finished buffer
-    buffer
+  ###
+   * {{eachProperty}}
+   * Handlebars block helper to enumerate properties in an object
+   * @param  {[type]} context [description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+  ###
+  eachProperty: eachProperty = (context, options) ->
+    content = for key, value of context
+      options.fn({key: key, value: value})
+    content.join("")
 
   # eachIndex
   #  {{#eachIndex collection}}
@@ -271,7 +247,7 @@ module.exports =
   eachIndexPlusOne: eachIndexPlusOne = (array, options) ->
     result = ''
     for value, index in array
-      result += options.fn item: value, index: index+1
+      result += options.fn item: value, index: index + 1
     result
 
   # Arrayify: data gets passed in from *.yml as a string,
@@ -289,7 +265,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper 'any', any
   Handlebars.registerHelper 'arrayify', arrayify
   Handlebars.registerHelper 'before', before
-  Handlebars.registerHelper 'eachWithClasses', eachWithClasses
   Handlebars.registerHelper 'eachIndex', eachIndex
   Handlebars.registerHelper 'eachIndexPlusOne', eachIndexPlusOne
   Handlebars.registerHelper 'empty', empty
