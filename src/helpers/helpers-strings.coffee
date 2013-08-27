@@ -122,5 +122,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "titleize", titleize
   Handlebars.registerHelper "truncate", truncate
   Handlebars.registerHelper "uppercase", uppercase
+  Handlebars.registerHelper "startsWith", startsWith
 
   @
