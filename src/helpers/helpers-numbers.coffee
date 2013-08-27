@@ -66,7 +66,7 @@ module.exports =
       resValue = (bytes / Math.pow(1000, Math.floor(resInt))).toFixed(if resInt < 2 then 0 else 1) # no decimals for anything smaller than 1 MB 
       resInt = -1 if bytes is 1 # special case: 1 byte (singular)
       
-    return new Handlebars.SafeString( resValue+' '+metric[resInt+1] )
+    return Utils.safeString( resValue+' '+metric[resInt+1] )
 
 
 module.exports.register = (Handlebars, options) ->
