@@ -99,6 +99,10 @@ module.exports =
     if str.length > length then str.substring(0, length - omission.length) +
       omission else str
 
+  # Tests whether a testString has a certain prefix. Behaves sensibly if the testString is null.
+  startsWith: startsWith = (prefix,testString,options) ->
+    if testString?.indexOf(prefix) is 0 then options.fn(@) else options.inverse(@)
+
 
 module.exports.register = (Handlebars, options) ->
 
@@ -118,5 +122,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "titleize", titleize
   Handlebars.registerHelper "truncate", truncate
   Handlebars.registerHelper "uppercase", uppercase
+  Handlebars.registerHelper "startsWith", startsWith
 
   @
