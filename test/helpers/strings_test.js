@@ -136,4 +136,32 @@
     });
   });
 
+  describe("startsWith", function() {
+    describe('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}', function() {
+      return it("should render 'Yes he is', from inside the block.", function() {
+        var source, template;
+        source = '{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}';
+        template = Handlebars.compile(source);
+        return template().should.equal("Yes he is");
+      });
+    });
+    describe("{{#startsWith somePrefix badString}}\nSuccess\n{{else}}\nInverse\n{{/startsWith}}", function() {
+      return it("should render the Inverse block.", function() {
+        var source, template;
+        source = '{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}';
+        template = Handlebars.compile(source);
+        return template().should.equal("Bro, do you even hello world?");
+      });
+    });
+    return describe("{{#startsWith somePrefix nullProperty}}\nSuccess\n{{else}}\nInverse\n{{/startsWith}}", function() {
+      return it("should render the Inverse block.", function() {
+        var context, source, template;
+        source = '{{#startsWith "myPrefix" nullProperty}}fn block{{else}}inverse block{{/startsWith}}';
+        template = Handlebars.compile(source);
+        context = {};
+        return template(context).should.equal("inverse block");
+      });
+    });
+  });
+
 }).call(this);
