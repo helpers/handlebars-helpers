@@ -87,3 +87,23 @@ describe "dashify", ->
       source = '{{dashify "Bender.should.not.be.allowed.on.tv."}}'
       template = Handlebars.compile(source)
       template().should.equal "Bender-should-not-be-allowed-on-tv-"
+
+describe "startsWith", ->
+  describe '{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}', ->
+    it "should render 'Yes he is', from inside the block.", ->
+      source = '{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}'
+      template = Handlebars.compile(source)
+      template().should.equal "Yes he is"
+
+  describe "{{#startsWith somePrefix badString}}\nSuccess\n{{else}}\nInverse\n{{/startsWith}}", ->
+    it "should render the Inverse block.", ->
+      source = '{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}'
+      template = Handlebars.compile(source)
+      template().should.equal "Bro, do you even hello world?"
+
+  describe "{{#startsWith somePrefix nullProperty}}\nSuccess\n{{else}}\nInverse\n{{/startsWith}}", ->
+    it "should render the Inverse block.", ->
+      source = '{{#startsWith "myPrefix" nullProperty}}fn block{{else}}inverse block{{/startsWith}}'
+      template = Handlebars.compile(source)
+      context = {}
+      template(context).should.equal "inverse block"
