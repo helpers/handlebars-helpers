@@ -99,3 +99,28 @@ describe 'toAbbr', ->
       context  = value: 123456789
 
       template(context).should.equal '123.457m'
+  
+describe 'fileSize', ->
+  describe '{{fileSize bigValue}}', ->
+    it 'should add MB and display a decimal point (matches file size strings in Mac OS X)', ->
+      source   = '{{fileSize bigValue}}'
+      template = Handlebars.compile(source)
+      context  = bigValue: 13661855
+
+      template(context).should.equal '13.7 MB'
+
+  describe '{{fileSize mValue}}', ->
+    it 'should add KB and display only three digits (matches file size strings in Mac OS X)', ->
+      source   = '{{fileSize mValue}}'
+      template = Handlebars.compile(source)
+      context  = mValue: 825399
+
+      template(context).should.equal '825 KB'
+
+  describe '{{fileSize tinyValue}}', ->
+    it 'should add KB and display only one digit (matches file size strings in Mac OS X)', ->
+      source   = '{{fileSize tinyValue}}'
+      template = Handlebars.compile(source)
+      context  = tinyValue: 1396
+
+      template(context).should.equal '1 KB'
