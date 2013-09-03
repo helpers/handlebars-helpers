@@ -20,6 +20,8 @@ npm install handlebars-helpers --save
 
 ## Release History
 
+ * 2013-09-03   v0.3.3   Add fileSize helper. Add startsWith helper.
+ * 2013-08-20   v0.3.2   Add glob helper.
  * 2013-07-30   v0.3.0   The project has been refactored, cleaned up, and full documentataion has bee put up at http://assemble.io
  * 2013-05-11   v0.2.4   Adding object globbing utility functions to be used in helpers later.
  * 2013-05-11   v0.2.3   File globbing added to some helpers. Including md and some file helpers.
