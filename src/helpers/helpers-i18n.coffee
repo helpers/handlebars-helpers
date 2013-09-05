@@ -9,3 +9,4 @@ module.exports.register = (Handlebars, options) ->
     throw "No strings found for language '" + language + "'"  if typeof this[language] is "undefined"
     throw "No string for key '" + context + "' for language '" + language + "'"  if typeof this[language][context] is "undefined"
     this[language][context]
+  @
