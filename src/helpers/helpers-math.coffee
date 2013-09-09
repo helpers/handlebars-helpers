@@ -48,5 +48,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "ceil", ceil
   Handlebars.registerHelper "round", round
   Handlebars.registerHelper "sum", sum
+  Handlebars.registerHelper "random", random
 
   @
