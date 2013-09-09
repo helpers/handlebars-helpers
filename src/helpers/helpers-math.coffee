@@ -34,6 +34,9 @@ module.exports =
         sum += args[i]
     sum
 
+  random: random = (min, max) ->
+    (Math.random() * max) + min
+
 
 module.exports.register = (Handlebars, options) ->
 
@@ -45,5 +48,6 @@ module.exports.register = (Handlebars, options) ->
   Handlebars.registerHelper "ceil", ceil
   Handlebars.registerHelper "round", round
   Handlebars.registerHelper "sum", sum
+  Handlebars.registerHelper "random", random
 
   @
