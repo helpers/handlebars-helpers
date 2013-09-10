@@ -35,7 +35,7 @@ module.exports =
     sum
 
   random: random = (min, max) ->
-    (Math.random() * max) + min
+    _.random min, max
 
 
 module.exports.register = (Handlebars, options) ->
