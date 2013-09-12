@@ -1,44 +1,45 @@
-(function() {
-  var Handlebars, context;
+/**
+ * Tests: Code Helpers
+ * http://github.com/assemble/handlebars-helpers
+ * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
+ * Licensed under the MIT License (MIT).
+ */
 
-  require('should');
 
-  Handlebars = require('handlebars');
+require('should');
+var Handlebars = require('handlebars');
+require('../../lib/helpers/helpers-code').register(Handlebars, {});
 
-  require('../../lib/helpers/helpers-code').register(Handlebars, {});
+var context = {
+  AUTHORS: 'Brian Woodward (http://github.com/doowb)\nJon Schlinkert (http://github.com/jonschlinkert)'
+};
 
-  context = {
-    AUTHORS: 'Brian Woodward (http://github.com/doowb)\nJon Schlinkert (http://github.com/jonschlinkert)'
-  };
+// TODO: embed
 
-  describe('jsfiddle', function() {
-    describe('{{jsfiddle id}}', function() {
-      return it('should return a jsfiddle embed link, with default tabs assigned', function() {
-        var source, template;
-        source = '{{jsfiddle "UXbas"}}';
-        template = Handlebars.compile(source);
-        return template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
-      });
-    });
-    return describe('{{jsfiddle id tabs}}', function() {
-      return it('should return a jsfiddle embed link, with custom tabs assigned', function() {
-        var source, template;
-        source = '{{jsfiddle "UXbas" "html,css"}}';
-        template = Handlebars.compile(source);
-        return template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
-      });
+var source, template;
+describe('jsfiddle', function() {
+  describe('{{jsfiddle id}}', function() {
+    it('should return a jsfiddle embed link, with default tabs assigned', function() {
+      source = '{{jsfiddle "UXbas"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
   });
-
-  describe('gist', function() {
-    return describe('{{gist id}}', function() {
-      return it('should return a gist script tag', function() {
-        var source, template;
-        source = '{{gist "abcdefg"}}';
-        template = Handlebars.compile(source);
-        return template().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
-      });
+  describe('{{jsfiddle id tabs}}', function() {
+    it('should return a jsfiddle embed link, with custom tabs assigned', function() {
+      source = '{{jsfiddle "UXbas" "html,css"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
   });
+});
 
-}).call(this);
+describe('gist', function() {
+  describe('{{gist id}}', function() {
+    it('should return a gist script tag', function() {
+      source = '{{gist "abcdefg"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
+    });
+  });
+});

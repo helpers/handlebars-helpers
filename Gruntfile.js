@@ -15,24 +15,26 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-
-    // Configuration to be run (and then tested).
-    coffee: {
-      tests: {
-        files: [{
-          expand: true,
-          cwd: 'src',
-          src: ['helper-lib.coffee', 'helpers/*.coffee', 'utils/*.coffee'],
-          dest: 'lib/',
-          ext: '.js'
-        }, {
-          expand: true,
-          cwd: 'src/tests',
-          src: ['**/*.coffee'],
-          dest: 'test/',
-          ext: '.js'
-        }]
-      }
+    jshint: {
+      options: {
+        curly: true,
+        eqeqeq: true,
+        immed: true,
+        latedef: true,
+        newcap: true,
+        noarg: true,
+        sub: true,
+        undef: true,
+        boss: true,
+        eqnull: true,
+        node: true,
+        strict: false
+      },
+      all: [
+        'Gruntfile.js',
+        'test/**/*.js',
+        'lib/**/*.js'
+      ]
     },
 
     // Run mocha tests.
@@ -45,31 +47,10 @@ module.exports = function(grunt) {
       }
     },
 
-    jshint: {
-      options: {
-        jshintrc: 'test/.jshintrc'
-      },
-      helpers: [
-        'lib/helpers/*.js',
-        'lib/utils/*.js',
-        'lib/**/*.js'
-      ]
+    // Unit tests.
+    nodeunit: {
+      tests: ['test/*_test.js']
     },
-
-    coffeelint: {
-      options: grunt.file.readJSON('src/.coffeerc'),
-      helpers: {
-        files: {
-          src: ['src/helpers/**/*.coffee']
-        }
-      },
-      tests: {
-        files: {
-          src: ['src/tests/**/*.coffee']
-        }
-      }
-    },
-
 
     // Clean test files before building or re-testing.
     clean: {
@@ -81,8 +62,12 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.loadNpmTasks('assemble-internal');
 
-  // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['clean', 'coffee']);
-  grunt.registerTask('test',    ['default', 'mochaTest']);
+  // Generate readme.
   grunt.registerTask('docs',    ['assemble-internal']);
+
+  // Tests to be run
+  grunt.registerTask('test',    ['mochaTest']);
+
+  // By default, build templates using helpers and run all tests.
+  grunt.registerTask('default', ['jshint', 'test']);
 };

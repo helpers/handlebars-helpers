@@ -4,7 +4,7 @@
   "version": "0.3.3",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
-    "name": "assemble",
+    "name": "Assemble",
     "url": "https://github.com/assemble/assemble/handlebars-helpers"
   },
   "contributors": [
@@ -46,22 +46,20 @@
     "minimatch": "~0.2.12",
     "js-yaml": "~2.1.0",
     "to": "~0.2.9",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "js-beautify": "~1.4.0"
   },
   "devDependencies": {
     "assemble-internal": "0.2.0",
     "amdefine": "0.0.4",
     "chai": "~1.5.0",
-    "coffee-script": "~1.6.2",
     "grunt": "~0.4.1",
-    "grunt-coffeelint": "0.0.7",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-coffee": "~0.6.4",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
     "should": "~1.2.2",
-    "matchdep": "~0.1.2"
+    "grunt-contrib-nodeunit": "~0.2.0"
   },
   "keywords": [
     "assemble helpers",

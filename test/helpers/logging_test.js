@@ -1,46 +1,49 @@
+/**
+ * Tests: Logging Helpers
+ * http://github.com/assemble/handlebars-helpers
+ * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
+ * Licensed under the MIT License (MIT).
+ */
+
 (function() {
-  var Handlebars, _log;
 
   require('should');
-
-  Handlebars = require('handlebars');
-
+  var Handlebars = require('handlebars');
   require('../../lib/helpers/helpers-logging').register(Handlebars, {});
 
-  _log = console ? console.log : function() {};
+  var log = console ? console.log : function() {};
+  log.history = [];
 
-  _log.history = [];
 
   console.log = function() {
-    _log.history.push.apply(_log.history, arguments);
-    return _log.apply(console, arguments);
+    log.history.push.apply(log.history, arguments);
+    log.apply(console, arguments);
   };
 
+
   describe('log', function() {
-    return describe('{{log "Log helper worked!"}}', function() {
-      return it('should log a message to the console.', function() {
-        var source, template;
-        source = '{{log "Log helper worked!"}}';
-        template = Handlebars.compile(source);
+    describe('{{log "Log helper worked!"}}', function() {
+      it('should log a message to the console.', function() {
+        var source = '{{log "Log helper worked!"}}';
+        var template = Handlebars.compile(source);
         template();
-        return _log.history.should.include('Log helper worked!');
+        log.history.should.include('Log helper worked!');
       });
     });
   });
 
-  _log.history = [];
-
+  log.history = [];
   describe('debug', function() {
-    return describe('{{debug value}}', function() {
-      return it('should log current context.', function() {
-        var context, source, template;
-        source = '{{debug this}}';
-        template = Handlebars.compile(source);
-        context = 'assemble';
+    describe('{{debug value}}', function() {
+      it('should log current context.', function() {
+        var source = '{{debug this}}';
+        var template = Handlebars.compile(source);
+        var context = 'assemble';
         template(context);
-        return _log.history.should.include('assemble');
+        log.history.should.include('assemble');
       });
     });
   });
+
 
 }).call(this);

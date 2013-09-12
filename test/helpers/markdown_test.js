@@ -1,3 +1,10 @@
+/**
+ * Tests: Markdown Helpers
+ * http://github.com/assemble/handlebars-helpers
+ * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
+ * Licensed under the MIT License (MIT).
+ */
+
 (function() {
   var Handlebars, grunt, path, pkg, simple, simpleExpected;
 
@@ -23,16 +30,16 @@
 
   describe("markdown", function() {
     describe("should convert a block of markdown to HTML", function() {
-      return it("{{#markdown}}", function(done) {
+      it("{{#markdown}}", function(done) {
         var template;
         template = Handlebars.compile(simple);
         template().should.equal(simpleExpected);
         return done();
       });
     });
-    return describe("md", function() {
-      return describe("should convert an imported markdown file to HTML", function() {
-        return it("{{md simple1.md}}", function(done) {
+    describe("md", function() {
+      describe("should convert an imported markdown file to HTML", function() {
+        it("{{md simple1.md}}", function(done) {
           var filename, source, template;
           filename = path.join(__dirname, "../files/simple1.md");
           source = "{{md filename}}";
@@ -47,7 +54,7 @@
   });
 
   describe("markdown options", function() {
-    return it("langPrefix", function(done) {
+    it("langPrefix", function(done) {
       var codeExample, codeExampleExpected, template;
       require("../../lib/helpers/helpers-markdown").register(Handlebars, {
         marked: {
