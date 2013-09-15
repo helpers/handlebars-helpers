@@ -1,5 +1,5 @@
 /**
- * Tests: Misc. Helpers
+ * Handlebars Helpers Tests: Misc. Helpers
  * http://github.com/assemble/handlebars-helpers
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT).

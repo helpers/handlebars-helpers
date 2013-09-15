@@ -1,5 +1,5 @@
 /**
- * Tests: Markdown Helpers
+ * Handlebars Helpers Tests: Markdown Helpers
  * http://github.com/assemble/handlebars-helpers
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT).
@@ -32,7 +32,7 @@ describe("markdown", function() {
   describe("md", function() {
     describe("should convert an imported markdown file to HTML", function() {
       it("{{md simple1.md}}", function(done) {
-        var filename = path.join(__dirname, "../files/simple1.md");
+        var filename = path.join(__dirname, "../fixtures/simple1.md");
         var source = "{{md filename}}";
         var template = Handlebars.compile(source);
         template({
