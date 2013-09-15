@@ -47,7 +47,8 @@
     "js-yaml": "~2.1.0",
     "to": "~0.2.9",
     "matchdep": "~0.1.2",
-    "js-beautify": "~1.4.0"
+    "js-beautify": "~1.4.0",
+    "iconv-lite": "~0.2.11"
   },
   "devDependencies": {
     "assemble-internal": "0.2.0",
