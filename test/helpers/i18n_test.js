@@ -20,7 +20,7 @@ var context = {
 };
 
 describe('i18n', function () {
-  describe('{{urlresolve base href}}', function () {
+  describe('{{#i18n}}', function () {
     it('should take a key and return for the default language', function () {
       var source = '{{#i18n "key"}}{{/i18n}}';
       var template = Handlebars.compile(source);

@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        'test/**/*.js',
+        // 'test/**/*.js',
         'lib/**/*.js'
       ]
     },
@@ -69,5 +69,5 @@ module.exports = function(grunt) {
   grunt.registerTask('test',    ['mochaTest']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'test', 'sync']);
 };
