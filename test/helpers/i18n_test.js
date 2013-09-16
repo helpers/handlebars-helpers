@@ -22,15 +22,13 @@ var context = {
 describe('i18n', function () {
   describe('{{urlresolve base href}}', function () {
     it('should take a key and return for the default language', function () {
-      var source, template;
-      source = '{{#i18n "key"}}{{/i18n}}';
-      template = Handlebars.compile(source);
+      var source = '{{#i18n "key"}}{{/i18n}}';
+      var template = Handlebars.compile(source);
       template(context).should.equal("value");
     });
     it('should take a key and return for the override language', function () {
-      var source, template;
-      source = '{{#i18n "key" language="fr"}}{{/i18n}}';
-      template = Handlebars.compile(source);
+      var source = '{{#i18n "key" language="fr"}}{{/i18n}}';
+      var template = Handlebars.compile(source);
       template(context).should.equal("valeur");
     });
   });

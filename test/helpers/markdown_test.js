@@ -26,7 +26,7 @@ describe("markdown", function() {
     it("{{#markdown}}", function(done) {
       var template = Handlebars.compile(simple);
       template().should.equal(simpleExpected);
-      return done();
+      done();
     });
   });
   describe("md", function() {
@@ -38,7 +38,7 @@ describe("markdown", function() {
         template({
           filename: filename
         }).should.equal(simpleExpected);
-        return done();
+        done();
       });
     });
   });
@@ -56,6 +56,6 @@ describe("markdown options", function() {
     var codeExampleExpected = "<h2>Some Markdown</h2>\n<pre><code class=\"language-js\"><span class=\"keyword\">var</span> foo=<span class=\"string\">'bar'</span>;</code></pre>\n";
     var template = Handlebars.compile(codeExample);
     template().should.equal(codeExampleExpected);
-    return done();
+    done();
   });
 });
