@@ -203,6 +203,18 @@ describe('withSort', function() {
         ]
       };
       template(_context).should.equal('Fry: -12 <br>Bender: 239 <br>Leela: 8021 <br>');
+      _context.collection.should.eql([
+          {
+            name: 'Leela',
+            deliveries: 8021
+          }, {
+            name: 'Bender',
+            deliveries: 239
+          }, {
+            name: 'Fry',
+            deliveries: -12
+          }
+        ]);
     });
   });
 });
