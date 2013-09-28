@@ -13,27 +13,14 @@
 ## Development
 {%= _.doc("contributing.md") %}
 
-
+{% if (changelog) { %}
 ## Release History
-{% if (changelog) {
-  _.each(changelog, function(details, version) {
-    var date = details.date;
-    if (date instanceof Date) {
-      date = grunt.template.date(new Date(date.getTime() + date.getTimezoneOffset() * 60000), 'yyyy-mm-dd');
-    }
-    print('\n * ' + [
-      date,
-      version,
-      details.changes.join(' '),
-    ].join('\u2003\u2003\u2003'));
-  });
-} else { %}
-_(Nothing yet)_
+{%= _.include("docs-changelog.md") %} {% } else { %}
+ * {%= grunt.template.today('yyyy') %}   v0.1.0   First commit
 {% } %}
 
 ## Credit
 {%= _.doc("credit.md") %}
-
 
 ## Authors
 
@@ -47,7 +34,6 @@ _(Nothing yet)_
 + [github.com/doowb](https://github.com/doowb)
 + [twitter.com/doowb](http://twitter.com/doowb)
 
-
 ## License
 {%= copyright %}
 {%= license %}
@@ -55,5 +41,3 @@ _(Nothing yet)_
 ***
 
 _This file was generated on Mon Sep 02 2013 09:44:51._
-
-[minimatch]: https://github.com/isaacs/minimatch
