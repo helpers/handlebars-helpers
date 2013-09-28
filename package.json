@@ -65,7 +65,8 @@
     "grunt-sync-pkg": "~0.1.0",
     "should": "~1.2.2",
     "matchkeys": "~0.1.1",
-    "matchdep": "~0.1.2"
+    "matchdep": "~0.1.2",
+    "chalk": "~0.2.1"
   },
   "keywords": [
     "assemble helpers",
