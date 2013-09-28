@@ -1,5 +1,5 @@
 /**
- * Tests: Numbers Helpers
+ * Handlebars Helpers Tests: Numbers Helpers
  * http://github.com/assemble/handlebars-helpers
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT).
@@ -11,10 +11,11 @@ require('../../lib/helpers/helpers-numbers').register(Handlebars, {});
 
 // TODO: formatNumber
 
+var context, source, template;
+
 describe('toFixed', function() {
   describe('{{toFixed value}}', function() {
     it('should return the value rounded to the nearest integer.', function() {
-      var context, source, template;
       source = '{{toFixed value}}';
       template = Handlebars.compile(source);
       context = {
@@ -25,7 +26,6 @@ describe('toFixed', function() {
   });
   describe('{{toFixed value 3}}', function() {
     it('should return the value rounded exactly n digits after the decimal place.', function() {
-      var context, source, template;
       source = '{{toFixed value 3}}';
       template = Handlebars.compile(source);
       context = {
@@ -39,7 +39,6 @@ describe('toFixed', function() {
 describe('toPrecision', function() {
   describe('{{toPrecision value}}', function() {
     it('Returns the number in fixed-point or exponential notation rounded to n significant digits.', function() {
-      var context, source, template;
       source = '{{toPrecision value}}';
       template = Handlebars.compile(source);
       context = {
@@ -50,7 +49,6 @@ describe('toPrecision', function() {
   });
   describe('{{toPrecision value 4}}', function() {
     it('should return the value rounded exactly n digits after the decimal place.', function() {
-      var context, source, template;
       source = '{{toPrecision value 4}}';
       template = Handlebars.compile(source);
       context = {
@@ -64,7 +62,6 @@ describe('toPrecision', function() {
 describe('toExponential', function() {
   describe('{{toExponential value}}', function() {
     it('should return the number in fixed-point or exponential notation rounded to n significant digits.', function() {
-      var context, source, template;
       source = '{{toExponential value}}';
       template = Handlebars.compile(source);
       context = {
@@ -75,7 +72,6 @@ describe('toExponential', function() {
   });
   describe('{{toExponential value 5}}', function() {
     it('should return the number in fixed-point or exponential notation rounded to exactly n significant digits.', function() {
-      var context, source, template;
       source = '{{toExponential value 5}}';
       template = Handlebars.compile(source);
       context = {
@@ -89,7 +85,6 @@ describe('toExponential', function() {
 describe('toInt', function() {
   describe('{{toInt value}}', function() {
     it('should return an integer.', function() {
-      var context, source, template;
       source = '{{toInt value}}';
       template = Handlebars.compile(source);
       context = {
@@ -103,7 +98,6 @@ describe('toInt', function() {
 describe('toFloat', function() {
   describe('{{toFloat value}}', function() {
     it('should return a floating point number.', function() {
-      var context, source, template;
       source = '{{toFloat value}}';
       template = Handlebars.compile(source);
       context = {
@@ -117,7 +111,6 @@ describe('toFloat', function() {
 describe('addCommas', function() {
   describe('{{addCommas value}}', function() {
     it('should add commas to a number.', function() {
-      var context, source, template;
       source = '{{addCommas value}}';
       template = Handlebars.compile(source);
       context = {
@@ -131,7 +124,6 @@ describe('addCommas', function() {
 describe('toAbbr', function() {
   describe('{{toAbbr value}}', function() {
     it('should formats (and approximates) a number into abbreviation based on a value.', function() {
-      var context, source, template;
       source = '{{toAbbr value}}';
       template = Handlebars.compile(source);
       context = {
@@ -142,7 +134,6 @@ describe('toAbbr', function() {
   });
   describe('{{toAbbr value 3}}', function() {
     it('should formats (and approximates) a number into abbreviation based on a value and include decimal.', function() {
-      var context, source, template;
       source = '{{toAbbr value 3}}';
       template = Handlebars.compile(source);
       context = {

@@ -1,5 +1,5 @@
 /**
- * Tests: i18n Helpers
+ * Handlebars Helpers Tests: i18n Helpers
  * http://github.com/assemble/handlebars-helpers
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT).
@@ -20,17 +20,15 @@ var context = {
 };
 
 describe('i18n', function () {
-  describe('{{urlresolve base href}}', function () {
+  describe('{{#i18n}}', function () {
     it('should take a key and return for the default language', function () {
-      var source, template;
-      source = '{{#i18n "key"}}{{/i18n}}';
-      template = Handlebars.compile(source);
+      var source = '{{#i18n "key"}}{{/i18n}}';
+      var template = Handlebars.compile(source);
       template(context).should.equal("value");
     });
     it('should take a key and return for the override language', function () {
-      var source, template;
-      source = '{{#i18n "key" language="fr"}}{{/i18n}}';
-      template = Handlebars.compile(source);
+      var source = '{{#i18n "key" language="fr"}}{{/i18n}}';
+      var template = Handlebars.compile(source);
       template(context).should.equal("valeur");
     });
   });

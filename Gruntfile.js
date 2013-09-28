@@ -32,7 +32,7 @@ module.exports = function(grunt) {
       },
       all: [
         'Gruntfile.js',
-        'test/**/*.js',
+        // 'test/**/*.js',
         'lib/**/*.js'
       ]
     },
@@ -60,14 +60,10 @@ module.exports = function(grunt) {
 
   // Load plugins to provide the necessary tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.loadNpmTasks('assemble-internal');
-
-  // Generate readme.
-  grunt.registerTask('docs',    ['assemble-internal']);
 
   // Tests to be run
-  grunt.registerTask('test',    ['mochaTest']);
+  grunt.registerTask('test', ['mochaTest']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('default', ['jshint', 'test', 'sync', 'readme']);
 };

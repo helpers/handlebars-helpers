@@ -1,37 +1,24 @@
 /**
- * Tests: HTML Helpers
+ * Handlebars Helpers Tests: HTML Helpers
  * http://github.com/assemble/handlebars-helpers
  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT).
  */
 
-// (function() {
-//   var Handlebars, grunt, path, simple, simpleExpected;
 
-//   require("should");
 
-//   path = require("path");
+// require('should');
+// var Handlebars = require('handlebars');
+// require('../../lib/helpers/helper-prettify').register(Handlebars, {});
 
-//   grunt = require("grunt");
+// var expected = '<div>\n' + '  <p>\n' + '    <ul>\n' + '      <li><a href="#">Link</a></li>\n' + '    </ul>\n' + '  </p>\n' + '</div>';
 
-//   Handlebars = require("handlebars");
-
-//   require("../../lib/helpers/helpers-html").register(Handlebars, simple = "{{#prettify}}<h2>Some Markup</h2><ul><li>one</li><li>two</li><li>three</li></ul><p><a href=\"http://github.com\">Click here</a></p>{{/prettify}}");
-
-//   simpleExpected = "<h2>Some Markup</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p>\n<a href=\"http://github.com\">Click here</a>\n</p>";
-
-//   describe("prettify options", function() {
-//     it("indents", function(done) {
-//       var template;
-//       require("../../lib/helpers/helpers-html").register(Handlebars, {
-//         prettify: {
-//           indent: 2
-//         }
-//       });
-//       template = Handlebars.compile(simple);
-//       template().should.equal(simpleExpected);
-//       return done();
+// describe('prettify', function() {
+//   describe('{{#prettify}}{{/prettify}}', function() {
+//     it('Should prettify the output HTML.', function() {
+//       var source = '{{#prettify}}<div><p><ul><li><a href="#">Link</a></li></ul></p></div>{{/prettify}}';
+//       var template = Handlebars.compile(source);
+//       template().should.equal(expected);
 //     });
 //   });
-
-// }).call(this);
+// });
