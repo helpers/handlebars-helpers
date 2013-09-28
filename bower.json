@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "amdefine": "0.0.4",
-    "assemble-internal": "0.2.0",
     "chai": "~1.5.0",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.4.0",
@@ -27,6 +26,7 @@
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.0",
     "grunt-mocha-test": "~0.2.0",
+    "grunt-readme": "~0.1.5",
     "grunt-sync-pkg": "~0.1.0",
     "should": "~1.2.2"
   }

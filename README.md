@@ -1,17 +1,8 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> Extensive collection of Handlebars helpers.
+> Extensive collection of Handlebars helpers, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and more than 100 other helpers in ~20 categories.
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
-
-## Credit
-> Many of these helpers come from the following repos:
-
-Thank you [Dan Harper](http://github.com/danharper) and [Elving Rodriguez](http://elving.github.com/swag/). Your hard work on many of these helpers is appreciated.
-
-* [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
-* [Swag v0.2.1, by Elving Rodriguez](http://elving.github.com/swag/)
-
 
 ## Quickstart
 ```shell
@@ -91,6 +82,7 @@ Please remember add some kind of attribution for yourself in this format: `@auth
 
 
 
+
 ## Release History
 
  * 2013-09-03   v0.3.3   Add fileSize helper. Add startsWith helper.
@@ -112,6 +104,16 @@ Please remember add some kind of attribution for yourself in this format: `@auth
  * 2013-03-16   v0.1.3   New helpers, "formatPhoneNumber" and "eachProperty"
  * 2013-03-15   v0.1.2   Update README.md with documentation, examples.
  * 2013-03-06   v0.1.0   First commit.
+ 
+
+## Credit
+> Many of these helpers come from the following repos:
+
+Thank you Dan Harper and Elving Rodriguez. Your hard work on many of these helpers is appreciated!
+
+* [Handlebars Helpers, by Dan Harper](http://github.com/danharper)
+* [Swag v0.2.1, by Elving Rodriguez](http://elving.github.com/swag/)
+
 
 ## Authors
 
@@ -132,5 +134,3 @@ Released under the MIT license
 ***
 
 _This file was generated on Mon Sep 02 2013 09:44:51._
-
-[minimatch]: https://github.com/isaacs/minimatch
