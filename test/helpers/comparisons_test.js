@@ -11,6 +11,41 @@ var Handlebars = require('handlebars');
 require('../../lib/helpers/helpers-comparisons').register(Handlebars, {});
 
 
+describe('compare', function() {
+  describe('{{#compare left "<=" right}}The value is greater than or equal to 10{{else}}The value is lower than 10{{/compare}}', function() {
+    it('should render the first block if the left value is equal or greater.', function() {
+      var context = {
+        left: 10,
+        right: 15
+      };
+      var source = '{{#compare left "<=" right}}The value is greater than or equal to 10{{else}}The value is lower than 10{{/compare}}';
+      var template = Handlebars.compile(source);
+      template(context).should.equal('The value is greater than or equal to 10');
+    });
+  });
+  describe('{{#compare unicorns "<" ponies}}I knew it, unicorns are just low-quality ponies!{{/compare}}', function() {
+    it('should render the first block if the left value is less than the right.', function() {
+      var context = {
+        unicorns: 5,
+        ponies: 6
+      };
+      var source = '{{#compare unicorns "<" ponies}}I knew it, unicorns are just low-quality ponies!{{/compare}}';
+      var template = Handlebars.compile(source);
+      template(context).should.equal('I knew it, unicorns are just low-quality ponies!');
+    });
+  });
+  describe('{{#compare obj "typeof" "object"}}It\'s an object.{{else}}It\'s not an object.{{/compare}}', function() {
+    it('should render the first block if the right value is an object.', function() {
+      var context = {
+        obj: {}
+      };
+      var source = '{{#compare obj "typeof" "object"}}It\'s an object.{{else}}It\'s not an object.{{/compare}}';
+      var template = Handlebars.compile(source);
+      template(context).should.equal('It\'s an object.');
+    });
+  });
+});
+
 describe('contains', function() {
   describe('{{#contains bender "z"}} Kiss my shiny metal ass! {{else}} Never mind :( {{/contains}}', function() {
     it('should render a block if the condition is true.', function() {
