@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "Extensive collection of Handlebars helpers, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and more than 100 other helpers in ~20 categories.",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
@@ -49,7 +49,6 @@
     "mime": "~1.2.10",
     "minimatch": "~0.2.12",
     "matchkeys": "~0.1.1",
-    "matchdep": "~0.1.2",
     "to": "~0.2.9",
     "prettify": "~0.1.7",
     "helper-repeat": "~0.1.0"
