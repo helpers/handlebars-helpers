@@ -38,7 +38,6 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "handlebars": "1.0.10",
     "highlight.js": "~7.3.0",
     "iconv-lite": "~0.2.11",
     "js-beautify": "~1.4.0",
@@ -48,9 +47,12 @@
     "matchdep": "~0.1.2",
     "mime": "~1.2.10",
     "minimatch": "~0.2.12",
-    "to": "~0.2.9"
+    "to": "~0.2.9",
+    "prettify": "~0.1.7",
+    "helper-repeat": "~0.1.0"
   },
   "devDependencies": {
+    "handlebars": "1.0.10",
     "amdefine": "0.0.4",
     "chai": "~1.5.0",
     "grunt": "~0.4.1",
@@ -61,7 +63,10 @@
     "grunt-mocha-test": "~0.2.0",
     "grunt-readme": "~0.1.5",
     "grunt-sync-pkg": "~0.1.0",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "matchkeys": "~0.1.1",
+    "matchdep": "~0.1.2",
+    "chalk": "~0.2.1"
   },
   "keywords": [
     "assemble helpers",
@@ -102,7 +107,9 @@
     "miscellaneous helpers",
     "numbers helpers",
     "path helpers",
+    "prettify",
     "prettify helper",
+    "helper-repeat",
     "repeat helper",
     "strings helpers",
     "template helpers",
