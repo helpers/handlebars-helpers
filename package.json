@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "Extensive collection of Handlebars helpers, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and more than 100 other helpers in ~20 categories.",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
@@ -64,7 +64,8 @@
     "grunt-mocha-test": "~0.2.0",
     "grunt-readme": "~0.1.5",
     "grunt-sync-pkg": "~0.1.0",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "chalk": "~0.2.1"
   },
   "keywords": [
     "assemble helpers",

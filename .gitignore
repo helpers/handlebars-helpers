@@ -1,7 +1,9 @@
 node_modules
 *.sublime-*
-_gh_pages
-_gh-pages
+
+# Ignore the staging dir for docs
+_docs
+
 
 tmp
 vendor

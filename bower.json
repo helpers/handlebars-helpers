@@ -1,6 +1,6 @@
 {
   "name": "handlebars-helpers",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "main": [
     "index.js"
   ],
@@ -31,6 +31,7 @@
     "grunt-mocha-test": "~0.2.0",
     "grunt-readme": "~0.1.5",
     "grunt-sync-pkg": "~0.1.0",
-    "should": "~1.2.2"
+    "should": "~1.2.2",
+    "chalk": "~0.2.1"
   }
 }
