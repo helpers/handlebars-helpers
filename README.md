@@ -51,7 +51,96 @@ Some helpers feature enhancements that are specifically intended for use with [A
 
 
 
-## Development
+## Contributing
+#### Undocumented Helpers
+We can always use your help documenting helpers. Here is an up-to-date list of helpers that require documentation:
+
+* `{{arrayify}}`
+* `{{basename}}`
+* `{{css}}`
+* `{{decodeURI}}`
+* `{{each}}`
+* `{{eachIndexPlusOne}}`
+* `{{ellipsis}}`
+* `{{encodeURI}}`
+* `{{expandMapping}}`
+* `{{fileSize}}`
+* `{{filename}}`
+* `{{forEach}}`
+* `{{formatDate}}`
+* `{{globWithContext}}`
+* `{{highlight}}`
+* `{{i18n}}`
+* `{{ifAny}}`
+* `{{if_eq}}`
+* `{{if_lt}}`
+* `{{if_lteq}}`
+* `{{iterate}}`
+* `{{joinAny}}`
+* `{{js}}`
+* `{{length}}`
+* `{{occurrences}}`
+* `{{prop}}`
+* `{{random}}`
+* `{{replace}}`
+* `{{safeString}}`
+* `{{startsWith}}`
+* `{{stringify}}`
+* `{{stripQuerystring}}`
+* `{{urlparse}}`
+* `{{urlresolve}}`
+* `{{value}}`
+
+
+#### Helpers that need tests
+We can always use your help documenting helpers. Here is an up-to-date list of helpers that require documentation:
+
+* `{{arrayify}}`
+* `{{css}}`
+* `{{debug}}`
+* `{{decodeURI}}`
+* `{{eachProperty}}`
+* `{{ellipsis}}`
+* `{{embed}}`
+* `{{encodeURI}}`
+* `{{expandJSON}}`
+* `{{expandMapping}}`
+* `{{expandYAML}}`
+* `{{forEach}}`
+* `{{formatPhoneNumber}}`
+* `{{glob}}`
+* `{{globWithContext}}`
+* `{{highlight}}`
+* `{{ifAny}}`
+* `{{if_eq}}`
+* `{{if_gt}}`
+* `{{if_gteq}}`
+* `{{if_lt}}`
+* `{{if_lteq}}`
+* `{{iterate}}`
+* `{{joinAny}}`
+* `{{js}}`
+* `{{log}}`
+* `{{noop}}`
+* `{{occurrences}}`
+* `{{ol}}`
+* `{{parseJSON}}`
+* `{{prop}}`
+* `{{random}}`
+* `{{replace}}`
+* `{{safeString}}`
+* `{{stringify}}`
+* `{{stripQuerystring}}`
+* `{{ul}}`
+* `{{unless_eq}}`
+* `{{unless_gt}}`
+* `{{unless_gteq}}`
+* `{{unless_lt}}`
+* `{{unless_lteq}}`
+* `{{urlparse}}`
+* `{{value}}`
+
+
 ### Developing Helpers
 
 #### Custom Helpers

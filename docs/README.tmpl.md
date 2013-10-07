@@ -10,7 +10,9 @@
 ## Overview
 {%= _.doc("overview.md") %}
 
-## Development
+## Contributing
+{%= _.doc("undocumented.md") %}
+{%= _.doc("notest.md") %}
 {%= _.doc("contributing.md") %}
 
 {% if (changelog) { %}

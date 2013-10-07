@@ -28,14 +28,22 @@ module.exports = function(grunt) {
         boss: true,
         eqnull: true,
         node: true,
-        strict: false
+        globals: {
+          it: true,
+          describe: true,
+          expect: true,
+          module: true,
+          exports: true,
+          require: true
+        }
       },
       all: [
         'Gruntfile.js',
-        // 'test/**/*.js',
+        'test/**/*.js',
         'lib/**/*.js'
       ]
     },
+
 
     // Run mocha tests.
     mochaTest: {
@@ -55,15 +63,53 @@ module.exports = function(grunt) {
     // Clean test files before building or re-testing.
     clean: {
       helpers: ['lib/**/*']
+    },
+
+    // Configuration to be run (and then tested).
+    delta: {
+      options: {
+        srcPattern: /\s*(.+((?!(')).)):\s*function/g,
+        srcSanitize: ['_readme', '.md', '.hbs', 'helper-']
+      },
+      documented: {
+        src: ['lib/helpers/*.js'],
+        dest: 'docs/undocumented.json',
+        options: {
+          keyname: 'docsDifference',
+          compare: '_docs/**/*.md.hbs',
+          compareSanitize: []
+        }
+      },
+      tests: {
+        src: ['lib/helpers/*.js'],
+        dest: 'docs/notest.json',
+        options: {
+          read: true,
+          keyname: 'testsDifference',
+          compare: 'test/helpers/*.js',
+          comparePattern: /^(?!  )describe\((?:'|")(.+)(?:'|").+/gm,
+          compareSanitize: [],
+        },
+      }
+    },
+
+    readme: {
+      options: {
+        metadata: ['<%= delta.documented.dest %>', '<%= delta.tests.dest %>']
+      }
     }
   });
 
   // Load plugins to provide the necessary tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
+  // Load local tasks.
+  grunt.loadTasks('tasks');
+
   // Tests to be run
   grunt.registerTask('test', ['mochaTest']);
+  grunt.registerTask('docs', ['delta', 'readme']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test', 'sync', 'readme']);
+  grunt.registerTask('default', ['jshint', 'test', 'sync', 'delta', 'readme']);
 };
