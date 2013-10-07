@@ -5,8 +5,11 @@
  * Licensed under the MIT License (MIT).
  */
 
+// node_modules
 require('should');
 var Handlebars = require('handlebars');
+
+// Local helpers
 require('../../lib/helpers/helpers-math').register(Handlebars, {});
 
 var context = {

@@ -5,15 +5,20 @@
  * Licensed under the MIT License (MIT).
  */
 
+
+// node_modules
 require('should');
 var Handlebars = require('handlebars');
+
+// Local helpers
 require('../../lib/helpers/helpers-collections').register(Handlebars, {});
 
-var context = {
+var source, template, context;
+
+context = {
   collection: ['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']
 };
 
-var source, template;
 describe('first', function() {
   describe('{{first collection}}', function() {
     it('should return the first item in a collection.', function() {
@@ -32,14 +37,14 @@ describe('first', function() {
 });
 
 describe('withFirst', function() {
-  describe('{{#withFirst collection}} \n\ <p>{{this}} is smart.</p> \n\ {{/withFirst}}', function() {
+  describe('{{#withFirst collection}} \n <p>{{this}} is smart.</p> \n {{/withFirst}}', function() {
     it('should use the first item in a collection inside a block.', function() {
       source = '{{#withFirst collection}}<p>{{this}} is smart.</p>{{/withFirst}}';
       template = Handlebars.compile(source);
       template(context).should.equal('<p>Amy Wong is smart.</p>');
     });
   });
-  describe('{{#withFirst collection 2}} \n\ <p>{{this}} is smart.</p> \n\ {{/withFirst}}', function() {
+  describe('{{#withFirst collection 2}} \n <p>{{this}} is smart.</p> \n {{/withFirst}}', function() {
     it('should use the first two items in a collection inside a block.', function() {
       source = '{{#withFirst collection 2}}<p>{{this}} is smart.</p>{{/withFirst}}';
       template = Handlebars.compile(source);
@@ -66,14 +71,14 @@ describe('last', function() {
 });
 
 describe('withLast', function() {
-  describe('{{#withLast collection}} \n\ <p>{{this}} is dumb.</p> \n\ {{/withLast}}', function() {
+  describe('{{#withLast collection}} \n <p>{{this}} is dumb.</p> \n {{/withLast}}', function() {
     it('should use the last item in a collection inside a block.', function() {
       source = '{{#withLast collection}}<p>{{this}} is dumb.</p>{{/withLast}}';
       template = Handlebars.compile(source);
       template(context).should.equal('<p>Scruffy is dumb.</p>');
     });
   });
-  describe('{{#withLast collection 2}} \n\ <p>{{this}} is dumb.</p> \n\ {{/withLast}}', function() {
+  describe('{{#withLast collection 2}} \n <p>{{this}} is dumb.</p> \n {{/withLast}}', function() {
     it('should use the last two items in a collection inside a block.', function() {
       source = '{{#withLast collection 2}}<p>{{this}} is dumb.</p>{{/withLast}}';
       template = Handlebars.compile(source);
@@ -93,7 +98,7 @@ describe('after', function() {
 });
 
 describe('withAfter', function() {
-  describe('{{#withAfter collection 5}} \n\ <{{this}}> \n\ {{/withAfter}}', function() {
+  describe('{{#withAfter collection 5}} \n <{{this}}> \n {{/withAfter}}', function() {
     it('should use all of the items in a collection after the specified count inside a block.', function() {
       source = '{{#withAfter collection 5}}<{{this}}>{{/withAfter}}';
       template = Handlebars.compile(source);
@@ -113,7 +118,7 @@ describe('before', function() {
 });
 
 describe('withBefore', function() {
-  describe('{{#withBefore collection 5}} \n\ <{{this}}> \n\ {{/withBefore}}', function() {
+  describe('{{#withBefore collection 5}} \n <{{this}}> \n {{/withBefore}}', function() {
     it('should use all of the items in a collection before the specified count inside a block.', function() {
       source = '{{#withBefore collection 5}}<{{this}}>{{/withBefore}}';
       template = Handlebars.compile(source);
@@ -176,14 +181,14 @@ describe('sort', function() {
 });
 
 describe('withSort', function() {
-  describe('{{#withSort collection}} \n\ <p>{{this}}</p> \n\ {{/withSort}}', function() {
+  describe('{{#withSort collection}} \n <p>{{this}}</p> \n {{/withSort}}', function() {
     it('should sort the collection in lexicographical order and use it in a block.', function() {
       source = '{{#withSort collection}}<p>{{this}}</p>{{/withSort}}';
       template = Handlebars.compile(source);
       template(context).should.equal('<p>Amy Wong</p><p>Bender</p><p>Dr. Zoidberg</p><p>Fry</p><p>Hermes Conrad</p><p>Leela</p><p>Professor Farnsworth</p><p>Scruffy</p>');
     });
   });
-  describe('{{#withSort collection "deliveries"}} \n\ {{name}}: {{deliveries}} <br> \n\ {{/withSort}}', function() {
+  describe('{{#withSort collection "deliveries"}} \n {{name}}: {{deliveries}} <br> \n {{/withSort}}', function() {
     it('should sort the collection by deliveries and use it in a block.', function() {
       var source, template, _context;
       source = '{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}';
@@ -230,7 +235,7 @@ describe('length', function() {
 });
 
 describe('lengthEqual', function() {
-  describe('{{#lengthEqual collection 3}} \n\ There are 3 people in Planet Express. \n\ {{else}} \n\ This is not Planet Express. \n\ {{/lengthEqual}}', function() {
+  describe('{{#lengthEqual collection 3}} \n There are 3 people in Planet Express. \n {{else}} \n This is not Planet Express. \n {{/lengthEqual}}', function() {
     it('should conditionally render a block based on the length of a collection.', function() {
       source = '{{#lengthEqual collection 3}}There are 3 people in Planet Express.{{else}}This is not Planet Express.{{/lengthEqual}}';
       template = Handlebars.compile(source);
@@ -240,7 +245,7 @@ describe('lengthEqual', function() {
 });
 
 describe('empty', function() {
-  describe('{{#empty collection}} \n\ Bad news everyone! \n\ {{else}} \n\ Good news everyone! \n\ {{/empty}}', function() {
+  describe('{{#empty collection}} \n Bad news everyone! \n {{else}} \n Good news everyone! \n {{/empty}}', function() {
     it('should conditionally render a block the collection is empty.', function() {
       source = '{{#empty collection}}Bad news everyone!{{else}}Good news everyone!{{/empty}}';
       template = Handlebars.compile(source);
@@ -250,7 +255,7 @@ describe('empty', function() {
 });
 
 describe('any', function() {
-  describe('{{#any collection}} \n\ Bad news everyone! \n\ {{else}} \n\ Good news everyone! \n\ {{/any}}', function() {
+  describe('{{#any collection}} \n Bad news everyone! \n {{else}} \n Good news everyone! \n {{/any}}', function() {
     it('should conditionally render a block the collection isn\'t empty.', function() {
       source = '{{#any collection}}Bad news everyone!{{else}}Good news everyone!{{/any}}';
       template = Handlebars.compile(source);
@@ -260,7 +265,7 @@ describe('any', function() {
 });
 
 describe('inArray', function() {
-  describe('{{#inArray collection "Fry"}} \n\ I\'m walking on sunshine! \n\ {{else}} \n\ I\'m walking in darkness. \n\ {{/inArray}}', function() {
+  describe('{{#inArray collection "Fry"}} \n I\'m walking on sunshine! \n {{else}} \n I\'m walking in darkness. \n {{/inArray}}', function() {
     it('should conditionally render a block if a specified value is in the collection.', function() {
       source = '{{#inArray collection "Fry"}}I\'m walking on sunshine!{{else}}I\'m walking in darkness.{{/inArray}}';
       template = Handlebars.compile(source);
@@ -270,7 +275,7 @@ describe('inArray', function() {
 });
 
 describe('eachIndex', function() {
-  describe('{{#eachIndex collection}} \n\ {{item}} is {{index}} \n\ {{/eachIndex}}', function() {
+  describe('{{#eachIndex collection}} \n {{item}} is {{index}} \n {{/eachIndex}}', function() {
     it('should render the block using the array and each item\'s index.', function() {
       source = '{{#eachIndex collection}} {{item}} is {{index}} {{/eachIndex}}';
       template = Handlebars.compile(source);
@@ -280,7 +285,7 @@ describe('eachIndex', function() {
 });
 
 describe('eachIndexPlusOne', function() {
-  describe('{{#eachIndexPlusOne collection}} \n\ {{item}} is {{index}} \n\ {{/eachIndexPlusOne}}',
+  describe('{{#eachIndexPlusOne collection}} \n {{item}} is {{index}} \n {{/eachIndexPlusOne}}',
     function() {
       it('should render the block using the array and each item\'s index + 1.', function() {
       source = '{{#eachIndexPlusOne collection}} {{item}} is {{index}} {{/eachIndexPlusOne}}';

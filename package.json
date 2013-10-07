@@ -65,7 +65,8 @@
     "grunt-readme": "~0.1.5",
     "grunt-sync-pkg": "~0.1.0",
     "should": "~1.2.2",
-    "chalk": "~0.2.1"
+    "chalk": "~0.2.1",
+    "matchkeys": "~0.1.3"
   },
   "keywords": [
     "assemble helpers",

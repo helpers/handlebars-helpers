@@ -5,17 +5,20 @@
  * Licensed under the MIT License (MIT).
  */
 
-
+// node_moduls
 require('should');
 var Handlebars = require('handlebars');
+
+// Local helpers
 require('../../lib/helpers/helpers-inflections').register(Handlebars, {});
+
 
 describe('inflect', function() {
   describe('{{inflect enemies "enemy" "enemies"}}', function() {
     it('should return the plural or singular form of a word based on a value.', function() {
       var source = '{{inflect enemies "enemy" "enemies"}}';
       var template = Handlebars.compile(source);
-      context = {
+      var context = {
         enemies: 3
       };
       template(context).should.equal('enemies');

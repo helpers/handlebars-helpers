@@ -1,4 +1,3 @@
-/*jshint mocha:true */
 /**
  * Handlebars Helpers Tests: Utils
  * http://github.com/assemble/handlebars-helpers

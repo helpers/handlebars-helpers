@@ -6,17 +6,15 @@
  */
 
 
+// node_modules
 require('should');
 var Handlebars = require('handlebars');
+
+// Local helpers
 require('../../lib/helpers/helpers-code').register(Handlebars, {});
 
-var context = {
-  AUTHORS: 'Brian Woodward (http://github.com/doowb)\nJon Schlinkert (http://github.com/jonschlinkert)'
-};
-
-// TODO: embed
-
 var source, template;
+
 describe('jsfiddle', function() {
   describe('{{jsfiddle id}}', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {

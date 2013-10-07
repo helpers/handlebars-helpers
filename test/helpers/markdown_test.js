@@ -5,57 +5,67 @@
  * Licensed under the MIT License (MIT).
  */
 
-require("should");
-var Handlebars = require("handlebars");
-require("../../lib/helpers/helpers-markdown").register(Handlebars, {
+// Node.js
+var path = require('path');
+
+// node_modules
+require('should');
+var Handlebars = require('handlebars');
+var grunt      = require('grunt');
+var chalk      = require('chalk');
+
+var fixtures = path.join.bind(process.cwd(), './test/fixtures');
+var helpers  = path.join.bind(__dirname, '../../lib/helpers');
+
+// Local helpers
+require(helpers('helpers-markdown')).register(Handlebars, {
   marked: {
     gfm: true
   }
 });
 
-var path = require("path");
-var grunt = require("grunt");
-var pkg = grunt.file.readJSON('package.json');
 
+// Fixtures
+var fixtureSimple     = '{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}';
+var fixtureCodeBlock  = '{{#markdown}}\n## Some Markdown\n\n```js\nvar foo="bar";\n```{{/markdown}}';
 
-var simple = "{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}";
-var simpleExpected = "<h2>Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href=\"http://github.com\">Click here</a></p>\n";
+// Expected
+var expectedSimple    = '<h2>Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
+var expectedCodeBlock = '<h2>Some Markdown</h2>\n<pre><code class="language-js"><span class="keyword">var</span> foo=<span class="string">"bar"</span>;</code></pre>\n';
 
-describe("markdown", function() {
-  describe("should convert a block of markdown to HTML", function() {
-    it("{{#markdown}}", function(done) {
-      var template = Handlebars.compile(simple);
-      template().should.equal(simpleExpected);
+var template;
+
+describe(chalk.bold('Should convert:'), function() {
+
+  // Blocks of inline markdown
+  describe('an inline block of markdown to HTML', function() {
+    it('{{#markdown}}', function(done) {
+      template = Handlebars.compile(fixtureSimple);
+      template().should.equal(expectedSimple);
       done();
     });
   });
-  describe("md", function() {
-    describe("should convert an imported markdown file to HTML", function() {
-      it("{{md simple1.md}}", function(done) {
-        var filename = path.join(__dirname, "../fixtures/simple1.md");
-        var source = "{{md filename}}";
-        var template = Handlebars.compile(source);
-        template({
-          filename: filename
-        }).should.equal(simpleExpected);
-        done();
+
+  // Included markdown
+  describe('imported markdown files to HTML', function() {
+    it('{{md "simple.md"}}', function(done) {
+      var fixture  = fixtures('simple.md');
+      template = Handlebars.compile('{{md fixture}}');
+      template({fixture: fixture}).should.equal(expectedSimple);
+      done();
+    });
+  });
+
+  // With user-defined options
+  describe('markdown to HTML, with user-defined', function() {
+    it('langPrefix', function(done) {
+      require('../../lib/helpers/helpers-markdown').register(Handlebars, {
+        marked: {langPrefix: 'language-'}
       });
+      template = Handlebars.compile(fixtureCodeBlock);
+      template().should.equal(expectedCodeBlock);
+      done();
     });
   });
 });
 
-describe("markdown options", function() {
-  it("langPrefix", function(done) {
-    require("../../lib/helpers/helpers-markdown").register(Handlebars, {
-      marked: {
-        gfm: true,
-        langPrefix: 'language-'
-      }
-    });
-    var codeExample = "{{#markdown}}\n## Some Markdown\n\n```js\nvar foo='bar';\n```{{/markdown}}";
-    var codeExampleExpected = "<h2>Some Markdown</h2>\n<pre><code class=\"language-js\"><span class=\"keyword\">var</span> foo=<span class=\"string\">'bar'</span>;</code></pre>\n";
-    var template = Handlebars.compile(codeExample);
-    template().should.equal(codeExampleExpected);
-    done();
-  });
-});
