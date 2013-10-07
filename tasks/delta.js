@@ -45,8 +45,8 @@ module.exports = function(grunt) {
           srcMatches.push(match);
         });
       });
-      // console.log(_.flatten(srcMatches));
-      // console.log(_.flatten(srcMatches).length);
+      grunt.verbose.writeln(_.flatten(srcMatches));
+      grunt.verbose.writeln(_.flatten(srcMatches).length);
       
 
       var comparison = [];
@@ -65,8 +65,8 @@ module.exports = function(grunt) {
         }
       });
 
-      console.log(_.flatten(comparison));
-      console.log(_.flatten(comparison).length);
+      grunt.verbose.writeln(_.flatten(comparison));
+      grunt.verbose.writeln(_.flatten(comparison).length);
 
 
 
@@ -74,7 +74,7 @@ module.exports = function(grunt) {
       var difference = options.keyname || 'difference';
       discrepancy[difference] = _.difference(_.flatten(srcMatches), _.flatten(comparison)).sort()
 
-      console.log(discrepancy[difference].length);
+      grunt.verbose.writeln(discrepancy[difference].length);
 
       grunt.file.write(f.dest, JSON.stringify(discrepancy, null, 2));
     });
