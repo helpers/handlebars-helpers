@@ -1,0 +1,19 @@
+{{#extend "layout"}}
+    {{#content "head"}}
+        <link rel="stylesheet" href="assets/css/home.css" />
+    {{/content}}
+
+    {{#content "body"}}
+        <h2>Welcome Home</h2>
+
+        <ul>
+            {{#items}}
+                <li>{{.}}</li>
+            {{/items}}
+        </ul>
+    {{/content}}
+
+    {{#content "foot"}}
+        <script src="assets/js/analytics.js"></script>
+    {{/content}}
+{{/extend}}
