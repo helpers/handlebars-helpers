@@ -1,11 +1,11 @@
 {
   "testsDifference": [
     "arrayify",
+    "count",
     "css",
     "debug",
     "decodeURI",
     "eachProperty",
-    "ellipsis",
     "embed",
     "encodeURI",
     "expandJSON",
@@ -27,7 +27,6 @@
     "js",
     "log",
     "noop",
-    "occurrences",
     "ol",
     "parseJSON",
     "prop",
