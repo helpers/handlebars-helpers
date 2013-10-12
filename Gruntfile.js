@@ -65,8 +65,8 @@ module.exports = function(grunt) {
       helpers: ['lib/**/*']
     },
 
-    // Configuration to be run (and then tested).
-    delta: {
+    // Generate lists of helpers that need docs and tests.
+    coverage: {
       options: {
         srcPattern: /\s*(.+((?!(')).)):\s*function/g,
         srcSanitize: ['_readme', '.md', '.hbs', 'helper-']
@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 
     readme: {
       options: {
-        metadata: ['<%= delta.documented.dest %>', '<%= delta.tests.dest %>']
+        metadata: ['<%= coverage.documented.dest %>', '<%= coverage.tests.dest %>']
       }
     }
   });
@@ -108,8 +108,8 @@ module.exports = function(grunt) {
 
   // Tests to be run
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('docs', ['delta', 'readme']);
+  grunt.registerTask('docs', ['coverage', 'readme']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test', 'sync', 'delta', 'readme']);
+  grunt.registerTask('default', ['jshint', 'test', 'sync', 'coverage', 'readme']);
 };
