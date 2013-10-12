@@ -7,7 +7,7 @@ var path = require('path');
 var _ = require('grunt').util._;
 
 module.exports = function(grunt) {
-  grunt.registerMultiTask('delta', 'Render a list of the differences between arrays. We use this to find helpers that have not been undocumented.', function() {
+  grunt.registerMultiTask('coverage', 'Render a list of the differences between arrays. We use this to find helpers that have not been undocumented.', function() {
 
     var options = this.options({
       read: false
@@ -32,7 +32,6 @@ module.exports = function(grunt) {
     };
 
     this.files.forEach(function(f) {
-
 
       var srcMatches = [];
       grunt.file.expand(f.src).map(function(file) {

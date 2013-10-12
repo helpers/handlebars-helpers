@@ -42,4 +42,7 @@
 
 ***
 
-_This file was generated on Mon Sep 02 2013 09:44:51._
+_This file was generated on {%= grunt.template.date("fullDate") %}._
+
+[assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
+[minimatch]: https://github.com/isaacs/minimatch "minimatch"

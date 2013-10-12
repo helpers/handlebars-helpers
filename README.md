@@ -22,18 +22,17 @@ Now your Handlebars instance will have access to the helpers.
 
 Some helpers offer useful functionality that is unique to this project, such as:
 
-* File globbing using [minimatch](https://github.com/isaacs/minimatch) patterns.
+* File globbing using [minimatch][] patterns.
 * Access to [assemble](https://github.com/assemble/assemble) options.
 * Ability to render either markdown or HTML conditionally based on the file extension of the generated file.
 
 Lots more...
 
 
-
 ## Overview
 ### [Visit the docs →]([assemble](http://assemble.io/docs/helpers/index.html)
 
-[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble](http://assemble.io/). By default, [Handlebars.js](http://handlebarsjs.com/) ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
+[Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble][]. By default, [Handlebars.js](http://handlebarsjs.com/) ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
 * A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).
 * Each parameter is a Handlebars expression.
@@ -42,21 +41,20 @@ Lots more...
 
 ### Special "Assemble" features
 
-Some helpers feature enhancements that are specifically intended for use with [Assemble](), the static site generator built on Grunt.js. Here are some highlights:
+Some helpers feature enhancements that are specifically intended for use with [Assemble][assemble], the static site generator built on Grunt.js. Here are some highlights:
 
 * File globbing.
 * Access to [assemble](http://assemble.io/docs/Options.html) options.
 * Some helpers will render either markdown or HTML based on the file extension of the generated file.
 
 
-
-
 ## Contributing
-#### Undocumented Helpers
-We can always use your help documenting helpers. Here is an up-to-date list of helpers that require documentation:
+### Undocumented Helpers
+We can always use your help documenting helpers. Here is an up-to-date list of **35 helpers** that require documentation:
 
 * `{{arrayify}}`
 * `{{basename}}`
+* `{{count}}`
 * `{{css}}`
 * `{{decodeURI}}`
 * `{{each}}`
@@ -79,7 +77,6 @@ We can always use your help documenting helpers. Here is an up-to-date list of h
 * `{{joinAny}}`
 * `{{js}}`
 * `{{length}}`
-* `{{occurrences}}`
 * `{{prop}}`
 * `{{random}}`
 * `{{replace}}`
@@ -92,15 +89,15 @@ We can always use your help documenting helpers. Here is an up-to-date list of h
 * `{{value}}`
 
 
-#### Helpers that need tests
-We can always use your help writing tests for helpers. Here is an up-to-date list of helpers that require tests:
+### Helpers that need tests
+We can always use your help writing tests for helpers. Here is an up-to-date list of **43 helpers** that require tests:
 
 * `{{arrayify}}`
+* `{{count}}`
 * `{{css}}`
 * `{{debug}}`
 * `{{decodeURI}}`
 * `{{eachProperty}}`
-* `{{ellipsis}}`
 * `{{embed}}`
 * `{{encodeURI}}`
 * `{{expandJSON}}`
@@ -122,7 +119,6 @@ We can always use your help writing tests for helpers. Here is an up-to-date lis
 * `{{js}}`
 * `{{log}}`
 * `{{noop}}`
-* `{{occurrences}}`
 * `{{ol}}`
 * `{{parseJSON}}`
 * `{{prop}}`
@@ -168,7 +164,6 @@ Please remember to add some kind of attribution for yourself in this format: `@a
  * @author: Mike Griffin <https://github.com/BrewDawg>
  */
 ```
-
 
 
 
@@ -222,4 +217,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Mon Sep 02 2013 09:44:51._
+_This file was generated on Saturday, October 12, 2013._
+
+[assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
+[minimatch]: https://github.com/isaacs/minimatch "minimatch"

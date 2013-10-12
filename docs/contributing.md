@@ -1,7 +1,7 @@
 ## Developing Helpers
 
 ### Custom Helpers
-When it comes to adding custom helpers, [Handlebars](http://handlebarsjs.com/) really accels over other templating libraries. Simply register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
+When it comes to adding custom helpers, [Handlebars](http://handlebarsjs.com/) really excels over other templating libraries. Simply register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
 
 Additionally, Handlebars allows two different kinds of helpers:
 
@@ -12,11 +12,11 @@ Additionally, Handlebars allows two different kinds of helpers:
 ## Contributing New Helpers
 > Want to contribute a new helper? **Awesome!** Please follow these steps before submitting a pull request with your helper:
 
-* **Search existing helpers** to see if there is on that already does what you're helper does. If they are similar, but different, please explain how they differ.
+* **Search existing helpers** to see if there is one that already does what your helper does. If they are similar, but different, please explain how they differ.
 * **Use camelCase** for the helper's name. You'll see a few helpers in the lib that use underscores, these are from another library (and are appropriately credited). All other helpers use camelcase.
 * [**document the helper**]() so that developers don't need to jump through hoops to figure out how to use it.
 
-Please remember add some kind of attribution for yourself in this format: `@author: Your Name <github address>`, example:
+Please remember to add some kind of attribution for yourself in this format: `@author: Your Name <github address>`, example:
 
 ```js
 /**
