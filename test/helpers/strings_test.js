@@ -84,6 +84,23 @@ describe('reverse', function() {
   });
 });
 
+describe('ellipsis', function() {
+  describe('{{ellipsis string 31}}', function() {
+    it('should return then string truncated by a specified length.', function() {
+      source = '{{ellipsis "Bender should not be allowed on tv." 31}}';
+      template = Handlebars.compile(source);
+      template().should.equal('Bender should not be allowed on');
+    });
+  });
+  describe('{{ellipsis string limit "..."}}', function() {
+    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
+      source = '{{ellipsis "Bender should not be allowed on tv." 31}}';
+      template = Handlebars.compile(source);
+      template().should.equal('Bender should not be allowed on');
+    });
+  });
+});
+
 describe('truncate', function() {
   describe('{{truncate string 31}}', function() {
     it('should return then string truncated by a specified length.', function() {
