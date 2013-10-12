@@ -15,14 +15,14 @@ Use within your application with the following line of JavaScript:
 var helpers = require('handlebars-helpers');
 ```
 
-Now your handlebars instance will have access to the helpers.
+Now your Handlebars instance will have access to the helpers.
 
 
 #### Features unique to this project
 
 Some helpers offer useful functionality that is unique to this project, such as:
 
-* File globbing using [minimatch](https://github.com/isaacs/minimatch) patterns
+* File globbing using [minimatch](https://github.com/isaacs/minimatch) patterns.
 * Access to [assemble](https://github.com/assemble/assemble) options.
 * Ability to render either markdown or HTML conditionally based on the file extension of the generated file.
 
@@ -42,9 +42,9 @@ Lots more...
 
 ### Special "Assemble" features
 
-Some helpers feature enhancements that are specifically intended for use with [Assemble](), the static site generator build on Grunt.js. Here are some highlights:
+Some helpers feature enhancements that are specifically intended for use with [Assemble](), the static site generator built on Grunt.js. Here are some highlights:
 
-* File globbing
+* File globbing.
 * Access to [assemble](http://assemble.io/docs/Options.html) options.
 * Some helpers will render either markdown or HTML based on the file extension of the generated file.
 
@@ -93,7 +93,7 @@ We can always use your help documenting helpers. Here is an up-to-date list of h
 
 
 #### Helpers that need tests
-We can always use your help documenting helpers. Here is an up-to-date list of helpers that require documentation:
+We can always use your help writing tests for helpers. Here is an up-to-date list of helpers that require tests:
 
 * `{{arrayify}}`
 * `{{css}}`
@@ -144,7 +144,7 @@ We can always use your help documenting helpers. Here is an up-to-date list of h
 ### Developing Helpers
 
 #### Custom Helpers
-When it comes to adding custom helpers, [Handlebars](http://handlebarsjs.com/) really accels over other templating libraries. Simply register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
+When it comes to adding custom helpers, [Handlebars](http://handlebarsjs.com/) really excels over other templating libraries. Simply register your function into Handlebars with the `Handlebars.registerHelper` method, and that helper will be available to any template you compile afterwards.
 
 Additionally, Handlebars allows two different kinds of helpers:
 
@@ -155,11 +155,11 @@ Additionally, Handlebars allows two different kinds of helpers:
 ### Contributing New Helpers
 > Want to contribute a new helper? **Awesome!** Please follow these steps before submitting a pull request with your helper:
 
-* **Search existing helpers** to see if there is on that already does what you're helper does. If they are similar, but different, please explain how they differ.
+* **Search existing helpers** to see if there is one that already does what your helper does. If they are similar, but different, please explain how they differ.
 * **Use camelCase** for the helper's name. You'll see a few helpers in the lib that use underscores, these are from another library (and are appropriately credited). All other helpers use camelcase.
 * [**document the helper**]() so that developers don't need to jump through hoops to figure out how to use it.
 
-Please remember add some kind of attribution for yourself in this format: `@author: Your Name <github address>`, example:
+Please remember to add some kind of attribution for yourself in this format: `@author: Your Name <github address>`, example:
 
 ```js
 /**
