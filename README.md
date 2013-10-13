@@ -217,7 +217,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Saturday, October 12, 2013._
+_This file was generated on Sunday, October 13, 2013._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
