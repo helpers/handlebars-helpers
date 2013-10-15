@@ -111,5 +111,5 @@ module.exports = function(grunt) {
   grunt.registerTask('docs', ['coverage', 'readme']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test', 'sync', 'coverage', 'readme']);
+  grunt.registerTask('default', ['jshint', 'test', 'coverage', 'readme']);
 };
