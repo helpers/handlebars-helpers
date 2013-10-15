@@ -50,10 +50,12 @@ Some helpers feature enhancements that are specifically intended for use with [A
 
 ## Contributing
 ### Undocumented Helpers
-We can always use your help documenting helpers. Here is an up-to-date list of **35 helpers** that require documentation:
+We can always use your help documenting helpers. Here is an up-to-date list of **39 helpers** that require documentation:
 
 * `{{arrayify}}`
 * `{{basename}}`
+* `{{block}}`
+* `{{content}}`
 * `{{count}}`
 * `{{css}}`
 * `{{decodeURI}}`
@@ -62,6 +64,7 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 * `{{ellipsis}}`
 * `{{encodeURI}}`
 * `{{expandMapping}}`
+* `{{extend}}`
 * `{{fileSize}}`
 * `{{filename}}`
 * `{{forEach}}`
@@ -73,6 +76,7 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 * `{{if_eq}}`
 * `{{if_lt}}`
 * `{{if_lteq}}`
+* `{{inspect}}`
 * `{{iterate}}`
 * `{{joinAny}}`
 * `{{js}}`
@@ -90,9 +94,11 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. Here is an up-to-date list of **43 helpers** that require tests:
+We can always use your help writing tests for helpers. Here is an up-to-date list of **47 helpers** that require tests:
 
 * `{{arrayify}}`
+* `{{block}}`
+* `{{content}}`
 * `{{count}}`
 * `{{css}}`
 * `{{debug}}`
@@ -103,6 +109,7 @@ We can always use your help writing tests for helpers. Here is an up-to-date lis
 * `{{expandJSON}}`
 * `{{expandMapping}}`
 * `{{expandYAML}}`
+* `{{extend}}`
 * `{{forEach}}`
 * `{{formatPhoneNumber}}`
 * `{{glob}}`
@@ -114,6 +121,7 @@ We can always use your help writing tests for helpers. Here is an up-to-date lis
 * `{{if_gteq}}`
 * `{{if_lt}}`
 * `{{if_lteq}}`
+* `{{inspect}}`
 * `{{iterate}}`
 * `{{joinAny}}`
 * `{{js}}`
@@ -217,7 +225,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Sunday, October 13, 2013._
+_This file was generated on Tuesday, October 15, 2013._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"

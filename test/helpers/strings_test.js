@@ -34,6 +34,16 @@ describe('uppercase', function() {
   });
 });
 
+describe('uppercase_block', function() {
+  describe('{{#uppercase}}string{{/uppercase}}', function() {
+    it('should return the string in uppercase', function() {
+      source = '{{#uppercase}}bender should not be allowed on tv{{/uppercase}}';
+      template = Handlebars.compile(source);
+      template().should.equal('BENDER SHOULD NOT BE ALLOWED ON TV');
+    });
+  });
+});
+
 describe('capitalizeFirst', function() {
   describe('{{capitalizeFirst string}}', function() {
     it('should return the string with the first word capitalized.', function() {
