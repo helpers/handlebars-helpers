@@ -1,6 +1,8 @@
 {
   "testsDifference": [
     "arrayify",
+    "block",
+    "content",
     "count",
     "css",
     "debug",
@@ -11,6 +13,7 @@
     "expandJSON",
     "expandMapping",
     "expandYAML",
+    "extend",
     "forEach",
     "formatPhoneNumber",
     "glob",
@@ -22,6 +25,7 @@
     "if_gteq",
     "if_lt",
     "if_lteq",
+    "inspect",
     "iterate",
     "joinAny",
     "js",
