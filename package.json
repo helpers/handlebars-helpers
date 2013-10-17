@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. There are many interesting helpers in this project, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and so on.",
-  "version": "0.3.14",
+  "version": "0.3.15",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
