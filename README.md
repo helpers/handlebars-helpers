@@ -1,6 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> Extensive collection of Handlebars helpers, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and more than 100 other helpers in ~20 categories.
+> Extensive collection of Handlebars helpers, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and more than 100 other helpers in 20+ categories.
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 

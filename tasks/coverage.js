@@ -46,7 +46,7 @@ module.exports = function(grunt) {
       });
       grunt.verbose.writeln(_.flatten(srcMatches));
       grunt.verbose.writeln(_.flatten(srcMatches).length);
-      
+
 
       var comparison = [];
       grunt.file.expand(options.compare).map(function(file) {
@@ -76,6 +76,7 @@ module.exports = function(grunt) {
       grunt.verbose.writeln(discrepancy[difference].length);
 
       grunt.file.write(f.dest, JSON.stringify(discrepancy, null, 2));
+      grunt.file.write(path.join(path.dirname(f.dest), 'total.json'), JSON.stringify(srcMatches, null, 2));
     });
   });
 };
