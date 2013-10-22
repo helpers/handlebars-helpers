@@ -92,6 +92,16 @@ module.exports = function(grunt) {
         },
       }
     },
+    compress: {
+      zip: {
+        options: {
+          archive: 'docs/helpers.zip'
+        },
+        files: [
+          {expand: true, cwd: 'docs/helpers/', src: ['**/*']}
+        ]
+      }
+    },
 
     readme: {
       options: {
