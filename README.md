@@ -50,47 +50,129 @@ Some helpers feature enhancements that are specifically intended for use with [A
 
 ## Contributing
 ### Undocumented Helpers
-We can always use your help documenting helpers. Here is an up-to-date list of **39 helpers** that require documentation:
+We can always use your help documenting helpers. Here is an up-to-date list of **121 helpers** that require documentation:
 
+* `{{add}}`
+* `{{addCommas}}`
+* `{{after}}`
+* `{{and}}`
+* `{{any}}`
 * `{{arrayify}}`
 * `{{basename}}`
+* `{{before}}`
 * `{{block}}`
+* `{{capitalizeEach}}`
+* `{{capitalizeFirst}}`
+* `{{ceil}}`
+* `{{center}}`
+* `{{compare}}`
+* `{{contains}}`
 * `{{content}}`
 * `{{count}}`
 * `{{css}}`
+* `{{dashify}}`
+* `{{debug}}`
 * `{{decodeURI}}`
+* `{{default}}`
+* `{{dirname}}`
+* `{{divide}}`
 * `{{each}}`
+* `{{eachIndex}}`
 * `{{eachIndexPlusOne}}`
+* `{{eachProperty}}`
 * `{{ellipsis}}`
+* `{{embed}}`
+* `{{empty}}`
 * `{{encodeURI}}`
+* `{{expandJSON}}`
 * `{{expandMapping}}`
+* `{{expandYAML}}`
 * `{{extend}}`
+* `{{extname}}`
 * `{{fileSize}}`
 * `{{filename}}`
+* `{{filter}}`
+* `{{first}}`
+* `{{floor}}`
 * `{{forEach}}`
 * `{{formatDate}}`
+* `{{formatPhoneNumber}}`
+* `{{gist}}`
+* `{{glob}}`
 * `{{globWithContext}}`
+* `{{gt}}`
+* `{{gte}}`
 * `{{highlight}}`
+* `{{hyphenate}}`
 * `{{i18n}}`
 * `{{ifAny}}`
 * `{{if_eq}}`
+* `{{if_gt}}`
+* `{{if_gteq}}`
 * `{{if_lt}}`
 * `{{if_lteq}}`
+* `{{inArray}}`
+* `{{inflect}}`
 * `{{inspect}}`
+* `{{is}}`
+* `{{isnt}}`
 * `{{iterate}}`
+* `{{join}}`
 * `{{joinAny}}`
 * `{{js}}`
+* `{{jsfiddle}}`
+* `{{last}}`
 * `{{length}}`
+* `{{lengthEqual}}`
+* `{{log}}`
+* `{{lowercase}}`
+* `{{lt}}`
+* `{{lte}}`
+* `{{multiply}}`
+* `{{noop}}`
+* `{{now}}`
+* `{{ol}}`
+* `{{or}}`
+* `{{ordinalize}}`
+* `{{parseJSON}}`
 * `{{prop}}`
 * `{{random}}`
+* `{{relative}}`
 * `{{replace}}`
+* `{{reverse}}`
+* `{{round}}`
 * `{{safeString}}`
+* `{{sentence}}`
+* `{{sort}}`
 * `{{startsWith}}`
 * `{{stringify}}`
 * `{{stripQuerystring}}`
+* `{{subtract}}`
+* `{{sum}}`
+* `{{timeago}}`
+* `{{titleize}}`
+* `{{toAbbr}}`
+* `{{toExponential}}`
+* `{{toFixed}}`
+* `{{toFloat}}`
+* `{{toInt}}`
+* `{{toPrecision}}`
+* `{{truncate}}`
+* `{{ul}}`
+* `{{unless_eq}}`
+* `{{unless_gt}}`
+* `{{unless_gteq}}`
+* `{{unless_lt}}`
+* `{{unless_lteq}}`
+* `{{uppercase}}`
 * `{{urlparse}}`
 * `{{urlresolve}}`
 * `{{value}}`
+* `{{withAfter}}`
+* `{{withBefore}}`
+* `{{withFirst}}`
+* `{{withLast}}`
+* `{{withSort}}`
 
 
 ### Helpers that need tests
@@ -225,7 +307,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Wednesday, October 16, 2013._
+_This file was generated on Monday, October 21, 2013._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
