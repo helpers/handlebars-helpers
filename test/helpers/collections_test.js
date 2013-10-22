@@ -274,6 +274,36 @@ describe('inArray', function() {
   });
 });
 
+describe('filter', function() {
+  describe('{{#filter collection "Fry"}} \n I\'m walking on sunshine! \n {{else}} \n I\'m walking in darkness. \n {{/filter}}', function() {
+    it('should conditionally render a block if a specified value is in the collection.', function() {
+      source = '{{#filter collection "Fry"}}I\'m walking on sunshine!{{else}}I\'m walking in darkness.{{/filter}}';
+      template = Handlebars.compile(source);
+      template(context).should.equal('I\'m walking on sunshine!');
+    });
+  });
+
+  describe('{{#filter collection "Fry" property="first"}} \n {{this.first}} \n {{else}} \n Not found! \n {{/filter}}', function() {
+    var context = {
+      collection: [
+        { first: 'Amy', last: 'Wong'},
+        { first: 'Bender'},
+        { title: 'Dr.', last: 'Zoidberg'}, 
+        { first: 'Fry'}, 
+        { first: 'Hermes', last: 'Conrad'},
+        { first: 'Leela'},
+        { title: 'Professor', last: 'Farnsworth'},
+        { first: 'Scruffy'}
+      ]
+    };
+    it('should render a block for each object that has a "first" property with the value "Fry".', function() {
+      source = '{{#filter collection "Fry" property="first"}}{{this.first}}{{else}}Not found!{{/filter}}';
+      template = Handlebars.compile(source);
+      template(context).should.equal('Fry');
+    });
+  });
+});
+
 describe('eachIndex', function() {
   describe('{{#eachIndex collection}} \n {{item}} is {{index}} \n {{/eachIndex}}', function() {
     it('should render the block using the array and each item\'s index.', function() {
