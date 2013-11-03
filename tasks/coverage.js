@@ -1,3 +1,11 @@
+/*
+ * 'coverage' plugin for Grunt.js
+ * http://github.com/assemble/handlebars-helpers
+ *
+ * Copyright (c) 2013 Jon Schlinkert
+ * MIT License
+ */
+
 
 // Node.js
 var fs = require('fs');
@@ -10,9 +18,9 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('coverage', 'Render a list of the differences between arrays. We use this to find helpers that have not been undocumented.', function() {
 
     var options = this.options({
-      read: false
+      compare: 'paths'
     });
-    options.compare = options.compare || '';
+    options.compareAgainst = options.compareAgainst || '';
 
     var sanitizePath = function (name, patterns) {
       var unwanted = [];
@@ -35,12 +43,8 @@ module.exports = function(grunt) {
 
       var srcMatches = [];
       grunt.file.expand(f.src).map(function(file) {
-        return {
-          name: sanitizePath(file),
-          content: options.srcPattern ? patternArray(options.srcPattern, file) : null
-        };
-      }).map(function(obj) {
-         _(obj.content).forEach(function(match) {
+        var content = options.srcPattern ? patternArray(options.srcPattern, file) : null;
+        content.forEach(function(match) {
           srcMatches.push(match);
         });
       });
@@ -49,18 +53,16 @@ module.exports = function(grunt) {
 
 
       var comparison = [];
-      grunt.file.expand(options.compare).map(function(file) {
-        return {
-          name: sanitizePath(file),
-          content: options.comparePattern ? patternArray(options.comparePattern, file) : null
-        };
-      }).map(function(obj) {
-        if(options.read === true) {
-           _(obj.content).forEach(function(match) {
+      grunt.file.expand(options.compareAgainst).map(function(file) {
+        var name = path.basename(sanitizePath(file));
+        var content = options.comparePattern ? patternArray(options.comparePattern, file) : null;
+
+        if(options.compare === 'content') {
+           content.forEach(function(match) {
             comparison.push(match);
           });
         } else {
-          comparison.push(path.basename(obj.name));
+          comparison.push(name);
         }
       });
 
@@ -68,9 +70,8 @@ module.exports = function(grunt) {
       grunt.verbose.writeln(_.flatten(comparison).length);
 
 
-
       var discrepancy = {};
-      var difference = options.keyname || 'difference';
+      var difference = options.namespace || 'difference';
       discrepancy[difference] = _.difference(_.flatten(srcMatches), _.flatten(comparison)).sort()
 
       grunt.verbose.writeln(discrepancy[difference].length);

@@ -65,7 +65,7 @@ module.exports = function(grunt) {
       documented: {
         options: {
           namespace: 'docsDifference',
-          compareAgainst: 'docs/helpers/*.md',
+          compareAgainst: 'docs/helpers/**/*.md',
           compareSanitize: []
         },
         src: ['lib/helpers/*.js'],
@@ -77,7 +77,7 @@ module.exports = function(grunt) {
           compare: 'content',
           compareAgainst: 'test/helpers/*.js',
           comparePattern: /^(?!  )describe\((?:'|")(.+)(?:'|").+/gm,
-          compareSanitize: [],
+          compareSanitize: []
         },
         src: ['lib/helpers/*.js'],
         dest: 'docs/notest.json',
@@ -93,7 +93,7 @@ module.exports = function(grunt) {
     compress: {
       zip: {
         options: {
-          archive: 'docs/docs.zip'
+          archive: 'docs/helpers.zip'
         },
         files: [
           {expand: true, cwd: 'docs/helpers/', src: ['**/*']}
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
 
   // Tests to be run
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('docs', ['coverage', 'readme', 'sync']);
+  grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', ['jshint', 'test', 'docs']);
