@@ -12,7 +12,6 @@ var path = require('path');
 require('should');
 var Handlebars = require('handlebars');
 var grunt      = require('grunt');
-var chalk      = require('chalk');
 
 var fixtures = path.join.bind(process.cwd(), './test/fixtures/helpers-layouts');
 var helpers  = path.join.bind(__dirname, '../../lib/helpers');
@@ -21,7 +20,7 @@ require(helpers('helpers-layouts')).register(Handlebars, {});
 
 var template;
 
-describe(chalk.bold('Should work:'), function() {
+describe('Should work:', function() {
 
   it('layouts', function(done) {
     Handlebars.registerPartial('layout', grunt.file.read(fixtures('layout.hbs')));

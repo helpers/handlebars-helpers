@@ -25,5 +25,4 @@ describe('loaded helpers', function() {
     var template = Handlebars.compile(source);
     var content = template();
   });
-
 });

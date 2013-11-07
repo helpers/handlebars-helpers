@@ -5,6 +5,7 @@ node_modules
 
 tmp
 vendor
+/test/spec/
 TODO.md
 *.rar
 

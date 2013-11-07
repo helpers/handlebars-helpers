@@ -12,7 +12,7 @@ var path = require('path');
 require('should');
 var Handlebars = require('handlebars');
 var grunt      = require('grunt');
-var chalk      = require('chalk');
+
 
 var fixtures = path.join.bind(process.cwd(), './test/fixtures');
 var helpers  = path.join.bind(__dirname, '../../lib/helpers');
@@ -30,12 +30,12 @@ var fixtureSimple     = '{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - t
 var fixtureCodeBlock  = '{{#markdown}}\n## Some Markdown\n\n```js\nvar foo="bar";\n```{{/markdown}}';
 
 // Expected
-var expectedSimple    = '<h2>Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
-var expectedCodeBlock = '<h2>Some Markdown</h2>\n<pre><code class="language-js"><span class="keyword">var</span> foo=<span class="string">"bar"</span>;</code></pre>\n';
+var expectedSimple    = '<h2 id="some-markdown">Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
+var expectedCodeBlock = '<h2 id="some-markdown">Some Markdown</h2>\n<pre><code class="language-js"><span class="keyword">var</span> foo=<span class="string">"bar"</span>;</code></pre>\n';
 
 var template;
 
-describe(chalk.bold('Should convert:'), function() {
+describe('Should convert:', function() {
 
   // Blocks of inline markdown
   describe('an inline block of markdown to HTML', function() {

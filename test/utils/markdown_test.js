@@ -12,7 +12,6 @@ var path = require('path');
 require('should');
 var Handlebars = require('handlebars');
 var expect     = require('chai').expect;
-var chalk      = require('chalk');
 
 // Local helpers
 var markdown = require('../../lib/utils/markdown').Markdown({
@@ -23,9 +22,9 @@ var markdown = require('../../lib/utils/markdown').Markdown({
 var fixtures = path.join.bind(process.cwd(), 'test/fixtures');
 var context;
 
-describe(chalk.bold('Convert Markdown to HTML: '), function() {
+describe('Should convert Markdown to HTML: ', function() {
   var simple         = '## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)';
-  var simpleExpected = '<h2>Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
+  var simpleExpected = '<h2 id="some-markdown">Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
 
   it('should convert a markdown string', function(done) {
     context = markdown.convert(simple);

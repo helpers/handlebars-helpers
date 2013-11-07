@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
-  "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. There are many interesting helpers in this project, including {{i18}}, {{markdown}}, {{relative}}, {{prettify}}, {{moment}}, and so on.",
-  "version": "0.3.16",
+  "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. There are many interesting helpers in this project, including {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.",
+  "version": "0.3.17",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
@@ -39,34 +39,30 @@
   },
   "dependencies": {
     "handlebars": "1.0.10",
-    "helper-prettify": "~0.1.7",
-    "helper-repeat": "~0.1.0",
-    "highlight.js": "~7.3.0",
+    "highlight.js": "~7.4.0",
     "iconv-lite": "~0.2.11",
-    "js-prettify": "~1.4.0",
-    "js-yaml": "~2.1.0",
-    "lodash": "~1.3.1",
-    "marked": "~0.2.9",
+    "js-yaml": "~2.1.3",
+    "lodash": "~2.2.1",
+    "marked": "~0.2.10",
     "matchdep": "~0.3.0",
     "matchkeys": "~0.1.3",
-    "mime": "~1.2.10",
     "minimatch": "~0.2.12",
-    "sort-object": "0.0.4",
+    "sort-object": "0.0.5",
     "to": "~0.2.9"
   },
   "devDependencies": {
-    "amdefine": "0.0.4",
-    "chai": "~1.5.0",
-    "chalk": "~0.2.1",
     "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.5.2",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-mocha-test": "~0.2.0",
-    "grunt-readme": "~0.1.5",
-    "should": "~1.2.2"
+    "grunt-contrib-jshint": "~0.7.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-readme": "~0.2.1",
+    "grunt-sync-pkg": "~0.1.1",
+    "handlebars-helper-prettify": "~0.1.11",
+    "handlebars-helper-repeat": "~0.1.1",
+    "should": "~2.0.2",
+    "chai": "~1.8.1"
   },
   "keywords": [
     "assemble helpers",
@@ -93,10 +89,10 @@
     "handlebars register helper",
     "handlebars view helper",
     "handlebars",
+    "handlebars-helper-prettify",
+    "handlebars-helper-repeat",
     "helper library",
     "helper",
-    "helper-prettify",
-    "helper-repeat",
     "helpers",
     "html helpers",
     "i18n helpers",
@@ -113,7 +109,6 @@
     "repeat helper",
     "strings helpers",
     "template helpers",
-    "url helpers",
-    "utilities"
+    "url helpers"
   ]
 }

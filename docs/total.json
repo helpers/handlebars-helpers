@@ -23,7 +23,6 @@
   "filter",
   "iterate",
   "forEach",
-  "each",
   "eachProperty",
   "eachIndex",
   "eachIndexPlusOne",

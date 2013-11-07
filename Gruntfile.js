@@ -47,23 +47,14 @@ module.exports = function(grunt) {
 
     // Run mocha tests.
     mochaTest: {
-      files: ['test/**/*_test.js']
-    },
-    mochaTestConfig: {
-      options: {
-        reporter: 'nyan'
+      tests: {
+        options: {
+          reporter: 'progress',
+        },
+        src: ['test/**/*_test.js']
       }
     },
 
-    // Unit tests.
-    nodeunit: {
-      tests: ['test/*_test.js']
-    },
-
-    // Clean test files before building or re-testing.
-    clean: {
-      helpers: ['lib/**/*']
-    },
 
     // Generate lists of helpers that need docs and tests.
     coverage: {
@@ -72,26 +63,33 @@ module.exports = function(grunt) {
         srcSanitize: ['_readme', '.md', '.hbs', 'helper-']
       },
       documented: {
+        options: {
+          namespace: 'docsDifference',
+          compareAgainst: 'docs/helpers/**/*.md',
+          compareSanitize: []
+        },
         src: ['lib/helpers/*.js'],
         dest: 'docs/undocumented.json',
-        options: {
-          keyname: 'docsDifference',
-          compare: '_docs/**/*.md.hbs',
-          compareSanitize: []
-        }
       },
       tests: {
+        options: {
+          namespace: 'testsDifference',
+          compare: 'content',
+          compareAgainst: 'test/helpers/*.js',
+          comparePattern: /^(?!  )describe\((?:'|")(.+)(?:'|").+/gm,
+          compareSanitize: []
+        },
         src: ['lib/helpers/*.js'],
         dest: 'docs/notest.json',
-        options: {
-          read: true,
-          keyname: 'testsDifference',
-          compare: 'test/helpers/*.js',
-          comparePattern: /^(?!  )describe\((?:'|")(.+)(?:'|").+/gm,
-          compareSanitize: [],
-        },
       }
     },
+
+    readme: {
+      options: {
+        metadata: ['<%= coverage.documented.dest %>', '<%= coverage.tests.dest %>']
+      }
+    },
+
     compress: {
       zip: {
         options: {
@@ -100,13 +98,12 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'docs/helpers/', src: ['**/*']}
         ]
-      }
+      },
     },
 
-    readme: {
-      options: {
-        metadata: ['<%= coverage.documented.dest %>', '<%= coverage.tests.dest %>']
-      }
+    // Clean test files before building or re-testing.
+    clean: {
+      helpers: ['lib/**/*']
     }
   });
 
@@ -118,8 +115,8 @@ module.exports = function(grunt) {
 
   // Tests to be run
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('docs', ['coverage', 'readme']);
+  grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test', 'coverage', 'readme']);
+  grunt.registerTask('default', ['jshint', 'test', 'docs']);
 };
