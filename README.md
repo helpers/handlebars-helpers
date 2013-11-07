@@ -70,7 +70,10 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 * `{{filter}}`
 * `{{forEach}}`
 * `{{formatDate}}`
+* `{{glob}}`
+* `{{globRaw}}`
 * `{{globWithContext}}`
+* `{{globRawWithContext}}`
 * `{{highlight}}`
 * `{{i18n}}`
 * `{{ifAny}}`
@@ -114,7 +117,9 @@ We can always use your help writing tests for helpers. Here is an up-to-date lis
 * `{{forEach}}`
 * `{{formatPhoneNumber}}`
 * `{{glob}}`
+* `{{globRaw}}`
 * `{{globWithContext}}`
+* `{{globRawWithContext}}`
 * `{{highlight}}`
 * `{{ifAny}}`
 * `{{if_eq}}`
