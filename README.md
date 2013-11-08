@@ -1,6 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> 120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. There are many interesting helpers in this project, including {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.
+> 117 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project. 
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -51,10 +51,9 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. Here is an up-to-date list of **38 helpers** that require documentation:
+We can always use your help documenting helpers. As of Thursday, November 7, 2013, **36 of 117 helpers** require documentation:
 
 * `{{arrayify}}`
-* `{{basename}}`
 * `{{block}}`
 * `{{content}}`
 * `{{count}}`
@@ -66,7 +65,6 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 * `{{expandMapping}}`
 * `{{extend}}`
 * `{{fileSize}}`
-* `{{filename}}`
 * `{{filter}}`
 * `{{forEach}}`
 * `{{formatDate}}`
@@ -96,7 +94,7 @@ We can always use your help documenting helpers. Here is an up-to-date list of *
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. Here is an up-to-date list of **45 helpers** that require tests:
+We can always use your help writing tests for helpers. As of Thursday, November 7, 2013, **45 of 117 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`

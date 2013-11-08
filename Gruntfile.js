@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 
     readme: {
       options: {
-        metadata: ['<%= coverage.documented.dest %>', '<%= coverage.tests.dest %>']
+        metadata: ['docs/*.json']
       }
     },
 
