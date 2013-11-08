@@ -25,6 +25,19 @@ var embeddedMarkdown = [
   '```\n'
 ].join('\n');
 
+var embeddedMarkdownBackticks = [
+  '```md',
+  '## Markdown\n',
+  'Code example\n',
+  '&#x60;&#x60;&#x60;js',
+  'var urlresolve = function (base, href) {',
+  '  return url.resolve(base, href);',
+  '};',
+  '&#x60;&#x60;&#x60;\n',
+  '[Click here](http://assemble.io) for more documentation.\n',
+  '```\n'
+].join('\n');
+
 var embeddedHTML = [
   '```html',
   '<!DOCTYPE html>',
@@ -42,14 +55,21 @@ var embeddedHTML = [
 
 describe('embed', function() {
   describe('{{embed "md"}}', function() {
-    it('should wrap code with triple ', function() {
+    it('should wrap embedded markdown with triple backticks', function() {
       source = '{{embed "test/fixtures/simple.md"}}';
       template = Handlebars.compile(source);
       template().should.equal(embeddedMarkdown);
     });
   });
+  describe('{{embed "md"}} with embedded code example', function() {
+    it('should wrap embedded markdown with triple backticks, and escape any backticks in the embedded code example.', function() {
+      source = '{{embed "test/fixtures/embedded.md"}}';
+      template = Handlebars.compile(source);
+      template().should.equal(embeddedMarkdownBackticks);
+    });
+  });
   describe('{{embed "html"}}', function() {
-    it('should wrap code with triple ', function() {
+    it('should wrap embedded HTML with triple backticks', function() {
       source = '{{embed "test/fixtures/index.html"}}';
       template = Handlebars.compile(source);
       template().should.equal(embeddedHTML);
