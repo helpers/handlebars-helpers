@@ -12,11 +12,6 @@ var Handlebars = require('handlebars');
 // Local helpers
 require('../../lib/helpers/helpers-path').register(Handlebars, {});
 
-
-// TODO:
-// relative using {{assets}} variable
-// relative using {{page}}/{{currentPage}} variable
-// absolute
 var context, source, template;
 
 describe('extname', function() {
@@ -35,51 +30,6 @@ describe('extname', function() {
       source = '{{extname "AUTHORS"}}';
       template = Handlebars.compile(source);
       template().should.equal('AUTHORS');
-    });
-  });
-});
-
-describe('basename', function() {
-  describe('{{basename src}}', function() {
-    it('should return the basename of a given file path', function() {
-      source = '{{basename "docs/toc.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('toc');
-    });
-    it('should return the basename of a given file path', function() {
-      source = '{{basename "docs/toc"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('toc');
-    });
-    it('should return the basename of a given file path', function() {
-      source = '{{basename "package.json"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('package');
-    });
-  });
-});
-
-describe('filename', function() {
-  describe('{{filename src}}', function() {
-    it('should return the filename of a given file path', function() {
-      source = '{{filename "docs/toc.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('toc.md');
-    });
-  });
-});
-
-describe('dirname', function() {
-  describe('{{dirname src}}', function() {
-    it('should return the directory name of the given file path', function() {
-      source = '{{dirname "docs/toc.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('docs');
-    });
-    it('should return the directory name of the given file path', function() {
-      source = '{{dirname "examples/result/md/path.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('examples/result/md');
     });
   });
 });
