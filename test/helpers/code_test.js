@@ -15,6 +15,48 @@ require('../../lib/helpers/helpers-code').register(Handlebars, {});
 
 var source, template;
 
+var embeddedMarkdown = [
+  '```md',
+  '## Some Markdown\n',
+  ' - one',
+  ' - two',
+  ' - three\n',
+  '[Click here](http://github.com)\n',
+  '```\n'
+].join('\n');
+
+var embeddedHTML = [
+  '```html',
+  '<!DOCTYPE html>',
+  '  <html lang="en">',
+  '  <head>',
+  '    <meta charset="UTF-8">',
+  '    <title>{{title}}</title>',
+  '  </head>',
+  '  <body>',
+  '    {{> foo }}',
+  '  </body>',
+  '</html>\n',
+  '```\n'
+].join('\n');
+
+describe('embed', function() {
+  describe('{{embed "md"}}', function() {
+    it('should wrap code with triple ', function() {
+      source = '{{embed "test/fixtures/simple.md"}}';
+      template = Handlebars.compile(source);
+      template().should.equal(embeddedMarkdown);
+    });
+  });
+  describe('{{embed "html"}}', function() {
+    it('should wrap code with triple ', function() {
+      source = '{{embed "test/fixtures/index.html"}}';
+      template = Handlebars.compile(source);
+      template().should.equal(embeddedHTML);
+    });
+  });
+});
+
 describe('jsfiddle', function() {
   describe('{{jsfiddle id}}', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {
@@ -41,4 +83,3 @@ describe('gist', function() {
     });
   });
 });
-
