@@ -1,7 +1,6 @@
 {
   "docsDifference": [
     "arrayify",
-    "basename",
     "block",
     "content",
     "count",
@@ -13,7 +12,6 @@
     "expandMapping",
     "extend",
     "fileSize",
-    "filename",
     "filter",
     "forEach",
     "formatDate",

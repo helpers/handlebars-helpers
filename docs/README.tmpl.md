@@ -1,6 +1,6 @@
 # {%= name %} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
 
-> {%= description %}
+> {%= total.length %} Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project. 
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -13,13 +13,13 @@
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. Here is an up-to-date list of **{%= docsDifference.length %} helpers** that require documentation:
+We can always use your help documenting helpers. As of {%= grunt.template.date("fullDate") %}, **{%= docsDifference.length %} of {%= total.length %} helpers** require documentation:
 {% if (docsDifference) { %}{% for(var helper in docsDifference) { %}
 * `{{{%= docsDifference[helper] %}}}`{% } %}{% } else { %}_(Everything is documented!)_
 {% } %}
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. Here is an up-to-date list of **{%= testsDifference.length %} helpers** that require tests:
+We can always use your help writing tests for helpers. As of {%= grunt.template.date("fullDate") %}, **{%= testsDifference.length %} of {%= total.length %} helpers** require tests:
 {% if (testsDifference) { %}{% for(var helper in testsDifference) { %}
 * `{{{%= testsDifference[helper] %}}}`{% } %}{% } else { %}
 _(Everything is documented!)_

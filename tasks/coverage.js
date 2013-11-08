@@ -41,11 +41,13 @@ module.exports = function(grunt) {
 
     this.files.forEach(function(f) {
 
-      var srcMatches = [];
+      var srcMatches = {
+        total: []
+      };
       grunt.file.expand(f.src).map(function(file) {
         var content = options.srcPattern ? patternArray(options.srcPattern, file) : null;
         content.forEach(function(match) {
-          srcMatches.push(match);
+          srcMatches.total.push(match);
         });
       });
       grunt.verbose.writeln(_.flatten(srcMatches));
@@ -72,7 +74,7 @@ module.exports = function(grunt) {
 
       var discrepancy = {};
       var difference = options.namespace || 'difference';
-      discrepancy[difference] = _.difference(_.flatten(srcMatches), _.flatten(comparison)).sort()
+      discrepancy[difference] = _.difference(_.flatten(srcMatches.total), _.flatten(comparison)).sort()
 
       grunt.verbose.writeln(discrepancy[difference].length);
 
