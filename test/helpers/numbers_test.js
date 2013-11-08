@@ -12,9 +12,20 @@ var Handlebars = require('handlebars');
 // Local helpers
 require('../../lib/helpers/helpers-numbers').register(Handlebars, {});
 
-// TODO: formatNumber
-
 var context, source, template;
+
+describe('formatPhoneNumber', function() {
+  describe('{{formatPhoneNumber value}}', function() {
+    it('Format a phone number.', function() {
+      source = '{{formatPhoneNumber value}}';
+      template = Handlebars.compile(source);
+      context = {
+        value: '8005551212'
+      };
+      template(context).should.equal('(800) 555-1212');
+    });
+  });
+});
 
 describe('toFixed', function() {
   describe('{{toFixed value}}', function() {
