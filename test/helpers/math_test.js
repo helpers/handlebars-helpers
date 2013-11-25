@@ -21,7 +21,7 @@ describe('add', function() {
     it('should return the sum of two numbers.', function() {
       var source = '{{add value 5}}';
       var template = Handlebars.compile(source);
-      template(context).should.equal(10);
+      template(context).should.equal('10');
     });
   });
 });
@@ -31,7 +31,7 @@ describe('subtract', function() {
     it('should return the difference of two numbers.', function() {
       var source = '{{subtract value 5}}';
       var template = Handlebars.compile(source);
-      template(context).should.equal(0);
+      template(context).should.equal('0');
     });
   });
 });
@@ -41,7 +41,7 @@ describe('divide', function() {
     it('should return the division of two numbers.', function() {
       var source = '{{divide value 5}}';
       var template = Handlebars.compile(source);
-      template(context).should.equal(1);
+      template(context).should.equal('1');
     });
   });
 });
@@ -51,7 +51,7 @@ describe('multiply', function() {
     it('should return the multiplication of two numbers.', function() {
       var source = '{{multiply value 5}}';
       var template = Handlebars.compile(source);
-      template(context).should.equal(25);
+      template(context).should.equal('25');
     });
   });
 });
@@ -63,7 +63,7 @@ describe('floor', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: 5.6
-      }).should.equal(5);
+      }).should.equal('5');
     });
   });
 });
@@ -75,7 +75,7 @@ describe('ceil', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: 5.6
-      }).should.equal(6);
+      }).should.equal('6');
     });
   });
 });
@@ -87,7 +87,7 @@ describe('round', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: 5.69
-      }).should.equal(6);
+      }).should.equal('6');
     });
   });
 });
@@ -99,7 +99,7 @@ describe('sum', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: 20
-      }).should.equal(167);
+      }).should.equal('167');
     });
   });
 });
@@ -109,7 +109,7 @@ describe('sum', function() {
     it('should return the sum of multiple numbers.', function() {
       var source = '{{sum 1 2 3}}';
       var template = Handlebars.compile(source);
-      template().should.equal(6);
+      template().should.equal('6');
     });
   });
 });
@@ -121,7 +121,7 @@ describe('sum', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: [1, 2, 3]
-      }).should.equal(6);
+      }).should.equal('6');
     });
   });
 });
@@ -133,7 +133,7 @@ describe('sum', function() {
       var template = Handlebars.compile(source);
       template(context = {
         value: [1, 2, 3]
-      }).should.equal(11);
+      }).should.equal('11');
     });
   });
 });

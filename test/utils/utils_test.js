@@ -88,7 +88,7 @@ describe('utils', function() {
       Handlebars.Utils.escapeExpression(undefined).should.equal('');
       Handlebars.Utils.escapeExpression(null).should.equal('');
       Handlebars.Utils.escapeExpression(false).should.equal('');
-      Handlebars.Utils.escapeExpression(0).should.equal(0);
+      Handlebars.Utils.escapeExpression(0).should.equal('0');
     });
   });
 

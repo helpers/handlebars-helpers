@@ -104,7 +104,7 @@ describe('toInt', function() {
       context = {
         value: '3cc'
       };
-      template(context).should.equal(3);
+      template(context).should.equal('3');
     });
   });
 });
@@ -117,7 +117,7 @@ describe('toFloat', function() {
       context = {
         value: '3.1cc'
       };
-      template(context).should.equal(3.1);
+      template(context).should.equal('3.1');
     });
   });
 });
