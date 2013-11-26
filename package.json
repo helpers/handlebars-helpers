@@ -38,7 +38,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "handlebars": "1.0.10",
+    "handlebars": "1.1.2",
     "highlight.js": "~7.4.0",
     "iconv-lite": "~0.2.11",
     "js-yaml": "~2.1.3",

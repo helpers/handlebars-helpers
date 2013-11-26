@@ -31,7 +31,7 @@ describe('first', function() {
     it('Should return an array with the first two items in a collection.', function() {
       source = '{{first collection 2}}';
       template = Handlebars.compile(source);
-      template(context).should.eql(['Amy Wong', 'Bender']);
+      template(context).should.eql(['Amy Wong', 'Bender'].toString());
     });
   });
 });
@@ -65,7 +65,7 @@ describe('last', function() {
     it('Should return an array with the last two items in a collection.', function() {
       source = '{{last collection 2}}';
       template = Handlebars.compile(source);
-      template(context).should.eql(['Professor Farnsworth', 'Scruffy']);
+      template(context).should.eql(['Professor Farnsworth', 'Scruffy'].toString());
     });
   });
 });
@@ -92,7 +92,7 @@ describe('after', function() {
     it('Should return all of the items in a collection after the specified count.', function() {
       source = '{{after collection 5}}';
       template = Handlebars.compile(source);
-      template(context).should.eql(['Leela', 'Professor Farnsworth', 'Scruffy']);
+      template(context).should.eql(['Leela', 'Professor Farnsworth', 'Scruffy'].toString());
     });
   });
 });
@@ -112,7 +112,7 @@ describe('before', function() {
     it('Should return all of the items in a collection before the specified count.', function() {
       source = '{{before collection 5}}';
       template = Handlebars.compile(source);
-      template(context).should.eql(['Amy Wong', 'Bender', 'Dr. Zoidberg']);
+      template(context).should.eql(['Amy Wong', 'Bender', 'Dr. Zoidberg'].toString());
     });
   });
 });
@@ -142,9 +142,12 @@ describe('sort', function() {
     it('Should return all items in a collection sorted in lexicographical order.', function() {
       source = '{{sort collection}}';
       template = Handlebars.compile(source);
-      template(context).should.eql(['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy']);
+      template(context).should.eql(['Amy Wong', 'Bender', 'Dr. Zoidberg', 'Fry', 'Hermes Conrad', 'Leela', 'Professor Farnsworth', 'Scruffy'].toString());
     });
   });
+
+  // this test and sort helper needs to be updated to do something
+  // other than just spitting out the string of the array.
   describe('{{sort collection property}}', function() {
     it('Should return all items in a collection sorted in by name.', function() {
       var source, template, _context;
@@ -175,7 +178,7 @@ describe('sort', function() {
           name: 'Leela',
           deliveries: 8021
         }
-      ]);
+      ].toString());
     });
   });
 });
@@ -229,7 +232,7 @@ describe('length', function() {
     it('Should return the length of the collection', function() {
       source = '{{length collection}}';
       template = Handlebars.compile(source);
-      template(context).should.equal(8);
+      template(context).should.equal('8');
     });
   });
 });
