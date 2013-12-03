@@ -64,6 +64,8 @@
     "js",
     "ul",
     "ol",
+    "napJs",
+    "napCss",
     "i18n",
     "inflect",
     "ordinalize",

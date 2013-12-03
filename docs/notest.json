@@ -29,6 +29,8 @@
     "joinAny",
     "js",
     "log",
+    "napCss",
+    "napJs",
     "noop",
     "ol",
     "parseJSON",
