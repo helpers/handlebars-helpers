@@ -34,7 +34,9 @@ module.exports = function(grunt) {
           expect: true,
           module: true,
           exports: true,
-          require: true
+          require: true,
+          before: true,
+          after: true
         }
       },
       all: [

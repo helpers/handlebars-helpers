@@ -1,6 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> 119 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project. 
+> 121 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project. 
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -51,7 +51,7 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Monday, November 25, 2013, **38 of 119 helpers** require documentation:
+We can always use your help documenting helpers. As of Tuesday, December 3, 2013, **40 of 121 helpers** require documentation:
 
 * `{{arrayify}}`
 * `{{block}}`
@@ -81,6 +81,8 @@ We can always use your help documenting helpers. As of Monday, November 25, 2013
 * `{{iterate}}`
 * `{{joinAny}}`
 * `{{js}}`
+* `{{napCss}}`
+* `{{napJs}}`
 * `{{prop}}`
 * `{{random}}`
 * `{{replace}}`
@@ -93,7 +95,7 @@ We can always use your help documenting helpers. As of Monday, November 25, 2013
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Monday, November 25, 2013, **46 of 119 helpers** require tests:
+We can always use your help writing tests for helpers. As of Tuesday, December 3, 2013, **48 of 121 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`
@@ -124,6 +126,8 @@ We can always use your help writing tests for helpers. As of Monday, November 25
 * `{{joinAny}}`
 * `{{js}}`
 * `{{log}}`
+* `{{napCss}}`
+* `{{napJs}}`
 * `{{noop}}`
 * `{{ol}}`
 * `{{parseJSON}}`
@@ -222,7 +226,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Monday, November 25, 2013._
+_This file was generated on Tuesday, December 3, 2013._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
