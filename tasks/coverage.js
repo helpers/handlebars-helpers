@@ -74,7 +74,7 @@ module.exports = function(grunt) {
 
       var discrepancy = {};
       var difference = options.namespace || 'difference';
-      discrepancy[difference] = _.difference(_.flatten(srcMatches.total), _.flatten(comparison)).sort()
+      discrepancy[difference] = _.difference(_.flatten(srcMatches.total), _.flatten(comparison)).sort();
 
       grunt.verbose.writeln(discrepancy[difference].length);
 
