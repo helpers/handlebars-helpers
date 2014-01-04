@@ -10,9 +10,12 @@
 
 require('should');
 var Handlebars = require('handlebars');
-require('../lib/helper-lib').register(Handlebars, {});
 
 describe('loaded helpers', function() {
+
+  before(function() {
+    require('../lib/helper-lib').register(Handlebars, {});
+  });
 
   it('should have prettify helper', function() {
     var source = '{{#prettify}}<div>Some HTML</div>{{/prettify}}';

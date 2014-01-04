@@ -15,12 +15,16 @@ var nap = require('nap');
 
 var helpers = path.join.bind(__dirname, '../../lib/helpers');
 
-require(helpers('helpers-html')).register(Handlebars, {});
+var options = {
+  assets: 'assets/'
+};
+
 
 describe('html', function() {
   describe('nap', function() {
 
     before(function() {
+      require(helpers('helpers-html')).register(Handlebars, options);
       nap({
         publicDir: path.resolve(__dirname, '../actual/'),
         mode: 'production',
@@ -48,14 +52,14 @@ describe('html', function() {
     it('should generate js file', function(){
       var template = '{{{napJs "test"}}}';
       template = Handlebars.compile(template)();
-      var script = nap.js('test');
+      var script = nap.js('test').replace('/assets/', options.assets);
       template.should.equal(script);
     });
 
     it('should generate css file', function(){
       var template = '{{{napCss "test"}}}';
       template = Handlebars.compile(template)();
-      var script = nap.css('test');
+      var script = nap.css('test').replace('/assets/', options.assets);
       template.should.equal(script);
     });
 
