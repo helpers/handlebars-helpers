@@ -51,11 +51,9 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Saturday, December 14, 2013, **40 of 121 helpers** require documentation:
+We can always use your help documenting helpers. As of Saturday, January 4, 2014, **37 of 121 helpers** require documentation:
 
 * `{{arrayify}}`
-* `{{block}}`
-* `{{content}}`
 * `{{count}}`
 * `{{css}}`
 * `{{decodeURI}}`
@@ -63,7 +61,6 @@ We can always use your help documenting helpers. As of Saturday, December 14, 20
 * `{{ellipsis}}`
 * `{{encodeURI}}`
 * `{{expandMapping}}`
-* `{{extend}}`
 * `{{fileSize}}`
 * `{{filter}}`
 * `{{forEach}}`
