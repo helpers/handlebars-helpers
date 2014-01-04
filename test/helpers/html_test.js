@@ -22,7 +22,7 @@ describe('html', function() {
 
     before(function() {
       nap({
-        publicDir: '/test/actual/',
+        publicDir: './test/actual/',
         mode: 'production',
         assets: {
           js: {
