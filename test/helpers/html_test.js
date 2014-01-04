@@ -26,7 +26,7 @@ describe('html', function() {
     before(function() {
       require(helpers('helpers-html')).register(Handlebars, options);
       nap({
-        publicDir: '/test/actual/',
+        publicDir: path.resolve(__dirname, '../actual/'),
         mode: 'production',
         assets: {
           js: {
