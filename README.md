@@ -51,7 +51,7 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Tuesday, December 3, 2013, **40 of 121 helpers** require documentation:
+We can always use your help documenting helpers. As of Saturday, January 4, 2014, **40 of 121 helpers** require documentation:
 
 * `{{arrayify}}`
 * `{{block}}`
@@ -95,7 +95,7 @@ We can always use your help documenting helpers. As of Tuesday, December 3, 2013
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Tuesday, December 3, 2013, **48 of 121 helpers** require tests:
+We can always use your help writing tests for helpers. As of Saturday, January 4, 2014, **48 of 121 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`
@@ -221,12 +221,12 @@ Thank you Dan Harper and Elving Rodriguez. Your hard work on many of these helpe
 + [twitter.com/doowb](http://twitter.com/doowb)
 
 ## License
-Copyright (c) 2013 Assemble, contributors.
+Copyright (c) 2014 Assemble, contributors.
 Released under the MIT license
 
 ***
 
-_This file was generated on Tuesday, December 3, 2013._
+_This file was generated on Saturday, January 4, 2014._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
