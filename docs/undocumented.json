@@ -1,8 +1,6 @@
 {
   "docsDifference": [
     "arrayify",
-    "block",
-    "content",
     "count",
     "css",
     "decodeURI",
@@ -10,7 +8,6 @@
     "ellipsis",
     "encodeURI",
     "expandMapping",
-    "extend",
     "fileSize",
     "filter",
     "forEach",
