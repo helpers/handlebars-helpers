@@ -80,14 +80,14 @@ describe('embed', function() {
 describe('jsfiddle', function() {
   describe('{{jsfiddle id}}', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {
-      source = '{{jsfiddle "UXbas"}}';
+      source = '{{jsfiddle id="UXbas"}}';
       template = Handlebars.compile(source);
       template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
   });
   describe('{{jsfiddle id tabs}}', function() {
     it('should return a jsfiddle embed link, with custom tabs assigned', function() {
-      source = '{{jsfiddle "UXbas" "html,css"}}';
+      source = '{{jsfiddle id="UXbas" tabs="html,css"}}';
       template = Handlebars.compile(source);
       template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
