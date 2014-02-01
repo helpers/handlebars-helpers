@@ -157,3 +157,13 @@ describe('toAbbr', function() {
     });
   });
 });
+
+describe('random', function() {
+  describe('{{random min max}}', function() {
+    it('should return a random number between two values.', function() {
+      source = '{{random 5 10}}';
+      template = Handlebars.compile(source);
+      template().should.be.within(5,10);
+    });
+  });
+});

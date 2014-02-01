@@ -103,17 +103,17 @@ describe('ellipsis', function() {
     });
   });
   describe('{{ellipsis string limit "..."}}', function() {
-    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
-      source = '{{ellipsis "Bender should not be allowed on tv." 31}}';
+    it('should return the string truncated by a specified length, providing a custom string to denote an omission.', function() {
+      source = '{{ellipsis "Bender should not be allowed on tv." 31 "..."}}';
       template = Handlebars.compile(source);
-      template().should.equal('Bender should not be allowed on');
+      template().should.equal('Bender should not be allowed...');
     });
   });
 });
 
 describe('truncate', function() {
   describe('{{truncate string 31}}', function() {
-    it('should return then string truncated by a specified length.', function() {
+    it('should return the string truncated by a specified length.', function() {
       source = '{{truncate "Bender should not be allowed on tv." 31}}';
       template = Handlebars.compile(source);
       template().should.equal('Bender should not be allowed on');
@@ -149,7 +149,7 @@ describe('hyphenate', function() {
 });
 
 describe('dashify', function() {
-  describe('{{hyphenate string}}', function() {
+  describe('{{dashify string}}', function() {
     it('should return the string with periods replaced with hyphens.', function() {
       source = '{{dashify "Bender.should.not.be.allowed.on.tv."}}';
       template = Handlebars.compile(source);
@@ -179,6 +179,36 @@ describe('startsWith', function() {
       template = Handlebars.compile(source);
       var context = {};
       template(context).should.equal('inverse block');
+    });
+  });
+});
+
+describe('count', function() {
+  describe('{{count string substring}}', function() {
+    it('should return the number of occurrances of a string, within a string.', function() {
+      source = '{{count "Death by Snu-Snu" "Snu"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('2');
+    });
+  });
+});
+
+describe('replace', function() {
+  describe('{{replace string}}', function() {
+    it('should replace occurrences of string "A" with string "B"', function() {
+      source = '{{replace "Bender Bending Rodriguez" "B" "M"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('Mender Mending Rodriguez');
+    });
+  });
+});
+
+describe('safeString', function() {
+  describe('{{safeString string}}', function() {
+    it('should return a Handlebars safeString', function() {
+      source = '{{safeString "<li>Bender Bending Rodriguez</li>"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('<li>Bender Bending Rodriguez</li>');
     });
   });
 });

@@ -25,3 +25,15 @@ describe('default', function() {
   });
 });
 
+describe('noop', function() {
+  describe('{{#noop}}{{message}}{{/noop}}', function() {
+    it('should be a noop', function() {
+      var source = '{{#noop}}{{message}}{{/noop}}';
+      var template = Handlebars.compile(source);
+      var context = {
+        message: 'This is a test'
+      };
+      template(context).should.equal('This is a test');
+    });
+  });
+});
