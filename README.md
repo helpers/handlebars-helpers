@@ -51,7 +51,7 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Saturday, January 18, 2014, **37 of 121 helpers** require documentation:
+We can always use your help documenting helpers. As of Saturday, February 1, 2014, **37 of 121 helpers** require documentation:
 
 * `{{arrayify}}`
 * `{{count}}`
@@ -92,17 +92,14 @@ We can always use your help documenting helpers. As of Saturday, January 18, 201
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Saturday, January 18, 2014, **48 of 121 helpers** require tests:
+We can always use your help writing tests for helpers. As of Saturday, February 1, 2014, **26 of 121 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`
 * `{{content}}`
-* `{{count}}`
 * `{{css}}`
 * `{{debug}}`
-* `{{decodeURI}}`
 * `{{eachProperty}}`
-* `{{encodeURI}}`
 * `{{expandJSON}}`
 * `{{expandMapping}}`
 * `{{expandYAML}}`
@@ -113,11 +110,6 @@ We can always use your help writing tests for helpers. As of Saturday, January 1
 * `{{globWithContext}}`
 * `{{highlight}}`
 * `{{ifAny}}`
-* `{{if_eq}}`
-* `{{if_gt}}`
-* `{{if_gteq}}`
-* `{{if_lt}}`
-* `{{if_lteq}}`
 * `{{inspect}}`
 * `{{iterate}}`
 * `{{joinAny}}`
@@ -125,23 +117,9 @@ We can always use your help writing tests for helpers. As of Saturday, January 1
 * `{{log}}`
 * `{{napCss}}`
 * `{{napJs}}`
-* `{{noop}}`
 * `{{ol}}`
-* `{{parseJSON}}`
-* `{{prop}}`
-* `{{random}}`
-* `{{replace}}`
-* `{{safeString}}`
-* `{{stringify}}`
-* `{{stripQuerystring}}`
 * `{{ul}}`
-* `{{unless_eq}}`
-* `{{unless_gt}}`
-* `{{unless_gteq}}`
-* `{{unless_lt}}`
-* `{{unless_lteq}}`
 * `{{urlparse}}`
-* `{{value}}`
 
 ### Developing Helpers
 
@@ -223,7 +201,7 @@ Released under the MIT license
 
 ***
 
-_This file was generated on Saturday, January 18, 2014._
+_This file was generated on Saturday, February 1, 2014._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
