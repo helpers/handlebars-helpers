@@ -16,6 +16,7 @@
     "globWithContext",
     "highlight",
     "ifAny",
+    "ifNth",
     "inspect",
     "iterate",
     "joinAny",
@@ -23,8 +24,6 @@
     "log",
     "napCss",
     "napJs",
-    "ol",
-    "ul",
     "urlparse"
   ]
 }
