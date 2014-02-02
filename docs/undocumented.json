@@ -18,6 +18,7 @@
     "highlight",
     "i18n",
     "ifAny",
+    "ifNth",
     "if_eq",
     "if_lt",
     "if_lteq",
