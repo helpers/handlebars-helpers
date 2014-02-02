@@ -52,8 +52,8 @@ describe('parseJSON', function() {
       var source = '{{#parseJSON jsonString}}{{name}}{{/parseJSON}}';
       var template = Handlebars.compile(source);
       var context = {
-        jsonString: "\{\"name\": \"Fry\"\}"
-      }
+        jsonString: "{\"name\": \"Fry\"}"
+      };
       template(context).should.equal('Fry');
     });
   });

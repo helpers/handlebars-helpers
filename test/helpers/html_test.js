@@ -31,7 +31,7 @@ describe('ul', function() {
           {firstName: 'Kif', lastName: 'Kroker'},
           {firstName: 'Zapp', lastName: 'Brannigan'}
         ]
-      }
+      };
       var template = Handlebars.compile(source);
       template(context).should.equal('<ul class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ul>');
     });
@@ -47,7 +47,7 @@ describe('ol', function() {
           {firstName: 'Kif', lastName: 'Kroker'},
           {firstName: 'Zapp', lastName: 'Brannigan'}
         ]
-      }
+      };
       var template = Handlebars.compile(source);
       template(context).should.equal('<ol class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ol>');
     });
