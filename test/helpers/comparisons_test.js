@@ -299,6 +299,39 @@ describe('if_lteq', function() {
   });
 });
 
+describe('ifNth', function() {
+
+  describe('{{#ifNth "2" @index}}', function() {
+  
+    it('should render a custom class on even rows', function() {
+
+      source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
+      template = Handlebars.compile(source);
+      context = {
+        items: [
+          { name: 'Philip J. Fry' },
+          { name: 'Turanga Leela' },
+          { name: 'Bender Bending Rodriguez' },
+          { name: 'Amy Wong' },
+          { name: 'Hermes Conrad' }
+        ]
+      };
+      var output = template(context);
+      console.log(output);
+      output.should.equal([
+          '<div >Philip J. Fry</div>',
+          '<div class="row-alternate">Turanga Leela</div>',
+          '<div >Bender Bending Rodriguez</div>',
+          '<div class="row-alternate">Amy Wong</div>',
+          '<div >Hermes Conrad</div>'
+        ].join(''));
+
+    });
+  
+  });
+
+});
+
 describe('unless_eq', function() {
   describe('{{#unless_eq number compare=8}}', function() {
     it('should render a block unless the value is equal to a given number.', function() {

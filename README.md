@@ -93,7 +93,7 @@ We can always use your help documenting helpers. As of Sunday, February 2, 2014,
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Sunday, February 2, 2014, **25 of 122 helpers** require tests:
+We can always use your help writing tests for helpers. As of Sunday, February 2, 2014, **24 of 122 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`
@@ -111,7 +111,6 @@ We can always use your help writing tests for helpers. As of Sunday, February 2,
 * `{{globWithContext}}`
 * `{{highlight}}`
 * `{{ifAny}}`
-* `{{ifNth}}`
 * `{{inspect}}`
 * `{{iterate}}`
 * `{{joinAny}}`

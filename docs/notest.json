@@ -16,7 +16,6 @@
     "globWithContext",
     "highlight",
     "ifAny",
-    "ifNth",
     "inspect",
     "iterate",
     "joinAny",
