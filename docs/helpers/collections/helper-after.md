@@ -1,6 +1,18 @@
-#### \{{after}}
-_Returns all of the items in the collection after the specified count._
-<br>Parameters: count `int` - How many items to omit from the beginning. (Required)
+---
+name: after
+block: false
+summary: Returns all of the items in a collection after the specified count as a comma-separated string.
+parameters:
+  - name: collection
+    type: collection
+    required: true
+  - name: count
+    type: number
+    description: Number of items to omit, counting from the beginning.
+    required: true
+---
+
+## Example
 
 Data:
 
@@ -16,6 +28,7 @@ Data:
   "Scruffy"
 ]
 ```
+
 Template:
 
 ```html
@@ -25,5 +38,5 @@ Template:
 Renders to:
 
 ```html
-Leela, Professor Farnsworth, Scruffy
+Leela,Professor Farnsworth,Scruffy
 ```
