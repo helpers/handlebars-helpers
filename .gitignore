@@ -9,3 +9,4 @@ vendor
 TODO.md
 *.rar
 
+/npm-debug.log
