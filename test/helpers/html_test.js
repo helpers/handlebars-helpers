@@ -15,10 +15,44 @@ var nap = require('nap');
 
 var helpers = path.join.bind(__dirname, '../../lib/helpers');
 
+// Local helpers
+require('../../lib/helpers/helpers-html').register(Handlebars, {});
+
 var options = {
   assets: 'assets/'
 };
 
+describe('ul', function() {
+  describe('{{#ul context options}}', function() {
+    it('should should return an unordered list', function() {
+      var source = '{{#ul data class="names"}}{{firstName}} {{lastName}}{{/ul}}';
+      var context = {
+        data: [
+          {firstName: 'Kif', lastName: 'Kroker'},
+          {firstName: 'Zapp', lastName: 'Brannigan'}
+        ]
+      };
+      var template = Handlebars.compile(source);
+      template(context).should.equal('<ul class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ul>');
+    });
+  });
+});
+
+describe('ol', function() {
+  describe('{{#ol context options}}', function() {
+    it('should should return an ordered list', function() {
+      var source = '{{#ol data class="names"}}{{firstName}} {{lastName}}{{/ol}}';
+      var context = {
+        data: [
+          {firstName: 'Kif', lastName: 'Kroker'},
+          {firstName: 'Zapp', lastName: 'Brannigan'}
+        ]
+      };
+      var template = Handlebars.compile(source);
+      template(context).should.equal('<ol class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ol>');
+    });
+  });
+});
 
 describe('html', function() {
   describe('nap', function() {

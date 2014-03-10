@@ -36,6 +36,7 @@
     "lt",
     "lte",
     "or",
+    "ifNth",
     "compare",
     "if_eq",
     "unless_eq",

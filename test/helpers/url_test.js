@@ -34,6 +34,36 @@ describe('urlresolve', function() {
   });
 });
 
+describe('stripQuerystring', function() {
+  describe('{{stripQuerystring url}}', function() {
+    it('should return a url without its query string.', function() {
+      source = '{{stripQuerystring "http://example.com?tests=true"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('http://example.com');
+    });
+  });
+});
+
+describe('encodeURI', function() {
+  describe('{{encodeURI uri}}', function() {
+    it('should return an encoded uri string.', function() {
+      source = '{{encodeURI "http://example.com?comment=Thyme &time=again"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('http%3A%2F%2Fexample.com%3Fcomment%3DThyme%20%26time%3Dagain');
+    });
+  });
+});
+
+describe('decodeURI', function() {
+  describe('{{decodeURI uri}}', function() {
+    it('should return an decoded uri string.', function() {
+      source = '{{decodeURI "http%3A%2F%2Fexample.com%3Fcomment%3DThyme%20%26time%3Dagain"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('http://example.com?comment=Thyme &amp;time=again');
+    });
+  });
+});
+
 // describe('urlparse', function() {
 //   describe('{{urlparse base href}}', function() {
 //     it('should take a URL string, and return an object stringified to JSON.', function() {
