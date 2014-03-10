@@ -90,6 +90,7 @@
     "sum",
     "default",
     "noop",
+    "withHash",
     "addCommas",
     "formatPhoneNumber",
     "random",
