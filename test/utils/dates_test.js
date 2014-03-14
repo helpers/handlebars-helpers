@@ -6,7 +6,7 @@
  */
 
 require('should');
-var Dates = require('../../lib/utils/dates');
+var Dates = require('../../src/utils/dates');
 
 describe('pad number', function() {
   describe('default padCharacter', function() {

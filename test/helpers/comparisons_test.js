@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-comparisons').register(Handlebars, {});
+require('../../src/helpers/helpers-comparisons').register(Handlebars, {});
 
 var source, template, context;
 
@@ -302,7 +302,7 @@ describe('if_lteq', function() {
 describe('ifNth', function() {
 
   describe('{{#ifNth "2" @index}}', function() {
-  
+
     it('should render a custom class on even rows', function() {
 
       source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
@@ -327,7 +327,7 @@ describe('ifNth', function() {
         ].join(''));
 
     });
-  
+
   });
 
 });

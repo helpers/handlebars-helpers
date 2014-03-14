@@ -14,7 +14,7 @@ var Handlebars = require('handlebars');
 var expect     = require('chai').expect;
 
 // Local helpers
-var markdown = require('../../lib/utils/markdown').Markdown({
+var markdown = require('../../src/utils/markdown').Markdown({
   gfm: true,
   highlight: 'auto'
 });

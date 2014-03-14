@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-inflections').register(Handlebars, {});
+require('../../src/helpers/helpers-inflections').register(Handlebars, {});
 
 
 describe('inflect', function() {

@@ -10,10 +10,10 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-data').register(Handlebars, {});
+require('../../src/helpers/helpers-data').register(Handlebars, {});
 
 // Local utils
-var Utils = require('../../lib/utils/utils');
+var Utils = require('../../src/utils/utils');
 
 
 describe('value', function() {

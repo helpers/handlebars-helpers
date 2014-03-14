@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-files').register(Handlebars, {});
+require('../../src/helpers/helpers-files').register(Handlebars, {});
 
 
 describe('fileSize', function() {

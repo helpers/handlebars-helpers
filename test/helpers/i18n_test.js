@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-i18n').register(Handlebars, {});
+require('../../src/helpers/helpers-i18n').register(Handlebars, {});
 
 var context = {
   language: 'en',

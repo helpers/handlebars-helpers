@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-url').register(Handlebars, {});
+require('../../src/helpers/helpers-url').register(Handlebars, {});
 
 var source, template;
 

@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-math').register(Handlebars, {});
+require('../../src/helpers/helpers-math').register(Handlebars, {});
 
 var context = {
   value: 5

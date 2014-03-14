@@ -10,7 +10,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-miscellaneous').register(Handlebars, {});
+require('../../src/helpers/helpers-miscellaneous').register(Handlebars, {});
 
 describe('default', function() {
   describe('{{default title "Not title available."}}', function() {

@@ -14,7 +14,7 @@ var Handlebars = require('handlebars');
 describe('loaded helpers', function() {
 
   before(function() {
-    require('../lib/helper-lib').register(Handlebars, {});
+    require('../src/register.js').register(Handlebars, {});
   });
 
   it('should have prettify helper', function() {

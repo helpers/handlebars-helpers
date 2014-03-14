@@ -11,7 +11,7 @@ require('should');
 var Handlebars = require('handlebars');
 
 // Local helpers
-require('../../lib/helpers/helpers-collections').register(Handlebars, {});
+require('../../src/helpers/helpers-collections').register(Handlebars, {});
 
 var source, template, context;
 

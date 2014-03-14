@@ -13,10 +13,10 @@ var expect = require('chai').expect;
 var Handlebars = require('handlebars');
 var nap = require('nap');
 
-var helpers = path.join.bind(__dirname, '../../lib/helpers');
+var helpers = path.join.bind(__dirname, '../../src/helpers');
 
 // Local helpers
-require('../../lib/helpers/helpers-html').register(Handlebars, {});
+require('../../src/helpers/helpers-html').register(Handlebars, {});
 
 var options = {
   assets: 'assets/'

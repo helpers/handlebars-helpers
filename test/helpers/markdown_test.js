@@ -15,7 +15,7 @@ var grunt      = require('grunt');
 
 
 var fixtures = path.join.bind(process.cwd(), './test/fixtures');
-var helpers  = path.join.bind(__dirname, '../../lib/helpers');
+var helpers  = path.join.bind(__dirname, '../../src/helpers');
 
 // Local helpers
 require(helpers('helpers-markdown')).register(Handlebars, {
@@ -31,7 +31,7 @@ var fixtureCodeBlock  = '{{#markdown}}\n## Some Markdown\n\n```js\nvar foo="bar"
 
 // Expected
 var expectedSimple    = '<h2 id="some-markdown">Some Markdown</h2>\n<ul>\n<li>one</li>\n<li>two</li>\n<li>three</li>\n</ul>\n<p><a href="http://github.com">Click here</a></p>\n';
-var expectedCodeBlock = '<h2 id="some-markdown">Some Markdown</h2>\n<pre><code class="language-js"><span class="keyword">var</span> foo=<span class="string">"bar"</span>;</code></pre>\n';
+var expectedCodeBlock = '<h2 id="some-markdown">Some Markdown</h2>\n<pre><code class="language-js"><span class="hljs-keyword">var</span> foo=<span class="hljs-string">"bar"</span>;\n</code></pre>\n';
 
 var template;
 
@@ -59,7 +59,7 @@ describe('Should convert:', function() {
   // With user-defined options
   describe('markdown to HTML, with user-defined', function() {
     it('langPrefix', function(done) {
-      require('../../lib/helpers/helpers-markdown').register(Handlebars, {
+      require('../../src/helpers/helpers-markdown').register(Handlebars, {
         marked: {langPrefix: 'language-'}
       });
       template = Handlebars.compile(fixtureCodeBlock);

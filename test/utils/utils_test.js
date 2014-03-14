@@ -7,8 +7,8 @@
 
 
 require('should');
-var Glob = require('../../lib/utils/glob');
-var Utils = require('../../lib/utils/utils');
+var Glob = require('../../src/utils/glob');
+var Utils = require('../../src/utils/utils');
 var Handlebars = require('handlebars');
 
 
