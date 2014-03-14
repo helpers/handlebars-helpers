@@ -1,19 +1,13 @@
 /**
- * Handlebars File Helpers
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
-'use strict';
-
-
-// node_modules
-var grunt = require('grunt');
-
 
 // Local utils
 var Utils = require('../utils/utils');
 var Glob = require('../utils/glob');
-
 
 
 module.exports.register = function (Handlebars, options) {

@@ -1,15 +1,16 @@
 /**
- * Handlebars Helpers: File Globbing Utils
- * http://github.com/assemble/handlebars-helpers
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
+
 'use strict';
 
 
 // node_modules
 var minimatch = require('minimatch');
-var grunt     = require('grunt');
+var file     = require('fs-utils');
 var _         = require('lodash');
 
 
@@ -18,14 +19,13 @@ var compareFn = require('./lib/compare');
 
 
 // The module to be exported.
-var Utils = module.exports = exports = {};
-Utils.toString = Object.prototype.toString;
+var utils = module.exports = exports = {};
+utils.toString = Object.prototype.toString;
 
 
 /**
  * Returns an array of all file paths that match the given wildcard patterns,
- * then reads each file and return its contents as a string, and last normalizes
- * all line linefeeds in the string
+ * then reads each file and return its contents as a string
  * @author: Jon Schlinkert <http://ghtub.com/jonschlinkert>
  *
  * @param {String|Array} src Globbing pattern(s).
@@ -37,24 +37,24 @@ Utils.toString = Object.prototype.toString;
  *     content: content of file
  *   }
  */
-Utils.globFiles = function (src, compare_fn) {
+
+utils.globFiles = function (src, compare_fn) {
   compare_fn = compareFn(compare_fn);
   var content = void 0;
   var index = 0;
-  return content = grunt.file.expand(src).map(function (path) {
+  return content = file.expand(src).map(function (path) {
     index += 1;
     return {
       index: index,
       path: path,
-      content: grunt.file.read(path)
+      content: file.readFileSync(path)
     };
   }).sort(compare_fn).map(function (obj) {
     return obj.content;
-  }).join(grunt.util.normalizelf(grunt.util.linefeed));
+  }).join('\n');
 };
 
-
-Utils.buildObjectPaths = function (obj) {
+utils.buildObjectPaths = function (obj) {
   var files = [];
   _.forOwn(obj, function (value, key) {
     var file = key;
@@ -78,8 +78,8 @@ Utils.buildObjectPaths = function (obj) {
 };
 
 
-Utils.globObject = function (obj, pattern) {
-  var files = Utils.buildObjectPaths(obj);
+utils.globObject = function (obj, pattern) {
+  var files = utils.buildObjectPaths(obj);
   var matches = files.filter(minimatch.filter(pattern));
   var result = {};
 

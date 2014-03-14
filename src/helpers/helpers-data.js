@@ -1,13 +1,14 @@
 /**
- * Handlebars Helpers: Data
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
-'use strict';
 
 
 // Node.js
 var fs = require('fs');
+var file = require('fs-utils');
 
 
 // node_modules
@@ -17,70 +18,57 @@ var _ = require('lodash');
 // Local utils
 var Utils = require('../utils/utils');
 
-
-// The module to be exported
-var helpers = {
+// Export helpers
+module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  var helpers = {};
 
   /**
-   * {{value}}
-   * Extract a value from a specific property
+   * {{value}} extract a value from the specified property
+   *
+   * @param  {String} filepath [description]
+   * @param  {String} prop     [description]
+   * @return {String}          [description]
+   */
+
+  helpers.value = function (filepath, prop) {
+    var str = file.readJSONSync(filepath);
+    var val = _.pick(str, prop);
+    var result = _.pluck(val);
+    return new Handlebars.SafeString(result);
+  };
+
+  /**
+   * {{prop}} extract a specific property
    * @param  {[type]} filepath [description]
    * @param  {[type]} prop     [description]
    * @return {[type]}          [description]
    */
-  value: function (filepath, prop) {
-    filepath = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    prop = _.pick(filepath, prop);
-    prop = _.pluck(prop);
-    return new Utils.safeString(prop);
-  },
 
-  /**
-   * {{prop}}
-   * Extract a specific property
-   * @param  {[type]} filepath [description]
-   * @param  {[type]} prop     [description]
-   * @return {[type]}          [description]
-   */
-  prop: function (filepath, prop) {
-    filepath = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    prop = _.pick(filepath, prop);
-    return new Utils.safeString(JSON.stringify(prop, null, 2));
-  },
-
-  /**
-   * {{stringify}}
-   * Stringify an object to JSON
-   * @param  {[type]} filepath [description]
-   * @return {[type]}          [description]
-   */
-  stringify: function (filepath) {
-    filepath = JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    return new Utils.safeString(JSON.stringify(filepath, null, 2));
-  },
+  helpers.prop = function (filepath, prop) {
+    var str = file.readJSONSync(filepath);
+    var result = JSON.stringify(_.pick(str, prop));
+    return new Handlebars.SafeString(result);
+  };
 
   /**
    * {{parseJSON}}
    * Contributed by github.com/keeganstreet
    */
-  parseJSON: function (data, options) {
+
+  helpers.parseJSON = function (data, options) {
     return options.fn(JSON.parse(data));
-  }
-
-};
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
+  };
 
   /**
-   * {{opt}} example helper
-   * Return a property from the `assemble.options` object
-   * @param  {[type]} key [description]
-   * @return {[type]}     [description]
+   * {{opt}} get a property from assemble.options
+   *
+   * @param {String} key The name of the property
+   * @return Returns value from `assemble.options`
    */
+
   helpers.opt = function(key) {
-    return options[key] || "";
+    return options[key] || '';
   };
 
   for (var helper in helpers) {

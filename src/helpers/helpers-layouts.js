@@ -1,15 +1,16 @@
 /**
- * Handlebars Helpers: Layout Helpers
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
-'use strict';
+
+
 
 /**
  * These helpers are inspired by handlebars-layouts.
  * https://github.com/shannonmoeller/handlebars-layouts *
  */
-
 
 // Export helpers
 module.exports.register = function (Handlebars, opts) {

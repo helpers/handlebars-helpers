@@ -1,18 +1,19 @@
 /**
- * Handlebars Helpers Utils
- * http://github.com/assemble/handlebars-helpers
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
-'use strict';
+
 
 
 /**
- * Accepts two objects (a,b) and returning 1 if a >= b otherwise -1.
+ * Compare function. Accepts two objects (a,b) and returning 1 if a >= b otherwise -1.
+ *
  * @param  {[type]} val [description]
  * @return {[type]}     [description]
  */
-function compareFn(val) {
+module.exports = function(val) {
   val = val || function (a, b) {
     if (a.index >= b.index) {
       return 1;
@@ -20,6 +21,4 @@ function compareFn(val) {
       return -1;
     }
   };
-}
-
-module.exports = exports = compareFn;
+};

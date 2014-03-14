@@ -1,3 +1,11 @@
+/**
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
+ * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
+ * Licensed under the MIT License (MIT)
+ */
+
+
 // node_modules
 var Handlebars = require('../helpers/helpers').Handlebars;
 var _          = require('lodash');

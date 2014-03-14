@@ -1,16 +1,16 @@
 /**
- * Handlebars Helpers: Utils
- * http://github.com/assemble/handlebars-helpers
+ * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
+ * Licensed under the MIT License (MIT)
  */
+
 'use strict';
 
 
 // Node.js
 var path = require('path');
 var fs   = require('path');
-
 
 // node_modules
 var minimatch = require('minimatch');

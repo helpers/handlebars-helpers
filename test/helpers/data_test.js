@@ -11,10 +11,16 @@ var Handlebars = require('handlebars');
 
 // Local helpers
 require('../../src/helpers/helpers-data').register(Handlebars, {});
+require('../../src/helpers/helpers-objects').register(Handlebars, {});
 
 // Local utils
 var Utils = require('../../src/utils/utils');
 
+var context = {
+  foo: {
+    bar: 'boo'
+  }
+};
 
 describe('value', function() {
   describe('{{value filepath prop}}', function() {
@@ -31,17 +37,7 @@ describe('prop', function() {
     it('should return a string representation of a JSON property', function() {
       var source = '{{prop "test/fixtures/payload.json" "name"}}';
       var template = Handlebars.compile(source);
-      template().should.equal('{\n  "name": "Philip J. Fry"\n}');
-    });
-  });
-});
-
-describe('stringify', function() {
-  describe('{{stringify filepath}}', function() {
-    it('should return a string representation of a JSON object', function() {
-      var source = '{{stringify "test/fixtures/payload.json"}}';
-      var template = Handlebars.compile(source);
-      template().should.equal('{\n  "name": "Philip J. Fry",\n  "age": 30,\n  "userid": "Fryster"\n}');
+      template().should.equal('{"name":"Philip J. Fry"}');
     });
   });
 });
