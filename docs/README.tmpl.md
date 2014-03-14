@@ -1,6 +1,6 @@
 # {%= name %} [![NPM version](https://badge.fury.io/js/{%= name %}.png)](http://badge.fury.io/js/{%= name %}) {% if (travis) { %} [![Build Status]({%= travis %}.png)]({%= travis %}){% } %}
 
-> {%= total.length %} Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project. 
+> {%= total.length %} Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project.
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -29,7 +29,7 @@ _(Everything is documented!)_
 
 {% if (changelog) { %}
 ## Release History
-{%= _.include("docs-changelog.md") %} {% } else { %}
+{%= _.include("release-history.md") %} {% } else { %}
  * {%= grunt.template.today('yyyy') %}   v0.1.0   First commit
 {% } %}
 
