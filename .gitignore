@@ -1,12 +1,42 @@
-node_modules
-*.sublime-*
+# Numerous always-ignore extensions
+.ruby-version
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.zip
+*.vi
+*~
 
-# Ignore the staging dir for docs
+# OS or Editor folders
+*.esproj
+*.sublime-project
+*.sublime-workspace
+._*
+.cache
+.DS_Store
+.idea
+.project
+.settings
+.tmproj
+nbproject
+Thumbs.db
 
+# Komodo
+*.komodoproject
+.komodotools
+
+# grunt-html-validation
+validation-status.json
+validation-report.json
+
+# Folders to ignore
 tmp
-vendor
-/test/spec/
+temp
 TODO.md
-*.rar
-
-/npm-debug.log
+vendor
+node_modules
+bower_components
