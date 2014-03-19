@@ -1,16 +1,12 @@
 {
   "docsDifference": [
-    "arrayify",
+    "'typeof'",
     "count",
     "css",
     "decodeURI",
-    "eachIndexPlusOne",
     "ellipsis",
     "encodeURI",
-    "expandMapping",
     "fileSize",
-    "filter",
-    "forEach",
     "formatDate",
     "globRaw",
     "globRawWithContext",
@@ -22,21 +18,15 @@
     "if_eq",
     "if_lt",
     "if_lteq",
-    "inspect",
-    "iterate",
-    "joinAny",
     "js",
     "napCss",
     "napJs",
-    "prop",
     "random",
     "replace",
     "safeString",
     "startsWith",
-    "stringify",
     "stripQuerystring",
     "urlparse",
-    "urlresolve",
-    "value"
+    "urlresolve"
   ]
 }

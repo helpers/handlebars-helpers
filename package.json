@@ -54,7 +54,9 @@
     "minimatch": "~0.2.14",
     "nap": "~0.7.17",
     "sort-object": "0.0.6",
-    "to": "~0.2.9"
+    "to": "~0.2.9",
+    "gray-matter": "~0.2.8",
+    "marked-extras": "~0.2.2"
   },
   "devDependencies": {
     "chai": "~1.9.0",

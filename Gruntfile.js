@@ -15,37 +15,30 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    metadata: {
+      year: '<%= grunt.template.today("yyyy") %>',
+      authors: 'Jon Schlinkert, Brian Woodward, contributors',
+      credit: grunt.file.read('./tmp/v0.6.0/src/credit.txt'),
+      banner: [
+        '/*!',
+        ' * <%= pkg.name %> v<%= pkg.version %> <<%= pkg.homepage %>>',
+        ' * Copyright (c) 2013-<%= metadata.year %>, <%= metadata.authors %>.',
+        ' * Source code licensed under the MIT license.',
+        '',
+        '<%= metadata.credit %>',
+        ' */\n\n'
+      ].join('\n')
+    },
+
+    // Lint JavaScripts
     jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        node: true,
-        globals: {
-          it: true,
-          describe: true,
-          expect: true,
-          module: true,
-          exports: true,
-          require: true,
-          before: true,
-          after: true
-        }
-      },
+      options: {jshintrc: '.jshintrc'},
       all: [
         'Gruntfile.js',
         'test/**/*.js',
-        'lib/**/*.js'
+        'src/**/*.js'
       ]
     },
-
 
     // Run mocha tests.
     mochaTest: {
@@ -57,11 +50,11 @@ module.exports = function(grunt) {
       }
     },
 
-
     // Generate lists of helpers that need docs and tests.
     coverage: {
       options: {
-        srcPattern: /\s*(.+((?!(')).)):\s*function/g,
+        srcPattern: /\s+([\S]+): function/g,
+        // srcPattern: /helpers\.([\S]+)/g,
         srcSanitize: ['_readme', '.md', '.hbs', 'helper-']
       },
       documented: {
@@ -70,7 +63,7 @@ module.exports = function(grunt) {
           compareAgainst: 'docs/helpers/**/*.md',
           compareSanitize: []
         },
-        src: ['lib/helpers/*.js'],
+        src: ['src/helpers/*.js'],
         dest: 'docs/undocumented.json',
       },
       tests: {
@@ -81,17 +74,36 @@ module.exports = function(grunt) {
           comparePattern: /^(?!  )describe\((?:'|")(.+)(?:'|").+/gm,
           compareSanitize: []
         },
-        src: ['lib/helpers/*.js'],
+        src: ['src/helpers/*.js'],
         dest: 'docs/notest.json',
       }
     },
 
+    // Build README
     readme: {
       options: {
         metadata: ['docs/*.json']
       }
     },
 
+    concat: {
+      options: {
+        banner: '<%= metadata.banner %>',
+        stripBanners: true
+      },
+      helpers: {
+        src: [
+          'tmp/v0.6.0/src/helpers.js',
+          'tmp/v0.6.0/src/utils.js',
+          'tmp/v0.6.0/src/helpers/*.js'
+        ],
+        dest: 'tmp/v0.6.0/lib/helpers.js'
+      }
+    },
+
+    // Create zip file from markdown docs. This is pulled
+    // down by Assemble and decompressed, then built into a
+    // single page: http://assemble.io/helpers/
     compress: {
       zip: {
         options: {
@@ -100,12 +112,12 @@ module.exports = function(grunt) {
         files: [
           {expand: true, cwd: 'docs/helpers/', src: ['**/*']}
         ]
-      },
+      }
     },
 
     // Clean test files before building or re-testing.
     clean: {
-      helpers: ['lib/**/*']
+      helpers: ['src/**/*']
     }
   });
 

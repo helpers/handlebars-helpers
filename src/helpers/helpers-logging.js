@@ -18,15 +18,15 @@ var sort  = require('sort-object');
 // Local utils
 var Utils = require('../utils/utils');
 
+module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  var helpers = {};
 
-// The module to be exported
-var helpers = {
-
-  log: function (value) {
+  helpers.log = function (value) {
     return console.log(value);
-  },
+  };
 
-  inspect: function(context, options) {
+  helpers.inspect = function(context, options) {
     var hash = options.hash || {};
     var ext = hash.ext || '.html';
     context = JSON.stringify(sort(context), null, 2);
@@ -37,22 +37,17 @@ var helpers = {
     var html = '<pre><code class="json">\n' + context + '\n</code></pre>';
     var result = Utils.switchOutput(ext, md, html);
     return new Utils.safeString(result);
-  },
+  };
 
-  debug: function (value) {
+  helpers.debug = function (value) {
     console.log('=================================');
     console.log('Context: ', this);
     if (!Utils.isUndefined(value)) {
       console.log('Value: ', value);
     }
     return console.log('=================================');
-  }
-};
+  };
 
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
   for (var helper in helpers) {
     if (helpers.hasOwnProperty(helper)) {
       Handlebars.registerHelper(helper, helpers[helper]);

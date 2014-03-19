@@ -11,9 +11,9 @@ var Utils = require('../utils/utils');
 var Dates = require('../utils/dates');
 
 
-
-// The module to be exported
-var helpers = {
+module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  var helpers = {};
 
   /**
    * {{formatData}}
@@ -22,24 +22,24 @@ var helpers = {
    * @param  {[type]} format [description]
    * @return {[type]}        [description]
    */
-  formatDate: function (date, format) {
+  helpers.formatDate = function (date, format) {
     date = new Date(date);
     return Dates.format(date, format);
-  },
+  };
 
   /**
    * {{now}}
    * @param  {[type]} format [description]
    * @return {[type]}        [description]
    */
-  now: function (format) {
+  helpers.now = function (format) {
     var date = new Date();
     if (Utils.isUndefined(format)) {
       return date;
     } else {
       return Dates.format(date, format);
     }
-  },
+  };
 
   /**
    * {{timeago}}
@@ -47,7 +47,7 @@ var helpers = {
    * @param  {[type]} date [description]
    * @return {[type]}      [description]
    */
-  timeago: function (date) {
+  helpers.timeago = function (date) {
     date = new Date(date);
     var seconds = Math.floor((new Date() - date) / 1000);
     var interval = Math.floor(seconds / 31536000);
@@ -65,13 +65,9 @@ var helpers = {
     } else {
       return Math.floor(seconds) + ' seconds ago';
     }
-  }
+  };
 
-};
 
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
   for (var helper in helpers) {
     if (helpers.hasOwnProperty(helper)) {
       Handlebars.registerHelper(helper, helpers[helper]);

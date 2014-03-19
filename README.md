@@ -1,6 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> 123 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project.
+> 87 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project.
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -52,19 +52,15 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Friday, March 14, 2014, **38 of 123 helpers** require documentation:
+We can always use your help documenting helpers. As of Friday, March 14, 2014, **28 of 87 helpers** require documentation:
 
-* `{{arrayify}}`
+* `{{'typeof'}}`
 * `{{count}}`
 * `{{css}}`
 * `{{decodeURI}}`
-* `{{eachIndexPlusOne}}`
 * `{{ellipsis}}`
 * `{{encodeURI}}`
-* `{{expandMapping}}`
 * `{{fileSize}}`
-* `{{filter}}`
-* `{{forEach}}`
 * `{{formatDate}}`
 * `{{globRaw}}`
 * `{{globRawWithContext}}`
@@ -76,47 +72,31 @@ We can always use your help documenting helpers. As of Friday, March 14, 2014, *
 * `{{if_eq}}`
 * `{{if_lt}}`
 * `{{if_lteq}}`
-* `{{inspect}}`
-* `{{iterate}}`
-* `{{joinAny}}`
 * `{{js}}`
 * `{{napCss}}`
 * `{{napJs}}`
-* `{{prop}}`
 * `{{random}}`
 * `{{replace}}`
 * `{{safeString}}`
 * `{{startsWith}}`
-* `{{stringify}}`
 * `{{stripQuerystring}}`
 * `{{urlparse}}`
 * `{{urlresolve}}`
-* `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Friday, March 14, 2014, **24 of 123 helpers** require tests:
+We can always use your help writing tests for helpers. As of Friday, March 14, 2014, **14 of 87 helpers** require tests:
 
-* `{{arrayify}}`
+* `{{'typeof'}}`
 * `{{block}}`
 * `{{content}}`
 * `{{css}}`
-* `{{debug}}`
-* `{{eachProperty}}`
-* `{{expandJSON}}`
-* `{{expandMapping}}`
-* `{{expandYAML}}`
 * `{{extend}}`
-* `{{forEach}}`
 * `{{globRaw}}`
 * `{{globRawWithContext}}`
 * `{{globWithContext}}`
 * `{{highlight}}`
 * `{{ifAny}}`
-* `{{inspect}}`
-* `{{iterate}}`
-* `{{joinAny}}`
 * `{{js}}`
-* `{{log}}`
 * `{{napCss}}`
 * `{{napJs}}`
 * `{{urlparse}}`

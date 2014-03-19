@@ -14,9 +14,9 @@ var _          = require('lodash');
 // Local utils
 var Utils      = require('../utils/utils');
 
-
-// The module to be exported
-var helpers = {
+module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  var helpers = {};
 
 
   /**
@@ -24,13 +24,13 @@ var helpers = {
    * @param  {Array}  array
    * @param  {Object} options
    */
-  any: function (array, options) {
+  helpers.any = function (array, options) {
     if (array.length > 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
 
   /**
@@ -39,9 +39,9 @@ var helpers = {
    * @param  {Number} count Number of items to exclude
    * @return {Array}        Array excluding the number of items specified
    */
-  after: function (array, count) {
+  helpers.after = function (array, count) {
     return array.slice(count);
-  },
+  };
 
 
   /**
@@ -52,14 +52,14 @@ var helpers = {
    * @param  {Ojbect} options
    * @return {Array}
    */
-  withAfter: function (array, count, options) {
+  helpers.withAfter = function (array, count, options) {
     array = array.slice(count);
     var result = '';
     for (var item in array) {
       result += options.fn(array[item]);
     }
     return result;
-  },
+  };
 
 
   /**
@@ -69,11 +69,11 @@ var helpers = {
    * @param  {[type]} data [description]
    * @return {[type]}      [description]
    */
-  arrayify: function (str) {
+  helpers.arrayify = function (str) {
     return str.split(",").map(function (tag) {
       return "\"" + tag + "\"";
     });
-  },
+  };
 
 
   /**
@@ -83,9 +83,9 @@ var helpers = {
    * @param  {[type]} count [description]
    * @return {[type]}       [description]
    */
-  before: function (array, count) {
+  helpers.before = function (array, count) {
     return array.slice(0, -count);
-  },
+  };
 
 
   /**
@@ -96,14 +96,14 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  withBefore: function (array, count, options) {
+  helpers.withBefore = function (array, count, options) {
     array = array.slice(0, -count);
     var result = '';
     for (var item in array) {
       result += options.fn(array[item]);
     }
     return result;
-  },
+  };
 
 
   /**
@@ -114,13 +114,13 @@ var helpers = {
    * @param  {[type]} count
    * @return {[type]}
    */
-  first: function (array, count) {
+  helpers.first = function (array, count) {
     if (Utils.isUndefined(count)) {
       return array[0];
     } else {
       return array.slice(0, count);
     }
-  },
+  };
 
   /**
    * {{withFirst}}
@@ -131,7 +131,7 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  withFirst: function(array, count, options) {
+  helpers.withFirst = function(array, count, options) {
     if (!Utils.isUndefined(array)) {
       array = Utils.result(array);
       if (!Utils.isUndefined(count)) {
@@ -151,7 +151,7 @@ var helpers = {
     } else {
       return console.error('{{withFirst}} takes at least one argument (array).');
     }
-  },
+  };
 
   /**
    * Returns the last item in a collection. Opposite of `first`.
@@ -159,13 +159,13 @@ var helpers = {
    * @param  {[type]} count [description]
    * @return {[type]}       [description]
    */
-  last: function (array, count) {
+  helpers.last = function (array, count) {
     if (Utils.isUndefined(count)) {
       return array[array.length - 1];
     } else {
       return array.slice(-count);
     }
-  },
+  };
 
   /**
    * Use the last item in a collection inside a block.
@@ -175,7 +175,7 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  withLast: function (array, count, options) {
+  helpers.withLast = function (array, count, options) {
     if (Utils.isUndefined(count)) {
       options = count;
       return options.fn(array[array.length - 1]);
@@ -187,7 +187,7 @@ var helpers = {
       }
       return result;
     }
-  },
+  };
 
   /**
    * Joins all elements of a collection into a string
@@ -196,9 +196,9 @@ var helpers = {
    * @param  {[type]} separator [description]
    * @return {[type]}           [description]
    */
-  join: function (array, separator) {
+  helpers.join = function (array, separator) {
     return array.join(Utils.isUndefined(separator) ? ' ' : separator);
-  },
+  };
 
 
   /**
@@ -220,7 +220,7 @@ var helpers = {
    *   {{join jobs delimiter=", " start="1" end="2"}}
    *
    */
-  joinAny: function (items, block) {
+  helpers.joinAny = function (items, block) {
     var delimiter = block.hash.delimiter || ",";
     var start = block.hash.start || 0;
     var len = (items ? items.length : 0);
@@ -246,10 +246,10 @@ var helpers = {
     } else {
       return [].concat(items).slice(start, end).join(delimiter);
     }
-  },
+  };
 
 
-  sort: function (array, field) {
+  helpers.sort = function (array, field) {
     if (Utils.isUndefined(field)) {
       return array.sort();
     } else {
@@ -257,10 +257,10 @@ var helpers = {
         return a[field] > b[field];
       });
     }
-  },
+  };
 
 
-  withSort: function (array, field, options) {
+  helpers.withSort = function (array, field, options) {
     array = _.cloneDeep(array);
     var getDescendantProp = function (obj, desc) {
       var arr = desc.split('.');
@@ -304,30 +304,30 @@ var helpers = {
       }
     }
     return result;
-  },
+  };
 
 
-  length: function (array) {
+  helpers.length = function (array) {
     return (!array) ? 0 : array.length;
-  },
+  };
 
 
-  lengthEqual: function (array, length, options) {
+  helpers.lengthEqual = function (array, length, options) {
     if (array.length === length) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
 
-  empty: function (array, options) {
+  helpers.empty = function (array, options) {
     if (array.length <= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
 
   /**
@@ -338,14 +338,14 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  inArray: function (array, value, options) {
+  helpers.inArray = function (array, value, options) {
     var _indexOf = require('../utils/lib/indexOf');
     if (_indexOf.call(array, value) >= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
 
   /**
@@ -355,7 +355,7 @@ var helpers = {
    * @param  {[type]} options [description]
    * @return {[type]}         [description]
    */
-  filter: function(array, value, options) {
+  helpers.filter = function(array, value, options) {
 
     var data = void 0;
     var content = '';
@@ -389,7 +389,7 @@ var helpers = {
       content = options.inverse(this);
     }
     return content;
-  },
+  };
 
   /**
    * {{iterate}}
@@ -403,7 +403,7 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  iterate: function (context, options) {
+  helpers.iterate = function (context, options) {
     var fn = options.fn;
     var inverse = options.inverse;
     var i = 0;
@@ -432,7 +432,7 @@ var helpers = {
     }
     if (i === 0) {ret = inverse(this);}
     return ret;
-  },
+  };
 
 
   /**
@@ -456,7 +456,7 @@ var helpers = {
    *     </a>{{#unless isLast}}, {{/unless}}
    *   {{/forEach}}
    */
-  forEach: function (array, fn) {
+  helpers.forEach = function (array, fn) {
     var total = array.length;
     var buffer = "";
     // Better performance: http://jsperf.com/for-vs-forEach/2
@@ -476,7 +476,7 @@ var helpers = {
     }
     // return the finished buffer
     return buffer;
-  },
+  };
 
 
   /**
@@ -488,7 +488,7 @@ var helpers = {
    * @param  {Object} options [description]
    * @return {[type]}         [description]
    */
-  eachProperty: function (context, options) {
+  helpers.eachProperty = function (context, options) {
     var content = (function () {
       var results = [];
       for (var key in context) {
@@ -501,7 +501,7 @@ var helpers = {
       return results;
     })();
     return content.join('');
-  },
+  };
 
 
   /**
@@ -515,7 +515,7 @@ var helpers = {
    *     {{item}} is {{index}}
    *   {{/eachIndex}}
    */
-  eachIndex: function (array, options) {
+  helpers.eachIndex = function (array, options) {
     var i;
     var len;
     var result = '';
@@ -528,7 +528,7 @@ var helpers = {
       });
     }
     return result;
-  },
+  };
 
   /**
    * {{eachIndexPlusOne}}
@@ -541,7 +541,7 @@ var helpers = {
    *     {{item}} is {{index}}
    *   {{/eachIndexPlusOne}}
    */
-  eachIndexPlusOne: function (array, options) {
+  helpers.eachIndexPlusOne = function (array, options) {
     var result = '';
     var len;
     var i;
@@ -554,15 +554,12 @@ var helpers = {
       });
     }
     return result;
-  }
+  };
 
-};
-
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
 
   for (var helper in helpers) {
-    Handlebars.registerHelper(helper, helpers[helper]);
+    if (helpers.hasOwnProperty(helper)) {
+      Handlebars.registerHelper(helper, helpers[helper]);
+    }
   }
-  return this;
 };

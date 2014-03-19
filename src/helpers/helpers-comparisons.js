@@ -5,101 +5,101 @@
  * Licensed under the MIT License (MIT)
  */
 
-
-// node_modules
 var _ = require('lodash');
 
 
-// The module to be exported
-var helpers = {
+module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  var helpers = {};
 
-  contains: function (str, pattern, options) {
+
+  helpers.contains = function (str, pattern, options) {
     if (str.indexOf(pattern) !== -1) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
-  and: function (a, b, options) {
+  helpers.and = function (a, b, options) {
     if (a && b) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  gt: function (value, test, options) {
+  helpers.gt = function (value, test, options) {
     if (value > test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  gte: function (value, test, options) {
+  helpers.gte = function (value, test, options) {
     if (value >= test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  is: function (value, test, options) {
+  helpers.is = function (value, test, options) {
     if (value === test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  isnt: function (value, test, options) {
+  helpers.isnt = function (value, test, options) {
     if (value !== test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  lt: function (value, test, options) {
+  helpers.lt = function (value, test, options) {
     if (value < test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
-  lte: function (value, test, options) {
+  helpers.lte = function (value, test, options) {
     if (value <= test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
   /**
    * Or
    * Conditionally render a block if one of the values is truthy.
    */
-  or: function (a, b, options) {
+  helpers.or = function (a, b, options) {
     if (a || b) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
   /**
    * ifNth
    * Conditionally render a block if mod(nr, v) is 0
    */
-  ifNth: function (nr, v, options) {
+  helpers.ifNth = function (nr, v, options) {
     v = v+1;
     if (v % nr === 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
   /**
    * {{#compare}}...{{/compare}}
@@ -122,7 +122,7 @@ var helpers = {
    *     The value is lower than 10
    *   {{/compare}}
    */
-  compare: function(left, operator, right, options) {
+  helpers.compare = function(left, operator, right, options) {
     /*jshint eqeqeq: false*/
 
     if (arguments.length < 3) {
@@ -158,7 +158,7 @@ var helpers = {
     } else {
       return options.inverse(this);
     }
-  },
+  };
 
 
   /**
@@ -172,12 +172,12 @@ var helpers = {
    *
    * @example: {{if_eq this compare=that}}
    */
-  if_eq: function (context, options) {
+  helpers.if_eq = function (context, options) {
     if (context === options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
   /**
    * {{unless_eq}}
@@ -189,12 +189,12 @@ var helpers = {
    *
    * @example: {{unless_eq this compare=that}}
    */
-  unless_eq: function (context, options) {
+  helpers.unless_eq = function (context, options) {
     if (context === options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  },
+  };
 
   /**
    * {{if_gt}}
@@ -206,12 +206,12 @@ var helpers = {
    *
    * @example: {{if_gt this compare=that}}
    */
-  if_gt: function (context, options) {
+  helpers.if_gt = function (context, options) {
     if (context > options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
   /**
    * {{unless_gt}}
@@ -223,12 +223,12 @@ var helpers = {
    *
    * @example: {{unless_gt this compare=that}}
    */
-  unless_gt: function (context, options) {
+  helpers.unless_gt = function (context, options) {
     if (context > options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  },
+  };
 
   /**
    * {{if_lt}}
@@ -240,12 +240,12 @@ var helpers = {
    *
    * @example: {{if_lt this compare=that}}
    */
-  if_lt: function (context, options) {
+  helpers.if_lt = function (context, options) {
     if (context < options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
   /**
    * {{unless_lt}}
@@ -257,12 +257,12 @@ var helpers = {
    *
    * @example: {{unless_lt this compare=that}}
    */
-  unless_lt: function (context, options) {
+  helpers.unless_lt = function (context, options) {
     if (context < options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  },
+  };
 
   /**
    * {{if_gteq}}
@@ -274,12 +274,12 @@ var helpers = {
    *
    * @example: {{if_gteq this compare=that}}
    */
-  if_gteq: function (context, options) {
+  helpers.if_gteq = function (context, options) {
     if (context >= options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
   /**
    * {{unless_gteq}}
@@ -291,12 +291,12 @@ var helpers = {
    *
    * @example: {{unless_gteq this compare=that}}
    */
-  unless_gteq: function (context, options) {
+  helpers.unless_gteq = function (context, options) {
     if (context >= options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  },
+  };
 
   /**
    * {{if_lteq}}
@@ -308,12 +308,12 @@ var helpers = {
    *
    * @example: {{if_lteq this compare=that}}
    */
-  if_lteq: function (context, options) {
+  helpers.if_lteq = function (context, options) {
     if (context <= options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  },
+  };
 
   /**
    * {{unless_lteq}}
@@ -325,12 +325,12 @@ var helpers = {
    *
    * @example: {{unless_lteq this compare=that}}
    */
-  unless_lteq: function (context, options) {
+  helpers.unless_lteq = function (context, options) {
     if (context <= options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  },
+  };
 
   /**
    * {{ifAny}}
@@ -343,7 +343,7 @@ var helpers = {
    *
    * @example: {{ifAny this compare=that}}
    */
-  ifAny: function () {
+  helpers.ifAny = function () {
     var argLength = arguments.length - 2;
     var content = arguments[argLength + 1];
     var success = true;
@@ -360,25 +360,20 @@ var helpers = {
     } else {
       return content.inverse(this);
     }
-  }
-};
+  };
 
-// Aliases
-helpers.ifeq       = helpers.if_eq;
-helpers.unlessEq   = helpers.unless_eq;
-helpers.ifgt       = helpers.if_gt;
-helpers.unlessGt   = helpers.unless_gt;
-helpers.iflt       = helpers.if_lt;
-helpers.unlessLt   = helpers.unless_lt;
-helpers.ifgteq     = helpers.if_gteq;
-helpers.unlessGtEq = helpers.unless_gteq;
-helpers.ifLtEq     = helpers.if_lteq;
-helpers.unlessLtEq = helpers.unless_lteq;
+  // Aliases
+  helpers.ifeq       = helpers.if_eq;
+  helpers.unlessEq   = helpers.unless_eq;
+  helpers.ifgt       = helpers.if_gt;
+  helpers.unlessGt   = helpers.unless_gt;
+  helpers.iflt       = helpers.if_lt;
+  helpers.unlessLt   = helpers.unless_lt;
+  helpers.ifgteq     = helpers.if_gteq;
+  helpers.unlessGtEq = helpers.unless_gteq;
+  helpers.ifLtEq     = helpers.if_lteq;
+  helpers.unlessLtEq = helpers.unless_lteq;
 
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
 
   for (var helper in helpers) {
     if (helpers.hasOwnProperty(helper)) {

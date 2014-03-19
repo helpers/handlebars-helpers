@@ -5,87 +5,62 @@
  * Licensed under the MIT License (MIT)
  */
 
-
-// node_modules
-var hljs  = require('highlight.js');
-var _     = require('lodash');
-
-
-// Local utils
-var Utils = require('../utils/utils');
-var Glob  = require('../utils/glob');
-
+var file = require('fs-utils');
+var matter = require('gray-matter');
+var marked = require('marked');
+var extras = require('marked-extras');
+var _ = require('lodash');
 
 // Export helpers
 module.exports.register = function (Handlebars, options) {
+  options = options || {};
+  options.marked = options.marked || {};
 
-  var opts = {
-    gfm: true,
-    tables: true,
-    breaks: false,
-    pedantic: false,
-    sanitize: false,
-    silent: false,
-    smartLists: true,
-    langPrefix: "language-",
-    highlight: function (code, lang) {
-      var res;
-      res = void 0;
-      if (!lang) {
-        return code;
-      }
-      switch (lang) {
-      case "js":
-        lang = "javascript";
-      }
-      try {
-        return res = hljs.highlight(lang, code).value;
-      } finally {
-        return res || code;
-      }
+  // Initialize `marked-extras`
+  extras.init(options.marked);
+
+  // Extend defaults from `marked-extras` with Gruntfile options
+  var markedOpts = _.extend({}, extras.markedDefaults, options.marked);
+
+  // Set marked.js options
+  marked.setOptions(markedOpts);
+
+  Handlebars.registerHelper("md", function (patterns, context, opts) {
+    opts = _.extend(options, opts || {});
+
+    _.extend(opts, opts.hash || {});
+
+    var filepath = this;
+    var str = file.readFileSync(filepath);
+    var page = matter(str);
+    var content = page.content;
+    var metadata = page.context;
+
+    var data = Handlebars.createFrame({filepath: filepath});
+
+    // Prepend or append any content in the given partial to the output
+    _.extend(markedOpts, context.data.root.markedOpts || {});
+
+    var append = '';
+    var prepend = '';
+
+    if(markedOpts.prepend) {
+      prepend = Handlebars.partials[markedOpts.prepend];
     }
-  };
-  opts = _.extend(opts, options.marked);
-  var Markdown = require('../utils/markdown').Markdown(opts);
+    if(markedOpts.append) {
+      append = Handlebars.partials[markedOpts.append];
+    }
 
-  /**
-   * {{markdown}}
-   *
-   * Block helper for embedding markdown in HTML and
-   * having it rendered to HTML at build time.
-   *
-   * @param  {[type]} options [description]
-   * @return {[type]}         [description]
-   * @example:
-   *   {{#markdown}}
-   *     # This is a title.
-   *   {{/markdown}}
-   * @result:
-   *   <h1>This is a title </h1>
-   */
-  Handlebars.registerHelper("markdown", function (options) {
-    return Markdown.convert(options.fn(this));
+    _.defaults(metadata, context.data.root);
+    var sections = [prepend, content, append].join('\n\n');
+
+    var fn = Handlebars.compile(sections);
+    var output = fn(metadata, {data: data});
+
+    return new Handlebars.SafeString(marked(output));
   });
 
-  if (typeof process !== 'undefined') {
-
-    /**
-     * {{md}}
-     *
-     * Include markdown content from the specified path,
-     * and render it to HTML.
-     *
-     * @param  {[type]} path [description]
-     * @return {[type]}      [description]
-     * @example:
-     *   {{md ../path/to/file.md}}
-     */
-    Handlebars.registerHelper("md", function (path) {
-      var content = Glob.globFiles(path);
-      var tmpl = Handlebars.compile(content);
-      var md = tmpl(this);
-      var html = Markdown.convert(md);
-      return new Utils.safeString(html);
-    });
-  }
+  Handlebars.registerHelper("markdown", function (options) {
+    return marked(options.fn(this));
+  });
 };
