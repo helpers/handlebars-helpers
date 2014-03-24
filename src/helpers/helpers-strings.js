@@ -95,6 +95,19 @@ var helpers = {
   },
 
   /**
+   * {{plusify}}
+   * Replace spaces in string with pluses.
+   * @author: Stephen Way <https://github.com/stephenway>
+   * @param  {[type]} str The input string
+   * @return {[type]}     Input string with spaces replaced by plus signs
+   */
+  plusify: function (str) {
+    if (str && typeof str === 'string') {
+      return str.split(' ').join('+');
+    }
+  },
+
+  /**
    * {{safeString}}
    * Output a Handlebars safeString
    * @param  {[type]} str [description]

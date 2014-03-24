@@ -39,6 +39,7 @@
     "dashify",
     "hyphenate",
     "lowercase",
+    "plusify",
     "safeString",
     "sentence",
     "titleize",

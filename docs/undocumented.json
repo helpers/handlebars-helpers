@@ -8,6 +8,7 @@
     "encodeURI",
     "i18n",
     "js",
+    "plusify",
     "random",
     "replace",
     "safeString",
