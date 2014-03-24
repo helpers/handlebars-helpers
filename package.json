@@ -43,11 +43,14 @@
   },
   "dependencies": {
     "fs-utils": "~0.3.6",
+    "gray-matter": "~0.2.8",
     "handlebars": "~2.0.0-alpha.2",
+    "helpers-utils": "~0.1.0"
     "highlight.js": "~8.0.0",
     "iconv-lite": "~0.2.11",
     "js-yaml": "~3.0.2",
     "lodash": "~2.4.1",
+    "marked-extras": "~0.2.2",
     "marked": "~0.3.2",
     "matchdep": "~0.3.0",
     "matchkeys": "~0.1.3",
@@ -55,12 +58,11 @@
     "nap": "~0.7.17",
     "sort-object": "0.0.6",
     "to": "~0.2.9",
-    "gray-matter": "~0.2.8",
-    "marked-extras": "~0.2.2"
   },
   "devDependencies": {
+    "browserify": "~3.33.0",
     "chai": "~1.9.0",
-    "grunt": "~0.4.4",
+    "grunt-browserify": "~2.0.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.7.0",
     "grunt-contrib-concat": "~0.3.0",
@@ -69,10 +71,12 @@
     "grunt-mocha-test": "~0.9.4",
     "grunt-readme": "~0.4.5",
     "grunt-sync-pkg": "~0.1.2",
+    "grunt": "~0.4.4",
     "handlebars-helper-prettify": "~0.2.1",
     "handlebars-helper-repeat": "~0.2.0",
+    "matchdep": "~0.3.0"
     "rimraf": "~2.2.6",
-    "should": "~3.1.3"
+    "should": "~3.1.3",
   },
   "keywords": [
     "assemble helpers",

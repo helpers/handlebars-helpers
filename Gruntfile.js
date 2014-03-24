@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     metadata: {
       year: '<%= grunt.template.today("yyyy") %>',
       authors: 'Jon Schlinkert, Brian Woodward, contributors',
-      credit: grunt.file.read('./tmp/v0.6.0/src/credit.txt'),
+      // credit: grunt.file.read('./tmp/v0.6.0/src/credit.txt'),
       banner: [
         '/*!',
         ' * <%= pkg.name %> v<%= pkg.version %> <<%= pkg.homepage %>>',
@@ -118,7 +118,17 @@ module.exports = function(grunt) {
     // Clean test files before building or re-testing.
     clean: {
       helpers: ['src/**/*']
+    },
+
+    // use browserify to build the web version
+    browserify: {
+      web: {
+        files: [
+          { src: 'src/**/*.js', dest: 'dist/handlebars-helpers.web.js' }
+        ]
+      }
     }
+
   });
 
   // Load plugins to provide the necessary tasks
