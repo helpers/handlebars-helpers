@@ -158,6 +158,30 @@ describe('dashify', function() {
   });
 });
 
+describe('plusify', function() {
+  describe('{{plusify emptyString}}', function() {
+    it('should return the empty string with no change.', function() {
+      source = '{{plusify ""}}';
+      template = Handlebars.compile(source);
+      template().should.equal('');
+    });
+  });
+  describe('{{plusify string}}', function() {
+    it('should return the string with no change.', function() {
+      source = '{{plusify "BenderShouldNotBeAllowedOnTv."}}';
+      template = Handlebars.compile(source);
+      template().should.equal('BenderShouldNotBeAllowedOnTv.');
+    });
+  });
+  describe('{{plusify string}}', function() {
+    it('should return the string with spaces replaced with pluses.', function() {
+      source = '{{plusify "Bender should not be allowed on tv."}}';
+      template = Handlebars.compile(source);
+      template().should.equal('Bender+should+not+be+allowed+on+tv.');
+    });
+  });
+});
+
 describe('startsWith', function() {
   describe('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}', function() {
     it('should render "Yes he is", from inside the block.', function() {

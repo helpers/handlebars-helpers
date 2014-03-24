@@ -106,6 +106,7 @@
     "capitalizeEach",
     "center",
     "dashify",
+    "plusify",
     "hyphenate",
     "lowercase",
     "safeString",
