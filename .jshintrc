@@ -12,6 +12,7 @@
   "node": true,
   "globals": {
     "it": true,
+    "xit": true,
     "define": true,
     "Ember": true,
     "window": true,

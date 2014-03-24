@@ -26,7 +26,7 @@ module.exports.register = function (Handlebars, options) {
   marked.setOptions(markedOpts);
 
   Handlebars.registerHelper("md", function (patterns, context, opts) {
-    opts = _.extend(options, opts || {});
+    opts = _.extend({}, options, opts || {});
 
     _.extend(opts, opts.hash || {});
 
@@ -39,7 +39,7 @@ module.exports.register = function (Handlebars, options) {
     var data = Handlebars.createFrame({filepath: filepath});
 
     // Prepend or append any content in the given partial to the output
-    _.extend(markedOpts, context.data.root.markedOpts || {});
+    _.extend({}, markedOpts, context.data.root.markedOpts || {});
 
     var append = '';
     var prepend = '';

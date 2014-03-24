@@ -5,14 +5,7 @@
     "content",
     "css",
     "extend",
-    "globRaw",
-    "globRawWithContext",
-    "globWithContext",
-    "highlight",
-    "ifAny",
     "js",
-    "napCss",
-    "napJs",
     "urlparse"
   ]
 }

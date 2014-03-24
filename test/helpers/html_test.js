@@ -11,7 +11,6 @@ var path = require('path');
 require('should');
 var expect = require('chai').expect;
 var Handlebars = require('handlebars');
-var nap = require('nap');
 
 var helpers = path.join.bind(__dirname, '../../src/helpers');
 
@@ -51,52 +50,6 @@ describe('ol', function() {
       var template = Handlebars.compile(source);
       template(context).should.equal('<ol class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ol>');
     });
-  });
-});
-
-describe('html', function() {
-  describe('nap', function() {
-
-    before(function() {
-      require(helpers('helpers-html')).register(Handlebars, options);
-      nap({
-        publicDir: path.resolve(__dirname, '../actual/'),
-        mode: 'production',
-        assets: {
-          js: {
-            test: [
-              '/test/fixtures/assets/js/**/*.js'
-            ]
-          },
-          css: {
-            test: [
-              '/test/fixtures/assets/styles/**/*.css'
-            ]
-          }
-        }
-      });
-      nap.package();
-    });
-
-    after(function(done) {
-      var filename = path.join(__dirname, '../actual/assets');
-      rimraf(filename, done);
-    });
-
-    it('should generate js file', function(){
-      var template = '{{{napJs "test"}}}';
-      template = Handlebars.compile(template)();
-      var script = nap.js('test').replace('/assets/', options.assets);
-      template.should.equal(script);
-    });
-
-    it('should generate css file', function(){
-      var template = '{{{napCss "test"}}}';
-      template = Handlebars.compile(template)();
-      var script = nap.css('test').replace('/assets/', options.assets);
-      template.should.equal(script);
-    });
-
   });
 });
 

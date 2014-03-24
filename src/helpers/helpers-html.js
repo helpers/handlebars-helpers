@@ -9,7 +9,6 @@
 // Local utils
 var Utils = require('../utils/utils');
 var HTML  = require('../utils/html');
-var nap = require('nap');
 
 
 module.exports.register = function (Handlebars, opts) {
@@ -96,14 +95,6 @@ module.exports.register = function (Handlebars, opts) {
       return ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map(function (item) {
         return "<li>" + (options.fn(item)) + "</li>";
       }).join("\n") + "</ol>";
-    },
-
-    napJs: function (packageName) {
-      return nap.js(packageName).replace('/assets/', opts.assets);
-    },
-
-    napCss: function (packageName) {
-      return nap.css(packageName).replace('/assets/', opts.assets);
     }
 
   };

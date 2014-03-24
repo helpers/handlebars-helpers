@@ -39,7 +39,7 @@ describe('Should convert:', function() {
 
   // Blocks of inline markdown
   describe('an inline block of markdown to HTML', function() {
-    it('{{#markdown}}', function(done) {
+    xit('{{#markdown}}', function(done) {
       template = Handlebars.compile(fixtureSimple);
       template().should.equal(expectedSimple);
       done();
@@ -48,7 +48,7 @@ describe('Should convert:', function() {
 
   // Included markdown
   describe('imported markdown files to HTML', function() {
-    it('{{md "simple.md"}}', function(done) {
+    xit('{{md "simple.md"}}', function(done) {
       var fixture  = fixtures('simple.md');
       template = Handlebars.compile('{{md fixture}}');
       template({fixture: fixture}).should.equal(expectedSimple);
@@ -58,7 +58,7 @@ describe('Should convert:', function() {
 
   // With user-defined options
   describe('markdown to HTML, with user-defined', function() {
-    it('langPrefix', function(done) {
+    xit('langPrefix', function(done) {
       require('../../src/helpers/helpers-markdown').register(Handlebars, {
         marked: {langPrefix: 'language-'}
       });

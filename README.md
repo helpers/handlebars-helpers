@@ -1,6 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.png)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.png)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> 87 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project.
+> 54 Handlebars helpers in 19 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any Handlebars project.
 
 ### [Visit the live docs →](http://assemble.io/helpers/)
 
@@ -52,7 +52,7 @@ Some helpers feature enhancements that are specifically intended for use with [A
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of Friday, March 14, 2014, **28 of 87 helpers** require documentation:
+We can always use your help documenting helpers. As of Monday, March 24, 2014, **15 of 54 helpers** require documentation:
 
 * `{{'typeof'}}`
 * `{{count}}`
@@ -60,21 +60,8 @@ We can always use your help documenting helpers. As of Friday, March 14, 2014, *
 * `{{decodeURI}}`
 * `{{ellipsis}}`
 * `{{encodeURI}}`
-* `{{fileSize}}`
-* `{{formatDate}}`
-* `{{globRaw}}`
-* `{{globRawWithContext}}`
-* `{{globWithContext}}`
-* `{{highlight}}`
 * `{{i18n}}`
-* `{{ifAny}}`
-* `{{ifNth}}`
-* `{{if_eq}}`
-* `{{if_lt}}`
-* `{{if_lteq}}`
 * `{{js}}`
-* `{{napCss}}`
-* `{{napJs}}`
 * `{{random}}`
 * `{{replace}}`
 * `{{safeString}}`
@@ -84,21 +71,14 @@ We can always use your help documenting helpers. As of Friday, March 14, 2014, *
 * `{{urlresolve}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of Friday, March 14, 2014, **14 of 87 helpers** require tests:
+We can always use your help writing tests for helpers. As of Monday, March 24, 2014, **7 of 54 helpers** require tests:
 
 * `{{'typeof'}}`
 * `{{block}}`
 * `{{content}}`
 * `{{css}}`
 * `{{extend}}`
-* `{{globRaw}}`
-* `{{globRawWithContext}}`
-* `{{globWithContext}}`
-* `{{highlight}}`
-* `{{ifAny}}`
 * `{{js}}`
-* `{{napCss}}`
-* `{{napJs}}`
 * `{{urlparse}}`
 
 ### Developing Helpers
@@ -181,7 +161,7 @@ Released under the MIT, Creative Commons Attribution 3.0 Unported licenses
 
 ***
 
-_This file was generated on Friday, March 14, 2014._
+_This file was generated on Monday, March 24, 2014._
 
 [assemble]: http://assemble.io/ "Assemble: the static site generator for Node.js, Grunt.js and Yeoman."
 [minimatch]: https://github.com/isaacs/minimatch "minimatch"
