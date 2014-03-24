@@ -59,9 +59,7 @@
     "to": "~0.2.9"
   },
   "devDependencies": {
-    "browserify": "~3.33.0",
     "chai": "~1.9.0",
-    "grunt-browserify": "~2.0.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-compress": "~0.7.0",
     "grunt-contrib-concat": "~0.3.0",

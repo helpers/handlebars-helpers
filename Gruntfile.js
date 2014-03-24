@@ -118,15 +118,6 @@ module.exports = function(grunt) {
     // Clean test files before building or re-testing.
     clean: {
       helpers: ['src/**/*']
-    },
-
-    // use browserify to build the web version
-    browserify: {
-      web: {
-        files: [
-          { src: 'src/**/*.js', dest: 'dist/handlebars-helpers.web.js' }
-        ]
-      }
     }
 
   });
