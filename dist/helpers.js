@@ -3,7 +3,13 @@
  * Copyright (c) 2013-2014, Jon Schlinkert, Brian Woodward, contributors.
  * Source code licensed under the MIT license.
 
-
+ * Thank you to Elving Rodriquez. Many of the helpers in this library
+ * originated in Swag. This library has been super useful because of
+ * your hard work!
+ *
+ * Swag <http://elving.github.com/swag/>
+ * Copyright 2012 Elving Rodriguez <http://elving.me/>
+ * MIT license <https://raw.github.com/elving/swag/master/LICENSE>
  */
 
 // Source File: ./src/node/prepend.js

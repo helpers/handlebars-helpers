@@ -18,7 +18,7 @@ module.exports = function(grunt) {
     metadata: {
       year: '<%= grunt.template.today("yyyy") %>',
       authors: 'Jon Schlinkert, Brian Woodward, contributors',
-      // credit: grunt.file.read('./tmp/v0.6.0/src/credit.txt'),
+      credit: grunt.file.read('./src/credit.txt'),
       banner: [
         '/*!',
         ' * <%= pkg.name %> v<%= pkg.version %> <<%= pkg.homepage %>>',
