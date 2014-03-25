@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -12,12 +13,6 @@
  * https://github.com/shannonmoeller/handlebars-layouts *
  */
 
-// Export helpers
-module.exports.register = function (Handlebars, opts) {
-  opts = opts || {};
-
-
-  var helpers = {
 
     /**
      * Extend a layout that contains block definitions
@@ -25,7 +20,7 @@ module.exports.register = function (Handlebars, opts) {
      * @param  {Object} options normal handlebars options
      * @return {String}         rendered layout
      */
-    extend: function (layout, options) {
+    Library.addHelper('extend', function (layout, options) {
       var output = null;
       var context = Object.create(this || null);
       var template = Handlebars.partials[layout];
@@ -44,7 +39,7 @@ module.exports.register = function (Handlebars, opts) {
 
       return template(context);
 
-    },
+    });
 
 
     /**
@@ -53,7 +48,7 @@ module.exports.register = function (Handlebars, opts) {
      * @param  {Object} options normal handlebars options
      * @return {String}         rendered block section
      */
-      block: function (name, options) {
+      Library.addHelper('block', function (name, options) {
         var block = null;
 
         this.blocks = this.blocks || {};
@@ -74,7 +69,7 @@ module.exports.register = function (Handlebars, opts) {
           default:
             return optionsFn(this);
         }
-      },
+      });
 
 
     /**
@@ -84,7 +79,7 @@ module.exports.register = function (Handlebars, opts) {
      * @param  {Object} options normal handlebars options
      * @return {String}         rendered content section
      */
-      content: function (name, options) {
+      Library.addHelper('content', function (name, options) {
         options = options || {};
         options.hash = options.hash || {};
         var mode = options.hash['mode'] || 'replace';
@@ -94,14 +89,5 @@ module.exports.register = function (Handlebars, opts) {
           mode: mode.toLowerCase(),
           fn: options.fn
         };
-      }
+      });
 
-  };
-
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};

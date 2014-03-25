@@ -1,0 +1,3 @@
+
+  Library.registerHelpers(config.Handlebars);
+};

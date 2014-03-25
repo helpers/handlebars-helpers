@@ -1,27 +1,19 @@
+
 /**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
  *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT)
  */
 
-// Local utils
-var Utils = require('../utils/utils');
-var file = require('fs-utils');
-var matter = require('gray-matter');
-var _ = require('lodash');
-
-module.exports.register = function (Handlebars, options) {
-  var opts = options || {};
-  var helpers = {};
 
   /**
    * {{#each (expand files)}} {{/each}}
    */
 
-  helpers.expand = function (patterns) {
+  Library.addHelper('expand', function (patterns) {
     return file.expand(patterns);
-  };
+  });
 
 
   /**
@@ -30,12 +22,12 @@ module.exports.register = function (Handlebars, options) {
    * YAML front matter is stripped.
    */
 
-  helpers.read = function (filepath, context, options) {
+  Library.addHelper('read', function (filepath, context, options) {
     var page = matter.read(filepath);
     var metadata = _.extend(context.data.root, page.context);
     var template = Handlebars.compile(page.content);
     return new Handlebars.SafeString(template(metadata));
-  };
+  });
 
 
   /**
@@ -46,7 +38,7 @@ module.exports.register = function (Handlebars, options) {
    * @param  {[type]} value
    * @return {[type]}
    */
-  helpers.fileSize = function (value) {
+  Library.addHelper('fileSize', function (value) {
     var bytes = parseInt(value, 10);
     if (isNaN(bytes)) {
       console.error("Handlebars helper fileSize couldn't parse '" + value + "'");
@@ -67,12 +59,5 @@ module.exports.register = function (Handlebars, options) {
       }
     }
     return new Utils.safeString(resValue + ' ' + metric[resInt + 1]);
-  };
+  });
 
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};

@@ -10,20 +10,23 @@ var path = require('path');
 
 // node_modules
 require('should');
-var Handlebars = require('handlebars');
 var grunt      = require('grunt');
 
-
 var fixtures = path.join.bind(process.cwd(), './test/fixtures');
-var helpers  = path.join.bind(__dirname, '../../src/helpers');
 
-// Local helpers
-require(helpers('helpers-markdown')).register(Handlebars, {
-  marked: {
-    gfm: true
+var Handlebars = require('handlebars');
+var helpers = require('../../dist/helpers');
+
+var config = {
+  Handlebars: Handlebars,
+  options: {
+    marked: {
+      gfm: true
+    }
   }
-});
+};
 
+helpers(config);
 
 // Fixtures
 var fixtureSimple     = '{{#markdown}}\n## Some Markdown\n\n - one\n - two\n - three\n\n[Click here](http://github.com)\n{{/markdown}}';
@@ -59,9 +62,6 @@ describe('Should convert:', function() {
   // With user-defined options
   describe('markdown to HTML, with user-defined', function() {
     xit('langPrefix', function(done) {
-      require('../../src/helpers/helpers-markdown').register(Handlebars, {
-        marked: {langPrefix: 'language-'}
-      });
       template = Handlebars.compile(fixtureCodeBlock);
       template().should.equal(expectedCodeBlock);
       done();

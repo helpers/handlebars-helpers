@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -5,15 +6,6 @@
  * Licensed under the MIT License (MIT)
  */
 
-var file = require('fs-utils');
-var matter = require('gray-matter');
-var marked = require('marked');
-var extras = require('marked-extras');
-var _ = require('lodash');
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
   options.marked = options.marked || {};
 
   // Initialize `marked-extras`
@@ -25,7 +17,7 @@ module.exports.register = function (Handlebars, options) {
   // Set marked.js options
   marked.setOptions(markedOpts);
 
-  Handlebars.registerHelper("md", function (patterns, context, opts) {
+  Library.addHelper('md', function (patterns, context, opts) {
     opts = _.extend({}, options, opts || {});
 
     _.extend(opts, opts.hash || {});
@@ -60,7 +52,6 @@ module.exports.register = function (Handlebars, options) {
     return new Handlebars.SafeString(marked(output));
   });
 
-  Handlebars.registerHelper("markdown", function (options) {
+  Library.addHelper('markdown', function (options) {
     return marked(options.fn(this));
   });
-};

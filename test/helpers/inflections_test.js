@@ -8,9 +8,13 @@
 // node_moduls
 require('should');
 var Handlebars = require('handlebars');
+var helpers = require('../../dist/helpers');
 
-// Local helpers
-require('../../src/helpers/helpers-inflections').register(Handlebars, {});
+var config = {
+  Handlebars: Handlebars
+};
+
+helpers(config);
 
 
 describe('inflect', function() {

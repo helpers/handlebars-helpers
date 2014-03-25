@@ -25,7 +25,7 @@ var YAML = to.format.yaml;
 
 
 // Internal libs.
-var Handlebars = require('../helpers/helpers').Handlebars;
+var Handlebars = require('handlebars');
 
 
 // Config object.

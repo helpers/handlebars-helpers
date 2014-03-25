@@ -8,9 +8,14 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var helpers = require('../../dist/helpers');
 
-// Local helpers
-require('../../src/helpers/helpers-fs').register(Handlebars, {});
+var config = {
+  Handlebars: Handlebars
+};
+
+helpers(config);
+
 
 
 describe('fileSize', function() {

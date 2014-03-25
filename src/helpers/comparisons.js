@@ -1,105 +1,98 @@
+
 /**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
  *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT)
  */
 
-var _ = require('lodash');
-
-
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-  var helpers = {};
-
-
-  helpers.contains = function (str, pattern, options) {
+  Library.addHelper('contains', function (str, pattern, options) {
     if (str.indexOf(pattern) !== -1) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
-  helpers.and = function (a, b, options) {
+  Library.addHelper('and', function (a, b, options) {
     if (a && b) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.gt = function (value, test, options) {
+  Library.addHelper('gt', function (value, test, options) {
     if (value > test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.gte = function (value, test, options) {
+  Library.addHelper('gte', function (value, test, options) {
     if (value >= test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.is = function (value, test, options) {
+  Library.addHelper('is', function (value, test, options) {
     if (value === test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.isnt = function (value, test, options) {
+  Library.addHelper('isnt', function (value, test, options) {
     if (value !== test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.lt = function (value, test, options) {
+  Library.addHelper('lt', function (value, test, options) {
     if (value < test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
-  helpers.lte = function (value, test, options) {
+  Library.addHelper('lte', function (value, test, options) {
     if (value <= test) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
   /**
    * Or
    * Conditionally render a block if one of the values is truthy.
    */
-  helpers.or = function (a, b, options) {
+  Library.addHelper('or', function (a, b, options) {
     if (a || b) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
   /**
    * ifNth
    * Conditionally render a block if mod(nr, v) is 0
    */
-  helpers.ifNth = function (nr, v, options) {
+  Library.addHelper('ifNth', function (nr, v, options) {
     v = v+1;
     if (v % nr === 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
   /**
    * {{#compare}}...{{/compare}}
@@ -122,7 +115,7 @@ module.exports.register = function (Handlebars, options) {
    *     The value is lower than 10
    *   {{/compare}}
    */
-  helpers.compare = function(left, operator, right, options) {
+  Library.addHelper('compare', function(left, operator, right, options) {
     /*jshint eqeqeq: false*/
 
     if (arguments.length < 3) {
@@ -158,7 +151,7 @@ module.exports.register = function (Handlebars, options) {
     } else {
       return options.inverse(this);
     }
-  };
+  });
 
 
   /**
@@ -172,12 +165,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{if_eq this compare=that}}
    */
-  helpers.if_eq = function (context, options) {
+  Library.addHelper('if_eq', function (context, options) {
     if (context === options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
   /**
    * {{unless_eq}}
@@ -189,12 +182,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{unless_eq this compare=that}}
    */
-  helpers.unless_eq = function (context, options) {
+  Library.addHelper('unless_eq', function (context, options) {
     if (context === options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  };
+  });
 
   /**
    * {{if_gt}}
@@ -206,12 +199,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{if_gt this compare=that}}
    */
-  helpers.if_gt = function (context, options) {
+  Library.addHelper('if_gt', function (context, options) {
     if (context > options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
   /**
    * {{unless_gt}}
@@ -223,12 +216,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{unless_gt this compare=that}}
    */
-  helpers.unless_gt = function (context, options) {
+  Library.addHelper('unless_gt', function (context, options) {
     if (context > options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  };
+  });
 
   /**
    * {{if_lt}}
@@ -240,12 +233,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{if_lt this compare=that}}
    */
-  helpers.if_lt = function (context, options) {
+  Library.addHelper('if_lt', function (context, options) {
     if (context < options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
   /**
    * {{unless_lt}}
@@ -257,12 +250,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{unless_lt this compare=that}}
    */
-  helpers.unless_lt = function (context, options) {
+  Library.addHelper('unless_lt', function (context, options) {
     if (context < options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  };
+  });
 
   /**
    * {{if_gteq}}
@@ -274,12 +267,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{if_gteq this compare=that}}
    */
-  helpers.if_gteq = function (context, options) {
+  Library.addHelper('if_gteq', function (context, options) {
     if (context >= options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
   /**
    * {{unless_gteq}}
@@ -291,12 +284,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{unless_gteq this compare=that}}
    */
-  helpers.unless_gteq = function (context, options) {
+  Library.addHelper('unless_gteq', function (context, options) {
     if (context >= options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  };
+  });
 
   /**
    * {{if_lteq}}
@@ -308,12 +301,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{if_lteq this compare=that}}
    */
-  helpers.if_lteq = function (context, options) {
+  Library.addHelper('if_lteq', function (context, options) {
     if (context <= options.hash.compare) {
       return options.fn(this);
     }
     return options.inverse(this);
-  };
+  });
 
   /**
    * {{unless_lteq}}
@@ -325,12 +318,12 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{unless_lteq this compare=that}}
    */
-  helpers.unless_lteq = function (context, options) {
+  Library.addHelper('unless_lteq', function (context, options) {
     if (context <= options.hash.compare) {
       return options.inverse(this);
     }
     return options.fn(this);
-  };
+  });
 
   /**
    * {{ifAny}}
@@ -343,7 +336,7 @@ module.exports.register = function (Handlebars, options) {
    *
    * @example: {{ifAny this compare=that}}
    */
-  helpers.ifAny = function () {
+  Library.addHelper('ifAny', function () {
     var argLength = arguments.length - 2;
     var content = arguments[argLength + 1];
     var success = true;
@@ -360,26 +353,17 @@ module.exports.register = function (Handlebars, options) {
     } else {
       return content.inverse(this);
     }
-  };
+  });
 
   // Aliases
-  helpers.ifeq       = helpers.if_eq;
-  helpers.unlessEq   = helpers.unless_eq;
-  helpers.ifgt       = helpers.if_gt;
-  helpers.unlessGt   = helpers.unless_gt;
-  helpers.iflt       = helpers.if_lt;
-  helpers.unlessLt   = helpers.unless_lt;
-  helpers.ifgteq     = helpers.if_gteq;
-  helpers.unlessGtEq = helpers.unless_gteq;
-  helpers.ifLtEq     = helpers.if_lteq;
-  helpers.unlessLtEq = helpers.unless_lteq;
-
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
-
+  Library.addHelper('ifeq',       Library.helpers['if_eq']);
+  Library.addHelper('unlessEq',   Library.helpers['unless_eq']);
+  Library.addHelper('ifgt',       Library.helpers['if_gt']);
+  Library.addHelper('unlessGt',   Library.helpers['unless_gt']);
+  Library.addHelper('iflt',       Library.helpers['if_lt']);
+  Library.addHelper('unlessLt',   Library.helpers['unless_lt']);
+  Library.addHelper('ifgteq',     Library.helpers['if_gteq']);
+  Library.addHelper('unlessGtEq', Library.helpers['unless_gteq']);
+  Library.addHelper('ifLtEq',     Library.helpers['if_lteq']);
+  Library.addHelper('unlessLtEq', Library.helpers['unless_lteq']);
 

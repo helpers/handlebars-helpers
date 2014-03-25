@@ -1,18 +1,11 @@
+
 /**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
  *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT)
  */
 
-// Local utils
-var Utils = require('../utils/utils');
-var Glob = require('../utils/glob');
-
-
-module.exports.register = function (Handlebars, options) {
-
-  var helpers = {};
 
   /**
    * {{glob "**"}} example helper
@@ -23,10 +16,10 @@ module.exports.register = function (Handlebars, options) {
    * @return {String}
    * @example {{ glob 'path/to/files/*.md' }}
    */
-  helpers.glob = function (src, compare_fn) {
+  Library.addHelper('glob', function (src, compare_fn) {
     var source = Glob.globFiles(src, compare_fn);
     return new Utils.safeString(source);
-  };
+  });
 
   /**
    * {{globRaw "**"}} example helper
@@ -37,10 +30,10 @@ module.exports.register = function (Handlebars, options) {
    * @return {String}
    * @example {{ glob 'path/to/files/*.md' }}
    */
-  helpers.globRaw = function (src, compare_fn) {
+  Library.addHelper('globRaw', function (src, compare_fn) {
     var source = Glob.globFiles(src, compare_fn);
     return source;
-  };
+  });
 
   /**
    * {{globWithContext "**"}} example helper
@@ -52,12 +45,12 @@ module.exports.register = function (Handlebars, options) {
    * @return {String}
    * @example {{ glob 'path/to/files/*.md' }}
    */
-  helpers.globWithContext = function (src, context, compare_fn) {
+  Library.addHelper('globWithContext', function (src, context, compare_fn) {
     var source = Glob.globFiles(src);
     var template = Handlebars.compile(source);
     var result = template(context);
     return new Utils.safeString(result);
-  };
+  });
 
   /**
    * {{globRawWithContext "**"}} example helper
@@ -69,18 +62,10 @@ module.exports.register = function (Handlebars, options) {
    * @return {String}
    * @example {{ glob 'path/to/files/*.md' }}
    */
-  helpers.globRawWithContext = function (src, context, compare_fn) {
+  Library.addHelper('globRawWithContext', function (src, context, compare_fn) {
     var source = Glob.globFiles(src);
     var template = Handlebars.compile(source);
     var result = template(context);
     return result;
-  };
-
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+  });
 

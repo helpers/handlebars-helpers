@@ -7,9 +7,14 @@
 
 
 // require('should');
-// var Handlebars = require('handlebars');
-// require('../../src/helpers/helpers-logging').register(Handlebars, {});
+//var Handlebars = require('handlebars');
+//var helpers = require('../../dist/helpers');
 
+//var config = {
+//  Handlebars: Handlebars
+//};
+
+//helpers(config);
 // var log = console ? console.log : function() {};
 // log.history = [];
 

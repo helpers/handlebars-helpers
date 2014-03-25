@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -6,32 +7,22 @@
  */
 
 
-// Local utils
-var Utils = require('../utils/utils');
-var HTML  = require('../utils/html');
-
-
-module.exports.register = function (Handlebars, opts) {
-  opts = opts || {};
-
-  // The module to be exported
-  var helpers = {
 
     /**
      * {{css}}
      * Add an array of <link></link> tags. Automatically resolves
-     * relative paths to `opts.assets` in the Assemble task.
+     * relative paths to `options.assets` in the Assemble task.
      * @param  {[type]} context [description]
      * @return {[type]}         [description]
      */
-    css: function (context) {
+    Library.addHelper('css', function (context) {
       if (!Array.isArray(context)) {
         context = [context];
       }
       return new Utils.safeString(context.map(function (item) {
         var ext = Utils.getExt(item);
-        var css = '<link rel="stylesheet" href="' + opts.assets + '/css/' + item + '">';
-        var less = '<link rel="stylesheet/less" href="' + opts.assets + '/less/' + item + '">';
+        var css = '<link rel="stylesheet" href="' + options.assets + '/css/' + item + '">';
+        var less = '<link rel="stylesheet/less" href="' + options.assets + '/less/' + item + '">';
         switch (ext) {
           case "less":
             return less;
@@ -41,21 +32,21 @@ module.exports.register = function (Handlebars, opts) {
             return css;
         }
       }).join("\n"));
-    },
+    });
 
     /**
      * {{js "src/to/*.js"}}
      * @param  {[type]} context [description]
      * @return {[type]}         [description]
      */
-    js: function (context) {
+    Library.addHelper('js', function (context) {
       if (!Array.isArray(context)) {
         context = [context];
       }
       return new Utils.safeString(context.map(function (item) {
         var ext = Utils.getExt(item);
-        var js = '<script src="' + opts.assets + '/js/' + item + '"></script>';
-        var coffee = '<script type="text/coffeescript" src="' + opts.assets + '/js/' + item + '"></script>';
+        var js = '<script src="' + options.assets + '/js/' + item + '"></script>';
+        var coffee = '<script type="text/coffeescript" src="' + options.assets + '/js/' + item + '"></script>';
         switch (ext) {
           case "js":
             return js;
@@ -65,7 +56,7 @@ module.exports.register = function (Handlebars, opts) {
             return js;
         }
       }).join("\n"));
-    },
+    });
 
     /**
      * {{#ul}}
@@ -73,14 +64,14 @@ module.exports.register = function (Handlebars, opts) {
      * {{/ul}}
      * Block helper for creating unordered lists.
      * @param  {[type]} context [description]
-     * @param  {[type]} options [description]
+     * @param  {[type]} opts    [description]
      * @return {[type]}         [description]
      */
-    ul: function (context, options) {
-      return ("<ul " + (HTML.parseAttributes(options.hash)) + ">") + context.map(function (item) {
-        return "<li>" + (options.fn(item)) + "</li>";
+    Library.addHelper('ul', function (context, opts) {
+      return ("<ul " + (HTML.parseAttributes(opts.hash)) + ">") + context.map(function (item) {
+        return "<li>" + (opts.fn(item)) + "</li>";
       }).join("\n") + "</ul>";
-    },
+    });
 
     /**
      * {{#ol}}
@@ -88,20 +79,12 @@ module.exports.register = function (Handlebars, opts) {
      * {{ol}}
      * Block helper for creating ordered lists.
      * @param  {[type]} context [description]
-     * @param  {[type]} options [description]
+     * @param  {[type]} opts    [description]
      * @return {[type]}         [description]
      */
-    ol: function (context, options) {
-      return ("<ol " + (HTML.parseAttributes(options.hash)) + ">") + context.map(function (item) {
-        return "<li>" + (options.fn(item)) + "</li>";
+    Library.addHelper('ol', function (context, opts) {
+      return ("<ol " + (HTML.parseAttributes(opts.hash)) + ">") + context.map(function (item) {
+        return "<li>" + (opts.fn(item)) + "</li>";
       }).join("\n") + "</ol>";
-    }
+    });
 
-  };
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};

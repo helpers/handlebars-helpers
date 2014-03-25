@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -5,16 +6,6 @@
  * Licensed under the MIT License (MIT)
  */
 
-// Node.js
-var path = require('path');
-
-
-// Local utils.
-var Utils = require('../utils/utils');
-
-
-// The module to be exported
-var helpers = {
 
   /**
    * {{relative}}
@@ -25,9 +16,9 @@ var helpers = {
    * @example:
    *   {{relative [from] [to]}}
    */
-  relative: function (a, b) {
+  Library.addHelper('relative', function (a, b) {
     return Utils.getRelativePath(a, b);
-  },
+  });
 
   /**
    * {{extname}}
@@ -39,19 +30,6 @@ var helpers = {
    * @returns:
    *   .md
    */
-  extname: function (ext) {
+  Library.addHelper('extname', function (ext) {
     return Utils.getExt(ext);
-  }
-
-};
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+  });

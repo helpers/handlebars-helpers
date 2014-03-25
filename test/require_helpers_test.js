@@ -7,25 +7,25 @@
  * Licensed under the MIT License (MIT).
  */
 
+var expect = require('chai').expect;
 
-require('should');
 var Handlebars = require('handlebars');
+var helpers = require('../dist/helpers');
+
+var config = {
+  Handlebars: Handlebars
+};
+
+helpers(config);
 
 describe('loaded helpers', function() {
 
-  before(function() {
-    require('../src/register.js').register(Handlebars, {});
+  xit('should have loaded helpers into Library', function() {
+    expect(helpers.Library.helpers.length).to.be.gt(0);
   });
 
-  it('should have prettify helper', function() {
-    var source = '{{#prettify}}<div>Some HTML</div>{{/prettify}}';
-    var template = Handlebars.compile(source);
-    var content = template();
-  });
-
-  it('should have repeat helper', function() {
-    var source = "{{#repeat '10'}}<div>Some HTML</div>{{/repeat}}";
-    var template = Handlebars.compile(source);
-    var content = template();
+  xit('should have loaded helpers into Handlebars', function() {
+    console.log(Handlebars);
+    expect(Handlebars.helpers.length).to.be.gt(0);
   });
 });

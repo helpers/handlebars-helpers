@@ -1,19 +1,11 @@
+
 /**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
+ * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
  *
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT)
  */
 
-
-// Local utils
-var Utils = require('../utils/utils');
-var Dates = require('../utils/dates');
-
-
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-  var helpers = {};
 
   /**
    * {{formatData}}
@@ -22,24 +14,24 @@ module.exports.register = function (Handlebars, options) {
    * @param  {[type]} format [description]
    * @return {[type]}        [description]
    */
-  helpers.formatDate = function (date, format) {
+  Library.addHelper('formatDate', function (date, format) {
     date = new Date(date);
     return Dates.format(date, format);
-  };
+  });
 
   /**
    * {{now}}
    * @param  {[type]} format [description]
    * @return {[type]}        [description]
    */
-  helpers.now = function (format) {
+  Library.addHelper('now', function (format) {
     var date = new Date();
     if (Utils.isUndefined(format)) {
       return date;
     } else {
       return Dates.format(date, format);
     }
-  };
+  });
 
   /**
    * {{timeago}}
@@ -47,7 +39,7 @@ module.exports.register = function (Handlebars, options) {
    * @param  {[type]} date [description]
    * @return {[type]}      [description]
    */
-  helpers.timeago = function (date) {
+  Library.addHelper('timeago', function (date) {
     date = new Date(date);
     var seconds = Math.floor((new Date() - date) / 1000);
     var interval = Math.floor(seconds / 31536000);
@@ -65,12 +57,5 @@ module.exports.register = function (Handlebars, options) {
     } else {
       return Math.floor(seconds) + ' seconds ago';
     }
-  };
+  });
 
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};

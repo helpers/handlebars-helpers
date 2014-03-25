@@ -9,9 +9,13 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var helpers = require('../../dist/helpers');
 
-// Local helpers
-require('../../src/helpers/helpers-code').register(Handlebars, {});
+var config = {
+  Handlebars: Handlebars
+};
+
+helpers(config);
 
 var source, template;
 

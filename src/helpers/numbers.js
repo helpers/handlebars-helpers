@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -6,26 +7,15 @@
  */
 
 
-// node_modules
-var _ = require('lodash');
-
-
-// Local utils.
-var Utils = require('../utils/utils');
-
-
-// The module to be exported
-var helpers = {
-
   /**
    * {{addCommas}}
    *
    * Add commas to numbers
    * @param {[type]} number [description]
    */
-  addCommas: function (number) {
+  Library.addHelper('addCommas', function (number) {
     return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-  },
+  });
 
  /**
   * {{formatPhoneNumber number}}
@@ -34,10 +24,10 @@ var helpers = {
   * @param  {Number} phoneNumber [8005551212]
   * @return {Number}             [(800) 555-1212]
   */
-  formatPhoneNumber: function (num) {
+  Library.addHelper('formatPhoneNumber', function (num) {
     num = num.toString();
     return "(" + num.substr(0, 3) + ") " + num.substr(3, 3) + "-" + num.substr(6, 4);
-  },
+  });
 
   /**
    * {{random}}
@@ -47,9 +37,9 @@ var helpers = {
    * @param  {[type]} max [description]
    * @return {[type]}     [description]
    */
-  random: function (min, max) {
+  Library.addHelper('random', function (min, max) {
     return _.random(min, max);
-  },
+  });
 
   /**
    * {{toAbbr}}
@@ -59,7 +49,7 @@ var helpers = {
    * @param  {[type]} digits [description]
    * @return {[type]}        [description]
    */
-  toAbbr: function (number, digits) {
+  Library.addHelper('toAbbr', function (number, digits) {
     if (Utils.isUndefined(digits)) {
       digits = 2;
     }
@@ -82,45 +72,33 @@ var helpers = {
       i--;
     }
     return number;
-  },
+  });
 
-  toExponential: function (number, fractions) {
+  Library.addHelper('toExponential', function (number, fractions) {
     if (Utils.isUndefined(fractions)) {
       fractions = 0;
     }
     return number.toExponential(fractions);
-  },
+  });
 
-  toFixed: function (number, digits) {
+  Library.addHelper('toFixed', function (number, digits) {
     if (Utils.isUndefined(digits)) {
       digits = 0;
     }
     return number.toFixed(digits);
-  },
+  });
 
-  toFloat: function (number) {
+  Library.addHelper('toFloat', function (number) {
     return parseFloat(number);
-  },
+  });
 
-  toInt: function (number) {
+  Library.addHelper('toInt', function (number) {
     return parseInt(number, 10);
-  },
+  });
 
-  toPrecision: function (number, precision) {
+  Library.addHelper('toPrecision', function (number, precision) {
     if (Utils.isUndefined(precision)) {
       precision = 1;
     }
     return number.toPrecision(precision);
-  }
-};
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+  });

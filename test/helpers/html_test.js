@@ -11,11 +11,13 @@ var path = require('path');
 require('should');
 var expect = require('chai').expect;
 var Handlebars = require('handlebars');
+var helpers = require('../../dist/helpers');
 
-var helpers = path.join.bind(__dirname, '../../src/helpers');
+var config = {
+  Handlebars: Handlebars
+};
 
-// Local helpers
-require('../../src/helpers/helpers-html').register(Handlebars, {});
+helpers(config);
 
 var options = {
   assets: 'assets/'

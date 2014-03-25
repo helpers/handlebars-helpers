@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -6,24 +7,17 @@
  */
 
 
-// Local utils
-var Utils    = require('../utils/utils');
-var _indexOf = require('../utils/lib/indexOf');
 
-
-// The module to be exported
-var helpers = {
-
-  inflect: function (count, singular, plural, include) {
+  Library.addHelper('inflect', function (count, singular, plural, include) {
     var word = count > 1 || count === 0 ? plural : singular;
     if (Utils.isUndefined(include) || include === false) {
       return word;
     } else {
       return "" + count + " " + word;
     }
-  },
+  });
 
-  ordinalize: function (value) {
+  Library.addHelper('ordinalize', function (value) {
     var _ref;
     var normal = Math.abs(Math.round(value));
     if (_ref = normal % 100, _indexOf.call([11, 12, 13], _ref) >= 0) {
@@ -40,15 +34,4 @@ var helpers = {
         return "" + value + "th";
       }
     }
-  }
-};
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+  });

@@ -1,28 +1,12 @@
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
+
+  /**
+  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
+  *
+  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
+  * Licensed under the MIT License (MIT)
+  */
 
 
-// Node.js
-var path = require('path');
-var file = require('fs-utils');
-
-// node_modules
-var Handlebars = require('../helpers/helpers').Handlebars;
-
-
-// Local utils
-var utils = require('../utils/utils');
-var html = require('../utils/html');
-var Glob = require('../utils/glob');
-
-
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-  var helpers = {};
 
   /**
    * {{embed}}
@@ -40,7 +24,7 @@ module.exports.register = function (Handlebars, options) {
    *   {{embed 'path/to/file.hbs' 'html'}}
    */
 
-  helpers.embed = function (src, lang) {
+  Library.addHelper('embed', function (src, lang) {
     var content = Glob.globFiles(src);
     var ext = path.extname(src).replace(/^(\.)/gm, '');
     var output;
@@ -82,14 +66,14 @@ module.exports.register = function (Handlebars, options) {
     }
     var result = '```' + lang + '\n' + output + '\n```\n';
     return new utils.safeString(result);
-  };
+  });
 
   /**
    * {{jsFiddle}}
    * Embed a jsFiddle, second parameter sets tabs
    * @usage: {{ jsfiddle [id] [tabs] }}
    */
-  helpers.jsfiddle = function (options) {
+  Library.addHelper('jsfiddle', function (options) {
     var hash = options.hash || {};
     hash.id = 'http://jsfiddle.net/' + (hash.id || '');
     hash.width = hash.width || '100%';
@@ -104,9 +88,9 @@ module.exports.register = function (Handlebars, options) {
     delete hash.tabs;
     delete hash.skin;
 
-    var attrs = html.parseAttributes(hash);
+    var attrs = HTML.parseAttributes(hash);
     return new Handlebars.SafeString('<iframe ' + attrs + '></iframe>');
-  };
+  });
 
   /**
    * {{gist}}
@@ -116,17 +100,9 @@ module.exports.register = function (Handlebars, options) {
    * @param  {String} file [description]
    * @usage: {{ gist [id] [file] }}
    */
-  helpers.gist = function (id, file) {
+  Library.addHelper('gist', function (id, file) {
     file = file || '';
     var result = '<script src="https://gist.github.com/' + id + '.js"></script>';
     return new Handlebars.SafeString(result);
-  };
+  });
 
-
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};

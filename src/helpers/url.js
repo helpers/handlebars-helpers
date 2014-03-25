@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -6,23 +7,10 @@
  */
 
 
-// Node.js
-var url   = require('url');
 
-// Local utils
-var Utils = require('../utils/utils');
-
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-
-  // The module to be exported
-  var helpers = {
-
-    stripQuerystring: function (url) {
+    Library.addHelper('stripQuerystring', function (url) {
       return url.split("?")[0];
-    },
+    });
 
     /**
      * {{encodeURI}}
@@ -35,9 +23,9 @@ module.exports.register = function (Handlebars, options) {
      * @param  {String} uri: The un-encoded string
      * @return {String}      The endcoded string.
      */
-    encodeURI: function (uri) {
+    Library.addHelper('encodeURI', function (uri) {
       return encodeURIComponent(uri);
-    },
+    });
 
     /**
      * {{decodeURI}}
@@ -49,9 +37,9 @@ module.exports.register = function (Handlebars, options) {
      * @param  {[type]} encodedURI [description]
      * @return {[type]}            [description]
      */
-    decodeURI: function (encodedURI) {
+    Library.addHelper('decodeURI', function (encodedURI) {
       return decodeURIComponent(encodedURI);
-    },
+    });
 
     /**
      * {{urlresolve}}
@@ -63,9 +51,9 @@ module.exports.register = function (Handlebars, options) {
      * @param  {[type]} href [description]
      * @return {[type]}      [description]
      */
-    urlresolve: function (base, href) {
+    Library.addHelper('urlresolve', function (base, href) {
       return url.resolve(base, href);
-    },
+    });
 
     /**
      * {{urlparse}}
@@ -79,15 +67,7 @@ module.exports.register = function (Handlebars, options) {
      * @param  {[type]} query [description]
      * @return {[type]}       [description]
      */
-    urlparse: function (path, type, query) {
+    Library.addHelper('urlparse', function (path, type, query) {
       var result = Utils.stringifyObj(url.parse(path), type, query);
       return new Handlebars.safeString(result);
-    }
-  };
-
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+    });

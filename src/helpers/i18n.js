@@ -1,3 +1,4 @@
+
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
  *
@@ -5,9 +6,6 @@
  * Licensed under the MIT License (MIT)
  */
 
-
-// The module to be exported
-var helpers = {
 
 
   /**
@@ -18,7 +16,7 @@ var helpers = {
    * @return {String}
    * @example: <https://github.com/assemble/buttons> (See the "button-i18n" example)
    */
-  i18n: function (context, options) {
+  Library.addHelper('i18n', function (context, options) {
     var language = void 0;
     if (typeof context !== "string") {
       throw "Key must be of type 'string'";
@@ -34,16 +32,4 @@ var helpers = {
       throw "No string for key '" + context + "' for language '" + language + "'";
     }
     return this[language][context];
-  }
-};
-
-
-// Export helpers
-module.exports.register = function (Handlebars, options) {
-  options = options || {};
-  for (var helper in helpers) {
-    if (helpers.hasOwnProperty(helper)) {
-      Handlebars.registerHelper(helper, helpers[helper]);
-    }
-  }
-};
+  });

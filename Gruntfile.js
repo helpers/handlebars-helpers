@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'test/**/*.js',
-        'src/**/*.js'
+        'dist/**/*.js'
       ]
     },
 
@@ -91,13 +91,28 @@ module.exports = function(grunt) {
         banner: '<%= metadata.banner %>',
         stripBanners: true
       },
-      helpers: {
+      node: {
+        options: {
+          process: function (src, filepath) {
+            return '// Source File: ' + filepath + '\n' + src;
+          }
+        },
         src: [
-          'tmp/v0.6.0/src/helpers.js',
-          'tmp/v0.6.0/src/utils.js',
-          'tmp/v0.6.0/src/helpers/*.js'
+          './src/node/prepend.js',
+          './src/helpers/*.js',
+          '!./src/helpers/helpers*.js',
+          './src/node/append.js'
         ],
-        dest: 'tmp/v0.6.0/lib/helpers.js'
+        dest: 'dist/helpers.js'
+      },
+      web: {
+        src: [
+          './src/web/prepend.js',
+          './src/helpers/*.js',
+          '!./src/helpers/helpers*.js',
+          './src/web/append.js'
+        ],
+        dest: 'dist/helpers.web.js'
       }
     },
 
@@ -133,5 +148,5 @@ module.exports = function(grunt) {
   grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['jshint', 'test', 'docs']);
+  grunt.registerTask('default', ['concat:node', 'jshint', 'test']);
 };
