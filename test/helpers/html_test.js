@@ -11,7 +11,7 @@ var path = require('path');
 require('should');
 var expect = require('chai').expect;
 var Handlebars = require('handlebars');
-var helpers = require('../../dist/helpers');
+var helpers = require('../../').handlebarsHelpers;
 
 var config = {
   Handlebars: Handlebars

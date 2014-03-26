@@ -11,8 +11,18 @@ module.exports = function(grunt) {
 
   'use strict';
 
-  // Project configuration.
-  grunt.initConfig({
+  // load the default tasks from the microlib
+  var appConfig = require('grunt-microlib').init.bind(this)(grunt);
+  grunt.loadNpmTasks('grunt-microlib');
+
+  // create our local config file
+  var config = {
+    cfg: {
+      name: 'handlebars-helpers.js',
+      barename: 'handlebars-helpers',
+      namespace: 'handlebarsHelpers'
+    },
+    env: process.env,
     pkg: grunt.file.readJSON('package.json'),
 
     metadata: {
@@ -87,32 +97,19 @@ module.exports = function(grunt) {
     },
 
     concat: {
-      options: {
-        banner: '<%= metadata.banner %>',
-        stripBanners: true
-      },
-      node: {
+      build: {
         options: {
+          banner: grunt.file.read('src/banner.js'),
+          footer: grunt.file.read('src/footer.js'),
+          stripBanners: true,
           process: function (src, filepath) {
             return '// Source File: ' + filepath + '\n' + src;
           }
         },
         src: [
-          './src/node/prepend.js',
-          './src/helpers/*.js',
-          '!./src/helpers/helpers*.js',
-          './src/node/append.js'
+          './src/helpers/*.js'
         ],
-        dest: 'dist/helpers.js'
-      },
-      web: {
-        src: [
-          './src/web/prepend.js',
-          './src/helpers/*.js',
-          '!./src/helpers/helpers*.js',
-          './src/web/append.js'
-        ],
-        dest: 'dist/helpers.web.js'
+        dest: 'lib/handlebars-helpers.js'
       }
     },
 
@@ -128,17 +125,15 @@ module.exports = function(grunt) {
           {expand: true, cwd: 'docs/helpers/', src: ['**/*']}
         ]
       }
-    },
-
-    // Clean test files before building or re-testing.
-    clean: {
-      helpers: ['src/**/*']
     }
 
-  });
+  };
+
+  // merge the config files
+  grunt.initConfig(grunt.util._.merge(appConfig, config));
 
   // Load plugins to provide the necessary tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  require('matchdep').filterDev(['grunt-*', '!grunt-microlib']).forEach(grunt.loadNpmTasks);
 
   // Load local tasks.
   grunt.loadTasks('tasks');
@@ -148,5 +143,6 @@ module.exports = function(grunt) {
   grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['concat:node', 'jshint', 'test']);
+  grunt.registerTask('default', ['concat:build', 'buildNoVersion', 'test']);
+
 };

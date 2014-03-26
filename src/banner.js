@@ -1,4 +1,3 @@
-
 var _ = require('lodash');
 var path = require('path');
 var file = require('fs-utils');
@@ -7,15 +6,16 @@ var sort = require('sort-object');
 var marked = require('marked');
 var extras = require('marked-extras');
 var url = require('url');
+var helpersUtils = require('helpers-utils');
 
-var utils = require('helpers-utils');
-var Library = utils.Library;
+var utils = helpersUtils.Utils;
+var Library = helpersUtils.Library;
 
-var Utils = require('../src/utils/utils');
-var Glob = require('../src/utils/glob');
-var Dates = require('../src/utils/dates');
-var HTML = require('../src/utils/html');
-var _indexOf = require('../src/utils/lib/indexOf');
+var Utils = require("../../src/utils/utils");
+var Glob = require("../../src/utils/glob");
+var Dates = require("../../src/utils/dates");
+var HTML = require("../../src/utils/html");
+var _indexOf = require( "../../src/utils/lib/indexOf");
 
 var specs = {
   context: function () { return {}; },
@@ -31,7 +31,7 @@ var specs = {
   }
 };
 
-module.exports = function (config) {
+var handlebarsHelpers = function (config) {
   utils.expects(config, specs);
   var Handlebars = config.Handlebars;
   var options = config.options;

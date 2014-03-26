@@ -34,7 +34,7 @@
       "url": "http://creativecommons.org/licenses/by/3.0/"
     }
   ],
-  "main": "dist/helpers.js",
+  "main": "dist/commonjs/main.js",
   "engines": {
     "node": ">= 0.10.16"
   },
