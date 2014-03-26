@@ -73,7 +73,8 @@
     "handlebars-helper-repeat": "~0.2.0",
     "matchdep": "~0.3.0",
     "rimraf": "~2.2.6",
-    "should": "~3.1.3"
+    "should": "~3.1.3",
+    "grunt-microlib": "~0.1.1"
   },
   "keywords": [
     "assemble helpers",
