@@ -8,10 +8,9 @@ var extras = require('marked-extras');
 var url = require('url');
 var helpersUtils = require('helpers-utils');
 
-var utils = helpersUtils.Utils;
+var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 
-var Utils = require("../../src/utils/utils");
 var Glob = require("../../src/utils/glob");
 var Dates = require("../../src/utils/dates");
 var HTML = require("../../src/utils/html");
@@ -32,6 +31,6 @@ var specs = {
 };
 
 var handlebarsHelpers = function (config) {
-  utils.expects(config, specs);
+  Utils.expects(config, specs);
   var Handlebars = config.Handlebars;
   var options = config.options;

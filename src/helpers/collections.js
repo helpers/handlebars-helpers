@@ -1,170 +1,74 @@
 
-/**
- * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
 
-
-
-  /**
-   * {{any}}
-   * @param  {Array}  array
-   * @param  {Object} options
-   */
-  Library.addHelper('any', function (array, options) {
-    if (array.length > 0) {
-      return options.fn(this);
-    } else {
-      return options.inverse(this);
+var _indexOf = [].indexOf || function (item) {
+  for (var i = 0, l = this.length; i < l; i++) {
+    if (i in this && this[i] === item) {
+      return i;
     }
-  });
+  }
+  return -1;
+};
 
-
-  /**
-   * Returns all of the items in the collection after the specified count.
-   * @param  {Array}  array Collection
-   * @param  {Number} count Number of items to exclude
-   * @return {Array}        Array excluding the number of items specified
-   */
-  Library.addHelper('after', function (array, count) {
-    return array.slice(count);
-  });
-
-
-  /**
-   * Use all of the items in the collection after the specified count
-   * inside a block.
-   * @param  {Array}  array
-   * @param  {Number} count
-   * @param  {Ojbect} options
-   * @return {Array}
-   */
-  Library.addHelper('withAfter', function (array, count, options) {
-    array = array.slice(count);
-    var result = '';
-    for (var item in array) {
-      result += options.fn(array[item]);
+Library.addHelper('first', function (array, count) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
     }
-    return result;
-  });
-
-
-  /**
-   * {{arrayify}}
-   * Converts a string such as "foo, bar, baz" to an ES Array of strings.
-   * @credit: http://bit.ly/1840DsB
-   * @param  {[type]} data [description]
-   * @return {[type]}      [description]
-   */
-  Library.addHelper('arrayify', function (str) {
-    return str.split(",").map(function (tag) {
-      return "\"" + tag + "\"";
-    });
-  });
-
-
-  /**
-   * Returns all of the items in the collection before the specified
-   * count. Opposite of {{after}}.
-   * @param  {Array}  array [description]
-   * @param  {[type]} count [description]
-   * @return {[type]}       [description]
-   */
-  Library.addHelper('before', function (array, count) {
-    return array.slice(0, -count);
-  });
-
-
-  /**
-   * Use all of the items in the collection before the specified count
-   * inside a block. Opposite of {{withAfter}}
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withBefore', function (array, count, options) {
-    array = array.slice(0, -count);
-    var result = '';
-    for (var item in array) {
-      result += options.fn(array[item]);
-    }
-    return result;
-  });
-
-
-  /**
-   * {{first}}
-   * Returns the first item in a collection.
-   *
-   * @param  {Array}  array
-   * @param  {[type]} count
-   * @return {[type]}
-   */
-  Library.addHelper('first', function (array, count) {
     if (Utils.isUndefined(count)) {
       return array[0];
     } else {
       return array.slice(0, count);
     }
-  });
+  } else {
+    return Utils.err('{{first}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * {{withFirst}}
-   * Use the first item in a collection inside a block.
-   *
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withFirst', function(array, count, options) {
-    if (!Utils.isUndefined(array)) {
-      array = Utils.result(array);
-      if (!Utils.isUndefined(count)) {
-        count = parseFloat(Utils.result(count));
-      }
-      if (Utils.isUndefined(count)) {
-        options = count;
-        return options.fn(array[0]);
-      } else {
-        array = array.slice(0, count);
-        var result = '';
-        for (var item in array) {
-          result += options.fn(array[item]);
-        }
-        return result;
-      }
-    } else {
-      return console.error('{{withFirst}} takes at least one argument (array).');
+Library.addHelper('withFirst', function (array, count, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
     }
-  });
+    if (Utils.isUndefined(count)) {
+      options = count;
+      return options.fn(array[0]);
+    } else {
+      array = array.slice(0, count);
+      var result = '';
+      for (var item in array) {
+        result += options.fn(array[item]);
+      }
+      return result;
+    }
+  } else {
+    return Utils.err('{{withFirst}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Returns the last item in a collection. Opposite of `first`.
-   * @param  {Array}  array [description]
-   * @param  {[type]} count [description]
-   * @return {[type]}       [description]
-   */
-  Library.addHelper('last', function (array, count) {
+Library.addHelper('last', function (array, count) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
     if (Utils.isUndefined(count)) {
       return array[array.length - 1];
     } else {
       return array.slice(-count);
     }
-  });
+  } else {
+    return Utils.err('{{last}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Use the last item in a collection inside a block.
-   * Opposite of {{withFirst}}.
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withLast', function (array, count, options) {
+Library.addHelper('withLast', function (array, count, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
     if (Utils.isUndefined(count)) {
       options = count;
       return options.fn(array[array.length - 1]);
@@ -176,339 +80,193 @@
       }
       return result;
     }
-  });
+  } else {
+    return Utils.err('{{withLast}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Joins all elements of a collection into a string
-   * using a separator if specified.
-   * @param  {Array}  array     [description]
-   * @param  {[type]} separator [description]
-   * @return {[type]}           [description]
-   */
-  Library.addHelper('join', function (array, separator) {
+Library.addHelper('after', function (array, count) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    return array.slice(count);
+  } else {
+    return Utils.err('{{after}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('withAfter', function (array, count, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    array = array.slice(count);
+    var result = '';
+    for (var item in array) {
+      result += options.fn(array[item]);
+    }
+    return result;
+  } else {
+    return Utils.err('{{withAfter}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('before', function (array, count) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    return array.slice(0, -count);
+  } else {
+    return Utils.err('{{before}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('withBefore', function (array, count, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    array = array.slice(0, -count);
+    var result = '';
+    for (var item in array) {
+      result += options.fn(array[item]);
+    }
+    return result;
+  } else {
+    return Utils.err('{{withBefore}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('join', function (array, separator) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(separator)) {
+      separator = Utils.result(separator);
+    }
     return array.join(Utils.isUndefined(separator) ? ' ' : separator);
-  });
+  } else {
+    return Utils.err('{{join}} takes at least one argument (array).');
+  }
+});
 
-
-  /**
-   * Handlebars "joinAny" block helper that supports
-   * arrays of objects or strings. implementation found here:
-   * https://github.com/wycats/handlebars.js/issues/133
-   *
-   * @param  {[type]} items [description]
-   * @param  {[type]} block [description]
-   * @return {[type]}       [description]
-   *
-   * If "delimiter" is not speficified, then it defaults to ",".
-   * You can use "start", and "end" to do a "slice" of the array.
-   * @example:
-   *   Use with objects:
-   *   {{#join people delimiter=" and "}}{{name}}, {{age}}{{/join}}
-   * @example:
-   *   Use with arrays:
-   *   {{join jobs delimiter=", " start="1" end="2"}}
-   *
-   */
-  Library.addHelper('joinAny', function (items, block) {
-    var delimiter = block.hash.delimiter || ",";
-    var start = block.hash.start || 0;
-    var len = (items ? items.length : 0);
-    var end = block.hash.end || len;
-    var out = '';
-    if (end > len) {
-      end = len;
-    }
-    if ('function' === typeof block) {
-      var i = start;
-      while (i < end) {
-        if (i > start) {
-          out += delimiter;
-        }
-        if ('string' === typeof items[i]) {
-          out += items[i];
-        } else {
-          out += block(items[i]);
-        }
-        i++;
-      }
-      return out;
-    } else {
-      return [].concat(items).slice(start, end).join(delimiter);
-    }
-  });
-
-
-  Library.addHelper('sort', function (array, field) {
+Library.addHelper('sort', function (array, field) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     if (Utils.isUndefined(field)) {
       return array.sort();
     } else {
+      field = Utils.result(field);
       return array.sort(function (a, b) {
         return a[field] > b[field];
       });
     }
-  });
+  } else {
+    return Utils.err('{{sort}} takes at least one argument (array).');
+  }
+});
 
-
-  Library.addHelper('withSort', function (array, field, options) {
-    array = _.cloneDeep(array);
-    var getDescendantProp = function (obj, desc) {
-      var arr = desc.split('.');
-      while (arr.length && (obj = obj[arr.shift()])) {
-        continue;
-      }
-      return obj;
-    };
+Library.addHelper('withSort', function (array, field, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     var result = '';
-    var item;
-    var i;
-    var len;
     if (Utils.isUndefined(field)) {
       options = field;
       array = array.sort();
-      if (options.hash && options.hash.dir === 'desc') {
-        array = array.reverse();
-      }
-      for (i = 0, len = array.length; i < len; i++) {
-        item = array[i];
+      for (var i = 0, len = array.length; i < len; i++) {
+        var item = array[i];
         result += options.fn(item);
       }
     } else {
+      field = Utils.result(field);
       array = array.sort(function (a, b) {
-        var aProp = getDescendantProp(a, field);
-        var bProp = getDescendantProp(b, field);
-        if (aProp > bProp) {
-          return 1;
-        } else {
-          if (aProp < bProp) {
-            return -1;
-          }
-        }
-        return 0;
+        return a[field] > b[field];
       });
-      if (options.hash && options.hash.dir === 'desc') {
-        array = array.reverse();
-      }
       for (item in array) {
         result += options.fn(array[item]);
       }
     }
     return result;
-  });
+  } else {
+    return Utils.err('{{withSort}} takes at least one argument (array).');
+  }
+});
 
+Library.addHelper('length', function (array) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    return array.length;
+  } else {
+    return Utils.err('{{length}} takes one argument (array).');
+  }
+});
 
-  Library.addHelper('length', function (array) {
-    return (!array) ? 0 : array.length;
-  });
-
-
-  Library.addHelper('lengthEqual', function (array, length, options) {
+Library.addHelper('lengthEqual', function (array, length, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(length)) {
+      length = parseFloat(Utils.result(length));
+    }
     if (array.length === length) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{lengthEqual}} takes two arguments (array, number).');
+  }
+});
 
-
-  Library.addHelper('empty', function (array, options) {
-    if (array.length <= 0) {
+Library.addHelper('empty', function (array, options) {
+  if (!Utils.isHandlebarsSpecific(array)) {
+    array = Utils.result(array);
+    if (!array || array.length <= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{empty}} takes one argument (array).');
+  }
+});
 
+Library.addHelper('any', function (array, options) {
+  if (!Utils.isHandlebarsSpecific(array)) {
+    array = Utils.result(array);
+    if (array && array.length > 0) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  } else {
+    return Utils.err('{{any}} takes one argument (array).');
+  }
+});
 
-  /**
-   * {{inArray}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {[type]} value   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('inArray', function (array, value, options) {
+Library.addHelper('inArray', function (array, value, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(value)))) {
+    array = Utils.result(array);
+    value = Utils.result(value);
     if (_indexOf.call(array, value) >= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{inArray}} takes two arguments (array, string|number).');
+  }
+});
 
-
-  /**
-   * {{filter}}
-   * @param  {[type]} array   [description]
-   * @param  {[type]} value   [description]
-   * @param  {[type]} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('filter', function(array, value, options) {
-
-    var data = void 0;
-    var content = '';
-    var results = [];
-
-    if(options.data) {
-      data = Handlebars.createFrame(options.data);
-    }
-
-    // filtering on a specific property
-    if(options.hash && options.hash.property) {
-
-      var search = {};
-      search[options.hash.property] = value;
-      results = _.filter(array, search);
-
-    } else {
-
-      // filtering on a string value
-      results = _.filter(array, function(v, k) {
-        return value === v;
-      });
-
-    }
-
-    if(results && results.length > 0) {
-      for(var i=0; i < results.length; i++){
-        content += options.fn(results[i], {data: data});
-      }
-    } else {
-      content = options.inverse(this);
-    }
-    return content;
-  });
-
-  /**
-   * {{iterate}}
-   *
-   * Similar to {{#each}} helper, but treats array-like objects
-   * as arrays (e.g. objects with a `.length` property that
-   * is a number) rather than objects. This lets us iterate
-   * over our collections items.
-   *
-   * @param  {[type]} context [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('iterate', function (context, options) {
-    var fn = options.fn;
-    var inverse = options.inverse;
-    var i = 0;
-    var ret = "";
-    var data = void 0;
-    if (options.data) {
-      data = Handlebars.createFrame(options.data);
-    }
-    if (context && typeof context === 'object') {
-      if (typeof context.length === 'number') {
-        var j = context.length;
-        while (i < j) {
-          if (data) {data.index = i;}
-          ret = ret + fn(context[i], {data: data});
-          i++;
-        }
-      } else {
-        for (var key in context) {
-          if (context.hasOwnProperty(key)) {
-            if (data) {data.key = key;}
-            ret = ret + fn(context[key], {data: data});
-            i++;
-          }
-        }
-      }
-    }
-    if (i === 0) {ret = inverse(this);}
-    return ret;
-  });
-
-
-  /**
-   * {{forEach}}
-   * Credit: http://bit.ly/14HLaDR
-   *
-   * @param  {[type]}   array [description]
-   * @param  {Function} fn    [description]
-   * @return {[type]}         [description]
-   *
-   * @example:
-   *   var accounts = [
-   *     {'name': 'John', 'email': 'john@example.com'},
-   *     {'name': 'Malcolm', 'email': 'malcolm@example.com'},
-   *     {'name': 'David', 'email': 'david@example.com'}
-   *   ];
-   *
-   *   {{#forEach accounts}}
-   *     <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
-   *       {{ name }}
-   *     </a>{{#unless isLast}}, {{/unless}}
-   *   {{/forEach}}
-   */
-  Library.addHelper('forEach', function (array, fn) {
-    var total = array.length;
-    var buffer = "";
-    // Better performance: http://jsperf.com/for-vs-forEach/2
-    var i = 0;
-    var j = total;
-    while (i < j) {
-      // stick an index property onto the item, starting
-      // with 1, may make configurable later
-      var item = array[i];
-      item['index'] = i + 1;
-      item['_total'] = total;
-      item['isFirst'] = i === 0;
-      item['isLast'] = i === (total - 1);
-      // show the inside of the block
-      buffer += fn.fn(item);
-      i++;
-    }
-    // return the finished buffer
-    return buffer;
-  });
-
-
-  /**
-   * {{eachProperty}}
-   * Handlebars block helper to enumerate
-   * the properties in an object
-   *
-   * @param  {[type]} context [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('eachProperty', function (context, options) {
-    var content = (function () {
-      var results = [];
-      for (var key in context) {
-        var value = context[key];
-        results.push(options.fn({
-          key: key,
-          value: value
-        }));
-      }
-      return results;
-    })();
-    return content.join('');
-  });
-
-
-  /**
-   * {{eachIndex}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   * @example:
-   *   {{#eachIndex collection}}
-   *     {{item}} is {{index}}
-   *   {{/eachIndex}}
-   */
-  Library.addHelper('eachIndex', function (array, options) {
-    var i;
-    var len;
+Library.addHelper('eachIndex', function (array, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     var result = '';
-    var index;
-    for (index = i = 0, len = array.length; i < len; index = ++i) {
+    for (var index = i = 0, len = array.length; i < len; index = ++i) {
       var value = array[index];
       result += options.fn({
         item: value,
@@ -516,31 +274,24 @@
       });
     }
     return result;
-  });
+  } else {
+    return Utils.err('{{eachIndex}} takes one argument (array).');
+  }
+});
 
-  /**
-   * {{eachIndexPlusOne}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   * @example:
-   *   {{#eachIndexPlusOne collection}}
-   *     {{item}} is {{index}}
-   *   {{/eachIndexPlusOne}}
-   */
-  Library.addHelper('eachIndexPlusOne', function (array, options) {
+Library.addHelper('eachProperty', function (obj, options) {
+  if (!Utils.isUndefined(obj)) {
+    obj = Utils.result(obj);
     var result = '';
-    var len;
-    var i;
-    var index;
-    for (index = i = 0, len = array.length; i < len; index = ++i) {
-      var value = array[index];
+    for (var key in obj) {
+      var value = obj[key];
       result += options.fn({
-        item: value,
-        index: index + 1
+        key: key,
+        value: value
       });
     }
     return result;
-  });
-
+  } else {
+    return Utils.err('{{eachProperty}} takes one argument (object).');
+  }
+});

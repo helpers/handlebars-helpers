@@ -46,7 +46,10 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec',
         },
-        src: ['test/**/*_test.js']
+        src: [
+          'test/**/*_test.js',
+          '!test/**/_*.js'
+        ]
       }
     },
 
@@ -98,6 +101,7 @@ module.exports = function(grunt) {
         },
         src: [
           './src/helpers/*.js',
+          '!./src/helpers/_*.js'
         ],
         dest: 'dist/commonjs/main.js'
       },
@@ -112,6 +116,7 @@ module.exports = function(grunt) {
         },
         src: [
           './src/helpers/*.js',
+          '!./src/helpers/_*.js'
         ],
         dest: 'dist/handlebars-helpers.js'
       }
@@ -149,5 +154,5 @@ module.exports = function(grunt) {
   grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
 
   // By default, build templates using helpers and run all tests.
-  grunt.registerTask('default', ['clean', 'concat', 'jshint', 'test']);
+  grunt.registerTask('default', ['clean', 'concat', 'test']);
 };

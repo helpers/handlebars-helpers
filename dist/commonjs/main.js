@@ -22,10 +22,9 @@ var extras = require('marked-extras');
 var url = require('url');
 var helpersUtils = require('helpers-utils');
 
-var utils = helpersUtils.Utils;
+var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 
-var Utils = require("../../src/utils/utils");
 var Glob = require("../../src/utils/glob");
 var Dates = require("../../src/utils/dates");
 var HTML = require("../../src/utils/html");
@@ -46,287 +45,81 @@ var specs = {
 };
 
 var handlebarsHelpers = function (config) {
-  utils.expects(config, specs);
+  Utils.expects(config, specs);
   var Handlebars = config.Handlebars;
   var options = config.options;
-	// Source File: ./src/helpers/code.js
-
-  /**
-  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
-  *
-  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
-  * Licensed under the MIT License (MIT)
-  */
-
-
-
-  /**
-   * {{embed}}
-   *
-   * Embeds code from an external file as preformatted
-   * text. The first parameter requires a path to the file
-   * you want to embed. There second second optional parameter
-   * is for specifying (forcing) syntax highlighting for
-   * language of choice.
-   *
-   * @syntax:
-   *   {{ embed [file] [lang] }}
-   * @usage:
-   *   {{embed 'path/to/file.js'}} or
-   *   {{embed 'path/to/file.hbs' 'html'}}
-   */
-
-  Library.addHelper('embed', function (src, lang) {
-    var content = Glob.globFiles(src);
-    var ext = path.extname(src).replace(/^(\.)/gm, '');
-    var output;
-
-    lang = lang || ext;
-
-    if (utils.isUndefined(lang)) {
-      lang = ext;
-    } else {
-      lang = lang;
-    }
-    switch (ext) {
-    case 'md':
-    case 'markdown':
-    case 'mdown':
-      output = content.replace(/^(```)/gm, '&#x60;&#x60;&#x60;');
-      ext = 'md';
-      break;
-    case 'txt':
-      output = content;
-      ext = 'text';
-      break;
-    case 'hbs':
-    case 'hbars':
-      output = content.replace(/^(---)/gm, '---');
-      ext = 'html';
-      break;
-    case 'less':
-      output = content;
-      ext = 'scss';
-      break;
-    case void 0:
-      output = content;
-      ext = '';
-      break;
-    default:
-      output = content;
-      ext = '';
-    }
-    var result = '```' + lang + '\n' + output + '\n```\n';
-    return new utils.safeString(result);
-  });
-
-  /**
-   * {{jsFiddle}}
-   * Embed a jsFiddle, second parameter sets tabs
-   * @usage: {{ jsfiddle [id] [tabs] }}
-   */
-  Library.addHelper('jsfiddle', function (options) {
-    var hash = options.hash || {};
-    hash.id = 'http://jsfiddle.net/' + (hash.id || '');
-    hash.width = hash.width || '100%';
-    hash.height = hash.height || '300';
-    hash.skin = hash.skin || '/presentation/';
-    hash.tabs = (hash.tabs || 'result,js,html,css') + hash.skin;
-    hash.src = hash.id + '/embedded/' + hash.tabs;
-    hash.allowfullscreen = hash.allowfullscreen || 'allowfullscreen';
-    hash.frameborder = hash.frameborder || '0';
-
-    delete hash.id;
-    delete hash.tabs;
-    delete hash.skin;
-
-    var attrs = HTML.parseAttributes(hash);
-    return new Handlebars.SafeString('<iframe ' + attrs + '></iframe>');
-  });
-
-  /**
-   * {{gist}}
-   * Embed a GitHub Gist using only the id of the Gist
-   *
-   * @param  {String} id   [description]
-   * @param  {String} file [description]
-   * @usage: {{ gist [id] [file] }}
-   */
-  Library.addHelper('gist', function (id, file) {
-    file = file || '';
-    var result = '<script src="https://gist.github.com/' + id + '.js"></script>';
-    return new Handlebars.SafeString(result);
-  });
-
-
 	// Source File: ./src/helpers/collections.js
 
-/**
- * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
 
-
-
-  /**
-   * {{any}}
-   * @param  {Array}  array
-   * @param  {Object} options
-   */
-  Library.addHelper('any', function (array, options) {
-    if (array.length > 0) {
-      return options.fn(this);
-    } else {
-      return options.inverse(this);
+var _indexOf = [].indexOf || function (item) {
+  for (var i = 0, l = this.length; i < l; i++) {
+    if (i in this && this[i] === item) {
+      return i;
     }
-  });
+  }
+  return -1;
+};
 
-
-  /**
-   * Returns all of the items in the collection after the specified count.
-   * @param  {Array}  array Collection
-   * @param  {Number} count Number of items to exclude
-   * @return {Array}        Array excluding the number of items specified
-   */
-  Library.addHelper('after', function (array, count) {
-    return array.slice(count);
-  });
-
-
-  /**
-   * Use all of the items in the collection after the specified count
-   * inside a block.
-   * @param  {Array}  array
-   * @param  {Number} count
-   * @param  {Ojbect} options
-   * @return {Array}
-   */
-  Library.addHelper('withAfter', function (array, count, options) {
-    array = array.slice(count);
-    var result = '';
-    for (var item in array) {
-      result += options.fn(array[item]);
+Library.addHelper('first', function (array, count) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
     }
-    return result;
-  });
-
-
-  /**
-   * {{arrayify}}
-   * Converts a string such as "foo, bar, baz" to an ES Array of strings.
-   * @credit: http://bit.ly/1840DsB
-   * @param  {[type]} data [description]
-   * @return {[type]}      [description]
-   */
-  Library.addHelper('arrayify', function (str) {
-    return str.split(",").map(function (tag) {
-      return "\"" + tag + "\"";
-    });
-  });
-
-
-  /**
-   * Returns all of the items in the collection before the specified
-   * count. Opposite of {{after}}.
-   * @param  {Array}  array [description]
-   * @param  {[type]} count [description]
-   * @return {[type]}       [description]
-   */
-  Library.addHelper('before', function (array, count) {
-    return array.slice(0, -count);
-  });
-
-
-  /**
-   * Use all of the items in the collection before the specified count
-   * inside a block. Opposite of {{withAfter}}
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withBefore', function (array, count, options) {
-    array = array.slice(0, -count);
-    var result = '';
-    for (var item in array) {
-      result += options.fn(array[item]);
-    }
-    return result;
-  });
-
-
-  /**
-   * {{first}}
-   * Returns the first item in a collection.
-   *
-   * @param  {Array}  array
-   * @param  {[type]} count
-   * @return {[type]}
-   */
-  Library.addHelper('first', function (array, count) {
     if (Utils.isUndefined(count)) {
       return array[0];
     } else {
       return array.slice(0, count);
     }
-  });
+  } else {
+    return Utils.err('{{first}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * {{withFirst}}
-   * Use the first item in a collection inside a block.
-   *
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withFirst', function(array, count, options) {
-    if (!Utils.isUndefined(array)) {
-      array = Utils.result(array);
-      if (!Utils.isUndefined(count)) {
-        count = parseFloat(Utils.result(count));
-      }
-      if (Utils.isUndefined(count)) {
-        options = count;
-        return options.fn(array[0]);
-      } else {
-        array = array.slice(0, count);
-        var result = '';
-        for (var item in array) {
-          result += options.fn(array[item]);
-        }
-        return result;
-      }
-    } else {
-      return console.error('{{withFirst}} takes at least one argument (array).');
+Library.addHelper('withFirst', function (array, count, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
     }
-  });
+    if (Utils.isUndefined(count)) {
+      options = count;
+      return options.fn(array[0]);
+    } else {
+      array = array.slice(0, count);
+      var result = '';
+      for (var item in array) {
+        result += options.fn(array[item]);
+      }
+      return result;
+    }
+  } else {
+    return Utils.err('{{withFirst}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Returns the last item in a collection. Opposite of `first`.
-   * @param  {Array}  array [description]
-   * @param  {[type]} count [description]
-   * @return {[type]}       [description]
-   */
-  Library.addHelper('last', function (array, count) {
+Library.addHelper('last', function (array, count) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
     if (Utils.isUndefined(count)) {
       return array[array.length - 1];
     } else {
       return array.slice(-count);
     }
-  });
+  } else {
+    return Utils.err('{{last}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Use the last item in a collection inside a block.
-   * Opposite of {{withFirst}}.
-   * @param  {Array}  array   [description]
-   * @param  {[type]} count   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('withLast', function (array, count, options) {
+Library.addHelper('withLast', function (array, count, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
     if (Utils.isUndefined(count)) {
       options = count;
       return options.fn(array[array.length - 1]);
@@ -338,339 +131,193 @@ var handlebarsHelpers = function (config) {
       }
       return result;
     }
-  });
+  } else {
+    return Utils.err('{{withLast}} takes at least one argument (array).');
+  }
+});
 
-  /**
-   * Joins all elements of a collection into a string
-   * using a separator if specified.
-   * @param  {Array}  array     [description]
-   * @param  {[type]} separator [description]
-   * @return {[type]}           [description]
-   */
-  Library.addHelper('join', function (array, separator) {
+Library.addHelper('after', function (array, count) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    return array.slice(count);
+  } else {
+    return Utils.err('{{after}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('withAfter', function (array, count, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    array = array.slice(count);
+    var result = '';
+    for (var item in array) {
+      result += options.fn(array[item]);
+    }
+    return result;
+  } else {
+    return Utils.err('{{withAfter}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('before', function (array, count) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    return array.slice(0, -count);
+  } else {
+    return Utils.err('{{before}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('withBefore', function (array, count, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(count)))) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(count)) {
+      count = parseFloat(Utils.result(count));
+    }
+    array = array.slice(0, -count);
+    var result = '';
+    for (var item in array) {
+      result += options.fn(array[item]);
+    }
+    return result;
+  } else {
+    return Utils.err('{{withBefore}} takes two arguments (array, number).');
+  }
+});
+
+Library.addHelper('join', function (array, separator) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(separator)) {
+      separator = Utils.result(separator);
+    }
     return array.join(Utils.isUndefined(separator) ? ' ' : separator);
-  });
+  } else {
+    return Utils.err('{{join}} takes at least one argument (array).');
+  }
+});
 
-
-  /**
-   * Handlebars "joinAny" block helper that supports
-   * arrays of objects or strings. implementation found here:
-   * https://github.com/wycats/handlebars.js/issues/133
-   *
-   * @param  {[type]} items [description]
-   * @param  {[type]} block [description]
-   * @return {[type]}       [description]
-   *
-   * If "delimiter" is not speficified, then it defaults to ",".
-   * You can use "start", and "end" to do a "slice" of the array.
-   * @example:
-   *   Use with objects:
-   *   {{#join people delimiter=" and "}}{{name}}, {{age}}{{/join}}
-   * @example:
-   *   Use with arrays:
-   *   {{join jobs delimiter=", " start="1" end="2"}}
-   *
-   */
-  Library.addHelper('joinAny', function (items, block) {
-    var delimiter = block.hash.delimiter || ",";
-    var start = block.hash.start || 0;
-    var len = (items ? items.length : 0);
-    var end = block.hash.end || len;
-    var out = '';
-    if (end > len) {
-      end = len;
-    }
-    if ('function' === typeof block) {
-      var i = start;
-      while (i < end) {
-        if (i > start) {
-          out += delimiter;
-        }
-        if ('string' === typeof items[i]) {
-          out += items[i];
-        } else {
-          out += block(items[i]);
-        }
-        i++;
-      }
-      return out;
-    } else {
-      return [].concat(items).slice(start, end).join(delimiter);
-    }
-  });
-
-
-  Library.addHelper('sort', function (array, field) {
+Library.addHelper('sort', function (array, field) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     if (Utils.isUndefined(field)) {
       return array.sort();
     } else {
+      field = Utils.result(field);
       return array.sort(function (a, b) {
         return a[field] > b[field];
       });
     }
-  });
+  } else {
+    return Utils.err('{{sort}} takes at least one argument (array).');
+  }
+});
 
-
-  Library.addHelper('withSort', function (array, field, options) {
-    array = _.cloneDeep(array);
-    var getDescendantProp = function (obj, desc) {
-      var arr = desc.split('.');
-      while (arr.length && (obj = obj[arr.shift()])) {
-        continue;
-      }
-      return obj;
-    };
+Library.addHelper('withSort', function (array, field, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     var result = '';
-    var item;
-    var i;
-    var len;
     if (Utils.isUndefined(field)) {
       options = field;
       array = array.sort();
-      if (options.hash && options.hash.dir === 'desc') {
-        array = array.reverse();
-      }
-      for (i = 0, len = array.length; i < len; i++) {
-        item = array[i];
+      for (var i = 0, len = array.length; i < len; i++) {
+        var item = array[i];
         result += options.fn(item);
       }
     } else {
+      field = Utils.result(field);
       array = array.sort(function (a, b) {
-        var aProp = getDescendantProp(a, field);
-        var bProp = getDescendantProp(b, field);
-        if (aProp > bProp) {
-          return 1;
-        } else {
-          if (aProp < bProp) {
-            return -1;
-          }
-        }
-        return 0;
+        return a[field] > b[field];
       });
-      if (options.hash && options.hash.dir === 'desc') {
-        array = array.reverse();
-      }
       for (item in array) {
         result += options.fn(array[item]);
       }
     }
     return result;
-  });
+  } else {
+    return Utils.err('{{withSort}} takes at least one argument (array).');
+  }
+});
 
+Library.addHelper('length', function (array) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    return array.length;
+  } else {
+    return Utils.err('{{length}} takes one argument (array).');
+  }
+});
 
-  Library.addHelper('length', function (array) {
-    return (!array) ? 0 : array.length;
-  });
-
-
-  Library.addHelper('lengthEqual', function (array, length, options) {
+Library.addHelper('lengthEqual', function (array, length, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
+    if (!Utils.isUndefined(length)) {
+      length = parseFloat(Utils.result(length));
+    }
     if (array.length === length) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{lengthEqual}} takes two arguments (array, number).');
+  }
+});
 
-
-  Library.addHelper('empty', function (array, options) {
-    if (array.length <= 0) {
+Library.addHelper('empty', function (array, options) {
+  if (!Utils.isHandlebarsSpecific(array)) {
+    array = Utils.result(array);
+    if (!array || array.length <= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{empty}} takes one argument (array).');
+  }
+});
 
+Library.addHelper('any', function (array, options) {
+  if (!Utils.isHandlebarsSpecific(array)) {
+    array = Utils.result(array);
+    if (array && array.length > 0) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  } else {
+    return Utils.err('{{any}} takes one argument (array).');
+  }
+});
 
-  /**
-   * {{inArray}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {[type]} value   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('inArray', function (array, value, options) {
+Library.addHelper('inArray', function (array, value, options) {
+  if (!((Utils.isUndefined(array)) && (Utils.isUndefined(value)))) {
+    array = Utils.result(array);
+    value = Utils.result(value);
     if (_indexOf.call(array, value) >= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
     }
-  });
+  } else {
+    return Utils.err('{{inArray}} takes two arguments (array, string|number).');
+  }
+});
 
-
-  /**
-   * {{filter}}
-   * @param  {[type]} array   [description]
-   * @param  {[type]} value   [description]
-   * @param  {[type]} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('filter', function(array, value, options) {
-
-    var data = void 0;
-    var content = '';
-    var results = [];
-
-    if(options.data) {
-      data = Handlebars.createFrame(options.data);
-    }
-
-    // filtering on a specific property
-    if(options.hash && options.hash.property) {
-
-      var search = {};
-      search[options.hash.property] = value;
-      results = _.filter(array, search);
-
-    } else {
-
-      // filtering on a string value
-      results = _.filter(array, function(v, k) {
-        return value === v;
-      });
-
-    }
-
-    if(results && results.length > 0) {
-      for(var i=0; i < results.length; i++){
-        content += options.fn(results[i], {data: data});
-      }
-    } else {
-      content = options.inverse(this);
-    }
-    return content;
-  });
-
-  /**
-   * {{iterate}}
-   *
-   * Similar to {{#each}} helper, but treats array-like objects
-   * as arrays (e.g. objects with a `.length` property that
-   * is a number) rather than objects. This lets us iterate
-   * over our collections items.
-   *
-   * @param  {[type]} context [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('iterate', function (context, options) {
-    var fn = options.fn;
-    var inverse = options.inverse;
-    var i = 0;
-    var ret = "";
-    var data = void 0;
-    if (options.data) {
-      data = Handlebars.createFrame(options.data);
-    }
-    if (context && typeof context === 'object') {
-      if (typeof context.length === 'number') {
-        var j = context.length;
-        while (i < j) {
-          if (data) {data.index = i;}
-          ret = ret + fn(context[i], {data: data});
-          i++;
-        }
-      } else {
-        for (var key in context) {
-          if (context.hasOwnProperty(key)) {
-            if (data) {data.key = key;}
-            ret = ret + fn(context[key], {data: data});
-            i++;
-          }
-        }
-      }
-    }
-    if (i === 0) {ret = inverse(this);}
-    return ret;
-  });
-
-
-  /**
-   * {{forEach}}
-   * Credit: http://bit.ly/14HLaDR
-   *
-   * @param  {[type]}   array [description]
-   * @param  {Function} fn    [description]
-   * @return {[type]}         [description]
-   *
-   * @example:
-   *   var accounts = [
-   *     {'name': 'John', 'email': 'john@example.com'},
-   *     {'name': 'Malcolm', 'email': 'malcolm@example.com'},
-   *     {'name': 'David', 'email': 'david@example.com'}
-   *   ];
-   *
-   *   {{#forEach accounts}}
-   *     <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
-   *       {{ name }}
-   *     </a>{{#unless isLast}}, {{/unless}}
-   *   {{/forEach}}
-   */
-  Library.addHelper('forEach', function (array, fn) {
-    var total = array.length;
-    var buffer = "";
-    // Better performance: http://jsperf.com/for-vs-forEach/2
-    var i = 0;
-    var j = total;
-    while (i < j) {
-      // stick an index property onto the item, starting
-      // with 1, may make configurable later
-      var item = array[i];
-      item['index'] = i + 1;
-      item['_total'] = total;
-      item['isFirst'] = i === 0;
-      item['isLast'] = i === (total - 1);
-      // show the inside of the block
-      buffer += fn.fn(item);
-      i++;
-    }
-    // return the finished buffer
-    return buffer;
-  });
-
-
-  /**
-   * {{eachProperty}}
-   * Handlebars block helper to enumerate
-   * the properties in an object
-   *
-   * @param  {[type]} context [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   */
-  Library.addHelper('eachProperty', function (context, options) {
-    var content = (function () {
-      var results = [];
-      for (var key in context) {
-        var value = context[key];
-        results.push(options.fn({
-          key: key,
-          value: value
-        }));
-      }
-      return results;
-    })();
-    return content.join('');
-  });
-
-
-  /**
-   * {{eachIndex}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   * @example:
-   *   {{#eachIndex collection}}
-   *     {{item}} is {{index}}
-   *   {{/eachIndex}}
-   */
-  Library.addHelper('eachIndex', function (array, options) {
-    var i;
-    var len;
+Library.addHelper('eachIndex', function (array, options) {
+  if (!Utils.isUndefined(array)) {
+    array = Utils.result(array);
     var result = '';
-    var index;
-    for (index = i = 0, len = array.length; i < len; index = ++i) {
+    for (var index = i = 0, len = array.length; i < len; index = ++i) {
       var value = array[index];
       result += options.fn({
         item: value,
@@ -678,34 +325,27 @@ var handlebarsHelpers = function (config) {
       });
     }
     return result;
-  });
+  } else {
+    return Utils.err('{{eachIndex}} takes one argument (array).');
+  }
+});
 
-  /**
-   * {{eachIndexPlusOne}}
-   *
-   * @param  {Array}  array   [description]
-   * @param  {Object} options [description]
-   * @return {[type]}         [description]
-   * @example:
-   *   {{#eachIndexPlusOne collection}}
-   *     {{item}} is {{index}}
-   *   {{/eachIndexPlusOne}}
-   */
-  Library.addHelper('eachIndexPlusOne', function (array, options) {
+Library.addHelper('eachProperty', function (obj, options) {
+  if (!Utils.isUndefined(obj)) {
+    obj = Utils.result(obj);
     var result = '';
-    var len;
-    var i;
-    var index;
-    for (index = i = 0, len = array.length; i < len; index = ++i) {
-      var value = array[index];
+    for (var key in obj) {
+      var value = obj[key];
       result += options.fn({
-        item: value,
-        index: index + 1
+        key: key,
+        value: value
       });
     }
     return result;
-  });
-
+  } else {
+    return Utils.err('{{eachProperty}} takes one argument (object).');
+  }
+});
 
 	// Source File: ./src/helpers/comparisons.js
 
@@ -1078,65 +718,6 @@ var handlebarsHelpers = function (config) {
   Library.addHelper('unlessLtEq', Library.helpers['unless_lteq']);
 
 
-	// Source File: ./src/helpers/data.js
-
-/**
- * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-  /**
-   * {{value}} extract a value from the specified property
-   *
-   * @param  {String} filepath [description]
-   * @param  {String} prop     [description]
-   * @return {String}          [description]
-   */
-
-  Library.addHelper('value', function (filepath, prop) {
-    var str = file.readJSONSync(filepath);
-    var val = _.pick(str, prop);
-    var result = _.pluck(val);
-    return new Handlebars.SafeString(result);
-  });
-
-  /**
-   * {{prop}} extract a specific property
-   * @param  {[type]} filepath [description]
-   * @param  {[type]} prop     [description]
-   * @return {[type]}          [description]
-   */
-
-  Library.addHelper('prop', function (filepath, prop) {
-    var str = file.readJSONSync(filepath);
-    var result = JSON.stringify(_.pick(str, prop));
-    return new Handlebars.SafeString(result);
-  });
-
-  /**
-   * {{parseJSON}}
-   * Contributed by github.com/keeganstreet
-   */
-
-  Library.addHelper('parseJSON', function (data, options) {
-    return options.fn(JSON.parse(data));
-  });
-
-  /**
-   * {{opt}} get a property from assemble.options
-   *
-   * @param {String} key The name of the property
-   * @return Returns value from `assemble.options`
-   */
-
-  Library.addHelper('opt', function(key) {
-    return options[key] || '';
-  });
-
-
 	// Source File: ./src/helpers/dates.js
 
 /**
@@ -1197,144 +778,6 @@ var handlebarsHelpers = function (config) {
     } else {
       return Math.floor(seconds) + ' seconds ago';
     }
-  });
-
-
-	// Source File: ./src/helpers/fs.js
-
-/**
- * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-  /**
-   * {{#each (expand files)}} {{/each}}
-   */
-
-  Library.addHelper('expand', function (patterns) {
-    return file.expand(patterns);
-  });
-
-
-  /**
-   * {{read}}
-   * Uses gray-matter to extract content only,
-   * YAML front matter is stripped.
-   */
-
-  Library.addHelper('read', function (filepath, context, options) {
-    var page = matter.read(filepath);
-    var metadata = _.extend(context.data.root, page.context);
-    var template = Handlebars.compile(page.content);
-    return new Handlebars.SafeString(template(metadata));
-  });
-
-
-  /**
-   * {{fileSize}}
-   *
-   * Converts bytes into a nice representation with unit.
-   * e.g. 13661855 => 13.7 MB, 825399 => 825 KB, 1396 => 1 KB
-   * @param  {[type]} value
-   * @return {[type]}
-   */
-  Library.addHelper('fileSize', function (value) {
-    var bytes = parseInt(value, 10);
-    if (isNaN(bytes)) {
-      console.error("Handlebars helper fileSize couldn't parse '" + value + "'");
-      return value; // Graceful degradation
-    }
-    // KB is technically a Kilobit, but it seems more readable.
-    var resInt, resValue;
-    var metric = ['byte', 'bytes', 'KB', 'MB', 'GB'];
-    if (bytes === 0) {
-      resInt = resValue = 0;
-    } else {
-      // Base 1000 (rather than 1024) matches Mac OS X
-      resInt = Math.floor(Math.log(bytes) / Math.log(1000));
-      // No decimals for anything smaller than 1 MB
-      resValue = (bytes / Math.pow(1000, Math.floor(resInt))).toFixed(resInt < 2 ? 0 : 1);
-      if (bytes === 1) {
-        resInt = -1; // special case: 1 byte (singular)
-      }
-    }
-    return new Utils.safeString(resValue + ' ' + metric[resInt + 1]);
-  });
-
-
-	// Source File: ./src/helpers/glob.js
-
-/**
- * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-  /**
-   * {{glob "**"}} example helper
-   *
-   * Read in content from files specified using minimatch patterns
-   * @param  {String}   src
-   * @param  {Function} compare_fn
-   * @return {String}
-   * @example {{ glob 'path/to/files/*.md' }}
-   */
-  Library.addHelper('glob', function (src, compare_fn) {
-    var source = Glob.globFiles(src, compare_fn);
-    return new Utils.safeString(source);
-  });
-
-  /**
-   * {{globRaw "**"}} example helper
-   *
-   * Read in content from files specified using minimatch patterns, return raw output without using 'safeString' filter (this chokes on JSON content)
-   * @param  {String}   src
-   * @param  {Function} compare_fn
-   * @return {String}
-   * @example {{ glob 'path/to/files/*.md' }}
-   */
-  Library.addHelper('globRaw', function (src, compare_fn) {
-    var source = Glob.globFiles(src, compare_fn);
-    return source;
-  });
-
-  /**
-   * {{globWithContext "**"}} example helper
-   *
-   * Read in content from files specified using minimatch patterns
-   * @param  {String}   src
-   * @param  {Object}   context
-   * @param  {Function} compare_fn
-   * @return {String}
-   * @example {{ glob 'path/to/files/*.md' }}
-   */
-  Library.addHelper('globWithContext', function (src, context, compare_fn) {
-    var source = Glob.globFiles(src);
-    var template = Handlebars.compile(source);
-    var result = template(context);
-    return new Utils.safeString(result);
-  });
-
-  /**
-   * {{globRawWithContext "**"}} example helper
-   *
-   * Read in content from files specified using minimatch patterns, return raw output without using 'safeString' filter (this chokes on JSON content)
-   * @param  {String}   src
-   * @param  {Object}   context
-   * @param  {Function} compare_fn
-   * @return {String}
-   * @example {{ glob 'path/to/files/*.md' }}
-   */
-  Library.addHelper('globRawWithContext', function (src, context, compare_fn) {
-    var source = Glob.globFiles(src);
-    var template = Handlebars.compile(source);
-    var result = template(context);
-    return result;
   });
 
 
@@ -1430,43 +873,6 @@ var handlebarsHelpers = function (config) {
     });
 
 
-	// Source File: ./src/helpers/i18n.js
-
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-
-  /**
-   * {{i18n}}
-   * @author: Laurent Goderre <https://github.com/LaurentGoderrre>
-   * @param  {String} context
-   * @param  {Object} options
-   * @return {String}
-   * @example: <https://github.com/assemble/buttons> (See the "button-i18n" example)
-   */
-  Library.addHelper('i18n', function (context, options) {
-    var language = void 0;
-    if (typeof context !== "string") {
-      throw "Key must be of type 'string'";
-    }
-    language = (typeof options.hash.language === "string" ? options.hash.language : this.language);
-    if (typeof language === "undefined") {
-      throw "The 'language' parameter is not defined";
-    }
-    if (typeof this[language] === "undefined") {
-      throw "No strings found for language '" + language + "'";
-    }
-    if (typeof this[language][context] === "undefined") {
-      throw "No string for key '" + context + "' for language '" + language + "'";
-    }
-    return this[language][context];
-  });
-
 	// Source File: ./src/helpers/inflections.js
 
 /**
@@ -1505,101 +911,6 @@ var handlebarsHelpers = function (config) {
       }
     }
   });
-
-	// Source File: ./src/helpers/layouts.js
-
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-
-/**
- * These helpers are inspired by handlebars-layouts.
- * https://github.com/shannonmoeller/handlebars-layouts *
- */
-
-
-    /**
-     * Extend a layout that contains block definitions
-     * @param  {String} layout  name of the layout to extend
-     * @param  {Object} options normal handlebars options
-     * @return {String}         rendered layout
-     */
-    Library.addHelper('extend', function (layout, options) {
-      var output = null;
-      var context = Object.create(this || null);
-      var template = Handlebars.partials[layout];
-
-      if (typeof template === 'undefined') {
-        throw new Error("Missing layout: '" + layout + "'");
-      }
-
-      if (typeof template === 'string') {
-        template = Handlebars.compile(template);
-      }
-
-      if (typeof options.fn === 'function') {
-        options.fn(context);
-      }
-
-      return template(context);
-
-    });
-
-
-    /**
-     * Used within layouts to define block sections
-     * @param  {String} name    name of block to be referenced later
-     * @param  {Object} options normal handlebars options
-     * @return {String}         rendered block section
-     */
-      Library.addHelper('block', function (name, options) {
-        var block = null;
-
-        this.blocks = this.blocks || {};
-        block = this.blocks[name];
-
-        var optionsFn = options.fn || function () {return '';};
-
-        switch (block && block.fn && block.mode.toLowerCase()) {
-          case 'append':
-            return optionsFn(this) + block.fn(this);
-
-          case 'prepend':
-            return block.fn(this) + optionsFn(this);
-
-          case 'replace':
-            return block.fn(this);
-
-          default:
-            return optionsFn(this);
-        }
-      });
-
-
-    /**
-     * Used within templates that extend a layout to define
-     * content that will replace block sections
-     * @param  {String} name    name of the block to replace
-     * @param  {Object} options normal handlebars options
-     * @return {String}         rendered content section
-     */
-      Library.addHelper('content', function (name, options) {
-        options = options || {};
-        options.hash = options.hash || {};
-        var mode = options.hash['mode'] || 'replace';
-
-        this.blocks = this.blocks || {};
-        this.blocks[name] = {
-          mode: mode.toLowerCase(),
-          fn: options.fn
-        };
-      });
-
 
 	// Source File: ./src/helpers/logging.js
 
@@ -1887,58 +1198,6 @@ var handlebarsHelpers = function (config) {
     return number.toPrecision(precision);
   });
 
-	// Source File: ./src/helpers/objects.js
-
-
-/**
- * Expose Lo-Dash as Handlebars helpers
- */
-
-(function () {
-  for (var helper in _) {
-    if (_.hasOwnProperty(helper)) {
-      Library.addHelper('_' + helper, _[helper]);
-    }
-  }
-}());
-
-	// Source File: ./src/helpers/path.js
-
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-  /**
-   * {{relative}}
-   * Returns the derived relative path from A to B.
-   * @param  {[type]} a [description]
-   * @param  {[type]} b [description]
-   * @return {[type]}   [description]
-   * @example:
-   *   {{relative [from] [to]}}
-   */
-  Library.addHelper('relative', function (a, b) {
-    return Utils.getRelativePath(a, b);
-  });
-
-  /**
-   * {{extname}}
-   * Returns the extension of a given file
-   * @param  {[type]} ext [description]
-   * @return {[type]}     [description]
-   * @example:
-   *   {{extname "docs/toc.md"}}
-   * @returns:
-   *   .md
-   */
-  Library.addHelper('extname', function (ext) {
-    return Utils.getExt(ext);
-  });
-
 	// Source File: ./src/helpers/strings.js
 
 /**
@@ -2215,81 +1474,6 @@ var handlebarsHelpers = function (config) {
       return options.inverse(this);
     }
   });
-
-	// Source File: ./src/helpers/url.js
-
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-
-
-
-    Library.addHelper('stripQuerystring', function (url) {
-      return url.split("?")[0];
-    });
-
-    /**
-     * {{encodeURI}}
-     * Encodes a Uniform Resource Identifier (URI) component
-     * by replacing each instance of certain characters by
-     * one, two, three, or four escape sequences representing
-     * the UTF-8 encoding of the character.
-     *
-     * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-     * @param  {String} uri: The un-encoded string
-     * @return {String}      The endcoded string.
-     */
-    Library.addHelper('encodeURI', function (uri) {
-      return encodeURIComponent(uri);
-    });
-
-    /**
-     * {{decodeURI}}
-     * Decodes a Uniform Resource Identifier (URI) component
-     * previously created by encodeURIComponent or by a
-     * similar routine.
-     *
-     * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-     * @param  {[type]} encodedURI [description]
-     * @return {[type]}            [description]
-     */
-    Library.addHelper('decodeURI', function (encodedURI) {
-      return decodeURIComponent(encodedURI);
-    });
-
-    /**
-     * {{urlresolve}}
-     * Take a base URL, and a href URL, and resolve them as a
-     * browser would for an anchor tag.
-     *
-     * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-     * @param  {[type]} base [description]
-     * @param  {[type]} href [description]
-     * @return {[type]}      [description]
-     */
-    Library.addHelper('urlresolve', function (base, href) {
-      return url.resolve(base, href);
-    });
-
-    /**
-     * {{urlparse}}
-     * Take a URL string, and return an object. Pass true as the
-     * second argument to also parse the query string using the
-     * querystring module. Defaults to false.
-     *
-     * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-     * @param  {[type]} path  [description]
-     * @param  {[type]} type  [description]
-     * @param  {[type]} query [description]
-     * @return {[type]}       [description]
-     */
-    Library.addHelper('urlparse', function (path, type, query) {
-      var result = Utils.stringifyObj(url.parse(path), type, query);
-      return new Handlebars.safeString(result);
-    });
 
   Library.registerHelpers(config.Handlebars);
 };
