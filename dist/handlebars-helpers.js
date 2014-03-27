@@ -26,8 +26,8 @@ var helpersUtils = require('helpers-utils');
 var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 var Dates = helpersUtils.Dates;
+var HTML = helpersUtils.Html;
 
-var HTML = require("../../src/utils/html");
 var _indexOf = require( "../../src/utils/lib/indexOf");
 
 var specs = {
