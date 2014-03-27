@@ -639,32 +639,25 @@ Library.addHelper('ordinalize', function (value) {
  */
 
 
-  Library.addHelper('log', function (value) {
+Library.addHelper('log', function (value) {
+  if (!Utils.isUndefined(value)) {
+    value = Utils.result(value);
     return console.log(value);
-  });
+  } else {
+    return Utils.err('{{log}} takes one arguments (string|number|boolean|array|object).');
+  }
+});
 
-  Library.addHelper('inspect', function(context, options) {
-    var hash = options.hash || {};
-    var ext = hash.ext || '.html';
-    context = JSON.stringify(sort(context), null, 2);
-
-    // Wrap the returned JSON in either markdown code fences
-    // or HTML, depending on the extension.
-    var md = '\n```json\n' + context + '\n```';
-    var html = '<pre><code class="json">\n' + context + '\n</code></pre>';
-    var result = Utils.switchOutput(ext, md, html);
-    return new Utils.safeString(result);
-  });
-
-  Library.addHelper('debug', function (value) {
-    console.log('=================================');
-    console.log('Context: ', this);
-    if (!Utils.isUndefined(value)) {
-      console.log('Value: ', value);
-    }
-    return console.log('=================================');
-  });
-
+Library.addHelper('debug', function (value) {
+  if (!Utils.isUndefined(value)) {
+    value = Utils.result(value);
+  }
+  console.log('Context: ', this);
+  if (!Utils.isUndefined(value)) {
+    console.log('Value: ', value);
+  }
+  return console.log('-----------------------------------------------');
+});
 
 	// Source File: ./src/helpers/markdown.js
 
