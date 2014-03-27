@@ -1,14 +1,5 @@
 
 
-var _indexOf = [].indexOf || function (item) {
-  for (var i = 0, l = this.length; i < l; i++) {
-    if (i in this && this[i] === item) {
-      return i;
-    }
-  }
-  return -1;
-};
-
 Library.addHelper('first', function (array, count) {
   if (!Utils.isUndefined(array)) {
     array = Utils.result(array);
@@ -252,7 +243,7 @@ Library.addHelper('inArray', function (array, value, options) {
   if (!((Utils.isUndefined(array)) && (Utils.isUndefined(value)))) {
     array = Utils.result(array);
     value = Utils.result(value);
-    if (_indexOf.call(array, value) >= 0) {
+    if (Utils._indexOf.call(array, value) >= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);

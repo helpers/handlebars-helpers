@@ -13,8 +13,6 @@ var Library = helpersUtils.Library;
 var Dates = helpersUtils.Dates;
 var HTML = helpersUtils.Html;
 
-var _indexOf = require( "../../src/utils/lib/indexOf");
-
 var specs = {
   context: function () { return {}; },
   options: { },

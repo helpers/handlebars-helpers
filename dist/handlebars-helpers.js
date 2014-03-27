@@ -13,22 +13,20 @@
  */
 
 
-var _ = require('lodash');
-var path = require('path');
-var file = require('fs-utils');
-var matter = require('gray-matter');
-var sort = require('sort-object');
-var marked = require('marked');
-var extras = require('marked-extras');
-var url = require('url');
-var helpersUtils = require('helpers-utils');
+// ensure lodash / underscore is included
+if (typeof _ === 'undefined') {
+  console.log('Error: lodash must be included before handlebars-helpers');
+}
+
+// ensure helpers-utils are included
+if (typeof helpersUtils === 'undefined') {
+  console.log('Error: helpers-utils must be included before handlebars-helpers');
+}
 
 var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 var Dates = helpersUtils.Dates;
 var HTML = helpersUtils.Html;
-
-var _indexOf = require( "../../src/utils/lib/indexOf");
 
 var specs = {
   context: function () { return {}; },
@@ -50,15 +48,6 @@ var HandlebarsHelpers = function (config) {
   var options = config.options;
 	// Source File: ./src/helpers/collections.js
 
-
-var _indexOf = [].indexOf || function (item) {
-  for (var i = 0, l = this.length; i < l; i++) {
-    if (i in this && this[i] === item) {
-      return i;
-    }
-  }
-  return -1;
-};
 
 Library.addHelper('first', function (array, count) {
   if (!Utils.isUndefined(array)) {
@@ -303,7 +292,7 @@ Library.addHelper('inArray', function (array, value, options) {
   if (!((Utils.isUndefined(array)) && (Utils.isUndefined(value)))) {
     array = Utils.result(array);
     value = Utils.result(value);
-    if (_indexOf.call(array, value) >= 0) {
+    if (Utils._indexOf.call(array, value) >= 0) {
       return options.fn(this);
     } else {
       return options.inverse(this);
@@ -571,22 +560,6 @@ Library.addHelper('br', function (count, options) {
 
 	// Source File: ./src/helpers/inflections.js
 
-/**
- * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
- *
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT)
- */
-var __indexOf = [].indexOf || function (item) {
-  for (var i = 0, l = this.length; i < l; i++) {
-    if (i in this && this[i] === item) {
-      return i;
-    }
-  }
-  return -1;
-};
-
-
 Library.addHelper('inflect', function (count, singular, plural, include) {
   if (!((Utils.isUndefined(count)) && (Utils.isUndefined(singular)) && (Utils.isUndefined(plural)))) {
     count = parseFloat(Utils.result(count));
@@ -608,7 +581,7 @@ Library.addHelper('ordinalize', function (value) {
   if (!Utils.isUndefined(value)) {
     value = parseFloat(Utils.result(value));
     var normal = Math.abs(Math.round(value));
-    if (ref = normal % 100, __indexOf.call([11, 12, 13], ref) >= 0) {
+    if (ref = normal % 100, Utils._indexOf.call([11, 12, 13], ref) >= 0) {
       return "" + value + "th";
     } else {
       switch (normal % 10) {

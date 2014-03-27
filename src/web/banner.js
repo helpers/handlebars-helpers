@@ -1,20 +1,18 @@
 
-var _ = require('lodash');
-var path = require('path');
-var file = require('fs-utils');
-var matter = require('gray-matter');
-var sort = require('sort-object');
-var marked = require('marked');
-var extras = require('marked-extras');
-var url = require('url');
-var helpersUtils = require('helpers-utils');
+// ensure lodash / underscore is included
+if (typeof _ === 'undefined') {
+  console.log('Error: lodash must be included before handlebars-helpers');
+}
+
+// ensure helpers-utils are included
+if (typeof helpersUtils === 'undefined') {
+  console.log('Error: helpers-utils must be included before handlebars-helpers');
+}
 
 var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 var Dates = helpersUtils.Dates;
 var HTML = helpersUtils.Html;
-
-var _indexOf = require( "../../src/utils/lib/indexOf");
 
 var specs = {
   context: function () { return {}; },
