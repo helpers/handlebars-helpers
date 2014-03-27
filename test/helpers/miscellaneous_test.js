@@ -24,60 +24,35 @@ describe('default', function() {
       var context = {
         title: null
       };
-      template(context).should.equal('No title available.');
+      return template(context).should.equal('No title available.');
     });
   });
 });
 
-describe('noop', function() {
-  describe('{{#noop}}{{message}}{{/noop}}', function() {
-    it('should be a noop', function() {
-      var source = '{{#noop}}{{message}}{{/noop}}';
-      var template = Handlebars.compile(source);
-      var context = {
-        message: 'This is a test'
-      };
-      template(context).should.equal('This is a test');
-    });
-  });
-});
+//Library.Config.partialsPath = '../test/templates/';
 
-describe('withHash', function () {
-  describe('{{#withHash}}{{message}}{{/withHash}}', function () {
-    it('should return an empty sting', function () {
-      var source = '{{#withHash}}{{message}}{{/withHash}}';
-      var template = Handlebars.compile(source);
+xdescribe('partial', function() {
+  beforeEach(function() {
+    return delete Library.Handlebars.partials["some_template"];
+  });
+  describe('{{partial name data template}}', function() {
+    it('should register and render a partial.', function() {
       var context = {
-        message: 'This is a test'
+        data: {
+          text: 'yay'
+        },
+        template: 'A partial {{text}}.'
       };
-      template(context).should.be.String.and.equal('');
+      var source = '{{partial "some_template" data template}}';
+      var template = Handlebars.compile(source);
+      return template(context).should.equal('A partial yay.');
     });
   });
-  describe('{{#withHash message="test"}}{{message}}{{/withHash}}', function () {
-    it('should return string from the newly created context', function () {
-      var source = '{{#withHash message="test"}}{{message}}{{/withHash}}';
+  describe('{{partial name}}', function() {
+    it('should register and render a partial.', function() {
+      var source = '{{partial "some_template"}}';
       var template = Handlebars.compile(source);
-      var context = {
-        message: 'This is a test'
-      };
-      template(context).should.be.equal('test');
-    });
-  });
-  describe('{{#withHash message=this.message}}{{message}}{{/withHash}}', function () {
-    it('should return string from the parent context', function () {
-      var source = '{{#withHash message=this.message}}{{message}}{{/withHash}}';
-      var template = Handlebars.compile(source);
-      var context = {
-        message: 'This is a test'
-      };
-      template(context).should.be.equal('This is a test');
-    });
-  });
-  describe('{{#withHash subject="Feedback" message="Hello!"}}{{subject}} - {{message}}{{/withHash}}', function () {
-    it('should add two attributes to the new context', function () {
-      var source = '{{#withHash subject="Feedback" message="Hello!"}}{{subject}} - {{message}}{{/withHash}}';
-      var template = Handlebars.compile(source);
-      template({}).should.be.equal('Feedback - Hello!');
+      return template().should.equal('A partial.');
     });
   });
 });
