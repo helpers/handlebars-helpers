@@ -5,22 +5,38 @@
  * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
  * Licensed under the MIT License (MIT)
  */
+var __indexOf = [].indexOf || function (item) {
+  for (var i = 0, l = this.length; i < l; i++) {
+    if (i in this && this[i] === item) {
+      return i;
+    }
+  }
+  return -1;
+};
 
 
-
-  Library.addHelper('inflect', function (count, singular, plural, include) {
+Library.addHelper('inflect', function (count, singular, plural, include) {
+  if (!((Utils.isUndefined(count)) && (Utils.isUndefined(singular)) && (Utils.isUndefined(plural)))) {
+    count = parseFloat(Utils.result(count));
+    singular = Utils.result(singular);
+    plural = Utils.result(plural);
     var word = count > 1 || count === 0 ? plural : singular;
     if (Utils.isUndefined(include) || include === false) {
       return word;
     } else {
       return "" + count + " " + word;
     }
-  });
+  } else {
+    return Utils.err('{{inflect}} takes at least three arguments (number, string, string).');
+  }
+});
 
-  Library.addHelper('ordinalize', function (value) {
-    var _ref;
+Library.addHelper('ordinalize', function (value) {
+  var ref;
+  if (!Utils.isUndefined(value)) {
+    value = parseFloat(Utils.result(value));
     var normal = Math.abs(Math.round(value));
-    if (_ref = normal % 100, _indexOf.call([11, 12, 13], _ref) >= 0) {
+    if (ref = normal % 100, __indexOf.call([11, 12, 13], ref) >= 0) {
       return "" + value + "th";
     } else {
       switch (normal % 10) {
@@ -34,4 +50,7 @@
         return "" + value + "th";
       }
     }
-  });
+  } else {
+    return Utils.err('{{ordinalize}} takes one arguments (number).');
+  }
+});
