@@ -27,7 +27,6 @@ var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
 var Dates = helpersUtils.Dates;
 
-var Glob = require("../../src/utils/glob");
 var HTML = require("../../src/utils/html");
 var _indexOf = require( "../../src/utils/lib/indexOf");
 
