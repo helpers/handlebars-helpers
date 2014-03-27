@@ -10,9 +10,9 @@ var helpersUtils = require('helpers-utils');
 
 var Utils = helpersUtils.Utils;
 var Library = helpersUtils.Library;
+var Dates = helpersUtils.Dates;
 
 var Glob = require("../../src/utils/glob");
-var Dates = require("../../src/utils/dates");
 var HTML = require("../../src/utils/html");
 var _indexOf = require( "../../src/utils/lib/indexOf");
 
