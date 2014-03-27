@@ -7,269 +7,136 @@
  */
 
 
-  /**
-   * {{capitalizeFirst}}
-   * Capitalize first word in a sentence
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('capitalizeFirst', function (str) {
-    if(str && typeof str === "string") {
-      return str.charAt(0).toUpperCase() + str.slice(1);
-    }
-  });
+Library.addHelper('lowercase', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.toLowerCase();
+  } else {
+    return Utils.err('{{lowercase}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{capitalizeEach}}
-   * Capitalize each word in a sentence
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('capitalizeEach', function (str) {
-    if(str && typeof str === "string") {
-      return str.replace(/\w\S*/g, function (word) {
-        return word.charAt(0).toUpperCase() + word.substr(1);
-      });
-    }
-  });
+Library.addHelper('uppercase', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.toUpperCase();
+  } else {
+    return Utils.err('{{uppercase}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{center}}
-   * Center a string using non-breaking spaces
-   * @param  {[type]} str    [description]
-   * @param  {[type]} spaces [description]
-   * @return {[type]}        [description]
-   */
-  Library.addHelper('center', function (str, spaces) {
-    if(str && typeof str === "string") {
-      var space = '';
-      var i = 0;
-      while (i < spaces) {
-        space += '&nbsp;';
-        i++;
+Library.addHelper('capitalizeFirst', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  } else {
+    return Utils.err('{{capitalizeFirst}} takes one argument (string).');
+  }
+});
+
+Library.addHelper('capitalizeEach', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1);
+    });
+  } else {
+    return Utils.err('{{capitalizeEach}} takes one argument (string).');
+  }
+});
+
+Library.addHelper('titleize', function (str) {
+  var word;
+
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    var title = str.replace(/[ \-_]+/g, ' ');
+    var words = title.match(/\w+/g);
+    var capitalize = function (word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    };
+    return ((function () {
+      var results = [];
+      for (var i = 0, len = words.length; i < len; i++) {
+        word = words[i];
+        results.push(capitalize(word));
       }
-      return "" + space + str + space;
-    }
-  });
+      return results;
+    })()).join(' ');
+  } else {
+    return Utils.err('{{titleize}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{dashify}}
-   * Replace periods in string with hyphens.
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('dashify', function (str) {
-    if(str && typeof str === "string") {
-      return str.split(".").join("-");
-    }
-  });
+Library.addHelper('sentence', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.replace(/((?:\S[^\.\?\!]*)[\.\?\!]*)/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  } else {
+    return Utils.err('{{sentence}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{hyphenate}}
-   * Replace spaces in string with hyphens.
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('hyphenate', function (str) {
-    if(str && typeof str === "string") {
-      return str.split(" ").join("-");
-    }
-  });
+Library.addHelper('reverse', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.split('').reverse().join('');
+  } else {
+    return Utils.err('{{reverse}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{lowercase}}
-   * Make all letters in the string lowercase
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('lowercase', function (str) {
-    if(str && typeof str === "string") {
-      return str.toLowerCase();
-    }
-  });
-
-  /**
-   * {{plusify}}
-   * Replace spaces in string with pluses.
-   * @author: Stephen Way <https://github.com/stephenway>
-   * @param  {[type]} str The input string
-   * @return {[type]}     Input string with spaces replaced by plus signs
-   */
-  Library.addHelper('plusify', function (str) {
-    if (str && typeof str === 'string') {
-      return str.split(' ').join('+');
-    }
-  });
-
-  /**
-   * {{safeString}}
-   * Output a Handlebars safeString
-   * @param  {[type]} str [description]
-   * @return {[type]}       [description]
-   */
-  Library.addHelper('safeString', function (str) {
-    if(str && typeof str === "string") {
-      return new Utils.safeString(str);
-    }
-  });
-
-  /**
-   * {{sentence}}
-   * Sentence case
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('sentence', function (str) {
-    if(str && typeof str === "string") {
-      return str.replace(/((?:\S[^\.\?\!]*)[\.\?\!]*)/g, function (txt) {
-        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-      });
-    }
-  });
-
-  /**
-   * {{titleize}}
-   * Title case. "This is Title Case"
-   * @param  {[type]} str [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('titleize', function (str) {
-    if(str && typeof str === "string") {
-      var title = str.replace(/[ \-_]+/g, ' ');
-      var words = title.match(/\w+/g);
-      var capitalize = function (word) {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-      };
-      return ((function () {
-        var i, len, results;
-        results = [];
-        for (i = 0, len = words.length; i < len; i++) {
-          var word = words[i];
-          results.push(capitalize(word));
-        }
-        return results;
-      })()).join(' ');
-    }
-  });
-
-  Library.addHelper('uppercase', function (options) {
-    if(options && typeof options === "string") {
-      return options.toUpperCase();
-    } else if(options && typeof options === "object") {
-      return options.fn(this).toUpperCase();
-    }
-  });
-
-  Library.addHelper('reverse', function (str) {
-    if(str && typeof str === "string") {
-      return str.split('').reverse().join('');
-    }
-  });
-
-  /**
-   * {{count}}
-   * Return the number of occurrances of a string, within a string
-   * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-   * @param  {String} str       The haystack
-   * @param  {String} substring The needle
-   * @return {Number}           The number of times the needle is found in the haystack.
-   */
-  Library.addHelper('count', function (str, substring) {
-    if(str && typeof str === "string") {
-      var n = 0;
-      var pos = 0;
-      var l = substring.length;
-      while (true) {
-        pos = str.indexOf(substring, pos);
-        if (pos > -1) {
-          n++;
-          pos += l;
-        } else {
-          break;
-        }
-      }
-      return n;
-    }
-  });
-
-  /**
-   * {{replace}}
-   * Replace occurrences of string "A" with string "B"
-   * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-   * @param  {[type]} str [description]
-   * @param  {[type]} a   [description]
-   * @param  {[type]} b   [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('replace', function (str, a, b) {
-    if(str && typeof str === "string") {
-      return str.split(a).join(b);
-    }
-  });
-
-  /**
-   * {{ellipsis}}
-   * @author: Jon Schlinkert <http://github.com/jonschlinkert>
-   * Truncate the input string and removes all HTML tags
-   * @param  {String} str      The input string.
-   * @param  {Number} limit    The number of characters to limit the string.
-   * @param  {String} append   The string to append if charaters are omitted.
-   * @return {String}          The truncated string.
-   */
-  Library.addHelper('ellipsis', function (str, limit, append) {
-    if (Utils.isUndefined(append)) {
-      append = '';
-    }
-    var sanitized = str.replace(/(<([^>]+)>)/g, '');
-    if (sanitized.length > limit) {
-      return sanitized.substr(0, limit - append.length) + append;
-    } else {
-      return sanitized;
-    }
-  });
-
-  /**
-   * {{truncate}}
-   * Truncates a string given a specified `length`,
-   * providing a custom string to denote an `omission`.
-   * @param  {[type]} str      [description]
-   * @param  {[type]} length   [description]
-   * @param  {[type]} omission [description]
-   * @return {[type]}          [description]
-   */
-  Library.addHelper('truncate', function (str, limit, omission) {
+Library.addHelper('truncate', function (str, length, omission) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
     if (Utils.isUndefined(omission)) {
       omission = '';
     }
-    if (str.length > limit) {
-      return str.substring(0, limit - omission.length) + omission;
+    if (str.length > length) {
+      return str.substring(0, length - omission.length) + omission;
     } else {
       return str;
     }
-  });
+  } else {
+    return Utils.err('{{truncate}} takes one argument (string).');
+  }
+});
 
-  /**
-   * {{startsWith}}
-   * @author: Dan Fox <http://github.com/iamdanfox>
-   *
-   * Tests whether a string begins with the given prefix.
-   * Behaves sensibly if the string is null.
-   * @param  {[type]} prefix     [description]
-   * @param  {[type]} testString [description]
-   * @param  {[type]} options    [description]
-   * @return {[type]}            [description]
-   *
-   * @example:
-   *   {{#startsWith "Goodbye" "Hello, world!"}}
-   *     Whoops
-   *   {{else}}
-   *     Bro, do you even hello world?
-   *   {{/startsWith}}
-   */
-  Library.addHelper('startsWith', function (prefix, str, options) {
-    if ((str != null ? str.indexOf(prefix) : void 0) === 0) {
-      return options.fn(this);
-    } else {
-      return options.inverse(this);
+Library.addHelper('center', function (str, spaces) {
+  if (!((Utils.isUndefined(str)) && (Utils.isUndefined(spaces)))) {
+    str = Utils.result(str);
+    spaces = Utils.result(spaces);
+    var space = '';
+    var i = 0;
+    while (i < spaces) {
+      space += '&nbsp;';
+      i++;
     }
-  });
+    return "" + space + str + space;
+  } else {
+    return Utils.err('{{center}} takes two arguments (string, number).');
+  }
+});
+
+Library.addHelper('newLineToBr', function (str) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    return str.replace(/\r?\n|\r/g, '<br>');
+  } else {
+    return Utils.err('{{newLineToBr}} takes one argument (string).');
+  }
+});
+
+Library.addHelper('sanitize', function (str, replaceWith) {
+  if (!Utils.isUndefined(str)) {
+    str = Utils.result(str);
+    if (Utils.isUndefined(replaceWith)) {
+      replaceWith = '-';
+    }
+    return str.replace(/[^a-z0-9]/gi, replaceWith);
+  } else {
+    return Utils.err('{{sanitize}} takes one argument (string).');
+  }
+});
