@@ -2,4 +2,4 @@
   Library.registerHelpers(config.Handlebars);
 };
 
-export { handlebarsHelpers };
+module.exports = handlebarsHelpers;

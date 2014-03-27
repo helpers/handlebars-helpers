@@ -10,7 +10,7 @@
 var expect = require('chai').expect;
 
 var Handlebars = require('handlebars');
-var helpers = require('../').handlebarsHelpers;
+var helpers = require('../');
 
 var config = {
   Handlebars: Handlebars

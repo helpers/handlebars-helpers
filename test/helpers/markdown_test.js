@@ -15,7 +15,7 @@ var grunt      = require('grunt');
 var fixtures = path.join.bind(process.cwd(), './test/fixtures');
 
 var Handlebars = require('handlebars');
-var helpers = require('../../').handlebarsHelpers;
+var helpers = require('../../');
 
 
 var config = {

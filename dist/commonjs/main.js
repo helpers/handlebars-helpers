@@ -1,4 +1,17 @@
-"use strict";
+/*!
+ * handlebars-helpers v0.6.0 <https://github.com/assemble/handlebars-helpers>
+ * Copyright (c) 2013-2014, Jon Schlinkert, Brian Woodward, contributors.
+ * Source code licensed under the MIT license.
+
+ * Thank you to Elving Rodriquez. Many of the helpers in this library
+ * originated in Swag. This library has been super useful because of
+ * your hard work!
+ *
+ * Swag <http://elving.github.com/swag/>
+ * Copyright 2012 Elving Rodriguez <http://elving.me/>
+ * MIT license <https://raw.github.com/elving/swag/master/LICENSE>
+ */
+
 var _ = require('lodash');
 var path = require('path');
 var file = require('fs-utils');
@@ -36,7 +49,7 @@ var handlebarsHelpers = function (config) {
   utils.expects(config, specs);
   var Handlebars = config.Handlebars;
   var options = config.options;
-// Source File: ./src/helpers/code.js
+	// Source File: ./src/helpers/code.js
 
   /**
   * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -146,7 +159,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/collections.js
+	// Source File: ./src/helpers/collections.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -694,7 +707,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/comparisons.js
+	// Source File: ./src/helpers/comparisons.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -1065,7 +1078,7 @@ var handlebarsHelpers = function (config) {
   Library.addHelper('unlessLtEq', Library.helpers['unless_lteq']);
 
 
-// Source File: ./src/helpers/data.js
+	// Source File: ./src/helpers/data.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -1124,7 +1137,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/dates.js
+	// Source File: ./src/helpers/dates.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -1187,7 +1200,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/fs.js
+	// Source File: ./src/helpers/fs.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -1252,7 +1265,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/glob.js
+	// Source File: ./src/helpers/glob.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-Library.addHelper('
@@ -1325,7 +1338,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/html.js
+	// Source File: ./src/helpers/html.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1417,7 +1430,7 @@ var handlebarsHelpers = function (config) {
     });
 
 
-// Source File: ./src/helpers/i18n.js
+	// Source File: ./src/helpers/i18n.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1454,7 +1467,7 @@ var handlebarsHelpers = function (config) {
     return this[language][context];
   });
 
-// Source File: ./src/helpers/inflections.js
+	// Source File: ./src/helpers/inflections.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1493,7 +1506,7 @@ var handlebarsHelpers = function (config) {
     }
   });
 
-// Source File: ./src/helpers/layouts.js
+	// Source File: ./src/helpers/layouts.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1588,7 +1601,7 @@ var handlebarsHelpers = function (config) {
       });
 
 
-// Source File: ./src/helpers/logging.js
+	// Source File: ./src/helpers/logging.js
 
 /**
  * Handlebars Library.addHelper('<http://github.com/assemble/handlebars-helpers>
@@ -1625,7 +1638,7 @@ var handlebarsHelpers = function (config) {
   });
 
 
-// Source File: ./src/helpers/markdown.js
+	// Source File: ./src/helpers/markdown.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1684,7 +1697,7 @@ var handlebarsHelpers = function (config) {
     return marked(options.fn(this));
   });
 
-// Source File: ./src/helpers/math.js
+	// Source File: ./src/helpers/math.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1735,7 +1748,7 @@ var handlebarsHelpers = function (config) {
     return Number(sum);
   });
 
-// Source File: ./src/helpers/miscellaneous.js
+	// Source File: ./src/helpers/miscellaneous.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1768,7 +1781,7 @@ var handlebarsHelpers = function (config) {
 
 
 
-// Source File: ./src/helpers/numbers.js
+	// Source File: ./src/helpers/numbers.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1874,7 +1887,7 @@ var handlebarsHelpers = function (config) {
     return number.toPrecision(precision);
   });
 
-// Source File: ./src/helpers/objects.js
+	// Source File: ./src/helpers/objects.js
 
 
 /**
@@ -1889,7 +1902,7 @@ var handlebarsHelpers = function (config) {
   }
 }());
 
-// Source File: ./src/helpers/path.js
+	// Source File: ./src/helpers/path.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -1926,7 +1939,7 @@ var handlebarsHelpers = function (config) {
     return Utils.getExt(ext);
   });
 
-// Source File: ./src/helpers/strings.js
+	// Source File: ./src/helpers/strings.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -2203,7 +2216,7 @@ var handlebarsHelpers = function (config) {
     }
   });
 
-// Source File: ./src/helpers/url.js
+	// Source File: ./src/helpers/url.js
 
 /**
  * Handlebars Helpers <http://github.com/assemble/handlebars-helpers>
@@ -2281,5 +2294,4 @@ var handlebarsHelpers = function (config) {
   Library.registerHelpers(config.Handlebars);
 };
 
-
-exports.handlebarsHelpers = handlebarsHelpers;
+module.exports = handlebarsHelpers;

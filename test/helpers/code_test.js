@@ -9,7 +9,7 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
-var helpers = require('../../').handlebarsHelpers;
+var helpers = require('../../');
 
 var config = {
   Handlebars: Handlebars
