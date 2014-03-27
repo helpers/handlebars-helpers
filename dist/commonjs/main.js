@@ -884,101 +884,63 @@ if (typeof Ember === 'undefined' || Ember === null) {
  */
 
 
-  /**
-   * {{addCommas}}
-   *
-   * Add commas to numbers
-   * @param {[type]} number [description]
-   */
-  Library.addHelper('addCommas', function (number) {
-    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-  });
-
- /**
-  * {{formatPhoneNumber number}}
-  * Output a formatted phone number
-  * @author: http://bit.ly/QlPmPr
-  * @param  {Number} phoneNumber [8005551212]
-  * @return {Number}             [(800) 555-1212]
-  */
-  Library.addHelper('formatPhoneNumber', function (num) {
-    num = num.toString();
-    return "(" + num.substr(0, 3) + ") " + num.substr(3, 3) + "-" + num.substr(6, 4);
-  });
-
-  /**
-   * {{random}}
-   * Generate a random number between two values
-   * @author Tim Douglas <https://github.com/timdouglas>
-   * @param  {[type]} min [description]
-   * @param  {[type]} max [description]
-   * @return {[type]}     [description]
-   */
-  Library.addHelper('random', function (min, max) {
-    return _.random(min, max);
-  });
-
-  /**
-   * {{toAbbr}}
-   *
-   * Abbreviate numbers
-   * @param  {[type]} number [description]
-   * @param  {[type]} digits [description]
-   * @return {[type]}        [description]
-   */
-  Library.addHelper('toAbbr', function (number, digits) {
-    if (Utils.isUndefined(digits)) {
-      digits = 2;
-    }
-    // @default: 2 decimal places => 100, 3 => 1000, etc.
-    digits = Math.pow(10, digits);
-    var abbr = ["k", "m", "b", "t"];
-    var i = abbr.length - 1;
-    while (i >= 0) {
-      var size = Math.pow(10, (i + 1) * 3);
-      if (size <= number) {
-        number = Math.round(number * digits / size) / digits;
-        // Special case where we round up to the next abbreviation
-        if ((number === 1000) && (i < abbr.length - 1)) {
-          number = 1;
-          i++;
-        }
-        number += abbr[i];
-        break;
-      }
-      i--;
-    }
-    return number;
-  });
-
-  Library.addHelper('toExponential', function (number, fractions) {
-    if (Utils.isUndefined(fractions)) {
-      fractions = 0;
-    }
-    return number.toExponential(fractions);
-  });
-
-  Library.addHelper('toFixed', function (number, digits) {
-    if (Utils.isUndefined(digits)) {
-      digits = 0;
-    }
+Library.addHelper('toFixed', function (number, digits) {
+  if (!Utils.isUndefined(number)) {
+    number = parseFloat(Utils.result(number));
+    digits = Utils.isUndefined(digits) ? 0 : Utils.result(digits);
     return number.toFixed(digits);
-  });
+  } else {
+    return Utils.err('{{toFixed}} takes at least one argument (number).');
+  }
+});
 
-  Library.addHelper('toFloat', function (number) {
-    return parseFloat(number);
-  });
-
-  Library.addHelper('toInt', function (number) {
-    return parseInt(number, 10);
-  });
-
-  Library.addHelper('toPrecision', function (number, precision) {
-    if (Utils.isUndefined(precision)) {
-      precision = 1;
-    }
+Library.addHelper('toPrecision', function (number, precision) {
+  if (!Utils.isUndefined(number)) {
+    number = parseFloat(Utils.result(number));
+    precision = Utils.isUndefined(precision) ? 1 : Utils.result(precision);
     return number.toPrecision(precision);
-  });
+  } else {
+    return Utils.err('{{toPrecision}} takes at least one argument (number).');
+  }
+});
+
+Library.addHelper('toExponential', function (number, fractions) {
+  if (!Utils.isUndefined(number)) {
+    number = parseFloat(Utils.result(number));
+    fractions = Utils.isUndefined(fractions) ? 0 : Utils.result(fractions);
+    return number.toExponential(fractions);
+  } else {
+    return Utils.err('{{toExponential}} takes at least one argument (number).');
+  }
+});
+
+Library.addHelper('toInt', function (number) {
+  if (!Utils.isUndefined(number)) {
+    number = Utils.result(number);
+    return parseInt(number, 10);
+  } else {
+    return Utils.err('{{toInt}} takes one argument (number).');
+  }
+});
+
+Library.addHelper('toFloat', function (number) {
+  if (!Utils.isUndefined(number)) {
+    number = Utils.result(number);
+    return parseFloat(number);
+  } else {
+    return Utils.err('{{toFloat}} takes one argument (number).');
+  }
+});
+
+Library.addHelper('digitGrouping', function (number, separator) {
+  if (!Utils.isUndefined(number)) {
+    number = parseFloat(Utils.result(number));
+    separator = Utils.isUndefined(separator) ? ',' : Utils.result(separator);
+    return number.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1" + separator);
+  } else {
+    return Utils.err('{{digitGrouping}} takes at least one argument (number).');
+  }
+});
 
 	// Source File: ./src/helpers/strings.js
 
