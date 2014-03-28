@@ -84,3 +84,14 @@ Library.addHelper('remainder', function (first, second) {
     return Utils.err('{{remainder}} takes two arguments (number, number).');
   }
 });
+
+Library.addHelper('sum', function () {
+  var sum = 0;
+  var args = _.flatten(arguments);
+  for (var i = 0; i < args.length - 1; i++) {
+      if ("number" === typeof args[i]) {
+        sum += args[i];
+      }
+  }
+  return Number(sum);
+});

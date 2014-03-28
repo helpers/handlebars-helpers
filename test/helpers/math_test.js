@@ -107,3 +107,37 @@ describe('remainder', function() {
     });
   });
 });
+
+describe('sum', function() {
+  describe('{{sum 1 2 3}}', function() {
+    it('should return the sum of multiple numbers.', function() {
+      var source = '{{sum 1 2 3}}';
+      var template = Handlebars.compile(source);
+      template().should.equal('6');
+    });
+  });
+});
+
+describe('sum', function() {
+  describe('{{sum value}}', function() {
+    it('should return the total sum of array.', function() {
+      var source = '{{sum value}}';
+      var template = Handlebars.compile(source);
+      template(context = {
+        value: [1, 2, 3]
+      }).should.equal('6');
+    });
+  });
+});
+
+describe('sum', function() {
+  describe('{{sum value 5}}', function() {
+    it('should return the total sum of array and numbers.', function() {
+      var source = '{{sum value 5}}';
+      var template = Handlebars.compile(source);
+      template(context = {
+        value: [1, 2, 3]
+      }).should.equal('11');
+    });
+  });
+});
