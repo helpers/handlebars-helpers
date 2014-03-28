@@ -776,6 +776,17 @@ Library.addHelper('remainder', function (first, second) {
   }
 });
 
+Library.addHelper('sum', function () {
+  var sum = 0;
+  var args = _.flatten(arguments);
+  for (var i = 0; i < args.length - 1; i++) {
+      if ("number" === typeof args[i]) {
+        sum += args[i];
+      }
+  }
+  return Number(sum);
+});
+
 	// Source File: ./src/helpers/miscellaneous.js
 
 /**
