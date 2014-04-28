@@ -13,7 +13,7 @@ npm i handlebars-helpers --save-dev
 
 
 ## Overview
-### [Visit the docs →](http://assemble.io/docs/helpers/index.html)
+### [Visit the docs →](http://assemble.io/helpers/)
 
 [Handlebars.js](https://github.com/wycats/handlebars.js) is currently the default template library for [assemble][]. By default, [Handlebars.js](http://handlebarsjs.com/) ships with some built-in helpers, such as `{{#each}}`, `{{#if}}` and `{{#unless}}`. Here is how helpers work:
 
