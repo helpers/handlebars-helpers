@@ -117,7 +117,7 @@ module.exports = function(grunt) {
 
   // Tests to be run
   grunt.registerTask('test', ['mochaTest']);
-  grunt.registerTask('docs', ['coverage', 'compress', 'readme', 'sync']);
+  grunt.registerTask('docs', ['coverage', 'compress', 'verb', 'sync']);
 
   // By default, build templates using helpers and run all tests.
   grunt.registerTask('default', ['jshint', 'test', 'docs']);

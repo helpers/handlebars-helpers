@@ -59,13 +59,12 @@
     "grunt-contrib-jshint": "~0.7.1",
     "grunt-contrib-uglify": "~0.2.5",
     "grunt-mocha-test": "~0.7.0",
-    "grunt-readme": "~0.2.1",
     "grunt-sync-pkg": "~0.1.1",
+    "grunt-verb": "~0.2.1",
     "handlebars-helper-prettify": "~0.1.11",
     "handlebars-helper-repeat": "~0.1.1",
-    "should": "~2.0.2",
     "rimraf": "~2.2.4",
-    "grunt-verb": "~0.2.1"
+    "should": "~2.0.2"
   },
   "keywords": [
     "assemble helpers",

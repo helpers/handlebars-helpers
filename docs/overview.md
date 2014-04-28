@@ -5,12 +5,3 @@
 * A Handlebars helper call is a simple identifier, followed by zero or more parameters (separated by space).
 * Each parameter is a Handlebars expression.
 * Handlebars helpers can be accessed from any context in a template.
-
-
-## Special "Assemble" features
-
-Some helpers feature enhancements that are specifically intended for use with [Assemble][assemble], the static site generator built on Grunt.js. Here are some highlights:
-
-* File globbing.
-* Access to [assemble](http://assemble.io/docs/Options.html) options.
-* Some helpers will render either markdown or HTML based on the file extension of the generated file.
