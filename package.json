@@ -64,7 +64,8 @@
     "handlebars-helper-prettify": "~0.1.11",
     "handlebars-helper-repeat": "~0.1.1",
     "should": "~2.0.2",
-    "rimraf": "~2.2.4"
+    "rimraf": "~2.2.4",
+    "grunt-verb": "~0.2.1"
   },
   "keywords": [
     "assemble helpers",
