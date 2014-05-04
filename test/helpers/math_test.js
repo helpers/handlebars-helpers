@@ -46,6 +46,26 @@ describe('divide', function() {
   });
 });
 
+describe('mod', function() {
+  describe('{{mod value 1}}', function() {
+    it('should return the modulus of two numbers.', function() {
+      var source = '{{mod value 1}}';
+      var template = Handlebars.compile(source);
+      template(context).should.equal('0');
+    });
+  });
+});
+
+describe('mod', function() {
+  describe('{{mod value 2}}', function() {
+    it('should return the modulus of two numbers.', function() {
+      var source = '{{mod value 2}}';
+      var template = Handlebars.compile(source);
+      template(context).should.equal('1');
+    });
+  });
+});
+
 describe('multiply', function() {
   describe('{{multiply value 5}}', function() {
     it('should return the multiplication of two numbers.', function() {
