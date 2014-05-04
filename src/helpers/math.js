@@ -38,6 +38,21 @@ Library.addHelper('divide', function (value, divisor) {
   }
 });
 
+/**
+ * {{mod}}
+ * Returns the modulus of two numbers
+ * @author: Liam Moat <https://github.com/liammoat>
+ */
+Library.addHelper('mod', function (value, divisor) {
+  if (!((Utils.isUndefined(value)) && (Utils.isUndefined(divisor)))) {
+    value = parseFloat(Utils.result(value));
+    divisor = parseFloat(Utils.result(divisor));
+    return value % divisor;
+  } else {
+    return Utils.err('{{mod}} takes two arguments (number, number).');
+  }
+});
+
 Library.addHelper('multiply', function (value, multiplier) {
   if (!((Utils.isUndefined(value)) && (Utils.isUndefined(multiplier)))) {
     value = parseFloat(Utils.result(value));
