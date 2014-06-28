@@ -109,7 +109,7 @@ Additionally, Handlebars allows two different kinds of helpers:
 
 * **Search existing helpers** to see if there is one that already does what your helper does. If they are similar, but different, please explain how they differ.
 * **Use camelCase** for the helper's name. You'll see a few helpers in the lib that use underscores, these are from another library (and are appropriately credited). All other helpers use camelcase.
-* [**document the helper**]() so that developers don't need to jump through hoops to figure out how to use it.
+* [**document the helper**](https://github.com/assemble/handlebars-helpers/tree/master/docs/helpers) so that developers don't need to jump through hoops to figure out how to use it.
 
 Please remember to add some kind of attribution for yourself in this format: `@author: Your Name <github address>`, example:
 
