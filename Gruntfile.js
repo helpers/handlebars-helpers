@@ -86,12 +86,6 @@ module.exports = function(grunt) {
       }
     },
 
-    readme: {
-      options: {
-        metadata: ['docs/*.json']
-      }
-    },
-
     compress: {
       zip: {
         options: {
