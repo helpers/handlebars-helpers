@@ -35,6 +35,7 @@
     "startsWith",
     "stringify",
     "stripQuerystring",
+    "thumbnailImage",
     "urlparse",
     "urlresolve",
     "value"
