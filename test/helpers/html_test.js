@@ -72,8 +72,8 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail">\n';
-          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png">\n';
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
           comparison += '</a>\n';
           comparison += '<figcaption>My new caption!</figcaption>\n';
@@ -100,8 +100,8 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail test">\n';
-          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png">\n';
+      var comparison = '<figure id="image-id" class="test">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
           comparison += '</a>\n';
           comparison += '<figcaption>My new caption!</figcaption>\n';
@@ -128,8 +128,8 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail">\n';
-          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png">\n';
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" ';
           comparison += 'width="200" height="200" class="test">\n';
           comparison += '</a>\n';
@@ -157,8 +157,8 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail">\n';
-          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" class="test">\n';
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" ';
           comparison += 'width="200" height="200">\n';
           comparison += '</a>\n';
@@ -182,7 +182,7 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail">\n';
+      var comparison = '<figure id="image-id">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
           comparison += '<figcaption>My new caption!</figcaption>\n';
           comparison += '</figure>';
@@ -204,8 +204,8 @@ describe('thumbnailImage', function() {
         }
       };
       var template = Handlebars.compile(source);
-      var comparison = '<figure id="image-id" class="js-thumbnail">\n';
-          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png">\n';
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
           comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
           comparison += '</a>\n';
           comparison += '</figure>';
