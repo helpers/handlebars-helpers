@@ -60,22 +60,6 @@ describe('utils', function() {
     });
   });
 
-  describe('pairedAttributes', function() {
-      it('should return an array with the values being key="value"', function() {
-        data = {
-          a: 'b',
-          c: 200
-        };
-        expected = [
-          'a="b"',
-          'c="200"'
-        ];
-        actual = Utils.pairedAttributes(data);
-
-        actual.should.eql(expected);
-      });
-  });
-
   describe('#SafeString', function() {
     /* jshint eqeqeq: false */
     it("constructing a safestring from a string and checking its type", function() {
