@@ -10,11 +10,14 @@
 
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
 describe('loaded helpers', function() {
 
   before(function() {
-    require('../lib/helper-lib').register(Handlebars, {});
+    _.forOwn(require('../')(), function (value, key) {
+      Handlebars.registerHelper(key, value);
+    });
   });
 
   it('should have prettify helper', function() {
