@@ -10,12 +10,10 @@ var path = require('path');
 
 // node_modules
 require('should');
-var grunt      = require('grunt');
-
 var Handlebars = require('handlebars');
 var _ = require('lodash');
-var Helpers = require('../..');
 
+var Helpers = require('../..');
 var loadHelpers = function (options) {
   var helpers = Helpers('markdown', options);
   _.forOwn(helpers, function (value, key) { 
