@@ -10,17 +10,19 @@ var path = require('path');
 
 require('should');
 var expect = require('chai').expect;
-var Handlebars = require('handlebars');
 var nap = require('nap');
 
-var helpers = path.join.bind(__dirname, '../../lib/helpers');
-
-// Local helpers
-require('../../lib/helpers/helpers-html').register(Handlebars, {});
+var Handlebars = require('handlebars');
+var _ = require('lodash');
 
 var options = {
   assets: 'assets/'
 };
+var helpers = require('../..')('html', options);
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
+
 
 describe('ul', function() {
   describe('{{#ul context options}}', function() {
@@ -58,7 +60,10 @@ describe('html', function() {
   describe('nap', function() {
 
     before(function() {
-      require(helpers('helpers-html')).register(Handlebars, options);
+      var helpers = require('../..')('html', options);
+      _.forOwn(helpers, function (value, key) { 
+        Handlebars.registerHelper(key, value);
+      });
       nap({
         publicDir: path.resolve(__dirname, '../actual/'),
         mode: 'production',

@@ -9,9 +9,12 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
-// Local helpers
-require('../../lib/helpers/helpers-code').register(Handlebars, {});
+var helpers = require('../..')('code');
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
 
 var source, template;
 

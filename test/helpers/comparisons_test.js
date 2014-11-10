@@ -8,10 +8,12 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
-// Local helpers
-require('../../lib/helpers/helpers-comparisons').register(Handlebars, {});
-
+var helpers = require('../..')('comparisons');
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
 var source, template, context;
 
 describe('compare', function() {

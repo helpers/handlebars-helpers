@@ -8,10 +8,12 @@
 // node_moduls
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
-// Local helpers
-require('../../lib/helpers/helpers-inflections').register(Handlebars, {});
-
+var helpers = require('../..')('inflections');
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
 
 describe('inflect', function() {
   describe('{{inflect enemies "enemy" "enemies"}}', function() {

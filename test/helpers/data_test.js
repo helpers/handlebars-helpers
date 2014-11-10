@@ -8,9 +8,12 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
-// Local helpers
-require('../../lib/helpers/helpers-data').register(Handlebars, {});
+var helpers = require('../..')('data');
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
 
 // Local utils
 var Utils = require('../../lib/utils/utils');

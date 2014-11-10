@@ -8,9 +8,12 @@
 // node_modules
 require('should');
 var Handlebars = require('handlebars');
+var _ = require('lodash');
 
-// Local helpers
-require('../../lib/helpers/helpers-miscellaneous').register(Handlebars, {});
+var helpers = require('../..')('miscellaneous');
+_.forOwn(helpers, function (value, key) { 
+  Handlebars.registerHelper(key, value);
+});
 
 describe('default', function() {
   describe('{{default title "Not title available."}}', function() {
