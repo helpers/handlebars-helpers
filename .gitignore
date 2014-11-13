@@ -1,0 +1,12 @@
+node_modules
+*.sublime-*
+
+# Ignore the staging dir for docs
+
+tmp
+vendor
+/test/spec/
+TODO.md
+*.rar
+
+/npm-debug.log
