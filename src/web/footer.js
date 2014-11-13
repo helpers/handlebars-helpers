@@ -1,5 +1,0 @@
-
-
-  Library.registerHelpers(config.Handlebars);
-};
-
