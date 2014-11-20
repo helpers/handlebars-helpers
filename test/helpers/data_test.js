@@ -38,10 +38,25 @@ describe('prop', function() {
 
 describe('stringify', function() {
   describe('{{stringify filepath}}', function() {
-    it('should return a string representation of a JSON object', function() {
+    it('should return a string representation of the content of a JSON file', function() {
       var source = '{{stringify "test/fixtures/payload.json"}}';
       var template = Handlebars.compile(source);
       template().should.equal('{\n  "name": "Philip J. Fry",\n  "age": 30,\n  "userid": "Fryster"\n}');
+    });
+  });
+
+  describe('{{stringify object}}', function() {
+    it('should return a string representation of an object', function() {
+      var source = '{{stringify data}}';
+      var template = Handlebars.compile(source);
+      var context = {
+        data: {
+          name: "Philip J. Fry",
+          age: 30,
+          userid: "Fryster"
+        }
+      };
+      template(context).should.equal('{\n  "name": "Philip J. Fry",\n  "age": 30,\n  "userid": "Fryster"\n}');
     });
   });
 });
