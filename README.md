@@ -24,7 +24,7 @@ npm i handlebars-helpers --save-dev
 ## Contributing
 
 ### Undocumented Helpers
-We can always use your help documenting helpers. As of 2014-07-01, **37 of 124 helpers** require documentation:
+We can always use your help documenting helpers. As of 2014-11-20, **37 of 124 helpers** require documentation:
 
 * `{{arrayify}}`
 * `{{count}}`
@@ -65,7 +65,7 @@ We can always use your help documenting helpers. As of 2014-07-01, **37 of 124 h
 * `{{value}}`
 
 ### Helpers that need tests
-We can always use your help writing tests for helpers. As of 2014-07-01, **23 of 124 helpers** require tests:
+We can always use your help writing tests for helpers. As of 2014-11-20, **23 of 124 helpers** require tests:
 
 * `{{arrayify}}`
 * `{{block}}`
