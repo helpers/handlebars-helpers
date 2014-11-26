@@ -9,9 +9,10 @@ vendor
 TODO.md
 *.rar
 
+/npm-debug.log
 
 
-# npmignore only
+# npmignore
 docs
 tasks
 test
