@@ -1,20 +1,12 @@
-/**
- * Handlebars Helpers Tests: Markdown Utils
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-// Node.js
 var path = require('path');
-
-// node_modules
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
-var expect     = require('chai').expect;
+var should = require('should');
 
 // Local helpers
-var markdown = require('../../lib/utils/markdown').Markdown({
+var markdown = require('../lib/utils/markdown').Markdown({
   gfm: true,
   highlight: 'auto'
 });

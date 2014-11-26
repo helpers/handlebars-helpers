@@ -1,18 +1,11 @@
-/**
- * Handlebars Helpers Tests: Collections Helpers
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-
-// node_modules
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('../..')(['collections', 'miscellaneous', 'strings']);
-_.forOwn(helpers, function (value, key) { 
+var helpers = require('..')(['collections', 'miscellaneous', 'strings']);
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 

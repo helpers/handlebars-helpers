@@ -1,24 +1,15 @@
-/*global require:true */
+'use strict';
 
-/**
- * Handlebars Helpers Tests: Helper Lib
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
-
-
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
 var helpers = require('..')();
-_.forOwn(helpers, function (value, key) { 
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 
 describe('loaded helpers', function() {
-
   it('should have prettify helper', function() {
     var source = '{{#prettify}}<div>Some HTML</div>{{/prettify}}';
     var template = Handlebars.compile(source);

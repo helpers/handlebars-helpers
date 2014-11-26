@@ -1,17 +1,11 @@
-/**
- * Handlebars Helpers Tests: Path Helpers
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-// node_modules
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('../..')('path');
-_.forOwn(helpers, function (value, key) { 
+var helpers = require('..')('path');
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 
@@ -47,7 +41,7 @@ describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
       source = '{{relative "examples/result/md/path.md" "examples/assets"}}';
       template = Handlebars.compile(source);
-      template().should.equal('../../assets');
+      template().should.equal('../assets');
     });
   });
 });

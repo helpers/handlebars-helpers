@@ -1,14 +1,8 @@
-// /**
-//  * Handlebars Helpers Tests: Logging Helpers
-//  * http://github.com/assemble/handlebars-helpers
-//  * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
-//  * Licensed under the MIT License (MIT).
-//  */
+'use strict';
 
-
-// require('should');
+// var should = require('should');
 // var Handlebars = require('handlebars');
-// require('../../lib/helpers/helpers-logging').register(Handlebars, {});
+// require('../lib/helpers/helpers-logging').register(Handlebars, {});
 
 // var log = console ? console.log : function() {};
 // log.history = [];

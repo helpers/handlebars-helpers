@@ -1,17 +1,11 @@
-/**
- * Handlebars Helpers Tests: String Helpers
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-// node_modules
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('../..')('strings');
-_.forOwn(helpers, function (value, key) { 
+var helpers = require('..')('strings');
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 

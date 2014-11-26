@@ -1,22 +1,16 @@
-/**
- * Handlebars Helpers Tests: Data Helpers
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2014 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-// node_modules
-require('should');
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('../..')('data');
-_.forOwn(helpers, function (value, key) { 
+var helpers = require('..')('data');
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 
 // Local utils
-var Utils = require('../../lib/utils/utils');
+var Utils = require('../lib/utils/utils');
 
 
 describe('value', function() {

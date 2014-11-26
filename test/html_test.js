@@ -1,24 +1,16 @@
-/**
- * Handlebars Helpers Tests: HTML Helpers
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
 var rimraf = require('rimraf');
 var path = require('path');
-
-require('should');
-var expect = require('chai').expect;
-
+var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
 var options = {
   assets: 'assets/'
 };
-var helpers = require('../..')('html', options);
-_.forOwn(helpers, function (value, key) { 
+var helpers = require('..')('html', options);
+_.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 

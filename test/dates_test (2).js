@@ -1,12 +1,7 @@
-/**
- * Handlebars Helpers Tests: Dates Utils
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-require('should');
-var Dates = require('../../lib/utils/dates');
+var should = require('should');
+var Dates = require('../lib/utils/dates');
 
 describe('pad number', function() {
   describe('default padCharacter', function() {

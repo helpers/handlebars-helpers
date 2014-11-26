@@ -1,16 +1,9 @@
-/**
- * Handlebars Helpers Tests: Utils
- * http://github.com/assemble/handlebars-helpers
- * Copyright (c) 2013 Jon Schlinkert, Brian Woodward, contributors
- * Licensed under the MIT License (MIT).
- */
+'use strict';
 
-
-require('should');
-var Glob = require('../../lib/utils/glob');
-var Utils = require('../../lib/utils/utils');
+var should = require('should');
+var Glob = require('../lib/utils/glob');
+var Utils = require('../lib/utils/utils');
 var Handlebars = require('handlebars');
-
 
 var content, expected, data, actual;
 
