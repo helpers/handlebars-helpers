@@ -6,12 +6,8 @@
  * MIT License
  */
 
-
-// Node.js
 var fs = require('fs');
 var path = require('path');
-
-// node_modules
 var _ = require('grunt').util._;
 
 module.exports = function(grunt) {
