@@ -41,7 +41,7 @@ describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
       source = '{{relative "examples/result/md/path.md" "examples/assets"}}';
       template = Handlebars.compile(source);
-      template().should.equal('../assets');
+      template().should.equal('../../assets');
     });
   });
 });
