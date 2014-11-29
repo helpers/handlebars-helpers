@@ -4,98 +4,75 @@ var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('..')('code');
-_.forOwn(helpers, function (value, key) {
+_.forOwn(require('..')('code'), function (value, key) {
   Handlebars.registerHelper(key, value);
 });
 
-var source, template;
-
-var embeddedMarkdown = [
-  '```md',
-  '## Some Markdown\n',
-  ' - one',
-  ' - two',
-  ' - three\n',
-  '[Click here](http://github.com)\n',
-  '```\n'
-].join('\n');
-
-var embeddedMarkdownBackticks = [
-  '```md',
-  '## Markdown\n',
-  'Code example\n',
-  '&#x60;&#x60;&#x60;js',
-  'var urlresolve = function (base, href) {',
-  '  return url.resolve(base, href);',
-  '};',
-  '&#x60;&#x60;&#x60;\n',
-  '[Click here](http://assemble.io) for more documentation.\n',
-  '```\n'
-].join('\n');
-
-var embeddedHTML = [
-  '```html',
-  '<!DOCTYPE html>',
-  '  <html lang="en">',
-  '  <head>',
-  '    <meta charset="UTF-8">',
-  '    <title>{{title}}</title>',
-  '  </head>',
-  '  <body>',
-  '    {{> foo }}',
-  '  </body>',
-  '</html>\n',
-  '```\n'
-].join('\n');
-
-describe('embed', function() {
-  describe('{{embed "md"}}', function() {
-    it('should wrap embedded markdown with triple backticks', function() {
-      source = '{{embed "test/fixtures/simple.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal(embeddedMarkdown);
-    });
+describe('{{embed}}', function() {
+  it('should embed markdown:', function() {
+    Handlebars.compile('{{{embed "test/fixtures/simple.md"}}}')().should.equal([
+      '```markdown',
+      '## Some Markdown\n',
+      ' - one',
+      ' - two',
+      ' - three\n',
+      '[Click here](http://github.com)\n',
+      '```\n'
+    ].join('\n'));
   });
-  describe('{{embed "md"}} with embedded code example', function() {
-    it('should wrap embedded markdown with triple backticks, and escape any backticks in the embedded code example.', function() {
-      source = '{{embed "test/fixtures/embedded.md"}}';
-      template = Handlebars.compile(source);
-      template().should.equal(embeddedMarkdownBackticks);
-    });
+
+  it('should determine the language from the file extension', function() {
+    Handlebars.compile('{{{embed "test/fixtures/embedded.md"}}}')().should.equal([
+      '```markdown',
+      '## Markdown\n',
+      'Code example\n',
+      '&#x60;&#x60;&#x60;js',
+      'var urlresolve = function (base, href) {',
+      '  return url.resolve(base, href);',
+      '};',
+      '&#x60;&#x60;&#x60;\n',
+      '[Click here](http://assemble.io) for more documentation.\n',
+      '```\n'
+    ].join('\n'));
   });
-  describe('{{embed "html"}}', function() {
-    it('should wrap embedded HTML with triple backticks', function() {
-      source = '{{embed "test/fixtures/index.html"}}';
-      template = Handlebars.compile(source);
-      template().should.equal(embeddedHTML);
-    });
+
+  it('should use the language defined in the last argument', function() {
+    var template = Handlebars.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
+    template().should.equal([
+      '```handlebars',
+      '<!DOCTYPE html>',
+      '  <html lang="en">',
+      '  <head>',
+      '    <meta charset="UTF-8">',
+      '    <title>{{title}}</title>',
+      '  </head>',
+      '  <body>',
+      '    {{> foo }}',
+      '  </body>',
+      '</html>\n',
+      '```\n'
+    ].join('\n'));
   });
 });
 
-describe('jsfiddle', function() {
-  describe('{{jsfiddle id}}', function() {
-    it('should return a jsfiddle embed link, with default tabs assigned', function() {
-      source = '{{jsfiddle id="UXbas"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
-    });
+describe('{{jsfiddle}}', function() {
+  it('should return a jsfiddle embed link, with default tabs assigned', function() {
+    var source = '{{{jsfiddle id="UXbas"}}}';
+    var template = Handlebars.compile(source);
+    template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
-  describe('{{jsfiddle id tabs}}', function() {
-    it('should return a jsfiddle embed link, with custom tabs assigned', function() {
-      source = '{{jsfiddle id="UXbas" tabs="html,css"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
-    });
+
+  it('should return a jsfiddle embed link, with custom tabs assigned', function() {
+    var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
+    var template = Handlebars.compile(source);
+    template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
 });
 
-describe('gist', function() {
-  describe('{{gist id}}', function() {
-    it('should return a gist script tag', function() {
-      source = '{{gist "abcdefg"}}';
-      template = Handlebars.compile(source);
-      template().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
-    });
+describe('{{gist}}', function() {
+  it('should create a script tag for a gist', function() {
+    var source = '{{{gist "abcdefg"}}}';
+    var template = Handlebars.compile(source);
+    template().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
   });
 });
