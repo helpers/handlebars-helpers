@@ -8,75 +8,51 @@ var helpers = require('..')('comparisons');
 _.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
-var source, template, context;
 
-describe('compare', function() {
+describe('{{compare}}', function() {
   describe('{{#compare left "<=" right}}', function() {
     it('should render the first block if the left value is equal or greater.', function() {
-      context = {
-        left: 10,
-        right: 15
-      };
-      source = '{{#compare left "<=" right}}The value is greater than or equal to 10{{else}}The value is lower than 10{{/compare}}';
-      template = Handlebars.compile(source);
-      template(context).should.equal('The value is greater than or equal to 10');
+      var source = '{{#compare left "<=" right}}greater than or equal to 10{{else}}lower than 10{{/compare}}';
+      var template = Handlebars.compile(source);
+      template({left: 10, right: 15}).should.equal('greater than or equal to 10');
     });
   });
   describe('{{#compare unicorns "<" ponies}}', function() {
     it('should render the first block if the left value is less than the right.', function() {
-      context = {
-        unicorns: 5,
-        ponies: 6
-      };
-      source = '{{#compare unicorns "<" ponies}}I knew it, unicorns are just low-quality ponies!{{/compare}}';
-      template = Handlebars.compile(source);
-      template(context).should.equal('I knew it, unicorns are just low-quality ponies!');
+      var source = '{{#compare unicorns "<" ponies}}I knew it, unicorns are just low-quality ponies!{{/compare}}';
+      var template = Handlebars.compile(source);
+      var res = template({unicorns: 5, ponies: 6});
+      res.should.equal('I knew it, unicorns are just low-quality ponies!');
     });
   });
   describe('{{#compare obj "typeof" "object"}}', function() {
     it('should render the first block if the right value is an object.', function() {
-      context = {
-        obj: {}
-      };
-      source = '{{#compare obj "typeof" "object"}}It\'s an object.{{else}}It\'s not an object.{{/compare}}';
-      template = Handlebars.compile(source);
-      template(context).should.equal('It\'s an object.');
+      var template = Handlebars.compile('{{#compare obj "typeof" "object"}}an object{{else}}not an object{{/compare}}');
+      template({obj: {}}).should.equal('an object');
     });
   });
 });
 
-describe('contains', function() {
+describe('{{contains}}', function() {
   describe('{{#contains bender "z"}}', function() {
     it('should render a block if the condition is true.', function() {
-      source = '{{#contains bender "great"}}Kiss my shiny metal ass!{{else}}Never mind :({{/contains}}';
-      template = Handlebars.compile(source);
-      context = {
-        bender: 'Bender is great!'
-      };
-      template(context).should.equal('Kiss my shiny metal ass!');
+      var template = Handlebars.compile('{{#contains bender "C"}}AAA{{else}}BBB{{/contains}}');
+      template({bender: 'CCC'}).should.equal('AAA');
     });
   });
   describe('{{#contains bender "z"}}', function() {
     it('should render a block if the condition is true.', function() {
-      source = '{{#contains bender "zzz"}}Kiss my shiny metal ass!{{else}}Never mind :({{/contains}}';
-      template = Handlebars.compile(source);
-      context = {
-        bender: 'Bender is great!'
-      };
-      template(context).should.equal('Never mind :(');
+      var template = Handlebars.compile('{{#contains bender "zzz"}}AAA{{else}}BBB{{/contains}}');
+      template({bender: 'CCC'}).should.equal('BBB');
     });
   });
 });
 
-describe('is', function() {
-  describe('{{#is bender "great"}}', function() {
+describe('{{is}}', function() {
+  describe('{{#is bender "CCC"}}', function() {
     it('should render a block if the condition is true.', function() {
-      source = '{{#is bender "great"}}Kiss my shiny metal ass!{{else}}Never mind :({{/is}}';
-      template = Handlebars.compile(source);
-      context = {
-        bender: 'great'
-      };
-      template(context).should.equal('Kiss my shiny metal ass!');
+      var template = Handlebars.compile('{{#is bender "CCC"}}AAA{{else}}BBB{{/is}}');
+      template({bender: 'CCC'}).should.equal('AAA');
     });
   });
 });
@@ -84,12 +60,8 @@ describe('is', function() {
 describe('isnt', function() {
   describe('{{#isnt number 2}}', function() {
     it('should render a block if the condition is not true.', function() {
-      source = '{{#isnt number 2}}Kiss my great metal ass!{{else}}Never mind :({{/isnt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 3
-      };
-      template(context).should.equal('Kiss my great metal ass!');
+      var template = Handlebars.compile('{{#isnt number 2}}AAA{{else}}BBB{{/isnt}}');
+      template({number: 3}).should.equal('AAA');
     });
   });
 });
@@ -97,12 +69,8 @@ describe('isnt', function() {
 describe('gt', function() {
   describe('{{#gt number 8}}', function() {
     it('should render a block if the value is greater than a given number.', function() {
-      source = '{{#gt number 8}}Kiss my glorious metal ass!{{else}}Never mind :({{/gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 9
-      };
-      template(context).should.equal('Kiss my glorious metal ass!');
+      var template = Handlebars.compile('{{#gt number 8}}AAA{{else}}BBB{{/gt}}');
+      template({number: 9}).should.equal('AAA');
     });
   });
 });
@@ -110,12 +78,8 @@ describe('gt', function() {
 describe('gte', function() {
   describe('{{#gte number 8}}', function() {
     it('should render a block if the value is greater or equal than a given number.', function() {
-      source = '{{#gte number 8}}Kiss my perfect metal ass!{{else}}Never mind :({{/gte}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#gte number 8}}AAA{{else}}BBB{{/gte}}');
+      template({number: 8}).should.equal('AAA');
     });
   });
 });
@@ -123,187 +87,118 @@ describe('gte', function() {
 describe('lt', function() {
   describe('{{#lt number 8}}', function() {
     it('should render a block if the value is less than a given number.', function() {
-      source = '{{#lt number 8}}Kiss my golden metal ass!{{else}}Never mind :({{/lt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 2
-      };
-      template(context).should.equal('Kiss my golden metal ass!');
+      var template = Handlebars.compile('{{#lt number 8}}AAA{{else}}BBB{{/lt}}');
+      template({number: 2}).should.equal('AAA');
     });
   });
 });
 
-describe('lte', function() {
+describe('{{lte}}', function() {
   describe('{{#lte number 8}}', function() {
     it('should render a block if the value is less or equal than a given number.', function() {
-      source = '{{#lte number 8}}Kiss my big metal ass!{{else}}Never mind :({{/lte}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8
-      };
-      template(context).should.equal('Kiss my big metal ass!');
+      var template = Handlebars.compile('{{#lte number 8}}AAA{{else}}BBB{{/lte}}');
+      template({number: 8}).should.equal('AAA');
     });
   });
 });
 
-describe('or', function() {
+describe('{{or}}', function() {
   describe('{{#or great magnificent}}', function() {
     it('should render a block if one of the values is truthy.', function() {
-      source = '{{#or great magnificent}}Kiss my perfect metal ass!{{else}}Never mind :({{/or}}';
-      template = Handlebars.compile(source);
-      context = {
-        great: false,
-        magnificent: true
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#or great magnificent}}AAA{{else}}BBB{{/or}}');
+      template({great: false, magnificent: true}).should.equal('AAA');
     });
   });
 });
 
-describe('and', function() {
+describe('{{and}}', function() {
   describe('{{#and great magnificent}}', function() {
     it('should render a block if both values are truthy.', function() {
-      source = '{{#and great magnificent}}Kiss my glorious metal ass!{{else}}Never mind :({{/and}}';
-      template = Handlebars.compile(source);
-      context = {
-        great: true,
-        magnificent: true
-      };
-      template(context).should.equal('Kiss my glorious metal ass!');
+      var template = Handlebars.compile('{{#and great magnificent}}AAA{{else}}BBB{{/and}}');
+      template({great: true, magnificent: true}).should.equal('AAA');
     });
   });
 });
 
-describe('if_eq', function() {
+describe('{{if_eq}}', function() {
   describe('{{#if_eq number compare=8}}', function() {
     it('should render a block if the value is equal to a given number.', function() {
-      source = '{{#if_eq number compare=8}}Kiss my perfect metal ass!{{/if_eq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_eq number compare=8}}AAA{{/if_eq}}');
+      template({number: 8}).should.equal('AAA');
     });
     it('should not render a block if the value is not equal to a given number.', function() {
-      source = '{{#if_gt number compare=8}}Kiss my perfect metal ass!{{/if_gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#if_gt number compare=8}}AAA{{/if_gt}}');
+      template({number: 5}).should.equal('');
     });
   });
 });
 
-describe('if_gt', function() {
+describe('{{if_gt}}', function() {
   describe('{{#if_gt number compare=8}}', function() {
     it('should render a block if the value is greater than a given number.', function() {
-      source = '{{#if_gt number compare=8}}Kiss my perfect metal ass!{{/if_gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 10,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_gt number compare=8}}AAA{{/if_gt}}');
+      template({number: 10}).should.equal('AAA');
     });
     it('should not render a block if the value is less than a given number.', function() {
-      source = '{{#if_gt number compare=8}}Kiss my perfect metal ass!{{/if_gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#if_gt number compare=8}}AAA{{/if_gt}}');
+      template({number: 5}).should.equal('');
     });
   });
 });
 
-describe('if_gteq', function() {
+describe('{{if_gteq}}', function() {
   describe('{{#if_gteq number compare=8}}', function() {
     it('should render a block if the value is greater than a given number.', function() {
-      source = '{{#if_gteq number compare=8}}Kiss my perfect metal ass!{{/if_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 12,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_gteq number compare=8}}AAA{{/if_gteq}}');
+      template({number: 12}).should.equal('AAA');
     });
     it('should render a block if the value is equal to a given number.', function() {
-      source = '{{#if_gteq number compare=8}}Kiss my perfect metal ass!{{/if_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_gteq number compare=8}}AAA{{/if_gteq}}');
+      template({number: 8}).should.equal('AAA');
     });
     it('should not render a block if the value is less than a given number.', function() {
-      source = '{{#if_gteq number compare=8}}Kiss my perfect metal ass!{{/if_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#if_gteq number compare=8}}AAA{{/if_gteq}}');
+      template({number: 5}).should.equal('');
     });
   });
 });
 
-describe('if_lt', function() {
+describe('{{if_lt}}', function() {
   describe('{{#if_lt number compare=8}}', function() {
     it('should render a block if the value is less than a given number.', function() {
-      source = '{{#if_lt number compare=8}}Kiss my perfect metal ass!{{/if_lt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_lt number compare=8}}AAA{{/if_lt}}');
+      template({number: 5}).should.equal('AAA');
     });
     it('should not render a block if the value is greater than a given number.', function() {
-      source = '{{#if_lt number compare=8}}Kiss my perfect metal ass!{{/if_lt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 42,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#if_lt number compare=8}}AAA{{/if_lt}}');
+      template({number: 42}).should.equal('');
     });
   });
 });
 
-describe('if_lteq', function() {
+describe('{{if_lteq}}', function() {
   describe('{{#if_lteq number compare=8}}', function() {
     it('should render a block if the value is less than a given number.', function() {
-      source = '{{#if_lteq number compare=8}}Kiss my perfect metal ass!{{/if_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 1,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_lteq number compare=8}}AAA{{/if_lteq}}');
+      template({number: 1}).should.equal('AAA');
     });
     it('should render a block if the value is equal to a given number.', function() {
-      source = '{{#if_lteq number compare=8}}Kiss my perfect metal ass!{{/if_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#if_lteq number compare=8}}AAA{{/if_lteq}}');
+      template({number: 8}).should.equal('AAA');
     });
     it('should not render a block if the value is greater than a given number.', function() {
-      source = '{{#if_lteq number compare=8}}Kiss my perfect metal ass!{{/if_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 27,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#if_lteq number compare=8}}AAA{{/if_lteq}}');
+      template({number: 27}).should.equal('');
     });
   });
 });
 
-describe('ifNth', function() {
-
+describe('{{ifNth}}', function() {
   describe('{{#ifNth "2" @index}}', function() {
-
     it('should render a custom class on even rows', function() {
-
-      source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
-      template = Handlebars.compile(source);
-      context = {
+      var source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
+      var template = Handlebars.compile(source);
+      var context = {
         items: [
           { name: 'Philip J. Fry' },
           { name: 'Turanga Leela' },
@@ -312,139 +207,86 @@ describe('ifNth', function() {
           { name: 'Hermes Conrad' }
         ]
       };
-      var output = template(context);
-      console.log(output);
-      output.should.equal([
-          '<div >Philip J. Fry</div>',
-          '<div class="row-alternate">Turanga Leela</div>',
-          '<div >Bender Bending Rodriguez</div>',
-          '<div class="row-alternate">Amy Wong</div>',
-          '<div >Hermes Conrad</div>'
-        ].join(''));
-
+      template(context).should.equal([
+        '<div >Philip J. Fry</div>',
+        '<div class="row-alternate">Turanga Leela</div>',
+        '<div >Bender Bending Rodriguez</div>',
+        '<div class="row-alternate">Amy Wong</div>',
+        '<div >Hermes Conrad</div>'
+      ].join(''));
     });
-
   });
-
 });
 
-describe('unless_eq', function() {
+describe('{{unless_eq}}', function() {
   describe('{{#unless_eq number compare=8}}', function() {
     it('should render a block unless the value is equal to a given number.', function() {
-      source = '{{#unless_eq number compare=8}}Kiss my perfect metal ass!{{/unless_eq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 10,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#unless_eq number compare=8}}AAA{{/unless_eq}}');
+      template({number: 10}).should.equal('AAA');
     });
     it('should render a block unless the value is equal to a given number.', function() {
-      source = '{{#unless_eq number compare=8}}Kiss my perfect metal ass!{{/unless_eq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_eq number compare=8}}AAA{{/unless_eq}}');
+      template({number: 8}).should.equal('');
     });
   });
 });
 
-describe('unless_gt', function() {
+describe('{{unless_gt}}', function() {
   describe('{{#unless_gt number compare=8}}', function() {
     it('should render a block unless the value is greater than a given number.', function() {
-      source = '{{#unless_gt number compare=8}}Kiss my perfect metal ass!{{/unless_gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#unless_gt number compare=8}}AAA{{/unless_gt}}');
+      template({number: 5}).should.equal('AAA');
     });
     it('should render a block unless the value is greater than a given number.', function() {
-      source = '{{#unless_gt number compare=8}}Kiss my perfect metal ass!{{/unless_gt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 10,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_gt number compare=8}}AAA{{/unless_gt}}');
+      template({number: 10}).should.equal('');
     });
   });
 });
 
-describe('unless_lt', function() {
+describe('{{unless_lt}}', function() {
   describe('{{#unless_lt number compare=8}}', function() {
     it('should render a block unless the value is less than a given number.', function() {
-      source = '{{#unless_lt number compare=8}}Kiss my perfect metal ass!{{/unless_lt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 10,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#unless_lt number compare=8}}AAA{{/unless_lt}}');
+      template({number: 10}).should.equal('AAA');
     });
     it('should render a block unless the value is less than a given number.', function() {
-      source = '{{#unless_lt number compare=8}}Kiss my perfect metal ass!{{/unless_lt}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 5,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_lt number compare=8}}AAA{{/unless_lt}}');
+      template({number: 5}).should.equal('');
     });
   });
 });
 
-describe('unless_gteq', function() {
+describe('{{unless_gteq}}', function() {
   describe('{{#unless_gteq number compare=8}}', function() {
     it('should render a block unless the value is greater than or equal to a given number.', function() {
-      source = '{{#unless_gteq number compare=8}}Kiss my perfect metal ass!{{/unless_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 4,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#unless_gteq number compare=8}}AAA{{/unless_gteq}}');
+      template({number: 4}).should.equal('AAA');
     });
     it('should render a block unless the value is greater than or equal to a given number.', function() {
-      source = '{{#unless_gteq number compare=8}}Kiss my perfect metal ass!{{/unless_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_gteq number compare=8}}AAA{{/unless_gteq}}');
+      template({number: 8}).should.equal('');
     });
     it('should not render a block unless the value is greater than or equal to a given number.', function() {
-      source = '{{#unless_gteq number compare=8}}Kiss my perfect metal ass!{{/unless_gteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 34,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_gteq number compare=8}}AAA{{/unless_gteq}}');
+      template({number: 34}).should.equal('');
     });
   });
 });
 
-describe('unless_lteq', function() {
+describe('{{unless_lteq}}', function() {
   describe('{{#unless_lteq number compare=8}}', function() {
     it('should render a block unless the value is less than or equal to a given number.', function() {
-      source = '{{#unless_lteq number compare=8}}Kiss my perfect metal ass!{{/unless_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 10,
-      };
-      template(context).should.equal('Kiss my perfect metal ass!');
+      var template = Handlebars.compile('{{#unless_lteq number compare=8}}AAA{{/unless_lteq}}');
+      template({number: 10}).should.equal('AAA');
     });
     it('should render a block unless the value is less than or equal to a given number.', function() {
-      source = '{{#unless_lteq number compare=8}}Kiss my perfect metal ass!{{/unless_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 8,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_lteq number compare=8}}AAA{{/unless_lteq}}');
+      template({number: 8}).should.equal('');
     });
     it('should not render a block unless the value is less than or equal to a given number.', function() {
-      source = '{{#unless_lteq number compare=8}}Kiss my perfect metal ass!{{/unless_lteq}}';
-      template = Handlebars.compile(source);
-      context = {
-        number: 4,
-      };
-      template(context).should.equal('');
+      var template = Handlebars.compile('{{#unless_lteq number compare=8}}AAA{{/unless_lteq}}');
+      template({number: 4}).should.equal('');
     });
   });
 });
