@@ -6,10 +6,9 @@ var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var options = {
-  assets: 'assets/'
-};
+var options = {assets: 'assets/'};
 var helpers = require('..')('html', options);
+
 _.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });
