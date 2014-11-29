@@ -4,6 +4,7 @@ node_modules
 # Ignore the staging dir for docs
 
 tmp
+temp
 vendor
 /test/spec/
 TODO.md
@@ -11,8 +12,7 @@ TODO.md
 
 /npm-debug.log
 
-
 # npmignore
 docs
-tasks
+support
 test
