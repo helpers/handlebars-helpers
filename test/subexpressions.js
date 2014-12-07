@@ -3,11 +3,11 @@
 var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
+var helpers = require('..');
 
-var helpers = require('..')(['collections', 'miscellaneous', 'strings']);
-_.forOwn(helpers, function (value, key) {
-  Handlebars.registerHelper(key, value);
-});
+Handlebars.registerHelper(helpers('collections'));
+Handlebars.registerHelper(helpers('misc'));
+Handlebars.registerHelper(helpers('strings'));
 
 var source, template, context;
 

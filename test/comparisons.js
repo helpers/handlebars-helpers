@@ -2,12 +2,10 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
+var helpers = require('..');
 
-var helpers = require('..')('comparisons');
-_.forOwn(helpers, function (value, key) {
-  Handlebars.registerHelper(key, value);
-});
+Handlebars.registerHelper(helpers('comparisons'));
+
 
 describe('{{compare}}', function() {
   describe('{{#compare left "<=" right}}', function() {

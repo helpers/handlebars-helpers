@@ -2,11 +2,9 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
+var helpers = require('..');
 
-_.forOwn(require('..')('code'), function (value, key) {
-  Handlebars.registerHelper(key, value);
-});
+Handlebars.registerHelper(helpers('code'));
 
 describe('{{embed}}', function() {
   it('should embed markdown:', function() {

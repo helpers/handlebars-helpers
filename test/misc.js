@@ -4,7 +4,7 @@ var should = require('should');
 var Handlebars = require('handlebars');
 var _ = require('lodash');
 
-var helpers = require('..')('miscellaneous');
+var helpers = require('..')('misc');
 _.forOwn(helpers, function (value, key) {
   Handlebars.registerHelper(key, value);
 });

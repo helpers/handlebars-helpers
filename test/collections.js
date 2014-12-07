@@ -2,12 +2,9 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
+var helpers = require('..');
 
-_.forOwn(require('..')('collections'), function(value, key) {
-  Handlebars.registerHelper(key, value);
-});
-
+Handlebars.registerHelper(helpers('collections'));
 var context = {
   collection: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 };
@@ -226,7 +223,7 @@ describe('withSort', function() {
         name: 'd',
         deliveries: -12
       }]
-    })
+    });
     res.should.equal('d: -12 <br>b: 239 <br>f: 8021 <br>');
   });
 });

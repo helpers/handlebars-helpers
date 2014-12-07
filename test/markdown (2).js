@@ -6,7 +6,7 @@ var Handlebars = require('handlebars');
 var should = require('should');
 
 // Local helpers
-var markdown = require('../lib/helpers/helpers-markdown');
+var markdown = require('../lib/helpers/markdown');
 
 var fixtures = path.join.bind(process.cwd(), 'test/fixtures');
 var context;
