@@ -5,9 +5,7 @@ var Handlebars = require('handlebars');
 var helpers = require('..');
 
 Handlebars.registerHelper(helpers('collections'));
-var context = {
-  collection: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-};
+var context = {collection: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
 
 describe('after', function() {
   it('Should return all of the items in a collection after the specified count.', function() {
@@ -213,16 +211,7 @@ describe('withSort', function() {
   it('Should sort the collection by deliveries and use it in a block.', function() {
     var template = Handlebars.compile('{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
     var res = template({
-      collection: [{
-        name: 'f',
-        deliveries: 8021
-      }, {
-        name: 'b',
-        deliveries: 239
-      }, {
-        name: 'd',
-        deliveries: -12
-      }]
+      collection: [{name: 'f', deliveries: 8021 }, {name: 'b', deliveries: 239 }, {name: 'd', deliveries: -12 }]
     });
     res.should.equal('d: -12 <br>b: 239 <br>f: 8021 <br>');
   });

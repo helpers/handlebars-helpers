@@ -1,59 +1,23 @@
 'use strict';
 
-var rimraf = require('rimraf');
-var path = require('path');
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
+var helpers = require('..');
 
-var options = {assets: 'assets/'};
-var helpers = require('..')('html', options);
+Handlebars.registerHelper(helpers('html'));
 
-_.forOwn(helpers, function (value, key) {
-  Handlebars.registerHelper(key, value);
-});
-
+var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
 
 describe('ul', function() {
-  describe('{{#ul context options}}', function() {
-    it('should should return an unordered list', function() {
-      var source = '{{#ul data class="names"}}{{firstName}} {{lastName}}{{/ul}}';
-      var context = {
-        data: [
-          {firstName: 'Kif', lastName: 'Kroker'},
-          {firstName: 'Zapp', lastName: 'Brannigan'}
-        ]
-      };
-      var template = Handlebars.compile(source);
-      template(context).should.equal('<ul class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ul>');
-    });
+  it('should should return an unordered list', function() {
+    var template = Handlebars.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
+    template(locals).should.equal('<ul class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ul>');
   });
 });
 
 describe('ol', function() {
-  describe('{{#ol context options}}', function() {
-    it('should should return an ordered list', function() {
-      var source = '{{#ol data class="names"}}{{firstName}} {{lastName}}{{/ol}}';
-      var context = {
-        data: [
-          {firstName: 'Kif', lastName: 'Kroker'},
-          {firstName: 'Zapp', lastName: 'Brannigan'}
-        ]
-      };
-      var template = Handlebars.compile(source);
-      template(context).should.equal('<ol class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ol>');
-    });
+  it('should should return an ordered list', function() {
+    var template = Handlebars.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
+    template(locals).should.equal('<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
   });
 });
-
-// var expected = '<div>\n' + '  <p>\n' + '    <ul>\n' + '      <li><a href="#">Link</a></li>\n' + '    </ul>\n' + '  </p>\n' + '</div>';
-
-// describe('prettify', function() {
-//   describe('{{#prettify}}{{/prettify}}', function() {
-//     it('Should prettify the output HTML.', function() {
-//       var source = '{{#prettify}}<div><p><ul><li><a href="#">Link</a></li></ul></p></div>{{/prettify}}';
-//       var template = Handlebars.compile(source);
-//       template().should.equal(expected);
-//     });
-//   });
-// });

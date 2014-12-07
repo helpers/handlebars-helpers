@@ -2,42 +2,27 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
+var helpers = require('..');
 
-var helpers = require('..')('inflections');
-_.forOwn(helpers, function (value, key) {
-  Handlebars.registerHelper(key, value);
-});
+Handlebars.registerHelper(helpers('inflections'));
 
 describe('inflect', function() {
-  describe('{{inflect enemies "enemy" "enemies"}}', function() {
-    it('should return the plural or singular form of a word based on a value.', function() {
-      var source = '{{inflect enemies "enemy" "enemies"}}';
-      var template = Handlebars.compile(source);
-      var context = {
-        enemies: 3
-      };
-      template(context).should.equal('enemies');
-    });
+  it('should return the plural or singular form of a word based on a value.', function() {
+    var template = Handlebars.compile('{{inflect mail "junk" "mail"}}');
+    template({mail: 3}).should.equal('mail');
   });
-  describe('{{inflect friends "friend" "friends" true}}', function() {
-    it('should return the plural or singular form of a word based on a value and include the count.', function() {
-      var source = '{{inflect friends "friend" "friends" true}}';
-      var template = Handlebars.compile(source);
-      var context = {
-        friends: 1
-      };
-      template(context).should.equal('1 friend');
-    });
+
+  it('should return the plural or singular form of a word based on a value and include the count.', function() {
+    var template = Handlebars.compile('{{inflect messages "message" "messages" true}}');
+    template({messages: 1}).should.equal('1 message');
   });
 });
 
 describe('ordinalize', function() {
-  describe('{{ordinalize 22}}', function() {
-    it('should return the number converted into an ordinal string.', function() {
-      var source = '{{ordinalize 22}}';
-      var template = Handlebars.compile(source);
-      template().should.equal('22nd');
-    });
+  it('should return an ordinalized string.', function() {
+    Handlebars.compile('{{ordinalize 1}}')().should.equal('1st');
+    Handlebars.compile('{{ordinalize 21}}')().should.equal('21st');
+    Handlebars.compile('{{ordinalize 29}}')().should.equal('29th');
+    Handlebars.compile('{{ordinalize 22}}')().should.equal('22nd');
   });
 });

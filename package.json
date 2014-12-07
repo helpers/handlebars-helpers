@@ -40,20 +40,17 @@
   "dependencies": {
     "any": "^0.1.2",
     "arr-flatten": "^0.2.1",
-    "arrayify-compact": "^0.1.0",
-    "digits": "^0.1.4",
-    "globby": "^1.0.0",
     "handlebars": "^2.0.0",
     "helper-concat": "^0.1.0",
+    "helper-glob": "^0.1.0",
+    "helper-date": "^0.1.0",
     "highlight.js": "^8.4.0",
     "iconv-lite": "^0.4.5",
     "js-yaml": "^3.2.3",
     "lang-map": "^0.2.0",
     "lodash": "^2.4.1",
-    "map-files": "^0.2.2",
     "matchdep": "^0.3.0",
     "matchkeys": "^0.2.2",
-    "minimatch": "^1.0.0",
     "randomatic": "^0.1.4",
     "relative": "^1.0.1",
     "remarkable": "^1.4.1",
@@ -61,7 +58,8 @@
   },
   "devDependencies": {
     "rimraf": "^2.2.8",
-    "should": "^4.3.0"
+    "should": "*",
+    "mocha": "*"
   },
   "keywords": [
     "assemble",
@@ -98,5 +96,9 @@
     "template",
     "url",
     "view"
-  ]
+  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/jonschlinkert/handlebars-helpers/blob/master/LICENSE-MIT"
+  }
 }

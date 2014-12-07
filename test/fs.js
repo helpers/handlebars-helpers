@@ -5,9 +5,8 @@ var Handlebars = require('handlebars');
 var _ = require('lodash');
 var helpers = require('..');
 
-console.log(helpers)
 Handlebars.registerHelper(helpers('fs'));
-
+Handlebars.registerHelper('glob', helpers('fs').glob.sync);
 
 
 describe('fileSize', function() {
@@ -21,6 +20,7 @@ describe('fileSize', function() {
       template(context).should.equal('13.7 MB');
     });
   });
+
   describe('{{fileSize mValue}}', function() {
     it('should add KB and display only three digits (matches file size strings in Mac OS X)', function() {
       var source = '{{fileSize mValue}}';
@@ -31,6 +31,7 @@ describe('fileSize', function() {
       template(context).should.equal('825 KB');
     });
   });
+
   describe('{{fileSize tinyValue}}', function() {
     it('should add KB and display only one digit (matches file size strings in Mac OS X)', function() {
       var source = '{{fileSize tinyValue}}';
@@ -43,38 +44,14 @@ describe('fileSize', function() {
   });
 });
 
-
 describe('{{glob}}', function() {
   it('should return glob string', function() {
-    // var res = Handlebars.compile('{{glob "test/fixtures/simple.md"}}')({});
-    // console.log(res)
+    var res = Handlebars.compile('{{glob "test/fixtures/*.md"}}')({});
+    res.split(',').should.eql([
+      'test/fixtures/changelog.md',
+      'test/fixtures/complex.md',
+      'test/fixtures/embedded.md',
+      'test/fixtures/simple.md',
+    ]);
   });
-
-  // describe('{{globRaw filepath}}', function() {
-  //   it('should return globRaw string', function() {
-  //     var source = '{{globRaw "test/fixtures/simple.md"}}';
-  //     var template = Handlebars.compile(source);
-  //     var context = {};
-  //     var out = template(context);
-  //     (out.length > 10).should.equal(true);
-  //   });
-  // });
-  // describe('{{globWithContext filepath}}', function() {
-  //   it('should return globWithContext string', function() {
-  //     var source = '{{globWithContext "test/fixtures/simple.md"}}';
-  //     var template = Handlebars.compile(source);
-  //     var context = {};
-  //     var out = template(context);
-  //     (out.length > 10).should.equal(true);
-  //   });
-  // });
-  // describe('{{globRawWithContext filepath}}', function() {
-  //   it('should return globRawWithContext string', function() {
-  //     var source = '{{globRawWithContext "test/fixtures/simple.md"}}';
-  //     var template = Handlebars.compile(source);
-  //     var context = {};
-  //     var out = template(context);
-  //     (out.length > 10).should.equal(true);
-  //   });
-  // });
 });
