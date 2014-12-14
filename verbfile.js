@@ -71,10 +71,13 @@ function format(obj) {
         link = mdu.link(method, './' + relative(fp) + '#L' + line);
       }
       return '  - ' + link;
-    }).join('\n');
+    }).sort().join('\n');
   }
 
-  return count + ' helpers:' + res;
+  return count
+    + ' helpers organized into'
+    + ' the following categories:'
+    + res;
 }
 
 verb.helper('require', function (pattern) {
