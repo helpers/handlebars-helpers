@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
-  "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes helpers like {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.",
-  "version": "1.0.0",
+  "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, YUI, Ghost or any node.js/Handlebars project.",
+  "version": "0.6.0",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
@@ -33,7 +33,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "mocha -R spec"
   },
   "dependencies": {
     "any": "^0.1.2",
@@ -52,6 +52,8 @@
     "relative": "^1.0.1"
   },
   "devDependencies": {
+    "code-context": "^0.3.0",
+    "markdown-utils": "^0.2.0",
     "mocha": "*",
     "should": "*",
     "verb": "^0.3.9"
