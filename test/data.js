@@ -2,8 +2,9 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
+var helpers = require('..');
 
-Handlebars.registerHelper(require('..')('data'));
+Handlebars.registerHelper(helpers('data'));
 
 describe('{{stringify}}', function() {
   it('should stringify an object:', function() {

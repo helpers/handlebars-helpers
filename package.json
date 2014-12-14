@@ -1,13 +1,13 @@
 {
   "name": "handlebars-helpers",
   "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes helpers like {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.",
-  "version": "0.5.8",
+  "version": "1.0.0",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": {
     "name": "Assemble",
     "url": "https://github.com/assemble/assemble/handlebars-helpers"
   },
-  "contributors": [
+  "maintainers": [
     {
       "name": "Jon Schlinkert",
       "url": "https://github.com/jonschlinkert"
@@ -24,12 +24,10 @@
   "bugs": {
     "url": "https://github.com/assemble/handlebars-helpers/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/assemble/handlebars-helpers/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/assemble/handlebars-helpers/blob/master/LICENSE-MIT"
+  },
   "main": "index.js",
   "engines": {
     "node": ">= 0.10.0"
@@ -42,24 +40,21 @@
     "arr-flatten": "^0.2.1",
     "handlebars": "^2.0.0",
     "helper-concat": "^0.1.0",
-    "helper-glob": "^0.1.0",
     "helper-date": "^0.1.0",
-    "highlight.js": "^8.4.0",
-    "iconv-lite": "^0.4.5",
+    "helper-glob": "^0.1.0",
+    "helper-markdown": "^0.1.1",
+    "helper-md": "^0.1.0",
     "js-yaml": "^3.2.3",
     "lang-map": "^0.2.0",
     "lodash": "^2.4.1",
-    "matchdep": "^0.3.0",
-    "matchkeys": "^0.2.2",
+    "logging-helpers": "^0.1.1",
     "randomatic": "^0.1.4",
-    "relative": "^1.0.1",
-    "remarkable": "^1.4.1",
-    "sort-object": "^0.3.2"
+    "relative": "^1.0.1"
   },
   "devDependencies": {
-    "rimraf": "^2.2.8",
+    "mocha": "*",
     "should": "*",
-    "mocha": "*"
+    "verb": "^0.3.9"
   },
   "keywords": [
     "assemble",
@@ -94,11 +89,6 @@
     "repeat",
     "strings",
     "template",
-    "url",
-    "view"
-  ],
-  "license": {
-    "type": "MIT",
-    "url": "https://github.com/jonschlinkert/handlebars-helpers/blob/master/LICENSE-MIT"
-  }
+    "url"
+  ]
 }

@@ -1,18 +1,24 @@
-node_modules
 *.sublime-*
-
-# Ignore the staging dir for docs
-
-tmp
+/actual/
+_gh_pages
+bower_components
+node_modules
+npm-debug.log
 temp
-vendor
-/test/spec/
+tmp
 TODO.md
-*.rar
-
-/npm-debug.log
+vendor
 
 # npmignore
-docs
-support
+.gitattributes
+.gitignore
+.jshintrc
+.verb*
+benchmark
+bower.json
+example.js
+grunt*
+gulp*
+LICENSE*
+test.js
 test
