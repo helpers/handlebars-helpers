@@ -17,16 +17,7 @@ verb.task('default', function() {
     .pipe(verb.dest('.'));
 });
 
-verb.helper('list', function (arr, bullet) {
-  return arr.map(function (name) {
-    return (bullet || '- ') + name;
-  }).join('\n');
-});
-
-// {%= list(require('./')) %}
-// {%= list(helpers()) %}
-
-verb.helper('helpers', function (pattern) {
+verb.helper('list', function (pattern) {
   var files = fs.readdirSync('lib/helpers');
   var res = files.reduce(function (acc, fp) {
     fp = path.resolve('lib/helpers', fp);
@@ -79,13 +70,3 @@ function format(obj) {
     + ' the following categories:'
     + res;
 }
-
-verb.helper('require', function (pattern) {
-  return Object.keys(require.apply(require, arguments)());
-});
-
-verb.helper('diff', function () {
-});
-
-verb.helper('total', function () {
-});
