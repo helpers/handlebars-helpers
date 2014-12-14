@@ -68,7 +68,7 @@ function format(obj) {
       var line = ctx[method];
       var link = method;
       if (line) {
-        link = mdu.link(method, './' + relative(fp) + '#' + line);
+        link = mdu.link(method, './' + relative(fp) + '#L' + line);
       }
       return '  - ' + link;
     }).join('\n');
