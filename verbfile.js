@@ -2,7 +2,6 @@
 
 var fs = require('fs');
 var path = require('path');
-var filter = require('filter-object');
 var relative = require('relative');
 var code = require('code-context');
 var mdu = require('markdown-utils');
@@ -63,6 +62,7 @@ function format(obj) {
 
     var list = obj[fp];
     var items = Object.keys(list);
+    // todo: move this to a new function
     res += items.map(function (method) {
       count++;
       var line = ctx[method];
