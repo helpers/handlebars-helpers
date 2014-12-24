@@ -1,22 +1,24 @@
 *.sublime-*
+.DS_store
 /actual/
 _gh_pages
 bower_components
+coverage
+docs
+example.js
 node_modules
 npm-debug.log
+support
 temp
 tmp
 TODO.md
 vendor
 
+
 # npmignore
-.gitattributes
-.gitignore
-.jshintrc
-.verb*
+.*
 benchmark
 bower.json
-example.js
 grunt*
 gulp*
 LICENSE*
