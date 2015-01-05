@@ -105,6 +105,18 @@ describe('sum', function() {
 });
 
 describe('sum', function() {
+  describe('{{sum "value" 10}}', function() {
+    it('should return the sum of multiple numbers.', function() {
+      var source = '{{sum value 10}}';
+      var template = Handlebars.compile(source);
+      template(context = {
+        value: "20"
+      }).should.equal('30');
+    });
+  });
+});
+
+describe('sum', function() {
   describe('{{sum 1 2 3}}', function() {
     it('should return the sum of multiple numbers.', function() {
       var source = '{{sum 1 2 3}}';
