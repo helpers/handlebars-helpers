@@ -72,6 +72,77 @@ describe('contains', function() {
   });
 });
 
+describe('ifAny', function () {
+  describe('{{#ifAny false false false false true}}', function () {
+    it('should render the truthy content.', function () {
+      source = '{{#ifAny a b c d e}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: false,
+        b: false,
+        c: false,
+        d: false,
+        e: true
+      };
+      template(context).should.equal('Truthy content');
+    });
+  });
+  describe('{{#ifAny false false true false}}', function () {
+    it('should render the truthy content.', function () {
+      source = '{{#ifAny a b c d}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: false,
+        b: false,
+        c: true,
+        d: false
+      };
+      template(context).should.equal('Truthy content');
+    });
+  });
+  describe('{{#ifAny "gibberish"}}', function () {
+    it('should render the truthy content.', function () {
+      source = '{{#ifAny a}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: 'gibberish'
+      };
+      template(context).should.equal('Truthy content');
+    });
+  });
+  describe('{{#ifAny 0}}', function () {
+    it('should render the falsy content.', function () {
+      source = '{{#ifAny a}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: 0
+      };
+      template(context).should.equal('Falsy content');
+    });
+  });
+  describe('{{#ifAny null}}', function () {
+    it('should render the falsy content.', function () {
+      source = '{{#ifAny a}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: null
+      };
+      template(context).should.equal('Falsy content');
+    });
+  });
+  describe('{{#ifAny false false}}', function () {
+    it('should render the falsy content.', function () {
+      source = '{{#ifAny a b}}Truthy content{{else}}Falsy content{{/ifAny}}';
+      template = Handlebars.compile(source);
+      context = {
+        a: false,
+        b: false
+      };
+      template(context).should.equal('Falsy content');
+    });
+  });
+});
+
 describe('is', function() {
   describe('{{#is bender "great"}}', function() {
     it('should render a block if the condition is true.', function() {
@@ -302,7 +373,7 @@ describe('if_lteq', function() {
 describe('ifNth', function() {
 
   describe('{{#ifNth "2" @index}}', function() {
-  
+
     it('should render a custom class on even rows', function() {
 
       source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
@@ -327,7 +398,7 @@ describe('ifNth', function() {
         ].join(''));
 
     });
-  
+
   });
 
 });
