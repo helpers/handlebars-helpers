@@ -2,19 +2,39 @@
 
 var fs = require('fs');
 var path = require('path');
+var gutil = require('gulp-util');
+var stripAnsi = require('strip-ansi');
+var coveralls = require('gulp-coveralls');
+var istanbul = require('gulp-istanbul');
+var mocha = require('gulp-mocha');
 var relative = require('relative');
 var code = require('code-context');
 var mdu = require('markdown-utils');
 var verb = require('verb');
 
-verb.data({
-  docsDiff: {},
-  testDiff: {}
-});
+verb.data({docsDiff: {}, testDiff: {}});
 
 verb.task('default', function() {
   verb.src('.verb.md')
     .pipe(verb.dest('.'));
+});
+
+verb.task('test', function (cb) {
+  verb.src('lib/**/*.js')
+    .pipe(istanbul({includeUntested: true}))
+    .pipe(istanbul.hookRequire())
+    .on('finish', function () {
+      verb.src(['test/*.js'])
+        .pipe(mocha())
+        .on('error', gutil.log)
+        .pipe(istanbul.writeReports({
+          reportOpts: {dir: 'coverage', file: 'summary.txt'}
+        }))
+        .on('end', cb)
+        .on('end', function () {
+          summary('coverage/summary.txt');
+        })
+    });
 });
 
 verb.helper('list', function (pattern) {
@@ -28,6 +48,17 @@ verb.helper('list', function (pattern) {
   }, {});
   return format(res).replace(/^\s*/, '');
 });
+
+/**
+ *
+ */
+
+function summary(fp) {
+  var str = fs.readFileSync(fp, 'utf8');
+  str = stripAnsi(str).replace(/^=.*/gm, '');
+  return str;
+}
+
 
 function context(str) {
   return code(str).reduce(function (acc, ele) {
