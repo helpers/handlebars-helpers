@@ -8,17 +8,16 @@ var fs = require('fs');
 
 describe('helpers()', function() {
   it('should should return all helpers:', function() {
-    var files = fs.readdirSync('lib/helpers').map(function(fp) {
-      if (/\.js$/.test(fp) && fp !== 'index.js') {
-        return path.basename(fp, path.extname(fp));
-      }
-    }).filter(Boolean);
+    (Object.keys(helpers()).length > 100).should.be.true;
+  });
 
-    var all = helpers();
-    var combined = files.reduce(function (acc, name) {
-      return _.extend(acc, helpers(name));
-    }, {});
+  it('should return a single collection:', function() {
+    helpers('path').should.have.properties(['relative', 'extname']);
+    helpers('math').should.have.properties(['add', 'subtract', 'divide']);
+    helpers('code').should.have.properties(['embed', 'gist']);
+  });
 
-    Object.keys(all).should.eql(Object.keys(combined));
+  it('should return an array of collections:', function() {
+    helpers(['math', 'code']).should.have.properties(['add', 'subtract', 'divide', 'embed', 'gist']);
   });
 });
