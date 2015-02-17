@@ -43,10 +43,6 @@
     "any": "^0.1.2",
     "arr-filter": "^1.1.0",
     "arr-flatten": "^1.0.0",
-    "gulp-coveralls": "^0.1.3",
-    "gulp-istanbul": "^0.6.0",
-    "gulp-mocha": "^2.0.0",
-    "gulp-util": "^3.0.3",
     "handlebars": "^3.0.0",
     "helper-concat": "^0.2.0",
     "helper-date": "^0.2.1",
@@ -60,17 +56,21 @@
     "lodash": "^3.2.0",
     "logging-helpers": "^0.3.0",
     "make-iterator": "^0.1.1",
-    "markdown-utils": "^0.3.0",
     "object-omit": "^1.0.0",
     "object.pluck": "^0.1.2",
     "randomatic": "^1.1.0",
-    "relative": "^1.2.0",
-    "should": "^5.0.0",
-    "strip-ansi": "^2.0.1"
+    "relative": "^1.2.0"
   },
   "devDependencies": {
     "code-context": "^0.3.0",
-    "verb": "^0.4.2"
+    "gulp-coveralls": "^0.1.3",
+    "gulp-istanbul": "^0.6.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-util": "^3.0.3",
+    "markdown-utils": "^0.3.0",
+    "should": "^5.0.0",
+    "strip-ansi": "^2.0.1",
+    "verb": "^0.4.4"
   },
   "keywords": [
     "assemble",
