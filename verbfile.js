@@ -12,9 +12,23 @@ var code = require('code-context');
 var mdu = require('markdown-utils');
 var verb = require('verb');
 
+
+verb.helper('list', function (pattern) {
+  var files = fs.readdirSync('lib/helpers');
+  var res = files.reduce(function (acc, fp) {
+    fp = path.resolve('lib/helpers', fp);
+    if (!/index\.js/.test(fp) && /\.js/.test(fp)) {
+      acc[fp] = require(fp);
+    }
+    return acc;
+  }, {});
+  return format(res).replace(/^\s*/, '');
+});
+
+verb.option('debugEngine', true);
 verb.data({docsDiff: {}, testDiff: {}});
 
-verb.task('default', function() {
+verb.task('readme', function() {
   verb.src('.verb.md')
     .pipe(verb.dest('.'));
 });
@@ -37,20 +51,12 @@ verb.task('test', function (cb) {
     });
 });
 
-verb.helper('list', function (pattern) {
-  var files = fs.readdirSync('lib/helpers');
-  var res = files.reduce(function (acc, fp) {
-    fp = path.resolve('lib/helpers', fp);
-    if (!/index\.js/.test(fp) && /\.js/.test(fp)) {
-      acc[fp] = require(fp);
-    }
-    return acc;
-  }, {});
-  return format(res).replace(/^\s*/, '');
-});
+verb.task('default', ['readme', 'test']);
+
+
 
 /**
- *
+ * TODO: move this out into a plugin
  */
 
 function summary(fp) {
@@ -80,7 +86,7 @@ function format(obj) {
     var fp = keys[i++];
     var ctx = context(fs.readFileSync(fp, 'utf8'));
     var name = path.basename(fp, path.extname(fp));
-    res += '\n+ **' + mdu.link(name, './' + relative(fp)) + '**\n';
+    res += '\n+ ' + mdu.strong(mdu.link(name, relative(fp))) + '\n';
 
     var list = obj[fp];
     var items = Object.keys(list);
@@ -90,14 +96,13 @@ function format(obj) {
       var line = ctx[method];
       var link = method;
       if (line) {
-        link = mdu.link(method, './' + relative(fp) + '#L' + line);
+        link = mdu.link(method, relative(fp) + '#L' + line);
       }
       return '  - ' + link;
     }).sort().join('\n');
   }
 
   return count
-    + ' helpers organized into'
-    + ' the following categories:'
+    + ' helpers organized into the following categories:'
     + res;
 }
