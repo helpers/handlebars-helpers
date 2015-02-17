@@ -1,22 +1,24 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
 var gutil = require('gulp-util');
-var stripAnsi = require('strip-ansi');
 var coveralls = require('gulp-coveralls');
 var istanbul = require('gulp-istanbul');
+var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
-var relative = require('relative');
+
+var fs = require('fs');
+var path = require('path');
+var stripAnsi = require('strip-ansi');
 var code = require('code-context');
 var mdu = require('markdown-utils');
+var relative = require('relative');
 var verb = require('verb');
 
 
-verb.helper('list', function (pattern) {
-  var files = fs.readdirSync('lib/helpers');
+verb.helper('list', function (dir) {
+  var files = fs.readdirSync(dir);
   var res = files.reduce(function (acc, fp) {
-    fp = path.resolve('lib/helpers', fp);
+    fp = path.resolve(dir, fp);
     if (!/index\.js/.test(fp) && /\.js/.test(fp)) {
       acc[fp] = require(fp);
     }
@@ -33,25 +35,26 @@ verb.task('readme', function() {
     .pipe(verb.dest('.'));
 });
 
+verb.task('lint', function () {
+  verb.src(['index.js', 'lib/**/*.js'])
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
 verb.task('test', function (cb) {
-  verb.src('lib/**/*.js')
+  verb.src(['index.js', 'lib/**/*.js'])
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire())
     .on('finish', function () {
-      verb.src(['test/*.js'])
-        .pipe(mocha())
+      verb.src('test/*.js')
         .on('error', gutil.log)
-        .pipe(istanbul.writeReports({
-          reportOpts: {dir: 'coverage', file: 'summary.txt'}
-        }))
-        .on('end', cb)
-        .on('end', function () {
-          summary('coverage/summary.txt');
-        })
+        .pipe(mocha())
+        .pipe(istanbul.writeReports())
+        .on('end', cb);
     });
 });
 
-verb.task('default', ['readme', 'test']);
+verb.task('default', ['readme', 'lint', 'test']);
 
 
 
