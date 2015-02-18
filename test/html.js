@@ -8,16 +8,215 @@ Handlebars.registerHelper(helpers('html'));
 
 var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
 
+describe('js;', function() {
+  it('should create an empty script tag', function() {
+    Handlebars.compile('{{js}}')().should.equal('<script></script>');
+  });
+
+  it('should use a path passed as a string', function() {
+    Handlebars.compile('{{js "abc.js"}}')().should.equal('<script src="abc.js"></script>');
+  });
+
+  it('should use the `src` attribute on the hash', function() {
+    Handlebars.compile('{{js src=""}}')().should.equal('<script src=""></script>');
+    Handlebars.compile('{{js src="abc.js"}}')().should.equal('<script src="abc.js"></script>');
+  });
+
+  it('should create multiple tags from an array passed on the context:', function() {
+    var ctx = {scripts: ['a.js', 'bjs', 'c.js'] };
+    Handlebars.compile('{{js scripts}}')(ctx).should.equal([
+      '<script src="a.js"></script>',
+      '<script src="bjs"></script>',
+      '<script src="c.js"></script>',
+    ].join('\n'));
+  });
+
+  it('should create a coffeescript tag (TODO: only works with array format)', function() {
+    var ctx = {scripts: ['a.coffee'] };
+    Handlebars.compile('{{js scripts}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee">');
+  });
+});
+
 describe('ul', function() {
   it('should should return an unordered list', function() {
-    var template = Handlebars.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
-    template(locals).should.equal('<ul class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ul>');
+    var fn = Handlebars.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
+    fn(locals).should.equal('<ul class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ul>');
   });
 });
 
 describe('ol', function() {
   it('should should return an ordered list', function() {
-    var template = Handlebars.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
-    template(locals).should.equal('<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
+    var fn = Handlebars.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
+    fn(locals).should.equal('<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
+  });
+});
+
+describe('thumbnailImage', function () {
+  describe('{{thumbnailImage context}}', function () {
+    it('should return figure with link and caption', function () {
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          caption: 'My new caption!'
+        }
+      };
+      var fn = Handlebars.compile('{{thumbnailImage data}}');
+      var comparison = [
+        '<figure id="image-id">',
+        '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
+        '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+        '</a>',
+        '<figcaption>My new caption!</figcaption>',
+        '</figure>',
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
+
+    it('should return figure with extra class "test"', function () {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          classes: {
+            figure: ['test']
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          caption: 'My new caption!'
+        }
+      };
+
+      var fn = Handlebars.compile(source);
+      var comparison = [
+        '<figure id="image-id" class="test">',
+        '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
+        '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+        '</a>',
+        '<figcaption>My new caption!</figcaption>',
+        '</figure>'
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
+
+    it('should return figure with image that has class "test"', function () {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          classes: {
+            image: ['test']
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var fn = Handlebars.compile(source);
+      var comparison = [
+        '<figure id="image-id">',
+        '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
+        '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200" class="test">',
+        '</a>',
+        '<figcaption>My new caption!</figcaption>',
+        '</figure>'
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
+
+    it('should return figure with link that has class "test"', function () {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          classes: {
+            link: ['test']
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var fn = Handlebars.compile(source);
+      var comparison = [
+       '<figure id="image-id">',
+       '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">',
+       '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+       '</a>',
+       '<figcaption>My new caption!</figcaption>',
+       '</figure>',
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
+
+    it('should return figure without link', function () {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var fn = Handlebars.compile(source);
+      var comparison = [
+        '<figure id="image-id">',
+        '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+        '<figcaption>My new caption!</figcaption>',
+        '</figure>'
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
+
+    it('should return figure without caption', function () {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png'
+        }
+      };
+      var fn = Handlebars.compile(source);
+      var comparison = [
+        '<figure id="image-id">',
+        '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
+        '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+        '</a>',
+        '</figure>'
+      ].join('\n');
+      fn(context).should.equal(comparison);
+    });
   });
 });
