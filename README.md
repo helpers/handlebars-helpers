@@ -10,6 +10,32 @@
 npm i handlebars-helpers --save
 ```
 
+## Usage
+
+```js
+var helpers = require('handlebars-helpers');
+//=> returns object with all 130+ helpers
+```
+
+**Get a specific collection**
+
+```js
+var helpers = require('handlebars-helpers')('math');
+//=> only the `math` helpers
+
+var helpers = require('handlebars-helpers')('collections');
+//=> only the `collections` helpers
+```
+
+**Get multiple collections**
+
+
+```js
+var helpers = require('handlebars-helpers')(['url', 'string']);
+//=> helpers from both `url` and `string`
+```
+
+
 ## Helpers
 
 Currently 137 helpers organized into the following categories:
