@@ -1,18 +1,47 @@
 'use strict';
 
 var gutil = require('gulp-util');
-var coveralls = require('gulp-coveralls');
 var istanbul = require('gulp-istanbul');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 
 var fs = require('fs');
 var path = require('path');
-var stripAnsi = require('strip-ansi');
 var code = require('code-context');
 var mdu = require('markdown-utils');
 var relative = require('relative');
 var verb = require('verb');
+
+verb.option('debugEngine', true);
+verb.data({docsDiff: {}, testDiff: {}});
+
+verb.task('readme', function() {
+  return verb.src('.verb.md')
+    .pipe(verb.dest('.'));
+});
+
+verb.task('lint', function () {
+  return verb.src(['index.js', 'lib/**/*.js'])
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'));
+});
+
+verb.task('test', function (cb) {
+  verb.src(['index.js', 'lib/**/*.js'])
+    .pipe(istanbul({includeUntested: true}))
+    .pipe(istanbul.hookRequire())
+    .on('finish', function () {
+      verb.src(['test/*.js'])
+        .pipe(mocha())
+        .on('error', gutil.log)
+        .pipe(istanbul.writeReports())
+        .on('end', cb)
+    })
+});
+
+
+verb.task('default', ['readme', 'lint', 'test']);
+
 
 
 verb.helper('list', function (dir) {
@@ -27,47 +56,10 @@ verb.helper('list', function (dir) {
   return format(res).replace(/^\s*/, '');
 });
 
-verb.option('debugEngine', true);
-verb.data({docsDiff: {}, testDiff: {}});
-
-verb.task('readme', function() {
-  verb.src('.verb.md')
-    .pipe(verb.dest('.'));
-});
-
-verb.task('lint', function () {
-  verb.src(['index.js', 'lib/**/*.js'])
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
-});
-
-verb.task('test', function (cb) {
-  verb.src(['index.js', 'lib/**/*.js'])
-    .pipe(istanbul({includeUntested: true}))
-    .pipe(istanbul.hookRequire())
-    .on('finish', function () {
-      verb.src('test/*.js')
-        .on('error', gutil.log)
-        .pipe(mocha())
-        .pipe(istanbul.writeReports())
-        .on('end', cb);
-    });
-});
-
-verb.task('default', ['readme', 'lint', 'test']);
-
-
 
 /**
  * TODO: move this out into a plugin
  */
-
-function summary(fp) {
-  var str = fs.readFileSync(fp, 'utf8');
-  str = stripAnsi(str).replace(/^=.*/gm, '');
-  return str;
-}
-
 
 function context(str) {
   return code(str).reduce(function (acc, ele) {
