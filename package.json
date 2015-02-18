@@ -43,7 +43,7 @@
     "iconv-lite": "~0.2.11",
     "js-yaml": "~2.1.3",
     "lodash": "~2.2.1",
-    "marked": "~0.2.10",
+    "marked": "0.3.2",
     "matchdep": "~0.3.0",
     "matchkeys": "~0.1.3",
     "minimatch": "~0.2.12",
