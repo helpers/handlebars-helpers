@@ -24,7 +24,7 @@ var options = {
 
 describe('ul', function() {
   describe('{{#ul context options}}', function() {
-    it('should should return an unordered list', function() {
+    it('should return an unordered list', function() {
       var source = '{{#ul data class="names"}}{{firstName}} {{lastName}}{{/ul}}';
       var context = {
         data: [
@@ -40,7 +40,7 @@ describe('ul', function() {
 
 describe('ol', function() {
   describe('{{#ol context options}}', function() {
-    it('should should return an ordered list', function() {
+    it('should return an ordered list', function() {
       var source = '{{#ol data class="names"}}{{firstName}} {{lastName}}{{/ol}}';
       var context = {
         data: [
@@ -50,6 +50,166 @@ describe('ol', function() {
       };
       var template = Handlebars.compile(source);
       template(context).should.equal('<ol class="names"><li>Kif Kroker</li>\n<li>Zapp Brannigan</li></ol>');
+    });
+  });
+});
+
+describe('thumbnailImage', function() {
+  describe('{{thumbnailImage context}}', function() {
+    it('should return figure with link and caption', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          caption: 'My new caption!'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
+          comparison += '</a>\n';
+          comparison += '<figcaption>My new caption!</figcaption>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
+    });
+
+  it('should return figure with extra class "test"', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          classes: {
+            figure: ['test']
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          caption: 'My new caption!'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id" class="test">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
+          comparison += '</a>\n';
+          comparison += '<figcaption>My new caption!</figcaption>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
+    });
+
+    it('should return figure with image that has class "test"', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          classes: {
+            image: ['test']
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" ';
+          comparison += 'width="200" height="200" class="test">\n';
+          comparison += '</a>\n';
+          comparison += '<figcaption>My new caption!</figcaption>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
+    });
+
+  it('should return figure with link that has class "test"', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png',
+          classes: {
+            link: ['test']
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" ';
+          comparison += 'width="200" height="200">\n';
+          comparison += '</a>\n';
+          comparison += '<figcaption>My new caption!</figcaption>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
+    });
+
+    it('should return figure without link', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          caption: 'My new caption!'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
+          comparison += '<figcaption>My new caption!</figcaption>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
+    });
+
+    it('should return figure without caption', function() {
+      var source = '{{thumbnailImage data}}';
+      var context = {
+        data: {
+          id: 'id',
+          alt: 'Picture of a placeholder',
+          thumbnail: 'http://placehold.it/200x200/0eafff/ffffff.png',
+          size: {
+            width: 200,
+            height: 200
+          },
+          full: 'http://placehold.it/600x400/0eafff/ffffff.png'
+        }
+      };
+      var template = Handlebars.compile(source);
+      var comparison = '<figure id="image-id">\n';
+          comparison += '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">\n';
+          comparison += '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">\n';
+          comparison += '</a>\n';
+          comparison += '</figure>';
+      template(context).should.equal(comparison);
     });
   });
 });

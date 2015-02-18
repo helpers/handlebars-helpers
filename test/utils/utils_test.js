@@ -76,7 +76,7 @@ describe('utils', function() {
   });
 
   describe('#escapeExpression', function() {
-    it('shouhld escape html', function() {
+    it('should escape html', function() {
       Handlebars.Utils.escapeExpression('foo<&"\'>').should.equal('foo&lt;&amp;&quot;&#x27;&gt;');
     });
     it('should not escape SafeString', function() {
