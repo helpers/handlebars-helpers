@@ -11,6 +11,10 @@ describe('helpers()', function() {
     (Object.keys(helpers()).length > 100).should.be.true;
   });
 
+  it('should return all helpers when options are passed:', function () {
+    (Object.keys(helpers({})).length > 100).should.be.true;
+  });
+
   it('should return a single collection:', function() {
     helpers('path').should.have.properties(['relative', 'extname']);
     helpers('math').should.have.properties(['add', 'subtract', 'divide']);
