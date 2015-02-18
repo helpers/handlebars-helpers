@@ -38,7 +38,7 @@ var helpers = require('handlebars-helpers')(['url', 'string']);
 
 ## Helpers
 
-Currently 137 helpers organized into the following categories:
+Currently 138 helpers organized into the following categories:
 
 + **[code](./lib/helpers/code.js)**
   - [embed](./lib/helpers/code.js#L25)
@@ -107,6 +107,7 @@ Currently 137 helpers organized into the following categories:
   - [css](./lib/helpers/html.js#L14)
   - [js](./lib/helpers/html.js#L33)
   - [ol](./lib/helpers/html.js#L74)
+  - [thumbnailImage](./lib/helpers/html.js#L92)
   - [ul](./lib/helpers/html.js#L60)
 + **[i18n](./lib/helpers/i18n.js)**
   - [i18n](./lib/helpers/i18n.js#L13)
