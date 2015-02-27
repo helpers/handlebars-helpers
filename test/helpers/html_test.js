@@ -260,6 +260,20 @@ describe('html', function() {
   });
 });
 
+describe('striptags', function() {
+  describe('{{#striptags options}}', function() {
+    it('should return a string with html tags removed', function() {
+      var source = '<title>{{#striptags}}{{{title}}}{{/striptags}}</title>';
+      var context = {
+        title: 'Revisions to the <em class="test">Agriculture Act</em>'
+      };
+      var template = Handlebars.compile(source);
+      template(context).should.equal('<title>Revisions to the Agriculture Act</title>');
+    });
+  });
+});
+
+
 // var expected = '<div>\n' + '  <p>\n' + '    <ul>\n' + '      <li><a href="#">Link</a></li>\n' + '    </ul>\n' + '  </p>\n' + '</div>';
 
 // describe('prettify', function() {
