@@ -1,8 +1,11 @@
 'use strict';
 
+var path = require('path');
 var should = require('should');
 var Handlebars = require('handlebars');
 var helpers = require('..');
+
+var upPath = '..' + path.sep;
 
 Handlebars.registerHelper(helpers('path'));
 
@@ -24,10 +27,10 @@ describe('{{extname}}', function() {
 describe('{{relative}}', function() {
   it('should return the relative path from file A to file B', function() {
     var template = Handlebars.compile('{{relative "dist/docs.html" "index.html"}}');
-    template().should.equal('../index.html');
+    template().should.equal(upPath + 'index.html');
   });
   it('should return the relative path from file A to file B', function() {
     var template = Handlebars.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
-    template().should.equal('../../assets');
+    template().should.equal(upPath + upPath + 'assets');
   });
 });
