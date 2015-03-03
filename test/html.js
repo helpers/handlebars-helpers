@@ -21,3 +21,11 @@ describe('ol', function() {
     template(locals).should.equal('<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
   });
 });
+
+describe('should return a string with html tags removed', function() {
+  it('should should return an ordered list', function() {
+    var local = {title: 'Revisions to the <em class="test">Agriculture Act</em>'};
+    var template = Handlebars.compile('<title>{{#striptags}}{{{title}}}{{/striptags}}</title>');
+    template(local).should.equal('<title>Revisions to the Agriculture Act</title>');
+  });
+});
