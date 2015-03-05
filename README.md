@@ -72,7 +72,6 @@ We can always use your help writing tests for helpers. As of 2014-07-12, **24 of
 * `{{block}}`
 * `{{content}}`
 * `{{css}}`
-* `{{debug}}`
 * `{{eachProperty}}`
 * `{{expandJSON}}`
 * `{{expandMapping}}`
@@ -88,7 +87,6 @@ We can always use your help writing tests for helpers. As of 2014-07-12, **24 of
 * `{{iterate}}`
 * `{{joinAny}}`
 * `{{js}}`
-* `{{log}}`
 * `{{napCss}}`
 * `{{napJs}}`
 * `{{urlparse}}`
