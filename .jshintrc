@@ -8,11 +8,11 @@
   "immed": true,
   "latedef": false,
   "laxcomma": false,
+  "mocha": true,
   "newcap": true,
   "noarg": true,
   "node": true,
   "sub": true,
   "undef": true,
-  "unused": true,
-  "mocha": true
+  "unused": true
 }

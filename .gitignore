@@ -1,3 +1,4 @@
+*.DS_Store
 *.sublime-*
 .DS_store
 /actual/
