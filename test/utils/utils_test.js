@@ -87,7 +87,7 @@ describe('utils', function() {
       Handlebars.Utils.escapeExpression('').should.equal('');
       Handlebars.Utils.escapeExpression(undefined).should.equal('');
       Handlebars.Utils.escapeExpression(null).should.equal('');
-      Handlebars.Utils.escapeExpression(false).should.equal('');
+      Handlebars.Utils.escapeExpression(false).should.equal('false');
       Handlebars.Utils.escapeExpression(0).should.equal('0');
     });
   });
