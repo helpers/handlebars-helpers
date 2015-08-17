@@ -236,3 +236,12 @@ describe('safeString', function() {
     });
   });
 });
+describe('splitCamelCase', function() {
+  describe('{{splitCamelCase string}}', function() {
+    it('should return the string split at capital letters with single space', function() {
+      source = '{{splitCamelCase "BusinessObjectConfirmed"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('Business Object Confirmed');
+    });
+  });
+});
