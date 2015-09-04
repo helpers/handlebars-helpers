@@ -236,3 +236,34 @@ describe('safeString', function() {
     });
   });
 });
+
+describe('slice', function() {
+  describe('{{slice string}}', function() {
+    it('should return the string without change', function() {
+      source = '{{slice "What is the point?"}}';
+      template = Handlebars.compile(source);
+      template().should.equal('What is the point?');
+    });
+  });
+
+  describe('{{slice string beginSlice}}', function() {
+    it('should slice the given string', function() {
+      source = '{{slice "This makes more sense!" 5}}';
+      template = Handlebars.compile(source);
+      template().should.equal('makes more sense!');
+    });
+    it('should support negative values', function() {
+      source = '{{slice "This makes more sense!" -6}}';
+      template = Handlebars.compile(source);
+      template().should.equal('sense!');
+    });
+  });
+
+  describe('{{slice string beginSlice endSlice}}', function() {
+    it('should slice the given string', function() {
+      source = '{{slice "This makes more sense!" 5 10}}';
+      template = Handlebars.compile(source);
+      template().should.equal('makes');
+    });
+  });
+});
