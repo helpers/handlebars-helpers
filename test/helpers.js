@@ -1,27 +1,39 @@
 'use strict';
 
-var should = require('should');
-var helpers = require('..');
-var path = require('path');
-var _ = require('lodash');
+require('mocha');
+require('should');
 var fs = require('fs');
+var path = require('path');
+var assert = require('assert');
+var hbs = require('handlebars');
+var helpers = require('..');
 
 describe('helpers()', function() {
   it('should should return all helpers:', function() {
-    (Object.keys(helpers()).length > 100).should.be.true;
+    assert(Object.keys(helpers()).length > 100);
   });
 
   it('should return all helpers when options are passed:', function () {
-    (Object.keys(helpers({})).length > 100).should.be.true;
+    assert(Object.keys(helpers({})).length > 100);
+  });
+
+  it('should register helpers with handlebars:', function() {
+    helpers();
+    hbs.helpers.should.have.properties(['contains', 'any', 'default']);
+  });
+
+  it('should support passing an instance of handlebars:', function () {
+    hbs.registerHelper('foo', function () {});
+    var opts = {handlebars: hbs};
+    assert(helpers(opts).hasOwnProperty('foo'));
   });
 
   it('should return a single collection:', function() {
-    helpers('path').should.have.properties(['relative', 'extname']);
-    helpers('math').should.have.properties(['add', 'subtract', 'divide']);
-    helpers('code').should.have.properties(['embed', 'gist']);
+    helpers.math().should.have.properties(['add', 'subtract', 'divide']);
   });
 
-  it('should return an array of collections:', function() {
-    helpers(['math', 'code']).should.have.properties(['add', 'subtract', 'divide', 'embed', 'gist']);
+  it('should register collection helpers with handlebars:', function() {
+    helpers.math();
+    hbs.helpers.should.have.properties(['add', 'subtract', 'divide']);
   });
 });

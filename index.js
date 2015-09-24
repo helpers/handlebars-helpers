@@ -7,58 +7,44 @@
 
 'use strict';
 
-var visit = require('collection-visit');
-var groups = require('./lib/');
-var utils = require('./lib/utils');
+var forIn = require('for-in');
+var define = require('define-property');
+var lib = require('./lib/');
 
-function Cache(options) {
-  this.options = options || {};
-  this.handlebars = this.options.handlebars;
-  delete this.options.handlebars;
+/**
+ * Expose helpers
+ */
 
-  if (!this.handlebars) {
-    throw new Error('handlebars-helpers expects an instance of handlebars.');
-  }
+module.exports = function helpers(opts) {
+  opts = opts || {};
+  var hbs = opts.handlebars || require('handlebars');
 
-  this.helpers = this.handlebars.helpers;
-  this.groups = {};
+  forIn(lib, function (group, key) {
+    if (typeof group === 'function') {
+      group = group(opts);
+    }
 
-  if (this.options.helpers) {
-    this.visit('register', this.options.helpers);
-    delete this.options.helpers;
-  }
-
-  if (this.options.groups) {
-    this.visit('group', this.options.groups);
-    delete this.options.groups;
-  }
-}
-
-Cache.prototype.register = function(name, fn) {
-  this.handlebars.registerHelper(name, fn);
-  return this;
-};
-
-Cache.prototype.group = function(key, value) {
-  this.groups[key] = new Cache({
-    handlebars: this.handlebars,
-    helpers: value
+    forIn(group, function (v, k) {
+      hbs.registerHelper(k, v);
+    });
   });
-  return this;
+  return hbs.helpers;
 };
 
-Cache.prototype.visit = function(method, value) {
-  visit(this, method, value);
-  return this;
-};
+/**
+ * Expose helper groups as getters
+ */
 
-module.exports = function (handlebars) {
-  return new Cache({
-    handlebars: handlebars,
-    groups: groups
+forIn(lib, function (group, key) {
+  define(module.exports, key, function (opts) {
+    opts = opts || {};
+    var hbs = opts.handlebars || require('handlebars');
+
+    if (typeof group === 'function') {
+      group = group(opts);
+    }
+
+    hbs.registerHelper(group);
+    return group;
   });
-};
-
-// module.exports.Cache = Cache;
-// module.exports.cache = cache;
-// module.exports.utils = utils;
+});

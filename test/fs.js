@@ -2,7 +2,6 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var _ = require('lodash');
 var helpers = require('..');
 
 Handlebars.registerHelper(helpers('fs'));

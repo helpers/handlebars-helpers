@@ -1,14 +1,13 @@
 'use strict';
 
 var should = require('should');
-var Handlebars = require('handlebars');
+var hbs = require('handlebars');
 var helpers = require('..');
-
-Handlebars.registerHelper(helpers('code'));
+helpers.code({handlebars: hbs});
 
 describe('{{embed}}', function() {
   it('should embed markdown:', function() {
-    Handlebars.compile('{{{embed "test/fixtures/simple.md"}}}')().should.equal([
+    hbs.compile('{{{embed "test/fixtures/simple.md"}}}')().should.equal([
       '```markdown',
       '## Some Markdown\n',
       ' - one',
@@ -20,24 +19,28 @@ describe('{{embed}}', function() {
   });
 
   it('should determine the language from the file extension', function() {
-    Handlebars.compile('{{{embed "test/fixtures/embedded.md"}}}')().should.equal([
+    hbs.compile('{{{embed "test/fixtures/embedded.md"}}}')().should.equal([
       '```markdown',
-      '## Markdown\n',
-      'Code example\n',
-      '&#x60;&#x60;&#x60;js',
+      '## Markdown',
+      '',
+      'Code example',
+      '',
+      '&#x60&#x60&#x60js',
       'var urlresolve = function (base, href) {',
       '  return url.resolve(base, href);',
       '};',
-      '&#x60;&#x60;&#x60;\n',
-      '[Click here](http://assemble.io) for more documentation.\n',
-      '```\n'
+      '&#x60&#x60&#x60',
+      '',
+      '[Click here](http://assemble.io) for more documentation.',
+      '',
+      '```\n',
     ].join('\n'));
   });
 
   it('should use the language defined in the last argument', function() {
-    var template = Handlebars.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
+    var template = hbs.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
     template().should.equal([
-      '```handlebars',
+      '```hbs',
       '<!DOCTYPE html>',
       '  <html lang="en">',
       '  <head>',
@@ -47,8 +50,9 @@ describe('{{embed}}', function() {
       '  <body>',
       '    {{> foo }}',
       '  </body>',
-      '</html>\n',
-      '```\n'
+      '</html>',
+      '',
+      '```\n',
     ].join('\n'));
   });
 });
@@ -56,21 +60,13 @@ describe('{{embed}}', function() {
 describe('{{jsfiddle}}', function() {
   it('should return a jsfiddle embed link, with default tabs assigned', function() {
     var source = '{{{jsfiddle id="UXbas"}}}';
-    var template = Handlebars.compile(source);
+    var template = hbs.compile(source);
     template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
 
   it('should return a jsfiddle embed link, with custom tabs assigned', function() {
     var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
-    var template = Handlebars.compile(source);
+    var template = hbs.compile(source);
     template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
-  });
-});
-
-describe('{{gist}}', function() {
-  it('should create a script tag for a gist', function() {
-    var source = '{{{gist "abcdefg"}}}';
-    var template = Handlebars.compile(source);
-    template().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
   });
 });
