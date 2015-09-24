@@ -1,8 +1,6 @@
 # handlebars-helpers [![NPM version](https://badge.fury.io/js/handlebars-helpers.svg)](http://badge.fury.io/js/handlebars-helpers)  [![Build Status](https://travis-ci.org/assemble/handlebars-helpers.svg)](https://travis-ci.org/assemble/handlebars-helpers)
 
-> More than 130 Handlebars helpers in ~20 categories. Helpers can be used with [Assemble](https://github.com/assemble/assemble), YUI, Ghost or any node.js/Handlebars project.
-
-### [Visit the live docs →](http://assemble.io/helpers/)
+> More than 130 [Handlebars](http://www.handlebarsjs.com/) helpers in ~20 categories that can be used with any Handlebars project.
 
 <!-- toc -->
 
@@ -53,10 +51,12 @@ $ npm i handlebars-helpers --save
 
 ```js
 var helpers = require('handlebars-helpers')();
-//=> returns object with all 130+ helpers
+//=> returns object with all (130+) helpers
 ```
 
 **Get a specific collection**
+
+Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
 
 ```js
 var helpers = require('handlebars-helpers');
@@ -86,24 +86,14 @@ var math = helpers.math({
 
 ### array
 
-### [.any](lib/array.js#L23)
+### [.any](lib/array.js#L22)
 
 **Params**
 
 * `array` **{Array}**
 * `options` **{Object}**
 
-### [.after](lib/array.js#L40)
-
-Return all of the items in the collection after the specified count.
-
-**Params**
-
-* `array` **{Array}**: Collection
-* `count` **{Number}**: Number of items to exclude
-* `returns` **{Array}**: Array excluding the number of items specified
-
-### [.after](lib/array.js#L60)
+### [.after](lib/array.js#L45)
 
 Returns all of the items in an arry after the specified index. Opposite of `{{before}}`.
 
@@ -120,7 +110,7 @@ Returns all of the items in an arry after the specified index. Opposite of `{{be
 //=> '["c"]'
 ```
 
-### [.arrayify](lib/array.js#L79)
+### [.arrayify](lib/array.js#L64)
 
 Cast `val` to an array.
 
@@ -137,7 +127,7 @@ Cast `val` to an array.
 //=> '["a"]'
 ```
 
-### [.before](lib/array.js#L99)
+### [.before](lib/array.js#L84)
 
 Return all of the items in the collection before the specified count. Opposite of {{after}}.
 
@@ -154,23 +144,7 @@ Return all of the items in the collection before the specified count. Opposite o
 //=> '["a", "b"]'
 ```
 
-### [.compact](lib/array.js#L116)
-
-Returns an array with all falsey values removed.
-
-**Params**
-
-* `array` **{Array}**
-* `returns` **{Array}**
-
-**Example**
-
-```handlebars
-{{compact "[null, a, undefined, 0, false, b, c, '']"}}
-//=> '["a", "b", "c"]'
-```
-
-### [.filter](lib/array.js#L133)
+### [.filter](lib/array.js#L98)
 
 **Params**
 
@@ -179,18 +153,7 @@ Returns an array with all falsey values removed.
 * `options` **{type}**
 * `returns` **{String}**
 
-### [.eachProperty](lib/array.js#L199)
-
-Handlebars block helper to enumerate the properties
-in an object
-
-**Params**
-
-* `context` **{Object}**
-* `options` **{Object}**
-* `returns` **{String}**
-
-### [.eachIndexPlusOne](lib/array.js#L215)
+### [.eachIndexPlusOne](lib/array.js#L166)
 
 **Params**
 
@@ -206,7 +169,7 @@ in an object
 {{/eachIndexPlusOne}}
 ```
 
-### [.empty](lib/array.js#L231)
+### [.empty](lib/array.js#L182)
 
 **Params**
 
@@ -214,7 +177,7 @@ in an object
 * `options` **{type}**
 * `returns` **{String}**
 
-### [.first](lib/array.js#L253)
+### [.first](lib/array.js#L204)
 
 Returns the first item, or first `n` items of an array.
 
@@ -231,32 +194,18 @@ Returns the first item, or first `n` items of an array.
 //=> '["a", "b"]'
 ```
 
-### [.forEach](lib/array.js#L286)
-
-Data:
-
-Templates:
-Credit: http://bit.ly/14HLaDR
-
-**Examples**
+### [.forEach](lib/array.js#L232)
 
 ```js
-var accounts = [
-{'name': 'John', 'email': 'john@example.com'},
-{'name': 'Malcolm', 'email': 'malcolm@example.com'},
-{'name': 'David', 'email': 'david@example.com'}
-];
+// example usage
+// {{#forEach accounts}}
+//   <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
+//     {{ name }}
+//   </a>{{#unless isLast}}, {{/unless}}
+// {{/forEach}}
 ```
 
-```handlebars
-{{#forEach accounts}}
-  <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
-    {{ name }}
-  </a>{{#unless isLast}}, {{/unless}}
-{{/forEach}}
-```
-
-### [.inArray](lib/array.js#L311)
+### [.inArray](lib/array.js#L257)
 
 **Params**
 
@@ -265,7 +214,7 @@ var accounts = [
 * `options` **{type}**
 * `returns` **{String}**
 
-### [.isArray](lib/array.js#L332)
+### [.isArray](lib/array.js#L278)
 
 Returns true if `value` is an array.
 
@@ -281,14 +230,7 @@ Returns true if `value` is an array.
 //=> 'false'
 ```
 
-### [.iterate](lib/array.js#L345)
-
-Similar to {{#each}} helper, but treats array-like objects
-as arrays (e.g. objects with a `.length` property that
-is a number) rather than objects. This lets us iterate
-over our collections items.
-
-### [.join](lib/array.js#L404)
+### [.join](lib/array.js#L300)
 
 Join all elements of array into a string, optionally using a given separator.
 
@@ -308,28 +250,9 @@ Join all elements of array into a string, optionally using a given separator.
 //=> 'a-b-c'
 ```
 
-### [.joinAny](lib/array.js#L432)
+### [.last](lib/array.js#L323)
 
-Handlebars "joinAny" block helper that supports arrays of objects or strings. Sourced from: [https://github.com/wycats/handlebars.js/issues/133](https://github.com/wycats/handlebars.js/issues/133)
-
-If "delimiter" is not speficified, then it defaults to ",".
-You can use "start", and "end" to do a "slice" of the array.
-Usage with objects
-Usage with arrays:
-
-**Examples**
-
-```handlebars
-{{#join people delimiter=" and "}}{{name}}, {{age}}{{/join}}
-```
-
-```handlebars
-{{join jobs delimiter=", " start="1" end="2"}}
-```
-
-### [.last](lib/array.js#L474)
-
-Returns the last item, or last `n` items of an array.
+Returns the last item, or last `n` items of an array. Opposite of [first][].
 
 **Params**
 
@@ -344,7 +267,7 @@ Returns the last item, or last `n` items of an array.
 //=> '["d", "e"]'
 ```
 
-### [.length](lib/array.js#L496)
+### [.length](lib/array.js#L344)
 
 Returns the length of the given array.
 
@@ -360,7 +283,7 @@ Returns the length of the given array.
 //=> 3
 ```
 
-### [.lengthEqual](lib/array.js#L513)
+### [.lengthEqual](lib/array.js#L361)
 
 **Params**
 
@@ -369,7 +292,7 @@ Returns the length of the given array.
 * `options` **{type}**
 * `returns` **{String}**
 
-### [.map](lib/array.js#L544)
+### [.map](lib/array.js#L392)
 
 Returns a new array, created by calling `function` on each element of the given `array`.
 
@@ -394,7 +317,7 @@ function double(str) {
 //=> '["aa", "bb", "cc"]'
 ```
 
-### [.sort](lib/array.js#L578)
+### [.sort](lib/array.js#L426)
 
 Sort the given `array`. If an array of objects is passed, you may optionally pass a `key` to sort on as the second argument. You may alternatively pass a sorting function as the second argument.
 
@@ -413,7 +336,7 @@ Sort the given `array`. If an array of objects is passed, you may optionally pas
 //=> '[{"a":"aaa"},{"a":"zzz"}]'
 ```
 
-### [.sortBy](lib/array.js#L610)
+### [.sortBy](lib/array.js#L458)
 
 Sort the given `array`. If an array of objects is passed, you may optionally pass a `key` to sort on as the second argument. You may alternatively pass a sorting function as the second argument.
 
@@ -432,7 +355,7 @@ Sort the given `array`. If an array of objects is passed, you may optionally pas
 //=> '[{"a":"aaa"},{"a":"zzz"}]'
 ```
 
-### [.shuffle](lib/array.js#L637)
+### [.shuffle](lib/array.js#L485)
 
 Shuffle the items in an array.
 
@@ -448,7 +371,7 @@ Shuffle the items in an array.
 //=> ["c", "a", "b"]
 ```
 
-### [.withFirst](lib/array.js#L663)
+### [.withFirst](lib/array.js#L511)
 
 Use the first item in a collection inside a handlebars
 block expression. Opposite of [withLast][].
@@ -460,17 +383,7 @@ block expression. Opposite of [withLast][].
 * `options` **{Object}**
 * `returns` **{*}**
 
-### [.last](lib/array.js#L694)
-
-Return the last item in an array. Opposite of [first][].
-
-**Params**
-
-* `array` **{Array}**
-* `num` **{Number}**: The number of elements to return.
-* `returns` **{Array}**
-
-### [.withLast](lib/array.js#L713)
+### [.withLast](lib/array.js#L544)
 
 Use the last item in a collection inside a block.
 Opposite of [withFirst][].
@@ -482,7 +395,7 @@ Opposite of [withFirst][].
 * `options` **{Object}**
 * `returns` **{*}**
 
-### [.withSort](lib/array.js#L736)
+### [.withSort](lib/array.js#L567)
 
 **Params**
 
@@ -491,7 +404,7 @@ Opposite of [withFirst][].
 * `options` **{type}**
 * `returns` **{String}**
 
-### [.toArray](lib/array.js#L793)
+### [.toArray](lib/array.js#L624)
 
 Converts a string such as "foo, bar, baz" to an ES Array of strings.
 
@@ -500,7 +413,7 @@ Converts a string such as "foo, bar, baz" to an ES Array of strings.
 * `str` **{String}**
 * `returns` **{String}**
 
-### [.withAfter](lib/array.js#L810)
+### [.withAfter](lib/array.js#L641)
 
 Use all of the items in the collection after the specified count
 inside a block.
@@ -512,7 +425,7 @@ inside a block.
 * `options` **{Object}**
 * `returns` **{Array}**
 
-### [.withBefore](lib/array.js#L830)
+### [.withBefore](lib/array.js#L661)
 
 Use all of the items in the collection before the specified count
 inside a block. Opposite of {{withAfter}}
@@ -574,7 +487,7 @@ it is used as the offset from the end of the collection.
 * `target` **{*}**: The value to check for.
 * `[fromIndex=0]` **{Number}**: Optionally define the index to search from.
 
-### [.any](lib/comparison.js#L49)
+### [.any](lib/comparison.js#L47)
 
 Returns `true` if a value exists in the given string, array or
 object, or if a callback is passed checks to see if a truthy
@@ -588,7 +501,7 @@ sub-string in a string.
 * `options` **{Object}**
 * `returns` **{Boolean}**
 
-### [.and](lib/comparison.js#L65)
+### [.and](lib/comparison.js#L63)
 
 **Params**
 
@@ -597,7 +510,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.gt](lib/comparison.js#L82)
+### [.gt](lib/comparison.js#L80)
 
 **Params**
 
@@ -606,7 +519,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.gte](lib/comparison.js#L99)
+### [.gte](lib/comparison.js#L97)
 
 **Params**
 
@@ -615,7 +528,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.is](lib/comparison.js#L116)
+### [.is](lib/comparison.js#L114)
 
 **Params**
 
@@ -624,7 +537,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.isnt](lib/comparison.js#L133)
+### [.isnt](lib/comparison.js#L131)
 
 **Params**
 
@@ -633,7 +546,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.lt](lib/comparison.js#L150)
+### [.lt](lib/comparison.js#L148)
 
 **Params**
 
@@ -642,7 +555,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.lte](lib/comparison.js#L167)
+### [.lte](lib/comparison.js#L165)
 
 **Params**
 
@@ -651,7 +564,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.if_eq](lib/comparison.js#L271)
+### [.if_eq](lib/comparison.js#L269)
 
 **Params**
 
@@ -659,7 +572,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.unless_eq](lib/comparison.js#L286)
+### [.unless_eq](lib/comparison.js#L284)
 
 **Params**
 
@@ -667,7 +580,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.if_gt](lib/comparison.js#L301)
+### [.if_gt](lib/comparison.js#L299)
 
 **Params**
 
@@ -675,7 +588,7 @@ sub-string in a string.
 * `options` **{type}**
 * `returns` **{Boolean}**
 
-### [.unless_gt](lib/comparison.js#L316)
+### [.unless_gt](lib/comparison.js#L314)
 
 **Params**
 
@@ -932,39 +845,61 @@ Abbreviate numbers to the given number of `digits`.
 
 ### object
 
-### [.hasOwn](lib/object.js#L24)
+### [.forIn](lib/object.js#L20)
+
+Block helper that iterates over the properties of
+an object, exposing each key and value on the context.
+
+**Params**
+
+* `context` **{Object}**
+* `options` **{Object}**
+* `returns` **{String}**
+
+### [.forOwn](lib/object.js#L39)
+
+Block helper that iterates over the **own** properties of
+an object, exposing each key and value on the context.
+
+**Params**
+
+* `context` **{Object}**
+* `options` **{Object}**
+* `returns` **{String}**
+
+### [.hasOwn](lib/object.js#L64)
 
 Return true if `key` is an own, enumerable property of the given `obj`.
 
 **Params**
 
 * `key` **{String}**
-* `obj` **{Object}**: Optionally pass an object to check.
+* `obj` **{Object}**: The object to check.
 * `returns` **{Boolean}**
 
 **Example**
 
 ```js
-hasOwn(obj, key);
+{{hasOwn obj key}}
 ```
 
-### [.hasOwn](lib/object.js#L43)
+### [.isObject](lib/object.js#L81)
 
-Return true if `key` is an own, enumerable property of the given `obj`.
+Return true if `value` is an object.
 
 **Params**
 
-* `key` **{String}**
-* `obj` **{Object}**: Optionally pass an object to check.
+* `value` **{String}**
 * `returns` **{Boolean}**
 
 **Example**
 
 ```js
-hasOwn(obj, key);
+{{isObject "foo"}}
+//=> false
 ```
 
-### [.merge](lib/object.js#L58)
+### [.merge](lib/object.js#L97)
 
 Recursively combine the properties of `o` with the
 properties of other `objects`.

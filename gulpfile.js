@@ -24,6 +24,7 @@ gulp.task('coverage', function () {
 gulp.task('test', ['coverage'], function () {
   return gulp.src('test/*.js')
     .pipe(mocha({reporter: 'spec'}))
+    .pipe(istanbul.writeReports())
     .pipe(istanbul.writeReports({
       reporters: [ 'text' ],
       reportOpts: {dir: 'coverage', file: 'summary.txt'}

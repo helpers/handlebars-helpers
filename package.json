@@ -41,6 +41,7 @@
     "define-property": "^0.2.5",
     "export-files": "^2.1.0",
     "for-in": "^0.1.4",
+    "get-value": "^1.2.1",
     "handlebars": "^4.0.2",
     "helper-date": "^0.2.2",
     "helper-markdown": "^0.1.2",
@@ -109,8 +110,9 @@
   ],
   "verb": {
     "reflinks": [
-      "verb",
-      "assemble"
+      "assemble",
+      "handlebars",
+      "verb"
     ],
     "related": {
       "list": [
