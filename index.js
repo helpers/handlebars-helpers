@@ -13,24 +13,37 @@ var utils = require('./lib/utils');
 
 function Cache(options) {
   this.options = options || {};
-  this.helpers = {};
+  this.handlebars = this.options.handlebars;
+  delete this.options.handlebars;
+
+  if (!this.handlebars) {
+    throw new Error('handlebars-helpers expects an instance of handlebars.');
+  }
+
+  this.helpers = this.handlebars.helpers;
   this.groups = {};
 
   if (this.options.helpers) {
     this.visit('register', this.options.helpers);
+    delete this.options.helpers;
   }
+
   if (this.options.groups) {
     this.visit('group', this.options.groups);
+    delete this.options.groups;
   }
 }
 
 Cache.prototype.register = function(name, fn) {
-  this.helpers[name] = fn;
+  this.handlebars.registerHelper(name, fn);
   return this;
 };
 
 Cache.prototype.group = function(key, value) {
-  this.groups[key] = new Cache({helpers: value});
+  this.groups[key] = new Cache({
+    handlebars: this.handlebars,
+    helpers: value
+  });
   return this;
 };
 
@@ -39,16 +52,13 @@ Cache.prototype.visit = function(method, value) {
   return this;
 };
 
-var cache = new Cache({groups: groups});
+module.exports = function (handlebars) {
+  return new Cache({
+    handlebars: handlebars,
+    groups: groups
+  });
+};
 
-
-
-
-console.log(cache)
-
-
-
-// module.exports = cache;
 // module.exports.Cache = Cache;
 // module.exports.cache = cache;
 // module.exports.utils = utils;

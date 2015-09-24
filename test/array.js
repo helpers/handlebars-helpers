@@ -2,18 +2,20 @@
 
 var should = require('should');
 var Handlebars = require('handlebars');
-var helpers = require('..');
+var helpers = require('..')(Handlebars);
 
-Handlebars.registerHelper(helpers('array'));
+console.log(helpers);
 
-var context = {arr: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
+// Handlebars.registerHelper(helpers('array'));
 
-describe('isArray', function() {
-  it('should return true if the value is an array.', function() {
-    Handlebars.compile('{{isArray "foo"}}')().should.eql('false');
-    Handlebars.compile('{{isArray foo}}')({foo: ['foo']}).should.equal('true');
-  });
-});
+// var context = {arr: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
+
+// describe('isArray', function() {
+//   it('should return true if the value is an array.', function() {
+//     Handlebars.compile('{{isArray "foo"}}')().should.eql('false');
+//     Handlebars.compile('{{isArray foo}}')({foo: ['foo']}).should.equal('true');
+//   });
+// });
 
 // describe('arrayify', function() {
 //   it('should coerce a value to an array.', function() {
