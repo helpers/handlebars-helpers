@@ -1,13 +1,13 @@
 'use strict';
 
-var through = require('through2');
+var plugin = require('./support/');
 var stylish = require('jshint-stylish');
 var istanbul = require('gulp-istanbul');
 var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var gulp = require('gulp');
 
-var lint = ['index.js', 'lib/**/*.js'];
+var lint = ['index.js', 'lib/*.js'];
 
 gulp.task('lint', function () {
   return gulp.src(lint)
@@ -36,12 +36,22 @@ gulp.task('organize', function () {
     .pipe(gulp.dest('lib/'));
 });
 
-function organize(options) {
-  return through.obj(function (file, enc, cb) {
+gulp.task('namify', function () {
+  return gulp.src(['lib/*.js'])
+    .pipe(plugin.namify())
+    .pipe(gulp.dest('lib/'));
+});
 
-    cb(null, file);
-  });
-}
+gulp.task('modularize', function () {
+  return gulp.src(['lib/*.js'])
+    .pipe(plugin.modularize())
+    .pipe(gulp.dest('lib/tmp'));
+});
 
+gulp.task('comments', function () {
+  return gulp.src(['lib/*.js'])
+    .pipe(plugin.comments())
+    .pipe(gulp.dest('lib/'));
+});
 
 gulp.task('default', ['lint', 'test']);
