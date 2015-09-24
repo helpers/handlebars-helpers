@@ -1,30 +1,29 @@
 'use strict';
 
 var should = require('should');
-var Handlebars = require('handlebars');
+var hbs = require('handlebars');
 var helpers = require('..');
-
-Handlebars.registerHelper(helpers('html'));
+helpers.html({handlebars: hbs});
 
 var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
 
 describe('js;', function() {
   it('should create an empty script tag', function() {
-    Handlebars.compile('{{js}}')().should.equal('<script></script>');
+    hbs.compile('{{{js}}}')().should.equal('<script></script>');
   });
 
   it('should use a path passed as a string', function() {
-    Handlebars.compile('{{js "abc.js"}}')().should.equal('<script src="abc.js"></script>');
+    hbs.compile('{{{js "abc.js"}}}')().should.equal('<script src="abc.js"></script>');
   });
 
   it('should use the `src` attribute on the hash', function() {
-    Handlebars.compile('{{js src=""}}')().should.equal('<script src=""></script>');
-    Handlebars.compile('{{js src="abc.js"}}')().should.equal('<script src="abc.js"></script>');
+    hbs.compile('{{{js src=""}}}')().should.equal('<script src=""></script>');
+    hbs.compile('{{{js src="abc.js"}}}')().should.equal('<script src="abc.js"></script>');
   });
 
   it('should create multiple tags from an array passed on the context:', function() {
     var ctx = {scripts: ['a.js', 'bjs', 'c.js'] };
-    Handlebars.compile('{{js scripts}}')(ctx).should.equal([
+    hbs.compile('{{{js scripts}}}')(ctx).should.equal([
       '<script src="a.js"></script>',
       '<script src="bjs"></script>',
       '<script src="c.js"></script>',
@@ -33,26 +32,26 @@ describe('js;', function() {
 
   it('should create a coffeescript tag (TODO: only works with array format)', function() {
     var ctx = {scripts: ['a.coffee'] };
-    Handlebars.compile('{{js scripts}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee">');
+    hbs.compile('{{{js scripts}}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee">');
   });
 });
 
 describe('ul', function() {
   it('should should return an unordered list', function() {
-    var fn = Handlebars.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
+    var fn = hbs.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
     fn(locals).should.equal('<ul class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ul>');
   });
 });
 
 describe('ol', function() {
   it('should should return an ordered list', function() {
-    var fn = Handlebars.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
+    var fn = hbs.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
     fn(locals).should.equal('<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
   });
 });
 
 describe('thumbnailImage', function () {
-  describe('{{thumbnailImage context}}', function () {
+  describe('{{{thumbnailImage context}}}', function () {
     it('should return figure with link and caption', function () {
       var context = {
         data: {
@@ -67,7 +66,7 @@ describe('thumbnailImage', function () {
           caption: 'My new caption!'
         }
       };
-      var fn = Handlebars.compile('{{thumbnailImage data}}');
+      var fn = hbs.compile('{{{thumbnailImage data}}}');
       var comparison = [
         '<figure id="image-id">',
         '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
@@ -80,7 +79,7 @@ describe('thumbnailImage', function () {
     });
 
     it('should return figure with extra class "test"', function () {
-      var source = '{{thumbnailImage data}}';
+      var source = '{{{thumbnailImage data}}}';
       var context = {
         data: {
           id: 'id',
@@ -98,7 +97,7 @@ describe('thumbnailImage', function () {
         }
       };
 
-      var fn = Handlebars.compile(source);
+      var fn = hbs.compile(source);
       var comparison = [
         '<figure id="image-id" class="test">',
         '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
@@ -111,7 +110,7 @@ describe('thumbnailImage', function () {
     });
 
     it('should return figure with image that has class "test"', function () {
-      var source = '{{thumbnailImage data}}';
+      var source = '{{{thumbnailImage data}}}';
       var context = {
         data: {
           id: 'id',
@@ -128,7 +127,7 @@ describe('thumbnailImage', function () {
           caption: 'My new caption!'
         }
       };
-      var fn = Handlebars.compile(source);
+      var fn = hbs.compile(source);
       var comparison = [
         '<figure id="image-id">',
         '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
@@ -141,7 +140,7 @@ describe('thumbnailImage', function () {
     });
 
     it('should return figure with link that has class "test"', function () {
-      var source = '{{thumbnailImage data}}';
+      var source = '{{{thumbnailImage data}}}';
       var context = {
         data: {
           id: 'id',
@@ -158,7 +157,7 @@ describe('thumbnailImage', function () {
           caption: 'My new caption!'
         }
       };
-      var fn = Handlebars.compile(source);
+      var fn = hbs.compile(source);
       var comparison = [
        '<figure id="image-id">',
        '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">',
@@ -171,7 +170,7 @@ describe('thumbnailImage', function () {
     });
 
     it('should return figure without link', function () {
-      var source = '{{thumbnailImage data}}';
+      var source = '{{{thumbnailImage data}}}';
       var context = {
         data: {
           id: 'id',
@@ -184,7 +183,7 @@ describe('thumbnailImage', function () {
           caption: 'My new caption!'
         }
       };
-      var fn = Handlebars.compile(source);
+      var fn = hbs.compile(source);
       var comparison = [
         '<figure id="image-id">',
         '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
@@ -195,7 +194,7 @@ describe('thumbnailImage', function () {
     });
 
     it('should return figure without caption', function () {
-      var source = '{{thumbnailImage data}}';
+      var source = '{{{thumbnailImage data}}}';
       var context = {
         data: {
           id: 'id',
@@ -208,7 +207,7 @@ describe('thumbnailImage', function () {
           full: 'http://placehold.it/600x400/0eafff/ffffff.png'
         }
       };
-      var fn = Handlebars.compile(source);
+      var fn = hbs.compile(source);
       var comparison = [
         '<figure id="image-id">',
         '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',

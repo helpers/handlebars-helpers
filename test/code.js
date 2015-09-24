@@ -5,7 +5,7 @@ var hbs = require('handlebars');
 var helpers = require('..');
 helpers.code({handlebars: hbs});
 
-describe('{{embed}}', function() {
+describe('embed', function() {
   it('should embed markdown:', function() {
     hbs.compile('{{{embed "test/fixtures/simple.md"}}}')().should.equal([
       '```markdown',
@@ -57,16 +57,16 @@ describe('{{embed}}', function() {
   });
 });
 
-describe('{{jsfiddle}}', function() {
+describe('jsfiddle', function() {
   it('should return a jsfiddle embed link, with default tabs assigned', function() {
     var source = '{{{jsfiddle id="UXbas"}}}';
-    var template = hbs.compile(source);
-    template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
+    var fn = hbs.compile(source);
+    fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
 
   it('should return a jsfiddle embed link, with custom tabs assigned', function() {
     var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
-    var template = hbs.compile(source);
-    template().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
+    var fn = hbs.compile(source);
+    fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
 });

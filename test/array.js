@@ -27,13 +27,13 @@ describe('first', function() {
   });
 
   it('should return the first item in an array.', function() {
-    var template = hbs.compile('{{first foo}}');
-    template({foo: ['a', 'b', 'c']}).should.equal('a');
+    var fn = hbs.compile('{{first foo}}');
+    fn({foo: ['a', 'b', 'c']}).should.equal('a');
   });
 
   it('should return an array with the first two items in an array.', function() {
-    var template = hbs.compile('{{first foo 2}}');
-    template({foo: ['a', 'b', 'c']}).should.eql(['a', 'b'].toString());
+    var fn = hbs.compile('{{first foo 2}}');
+    fn({foo: ['a', 'b', 'c']}).should.eql(['a', 'b'].toString());
   });
 });
 
@@ -55,8 +55,8 @@ describe('before', function() {
     hbs.compile('{{before}}')().should.equal('');
   });
   it('should return all of the items in an array before the given index.', function() {
-    var template = hbs.compile('{{before array 5}}');
-    template(context).should.eql(['a', 'b', 'c'].toString());
+    var fn = hbs.compile('{{before array 5}}');
+    fn(context).should.eql(['a', 'b', 'c'].toString());
   });
 });
 
@@ -66,8 +66,8 @@ describe('after', function() {
   });
 
   it('should return all of the items in an array after the given index.', function() {
-    var template = hbs.compile('{{after array 5}}');
-    template(context).should.eql(['f', 'g', 'h'].toString());
+    var fn = hbs.compile('{{after array 5}}');
+    fn(context).should.eql(['f', 'g', 'h'].toString());
   });
 });
 
@@ -77,13 +77,13 @@ describe('join', function() {
   });
 
   it('should return all items in an array joined by the default separator.', function() {
-    var template = hbs.compile('{{join array}}');
-    template(context).should.equal('a, b, c, d, e, f, g, h');
+    var fn = hbs.compile('{{join array}}');
+    fn(context).should.equal('a, b, c, d, e, f, g, h');
   });
 
   it('should return all items in an array joined by the given separator.', function() {
-    var template = hbs.compile('{{join array " | "}}');
-    template(context).should.equal('a | b | c | d | e | f | g | h');
+    var fn = hbs.compile('{{join array " | "}}');
+    fn(context).should.equal('a | b | c | d | e | f | g | h');
   });
 });
 
@@ -97,8 +97,8 @@ describe('map', function() {
     o.double = function(str) {
       return str + str;
     };
-    var template = hbs.compile('{{map \'["a","b","c"]\' double}}');
-    template(o).should.equal('aa,bb,cc');
+    var fn = hbs.compile('{{map \'["a","b","c"]\' double}}');
+    fn(o).should.equal('aa,bb,cc');
   });
 });
 
@@ -108,8 +108,8 @@ describe('sortBy', function() {
   });
 
   it('should sort the items in an array.', function() {
-    var template = hbs.compile('{{sortBy \'["b", "c", "a"]\'}}');
-    template(context).should.equal('a,b,c');
+    var fn = hbs.compile('{{sortBy \'["b", "c", "a"]\'}}');
+    fn(context).should.equal('a,b,c');
   });
 
   it('should take a compare function.', function() {
@@ -117,15 +117,15 @@ describe('sortBy', function() {
     o.compare = function (a, b) {
       return b.localeCompare(a);
     };
-    var template = hbs.compile('{{sortBy \'["b", "c", "a"]\' compare}}');
-    template(o).should.equal('c,b,a');
+    var fn = hbs.compile('{{sortBy \'["b", "c", "a"]\' compare}}');
+    fn(o).should.equal('c,b,a');
   });
 
   it('should sort based on object key:', function() {
     var ctx = {arr: [{a: 'zzz'}, {a: 'aaa'}]};
     hbs.registerHelper(helpers.data());
-    var template = hbs.compile('{{{stringify (sortBy arr "a") 0}}}');
-    template(ctx).should.equal('[{"a":"aaa"},{"a":"zzz"}]');
+    var fn = hbs.compile('{{{stringify (sortBy arr "a") 0}}}');
+    fn(ctx).should.equal('[{"a":"aaa"},{"a":"zzz"}]');
   });
 });
 
@@ -135,13 +135,13 @@ describe('length', function() {
   });
 
   it('should return the length of a string.', function() {
-    var template = hbs.compile('{{length "foo"}}');
-    template(context).should.equal('3');
+    var fn = hbs.compile('{{length "foo"}}');
+    fn(context).should.equal('3');
   });
 
   it('should return the length of an array.', function() {
-    var template = hbs.compile('{{length \'["b", "c", "a"]\'}}');
-    template(context).should.equal('3');
+    var fn = hbs.compile('{{length \'["b", "c", "a"]\'}}');
+    fn(context).should.equal('3');
   });
 });
 
@@ -152,36 +152,36 @@ describe('compact', function() {
 
   it('should remove falsey values from an array.', function() {
     var ctx = {arr: [null, 'a', undefined, 0, false, 'b', 'c', '']};
-    var template = hbs.compile('{{compact arr}}');
-    template(ctx).should.equal('a,b,c');
+    var fn = hbs.compile('{{compact arr}}');
+    fn(ctx).should.equal('a,b,c');
   });
 });
 
 describe('after', function() {
   it('Should return all of the items in an array after the specified count.', function() {
-    var template = hbs.compile('{{after array 5}}');
-    template(context).should.eql(['f', 'g', 'h'].toString());
+    var fn = hbs.compile('{{after array 5}}');
+    fn(context).should.eql(['f', 'g', 'h'].toString());
   });
 });
 
 describe('any', function() {
   it('Should conditionally render a block the array isn\'t empty.', function() {
-    var template = hbs.compile('{{#any array}}AAA{{else}}BBB{{/any}}');
-    template(context).should.equal('AAA');
+    var fn = hbs.compile('{{#any array}}AAA{{else}}BBB{{/any}}');
+    fn(context).should.equal('AAA');
   });
 });
 
 describe('before', function() {
   it('Should return all of the items in an array before the specified count.', function() {
-    var template = hbs.compile('{{before array 5}}');
-    template(context).should.eql(['a', 'b', 'c'].toString());
+    var fn = hbs.compile('{{before array 5}}');
+    fn(context).should.eql(['a', 'b', 'c'].toString());
   });
 });
 
 describe('join', function() {
   it('Should return all items in an array joined by a separator if specified.', function() {
-    var template = hbs.compile('{{join array " | "}}');
-    template(context).should.equal('a | b | c | d | e | f | g | h');
+    var fn = hbs.compile('{{join array " | "}}');
+    fn(context).should.equal('a | b | c | d | e | f | g | h');
   });
 });
 
@@ -207,69 +207,69 @@ describe('filter', function() {
     };
 
     var source = '{{#filter collection "d" property="first"}}{{this.first}}{{else}}ZZZ{{/filter}}';
-    var template = hbs.compile(source);
-    template(ctx).should.equal('d');
+    var fn = hbs.compile(source);
+    fn(ctx).should.equal('d');
   });
 });
 
 describe('each', function() {
   it('Should use the key and value of each property in an object inside a block.', function() {
-    var template = hbs.compile('{{#each obj}}{{@key}}: {{this}} {{/each}}');
-    template({obj: {fry: 3, bender: 120 }}).should.equal('fry: 3 bender: 120 ');
+    var fn = hbs.compile('{{#each obj}}{{@key}}: {{this}} {{/each}}');
+    fn({obj: {fry: 3, bender: 120 }}).should.equal('fry: 3 bender: 120 ');
   });
 });
 
 describe('eachIndex', function() {
   it('Should render the block using the array and each item\'s index.', function() {
-    var template = hbs.compile('{{#eachIndex array}} {{item}} is {{index}} {{/eachIndex}}');
-    template(context).should.equal(' a is 0  b is 1  c is 2  d is 3  e is 4  f is 5  g is 6  h is 7 ');
+    var fn = hbs.compile('{{#eachIndex array}} {{item}} is {{index}} {{/eachIndex}}');
+    fn(context).should.equal(' a is 0  b is 1  c is 2  d is 3  e is 4  f is 5  g is 6  h is 7 ');
   });
 });
 
 describe('eachIndexPlusOne', function() {
   it('Should render the block using the array and each item\'s index + 1.', function() {
-    var template = hbs.compile('{{#eachIndexPlusOne array}} {{item}} is {{index}} {{/eachIndexPlusOne}}');
-    template(context).should.equal(' a is 1  b is 2  c is 3  d is 4  e is 5  f is 6  g is 7  h is 8 ');
+    var fn = hbs.compile('{{#eachIndexPlusOne array}} {{item}} is {{index}} {{/eachIndexPlusOne}}');
+    fn(context).should.equal(' a is 1  b is 2  c is 3  d is 4  e is 5  f is 6  g is 7  h is 8 ');
   });
 });
 
 describe('empty', function() {
   it('Should conditionally render a block the array is empty.', function() {
-    var template = hbs.compile('{{#empty array}}AAA{{else}}BBB{{/empty}}');
-    template(context).should.equal('BBB');
+    var fn = hbs.compile('{{#empty array}}AAA{{else}}BBB{{/empty}}');
+    fn(context).should.equal('BBB');
   });
 });
 
 describe('inArray', function() {
   it('Should conditionally render a block if a specified string is in the array.', function() {
-    var template = hbs.compile('{{#inArray array "d"}}AAA{{else}}BBB{{/inArray}}');
-    template(context).should.equal('AAA');
+    var fn = hbs.compile('{{#inArray array "d"}}AAA{{else}}BBB{{/inArray}}');
+    fn(context).should.equal('AAA');
   });
 });
 
 describe('length', function() {
   it('Should return the length of the array', function() {
-    var template = hbs.compile('{{length array}}');
-    template(context).should.equal('8');
+    var fn = hbs.compile('{{length array}}');
+    fn(context).should.equal('8');
   });
 });
 
 describe('lengthEqual', function() {
   it('Should conditionally render a block based on the length of an array.', function() {
-    var template = hbs.compile('{{#lengthEqual array 3}}AAA{{else}}BBB{{/lengthEqual}}');
-    template(context).should.equal('BBB');
+    var fn = hbs.compile('{{#lengthEqual array 3}}AAA{{else}}BBB{{/lengthEqual}}');
+    fn(context).should.equal('BBB');
   });
 });
 
 describe('first', function() {
   it('Should return the first item in a collection.', function() {
-    var template = hbs.compile('{{first foo}}');
-    template({foo: ['a', 'b', 'c']}).should.equal('a');
+    var fn = hbs.compile('{{first foo}}');
+    fn({foo: ['a', 'b', 'c']}).should.equal('a');
   });
 
   it('Should return an array with the first two items in a collection.', function() {
-    var template = hbs.compile('{{first foo 2}}');
-    template({foo: ['a', 'b', 'c']}).should.eql(['a', 'b'].toString());
+    var fn = hbs.compile('{{first foo 2}}');
+    fn({foo: ['a', 'b', 'c']}).should.eql(['a', 'b'].toString());
   });
 });
 
@@ -285,26 +285,26 @@ describe('last', function() {
 
 describe('{{withFirst}}', function() {
   it('Should use the first item in an array inside a block.', function() {
-    var template = hbs.compile('{{#withFirst array}}<p>{{this}} is smart.</p>{{/withFirst}}');
-    template(context).should.equal('<p>a is smart.</p>');
+    var fn = hbs.compile('{{#withFirst array}}<p>{{this}} is smart.</p>{{/withFirst}}');
+    fn(context).should.equal('<p>a is smart.</p>');
   });
   it('Should use the first two items in an array inside a block.', function() {
-    var template = hbs.compile('{{#withFirst array 2}}<p>{{this}} is smart.</p>{{/withFirst}}');
-    template(context).should.equal('<p>a is smart.</p><p>b is smart.</p>');
+    var fn = hbs.compile('{{#withFirst array 2}}<p>{{this}} is smart.</p>{{/withFirst}}');
+    fn(context).should.equal('<p>a is smart.</p><p>b is smart.</p>');
   });
 });
 
 describe('sort', function() {
   it('Should return all items in an array sorted in lexicographical order.', function() {
-    var template = hbs.compile('{{sort array}}');
-    template(context).should.eql(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].toString());
+    var fn = hbs.compile('{{sort array}}');
+    fn(context).should.eql(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].toString());
   });
 
   // this test and sort helper needs to be updated to do something
   // other than just spitting out the string of the array.
   it('Should return all items in an array sorted in by name.', function() {
-    var template = hbs.compile('{{sort collection "name"}}');
-    var res = template({
+    var fn = hbs.compile('{{sort collection "name"}}');
+    var res = fn({
       collection: [{
         name: 'f',
         deliveries: 8021
@@ -332,37 +332,37 @@ describe('sort', function() {
 
 describe('withAfter', function() {
   it('Should use all of the items in an array after the specified count inside a block.', function() {
-    var template = hbs.compile('{{#withAfter array 5}}<{{this}}>{{/withAfter}}');
-    template(context).should.equal('<f><g><h>');
+    var fn = hbs.compile('{{#withAfter array 5}}<{{this}}>{{/withAfter}}');
+    fn(context).should.equal('<f><g><h>');
   });
 });
 
 describe('withBefore', function() {
   it('Should use all of the items in an array before the specified count inside a block.', function() {
-    var template = hbs.compile('{{#withBefore array 5}}<{{this}}>{{/withBefore}}');
-    template(context).should.equal('<a><b><c>');
+    var fn = hbs.compile('{{#withBefore array 5}}<{{this}}>{{/withBefore}}');
+    fn(context).should.equal('<a><b><c>');
   });
 });
 
 describe('withLast', function() {
   it('Should use the last item in an array inside a block.', function() {
-    var template = hbs.compile('{{#withLast array}}<p>{{this}} is dumb.</p>{{/withLast}}');
-    template(context).should.equal('<p>h is dumb.</p>');
+    var fn = hbs.compile('{{#withLast array}}<p>{{this}} is dumb.</p>{{/withLast}}');
+    fn(context).should.equal('<p>h is dumb.</p>');
   });
   it('Should use the last two items in an array inside a block.', function() {
-    var template = hbs.compile('{{#withLast array 2}}<p>{{this}} is dumb.</p>{{/withLast}}');
-    template(context).should.equal('<p>g is dumb.</p><p>h is dumb.</p>');
+    var fn = hbs.compile('{{#withLast array 2}}<p>{{this}} is dumb.</p>{{/withLast}}');
+    fn(context).should.equal('<p>g is dumb.</p><p>h is dumb.</p>');
   });
 });
 
 describe('withSort', function() {
   it('Should sort the array in lexicographical order and use it in a block.', function() {
-    var template = hbs.compile('{{#withSort array}}<p>{{this}}</p>{{/withSort}}');
-    template(context).should.equal('<p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p>');
+    var fn = hbs.compile('{{#withSort array}}<p>{{this}}</p>{{/withSort}}');
+    fn(context).should.equal('<p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p>');
   });
   it('Should sort the array by deliveries and use it in a block.', function() {
-    var template = hbs.compile('{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
-    var res = template({
+    var fn = hbs.compile('{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
+    var res = fn({
       collection: [{name: 'f', deliveries: 8021 }, {name: 'b', deliveries: 239 }, {name: 'd', deliveries: -12 }]
     });
     res.should.equal('d: -12 <br>b: 239 <br>f: 8021 <br>');
