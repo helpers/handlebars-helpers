@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('should');
+require('should');
 var hbs = require('handlebars');
 var helpers = require('..')({handlebars: hbs});
 

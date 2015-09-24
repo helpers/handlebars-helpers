@@ -1,6 +1,6 @@
 'use strict';
 
-var should = require('should');
+require('should');
 var hbs = require('handlebars');
 var utils = require('../lib/utils');
 var helpers = require('..');
@@ -112,9 +112,14 @@ describe('first', function() {
 });
 
 describe('filter', function() {
-  it('should conditionally render a block if a specified string is in the collection.', function() {
+  it('should render the block if the given string is in the array.', function() {
     var source = '{{#filter array "d"}}AAA{{else}}BBB{{/filter}}';
     hbs.compile(source)(context).should.equal('AAA');
+  });
+
+  it('should render the inverse block if the string is not in the array:', function() {
+    var source = '{{#filter array "foo"}}AAA{{else}}BBB{{/filter}}';
+    hbs.compile(source)(context).should.equal('BBB');
   });
 
   it('should render a block for each object that has a "first" property with the value "d".', function() {
@@ -295,7 +300,7 @@ describe('sort', function() {
     var res = fn({array: ['c', 'a', 'b']});
     res.should.equal('a,b,c');
   });
-  
+
   it('should return all items in an array sorted in lexicographical order.', function() {
     var fn = hbs.compile('{{sort array}}');
     fn(context).should.eql(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].toString());
@@ -369,6 +374,9 @@ describe('{{withFirst}}', function() {
 });
 
 describe('withLast', function() {
+  it('should return an empty string when undefined.', function() {
+    hbs.compile('{{withLast}}')().should.equal('');
+  });
   it('should use the last item in an array.', function() {
     var fn = hbs.compile('{{#withLast array}}<p>{{this}} is dumb.</p>{{/withLast}}');
     fn(context).should.equal('<p>h is dumb.</p>');
@@ -384,6 +392,7 @@ describe('withSort', function() {
     var fn = hbs.compile('{{#withSort array}}<p>{{this}}</p>{{/withSort}}');
     fn(context).should.equal('<p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p>');
   });
+
   it('should sort the array in reverse order', function() {
     var fn = hbs.compile('{{#withSort array reverse="true"}}<p>{{this}}</p>{{/withSort}}');
     fn(context).should.equal('<p>h</p><p>g</p><p>f</p><p>e</p><p>d</p><p>c</p><p>b</p><p>a</p>');

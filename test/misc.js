@@ -1,12 +1,18 @@
 'use strict';
 
-var should = require('should');
+require('should');
+var assert = require('assert');
 var hbs = require('handlebars');
 var helpers = require('..');
 helpers.misc({handlebars: hbs});
 
 describe('default', function () {
-  it('should provide a default or fallback value if a value doesn\'t exist.', function () {
+  it('should use the given value:', function () {
+    var fn = hbs.compile('{{default title "No title available."}}');
+    fn({title: 'foo'}).should.equal('foo');
+  });
+
+  it('should fallback to the default value when no value exists', function () {
     var fn = hbs.compile('{{default title "No title available."}}');
     fn({title: null}).should.equal('No title available.');
   });
@@ -22,7 +28,9 @@ describe('noop', function () {
 describe('withHash', function () {
   it('should return an empty sting', function () {
     var fn = hbs.compile('{{#withHash}}{{message}}{{/withHash}}');
-    fn({message: 'This is a test'}).should.be.String.and.equal('');
+    var actual = fn({message: 'This is a test'});
+    assert.equal(typeof actual, 'string');
+    assert.equal(actual, '');
   });
   it('should return string from the newly created context', function () {
     var fn = hbs.compile('{{#withHash message="test"}}{{message}}{{/withHash}}');
