@@ -70,7 +70,6 @@
     "parse-comments": "^0.4.1",
     "should": "^5.2.0",
     "through2": "^2.0.0",
-    "verb": "^0.5.0",
     "vinyl": "^0.5.3"
   },
   "keywords": [
@@ -107,5 +106,17 @@
     "strings",
     "template",
     "url"
-  ]
+  ],
+  "verb": {
+    "reflinks": [
+      "verb",
+      "assemble"
+    ],
+    "related": {
+      "list": [
+        "assemble",
+        "template-helpers"
+      ]
+    }
+  }
 }
