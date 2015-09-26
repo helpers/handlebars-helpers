@@ -195,6 +195,7 @@ describe('inArray', function() {
 describe('isArray', function() {
   it('should return true if the value is an array.', function() {
     hbs.compile('{{isArray "foo"}}')().should.eql('false');
+    hbs.compile('{{isArray \'["foo"]\'}}')().should.eql('false');
     hbs.compile('{{isArray foo}}')({foo: ['foo']}).should.equal('true');
     hbs.compile('{{isArray (arrayify "foo")}}')().should.equal('true');
     hbs.compile('{{isArray (arrayify ["foo"])}}')().should.equal('true');

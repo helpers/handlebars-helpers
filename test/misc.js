@@ -32,16 +32,24 @@ describe('withHash', function () {
     assert.equal(typeof actual, 'string');
     assert.equal(actual, '');
   });
+
+  it('should not blow up when no hash is defined.', function () {
+    var fn = hbs.compile('{{#withHash}}{{/withHash}}');
+    fn().should.equal('');
+  });
+
   it('should return string from the newly created context', function () {
     var fn = hbs.compile('{{#withHash message="test"}}{{message}}{{/withHash}}');
-    fn({message: 'This is a test'}).should.be.equal('test');
+    fn({message: 'This is a test'}).should.equal('test');
   });
+
   it('should return string from the parent context', function () {
     var fn = hbs.compile('{{#withHash message=this.message}}{{message}}{{/withHash}}');
-    fn({message: 'This is a test'}).should.be.equal('This is a test');
+    fn({message: 'This is a test'}).should.equal('This is a test');
   });
+
   it('should add two attributes to the new context', function () {
     var fn = hbs.compile('{{#withHash subject="Feedback" message="Hello!"}}{{subject}} - {{message}}{{/withHash}}');
-    fn({}).should.be.equal('Feedback - Hello!');
+    fn({}).should.equal('Feedback - Hello!');
   });
 });

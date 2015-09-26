@@ -64,6 +64,12 @@ describe('jsfiddle', function() {
     fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
   });
 
+  it('should throw an error if id is missing', function () {
+    (function () {
+      hbs.compile('{{jsfiddle}}')()
+    }).should.throw('jsfiddle helper expects an `id`');
+  });
+
   it('should return a jsfiddle embed link, with custom tabs assigned', function() {
     var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
     var fn = hbs.compile(source);

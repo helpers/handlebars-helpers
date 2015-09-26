@@ -21,6 +21,13 @@ describe('collection', function() {
         var fn = hbs.compile('{{#iterate obj}}{{@key}}{{/iterate}}');
         fn({obj: obj}).should.equal('abc');
       });
+
+      it('should render the inverse block when falsey:', function() {
+        var obj = {};
+
+        var fn = hbs.compile('{{#iterate obj}}A{{else}}B{{/iterate}}');
+        fn().should.equal('B');
+      });
     });
 
     describe('array', function() {
