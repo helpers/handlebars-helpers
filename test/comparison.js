@@ -5,6 +5,20 @@ var hbs = require('handlebars');
 var helpers = require('..');
 helpers.comparison({handlebars: hbs});
 
+var context = {array: ['a', 'b', 'c']};
+
+describe('any', function() {
+  it('should conditionally render a block the array isn\'t empty.', function() {
+    var fn = hbs.compile('{{#any array "a"}}AAA{{else}}BBB{{/any}}');
+    fn(context).should.equal('AAA');
+  });
+
+  it('should render the inverse when the array is empty', function() {
+    var fn = hbs.compile('{{#any array "d"}}AAA{{else}}BBB{{/any}}');
+    fn(context).should.equal('BBB');
+  });
+});
+
 describe('{{compare}}', function() {
   describe('{{#compare left "<=" right}}', function() {
     it('should render the first block if the left value is equal or greater.', function() {

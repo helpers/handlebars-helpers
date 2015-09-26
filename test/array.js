@@ -25,18 +25,6 @@ describe('after', function() {
   });
 });
 
-describe('any', function() {
-  it('should conditionally render a block the array isn\'t empty.', function() {
-    var fn = hbs.compile('{{#any array}}AAA{{else}}BBB{{/any}}');
-    fn(context).should.equal('AAA');
-  });
-
-  it('should render the inverse when the array is empty', function() {
-    var fn = hbs.compile('{{#any array}}AAA{{else}}BBB{{/any}}');
-    fn({array: []}).should.equal('BBB');
-  });
-});
-
 describe('before', function() {
   it('should return an empty string when undefined.', function() {
     hbs.compile('{{before}}')().should.equal('');
