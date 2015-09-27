@@ -19,7 +19,7 @@ describe('helpers()', function() {
 
   it('should register helpers with handlebars:', function() {
     helpers();
-    hbs.helpers.should.have.properties(['contains', 'any', 'default']);
+    hbs.helpers.should.have.properties(['contains', 'default']);
   });
 
   it('should support passing an instance of handlebars:', function () {

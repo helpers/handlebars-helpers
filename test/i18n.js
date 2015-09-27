@@ -13,6 +13,7 @@ describe('i18n', function () {
     var template = hbs.compile(source);
     template(context).should.equal('value');
   });
+  
   it('should take a key and return for the override language', function () {
     var source = '{{#i18n "key" language="fr"}}{{/i18n}}';
     var template = hbs.compile(source);
