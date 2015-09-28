@@ -58,6 +58,13 @@ describe('code', function() {
     });
   });
 
+  describe('gist', function() {
+    it('should return a gist script tag', function() {
+      var fn = hbs.compile('{{{gist "abcdefg"}}}');
+      fn().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
+    });
+  });
+
   describe('jsfiddle', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {
       var source = '{{{jsfiddle id="UXbas"}}}';

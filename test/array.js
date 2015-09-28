@@ -5,7 +5,6 @@ var hbs = require('handlebars');
 var utils = require('../lib/utils');
 var helpers = require('..');
 helpers.array({handlebars: hbs});
-hbs.registerHelper('arrayify', utils.arrayify);
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
 
@@ -23,6 +22,13 @@ describe('array', function() {
     it('should return all of the items in an array after the specified count.', function() {
       var fn = hbs.compile('{{after array 5}}');
       fn(context).should.eql(['f', 'g', 'h'].toString());
+    });
+  });
+
+  describe('arrayify', function() {
+    it('should arrayify a value.', function() {
+      hbs.compile('{{#each (arrayify .)}}{{.}}{{/each}}')('foo').should.equal('foo');
+      hbs.compile('{{#each (arrayify .)}}{{.}}{{/each}}')(['foo']).should.equal('foo');
     });
   });
 
@@ -219,6 +225,15 @@ describe('array', function() {
     });
 
     it('should map the items in the array and return new values.', function() {
+      var o = {array: ['a', 'b', 'c']};
+      o.double = function(str) {
+        return str + str;
+      };
+      var fn = hbs.compile('{{map array double}}');
+      fn(o).should.equal('aa,bb,cc');
+    });
+
+    it('should work with a string value:', function() {
       var o = {};
       o.double = function(str) {
         return str + str;
@@ -227,7 +242,7 @@ describe('array', function() {
       fn(o).should.equal('aa,bb,cc');
     });
 
-    it('should return an empty string when the array is invalid:', function() {
+    it('should return an empty string when the array syntax is invalid:', function() {
       var fn = hbs.compile('{{map \'["b", "c", "a"\'}}');
       fn(context).should.equal('');
     });
@@ -306,15 +321,15 @@ describe('array', function() {
 
   describe('{{withFirst}}', function() {
     it('should use the first item in an array.', function() {
-      var fn = hbs.compile('{{#withFirst array}}<p>{{this}} is smart.</p>{{/withFirst}}');
-      fn(context).should.equal('<p>a is smart.</p>');
+      var fn = hbs.compile('{{#withFirst array}}{{this}} is smart.{{/withFirst}}');
+      fn(context).should.equal('a is smart.');
     });
     it('should return an empty string when no array is passed:', function() {
       hbs.compile('{{#withFirst}}{{/withFirst}}')().should.equal('');
     });
     it('should use the first two items in an array.', function() {
-      var fn = hbs.compile('{{#withFirst array 2}}<p>{{this}} is smart.</p>{{/withFirst}}');
-      fn(context).should.equal('<p>a is smart.</p><p>b is smart.</p>');
+      var fn = hbs.compile('{{#withFirst array 2}}{{this}} is smart.{{/withFirst}}');
+      fn(context).should.equal('a is smart.b is smart.');
     });
   });
 
@@ -323,30 +338,39 @@ describe('array', function() {
       hbs.compile('{{withLast}}')().should.equal('');
     });
     it('should use the last item in an array.', function() {
-      var fn = hbs.compile('{{#withLast array}}<p>{{this}} is dumb.</p>{{/withLast}}');
-      fn(context).should.equal('<p>h is dumb.</p>');
+      var fn = hbs.compile('{{#withLast array}}{{this}} is dumb.{{/withLast}}');
+      fn(context).should.equal('h is dumb.');
     });
     it('should use the last two items in an array.', function() {
-      var fn = hbs.compile('{{#withLast array 2}}<p>{{this}} is dumb.</p>{{/withLast}}');
-      fn(context).should.equal('<p>g is dumb.</p><p>h is dumb.</p>');
+      var fn = hbs.compile('{{#withLast array 2}}{{this}} is dumb.{{/withLast}}');
+      fn(context).should.equal('g is dumb.h is dumb.');
     });
   });
 
   describe('withSort', function() {
+    it('should return an empty string when array is undefined', function() {
+      var fn = hbs.compile('{{#withSort}}{{this}}{{/withSort}}');
+      fn(context).should.equal('');
+    });
+
     it('should sort the array in lexicographical order', function() {
-      var fn = hbs.compile('{{#withSort array}}<p>{{this}}</p>{{/withSort}}');
-      fn(context).should.equal('<p>a</p><p>b</p><p>c</p><p>d</p><p>e</p><p>f</p><p>g</p><p>h</p>');
+      var fn = hbs.compile('{{#withSort array}}{{this}}{{/withSort}}');
+      fn(context).should.equal('abcdefgh');
     });
 
     it('should sort the array in reverse order', function() {
-      var fn = hbs.compile('{{#withSort array reverse="true"}}<p>{{this}}</p>{{/withSort}}');
-      fn(context).should.equal('<p>h</p><p>g</p><p>f</p><p>e</p><p>d</p><p>c</p><p>b</p><p>a</p>');
+      var fn = hbs.compile('{{#withSort array reverse="true"}}{{this}}{{/withSort}}');
+      fn(context).should.equal('hgfedcba');
     });
 
     it('should sort the array by deliveries', function() {
       var fn = hbs.compile('{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
       var res = fn({
-        collection: [{name: 'f', deliveries: 8021 }, {name: 'b', deliveries: 239 }, {name: 'd', deliveries: -12 }]
+        collection: [
+          {name: 'f', deliveries: 8021 }, 
+          {name: 'b', deliveries: 239 }, 
+          {name: 'd', deliveries: -12 }
+        ]
       });
       res.should.equal('d: -12 <br>b: 239 <br>f: 8021 <br>');
     });
@@ -354,7 +378,11 @@ describe('array', function() {
     it('should sort the array by deliveries in reverse order', function() {
       var fn = hbs.compile('{{#withSort collection "deliveries" reverse="true"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
       var res = fn({
-        collection: [{name: 'f', deliveries: 8021 }, {name: 'b', deliveries: 239 }, {name: 'd', deliveries: -12 }]
+        collection: [
+          {name: 'f', deliveries: 8021 }, 
+          {name: 'b', deliveries: 239 }, 
+          {name: 'd', deliveries: -12 }
+        ]
       });
       res.should.equal('f: 8021 <br>b: 239 <br>d: -12 <br>');
     });

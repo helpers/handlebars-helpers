@@ -55,4 +55,17 @@ gulp.task('comments', function () {
     .pipe(gulp.dest('lib/'));
 });
 
+gulp.task('methods', function () {
+  return gulp.src(['lib/*.js'])
+    .pipe(plugin.methods({name: 'helpers', cwd: 'lib'}))
+    .pipe(plugin.toc())
+    // .pipe(gulp.dest('lib/'));
+});
+
+gulp.task('comments:lint', function () {
+  return gulp.src(['lib/object.js'])
+    .pipe(plugin.lint())
+    // .pipe(gulp.dest('lib/'));
+});
+
 gulp.task('default', ['lint', 'test']);

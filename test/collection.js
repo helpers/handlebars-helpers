@@ -14,9 +14,24 @@ describe('collection', function() {
       fn({array: []}).should.equal('AAA');
     });
 
+    it('should render the first block when the value is null.', function() {
+      var fn = hbs.compile('{{#isEmpty}}AAA{{else}}BBB{{/isEmpty}}');
+      fn({array: []}).should.equal('AAA');
+    });
+
     it('should render the second block when an array is not empty.', function() {
       var fn = hbs.compile('{{#isEmpty array}}AAA{{else}}BBB{{/isEmpty}}');
       fn(context).should.equal('BBB');
+    });
+
+    it('should render the second block when an object is not empty.', function() {
+      var fn = hbs.compile('{{#isEmpty object}}AAA{{else}}BBB{{/isEmpty}}');
+      fn({object: {foo: 'bar'}}).should.equal('BBB');
+    });
+
+    it('should render the first block when an object is empty.', function() {
+      var fn = hbs.compile('{{#isEmpty object}}AAA{{else}}BBB{{/isEmpty}}');
+      fn({object: {}}).should.equal('AAA');
     });
   });
 
