@@ -1,0 +1,5 @@
+<% forOwn(methods, function(value, key) { %>
+<%= heading(key, value.path) %>
+  <% forOwn(value.data.methods, function(v, k) { %>
+  <%= bullet(k, v) %> <% }) %>
+<% }) %>
