@@ -319,7 +319,7 @@ describe('array', function() {
     });
   });
 
-  describe('{{withFirst}}', function() {
+  describe('withFirst', function() {
     it('should use the first item in an array.', function() {
       var fn = hbs.compile('{{#withFirst array}}{{this}} is smart.{{/withFirst}}');
       fn(context).should.equal('a is smart.');

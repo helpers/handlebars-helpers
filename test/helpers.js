@@ -8,7 +8,7 @@ var assert = require('assert');
 var hbs = require('handlebars');
 var helpers = require('..');
 
-describe('helpers()', function() {
+describe('helpers', function() {
   it('should should return all helpers:', function() {
     assert(Object.keys(helpers()).length > 100);
   });

@@ -56,16 +56,4 @@ gulp.task('toc', function () {
     .pipe(gulp.dest('./'));
 });
 
-gulp.task('tests', function () {
-  return gulp.src(['test/*.js'])
-    .pipe(plugin.tests({name: 'describe', cwd: 'test'}))
-    .pipe(plugin.testToc())
-    .pipe(gulp.dest('foo/'));
-});
-
-gulp.task('comments:lint', function () {
-  return gulp.src(['lib/object.js'])
-    .pipe(plugin.lint())
-});
-
 gulp.task('default', ['lint', 'test']);

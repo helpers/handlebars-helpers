@@ -159,20 +159,16 @@ describe('comparison', function() {
   });
 
   describe('is', function() {
-    describe('{{#is bender "CCC"}}', function() {
-      it('should render a block if the condition is true.', function() {
-        var fn = hbs.compile('{{#is bender "CCC"}}A{{else}}B{{/is}}');
-        fn({bender: 'CCC'}).should.equal('A');
-      });
+    it('should render a block if the condition is true.', function() {
+      var fn = hbs.compile('{{#is bender "CCC"}}A{{else}}B{{/is}}');
+      fn({bender: 'CCC'}).should.equal('A');
     });
   });
 
   describe('isnt', function() {
-    describe('{{#isnt number 2}}', function() {
-      it('should render a block if the condition is not true.', function() {
-        var fn = hbs.compile('{{#isnt number 2}}A{{else}}B{{/isnt}}');
-        fn({number: 3}).should.equal('A');
-      });
+    it('should render a block if the condition is not true.', function() {
+      var fn = hbs.compile('{{#isnt number 2}}A{{else}}B{{/isnt}}');
+      fn({number: 3}).should.equal('A');
     });
   });
 
@@ -233,24 +229,20 @@ describe('comparison', function() {
   });
 
   describe('ifAny', function() {
-    describe('{{#ifAny this compare=that}}', function() {
-      it('should render a block if the value is equal to a given number.', function() {
-        var fn = hbs.compile('{{#ifAny number compare=8}}A{{/ifAny}}');
-        fn({number: 8}).should.equal('A');
-      });
+    it('should render a block if the value is equal to a given number.', function() {
+      var fn = hbs.compile('{{#ifAny number compare=8}}A{{/ifAny}}');
+      fn({number: 8}).should.equal('A');
     });
   });
 
   describe('ifEq', function() {
-    describe('{{#ifEq number compare=8}}', function() {
-      it('should render a block if the value is equal to a given number.', function() {
-        var fn = hbs.compile('{{#ifEq number compare=8}}A{{/ifEq}}');
-        fn({number: 8}).should.equal('A');
-      });
-      it('should not render a block if the value is not equal to a given number.', function() {
-        var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
-        fn({number: 5}).should.equal('');
-      });
+    it('should render a block if the value is equal to a given number.', function() {
+      var fn = hbs.compile('{{#ifEq number compare=8}}A{{/ifEq}}');
+      fn({number: 8}).should.equal('A');
+    });
+    it('should not render a block if the value is not equal to a given number.', function() {
+      var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
+      fn({number: 5}).should.equal('');
     });
   });
 
@@ -270,19 +262,17 @@ describe('comparison', function() {
   });
 
   describe('ifGteq', function() {
-    describe('{{#ifGteq number compare=8}}', function() {
-      it('should render a block if the value is greater than a given number.', function() {
-        var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-        fn({number: 12}).should.equal('A');
-      });
-      it('should render a block if the value is equal to a given number.', function() {
-        var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-        fn({number: 8}).should.equal('A');
-      });
-      it('should not render a block if the value is less than a given number.', function() {
-        var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-        fn({number: 5}).should.equal('');
-      });
+    it('should render a block if the value is greater than a given number.', function() {
+      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
+      fn({number: 12}).should.equal('A');
+    });
+    it('should render a block if the value is equal to a given number.', function() {
+      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
+      fn({number: 8}).should.equal('A');
+    });
+    it('should not render a block if the value is less than a given number.', function() {
+      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
+      fn({number: 5}).should.equal('');
     });
   });
 

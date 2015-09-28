@@ -11,10 +11,12 @@ describe('url', function() {
       var fn = hbs.compile('{{urlResolve "/one/two/three" "four"}}');
       fn().should.equal('/one/two/four');
     });
+
     it('should take a base URL, and a href URL, and resolve them as a browser would', function() {
       var fn = hbs.compile('{{urlResolve "http://example.com/" "/one"}}');
       fn().should.equal('http://example.com/one');
     });
+    
     it('should take a base URL, and a href URL, and resolve them as a browser would', function() {
       var fn = hbs.compile('{{urlResolve "http://example.com/one" "/two"}}');
       fn().should.equal('http://example.com/two');
@@ -43,7 +45,7 @@ describe('url', function() {
   });
 
   describe('urlParse', function() {
-    it('should take a URL string, and return an object stringified to JSON.', function() {
+    it('should take a string, and return an object stringified to JSON.', function() {
       var fn = hbs.compile('{{{urlParse "http://foo.com/bar/baz?key=value" "json"}}}');
       JSON.parse(fn()).should.eql({
         "protocol": "http:",
