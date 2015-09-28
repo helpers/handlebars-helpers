@@ -11,22 +11,22 @@ module.exports = function(options) {
   var engine = new Engine(options);
 
   engine.helper('forOwn', require('for-own'));
-  engine.helper('heading', toc.heading);
   engine.helper('bullet', toc.bullet);
+  engine.helper('unitTest', toc.unitTest);
+  engine.helper('code', toc.code);
+  engine.helper('heading', toc.heading);
+  engine.helper('link', toc.link);
+  engine.helper('strong', toc.strong);
 
   return through.obj(function (file, enc, cb) {
     if (/summary/.test(file.path)) {
       var str = fs.readFileSync('support/utils/toc.tmpl', 'utf8');
       var res = engine.render(str, file.data);
-    console.log(res)
-      var file = new File({
-        path: 'toc.md',
-        contents: new Buffer(str)
-      });
-      // var str = file.contents.toString();
-      // toc.push(file.data.toc);
-      // toc.push('\n');
+      var file = new File({path: 'toc.md'});
+      file.contents = new Buffer(res);
+      cb(null, file);
+    } else {
+      cb();
     }
-    cb(null, file);
   });
 }

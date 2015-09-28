@@ -1,5 +1,12 @@
+## Categories
 <% forOwn(methods, function(value, key) { %>
-<%= heading(key, value.path) %>
-  <% forOwn(value.data.methods, function(v, k) { %>
-  <%= bullet(k, v) %> <% }) %>
+- <%= strong(key, value.path) %> (<%= link("code", value.path) %> | <%= link("unit tests", value.tests) %>) <% }) %>
+
+## All helpers
+<% forOwn(methods, function(value, key) { %>
+### <%= link(key + ' helpers', value.path) %>
+
+Visit the: <%= link("code", value.path) %> | <%= link("unit tests", value.tests) %>
+  <% forOwn(value.data.methods, function(v, k) { %><% console.log(v) %>
+  <%= bullet(k, v) %> (<%= code(k, v) %> | <%= unitTest(k, v) %>) <% }) %>
 <% }) %>

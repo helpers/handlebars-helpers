@@ -1,11 +1,13 @@
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 var File = require('vinyl');
 var define = require('define-property');
 var esprima = require('esprima');
 var through = require('through2');
 var toc = require('./utils/toc');
+var cache = {};
 
 module.exports = function(options) {
   options = options || {};
@@ -29,6 +31,8 @@ module.exports = function(options) {
     var nocomment = [];
 
     file.name = name(file.path);
+    var match = matchTest('test/' + file.name + '.js');
+
     file.data.codepath = path.join(options.cwd, file.relative);
 
     var comments = res.comments.reduce(function (acc, comment) {
@@ -49,7 +53,7 @@ module.exports = function(options) {
 
         if (exp.left) {
           if (exp.left.object.name === options.name) {
-            // count the method
+            // increment the number of methods
             total++;
             count++;
 
@@ -66,9 +70,15 @@ module.exports = function(options) {
               comment = {};
             }
 
+            var testLine = match(method);
+
             var obj = {
               name: method,
               path: file.data.codepath,
+              test: {
+                path: 'test/' + file.name + '.js',
+                code: {start: testLine}
+              },
               stats: {
                 isModule: !params && /require/.test(code),
                 isBlockHelper: isBlockHelper(code),
@@ -82,11 +92,11 @@ module.exports = function(options) {
               comment: comment,
               context: {
                 parent: file.name,
-                tests: 'test/' + file.name + '.js'
               }
             };
 
             bullets.push(toc.bullet(method, obj));
+            // console.log(obj)
 
             define(obj, 'exp', exp);
             file.data.methods[method] = obj;
@@ -99,6 +109,7 @@ module.exports = function(options) {
     data[file.name] = {
       name: file.name,
       path: file.data.codepath,
+      tests: 'test/' + file.name + '.js',
       data: file.data,
       missingdocs: nocomment
     };
@@ -112,6 +123,28 @@ module.exports = function(options) {
     this.push(file);
     cb();
   });
+}
+
+function matchTest(fp) {
+  var str = '';
+  if (fs.existsSync(fp)) {
+    str = cache[fp] || (cache[fp] = fs.readFileSync(fp, 'utf8'));
+  }
+  var lines = str.split('\n');
+
+  return function (method) {
+    if (!str) return;
+
+    var re = new RegExp('\\s*(describe|it)\\([\'"](' + method + ')');
+    var len = lines.length, i = -1;
+    while (++i < len) {
+      var line = lines[i];
+      if (re.test(line)) {
+        return i + 1;
+      }
+    }
+    return;
+  };
 }
 
 function name(fp) {

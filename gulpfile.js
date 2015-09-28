@@ -31,12 +31,6 @@ gulp.task('test', ['coverage'], function () {
     }))
 });
 
-gulp.task('organize', function () {
-  return gulp.src('lib/*.js')
-    .pipe(organize())
-    .pipe(gulp.dest('lib/'));
-});
-
 gulp.task('namify', function () {
   return gulp.src(['lib/*.js'])
     .pipe(plugin.namify())
@@ -55,17 +49,23 @@ gulp.task('comments', function () {
     .pipe(gulp.dest('lib/'));
 });
 
-gulp.task('methods', function () {
+gulp.task('toc', function () {
   return gulp.src(['lib/*.js'])
     .pipe(plugin.methods({name: 'helpers', cwd: 'lib'}))
     .pipe(plugin.toc())
-    // .pipe(gulp.dest('lib/'));
+    .pipe(gulp.dest('./'));
+});
+
+gulp.task('tests', function () {
+  return gulp.src(['test/*.js'])
+    .pipe(plugin.tests({name: 'describe', cwd: 'test'}))
+    .pipe(plugin.testToc())
+    .pipe(gulp.dest('foo/'));
 });
 
 gulp.task('comments:lint', function () {
   return gulp.src(['lib/object.js'])
     .pipe(plugin.lint())
-    // .pipe(gulp.dest('lib/'));
 });
 
 gulp.task('default', ['lint', 'test']);

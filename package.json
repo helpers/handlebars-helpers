@@ -31,7 +31,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/url.js"
   },
   "dependencies": {
     "arr-filter": "^1.1.1",
