@@ -20,10 +20,6 @@ module.exports = function helpers(opts) {
   var hbs = opts.handlebars || require('handlebars');
 
   forIn(lib, function (group, key) {
-    if (typeof group === 'function') {
-      group = group(opts);
-    }
-
     forIn(group, function (v, k) {
       hbs.registerHelper(k, v);
     });
@@ -39,10 +35,6 @@ forIn(lib, function (group, key) {
   define(module.exports, key, function (opts) {
     opts = opts || {};
     var hbs = opts.handlebars || require('handlebars');
-
-    if (typeof group === 'function') {
-      group = group(opts);
-    }
 
     hbs.registerHelper(group);
     return group;
