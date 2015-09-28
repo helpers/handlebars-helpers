@@ -7,6 +7,6 @@
 ### <%= link(key + ' helpers', value.path) %>
 
 Visit the: <%= link("code", value.path) %> | <%= link("unit tests", value.tests) %>
-  <% forOwn(value.data.methods, function(v, k) { %><% console.log(v) %>
+  <% forOwn(value.data.methods, function(v, k) { %>
   <%= bullet(k, v) %> (<%= code(k, v) %> | <%= unitTest(k, v) %>) <% }) %>
 <% }) %>

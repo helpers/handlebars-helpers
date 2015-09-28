@@ -162,7 +162,7 @@ describe('array', function() {
       fn(context).should.equal('AAA');
     });
 
-    it('should render the second block when a value does not exist.', function() {
+    it('should render the inverse block when a value does not exist.', function() {
       var fn = hbs.compile('{{#inArray array "foo"}}AAA{{else}}BBB{{/inArray}}');
       fn(context).should.equal('BBB');
     });
@@ -213,9 +213,34 @@ describe('array', function() {
       fn(context).should.equal('AAA');
     });
 
-    it('should render the second block if length is not the given number', function() {
+    it('should render the inverse block if length is not the given number', function() {
       var fn = hbs.compile('{{#lengthEqual array 3}}AAA{{else}}BBB{{/lengthEqual}}');
       fn(context).should.equal('BBB');
+    });
+  });
+
+  describe('some', function() {
+    it('should render the first block if the callback returns true', function() {
+      var ctx = {array: ['a', 'b', 'c']}
+      ctx.isString = function (val) {
+        return typeof val === 'string';
+      };
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn(ctx).should.equal('AAA');
+    });
+
+    it('should render the inverse block if the array is undefined', function() {
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn().should.equal('BBB');
+    });
+
+    it('should render the inverse block if falsey', function() {
+      var ctx = {array: [['a'], ['b'], ['c']]};
+      ctx.isString = function (val) {
+        return typeof val === 'string';
+      };
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn(ctx).should.equal('BBB');
     });
   });
 

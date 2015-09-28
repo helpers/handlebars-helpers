@@ -148,13 +148,50 @@ describe('comparison', function() {
 
   describe('contains', function() {
     it('should render a block if the condition is true.', function() {
-      var fn = hbs.compile('{{#contains bender "C"}}A{{else}}B{{/contains}}');
-      fn({bender: 'CCC'}).should.equal('A');
+      var fn = hbs.compile('{{#contains context "C"}}A{{else}}B{{/contains}}');
+      fn({context: 'CCC'}).should.equal('A');
     });
 
+    it('should render the inverse block if false.', function() {
+      var fn = hbs.compile('{{#contains context "zzz"}}A{{else}}B{{/contains}}');
+      fn({context: 'CCC'}).should.equal('B');
+    });
+
+    it('should work with arrays', function() {
+      var fn = hbs.compile('{{#contains array "a"}}A{{else}}B{{/contains}}');
+      fn({array: ['a', 'b', 'c']}).should.equal('A');
+    });
+
+    it('should render the block when an index is passed::', function() {
+      var fn = hbs.compile('{{#contains array "a" 0}}A{{else}}B{{/contains}}');
+      fn({array: ['a', 'b', 'c']}).should.equal('A');
+    });
+
+    it('should render the inverse block when false with index:', function() {
+      var fn = hbs.compile('{{#contains array "a" 1}}A{{else}}B{{/contains}}');
+      fn({array: ['a', 'b', 'c']}).should.equal('B');
+    });
+  });
+
+  describe('has', function() {
     it('should render a block if the condition is true.', function() {
-      var fn = hbs.compile('{{#contains bender "zzz"}}A{{else}}B{{/contains}}');
-      fn({bender: 'CCC'}).should.equal('B');
+      var fn = hbs.compile('{{#has context "C"}}A{{else}}B{{/has}}');
+      fn({context: 'CCC'}).should.equal('A');
+    });
+
+    it('should render the inverse block if false.', function() {
+      var fn = hbs.compile('{{#has context "zzz"}}A{{else}}B{{/has}}');
+      fn({context: 'CCC'}).should.equal('B');
+    });
+
+    it('should work with arrays', function() {
+      var fn = hbs.compile('{{#has array "a"}}A{{else}}B{{/has}}');
+      fn({array: ['a', 'b', 'c']}).should.equal('A');
+    });
+
+    it('should work with object keys', function() {
+      var fn = hbs.compile('{{#has object "a"}}A{{else}}B{{/has}}');
+      fn({object: {a: 'b'}}).should.equal('A');
     });
   });
 

@@ -41,7 +41,8 @@ module.exports = function(options) {
           start: comment.loc.start.line,
           end: comment.loc.end.line,
           raw: comment.value,
-          lines: stripStars(comment.value)
+          lines: stripStars(comment.value),
+          hasBlockComment: hasBlockComment(comment.value)
         });
       }
       return acc;
@@ -81,7 +82,7 @@ module.exports = function(options) {
               },
               stats: {
                 isModule: !params && /require/.test(code),
-                isBlockHelper: isBlockHelper(code),
+                isBlockHelper: isBlockHelper(code)
               },
               code: {
                 start: start,
@@ -96,7 +97,9 @@ module.exports = function(options) {
             };
 
             bullets.push(toc.bullet(method, obj));
-            // console.log(obj)
+            if (obj.stats.isBlockHelper && !comment.hasBlockComment) {
+              console.log(obj.context.parent, obj.name);
+            }
 
             define(obj, 'exp', exp);
             file.data.methods[method] = obj;
@@ -165,12 +168,12 @@ function groupParams(arr) {
 }
 
 function closest(start, code, comments) {
-  var keys = Object.keys(comments);
-  var len = keys.length;
-  while (len--) {
-    var comment = comments[keys[len]];
-    if (start <= comment.end + 3) {
-      return comment;
+  for (var key in comments) {
+    if (comments.hasOwnProperty(key)) {
+      var comment = comments[key];
+      if (start <= comment.end + 3) {
+        return comment;
+      }
     }
   }
   return null;
@@ -185,4 +188,8 @@ function stripStars(str) {
 
 function isBlockHelper(str) {
   return /(options\.fn|options\.inverse)/.test(str);
+}
+
+function hasBlockComment(str) {
+  return /@block/.test(str);
 }

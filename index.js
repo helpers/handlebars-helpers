@@ -19,7 +19,7 @@ module.exports = function helpers(opts) {
   opts = opts || {};
   var hbs = opts.handlebars || require('handlebars');
 
-  forIn(lib, function (group, key) {
+  forIn(lib, function (group) {
     forIn(group, function (v, k) {
       hbs.registerHelper(k, v);
     });
