@@ -39,6 +39,11 @@ describe('misc', function () {
       fn().should.equal('');
     });
 
+    it('should return the inverse hash when defined and the value is falsy.', function () {
+      var fn = hbs.compile('{{#withHash}}foo{{else}}bar{{/withHash}}');
+      fn().should.equal('bar');
+    });
+
     it('should return string from the newly created context', function () {
       var fn = hbs.compile('{{#withHash message="test"}}{{message}}{{/withHash}}');
       fn({message: 'This is a test'}).should.equal('test');

@@ -13,6 +13,18 @@ describe('math', function () {
     });
   });
 
+  describe('average', function () {
+    it('should return the average of a list of numbers:', function () {
+      var fn = hbs.compile('{{avg 1 2 3 4}}');
+      fn().should.equal('2.5');
+    });
+
+    it('should return the average of an array of numbers:', function () {
+      var fn = hbs.compile('{{avg array}}');
+      fn({array: [1, 3, 6, 9]}).should.equal('4.75');
+    });
+  });
+
   describe('subtract', function () {
     it('should return the difference of two numbers.', function () {
       var fn = hbs.compile('{{subtract value 5}}');

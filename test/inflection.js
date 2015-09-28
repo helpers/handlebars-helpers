@@ -21,6 +21,8 @@ describe('inflection', function() {
   describe('ordinalize', function() {
     it('should return an ordinalized string.', function() {
       hbs.compile('{{ordinalize 1}}')().should.equal('1st');
+      hbs.compile('{{ordinalize 3}}')().should.equal('3rd');
+      hbs.compile('{{ordinalize 11}}')().should.equal('11th');
       hbs.compile('{{ordinalize 21}}')().should.equal('21st');
       hbs.compile('{{ordinalize 29}}')().should.equal('29th');
       hbs.compile('{{ordinalize 22}}')().should.equal('22nd');

@@ -68,13 +68,27 @@ describe('number', function() {
   });
 
   describe('toAbbr', function() {
-    it('should formats (and approximates) a number into abbreviation based on a value.', function() {
-      var fn = hbs.compile('{{toAbbr value}}');
-      fn({value: 123456789 }).should.equal('123.46m');
+    it('should abbreviate the given number.', function() {
+      var fn = hbs.compile('{{toAbbr number}}');
+      fn({number: 123456789 }).should.equal('123.46m');
     });
-    it('should formats (and approximates) a number into abbreviation based on a value and include decimal.', function() {
-      var fn = hbs.compile('{{toAbbr value 3}}');
-      fn({value: 123456789 }).should.equal('123.457m');
+
+    it('should abbreviate a number with to the given decimal.', function() {
+      var fn = hbs.compile('{{toAbbr number 3}}');
+      fn({number: 123456789 }).should.equal('123.457m');
+    });
+
+    it('should round up to the next increment', function() {
+      var fn = hbs.compile('{{toAbbr number}}');
+      fn({number: 999 }).should.equal('1k');
+    });
+
+    it('should abbreviate a number based on a number and include decimal.', function() {
+      hbs.compile('{{toAbbr number 0}}')({number: 9999999 }).should.equal('10m');
+      hbs.compile('{{toAbbr number}}')({number: 1000000000 }).should.equal('1b');
+      hbs.compile('{{toAbbr number}}')({number: 1000000000000 }).should.equal('1t');
+      hbs.compile('{{toAbbr number}}')({number: 1000000000000000 }).should.equal('1q');
+      hbs.compile('{{toAbbr number}}')({number: 99393999393 }).should.equal('99.39b');
     });
   });
 

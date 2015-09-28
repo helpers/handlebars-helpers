@@ -6,8 +6,52 @@ var helpers = require('..');
 helpers.html({handlebars: hbs});
 
 var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
+var actual;
 
 describe('html', function() {
+  describe('css', function() {
+    it('should return an empty string when no context is passed:', function() {
+      hbs.compile('{{{css}}}')().should.equal('');
+    });
+
+    it('should use a path passed as a string', function() {
+      var actual = hbs.compile('{{{css "abc.css"}}}')();
+      actual.should.equal('<link type="text/css" rel="stylesheet" href="abc.css">');
+    });
+
+    it('should use options.assets', function() {
+      var actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: 'foo'}});
+      actual.should.equal('<link type="text/css" rel="stylesheet" href="foo/abc.css">');
+    });
+
+    it('should ensure that options.assets is a string', function() {
+      var actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: null}});
+      actual.should.equal('<link type="text/css" rel="stylesheet" href="abc.css">');
+    });
+
+    it('should use the `href` attribute on the hash', function() {
+      actual = hbs.compile('{{{css href=""}}}')();
+      actual.should.equal('');
+
+      actual = hbs.compile('{{{css href="abc.css"}}}')();
+      actual.should.equal('<link type="text/css" rel="stylesheet" href="abc.css">');
+    });
+
+    it('should create multiple tags from an array passed on the context:', function() {
+      var ctx = {styles: ['a.css', 'bcss', 'c.css'] };
+      hbs.compile('{{{css styles}}}')(ctx).should.equal([
+        '<link type="text/css" rel="stylesheet" href="a.css">',
+        '<link type="text/css" rel="stylesheet" href="bcss">',
+        '<link type="text/css" rel="stylesheet" href="c.css">',
+      ].join('\n'));
+    });
+
+    it('should create a less tag (TODO: only works with array format)', function() {
+      var ctx = {styles: ['a.less'] };
+      hbs.compile('{{{css styles}}}')(ctx).should.equal('<link type="text/css" rel="stylesheet/less" href="a.less">');
+    });
+  });
+
   describe('js', function() {
     it('should create an empty script tag', function() {
       hbs.compile('{{{js}}}')().should.equal('<script></script>');

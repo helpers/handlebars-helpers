@@ -6,14 +6,44 @@ var helpers = require('..');
 helpers.string({handlebars: hbs});
 
 describe('string', function() {
+  describe('capitalize', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalize}}');
+      fn().should.equal('');
+    });
+    it('should capitalize a word.', function() {
+      var fn = hbs.compile('{{capitalize "foo"}}');
+      fn().should.equal('Foo');
+    });
+  });
+
   describe('capitalizeFirst', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalizeFirst}}');
+      fn().should.equal('');
+    });
     it('should return the string with the first word capitalized.', function() {
       var fn = hbs.compile('{{capitalizeFirst "bender should not be allowed on tv"}}');
       fn().should.equal('Bender should not be allowed on tv');
     });
   });
 
+  describe('capitalizeAll', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalizeAll}}');
+      fn().should.equal('');
+    });
+    it('should return the string with the every word capitalized.', function() {
+      var fn = hbs.compile('{{capitalizeAll "bender should not bE allowed on tV"}}');
+      fn().should.equal('Bender Should Not BE Allowed On TV');
+    });
+  });
+
   describe('capitalizeEach', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalizeEach}}');
+      fn().should.equal('');
+    });
     it('should return the string with the every word capitalized.', function() {
       var fn = hbs.compile('{{capitalizeEach "bender should not bE allowed on tV"}}');
       fn().should.equal('Bender Should Not BE Allowed On TV');
@@ -21,6 +51,10 @@ describe('string', function() {
   });
 
   describe('center', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{center}}');
+      fn().should.equal('');
+    });
     it('should return the string centered by using non-breaking spaces.', function() {
       var fn = hbs.compile('{{center "Bender should not be allowed on tv." 2}}');
       fn().should.equal('&amp;nbsp;&amp;nbsp;Bender should not be allowed on tv.&amp;nbsp;&amp;nbsp;');
@@ -28,6 +62,10 @@ describe('string', function() {
   });
 
   describe('dashify', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{dashify}}');
+      fn().should.equal('');
+    });
     it('should return the string with periods replaced with hyphens.', function() {
       var fn = hbs.compile('{{dashify "Bender.should.not.be.allowed.on.tv."}}');
       fn().should.equal('Bender-should-not-be-allowed-on-tv-');
@@ -35,9 +73,17 @@ describe('string', function() {
   });
 
   describe('ellipsis', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{ellipsis}}');
+      fn().should.equal('');
+    });
     it('should return then string truncated by a specified length.', function() {
       var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
       fn().should.equal('Bender should not be allowed on');
+    });
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
+      fn().should.equal('Bender should not be allowed on tv.');
     });
     it('should return the string truncated by a specified length, providing a custom string to denote an omission.', function() {
       var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31 "..."}}');
@@ -46,6 +92,10 @@ describe('string', function() {
   });
 
   describe('hyphenate', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{hyphenate}}');
+      fn().should.equal('');
+    });
     it('should return the string with spaces replaced with hyphens.', function() {
       var fn = hbs.compile('{{hyphenate "Bender should not be allowed on tv."}}');
       fn().should.equal('Bender-should-not-be-allowed-on-tv.');
@@ -53,6 +103,10 @@ describe('string', function() {
   });
 
   describe('lowercase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{lowercase}}');
+      fn().should.equal('');
+    });
     it('should return the string in lowercase', function() {
       var fn = hbs.compile('{{lowercase "BENDER SHOULD NOT BE ALLOWED ON TV"}}');
       fn().should.equal('bender should not be allowed on tv');
@@ -60,6 +114,10 @@ describe('string', function() {
   });
 
   describe('occurrences', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{occurrences}}');
+      fn().should.equal('');
+    });
     it('should return the number of occurrences of a string, within a string.', function() {
       var fn = hbs.compile('{{occurrences "Death by Snu-Snu" "Snu"}}');
       fn().should.equal('2');
@@ -67,6 +125,10 @@ describe('string', function() {
   });
   
   describe('plusify', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{plusify}}');
+      fn().should.equal('');
+    });
     it('should return the empty string with no change.', function() {
       var fn = hbs.compile('{{plusify ""}}');
       fn().should.equal('');
@@ -82,6 +144,10 @@ describe('string', function() {
   });
 
   describe('replace', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{replace}}');
+      fn().should.equal('');
+    });
     it('should replace occurrences of string "A" with string "B"', function() {
       var fn = hbs.compile('{{replace "Bender Bending Rodriguez" "B" "M"}}');
       fn().should.equal('Mender Mending Rodriguez');
@@ -89,6 +155,10 @@ describe('string', function() {
   });
 
   describe('reverse', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{reverse}}');
+      fn().should.equal('');
+    });
     it('should return the string in reverse.', function() {
       var fn = hbs.compile('{{reverse "bender should NOT be allowed on TV."}}');
       fn().should.equal('.VT no dewolla eb TON dluohs redneb');
@@ -96,6 +166,10 @@ describe('string', function() {
   });
 
   describe('sentence', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{sentence}}');
+      fn().should.equal('');
+    });
     it('should capitalize the first word of each sentence in a string and convert the rest of the sentence to lowercase.', function() {
       var fn = hbs.compile('{{sentence "bender should NOT be allowed on TV. fry SHOULD be allowed on TV."}}');
       fn().should.equal('Bender should not be allowed on tv. Fry should be allowed on tv.');
@@ -103,6 +177,10 @@ describe('string', function() {
   });
 
   describe('titleize', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{titleize}}');
+      fn().should.equal('');
+    });
     it('should return the string in title case.', function() {
       var fn = hbs.compile('{{titleize "Bender-should-Not-be-allowed_on_Tv"}}');
       fn().should.equal('Bender Should Not Be Allowed On Tv');
@@ -110,9 +188,17 @@ describe('string', function() {
   });
 
   describe('truncate', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{truncate}}');
+      fn().should.equal('');
+    });
     it('should return the string truncated by a specified length.', function() {
       var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
       fn().should.equal('Bender should not be allowed on');
+    });
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
+      fn().should.equal('Bender should not be allowed on tv.');
     });
     it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
       var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31 "..."}}');
@@ -121,6 +207,10 @@ describe('string', function() {
   });
 
   describe('startsWith', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{startsWith}}');
+      fn().should.equal('');
+    });
     it('should render "Yes he is", from inside the block.', function() {
       var fn = hbs.compile('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}');
       fn().should.equal("Yes he is");
@@ -136,6 +226,11 @@ describe('string', function() {
   });
 
   describe('uppercase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{uppercase}}');
+      fn().should.equal('');
+    });
+
     it('should return the string in uppercase', function() {
       var fn = hbs.compile('{{uppercase "bender should not be allowed on tv"}}');
       fn().should.equal('BENDER SHOULD NOT BE ALLOWED ON TV');
