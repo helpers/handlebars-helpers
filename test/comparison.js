@@ -173,6 +173,68 @@ describe('comparison', function() {
     });
   });
 
+  describe('gt', function() {
+    var fn = hbs.compile('{{#gt a b}}A{{else}}B{{/gt}}');
+
+    describe('second arg', function() {
+      it('should render the first block if true.', function() {
+        fn({a: 20, b: 15}).should.equal('A');
+      });
+      it('should render the second block if equal.', function() {
+        fn({a: 15, b: 15}).should.equal('B');
+      });
+      it('should render the second block if false.', function() {
+        fn({a: 14, b: 15}).should.equal('B');
+      });
+    });
+
+    describe('compare hash', function() {
+      it('should not render a block if the value is not equal to a given number.', function() {
+        var fn = hbs.compile('{{#gt number compare=8}}A{{/gt}}');
+        fn({number: 5}).should.equal('');
+      });
+      it('should render a block if the value is greater than a given number.', function() {
+        var fn = hbs.compile('{{#gt number compare=8}}A{{/gt}}');
+        fn({number: 10}).should.equal('A');
+      });
+      it('should not render a block if the value is less than a given number.', function() {
+        var fn = hbs.compile('{{#gt number compare=8}}A{{/gt}}');
+        fn({number: 5}).should.equal('');
+      });
+    });
+  });
+
+  describe('gte', function() {
+    describe('second argument', function() {
+      var fn = hbs.compile('{{#gte a b}}A{{else}}B{{/gte}}');
+
+      it('should render the first block if true.', function() {
+        fn({a: 20, b: 15}).should.equal('A');
+      });
+      it('should render the first block if equal.', function() {
+        fn({a: 15, b: 15}).should.equal('A');
+      });
+      it('should render the second block if false.', function() {
+        fn({a: 14, b: 15}).should.equal('B');
+      });
+    });
+
+    describe('hash compare', function() {
+      it('should render a block if the value is greater than a given number.', function() {
+        var fn = hbs.compile('{{#gte number compare=8}}A{{/gte}}');
+        fn({number: 12}).should.equal('A');
+      });
+      it('should render a block if the value is equal to a given number.', function() {
+        var fn = hbs.compile('{{#gte number compare=8}}A{{/gte}}');
+        fn({number: 8}).should.equal('A');
+      });
+      it('should not render a block if the value is less than a given number.', function() {
+        var fn = hbs.compile('{{#gte number compare=8}}A{{/gte}}');
+        fn({number: 5}).should.equal('');
+      });
+    });
+  });
+
   describe('has', function() {
     it('should render a block if the condition is true.', function() {
       var fn = hbs.compile('{{#has context "C"}}A{{else}}B{{/has}}');
@@ -184,9 +246,29 @@ describe('comparison', function() {
       fn({context: 'CCC'}).should.equal('B');
     });
 
+    it('should render the inverse block if value is undefined.', function() {
+      var fn = hbs.compile('{{#has context}}A{{else}}B{{/has}}');
+      fn({context: 'CCC'}).should.equal('B');
+    });
+
+    it('should render the inverse block if context is undefined.', function() {
+      var fn = hbs.compile('{{#has}}A{{else}}B{{/has}}');
+      fn({context: 'CCC'}).should.equal('B');
+    });
+
     it('should work with arrays', function() {
       var fn = hbs.compile('{{#has array "a"}}A{{else}}B{{/has}}');
       fn({array: ['a', 'b', 'c']}).should.equal('A');
+    });
+
+    it('should work with two strings', function() {
+      var fn = hbs.compile('{{#has "abc" "a"}}A{{else}}B{{/has}}');
+      fn().should.equal('A');
+    });
+
+    it('should return the inverse when the second string is not found', function() {
+      var fn = hbs.compile('{{#has "abc" "z"}}A{{else}}B{{/has}}');
+      fn().should.equal('B');
     });
 
     it('should work with object keys', function() {
@@ -195,149 +277,32 @@ describe('comparison', function() {
     });
   });
 
-  describe('is', function() {
-    it('should render a block if the condition is true.', function() {
-      var fn = hbs.compile('{{#is bender "CCC"}}A{{else}}B{{/is}}');
-      fn({bender: 'CCC'}).should.equal('A');
-    });
-  });
-
-  describe('isnt', function() {
-    it('should render a block if the condition is not true.', function() {
-      var fn = hbs.compile('{{#isnt number 2}}A{{else}}B{{/isnt}}');
-      fn({number: 3}).should.equal('A');
-    });
-  });
-
-  describe('gt', function() {
-    var fn = hbs.compile('{{#gt a b}}A{{else}}B{{/gt}}');
-
-    it('should render the first block if true.', function() {
-      fn({a: 20, b: 15}).should.equal('A');
-    });
-    it('should render the second block if equal.', function() {
-      fn({a: 15, b: 15}).should.equal('B');
-    });
-    it('should render the second block if false.', function() {
-      fn({a: 14, b: 15}).should.equal('B');
-    });
-  });
-
-  describe('gte', function() {
-    var fn = hbs.compile('{{#gte a b}}A{{else}}B{{/gte}}');
-
-    it('should render the first block if true.', function() {
-      fn({a: 20, b: 15}).should.equal('A');
-    });
-    it('should render the first block if equal.', function() {
-      fn({a: 15, b: 15}).should.equal('A');
-    });
-    it('should render the second block if false.', function() {
-      fn({a: 14, b: 15}).should.equal('B');
-    });
-  });
-
-  describe('lt', function() {
-    var fn = hbs.compile('{{#lt a b}}A{{else}}B{{/lt}}');
-
-    it('should render the first block if true.', function() {
-      fn({a: 14, b: 15}).should.equal('A');
-    });
-    it('should render the second block if equal.', function() {
-      fn({a: 15, b: 15}).should.equal('B');
-    });
-    it('should render the second block if false.', function() {
-      fn({a: 20, b: 15}).should.equal('B');
-    });
-  });
-
-  describe('lte', function() {
-    var fn = hbs.compile('{{#lte a b}}A{{else}}B{{/lte}}');
-
-    it('should render the first block if true.', function() {
-      fn({a: 14, b: 15}).should.equal('A');
-    });
-    it('should render the first block if equal.', function() {
-      fn({a: 15, b: 15}).should.equal('A');
-    });
-    it('should render the second block if false.', function() {
-      fn({a: 20, b: 15}).should.equal('B');
-    });
-  });
-
-  describe('ifAny', function() {
+  describe('eq', function() {
     it('should render a block if the value is equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifAny number compare=8}}A{{/ifAny}}');
-      fn({number: 8}).should.equal('A');
-    });
-  });
-
-  describe('ifEq', function() {
-    it('should render a block if the value is equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifEq number compare=8}}A{{/ifEq}}');
-      fn({number: 8}).should.equal('A');
-    });
-    it('should not render a block if the value is not equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
-      fn({number: 5}).should.equal('');
-    });
-  });
-
-  describe('ifGt', function() {
-    it('should render a block if the value is greater than a given number.', function() {
-      var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
-      fn({number: 10}).should.equal('A');
-    });
-    it('should not render a block if the value is less than a given number.', function() {
-      var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
-      fn({number: 5}).should.equal('');
-    });
-    it('should not render a block if the value is not equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifGt number compare=8}}A{{/ifGt}}');
-      fn({number: 5}).should.equal('');
-    });
-  });
-
-  describe('ifGteq', function() {
-    it('should render a block if the value is greater than a given number.', function() {
-      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-      fn({number: 12}).should.equal('A');
-    });
-    it('should render a block if the value is equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-      fn({number: 8}).should.equal('A');
-    });
-    it('should not render a block if the value is less than a given number.', function() {
-      var fn = hbs.compile('{{#ifGteq number compare=8}}A{{/ifGteq}}');
-      fn({number: 5}).should.equal('');
-    });
-  });
-
-  describe('ifLt', function() {
-    it('should render a block if the value is less than a given number.', function() {
-      var fn = hbs.compile('{{#ifLt number compare=8}}A{{/ifLt}}');
-      fn({number: 5}).should.equal('A');
-    });
-    it('should not render a block if the value is greater than a given number.', function() {
-      var fn = hbs.compile('{{#ifLt number compare=8}}A{{/ifLt}}');
-      fn({number: 42}).should.equal('');
-    });
-  });
-
-  describe('ifLteq', function() {
-    it('should render a block if the value is less than a given number.', function() {
-      var fn = hbs.compile('{{#ifLteq number compare=8}}A{{/ifLteq}}');
-      fn({number: 1}).should.equal('A');
-    });
-
-    it('should render a block if the value is equal to a given number.', function() {
-      var fn = hbs.compile('{{#ifLteq number compare=8}}A{{/ifLteq}}');
+      var fn = hbs.compile('{{#eq number compare=8}}A{{/eq}}');
       fn({number: 8}).should.equal('A');
     });
 
-    it('should not render a block if the value is greater than a given number.', function() {
-      var fn = hbs.compile('{{#ifLteq number compare=8}}A{{/ifLteq}}');
-      fn({number: 27}).should.equal('');
+    it('should render the inverse block if falsey.', function() {
+      var fn = hbs.compile('{{#eq number compare=8}}A{{else}}B{{/eq}}');
+      fn({number: 9}).should.equal('B');
+    });
+
+    it('should compare first and second args', function() {
+      var fn = hbs.compile('{{#eq number 8}}A{{else}}B{{/eq}}');
+      fn({number: 9}).should.equal('B');
+    });
+  });
+
+  describe('ifEven', function() {
+    it('should render the block if the given value is an even number', function() {
+      var fn = hbs.compile('{{#ifEven number}}A{{else}}B{{/ifEven}}');
+      fn({number: 8}).should.equal('A');
+    });
+
+    it('should render the inverse block if the number is odd', function() {
+      var fn = hbs.compile('{{#ifEven number}}A{{else}}B{{/ifEven}}');
+      fn({number: 9}).should.equal('B');
     });
   });
 
@@ -364,10 +329,135 @@ describe('comparison', function() {
     });
   });
 
+  describe('ifOdd', function() {
+    it('should render the block if the given value is an even number', function() {
+      var fn = hbs.compile('{{#ifOdd number}}A{{else}}B{{/ifOdd}}');
+      fn({number: 9}).should.equal('A');
+    });
+
+    it('should render the inverse block if the number is odd', function() {
+      var fn = hbs.compile('{{#ifOdd number}}A{{else}}B{{/ifOdd}}');
+      fn({number: 8}).should.equal('B');
+    });
+  });
+
+  describe('is', function() {
+    it('should render a block if the condition is true.', function() {
+      var fn = hbs.compile('{{#is value "CCC"}}A{{else}}B{{/is}}');
+      fn({value: 'CCC'}).should.equal('A');
+    });
+
+    it('should use the `compare` arg on the options hash', function() {
+      var fn = hbs.compile('{{#is value compare="CCC"}}A{{else}}B{{/is}}');
+      fn({value: 'CCC'}).should.equal('A');
+    });
+
+    it('should render the inverse if the condition is false', function() {
+      var fn = hbs.compile('{{#is value "FOO"}}A{{else}}B{{/is}}');
+      fn({value: 'CCC'}).should.equal('B');
+    });
+  });
+
+  describe('isnt', function() {
+    it('should render a block if the condition is not true.', function() {
+      var fn = hbs.compile('{{#isnt number 2}}A{{else}}B{{/isnt}}');
+      fn({number: 3}).should.equal('A');
+    });
+
+    it('should use the `compare` arg on the options hash', function() {
+      var fn = hbs.compile('{{#isnt value compare="CCC"}}A{{else}}B{{/isnt}}');
+      fn({value: 'CCC'}).should.equal('B');
+    });
+
+    it('should render the inverse if the condition is false', function() {
+      var fn = hbs.compile('{{#isnt value "FOO"}}A{{else}}B{{/isnt}}');
+      fn({value: 'CCC'}).should.equal('A');
+    });
+  });
+
+  describe('lt', function() {
+    describe('second arg', function() {
+      var fn = hbs.compile('{{#lt a b}}A{{else}}B{{/lt}}');
+
+      it('should render the first block if true.', function() {
+        fn({a: 14, b: 15}).should.equal('A');
+      });
+      it('should render the second block if equal.', function() {
+        fn({a: 15, b: 15}).should.equal('B');
+      });
+      it('should render the second block if false.', function() {
+        fn({a: 20, b: 15}).should.equal('B');
+      });
+    });
+
+    describe('compare hash', function() {
+      it('should render a block if the value is less than a given number.', function() {
+        var fn = hbs.compile('{{#lt number compare=8}}A{{/lt}}');
+        fn({number: 5}).should.equal('A');
+      });
+      it('should not render a block if the value is greater than a given number.', function() {
+        var fn = hbs.compile('{{#lt number compare=8}}A{{/lt}}');
+        fn({number: 42}).should.equal('');
+      });
+    });
+  });
+
+  describe('lte', function() {
+    var fn = hbs.compile('{{#lte a b}}A{{else}}B{{/lte}}');
+
+    describe('second arg', function() {
+      it('should render the first block if true.', function() {
+        fn({a: 14, b: 15}).should.equal('A');
+      });
+
+      it('should render the first block if equal.', function() {
+        fn({a: 15, b: 15}).should.equal('A');
+      });
+
+      it('should render the second block if false.', function() {
+        fn({a: 20, b: 15}).should.equal('B');
+      });
+    });
+
+    describe('compare hash', function() {
+      it('should render a block if the value is less than a given number.', function() {
+        var fn = hbs.compile('{{#lte number compare=8}}A{{/lte}}');
+        fn({number: 1}).should.equal('A');
+      });
+
+      it('should render a block if the value is equal to a given number.', function() {
+        var fn = hbs.compile('{{#lte number compare=8}}A{{/lte}}');
+        fn({number: 8}).should.equal('A');
+      });
+
+      it('should not render a block if the value is greater than a given number.', function() {
+        var fn = hbs.compile('{{#lte number compare=8}}A{{/lte}}');
+        fn({number: 27}).should.equal('');
+      });
+    });
+  });
+
+  describe('neither', function() {
+    it('should render a block if one of the values is truthy.', function() {
+      var fn = hbs.compile('{{#neither great magnificent}}A{{else}}B{{/neither}}');
+      fn({great: false, magnificent: false}).should.equal('A');
+    });
+
+    it('should render the inverse block if neither are true.', function() {
+      var fn = hbs.compile('{{#neither great magnificent}}A{{else}}B{{/neither}}');
+      fn({great: true, magnificent: false}).should.equal('B');
+    });
+  });
+
   describe('or', function() {
     it('should render a block if one of the values is truthy.', function() {
       var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
       fn({great: false, magnificent: true}).should.equal('A');
+    });
+
+    it('should render the inverse block if neither are true.', function() {
+      var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
+      fn({great: false, magnificent: false}).should.equal('B');
     });
   });
 
