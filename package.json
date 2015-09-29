@@ -70,10 +70,11 @@
     "gulp-istanbul": "^0.6.0",
     "gulp-jshint": "^1.9.2",
     "gulp-mocha": "^2.0.0",
+    "js-comments": "^0.5.4",
     "jshint-stylish": "^1.0.1",
     "markdown-link": "^0.1.1",
     "mocha": "^2.3.3",
-    "parse-comments": "^0.4.1",
+    "parse-comments": "^0.4.3",
     "should": "^5.2.0",
     "through2": "^2.0.0",
     "vinyl": "^0.5.3"

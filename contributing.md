@@ -1,8 +1,6 @@
-# Contributing to Assemble
+# Welcome!
 
-First and foremost, **thank you for contributing to this project**! 
-
-We know that your time is valuable, and your contributions mean a lot to us.
+We're super excited that you're thinking about contributing to this open source project! If you're not quite sure what to do, please feel comfortable asking one of us — or just go ahead and submit the issue or pull request anyway. Worst case we might ask you to tweak something. All friendly contributions are welcome!
 
 **What does "contributing" mean?**
 
