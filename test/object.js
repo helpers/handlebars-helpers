@@ -2,7 +2,6 @@
 
 require('should');
 var support = require('./support');
-var fixture = support.fixture('object');
 var expected = support.expected('object');
 var helpers = require('..');
 var hbs = require('handlebars');
@@ -75,10 +74,10 @@ describe('object', function() {
 
   describe('getObject', function() {
     it('should get an object from the context', function() {
-      var one = hbs.compile('{{{stringify (getObject "a" this)}}}')({a: 'b'})
+      var one = hbs.compile('{{{stringify (getObject "a" this)}}}')({a: 'b'});
       one.should.equal('{"a":"b"}');
 
-      var two = hbs.compile('{{{stringify (getObject "c" this)}}}')({c: 'd'})
+      var two = hbs.compile('{{{stringify (getObject "c" this)}}}')({c: 'd'});
       two.should.equal('{"c":"d"}');
     });
   });

@@ -74,7 +74,7 @@ describe('code', function() {
 
     it('should throw an error if id is missing', function () {
       (function () {
-        hbs.compile('{{jsfiddle}}')()
+        hbs.compile('{{jsfiddle}}')();
       }).should.throw('jsfiddle helper expects an `id`');
     });
 

@@ -2,7 +2,6 @@
 
 require('should');
 var hbs = require('handlebars');
-var utils = require('../lib/utils');
 var helpers = require('..');
 helpers.array({handlebars: hbs});
 
@@ -221,7 +220,7 @@ describe('array', function() {
 
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
-      var ctx = {array: ['a', 'b', 'c']}
+      var ctx = {array: ['a', 'b', 'c']};
       ctx.isString = function (val) {
         return typeof val === 'string';
       };
@@ -392,8 +391,8 @@ describe('array', function() {
       var fn = hbs.compile('{{#withSort collection "deliveries"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
       var res = fn({
         collection: [
-          {name: 'f', deliveries: 8021 }, 
-          {name: 'b', deliveries: 239 }, 
+          {name: 'f', deliveries: 8021 },
+          {name: 'b', deliveries: 239 },
           {name: 'd', deliveries: -12 }
         ]
       });
@@ -404,8 +403,8 @@ describe('array', function() {
       var fn = hbs.compile('{{#withSort collection "deliveries" reverse="true"}}{{name}}: {{deliveries}} <br>{{/withSort}}');
       var res = fn({
         collection: [
-          {name: 'f', deliveries: 8021 }, 
-          {name: 'b', deliveries: 239 }, 
+          {name: 'f', deliveries: 8021 },
+          {name: 'b', deliveries: 239 },
           {name: 'd', deliveries: -12 }
         ]
       });

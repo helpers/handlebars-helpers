@@ -52,6 +52,11 @@ describe('match', function () {
       hbs.compile('{{match files "*" dot=true}}')(ctx).should.match(/\.DS_Store/);
       hbs.compile('{{match files "*" dot=false}}')(ctx).should.not.match(/\.DS_Store/);
     });
+
+    it('should take options passed as the last argument', function () {
+      var ctx = {files: files, options: {dot: true}};
+      hbs.compile('{{match files "*" options}}')(ctx).should.match(/\.DS_Store/);
+    });
   });
 
   describe('isMatch', function () {

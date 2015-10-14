@@ -5,8 +5,6 @@ var hbs = require('handlebars');
 var helpers = require('..');
 helpers.comparison({handlebars: hbs});
 
-var context = {array: ['a', 'b', 'c']};
-
 describe('comparison', function() {
   describe('and', function() {
     it('should render a block if both values are truthy.', function() {

@@ -1,8 +1,8 @@
 'use strict';
 
-var chalk = require('chalk');
 var through = require('through2');
 var relative = require('relative');
+var red = require('ansi-red');
 var path = require('path');
 
 /**
@@ -19,7 +19,7 @@ module.exports = function names(options) {
       if (i !== -1) {
         str = str.substr(0, i) + namify(file.path) + '\n * ' + str.substr(i);
       } else {
-        console.log(chalk.red('code comments missing in: '), relative(file.path));
+        console.log(red('code comments missing in: '), relative(file.path));
       }
     }
     // file.contents = new Buffer(str);
