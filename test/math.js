@@ -24,11 +24,11 @@ describe('math', function () {
       fn({array: [1, 3, 6, 9]}).should.equal('4.75');
     });
   });
-
-  describe('subtract', function () {
-    it('should return the difference of two numbers.', function () {
-      var fn = hbs.compile('{{subtract value 5}}');
-      fn({value: 5}).should.equal('0');
+  
+  describe('ceil', function () {
+    it('should return the value rounded up to the nearest integer.', function () {
+      var fn = hbs.compile('{{ceil value}}');
+      fn({value: 5.6}).should.equal('6');
     });
   });
 
@@ -39,13 +39,6 @@ describe('math', function () {
     });
   });
 
-  describe('multiply', function () {
-    it('should return the multiplication of two numbers.', function () {
-      var fn = hbs.compile('{{multiply value 5}}');
-      fn({value: 5}).should.equal('25');
-    });
-  });
-
   describe('floor', function () {
     it('should return the value rounded down to the nearest integer.', function () {
       var fn = hbs.compile('{{floor value}}');
@@ -53,10 +46,10 @@ describe('math', function () {
     });
   });
 
-  describe('ceil', function () {
-    it('should return the value rounded up to the nearest integer.', function () {
-      var fn = hbs.compile('{{ceil value}}');
-      fn({value: 5.6}).should.equal('6');
+  describe('multiply', function () {
+    it('should return the multiplication of two numbers.', function () {
+      var fn = hbs.compile('{{multiply value 5}}');
+      fn({value: 5}).should.equal('25');
     });
   });
 
@@ -64,6 +57,13 @@ describe('math', function () {
     it('should return the value rounded to the nearest integer.', function () {
       var fn = hbs.compile('{{round value}}');
       fn({value: 5.69}).should.equal('6');
+    });
+  });
+
+  describe('subtract', function () {
+    it('should return the difference of two numbers.', function () {
+      var fn = hbs.compile('{{subtract value 5}}');
+      fn({value: 5}).should.equal('0');
     });
   });
 

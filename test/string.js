@@ -6,6 +6,21 @@ var helpers = require('..');
 helpers.string({handlebars: hbs});
 
 describe('string', function() {
+  describe('camelcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{camelcase}}');
+      fn().should.equal('');
+    });
+    it('should return the string in camelcase', function() {
+      var fn = hbs.compile('{{camelcase "foo bar baz qux"}}');
+      fn().should.equal('fooBarBazQux');
+    });
+    it('should lowercase a single character', function() {
+      hbs.compile('{{camelcase "f"}}')().should.equal('f');
+      hbs.compile('{{camelcase "A"}}')().should.equal('a');
+    });
+  });
+
   describe('capitalize', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{capitalize}}');
@@ -17,17 +32,6 @@ describe('string', function() {
     });
   });
 
-  describe('capitalizeFirst', function() {
-    it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{capitalizeFirst}}');
-      fn().should.equal('');
-    });
-    it('should return the string with the first word capitalized.', function() {
-      var fn = hbs.compile('{{capitalizeFirst "bender should not be allowed on tv"}}');
-      fn().should.equal('Bender should not be allowed on tv');
-    });
-  });
-
   describe('capitalizeAll', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{capitalizeAll}}');
@@ -35,17 +39,6 @@ describe('string', function() {
     });
     it('should return the string with the every word capitalized.', function() {
       var fn = hbs.compile('{{capitalizeAll "bender should not bE allowed on tV"}}');
-      fn().should.equal('Bender Should Not BE Allowed On TV');
-    });
-  });
-
-  describe('capitalizeEach', function() {
-    it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{capitalizeEach}}');
-      fn().should.equal('');
-    });
-    it('should return the string with the every word capitalized.', function() {
-      var fn = hbs.compile('{{capitalizeEach "bender should not bE allowed on tV"}}');
       fn().should.equal('Bender Should Not BE Allowed On TV');
     });
   });
@@ -61,33 +54,48 @@ describe('string', function() {
     });
   });
 
-  describe('dashify', function() {
+  describe('chop', function() {
     it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{dashify}}');
+      var fn = hbs.compile('{{chop}}');
       fn().should.equal('');
     });
-    it('should return the string with periods replaced with hyphens.', function() {
-      var fn = hbs.compile('{{dashify "Bender.should.not.be.allowed.on.tv."}}');
-      fn().should.equal('Bender-should-not-be-allowed-on-tv-');
+    it('should remove non-word characters from start of string', function() {
+      var fn = hbs.compile('{{chop "- foo bar baz"}}');
+      fn().should.equal('foo bar baz');
+    });
+    it('should remove non-word characters from end of string', function() {
+      var fn = hbs.compile('{{chop "foo bar baz _- "}}');
+      fn().should.equal('foo bar baz');
     });
   });
 
-  describe('ellipsis', function() {
+  describe('dashcase', function() {
     it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{ellipsis}}');
+      var fn = hbs.compile('{{dashcase}}');
       fn().should.equal('');
     });
-    it('should return then string truncated by a specified length.', function() {
-      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
-      fn().should.equal('Bender should not be allowed on');
+    it('should return the string in dashcase', function() {
+      var fn = hbs.compile('{{dashcase "foo bar baz qux"}}');
+      fn().should.equal('foo-bar-baz-qux');
     });
-    it('should return the string if shorter than the specified length.', function() {
-      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
-      fn().should.equal('Bender should not be allowed on tv.');
+    it('should lowercase a single character', function() {
+      hbs.compile('{{dashcase "f"}}')().should.equal('f');
+      hbs.compile('{{dashcase "A"}}')().should.equal('a');
     });
-    it('should return the string truncated by a specified length, providing a custom string to denote an omission.', function() {
-      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31 "..."}}');
-      fn().should.equal('Bender should not be allowed...');
+  });
+
+  describe('dotcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{dotcase}}');
+      fn().should.equal('');
+    });
+    it('should return the string in dotcase', function() {
+      var fn = hbs.compile('{{dotcase "foo bar baz qux"}}');
+      fn().should.equal('foo.bar.baz.qux');
+    });
+    it('should lowercase a single character', function() {
+      hbs.compile('{{dotcase "f"}}')().should.equal('f');
+      hbs.compile('{{dotcase "A"}}')().should.equal('a');
     });
   });
 
@@ -124,6 +132,36 @@ describe('string', function() {
     });
   });
   
+  describe('pascalcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{pascalcase}}');
+      fn().should.equal('');
+    });
+    it('should return the string in pascalcase', function() {
+      var fn = hbs.compile('{{pascalcase "foo bar baz qux"}}');
+      fn().should.equal('FooBarBazQux');
+    });
+    it('should uppercase a single character', function() {
+      hbs.compile('{{pascalcase "f"}}')().should.equal('F');
+      hbs.compile('{{pascalcase "A"}}')().should.equal('A');
+    });
+  });
+
+  describe('pathcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{pathcase}}');
+      fn().should.equal('');
+    });
+    it('should return the string in pathcase', function() {
+      var fn = hbs.compile('{{pathcase "foo bar baz qux"}}');
+      fn().should.equal('foo/bar/baz/qux');
+    });
+    it('should lowercase a single character', function() {
+      hbs.compile('{{pathcase "f"}}')().should.equal('f');
+      hbs.compile('{{pathcase "A"}}')().should.equal('a');
+    });
+  });
+
   describe('plusify', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{plusify}}');
@@ -152,6 +190,14 @@ describe('string', function() {
       var fn = hbs.compile('{{replace "Bender Bending Rodriguez" "B" "M"}}');
       fn().should.equal('Mender Mending Rodriguez');
     });
+    it('should return the string if `a` is undefined', function() {
+      var fn = hbs.compile('{{replace "a b c"}}');
+      fn().should.equal('a b c');
+    });
+    it('should replace the string with `""` if `b` is undefined', function() {
+      var fn = hbs.compile('{{replace "a b c" "a"}}');
+      fn().should.equal(' b c');
+    });
   });
 
   describe('reverse', function() {
@@ -176,6 +222,36 @@ describe('string', function() {
     });
   });
 
+  describe('snakecase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{snakecase}}');
+      fn().should.equal('');
+    });
+    it('should lowercase a single character', function() {
+      hbs.compile('{{snakecase "a"}}')().should.equal('a');
+      hbs.compile('{{snakecase "A"}}')().should.equal('a');
+    });
+    it('should return the string in snakecase', function() {
+      var fn = hbs.compile('{{snakecase "foo bar baz qux"}}');
+      fn().should.equal('foo_bar_baz_qux');
+    });
+  });
+
+  describe('split', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{split}}');
+      fn().should.equal('');
+    });
+    it('should split the string with the default character', function() {
+      var fn = hbs.compile('{{#each (split "a,b,c")}}<{{.}}>{{/each}}');
+      fn().should.equal('<a><b><c>');
+    });
+    it('should split the string on the given character', function() {
+      var fn = hbs.compile('{{#each (split "a|b|c" "|")}}<{{.}}>{{/each}}');
+      fn().should.equal('<a><b><c>');
+    });
+  });
+
   describe('titleize', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{titleize}}');
@@ -187,22 +263,18 @@ describe('string', function() {
     });
   });
 
-  describe('truncate', function() {
+  describe('trim', function() {
     it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{truncate}}');
+      var fn = hbs.compile('{{trim}}');
       fn().should.equal('');
     });
-    it('should return the string truncated by a specified length.', function() {
-      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
-      fn().should.equal('Bender should not be allowed on');
+    it('should trim leading whitespace', function() {
+      var fn = hbs.compile('{{trim "    foo"}}');
+      fn().should.equal('foo');
     });
-    it('should return the string if shorter than the specified length.', function() {
-      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
-      fn().should.equal('Bender should not be allowed on tv.');
-    });
-    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
-      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31 "..."}}');
-      fn().should.equal('Bender should not be allowed...');
+    it('should trim trailing whitespace', function() {
+      var fn = hbs.compile('{{trim "foo   "}}');
+      fn().should.equal('foo');
     });
   });
 

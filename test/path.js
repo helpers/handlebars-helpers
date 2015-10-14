@@ -45,4 +45,14 @@ describe('path', function() {
       fn().should.equal('../../assets');
     });
   });
+
+  describe('segments', function() {
+    it('should return specified path segments:', function() {
+      hbs.compile('{{segments "a/b/c/e.js" 1 3}}')().should.equal('b/c');
+      hbs.compile('{{segments "a/b/c/e.js" 1 2}}')().should.equal('b');
+      hbs.compile('{{segments "a/b/c/e.js" 0 3}}')().should.equal('a/b/c');
+      hbs.compile('{{segments "a/b/c/e.js" 2 3}}')().should.equal('c');
+      hbs.compile('{{segments "a/b/c/e.js" 0 3}}')().should.equal('a/b/c');
+    });
+  });
 });

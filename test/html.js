@@ -52,6 +52,21 @@ describe('html', function() {
     });
   });
 
+  describe('ellipsis', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{ellipsis}}');
+      fn().should.equal('');
+    });
+    it('should return then string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
+      fn().should.equal('Bender should not be allowed on…');
+    });
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
+      fn().should.equal('Bender should not be allowed on tv.');
+    });
+  });
+
   describe('js', function() {
     it('should create an empty script tag', function() {
       hbs.compile('{{{js}}}')().should.equal('<script></script>');
@@ -78,6 +93,40 @@ describe('html', function() {
     it('should create a coffeescript tag (TODO: only works with array format)', function() {
       var ctx = {scripts: ['a.coffee'] };
       hbs.compile('{{{js scripts}}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee">');
+    });
+  });
+
+  describe('sanitize', function() {
+    it('should return an empty string when undefined.', function() {
+      hbs.compile('{{sanitize}}')().should.equal('');
+    });
+    it('should strip html from a string.', function() {
+      var actual = hbs.compile('{{sanitize "<span>foo</span>"}}')();
+      actual.should.equal('foo');
+    });
+  });
+
+  describe('truncate', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{truncate}}');
+      fn().should.equal('');
+    });
+    it('should return the string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
+      fn().should.equal('Bender should not be allowed on');
+    });
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
+      fn().should.equal('Bender should not be allowed on tv.');
+    });
+    it('should return then string truncated by a specified length', function() {
+      var fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
+      fn().should.equal('foo bar...');
+    });
+
+    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
+      var fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
+      fn().should.equal('foo ba…');
     });
   });
 
