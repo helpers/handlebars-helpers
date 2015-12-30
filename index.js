@@ -40,3 +40,9 @@ forIn(lib, function (group, key) {
     return group;
   });
 });
+
+/**
+ * Expose `utils`
+ */
+
+module.exports.utils = require('./lib/utils');
