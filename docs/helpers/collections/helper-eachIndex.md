@@ -11,7 +11,7 @@ Template:
 
 ```html
 \{{#eachIndex collection}}
-  \{{this}} is \{{index}}
+  \{{item}} is \{{index}}
 \{{/eachIndex}}
 ```
 
