@@ -25,7 +25,12 @@ module.exports = function(options) {
 
     var str = file.contents.toString();
     var lines = str.split('\n');
-    var res = esprima.parse(str, {loc: true, comment: true, tolerant: true});
+    var res = esprima.parse(str, {
+      loc: true,
+      comment: true,
+      tolerant: true
+    });
+
     file.data = {};
     file.data.methods = {};
     var nocomment = [];
