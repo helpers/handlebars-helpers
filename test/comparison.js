@@ -23,10 +23,10 @@ describe('comparison', function() {
       it('should throw an error when args are invalid', function() {
         (function () {
           hbs.compile('{{#compare}}{{/compare}}')();
-        }).should.throw('handlebars Helper {{compare}} expects 2 arguments.');
+        }).should.throw('handlebars Helper {{compare}} expects 4 arguments');
         (function () {
           hbs.compile('{{#compare a b}}{{/compare}}')();
-        }).should.throw('handlebars Helper {{compare}} expects 2 arguments.');
+        }).should.throw('handlebars Helper {{compare}} expects 4 arguments');
       });
 
       it('should throw an error when the operator is invalid', function() {
