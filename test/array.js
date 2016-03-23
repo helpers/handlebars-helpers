@@ -221,7 +221,7 @@ describe('array', function() {
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
       var ctx = {array: ['a', 'b', 'c']};
-      ctx.isString = function (val) {
+      ctx.isString = function(val) {
         return typeof val === 'string';
       };
       var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
@@ -235,7 +235,7 @@ describe('array', function() {
 
     it('should render the inverse block if falsey', function() {
       var ctx = {array: [['a'], ['b'], ['c']]};
-      ctx.isString = function (val) {
+      ctx.isString = function(val) {
         return typeof val === 'string';
       };
       var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
@@ -314,7 +314,7 @@ describe('array', function() {
 
     it('should take a compare function.', function() {
       var o = {};
-      o.compare = function (a, b) {
+      o.compare = function(a, b) {
         return b.localeCompare(a);
       };
       var fn = hbs.compile('{{sortBy \'["b", "c", "a"]\' compare}}');
