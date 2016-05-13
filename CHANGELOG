@@ -1,7 +1,12 @@
 v0.6.0:
-  data: "2015-09-26"
+  data: "2016-05-13"
   changes:
-    - "BREAKING CHANGE, all comparison helper names are now camelcase"
+    - the main export is now a function that takes a name or array of names of helper types to load. Example `helpers(['string', 'array'])` will load only the `string` and `array` helpers
+    - helper types can alternatively be accessed as methods. example: `helpers.path()` will return all of the path helpers.
+    - handlebars may be provided by the user. if not provided it will fall back to the `handlebars-helpers`  handlebars
+    - helpers are now as generic as possible, with little to no code related to assemble, grunt, etc.
+    - helpers are lazy-loaded using getters for improved performance
+    - Once tests are added for the `md` and `markdown` helpers, we'll have 100% unit test coverage on helpers
 v0.3.3:
   date: "2013-09-03"
   changes:
