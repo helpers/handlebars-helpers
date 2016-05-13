@@ -164,9 +164,9 @@ Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://g
 
 Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
 
-* **[fileSize](#fileSize)** ([code](lib/fs.js#L27) | [tests](test/fs.js#L9))
-* **[read](#read)** ([code](lib/fs.js#L63) | [tests](test/fs.js#L48))
-* **[readdir](#readdir)** ([code](lib/fs.js#L76) | [tests](test/fs.js#L55))
+* **[fileSize](#fileSize)** ([code](lib/fs.js#L27) | [tests](test/fs.js#L16))
+* **[read](#read)** ([code](lib/fs.js#L63) | [tests](test/fs.js#L55))
+* **[readdir](#readdir)** ([code](lib/fs.js#L76) | [tests](test/fs.js#L62))
 
 ### [html helpers](#html)
 
@@ -214,9 +214,9 @@ Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](h
 
 Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers))
 
-* **[mm](#mm)** ([code](lib/match.js#L26) | [tests](test/match.js#L13))
-* **[match](#match)** ([code](lib/match.js#L45) | [tests](test/match.js#L12))
-* **[isMatch](#isMatch)** ([code](lib/match.js#L66) | [tests](test/match.js#L62))
+* **[mm](#mm)** ([code](lib/match.js#L26) | [tests](test/match.js#L15))
+* **[match](#match)** ([code](lib/match.js#L45) | [tests](test/match.js#L14))
+* **[isMatch](#isMatch)** ([code](lib/match.js#L66) | [tests](test/match.js#L64))
 
 ### [math helpers](#math)
 
