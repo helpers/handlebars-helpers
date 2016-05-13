@@ -2443,8 +2443,8 @@ $ npm install -d && npm test
 
 **Brian Woodward**
 
-* [github/jonschlinkert](https://github.com/jonschlinkert)
-* [twitter/jonschlinkert](http://twitter.com/jonschlinkert)
+* [github/doowb](https://github.com/doowb)
+* [twitter/doowb](http://twitter.com/doowb)
 
 **Jon Schlinkert**
 
