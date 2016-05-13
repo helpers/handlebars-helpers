@@ -15,29 +15,42 @@ var lib = require('./lib/');
  * Expose helpers
  */
 
-module.exports = function helpers(opts) {
-  opts = opts || {};
-  var hbs = opts.handlebars || require('handlebars');
+module.exports = function helpers(groups, options) {
+  if (typeof groups === 'string') {
+    groups = [groups];
+  } else if (!Array.isArray(groups)) {
+    options = groups;
+    groups = null;
+  }
 
-  forIn(lib, function (group) {
-    forIn(group, function (v, k) {
-      hbs.registerHelper(k, v);
+  options = options || {};
+  var hbs = options.handlebars || require('handlebars');
+
+  define(module.exports, 'handlebars', hbs);
+
+  if (groups) {
+    groups.forEach(function(key) {
+      hbs.registerHelper(lib[key]);
     });
-  });
+  } else {
+    forIn(lib, function(group, key) {
+      hbs.registerHelper(group);
+    });
+  }
   return hbs.helpers;
 };
 
 /**
- * Expose helper groups as getters
+ * Expose helper groups
  */
 
-forIn(lib, function (group, key) {
-  define(module.exports, key, function (opts) {
-    opts = opts || {};
-    var hbs = opts.handlebars || require('handlebars');
-
+forIn(lib, function(group, key) {
+  define(module.exports, key, function(options) {
+    options = options || {};
+    var hbs = options.hbs || require('handlebars');
+    define(module.exports, 'handlebars', hbs);
     hbs.registerHelper(group);
-    return group;
+    return hbs.helpers;
   });
 });
 
