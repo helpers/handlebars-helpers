@@ -1,6 +1,6 @@
 'use strict';
 
-require('should');
+var assert = require('assert');
 var hbs = require('handlebars');
 
 var context = {
@@ -13,11 +13,11 @@ describe('subexpressions', function() {
     describe('strings', function() {
       it('Should return the first item in a collection, all lowercase.', function() {
         var fn = hbs.compile('{{lowercase (first one)}}');
-        fn(context).should.equal('a');
+        assert.equal(fn(context), 'a');
       });
       it('Should return the last item in a collection, all uppercase.', function() {
         var fn = hbs.compile('{{uppercase (last two)}}');
-        fn(context).should.equal('F');
+        assert.equal(fn(context), 'F');
       });
     });
   });

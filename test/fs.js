@@ -7,10 +7,10 @@ var orig;
 
 describe('fs', function() {
   describe('fileSize', function() {
-    before(function () {
+    before(function() {
       orig = console.error;
     });
-    after(function () {
+    after(function() {
       console.error = orig;
     });
 
@@ -45,15 +45,15 @@ describe('fs', function() {
     });
   });
 
-  describe('read', function () {
-    it('should read a file from the file system', function () {
+  describe('read', function() {
+    it('should read a file from the file system', function() {
       var fn = hbs.compile('{{read filepath}}');
       fn({filepath: 'test/fixtures/read/a.txt'}).should.equal('abc');
     });
   });
 
-  describe('readdir', function () {
-    it('should return an array of files', function () {
+  describe('readdir', function() {
+    it('should return an array of files', function() {
       var fn = hbs.compile('{{readdir dir}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/.DS_Store',
@@ -81,7 +81,7 @@ describe('fs', function() {
       ]);
     });
 
-    it('should work as a subexpression', function () {
+    it('should work as a subexpression', function() {
       var fn = hbs.compile('{{mm (readdir dir) "**/[a-c]*.js"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/array.js',
@@ -91,10 +91,10 @@ describe('fs', function() {
       ]);
     });
 
-    it('should filter using a custom filter function', function () {
+    it('should filter using a custom filter function', function() {
       var fn = hbs.compile('{{readdir dir filter}}');
       function filter(arr) {
-        return arr.filter(function (fp) {
+        return arr.filter(function(fp) {
           return /\.js$/.test(fp);
         });
       }
@@ -123,7 +123,7 @@ describe('fs', function() {
       ]);
     });
 
-    it('should filter using a regex', function () {
+    it('should filter using a regex', function() {
       var fn = hbs.compile('{{readdir dir "/\\.js$/"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/array.js',
@@ -149,7 +149,7 @@ describe('fs', function() {
       ]);
     });
 
-    it('should filter using a glob pattern', function () {
+    it('should filter using a glob pattern', function() {
       var fn = hbs.compile('{{readdir dir "lib/[a-d]*.js"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/array.js',
@@ -160,7 +160,7 @@ describe('fs', function() {
       ]);
     });
 
-    it('should filter by fs.stat (files)', function () {
+    it('should filter by fs.stat (files)', function() {
       var fn = hbs.compile('{{readdir dir "isFile"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/.DS_Store',
@@ -187,14 +187,14 @@ describe('fs', function() {
       ]);
     });
 
-    it('should filter by fs.stat (dirs)', function () {
+    it('should filter by fs.stat (dirs)', function() {
       var fn = hbs.compile('{{readdir dir "isDirectory"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/utils'
       ]);
     });
 
-    it('should return the whole array when the filter is invalid', function () {
+    it('should return the whole array when the filter is invalid', function() {
       var fn = hbs.compile('{{readdir dir "foo"}}');
       fn({dir: 'lib'}).split(',').should.eql([
         'lib/.DS_Store',

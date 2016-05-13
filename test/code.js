@@ -27,7 +27,7 @@ describe('code', function() {
         'Code example',
         '',
         '&#x60&#x60&#x60js',
-        'var urlresolve = function (base, href) {',
+        'var urlresolve = function(base, href) {',
         '  return url.resolve(base, href);',
         '};',
         '&#x60&#x60&#x60',
@@ -72,8 +72,8 @@ describe('code', function() {
       fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
 
-    it('should throw an error if id is missing', function () {
-      (function () {
+    it('should throw an error if id is missing', function() {
+      (function() {
         hbs.compile('{{jsfiddle}}')();
       }).should.throw('jsfiddle helper expects an `id`');
     });

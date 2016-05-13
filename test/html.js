@@ -144,9 +144,9 @@ describe('html', function() {
     });
   });
 
-  describe('thumbnailImage', function () {
-    describe('{{{thumbnailImage context}}}', function () {
-      it('should return figure with link and caption', function () {
+  describe('thumbnailImage', function() {
+    describe('{{{thumbnailImage context}}}', function() {
+      it('should return figure with link and caption', function() {
         var context = {
           data: {
             id: 'id',
@@ -172,7 +172,7 @@ describe('html', function() {
         fn(context).should.equal(comparison);
       });
 
-      it('should return figure with extra class "test"', function () {
+      it('should return figure with extra class "test"', function() {
         var source = '{{{thumbnailImage data}}}';
         var context = {
           data: {
@@ -203,7 +203,7 @@ describe('html', function() {
         fn(context).should.equal(comparison);
       });
 
-      it('should return figure with image that has class "test"', function () {
+      it('should return figure with image that has class "test"', function() {
         var source = '{{{thumbnailImage data}}}';
         var context = {
           data: {
@@ -233,7 +233,7 @@ describe('html', function() {
         fn(context).should.equal(comparison);
       });
 
-      it('should return figure with link that has class "test"', function () {
+      it('should return figure with link that has class "test"', function() {
         var source = '{{{thumbnailImage data}}}';
         var context = {
           data: {
@@ -263,7 +263,7 @@ describe('html', function() {
         fn(context).should.equal(comparison);
       });
 
-      it('should return figure without link', function () {
+      it('should return figure without link', function() {
         var source = '{{{thumbnailImage data}}}';
         var context = {
           data: {
@@ -287,7 +287,7 @@ describe('html', function() {
         fn(context).should.equal(comparison);
       });
 
-      it('should return figure without caption', function () {
+      it('should return figure without caption', function() {
         var source = '{{{thumbnailImage data}}}';
         var context = {
           data: {
