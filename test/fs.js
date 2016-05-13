@@ -1,8 +1,15 @@
 'use strict';
 
 require('should');
+var fs = require('fs');
+var path = require('path');
 var hbs = require('handlebars');
 require('..')({handlebars: hbs});
+
+var libFiles = fs.readdirSync(path.join(__dirname, '../lib'))
+  .map(function(fp) {
+    return path.join('lib', fp);
+  });
 var orig;
 
 describe('fs', function() {
@@ -55,30 +62,7 @@ describe('fs', function() {
   describe('readdir', function() {
     it('should return an array of files', function() {
       var fn = hbs.compile('{{readdir dir}}');
-      fn({dir: 'lib'}).split(',').should.eql([
-        'lib/.DS_Store',
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js',
-        'lib/fs.js',
-        'lib/html.js',
-        'lib/i18n.js',
-        'lib/index.js',
-        'lib/inflection.js',
-        'lib/logging.js',
-        'lib/markdown.js',
-        'lib/match.js',
-        'lib/math.js',
-        'lib/misc.js',
-        'lib/number.js',
-        'lib/object.js',
-        'lib/path.js',
-        'lib/string.js',
-        'lib/url.js',
-        'lib/utils'
-      ]);
+      fn({dir: 'lib'}).split(',').should.eql(libFiles);
     });
 
     it('should work as a subexpression', function() {
@@ -162,29 +146,9 @@ describe('fs', function() {
 
     it('should filter by fs.stat (files)', function() {
       var fn = hbs.compile('{{readdir dir "isFile"}}');
-      fn({dir: 'lib'}).split(',').should.eql([
-        'lib/.DS_Store',
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js',
-        'lib/fs.js',
-        'lib/html.js',
-        'lib/i18n.js',
-        'lib/index.js',
-        'lib/inflection.js',
-        'lib/logging.js',
-        'lib/markdown.js',
-        'lib/match.js',
-        'lib/math.js',
-        'lib/misc.js',
-        'lib/number.js',
-        'lib/object.js',
-        'lib/path.js',
-        'lib/string.js',
-        'lib/url.js'
-      ]);
+      fn({dir: 'lib'}).split(',').should.eql(libFiles.filter(function(fp) {
+        return fp.indexOf('lib/util') !== 0;
+      }));
     });
 
     it('should filter by fs.stat (dirs)', function() {
@@ -196,30 +160,7 @@ describe('fs', function() {
 
     it('should return the whole array when the filter is invalid', function() {
       var fn = hbs.compile('{{readdir dir "foo"}}');
-      fn({dir: 'lib'}).split(',').should.eql([
-        'lib/.DS_Store',
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js',
-        'lib/fs.js',
-        'lib/html.js',
-        'lib/i18n.js',
-        'lib/index.js',
-        'lib/inflection.js',
-        'lib/logging.js',
-        'lib/markdown.js',
-        'lib/match.js',
-        'lib/math.js',
-        'lib/misc.js',
-        'lib/number.js',
-        'lib/object.js',
-        'lib/path.js',
-        'lib/string.js',
-        'lib/url.js',
-        'lib/utils'
-      ]);
+      fn({dir: 'lib'}).split(',').should.eql(libFiles);
     });
   });
 });
