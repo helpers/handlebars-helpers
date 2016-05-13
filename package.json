@@ -1,116 +1,143 @@
 {
   "name": "handlebars-helpers",
-  "description": "120+ Handlebars helpers in ~20 categories, for Assemble, YUI, Ghost or any Handlebars project. Includes helpers like {{i18}}, {{markdown}}, {{relative}}, {{extend}}, {{moment}}, and so on.",
-  "version": "0.5.8",
+  "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, YUI, Ghost or any node.js/Handlebars project.",
+  "version": "0.6.0",
   "homepage": "https://github.com/assemble/handlebars-helpers",
-  "author": {
-    "name": "Assemble",
-    "url": "https://github.com/assemble/assemble/handlebars-helpers"
-  },
-  "contributors": [
-    {
-      "name": "Jon Schlinkert",
-      "url": "https://github.com/jonschlinkert"
-    },
-    {
-      "name": "Brian Woodward",
-      "url": "https://github.com/doowb"
-    }
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "maintainers": [
+    "Brian Woodward (https://github.com/doowb)",
+    "Jon Schlinkert (https://github.com/jonschlinkert)"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/assemble/handlebars-helpers.git"
-  },
+  "repository": "assemble/handlebars-helpers",
   "bugs": {
     "url": "https://github.com/assemble/handlebars-helpers/issues"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/assemble/handlebars-helpers/blob/master/LICENSE-MIT"
-    }
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "lib"
   ],
   "main": "index.js",
   "engines": {
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "mocha"
   },
   "dependencies": {
-    "handlebars": "~1.3.0",
-    "highlight.js": "~7.4.0",
-    "iconv-lite": "~0.2.11",
-    "js-yaml": "~2.1.3",
-    "lodash": "~2.2.1",
-    "marked": "~0.2.10",
-    "matchdep": "~0.3.0",
-    "matchkeys": "~0.1.3",
-    "minimatch": "~0.2.12",
-    "nap": "~0.7.11",
-    "sort-object": "0.0.5",
-    "to": "~0.2.9"
+    "arr-filter": "^1.1.1",
+    "arr-flatten": "^1.0.1",
+    "array-sort": "^0.1.2",
+    "create-frame": "^0.1.2",
+    "define-property": "^0.2.5",
+    "export-files": "^2.1.1",
+    "for-in": "^0.1.5",
+    "for-own": "^0.1.4",
+    "get-object": "^0.2.0",
+    "get-value": "^2.0.5",
+    "helper-date": "^0.2.2",
+    "helper-markdown": "^0.2.1",
+    "helper-md": "^0.2.0",
+    "html-tag": "^0.2.1",
+    "index-of": "^0.2.0",
+    "is-even": "^0.1.1",
+    "is-glob": "^2.0.1",
+    "is-number": "^2.1.0",
+    "is-odd": "^0.1.0",
+    "kind-of": "^3.0.3",
+    "lazy-cache": "^2.0.1",
+    "logging-helpers": "^0.4.0",
+    "make-iterator": "^0.2.0",
+    "micromatch": "^2.3.8",
+    "mixin-deep": "^1.1.3",
+    "normalize-path": "^2.0.1",
+    "relative": "^3.0.2",
+    "striptags": "^2.1.1",
+    "to-gfm-code-block": "^0.1.1"
   },
   "devDependencies": {
-    "chai": "~1.8.1",
-    "grunt": "~0.4.1",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-compress": "~0.5.2",
-    "grunt-contrib-jshint": "~0.7.1",
-    "grunt-contrib-uglify": "~0.2.5",
-    "grunt-mocha-test": "~0.7.0",
-    "grunt-sync-pkg": "~0.1.1",
-    "grunt-verb": "~0.2.1",
-    "handlebars-helper-prettify": "~0.1.11",
-    "handlebars-helper-repeat": "~0.1.1",
-    "rimraf": "~2.2.4",
-    "should": "~2.0.2"
+    "fs-exists-sync": "^0.1.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-format-md": "^0.1.9",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "gulp-unused": "^0.1.2",
+    "handlebars": "^4.0.5",
+    "helper-coverage": "^0.1.3",
+    "markdown-link": "^0.1.1",
+    "mocha": "^2.4.5",
+    "should": "^8.3.1",
+    "template-helpers": "^0.6.3",
+    "through2": "^2.0.1",
+    "verb-readme-generator": "^0.1.12"
   },
   "keywords": [
-    "assemble helpers",
-    "block helper",
-    "code helpers",
-    "collections helpers",
-    "comparisons helpers",
-    "data helpers",
-    "dates helpers",
-    "example helper",
-    "files helpers",
-    "handle bars js",
-    "handlebar helper",
-    "handlebars block helper",
-    "handlebars custom helpers",
-    "handlebars escape",
-    "handlebars for loop",
-    "handlebars helper",
-    "handlebars helpers",
-    "handlebars if helper",
-    "handlebars list",
-    "handlebars loop index",
-    "handlebars loop",
-    "handlebars register helper",
-    "handlebars view helper",
+    "assemble",
+    "block",
+    "code",
+    "collections",
+    "comparisons",
+    "custom",
+    "data",
+    "dates",
+    "escape",
+    "example",
+    "files",
     "handlebars",
-    "handlebars-helper-prettify",
-    "handlebars-helper-repeat",
-    "helper library",
     "helper",
     "helpers",
-    "html helpers",
-    "i18n helpers",
-    "inflections helpers",
-    "logging helpers",
-    "loop handlebars",
-    "markdown helper",
-    "markdown helpers",
-    "math helpers",
-    "miscellaneous helpers",
-    "numbers helpers",
-    "path helpers",
-    "prettify helper",
-    "repeat helper",
-    "strings helpers",
-    "template helpers",
-    "url helpers"
-  ]
+    "html",
+    "i-n",
+    "index",
+    "inflections",
+    "js",
+    "library",
+    "list",
+    "logging",
+    "loop",
+    "markdown",
+    "math",
+    "miscellaneous",
+    "numbers",
+    "path",
+    "prettify",
+    "repeat",
+    "strings",
+    "template",
+    "url"
+  ],
+  "verb": {
+    "run": true,
+    "toc": true,
+    "tasks": [
+      "readme"
+    ],
+    "layout": "default",
+    "copyright": {
+      "start": "2013"
+    },
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": [
+        "assemble",
+        "template-helpers",
+        "utils"
+      ]
+    },
+    "reflinks": [
+      "assemble",
+      "handlebars",
+      "remarkable",
+      "verb"
+    ],
+    "helpers": [
+      "helper-coverage"
+    ],
+    "lint": {
+      "reflinks": true
+    }
+  }
 }

@@ -3,7 +3,7 @@
 Code example
 
 ```js
-var urlresolve = function (base, href) {
+var urlresolve = function(base, href) {
   return url.resolve(base, href);
 };
 ```

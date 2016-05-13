@@ -1,12 +1,15 @@
-node_modules
+*.DS_Store
 *.sublime-*
-
-# Ignore the staging dir for docs
-
+.DS_store
+/actual/
+_gh_pages
+bower_components
+coverage
+docs
+example.js
+node_modules
+npm-debug.log
+temp
 tmp
-vendor
-/test/spec/
 TODO.md
-*.rar
-
-/npm-debug.log
+vendor
