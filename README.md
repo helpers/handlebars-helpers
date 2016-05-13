@@ -86,9 +86,9 @@ Currently **139 helpers** in **19 categories**:
 
 ## All helpers
 
-### [array helpers](lib/array.js)
+### [array helpers](#array)
 
-Visit the: [code](lib/array.js) | [unit tests](test/array.js)
+Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+array+helpers))
 
 * **[after](#after)** ([code](lib/array.js#L26) | [tests](test/array.js#L11))
 * **[arrayify](#arrayify)** ([code](lib/array.js#L43) | [tests](test/array.js#L27))
@@ -112,25 +112,25 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js)
 * **[withLast](#withLast)** ([code](lib/array.js#L548) | [tests](test/array.js#L360))
 * **[withSort](#withSort)** ([code](lib/array.js#L583) | [tests](test/array.js#L374))
 
-### [code helpers](lib/code.js)
+### [code helpers](#code)
 
-Visit the: [code](lib/code.js) | [unit tests](test/code.js)
+Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers))
 
 * **[embed](#embed)** ([code](lib/code.js#L31) | [tests](test/code.js#L9))
 * **[gist](#gist)** ([code](lib/code.js#L56) | [tests](test/code.js#L61))
 * **[jsfiddle](#jsfiddle)** ([code](lib/code.js#L72) | [tests](test/code.js#L68))
 
-### [collection helpers](lib/collection.js)
+### [collection helpers](#collection)
 
-Visit the: [code](lib/collection.js) | [unit tests](test/collection.js)
+Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers))
 
 * **[isEmpty](#isEmpty)** ([code](lib/collection.js#L28) | [tests](test/collection.js#L11))
 * **[iterate](#iterate)** ([code](lib/collection.js#L56) | [tests](test/collection.js#L38))
 * **[length](#length)** ([code](lib/collection.js#L77) | [tests](test/collection.js#L77))
 
-### [comparison helpers](lib/comparison.js)
+### [comparison helpers](#comparison)
 
-Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js)
+Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers))
 
 * **[and](#and)** ([code](lib/comparison.js#L26) | [tests](test/comparison.js#L10))
 * **[compare](#compare)** ([code](lib/comparison.js#L48) | [tests](test/comparison.js#L22))
@@ -154,23 +154,23 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js)
 * **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L524) | [tests](test/comparison.js#L496))
 * **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L543) | [tests](test/comparison.js#L511))
 
-### [date helpers](lib/date.js)
+### [date helpers](#date)
 
-Visit the: [code](lib/date.js) | [unit tests](test/date.js)
+Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers))
 
 * **[moment](#moment)** ([code](lib/date.js#L15) | [no tests])
 
-### [fs helpers](lib/fs.js)
+### [fs helpers](#fs)
 
-Visit the: [code](lib/fs.js) | [unit tests](test/fs.js)
+Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
 
 * **[fileSize](#fileSize)** ([code](lib/fs.js#L27) | [tests](test/fs.js#L9))
 * **[read](#read)** ([code](lib/fs.js#L63) | [tests](test/fs.js#L48))
 * **[readdir](#readdir)** ([code](lib/fs.js#L76) | [tests](test/fs.js#L55))
 
-### [html helpers](lib/html.js)
+### [html helpers](#html)
 
-Visit the: [code](lib/html.js) | [unit tests](test/html.js)
+Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers))
 
 * **[css](#css)** ([code](lib/html.js#L23) | [tests](test/html.js#L12))
 * **[ellipsis](#ellipsis)** ([code](lib/html.js#L66) | [tests](test/html.js#L55))
@@ -181,22 +181,22 @@ Visit the: [code](lib/html.js) | [unit tests](test/html.js)
 * **[ol](#ol)** ([code](lib/html.js#L178) | [tests](test/html.js#L140))
 * **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L197) | [tests](test/html.js#L147))
 
-### [i18n helpers](lib/i18n.js)
+### [i18n helpers](#i18n)
 
-Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js)
+Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+i18n+helpers))
 
 * **[i18n](#i18n)** ([code](lib/i18n.js#L22) | [tests](test/i18n.js#L10))
 
-### [inflection helpers](lib/inflection.js)
+### [inflection helpers](#inflection)
 
-Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js)
+Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+inflection+helpers))
 
 * **[inflect](#inflect)** ([code](lib/inflection.js#L21) | [tests](test/inflection.js#L8))
 * **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L50) | [tests](test/inflection.js#L21))
 
-### [logging helpers](lib/logging.js)
+### [logging helpers](#logging)
 
-Visit the: [code](lib/logging.js) | [unit tests](test/logging.js)
+Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+logging+helpers))
 
 * **[log](#log)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[info](#info)** ([code](lib/logging.js#Lundefined) | [no tests])
@@ -206,21 +206,21 @@ Visit the: [code](lib/logging.js) | [unit tests](test/logging.js)
 * **[debug](#debug)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[_inspect](#_inspect)** ([code](lib/logging.js#Lundefined) | [no tests])
 
-### [markdown helpers](lib/markdown.js)
+### [markdown helpers](#markdown)
 
-Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js)
+Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
 
-### [match helpers](lib/match.js)
+### [match helpers](#match)
 
-Visit the: [code](lib/match.js) | [unit tests](test/match.js)
+Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers))
 
 * **[mm](#mm)** ([code](lib/match.js#L26) | [tests](test/match.js#L13))
 * **[match](#match)** ([code](lib/match.js#L45) | [tests](test/match.js#L12))
 * **[isMatch](#isMatch)** ([code](lib/match.js#L66) | [tests](test/match.js#L62))
 
-### [math helpers](lib/math.js)
+### [math helpers](#math)
 
-Visit the: [code](lib/math.js) | [unit tests](test/math.js)
+Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers))
 
 * **[add](#add)** ([code](lib/math.js#L19) | [tests](test/math.js#L9))
 * **[subtract](#subtract)** ([code](lib/math.js#L30) | [tests](test/math.js#L63))
@@ -232,18 +232,18 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js)
 * **[sum](#sum)** ([code](lib/math.js#L105) | [tests](test/math.js#L70))
 * **[avg](#avg)** ([code](lib/math.js#L131) | [no tests])
 
-### [misc helpers](lib/misc.js)
+### [misc helpers](#misc)
 
-Visit the: [code](lib/misc.js) | [unit tests](test/misc.js)
+Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+misc+helpers))
 
 * **[default](#default)** ([code](lib/misc.js#L21) | [tests](test/misc.js#L13))
 * **[option](#option)** ([code](lib/misc.js#L40) | [tests](test/misc.js#L30))
 * **[noop](#noop)** ([code](lib/misc.js#L54) | [tests](test/misc.js#L23))
 * **[withHash](#withHash)** ([code](lib/misc.js#L68) | [tests](test/misc.js#L48))
 
-### [number helpers](lib/number.js)
+### [number helpers](#number)
 
-Visit the: [code](lib/number.js) | [unit tests](test/number.js)
+Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+number+helpers))
 
 * **[addCommas](#addCommas)** ([code](lib/number.js#L19) | [tests](test/number.js#L63))
 * **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
@@ -255,9 +255,9 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js)
 * **[toInt](#toInt)** ([code](lib/number.js#L136) | [tests](test/number.js#L49))
 * **[toPrecision](#toPrecision)** ([code](lib/number.js#L146) | [tests](test/number.js#L27))
 
-### [object helpers](lib/object.js)
+### [object helpers](#object)
 
-Visit the: [code](lib/object.js) | [unit tests](test/object.js)
+Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers))
 
 * **[extend](#extend)** ([code](lib/object.js#L21) | [tests](test/object.js#L13))
 * **[forIn](#forIn)** ([code](lib/object.js#L59) | [tests](test/object.js#L31))
@@ -271,9 +271,9 @@ Visit the: [code](lib/object.js) | [unit tests](test/object.js)
 * **[pick](#pick)** ([code](lib/object.js#L230) | [tests](test/object.js#L155))
 * **[stringify](#stringify)** ([code](lib/object.js#L257) | [tests](test/object.js#L183))
 
-### [path helpers](lib/path.js)
+### [path helpers](#path)
 
-Visit the: [code](lib/path.js) | [unit tests](test/path.js)
+Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+path+helpers))
 
 * **[basename](#basename)** ([code](lib/path.js#L24) | [tests](test/path.js#L9))
 * **[dirname](#dirname)** ([code](lib/path.js#L40) | [tests](test/path.js#L31))
@@ -281,9 +281,9 @@ Visit the: [code](lib/path.js) | [unit tests](test/path.js)
 * **[relative](#relative)** ([code](lib/path.js#L73) | [tests](test/path.js#L38))
 * **[segments](#segments)** ([code](lib/path.js#L97) | [tests](test/path.js#L49))
 
-### [string helpers](lib/string.js)
+### [string helpers](#string)
 
-Visit the: [code](lib/string.js) | [unit tests](test/string.js)
+Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+string+helpers))
 
 * **[camelcase](#camelcase)** ([code](lib/string.js#L25) | [tests](test/string.js#L9))
 * **[capitalize](#capitalize)** ([code](lib/string.js#L43) | [tests](test/string.js#L24))
@@ -309,9 +309,9 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js)
 * **[trim](#trim)** ([code](lib/string.js#L475) | [tests](test/string.js#L266))
 * **[uppercase](#uppercase)** ([code](lib/string.js#L494) | [tests](test/string.js#L300))
 
-### [url helpers](lib/url.js)
+### [url helpers](#url)
 
-Visit the: [code](lib/url.js) | [unit tests](test/url.js)
+Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+url+helpers))
 
 * **[encodeURI](#encodeURI)** ([code](lib/url.js#L22) | [tests](test/url.js#L33))
 * **[decodeURI](#decodeURI)** ([code](lib/url.js#L34) | [tests](test/url.js#L40))

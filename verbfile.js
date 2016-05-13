@@ -158,6 +158,17 @@ function helpers(app) {
     return '- **' + link(file.stem, '#' + file.stem) + '**';
   });
 
+  app.helper('issue', function(name) {
+    var repo = app.cache.data.repository;
+    return '[create issue](https://github.com/' + repo + '/issues/new?title=' + name + '%20helper)';
+  });
+
+  app.helper('sectionIssue', function(section) {
+    var repo = app.cache.data.repository;
+    var url = 'https://github.com/' + repo + '/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+';
+    return '[issues](' + url + section + '+helpers)';
+  });
+
   app.helper('anchor', function(file) {
     return link(file.stem, '#' + file.stem);
   });
