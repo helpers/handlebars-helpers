@@ -1,14 +1,12 @@
 sudo: false
 language: node_js
 node_js:
-  - "stable"
-  - "5"
-  - "4"
-  - "0.12"
-  - "0.10"
-before_install:
-  - npm install -g npm@next
+  - '5'
+  - '4'
+  - '0.12'
+  - '0.10'
 matrix:
   fast_finish: true
   allow_failures:
-    - node_js: "0.10"
+    - node_js: '0.10'
+    - node_js: '0.12'

@@ -88,6 +88,13 @@
         "afterColon": true
       }
     ],
+    "keyword-spacing": [
+      2,
+      {
+        "before": true,
+        "after": true
+      }
+    ],
     "new-cap": [
       2,
       {
@@ -109,7 +116,6 @@
     "no-dupe-keys": 2,
     "no-duplicate-case": 2,
     "no-empty-character-class": 2,
-    "no-empty-label": 2,
     "no-eval": 2,
     "no-ex-assign": 2,
     "no-extend-native": 2,
@@ -142,7 +148,7 @@
         "max": 1
       }
     ],
-    "no-native-reassign": 2,
+    "no-native-reassign": 0,
     "no-negated-in-lhs": 2,
     "no-new": 2,
     "no-new-func": 2,
@@ -220,10 +226,6 @@
         "after": true
       }
     ],
-    "space-after-keywords": [
-      2,
-      "always"
-    ],
     "space-before-blocks": [
       2,
       "always"
@@ -232,16 +234,11 @@
       2,
       "never"
     ],
-    "space-before-keywords": [
-      2,
-      "always"
-    ],
     "space-in-parens": [
       2,
       "never"
     ],
     "space-infix-ops": 2,
-    "space-return-throw-case": 2,
     "space-unary-ops": [
       2,
       {
