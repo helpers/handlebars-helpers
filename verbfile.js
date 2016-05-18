@@ -23,7 +23,22 @@ module.exports = function(verb, base, env) {
   verb.on('error', console.log);
   verb.helpers(require('template-helpers')());
   verb.task('data', function(cb) {
-    verb.data({authors: verb.cache.data.maintainers});
+    verb.data({
+      authors: [
+        {
+          "name": "Brian Woodward",
+          "url": "https://github.com/doowb",
+          "twitter": "doowb",
+          "username": "doowb"
+        },
+        {
+          "name": "Jon Schlinkert",
+          "url": "https://github.com/jonschlinkert",
+          "twitter": "jonschlinkert",
+          "username": "jonschlinkert"
+        }
+      ]
+    });
     cb();
   });
 
