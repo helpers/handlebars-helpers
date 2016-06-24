@@ -453,10 +453,17 @@ describe('comparison', function() {
       var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
       assert.equal(fn({great: false, magnificent: true}), 'A');
     });
-
+    it('should render a block if any of the values are truthy.', function() {
+      var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
+      assert.equal(fn({great: false, magnificent: false, fantastic: true}), 'A');
+    });
     it('should render the inverse block if neither are true.', function() {
       var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
       assert.equal(fn({great: false, magnificent: false}), 'B');
+    });
+    it('should render the inverse block if none are true.', function() {
+      var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
+      assert.equal(fn({great: false, magnificent: false, fantastic: false}), 'B');
     });
   });
 
