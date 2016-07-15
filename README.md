@@ -1026,7 +1026,7 @@ Block helper that renders a block if **any of** the given values is truthy. If a
 
 **Params**
 
-* `arguments` **{}**: {...any} var_args,
+* `arguments` **{...any}**: ,
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
