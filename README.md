@@ -156,12 +156,12 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[lt](#lt)** ([code](lib/comparison.js#L373) | [tests](test/comparison.js#L377))
 * **[lte](#lte)** ([code](lib/comparison.js#L401) | [tests](test/comparison.js#L404))
 * **[neither](#neither)** ([code](lib/comparison.js#L426) | [tests](test/comparison.js#L439))
-* **[or](#or)** ([code](lib/comparison.js#L447) | [tests](test/comparison.js#L451))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L467) | [tests](test/comparison.js#L463))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L486) | [tests](test/comparison.js#L474))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L505) | [tests](test/comparison.js#L485))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L524) | [tests](test/comparison.js#L496))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L543) | [tests](test/comparison.js#L511))
+* **[or](#or)** ([code](lib/comparison.js#L446) | [tests](test/comparison.js#L451))
+* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L478) | [tests](test/comparison.js#L470))
+* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L497) | [tests](test/comparison.js#L481))
+* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L516) | [tests](test/comparison.js#L492))
+* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L535) | [tests](test/comparison.js#L503))
+* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L554) | [tests](test/comparison.js#L518))
 
 ### [date helpers](#date)
 
@@ -1020,20 +1020,19 @@ when falsy.
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{or}}](lib/comparison.js#L447)
+### [{{or}}](lib/comparison.js#L446)
 
-Block helper that renders a block if **either of** the given values
+Block helper that renders a block if **any of** the given values
 is truthy. If an inverse block is specified it will be rendered
 when falsy.
 
 **Params**
 
-* `a` **{any}**
-* `b` **{any}**
+* **{...any}**: var_args
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessEq}}](lib/comparison.js#L467)
+### [{{unlessEq}}](lib/comparison.js#L478)
 
 Block helper that always renders the inverse block **unless `a` is
 is equal to `b`**.
@@ -1045,7 +1044,7 @@ is equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessGt}}](lib/comparison.js#L486)
+### [{{unlessGt}}](lib/comparison.js#L497)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than `b`**.
@@ -1056,7 +1055,7 @@ is greater than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessLt}}](lib/comparison.js#L505)
+### [{{unlessLt}}](lib/comparison.js#L516)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than `b`**.
@@ -1067,7 +1066,7 @@ is less than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessGteq}}](lib/comparison.js#L524)
+### [{{unlessGteq}}](lib/comparison.js#L535)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than or equal to `b`**.
@@ -1078,7 +1077,7 @@ is greater than or equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessLteq}}](lib/comparison.js#L543)
+### [{{unlessLteq}}](lib/comparison.js#L554)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than or equal to `b`**.
@@ -2418,7 +2417,7 @@ Cast `val` to an array.
 
 You might also be interested in these projects:
 
-* [assemble](https://www.npmjs.com/package/assemble): Assemble is a powerful, extendable and easy to use static site generator for node.js. Used… [more](https://github.com/assemble/assemble) | [homepage](https://github.com/assemble/assemble "Assemble is a powerful, extendable and easy to use static site generator for node.js. Used by thousands of projects for much more than building websites, Assemble is also used for creating themes, scaffolds, boilerplates, e-books, UI components, API docum")
+* [assemble](https://www.npmjs.com/package/assemble): Get the rocks out of your socks! Assemble makes you fast at creating web projects… [more](https://github.com/assemble/assemble) | [homepage](https://github.com/assemble/assemble "Get the rocks out of your socks! Assemble makes you fast at creating web projects. Assemble is used by thousands of projects for rapid prototyping, creating themes, scaffolds, boilerplates, e-books, UI components, API documentation, blogs, building websit")
 * [template-helpers](https://www.npmjs.com/package/template-helpers): Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or… [more](https://github.com/jonschlinkert/template-helpers) | [homepage](https://github.com/jonschlinkert/template-helpers "Generic JavaScript helpers that can be used with any template engine. Handlebars, Lo-Dash, Underscore, or any engine that supports helper functions.")
 * [utils](https://www.npmjs.com/package/utils): Fast, generic JavaScript/node.js utility functions. | [homepage](https://github.com/jonschlinkert/utils "Fast, generic JavaScript/node.js utility functions.")
 
@@ -2468,4 +2467,4 @@ Released under the [MIT license](https://github.com/assemble/handlebars-helpers/
 
 ***
 
-_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on July 07, 2016._
+_This file was generated by [verb](https://github.com/verbose/verb), v0.9.0, on July 15, 2016._
