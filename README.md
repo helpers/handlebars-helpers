@@ -156,12 +156,12 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[lt](#lt)** ([code](lib/comparison.js#L373) | [tests](test/comparison.js#L377))
 * **[lte](#lte)** ([code](lib/comparison.js#L401) | [tests](test/comparison.js#L404))
 * **[neither](#neither)** ([code](lib/comparison.js#L426) | [tests](test/comparison.js#L439))
-* **[or](#or)** ([code](lib/comparison.js#L446) | [tests](test/comparison.js#L451))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L478) | [tests](test/comparison.js#L470))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L497) | [tests](test/comparison.js#L481))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L516) | [tests](test/comparison.js#L492))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L535) | [tests](test/comparison.js#L503))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L554) | [tests](test/comparison.js#L518))
+* **[or](#or)** ([code](lib/comparison.js#L452) | [tests](test/comparison.js#L451))
+* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L484) | [tests](test/comparison.js#L470))
+* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L503) | [tests](test/comparison.js#L481))
+* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L522) | [tests](test/comparison.js#L492))
+* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L541) | [tests](test/comparison.js#L503))
+* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L560) | [tests](test/comparison.js#L518))
 
 ### [date helpers](#date)
 
@@ -1020,19 +1020,25 @@ when falsy.
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{or}}](lib/comparison.js#L446)
+### [{{or}}](lib/comparison.js#L452)
 
-Block helper that renders a block if **any of** the given values
-is truthy. If an inverse block is specified it will be rendered
-when falsy.
+Block helper that renders a block if **any of** the given values is truthy. If an inverse block is specified it will be rendered when falsy.
 
 **Params**
 
-* **{...any}**: var_args
+* `arguments` **{}**: {...any} var_args,
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessEq}}](lib/comparison.js#L478)
+**Example**
+
+```handlebars
+{{#or a b c}}
+  If any value is true this will be rendered.
+{{/or}}
+```
+
+### [{{unlessEq}}](lib/comparison.js#L484)
 
 Block helper that always renders the inverse block **unless `a` is
 is equal to `b`**.
@@ -1044,7 +1050,7 @@ is equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessGt}}](lib/comparison.js#L497)
+### [{{unlessGt}}](lib/comparison.js#L503)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than `b`**.
@@ -1055,7 +1061,7 @@ is greater than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessLt}}](lib/comparison.js#L516)
+### [{{unlessLt}}](lib/comparison.js#L522)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than `b`**.
@@ -1066,7 +1072,7 @@ is less than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessGteq}}](lib/comparison.js#L535)
+### [{{unlessGteq}}](lib/comparison.js#L541)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than or equal to `b`**.
@@ -1077,7 +1083,7 @@ is greater than or equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessLteq}}](lib/comparison.js#L554)
+### [{{unlessLteq}}](lib/comparison.js#L560)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than or equal to `b`**.
