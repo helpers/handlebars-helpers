@@ -72,7 +72,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **139 helpers** in **19 categories**:
+Currently **141 helpers** in **19 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -269,27 +269,29 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https
 
 Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers))
 
-* **[extend](#extend)** ([code](lib/object.js#L21) | [tests](test/object.js#L13))
-* **[forIn](#forIn)** ([code](lib/object.js#L59) | [tests](test/object.js#L31))
-* **[forOwn](#forOwn)** ([code](lib/object.js#L86) | [tests](test/object.js#L48))
-* **[get](#get)** ([code](lib/object.js#L116) | [tests](test/object.js#L75))
-* **[getObject](#getObject)** ([code](lib/object.js#L138) | [tests](test/object.js#L75))
-* **[hasOwn](#hasOwn)** ([code](lib/object.js#L157) | [tests](test/object.js#L110))
-* **[isObject](#isObject)** ([code](lib/object.js#L174) | [tests](test/object.js#L128))
-* **[merge](#merge)** ([code](lib/object.js#L190) | [tests](test/object.js#L140))
-* **[parseJSON](#parseJSON)** ([code](lib/object.js#L215) | [tests](test/object.js#L148))
-* **[pick](#pick)** ([code](lib/object.js#L230) | [tests](test/object.js#L155))
-* **[stringify](#stringify)** ([code](lib/object.js#L257) | [tests](test/object.js#L183))
+* **[extend](#extend)** ([code](lib/object.js#L22) | [tests](test/object.js#L13))
+* **[forIn](#forIn)** ([code](lib/object.js#L61) | [tests](test/object.js#L31))
+* **[forOwn](#forOwn)** ([code](lib/object.js#L88) | [tests](test/object.js#L48))
+* **[get](#get)** ([code](lib/object.js#L118) | [tests](test/object.js#L75))
+* **[getObject](#getObject)** ([code](lib/object.js#L140) | [tests](test/object.js#L75))
+* **[hasOwn](#hasOwn)** ([code](lib/object.js#L159) | [tests](test/object.js#L110))
+* **[isObject](#isObject)** ([code](lib/object.js#L176) | [tests](test/object.js#L128))
+* **[merge](#merge)** ([code](lib/object.js#L192) | [tests](test/object.js#L140))
+* **[parseJSON](#parseJSON)** ([code](lib/object.js#L217) | [tests](test/object.js#L148))
+* **[pick](#pick)** ([code](lib/object.js#L232) | [tests](test/object.js#L155))
+* **[stringify](#stringify)** ([code](lib/object.js#L259) | [tests](test/object.js#L183))
 
 ### [path helpers](#path)
 
 Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+path+helpers))
 
-* **[basename](#basename)** ([code](lib/path.js#L24) | [tests](test/path.js#L9))
-* **[dirname](#dirname)** ([code](lib/path.js#L40) | [tests](test/path.js#L31))
-* **[extname](#extname)** ([code](lib/path.js#L56) | [tests](test/path.js#L20))
-* **[relative](#relative)** ([code](lib/path.js#L73) | [tests](test/path.js#L38))
-* **[segments](#segments)** ([code](lib/path.js#L97) | [tests](test/path.js#L49))
+* **[absolute](#absolute)** ([code](lib/path.js#L24) | [tests](test/path.js#L12))
+* **[dirname](#dirname)** ([code](lib/path.js#L43) | [tests](test/path.js#L24))
+* **[relative](#relative)** ([code](lib/path.js#L60) | [tests](test/path.js#L31))
+* **[basename](#basename)** ([code](lib/path.js#L76) | [tests](test/path.js#L46))
+* **[stem](#stem)** ([code](lib/path.js#L92) | [tests](test/path.js#L57))
+* **[extname](#extname)** ([code](lib/path.js#L108) | [tests](test/path.js#L68))
+* **[segments](#segments)** ([code](lib/path.js#L132) | [tests](test/path.js#L79))
 
 ### [string helpers](#string)
 
@@ -1618,7 +1620,7 @@ Formats the given number using fixed-point notation.
 
 ## object
 
-### [{{extend}}](lib/object.js#L21)
+### [{{extend}}](lib/object.js#L22)
 
 Extend the context with the properties of other objects.
 A shallow merge is performed to avoid mutating the context.
@@ -1628,7 +1630,7 @@ A shallow merge is performed to avoid mutating the context.
 * `objects` **{Object}**: One or more objects to extend.
 * `returns` **{Object}**
 
-### [{{forIn}}](lib/object.js#L59)
+### [{{forIn}}](lib/object.js#L61)
 
 Block helper that iterates over the properties of
 an object, exposing each key and value on the context.
@@ -1639,7 +1641,7 @@ an object, exposing each key and value on the context.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{forOwn}}](lib/object.js#L86)
+### [{{forOwn}}](lib/object.js#L88)
 
 Block helper that iterates over the **own** properties of
 an object, exposing each key and value on the context.
@@ -1650,7 +1652,7 @@ an object, exposing each key and value on the context.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{get}}](lib/object.js#L116)
+### [{{get}}](lib/object.js#L118)
 
 Use property paths (`a.b.c`) to get a value or nested value from
 the context. Works as a regular helper or block helper.
@@ -1662,7 +1664,7 @@ the context. Works as a regular helper or block helper.
 * `options` **{Object}**: The handlebars options object, if used as a block helper.
 * `returns` **{String}**
 
-### [{{getObject}}](lib/object.js#L138)
+### [{{getObject}}](lib/object.js#L140)
 
 Use property paths (`a.b.c`) to get an object from
 the context. Differs from the `get` helper in that this
@@ -1676,7 +1678,7 @@ block helper.
 * `context` **{Object}**: The context object
 * `returns` **{String}**
 
-### [{{hasOwn}}](lib/object.js#L157)
+### [{{hasOwn}}](lib/object.js#L159)
 
 Return true if `key` is an own, enumerable property of the given `context` object.
 
@@ -1692,7 +1694,7 @@ Return true if `key` is an own, enumerable property of the given `context` objec
 {{hasOwn context key}}
 ```
 
-### [{{isObject}}](lib/object.js#L174)
+### [{{isObject}}](lib/object.js#L176)
 
 Return true if `value` is an object.
 
@@ -1708,7 +1710,7 @@ Return true if `value` is an object.
 //=> false
 ```
 
-### [{{merge}}](lib/object.js#L190)
+### [{{merge}}](lib/object.js#L192)
 
 Deeply merge the properties of the given `objects` with the
 context object.
@@ -1719,7 +1721,7 @@ context object.
 * `objects` **{Object}**
 * `returns` **{Object}**
 
-### [{{parseJSON}}](lib/object.js#L215)
+### [{{parseJSON}}](lib/object.js#L217)
 
 Block helper that parses a string using `JSON.parse`,
 then passes the parsed object to the block as context.
@@ -1729,7 +1731,7 @@ then passes the parsed object to the block as context.
 * `string` **{String}**: The string to parse
 * `options` **{Object}**: Handlebars options object
 
-### [{{pick}}](lib/object.js#L230)
+### [{{pick}}](lib/object.js#L232)
 
 Pick properties from the context object.
 
@@ -1740,7 +1742,7 @@ Pick properties from the context object.
 * `options` **{Object}**: Handlebars options object.
 * `returns` **{Object}**: Returns an object with the picked values. If used as a block helper, the values are passed as context to the inner block. If no values are found, the context is passed to the inverse block.
 
-### [{{stringify}}](lib/object.js#L257)
+### [{{stringify}}](lib/object.js#L259)
 
 Stringify an object using `JSON.stringify`.
 
@@ -1751,9 +1753,9 @@ Stringify an object using `JSON.stringify`.
 
 ## path
 
-### [{{basename}}](lib/path.js#L24)
+### [{{absolute}}](lib/path.js#L24)
 
-Get the file extension from the given `filepath`.
+Get the directory path segment from the given `filepath`.
 
 **Params**
 
@@ -1763,11 +1765,11 @@ Get the file extension from the given `filepath`.
 **Example**
 
 ```handlebars
-{{basename "docs/toc.md"}}
-//=> 'toc.md'
+{{absolute "docs/toc.md"}}
+//=> 'docs'
 ```
 
-### [{{dirname}}](lib/path.js#L40)
+### [{{dirname}}](lib/path.js#L43)
 
 Get the directory path segment from the given `filepath`.
 
@@ -1783,23 +1785,7 @@ Get the directory path segment from the given `filepath`.
 //=> 'docs'
 ```
 
-### [{{extname}}](lib/path.js#L56)
-
-Get the file extension from the given `filepath`.
-
-**Params**
-
-* `filepath` **{String}**
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{extname "docs/toc.md"}}
-//=> '.md'
-```
-
-### [{{relative}}](lib/path.js#L73)
+### [{{relative}}](lib/path.js#L60)
 
 Get the relative filepath from `a` to `b`.
 
@@ -1815,7 +1801,55 @@ Get the relative filepath from `a` to `b`.
 {{relative a b}}
 ```
 
-### [{{segments}}](lib/path.js#L97)
+### [{{basename}}](lib/path.js#L76)
+
+Get the file extension from the given `filepath`.
+
+**Params**
+
+* `ext` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{basename "docs/toc.md"}}
+//=> 'toc.md'
+```
+
+### [{{stem}}](lib/path.js#L92)
+
+Get the "stem" from the given `filepath`.
+
+**Params**
+
+* `filepath` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{stem "docs/toc.md"}}
+//=> 'toc'
+```
+
+### [{{extname}}](lib/path.js#L108)
+
+Get the file extension from the given `filepath`.
+
+**Params**
+
+* `filepath` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{extname "docs/toc.md"}}
+//=> '.md'
+```
+
+### [{{segments}}](lib/path.js#L132)
 
 Get specific (joined) segments of a file path by passing a range of array indices.
 
@@ -2352,7 +2386,7 @@ Get options from the options hash and `this`.
 * `app` **{Object}**: The current application instance.
 * `returns` **{Object}**
 
-### [{{isObject}}](lib/utils/index.js#L206)
+### [{{isObject}}](lib/utils/index.js#L208)
 
 Returns true if the given value is an object
 and not an array.
@@ -2362,7 +2396,7 @@ and not an array.
 * `value` **{any}**
 * `returns` **{Boolean}**
 
-### [{{isEmpty}}](lib/utils/index.js#L219)
+### [{{isEmpty}}](lib/utils/index.js#L221)
 
 Returns true if the given value is empty.
 
@@ -2371,7 +2405,7 @@ Returns true if the given value is empty.
 * `value` **{any}**
 * `returns` **{Boolean}**
 
-### [{{tryParse}}](lib/utils/index.js#L242)
+### [{{tryParse}}](lib/utils/index.js#L244)
 
 Try to parse the given `string` as JSON. Fails
 gracefully if the value cannot be parsed.
@@ -2381,7 +2415,7 @@ gracefully if the value cannot be parsed.
 * `string` **{String}**
 * `returns` **{Object}**
 
-### [{{result}}](lib/utils/index.js#L258)
+### [{{result}}](lib/utils/index.js#L260)
 
 Return the given value. If the value is a function
 it will be called, and the result is returned.
@@ -2391,7 +2425,7 @@ it will be called, and the result is returned.
 * `val` **{any}**
 * `returns` **{any}**
 
-### [{{identity}}](lib/utils/index.js#L273)
+### [{{identity}}](lib/utils/index.js#L275)
 
 Return the given value, unchanged.
 
@@ -2400,7 +2434,7 @@ Return the given value, unchanged.
 * `val` **{any}**
 * `returns` **{any}**
 
-### [{{isString}}](lib/utils/index.js#L285)
+### [{{isString}}](lib/utils/index.js#L287)
 
 Return true if `val` is a string.
 
@@ -2409,7 +2443,7 @@ Return true if `val` is a string.
 * `val` **{any}**: The value to check
 * `returns` **{Boolean}**
 
-### [{{arrayify}}](lib/utils/index.js#L297)
+### [{{arrayify}}](lib/utils/index.js#L299)
 
 Cast `val` to an array.
 
