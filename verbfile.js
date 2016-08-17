@@ -4,134 +4,140 @@ var fs = require('fs');
 var path = require('path');
 var link = require('markdown-link');
 var exists = require('fs-exists-sync');
+var isValid = require('is-valid-app');
 var through = require('through2');
-var forOwn = require('for-own');
-var cache = {};
+var File = require('vinyl');
 
-module.exports = function(verb, base, env) {
-  verb.use(require('verb-readme-generator'));
+module.exports = function(app, base, env) {
+  if (!isValid(app, 'verbfile')) return;
+  app.use(require('verb-generate-readme'));
+  app.on('error', console.log);
 
-  verb.data({
-    before: {
-      license: 'When this project was created some helpers were sourced from [Swag, by Elving Rodriguez](http://elving.github.com/swag/).'
-    }
-  });
+  /**
+   * Helpers
+   */
 
-  helpers(verb);
-  verb.data({arr: ['foo', 'bar', 'baz']});
+  app.helpers(require('template-helpers')());
+  helpers(app);
 
-  verb.on('error', console.log);
-  verb.helpers(require('template-helpers')());
-  verb.task('data', function(cb) {
-    verb.data({
+  /**
+   * Tasks
+   */
+
+  app.task('data', function(cb) {
+    app.data({
+      before: {
+        license: 'When this project was created some helpers were sourced from [Swag, by Elving Rodriguez](http://elving.github.com/swag/).'
+      },
       authors: [
         {
-          "name": "Brian Woodward",
-          "url": "https://github.com/doowb",
-          "twitter": "doowb",
-          "username": "doowb"
+          'name': 'Brian Woodward',
+          'url': 'https://github.com/doowb',
+          'twitter': 'doowb',
+          'username': 'doowb'
         },
         {
-          "name": "Jon Schlinkert",
-          "url": "https://github.com/jonschlinkert",
-          "twitter": "jonschlinkert",
-          "username": "jonschlinkert"
+          'name': 'Jon Schlinkert',
+          'url': 'https://github.com/jonschlinkert',
+          'twitter': 'jonschlinkert',
+          'username': 'jonschlinkert'
         }
       ]
     });
     cb();
   });
 
-  verb.task('toc', function(cb) {
-    var total = { categories: 0, helpers: 0 };
-    var sections = [];
-    var summary = [];
-    var methods = {};
-    var toc = [];
-
-    return verb.src('lib/*.js')
-      .pipe(through.obj(function(file, enc, next) {
-        try {
-
-          if (file.stem !== 'index') {
-            file.base = verb.cwd;
-            file.code = require(file.path);
-            var heading = listItem(file);
-            var newFile = {
-              methods: require(file.path),
-              test: {
-                path: path.join('test', file.basename),
-                code: {}
-              },
-              code: {},
-              path: file.relative,
-              base: file.base,
-              cwd: file.cwd,
-              relative: file.relative,
-              stem: file.stem || path.basename(file.path, path.extname(filepath)),
-              data: {
-                methods: {}
-              }
-            };
-
-            var testLine = matchTest(newFile.test.path);
-            var codeLine = matchCode(newFile.path);
-
-            for (var key in newFile.methods) {
-              total.helpers++;
-
-              if (newFile.methods.hasOwnProperty(key)) {
-                newFile.data.methods[key] = {
-                  method: newFile.stem,
-                  stem: key,
-                  code: {
-                    path: newFile.relative,
-                    line: codeLine(key)
-                  },
-                  test: {
-                    path: newFile.test.path,
-                    line: testLine(key)
-                  }
-                };
-              }
-            }
-
-            methods[newFile.stem] = newFile;
-            total.categories++;
-          }
-          next();
-        } catch (err) {
-          next(err);
-        }
-      }, function(next) {
-
-        verb.data({total: total});
-        verb.data({methods: methods});
-        next();
-      }));
+  app.task('toc', function(cb) {
+    return app.src('lib/*.js')
+      .pipe(toc(app));
   });
 
-  verb.task('docs', function(cb) {
-    return verb.src('README.md')
+  app.task('docs', function(cb) {
+    return app.src('README.md')
       .pipe(through.obj(function(file, enc, next) {
         file.content = file.content.replace(/^(#{2,}\s*)\[\.([^\]]+)\]/gm, '$1[{{$2}}]');
         next(null, file);
       }))
-      .pipe(verb.dest('.'));
+      .pipe(app.dest('.'));
   });
 
-  verb.preRender(/\.md$/, function(file, next) {
+  app.preRender(/\.md$/, function(file, next) {
     file.options.stripEmpty = false;
     next();
   });
 
-  verb.task('default', function(cb) {
-    verb.generate(['data', 'toc', 'readme', 'docs'], cb);
+  app.task('default', function(cb) {
+    app.generate(['data', 'toc', 'readme', 'docs'], cb);
   });
 };
 
-function section(name) {
-  return `## ${name}\n{%= apidocs("lib/${name}.js") %}`;
+function toc(app, options) {
+  options = options || {};
+  var total = { categories: 0, helpers: 0 };
+  var methods = {};
+
+  return through.obj(function(file, enc, next) {
+    if (typeof file.stem === 'undefined') {
+      file = new File(file);
+    }
+
+    file.base = app.cwd;
+    file.cwd = app.cwd;
+
+    try {
+      if (file.stem !== 'index') {
+        file.code = require(file.path);
+        var newFile = {
+          methods: require(file.path),
+          test: {
+            path: path.join('test', file.basename),
+            code: {}
+          },
+          code: {},
+          path: file.relative,
+          base: file.base,
+          cwd: file.cwd,
+          relative: file.relative,
+          stem: file.stem,
+          data: {
+            methods: {}
+          }
+        };
+
+        var testLine = matchTest(newFile.test.path);
+        var codeLine = matchCode(newFile.path);
+
+        for (var key in newFile.methods) {
+          total.helpers++;
+
+          if (newFile.methods.hasOwnProperty(key)) {
+            newFile.data.methods[key] = {
+              method: newFile.stem,
+              stem: key,
+              code: {
+                path: newFile.relative,
+                line: codeLine(key)
+              },
+              test: {
+                path: newFile.test.path,
+                line: testLine(key)
+              }
+            };
+          }
+        }
+
+        methods[newFile.stem] = newFile;
+        total.categories++;
+      }
+      next();
+    } catch (err) {
+      next(err);
+    }
+  }, function(next) {
+    app.data({total: total});
+    app.data({methods: methods});
+    next();
+  });
 }
 
 function matchTest(fp) {
@@ -200,6 +206,10 @@ function helpers(app) {
   app.helper('link', function(name, filepath) {
     return link(name, filepath);
   });
+}
+
+function section(name) {
+  return `## ${name}\n{%= apidocs("lib/${name}.js") %}`;
 }
 
 function listItem(file) {
