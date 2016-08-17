@@ -51,7 +51,9 @@
     "to-gfm-code-block": "^0.1.1"
   },
   "devDependencies": {
+    "engine-handlebars": "^0.8.0",
     "fs-exists-sync": "^0.1.0",
+    "global-modules": "^0.2.3",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
     "gulp-format-md": "^0.1.9",
@@ -65,6 +67,7 @@
     "mocha": "^2.5.3",
     "should": "^9.0.2",
     "template-helpers": "^0.6.6",
+    "templates": "^0.25.1",
     "through2": "^2.0.1",
     "verb-generate-readme": "^0.1.30",
     "vinyl": "^1.2.0"
