@@ -24,7 +24,7 @@ module.exports = function helpers(groups, options) {
   }
 
   options = options || {};
-  var hbs = options.handlebars || require('handlebars');
+  var hbs = options.handlebars || options.hbs || require('handlebars');
 
   define(module.exports, 'handlebars', hbs);
 
@@ -47,7 +47,7 @@ module.exports = function helpers(groups, options) {
 forIn(lib, function(group, key) {
   define(module.exports, key, function(options) {
     options = options || {};
-    var hbs = options.hbs || require('handlebars');
+    var hbs = options.handlebars || options.hbs || require('handlebars');
     define(module.exports, 'handlebars', hbs);
     hbs.registerHelper(group);
     return hbs.helpers;
