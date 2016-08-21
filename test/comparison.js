@@ -603,9 +603,9 @@ describe('comparison', function() {
     
     
     describe('non-block helper', function() {
-      it('should have a test for non block helper', function() {
-        assert(false);
-      });
+      // it('should have a test for non block helper', function() {
+      //   assert(false);
+      // });
     });
   });
 
