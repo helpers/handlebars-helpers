@@ -307,7 +307,7 @@ describe('comparison', function() {
 
   describe('ifNth', function() {
     it('should render a custom class on even rows', function() {
-      var source = '{{#each items}}<div {{#ifNth "2" @index}}class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
+      var source = '{{#each items}}<div{{#ifNth 2 @index}}{{else}} class="row-alternate"{{/ifNth}}>{{name}}</div>{{/each}}';
       var fn = hbs.compile(source);
       var context = {
         items: [
@@ -319,11 +319,11 @@ describe('comparison', function() {
         ]
       };
       assert(fn(context), [
-        '<div >Philip J. Fry</div>',
+        '<div>Philip J. Fry</div>',
         '<div class="row-alternate">Turanga Leela</div>',
-        '<div >Bender Bending Rodriguez</div>',
+        '<div>Bender Bending Rodriguez</div>',
         '<div class="row-alternate">Amy Wong</div>',
-        '<div >Hermes Conrad</div>'
+        '<div>Hermes Conrad</div>'
       ].join(''));
     });
   });
