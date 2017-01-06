@@ -737,7 +737,7 @@ Embed a GitHub Gist using only the id of the Gist
 **Example**
 
 ```handlebars
-{{gist 12345}}
+{{gist "12345"}}
 ```
 
 ### [{{jsfiddle}}](lib/code.js#L72)
