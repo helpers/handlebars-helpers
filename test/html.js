@@ -92,7 +92,7 @@ describe('html', function() {
 
     it('should create a coffeescript tag (TODO: only works with array format)', function() {
       var ctx = {scripts: ['a.coffee'] };
-      hbs.compile('{{{js scripts}}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee">');
+      hbs.compile('{{{js scripts}}}')(ctx).should.equal('<script type="text/coffeescript" src="a.coffee"></script>');
     });
   });
 
