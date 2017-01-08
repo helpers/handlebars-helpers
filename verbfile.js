@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var yaml = require('js-yaml');
 var link = require('markdown-link');
 var exists = require('fs-exists-sync');
 var isValid = require('is-valid-app');
@@ -18,7 +19,10 @@ module.exports = function(app, base, env) {
    */
 
   app.helpers(require('template-helpers')());
-  helpers(app);
+  customDocsHelpers(app);
+  app.helper('yaml', function(str) {
+    return yaml.safeLoad(str);
+  });
 
   /**
    * Tasks
@@ -174,7 +178,7 @@ function matchCode(fp) {
   };
 }
 
-function helpers(app) {
+function customDocsHelpers(app) {
   app.helper('bullet', function(file) {
     return '- **' + link(file.stem, '#' + file.stem) + '**';
   });
