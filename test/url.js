@@ -46,7 +46,7 @@ describe('url', function() {
 
   describe('urlParse', function() {
     it('should take a string, and return an object stringified to JSON.', function() {
-      var fn = hbs.compile('{{{urlParse "http://foo.com/bar/baz?key=value" "json"}}}');
+      var fn = hbs.compile('{{{JSONstringify (urlParse "http://foo.com/bar/baz?key=value" "json")}}}');
       JSON.parse(fn()).should.eql({
         "protocol": "http:",
         "slashes": true,
