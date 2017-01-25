@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.",
-  "version": "0.7.7",
+  "version": "0.8.0",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "assemble/handlebars-helpers",
