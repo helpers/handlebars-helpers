@@ -67,7 +67,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **143 helpers** in **19 categories**:
+Currently **145 helpers** in **19 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -121,9 +121,9 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 
 Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers))
 
-* **[embed](#embed)** ([code](lib/code.js#L31) | [tests](test/code.js#L9))
-* **[gist](#gist)** ([code](lib/code.js#L53) | [tests](test/code.js#L61))
-* **[jsfiddle](#jsfiddle)** ([code](lib/code.js#L69) | [tests](test/code.js#L68))
+* **[embed](#embed)** ([code](lib/code.js#L30) | [tests](test/code.js#L9))
+* **[gist](#gist)** ([code](lib/code.js#L52) | [tests](test/code.js#L61))
+* **[jsfiddle](#jsfiddle)** ([code](lib/code.js#L68) | [tests](test/code.js#L68))
 
 ### [collection helpers](#collection)
 
@@ -183,8 +183,8 @@ Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://g
 * **[sanitize](#sanitize)** ([code](lib/html.js#L120) | [tests](test/html.js#L99))
 * **[truncate](#truncate)** ([code](lib/html.js#L142) | [tests](test/html.js#L109))
 * **[ul](#ul)** ([code](lib/html.js#L162) | [tests](test/html.js#L133))
-* **[ol](#ol)** ([code](lib/html.js#L178) | [tests](test/html.js#L140))
-* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L197) | [tests](test/html.js#L147))
+* **[ol](#ol)** ([code](lib/html.js#L181) | [tests](test/html.js#L140))
+* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L203) | [tests](test/html.js#L147))
 
 ### [i18n helpers](#i18n)
 
@@ -216,7 +216,7 @@ Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](htt
 Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
 
 * **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [no tests])
-* **[md](#md)** ([code](lib/markdown.js#L57) | [no tests])
+* **[md](#md)** ([code](lib/markdown.js#L56) | [no tests])
 
 ### [match helpers](#match)
 
@@ -256,12 +256,12 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https
 * **[addCommas](#addCommas)** ([code](lib/number.js#L19) | [tests](test/number.js#L63))
 * **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
 * **[random](#random)** ([code](lib/number.js#L50) | [tests](test/number.js#L95))
-* **[toAbbr](#toAbbr)** ([code](lib/number.js#L63) | [tests](test/number.js#L70))
-* **[toExponential](#toExponential)** ([code](lib/number.js#L97) | [tests](test/number.js#L38))
-* **[toFixed](#toFixed)** ([code](lib/number.js#L113) | [tests](test/number.js#L16))
-* **[toFloat](#toFloat)** ([code](lib/number.js#L126) | [tests](test/number.js#L56))
-* **[toInt](#toInt)** ([code](lib/number.js#L136) | [tests](test/number.js#L49))
-* **[toPrecision](#toPrecision)** ([code](lib/number.js#L147) | [tests](test/number.js#L27))
+* **[toAbbr](#toAbbr)** ([code](lib/number.js#L64) | [tests](test/number.js#L70))
+* **[toExponential](#toExponential)** ([code](lib/number.js#L98) | [tests](test/number.js#L38))
+* **[toFixed](#toFixed)** ([code](lib/number.js#L114) | [tests](test/number.js#L16))
+* **[toFloat](#toFloat)** ([code](lib/number.js#L127) | [tests](test/number.js#L56))
+* **[toInt](#toInt)** ([code](lib/number.js#L137) | [tests](test/number.js#L49))
+* **[toPrecision](#toPrecision)** ([code](lib/number.js#L148) | [tests](test/number.js#L27))
 
 ### [object helpers](#object)
 
@@ -275,9 +275,11 @@ Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https
 * **[hasOwn](#hasOwn)** ([code](lib/object.js#L159) | [tests](test/object.js#L110))
 * **[isObject](#isObject)** ([code](lib/object.js#L176) | [tests](test/object.js#L128))
 * **[merge](#merge)** ([code](lib/object.js#L192) | [tests](test/object.js#L140))
-* **[parseJSON](#parseJSON)** ([code](lib/object.js#L217) | [tests](test/object.js#L148))
-* **[pick](#pick)** ([code](lib/object.js#L232) | [tests](test/object.js#L155))
-* **[stringify](#stringify)** ([code](lib/object.js#L259) | [tests](test/object.js#L183))
+* **[JSONparse](#JSONparse)** ([code](lib/object.js#L217) | [no tests])
+* **[parseJSON](#parseJSON)** ([code](lib/object.js#L226) | [tests](test/object.js#L148))
+* **[pick](#pick)** ([code](lib/object.js#L239) | [tests](test/object.js#L155))
+* **[JSONstringify](#JSONstringify)** ([code](lib/object.js#L266) | [no tests])
+* **[stringify](#stringify)** ([code](lib/object.js#L278) | [tests](test/object.js#L183))
 
 ### [path helpers](#path)
 
@@ -704,7 +706,7 @@ collection as context inside the block.
 
 ## code
 
-### [{{embed}}](lib/code.js#L31)
+### [{{embed}}](lib/code.js#L30)
 
 Embed code from an external file as preformatted text.
 
@@ -723,7 +725,7 @@ Embed code from an external file as preformatted text.
 {{embed 'path/to/file.hbs' 'html')}}
 ```
 
-### [{{gist}}](lib/code.js#L53)
+### [{{gist}}](lib/code.js#L52)
 
 Embed a GitHub Gist using only the id of the Gist
 
@@ -738,7 +740,7 @@ Embed a GitHub Gist using only the id of the Gist
 {{gist "12345"}}
 ```
 
-### [{{jsfiddle}}](lib/code.js#L69)
+### [{{jsfiddle}}](lib/code.js#L68)
 
 Generate the HTML for a jsFiddle link with the given `params`
 
@@ -1232,7 +1234,7 @@ Block helper for creating unordered lists (`<ul></ul>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{ol}}](lib/html.js#L178)
+### [{{ol}}](lib/html.js#L181)
 
 Block helper for creating ordered lists  (`<ol></ol>`)
 
@@ -1242,7 +1244,7 @@ Block helper for creating ordered lists  (`<ol></ol>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{thumbnailImage}}](lib/html.js#L197)
+### [{{thumbnailImage}}](lib/html.js#L203)
 
 Returns a `<figure>` with a thumbnail linked to a full picture
 
@@ -1308,7 +1310,7 @@ Returns an ordinalized number (as a string).
 
 ## markdown
 
-### [{{markdown}}](lib/markdown.js#L29)
+### [{{markdown}}](lib/markdown.js#L28)
 
 Block helper that converts a string of inline markdown to HTML.
 
@@ -1327,7 +1329,7 @@ Block helper that converts a string of inline markdown to HTML.
 //=> <h1>Foo</h1>
 ```
 
-### [{{md}}](lib/markdown.js#L57)
+### [{{md}}](lib/markdown.js#L56)
 
 Read a markdown file from the file system and inject its contents after converting it to HTML.
 
@@ -1566,9 +1568,10 @@ Generate a random number between two values
 * `max` **{Number}**
 * `returns` **{String}**
 
-### [{{toAbbr}}](lib/number.js#L63)
+### [{{toAbbr}}](lib/number.js#L64)
 
-Abbreviate numbers to the given number of `precision`.
+Abbreviate numbers to the given number of `precision`. This is for
+general numbers, not size in bytes.
 
 **Params**
 
@@ -1576,7 +1579,7 @@ Abbreviate numbers to the given number of `precision`.
 * `precision` **{String}**
 * `returns` **{String}**
 
-### [{{toExponential}}](lib/number.js#L97)
+### [{{toExponential}}](lib/number.js#L98)
 
 Returns a string representing the given number in exponential notation.
 
@@ -1592,7 +1595,7 @@ Returns a string representing the given number in exponential notation.
 {{toExponential number digits}};
 ```
 
-### [{{toFixed}}](lib/number.js#L113)
+### [{{toFixed}}](lib/number.js#L114)
 
 Formats the given number using fixed-point notation.
 
@@ -1602,21 +1605,21 @@ Formats the given number using fixed-point notation.
 * `digits` **{Number}**: Optional. The number of digits to use after the decimal point; this may be a value between 0 and 20, inclusive, and implementations may optionally support a larger range of values. If this argument is omitted, it is treated as 0.
 * `returns` **{Number}**
 
-### [{{toFloat}}](lib/number.js#L126)
+### [{{toFloat}}](lib/number.js#L127)
 
 **Params**
 
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toInt}}](lib/number.js#L136)
+### [{{toInt}}](lib/number.js#L137)
 
 **Params**
 
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toPrecision}}](lib/number.js#L147)
+### [{{toPrecision}}](lib/number.js#L148)
 
 **Params**
 
@@ -1727,7 +1730,7 @@ context object.
 * `objects` **{Object}**
 * `returns` **{Object}**
 
-### [{{parseJSON}}](lib/object.js#L217)
+### [{{JSONparse}}](lib/object.js#L217)
 
 Block helper that parses a string using `JSON.parse`,
 then passes the parsed object to the block as context.
@@ -1737,7 +1740,7 @@ then passes the parsed object to the block as context.
 * `string` **{String}**: The string to parse
 * `options` **{Object}**: Handlebars options object
 
-### [{{pick}}](lib/object.js#L232)
+### [{{pick}}](lib/object.js#L239)
 
 Pick properties from the context object.
 
@@ -1748,7 +1751,7 @@ Pick properties from the context object.
 * `options` **{Object}**: Handlebars options object.
 * `returns` **{Object}**: Returns an object with the picked values. If used as a block helper, the values are passed as context to the inner block. If no values are found, the context is passed to the inverse block.
 
-### [{{stringify}}](lib/object.js#L259)
+### [{{JSONstringify}}](lib/object.js#L266)
 
 Stringify an object using `JSON.stringify`.
 
@@ -2618,7 +2621,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 | **Commits** | **Contributor** | 
 | --- | --- |
-| 488 | [jonschlinkert](https://github.com/jonschlinkert) |
+| 492 | [jonschlinkert](https://github.com/jonschlinkert) |
 | 176 | [doowb](https://github.com/doowb) |
 | 12 | [spacedawwwg](https://github.com/spacedawwwg) |
 | 5 | [hariadi](https://github.com/hariadi) |
@@ -2694,4 +2697,4 @@ Released under the [MIT license](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.0, on January 08, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.0, on January 25, 2017._
