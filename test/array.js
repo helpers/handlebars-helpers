@@ -155,6 +155,16 @@ describe('array', function() {
     });
   });
 
+  describe('groupEach', function() {
+    it('should iterate over an array grouping elements by a given number', function() {
+      var fn = hbs.compile('{{#groupEach 4 collection }}{{#each this}}{{name}}{{/each}}<br>{{/groupEach}}');
+      var res = fn({
+        collection: [ {name: 'a'}, {name: 'b'}, {name: 'c'}, {name: 'd'}, {name: 'e'}, {name: 'f'}, {name: 'g'}, {name: 'h'}]
+      });
+      res.should.equal('abcd<br>efgh<br>');
+    });
+  });  
+
   describe('inArray', function() {
     it('should render the first block when a value exists in the array.', function() {
       var fn = hbs.compile('{{#inArray array "d"}}AAA{{else}}BBB{{/inArray}}');
