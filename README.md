@@ -257,11 +257,11 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https
 * **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
 * **[random](#random)** ([code](lib/number.js#L50) | [tests](test/number.js#L95))
 * **[toAbbr](#toAbbr)** ([code](lib/number.js#L64) | [tests](test/number.js#L70))
-* **[toExponential](#toExponential)** ([code](lib/number.js#L98) | [tests](test/number.js#L38))
-* **[toFixed](#toFixed)** ([code](lib/number.js#L114) | [tests](test/number.js#L16))
-* **[toFloat](#toFloat)** ([code](lib/number.js#L127) | [tests](test/number.js#L56))
-* **[toInt](#toInt)** ([code](lib/number.js#L137) | [tests](test/number.js#L49))
-* **[toPrecision](#toPrecision)** ([code](lib/number.js#L148) | [tests](test/number.js#L27))
+* **[toExponential](#toExponential)** ([code](lib/number.js#L102) | [tests](test/number.js#L38))
+* **[toFixed](#toFixed)** ([code](lib/number.js#L122) | [tests](test/number.js#L16))
+* **[toFloat](#toFloat)** ([code](lib/number.js#L139) | [tests](test/number.js#L56))
+* **[toInt](#toInt)** ([code](lib/number.js#L149) | [tests](test/number.js#L49))
+* **[toPrecision](#toPrecision)** ([code](lib/number.js#L160) | [tests](test/number.js#L27))
 
 ### [object helpers](#object)
 
@@ -2619,7 +2619,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ### Contributors
 
-| **Commits** | **Contributor** | 
+| **Commits** | **Contributor** |
 | --- | --- |
 | 492 | [jonschlinkert](https://github.com/jonschlinkert) |
 | 176 | [doowb](https://github.com/doowb) |
