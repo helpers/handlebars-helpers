@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, YUI, Ghost or any node.js/Handlebars project.",
-  "version": "0.6.0",
+  "version": "0.8.1",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "authors": [
     "Brian Woodward (https://github.com/doowb)",
