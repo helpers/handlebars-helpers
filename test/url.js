@@ -63,4 +63,35 @@ describe('url', function() {
       });
     });
   });
+
+  describe('strip protocol', function() {
+    it('should take an http url and return without the protocol', function() {
+      var data = { testUrl: 'http://foo.bar' };
+      var expectedResult = '//foo.bar/';
+      var fn = hbs.compile('{{stripProtocol testUrl}}');
+      fn(data).should.eql(expectedResult);
+    });
+
+    it('strip https protocol', function() {
+      var data = { testUrl: 'https://foo.bar' };
+      var expectedResult = '//foo.bar/';
+      var fn = hbs.compile('{{stripProtocol testUrl}}');
+      fn(data).should.eql(expectedResult);
+    });
+
+    it('should leave a relative url unchanged', function() {
+      var testUrl = 'path/to/file';
+      var data = { testUrl: testUrl };
+      var fn = hbs.compile('{{stripProtocol testUrl}}');
+      fn(data).should.eql(testUrl);
+    });
+
+    it('should leave an absolute url unchanged', function() {
+      var testUrl = '/path/to/file';
+      var data = { testUrl: testUrl };
+      var fn = hbs.compile('{{stripProtocol testUrl}}');
+      fn(data).should.eql(testUrl);
+    });
+
+  });
 });

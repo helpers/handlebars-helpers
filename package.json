@@ -4,6 +4,46 @@
   "version": "0.8.1",
   "homepage": "https://github.com/assemble/handlebars-helpers",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "contributors": [
+    "Aleš Kotnik <ales.kotnik@gmail.com> (www.draagle.com)",
+    "Alex Hunt <hello@alexhunt.io> (https://alexhunt.io)",
+    "Ali Sheehan-Dare <alisd23@live.co.uk> (https://github.com/alisd23)",
+    "Anders D. Johnson (https://andrz.me)",
+    "Arthur Cinader (http://github.com/acinader)",
+    "Brian Woodward <brian.woodward@gmail.com> (https://twitter.com/doowb)",
+    "Dan Dascalescu <ddascalescu+github@gmail.com> (http://dandascalescu.com)",
+    "Dan Gorby (https://plus.google.com/+GreenRaccoon23)",
+    "Dane Petersen (https://thegreatsunra.com)",
+    "Daniel Wabyick (https://github.com/dwabyick)",
+    "Hariadi Hinta (http://www.hariadi.org)",
+    "Jan Stola (https://github.com/iamstolis)",
+    "Jarvis Badgley <chiper@chipersoft.com> (http://www.chipersoft.com)",
+    "Jason Bellamy <j@sonbellamy.com> (http://jasonbellamy.com)",
+    "Jeffrey Froom (http://jfroom.com)",
+    "Joey Baker <joey@byjoeybaker.com> (https://byjoeybaker.com)",
+    "Jon Schlinkert <jon.schlinkert@sellside.com> (http://twitter.com/jonschlinkert)",
+    "Laurent Goderre <laurent.goderre@gmail.com> (https://github.com/LaurentGoderre)",
+    "Liam Moat <contact@liammoat.com> (http://www.liammoat.com)",
+    "Makoto Tateno <makoto.ttn@gmail.com> (https://github.com/makotot)",
+    "Marie Hogebrandt <webmistress@melindrea.net> (http://mariehogebrandt.se)",
+    "Mark Perkins (http://allmarkedup.com)",
+    "Martyn Rushton (http://swapnull.co.uk)",
+    "Max Albrecht <1@178.is> (178.is)",
+    "Michael Sheedy (michaelsheedy.com)",
+    "Mikko Tapionlinna (http://mikko.tapionlinna.fi)",
+    "Nathan Jessen (http://nathanjessen.github.io)",
+    "Nathaniel Furniss (https://github.com/nlfurniss)",
+    "Oleg Orlov (https://github.com/efender)",
+    "Patrick Burtchaell <patrick@pburtchaell.com> (https://pburtchaell.com)",
+    "Paul Welsh <spacedawwwg@gmail.com> (paulwelsh.info)",
+    "Raymond Camden <raymondcamden@gmail.com> (http://www.raymondcamden.com)",
+    "Sam Tiffin (https://samtiffin.com)",
+    "Shannon Moeller <me@shannonmoeller.com> (http://shannonmoeller.com)",
+    "Spud Hsu <supersheepxjy@gmail.com> (http://spud.in)",
+    "Stephen Way (http://stephenway.net)",
+    "Thomas Jaggi (http://responsive.ch)",
+    "Tim Douglas (https://github.com/timdouglas)"
+  ],
   "repository": "assemble/handlebars-helpers",
   "bugs": {
     "url": "https://github.com/assemble/handlebars-helpers/issues"
@@ -139,8 +179,8 @@
       "verb-readme-generator"
     ],
     "helpers": [
-      "helper-coverage",
-      "helper-changelog"
+      "helper-changelog",
+      "helper-coverage"
     ],
     "lint": {
       "reflinks": true

@@ -67,7 +67,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **145 helpers** in **19 categories**:
+Currently **147 helpers** in **19 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -257,11 +257,11 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https
 * **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
 * **[random](#random)** ([code](lib/number.js#L50) | [tests](test/number.js#L95))
 * **[toAbbr](#toAbbr)** ([code](lib/number.js#L64) | [tests](test/number.js#L70))
-* **[toExponential](#toExponential)** ([code](lib/number.js#L98) | [tests](test/number.js#L38))
-* **[toFixed](#toFixed)** ([code](lib/number.js#L114) | [tests](test/number.js#L16))
-* **[toFloat](#toFloat)** ([code](lib/number.js#L127) | [tests](test/number.js#L56))
-* **[toInt](#toInt)** ([code](lib/number.js#L137) | [tests](test/number.js#L49))
-* **[toPrecision](#toPrecision)** ([code](lib/number.js#L148) | [tests](test/number.js#L27))
+* **[toExponential](#toExponential)** ([code](lib/number.js#L102) | [tests](test/number.js#L38))
+* **[toFixed](#toFixed)** ([code](lib/number.js#L122) | [tests](test/number.js#L16))
+* **[toFloat](#toFloat)** ([code](lib/number.js#L139) | [tests](test/number.js#L56))
+* **[toInt](#toInt)** ([code](lib/number.js#L149) | [tests](test/number.js#L49))
+* **[toPrecision](#toPrecision)** ([code](lib/number.js#L160) | [tests](test/number.js#L27))
 
 ### [object helpers](#object)
 
@@ -270,16 +270,17 @@ Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https
 * **[extend](#extend)** ([code](lib/object.js#L22) | [tests](test/object.js#L13))
 * **[forIn](#forIn)** ([code](lib/object.js#L61) | [tests](test/object.js#L31))
 * **[forOwn](#forOwn)** ([code](lib/object.js#L88) | [tests](test/object.js#L48))
-* **[get](#get)** ([code](lib/object.js#L118) | [tests](test/object.js#L75))
-* **[getObject](#getObject)** ([code](lib/object.js#L140) | [tests](test/object.js#L75))
-* **[hasOwn](#hasOwn)** ([code](lib/object.js#L159) | [tests](test/object.js#L110))
-* **[isObject](#isObject)** ([code](lib/object.js#L176) | [tests](test/object.js#L128))
-* **[merge](#merge)** ([code](lib/object.js#L192) | [tests](test/object.js#L140))
-* **[JSONparse](#JSONparse)** ([code](lib/object.js#L217) | [no tests])
-* **[parseJSON](#parseJSON)** ([code](lib/object.js#L226) | [tests](test/object.js#L148))
-* **[pick](#pick)** ([code](lib/object.js#L239) | [tests](test/object.js#L155))
-* **[JSONstringify](#JSONstringify)** ([code](lib/object.js#L266) | [no tests])
-* **[stringify](#stringify)** ([code](lib/object.js#L278) | [tests](test/object.js#L183))
+* **[toPath](#toPath)** ([code](lib/object.js#L113) | [tests](test/object.js#L85))
+* **[get](#get)** ([code](lib/object.js#L136) | [tests](test/object.js#L75))
+* **[getObject](#getObject)** ([code](lib/object.js#L158) | [tests](test/object.js#L75))
+* **[hasOwn](#hasOwn)** ([code](lib/object.js#L177) | [tests](test/object.js#L124))
+* **[isObject](#isObject)** ([code](lib/object.js#L194) | [tests](test/object.js#L142))
+* **[merge](#merge)** ([code](lib/object.js#L210) | [tests](test/object.js#L154))
+* **[JSONparse](#JSONparse)** ([code](lib/object.js#L235) | [no tests])
+* **[parseJSON](#parseJSON)** ([code](lib/object.js#L244) | [tests](test/object.js#L162))
+* **[pick](#pick)** ([code](lib/object.js#L257) | [tests](test/object.js#L169))
+* **[JSONstringify](#JSONstringify)** ([code](lib/object.js#L284) | [no tests])
+* **[stringify](#stringify)** ([code](lib/object.js#L296) | [tests](test/object.js#L197))
 
 ### [path helpers](#path)
 
@@ -330,6 +331,7 @@ Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://git
 * **[urlResolve](#urlResolve)** ([code](lib/url.js#L48) | [tests](test/url.js#L9))
 * **[urlParse](#urlParse)** ([code](lib/url.js#L60) | [tests](test/url.js#L47))
 * **[stripQuerystring](#stripQuerystring)** ([code](lib/url.js#L73) | [tests](test/url.js#L26))
+* **[stripProtocol](#stripProtocol)** ([code](lib/url.js#L89) | [no tests])
 
 ***
 
@@ -1575,11 +1577,11 @@ general numbers, not size in bytes.
 
 **Params**
 
-* `number` **{String}**
-* `precision` **{String}**
+* `number` **{Number}**
+* `precision` **{Number}**
 * `returns` **{String}**
 
-### [{{toExponential}}](lib/number.js#L98)
+### [{{toExponential}}](lib/number.js#L102)
 
 Returns a string representing the given number in exponential notation.
 
@@ -1595,7 +1597,7 @@ Returns a string representing the given number in exponential notation.
 {{toExponential number digits}};
 ```
 
-### [{{toFixed}}](lib/number.js#L114)
+### [{{toFixed}}](lib/number.js#L122)
 
 Formats the given number using fixed-point notation.
 
@@ -1605,21 +1607,21 @@ Formats the given number using fixed-point notation.
 * `digits` **{Number}**: Optional. The number of digits to use after the decimal point; this may be a value between 0 and 20, inclusive, and implementations may optionally support a larger range of values. If this argument is omitted, it is treated as 0.
 * `returns` **{Number}**
 
-### [{{toFloat}}](lib/number.js#L127)
+### [{{toFloat}}](lib/number.js#L139)
 
 **Params**
 
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toInt}}](lib/number.js#L137)
+### [{{toInt}}](lib/number.js#L149)
 
 **Params**
 
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toPrecision}}](lib/number.js#L148)
+### [{{toPrecision}}](lib/number.js#L160)
 
 **Params**
 
@@ -1661,7 +1663,16 @@ an object, exposing each key and value on the context.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{get}}](lib/object.js#L118)
+### [{{toPath}}](lib/object.js#L114)
+
+Take arguments and, if they are string or number, convert them to a dot-delineated object property path.
+
+**Params**
+
+* `prop` **{String|Number}**: The property segments to assemble (can be multiple).
+* `returns` **{String}**
+
+### [{{get}}](lib/object.js#L136)
 
 Use property paths (`a.b.c`) to get a value or nested value from
 the context. Works as a regular helper or block helper.
@@ -1673,7 +1684,7 @@ the context. Works as a regular helper or block helper.
 * `options` **{Object}**: The handlebars options object, if used as a block helper.
 * `returns` **{String}**
 
-### [{{getObject}}](lib/object.js#L140)
+### [{{getObject}}](lib/object.js#L158)
 
 Use property paths (`a.b.c`) to get an object from
 the context. Differs from the `get` helper in that this
@@ -1687,7 +1698,7 @@ block helper.
 * `context` **{Object}**: The context object
 * `returns` **{String}**
 
-### [{{hasOwn}}](lib/object.js#L159)
+### [{{hasOwn}}](lib/object.js#L177)
 
 Return true if `key` is an own, enumerable property of the given `context` object.
 
@@ -1703,7 +1714,7 @@ Return true if `key` is an own, enumerable property of the given `context` objec
 {{hasOwn context key}}
 ```
 
-### [{{isObject}}](lib/object.js#L176)
+### [{{isObject}}](lib/object.js#L194)
 
 Return true if `value` is an object.
 
@@ -1719,7 +1730,7 @@ Return true if `value` is an object.
 //=> false
 ```
 
-### [{{merge}}](lib/object.js#L192)
+### [{{merge}}](lib/object.js#L210)
 
 Deeply merge the properties of the given `objects` with the
 context object.
@@ -1730,7 +1741,7 @@ context object.
 * `objects` **{Object}**
 * `returns` **{Object}**
 
-### [{{JSONparse}}](lib/object.js#L217)
+### [{{JSONparse}}](lib/object.js#L235)
 
 Block helper that parses a string using `JSON.parse`,
 then passes the parsed object to the block as context.
@@ -1740,18 +1751,18 @@ then passes the parsed object to the block as context.
 * `string` **{String}**: The string to parse
 * `options` **{Object}**: Handlebars options object
 
-### [{{pick}}](lib/object.js#L239)
+### [{{pick}}](lib/object.js#L257)
 
 Pick properties from the context object.
 
 **Params**
 
-* `properties` **{Array|String}**: One or more proeperties to pick.
+* `properties` **{Array|String}**: One or more properties to pick.
 * `context` **{Object}**
 * `options` **{Object}**: Handlebars options object.
 * `returns` **{Object}**: Returns an object with the picked values. If used as a block helper, the values are passed as context to the inner block. If no values are found, the context is passed to the inverse block.
 
-### [{{JSONstringify}}](lib/object.js#L266)
+### [{{JSONstringify}}](lib/object.js#L284)
 
 Stringify an object using `JSON.stringify`.
 
@@ -2299,12 +2310,24 @@ Parses a `url` string into an object.
 
 ### [{{stripQuerystring}}](lib/url.js#L73)
 
-Strip the query string from the give `url`.
+Strip the query string from a `url`.
 
 **Params**
 
 * `url` **{String}**
-* `returns` **{String}**
+* `returns` **{String}**: the url without the queryString
+
+### [{{stripProtocol}}](lib/url.js#L89)
+
+Strip protocol from a `url`.
+
+Useful for displaying media that may have an 'http' protocol
+on secure connections.  Will change 'http://foo.bar to `//foo.bar`
+
+**Params**
+
+* `str` **{String}**
+* `returns` **{String}**: the url with http protocol stripped
 
 ***
 
@@ -2621,18 +2644,20 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 | **Commits** | **Contributor** | 
 | --- | --- |
-| 492 | [jonschlinkert](https://github.com/jonschlinkert) |
-| 176 | [doowb](https://github.com/doowb) |
+| 499 | [jonschlinkert](https://github.com/jonschlinkert) |
+| 178 | [doowb](https://github.com/doowb) |
 | 12 | [spacedawwwg](https://github.com/spacedawwwg) |
 | 5 | [hariadi](https://github.com/hariadi) |
 | 4 | [ChiperSoft](https://github.com/ChiperSoft) |
 | 4 | [stephenway](https://github.com/stephenway) |
 | 4 | [makotot](https://github.com/makotot) |
 | 4 | [timdouglas](https://github.com/timdouglas) |
+| 3 | [GreenRaccoon23](https://github.com/GreenRaccoon23) |
 | 3 | [LaurentGoderre](https://github.com/LaurentGoderre) |
 | 3 | [Melindrea](https://github.com/Melindrea) |
 | 3 | [adjohnson916](https://github.com/adjohnson916) |
 | 2 | [huntie](https://github.com/huntie) |
+| 2 | [acinader](https://github.com/acinader) |
 | 2 | [jfroom](https://github.com/jfroom) |
 | 2 | [sheedy](https://github.com/sheedy) |
 | 2 | [Arkkimaagi](https://github.com/Arkkimaagi) |
@@ -2644,6 +2669,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 | 1 | [dandv](https://github.com/dandv) |
 | 1 | [thegreatsunra](https://github.com/thegreatsunra) |
 | 1 | [dwabyick](https://github.com/dwabyick) |
+| 1 | [iamstolis](https://github.com/iamstolis) |
 | 1 | [jasonbellamy](https://github.com/jasonbellamy) |
 | 1 | [joeybaker](https://github.com/joeybaker) |
 | 1 | [allmarkedup](https://github.com/allmarkedup) |
@@ -2693,8 +2719,8 @@ $ npm install -d && npm test
 
 Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
 When this project was created some helpers were sourced from [Swag, by Elving Rodriguez](http://elving.github.com/swag/).
-Released under the [MIT license](LICENSE).
+MIT
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.0, on January 25, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.1, on March 30, 2017._
