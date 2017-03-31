@@ -53,6 +53,13 @@ describe('math', function() {
     });
   });
 
+  describe('mod', function() {
+    it('should return the mod of two numbers.', function() {
+      var fn = hbs.compile('{{mod value 3}}');
+      fn({value: 5}).should.equal('2');
+    });
+  });
+
   describe('round', function() {
     it('should return the value rounded to the nearest integer.', function() {
       var fn = hbs.compile('{{round value}}');
