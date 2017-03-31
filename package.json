@@ -72,7 +72,7 @@
     "handlebars": "^4.0.6",
     "helper-date": "^0.2.3",
     "helper-markdown": "^0.2.1",
-    "helper-md": "^0.2.1",
+    "helper-md": "^0.2.2",
     "html-tag": "^1.0.0",
     "index-of": "^0.2.0",
     "is-even": "^0.1.1",
