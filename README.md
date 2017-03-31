@@ -1,4 +1,4 @@
-# handlebars-helpers [![NPM version](https://img.shields.io/npm/v/handlebars-helpers.svg?style=flat)](https://www.npmjs.com/package/handlebars-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers)  [![NPM total downloads](https://img.shields.io/npm/dt/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers) [![Linux Build Status](https://img.shields.io/travis/assemble/handlebars-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/assemble/handlebars-helpers)
+# handlebars-helpers [![NPM version](https://img.shields.io/npm/v/handlebars-helpers.svg?style=flat)](https://www.npmjs.com/package/handlebars-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers)  [![NPM total downloads](https://img.shields.io/npm/dt/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers) [![Linux Build Status](https://img.shields.io/travis/helpers/handlebars-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/helpers/handlebars-helpers)
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
@@ -93,7 +93,7 @@ Currently **147 helpers** in **19 categories**:
 
 ### [array helpers](#array)
 
-Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+array+helpers))
+Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+array+helpers))
 
 * **[after](#after)** ([code](lib/array.js#L26) | [tests](test/array.js#L11))
 * **[arrayify](#arrayify)** ([code](lib/array.js#L43) | [tests](test/array.js#L27))
@@ -119,7 +119,7 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 
 ### [code helpers](#code)
 
-Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers))
+Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers))
 
 * **[embed](#embed)** ([code](lib/code.js#L30) | [tests](test/code.js#L9))
 * **[gist](#gist)** ([code](lib/code.js#L52) | [tests](test/code.js#L61))
@@ -127,15 +127,15 @@ Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://g
 
 ### [collection helpers](#collection)
 
-Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers))
+Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers))
 
 * **[isEmpty](#isEmpty)** ([code](lib/collection.js#L28) | [tests](test/collection.js#L11))
 * **[iterate](#iterate)** ([code](lib/collection.js#L56) | [tests](test/collection.js#L38))
-* **[length](#length)** ([code](lib/collection.js#L77) | [tests](test/collection.js#L77))
+* **[length](#length)** ([code](lib/collection.js#L87) | [tests](test/collection.js#L77))
 
 ### [comparison helpers](#comparison)
 
-Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers))
+Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers))
 
 * **[and](#and)** ([code](lib/comparison.js#L26) | [tests](test/comparison.js#L10))
 * **[compare](#compare)** ([code](lib/comparison.js#L48) | [tests](test/comparison.js#L22))
@@ -161,13 +161,13 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 
 ### [date helpers](#date)
 
-Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers))
+Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers))
 
 * **[moment](#moment)** ([code](lib/date.js#L15) | [no tests])
 
 ### [fs helpers](#fs)
 
-Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
+Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
 
 * **[fileSize](#fileSize)** ([code](lib/fs.js#L27) | [tests](test/fs.js#L16))
 * **[read](#read)** ([code](lib/fs.js#L68) | [tests](test/fs.js#L55))
@@ -175,7 +175,7 @@ Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://githu
 
 ### [html helpers](#html)
 
-Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers))
+Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers))
 
 * **[css](#css)** ([code](lib/html.js#L23) | [tests](test/html.js#L12))
 * **[ellipsis](#ellipsis)** ([code](lib/html.js#L66) | [tests](test/html.js#L55))
@@ -188,20 +188,20 @@ Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://g
 
 ### [i18n helpers](#i18n)
 
-Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+i18n+helpers))
+Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+i18n+helpers))
 
 * **[i18n](#i18n)** ([code](lib/i18n.js#L22) | [tests](test/i18n.js#L10))
 
 ### [inflection helpers](#inflection)
 
-Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+inflection+helpers))
+Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+inflection+helpers))
 
 * **[inflect](#inflect)** ([code](lib/inflection.js#L21) | [tests](test/inflection.js#L8))
 * **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L50) | [tests](test/inflection.js#L21))
 
 ### [logging helpers](#logging)
 
-Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+logging+helpers))
+Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+logging+helpers))
 
 * **[log](#log)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[info](#info)** ([code](lib/logging.js#Lundefined) | [no tests])
@@ -213,14 +213,14 @@ Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](htt
 
 ### [markdown helpers](#markdown)
 
-Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
+Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
 
-* **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [no tests])
-* **[md](#md)** ([code](lib/markdown.js#L56) | [no tests])
+* **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [tests](test/markdown.js#L9))
+* **[md](#md)** ([code](lib/markdown.js#L56) | [tests](test/markdown.js#L17))
 
 ### [match helpers](#match)
 
-Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers))
+Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers))
 
 * **[mm](#mm)** ([code](lib/match.js#L26) | [tests](test/match.js#L15))
 * **[match](#match)** ([code](lib/match.js#L45) | [tests](test/match.js#L14))
@@ -228,7 +228,7 @@ Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https:/
 
 ### [math helpers](#math)
 
-Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers))
+Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers))
 
 * **[add](#add)** ([code](lib/math.js#L19) | [tests](test/math.js#L9))
 * **[subtract](#subtract)** ([code](lib/math.js#L30) | [tests](test/math.js#L63))
@@ -242,7 +242,7 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://g
 
 ### [misc helpers](#misc)
 
-Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+misc+helpers))
+Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+misc+helpers))
 
 * **[default](#default)** ([code](lib/misc.js#L21) | [tests](test/misc.js#L13))
 * **[option](#option)** ([code](lib/misc.js#L40) | [tests](test/misc.js#L30))
@@ -251,7 +251,7 @@ Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://g
 
 ### [number helpers](#number)
 
-Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+number+helpers))
+Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+number+helpers))
 
 * **[addCommas](#addCommas)** ([code](lib/number.js#L19) | [tests](test/number.js#L63))
 * **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
@@ -265,7 +265,7 @@ Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https
 
 ### [object helpers](#object)
 
-Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers))
+Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers))
 
 * **[extend](#extend)** ([code](lib/object.js#L22) | [tests](test/object.js#L13))
 * **[forIn](#forIn)** ([code](lib/object.js#L61) | [tests](test/object.js#L31))
@@ -284,7 +284,7 @@ Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https
 
 ### [path helpers](#path)
 
-Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+path+helpers))
+Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+path+helpers))
 
 * **[absolute](#absolute)** ([code](lib/path.js#L24) | [tests](test/path.js#L12))
 * **[dirname](#dirname)** ([code](lib/path.js#L43) | [tests](test/path.js#L24))
@@ -296,7 +296,7 @@ Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://g
 
 ### [string helpers](#string)
 
-Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+string+helpers))
+Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+string+helpers))
 
 * **[camelcase](#camelcase)** ([code](lib/string.js#L25) | [tests](test/string.js#L9))
 * **[capitalize](#capitalize)** ([code](lib/string.js#L43) | [tests](test/string.js#L24))
@@ -324,7 +324,7 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https
 
 ### [url helpers](#url)
 
-Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://github.com/assemble/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+url+helpers))
+Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+url+helpers))
 
 * **[encodeURI](#encodeURI)** ([code](lib/url.js#L22) | [tests](test/url.js#L33))
 * **[decodeURI](#decodeURI)** ([code](lib/url.js#L34) | [tests](test/url.js#L40))
@@ -781,9 +781,9 @@ Iterate over an array or object,
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{length}}](lib/collection.js#L77)
+### [{{length}}](lib/collection.js#L87)
 
-Returns the length of the given collection.
+Returns the length of the given collection. When using a string literal in the template, the string must be value JSON. See the example below. Otherwise pass in an array or object from the context
 
 **Params**
 
@@ -793,8 +793,16 @@ Returns the length of the given collection.
 **Example**
 
 ```handlebars
-{{length "['a', 'b', 'c']"}}
+{{length '["a", "b", "c"]'}}
 //=> 3
+
+//=> myArray = ['a', 'b', 'c', 'd', 'e'];
+{{length myArray}}
+//=> 5
+
+//=> myObject = {'a': 'a', 'b': 'b'};
+{{length myObject}}
+//=> 2
 ```
 
 ## comparison
@@ -1937,7 +1945,7 @@ Capitalize all words in a string.
 **Example**
 
 ```handlebars
-{{capitalize "foo bar baz"}}
+{{capitalizeAll "foo bar baz"}}
 //=> "Foo Bar Baz"
 ```
 
@@ -2488,20 +2496,43 @@ Cast `val` to an array.
 
 ## History
 
-## [v0.7.6](https://github.com/assemble/handlebars-helpers/compare/v0.7.0...v0.7.6) - 2017-01-08
+## [v0.8.2](https://github.com/helpers/handlebars-helpers/compare/v0.8.1...v0.8.2) - 2017-03-30
+
+**changes**
+
+* documentation updates
+* fixes md helper to use sync by default
+
+## [v0.8.1](https://github.com/helpers/handlebars-helpers/compare/v0.8.0...v0.8.1) - 2017-03-30
+
+**changes**
+
+* fixes sorting in withSort helper. see https://github.com/helpers/handlebars-helpers/pull/245
+* adds toPath helper
+* handle null inputs in number helpers
+* adds stripProtocol helper
+
+## [v0.8.0](https://github.com/helpers/handlebars-helpers/compare/v0.7.6...v0.8.0) - 2017-01-25
+
+**changes**
+
+* handle string arguments in list helpers
+* adds JSONParse helper as an alias for parseJSON
+
+## [v0.7.6](https://github.com/helpers/handlebars-helpers/compare/v0.7.0...v0.7.6) - 2017-01-08
 
 **changes**
 
 * fixes markdown helpers. see https://github.com/helpers/handlebars-helpers/pull/226
 * documentation improvements and other minor fixes
 
-## [v0.7.0](https://github.com/assemble/handlebars-helpers/compare/v0.6.0...v0.7.0) - 2016-07-16
+## [v0.7.0](https://github.com/helpers/handlebars-helpers/compare/v0.6.0...v0.7.0) - 2016-07-16
 
 **changes**
 
 * The [or](#or) helper can now take a variable number of arguments
 
-## [v0.6.0](https://github.com/assemble/handlebars-helpers/compare/v0.3.3...v0.6.0) - 2016-05-13
+## [v0.6.0](https://github.com/helpers/handlebars-helpers/compare/v0.3.3...v0.6.0) - 2016-05-13
 
 **changes**
 
@@ -2512,111 +2543,111 @@ Cast `val` to an array.
 * helpers are lazy-loaded using getters for improved performance
 * Once tests are added for the `md` and `markdown` helpers, we'll have 100% unit test coverage on helpers
 
-## [v0.3.3](https://github.com/assemble/handlebars-helpers/compare/v0.3.2...v0.3.3) - 2013-09-03
+## [v0.3.3](https://github.com/helpers/handlebars-helpers/compare/v0.3.2...v0.3.3) - 2013-09-03
 
 **changes**
 
 * Adds fileSize helper.
 * Adds startsWith helper.
 
-## [v0.3.2](https://github.com/assemble/handlebars-helpers/compare/v0.3.0...v0.3.2) - 2013-08-20
+## [v0.3.2](https://github.com/helpers/handlebars-helpers/compare/v0.3.0...v0.3.2) - 2013-08-20
 
 **changes**
 
 * Adds glob helper.
 
-## [v0.3.0](https://github.com/assemble/handlebars-helpers/compare/v0.2.4...v0.3.0) - 2013-07-30
+## [v0.3.0](https://github.com/helpers/handlebars-helpers/compare/v0.2.4...v0.3.0) - 2013-07-30
 
 **changes**
 
 * The project has been refactored, cleaned up, and full documentation has bee put up at http://assemble.io
 
-## [v0.2.4](https://github.com/assemble/handlebars-helpers/compare/v0.2.3...v0.2.4) - 2013-05-11
+## [v0.2.4](https://github.com/helpers/handlebars-helpers/compare/v0.2.3...v0.2.4) - 2013-05-11
 
 **changes**
 
 * Adding object globbing utility functions to be used in helpers later.
 
-## [v0.2.3](https://github.com/assemble/handlebars-helpers/compare/v0.2.0...v0.2.3) - 2013-05-11
+## [v0.2.3](https://github.com/helpers/handlebars-helpers/compare/v0.2.0...v0.2.3) - 2013-05-11
 
 **changes**
 
 * File globbing added to some helpers. Including md and some file helpers.
 
-## [v0.2.0](https://github.com/assemble/handlebars-helpers/compare/v0.1.32...v0.2.0) - 2013-05-07
+## [v0.2.0](https://github.com/helpers/handlebars-helpers/compare/v0.1.32...v0.2.0) - 2013-05-07
 
 **changes**
 
 * A bunch of new tests for markdown and special helpers.
 * Refactored most of the rest of the helpers to separate functions from Handlebars registration.
 
-## [v0.1.32](https://github.com/assemble/handlebars-helpers/compare/v0.1.31...v0.1.32) - 2013-05-02
+## [v0.1.32](https://github.com/helpers/handlebars-helpers/compare/v0.1.31...v0.1.32) - 2013-05-02
 
 **changes**
 
 * Updates utils and a number of helpers, including value, property, and stringify.
 
-## [v0.1.31](https://github.com/assemble/handlebars-helpers/compare/v0.1.30...v0.1.31) - 2013-04-21
+## [v0.1.31](https://github.com/helpers/handlebars-helpers/compare/v0.1.30...v0.1.31) - 2013-04-21
 
 **changes**
 
 * Fixes relative helper
 
-## [v0.1.30](https://github.com/assemble/handlebars-helpers/compare/v0.1.25...v0.1.30) - 2013-04-20
+## [v0.1.30](https://github.com/helpers/handlebars-helpers/compare/v0.1.25...v0.1.30) - 2013-04-20
 
 **changes**
 
 * Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
 
-## [v0.1.25](https://github.com/assemble/handlebars-helpers/compare/v0.1.21...v0.1.25) - 2013-04-16
+## [v0.1.25](https://github.com/helpers/handlebars-helpers/compare/v0.1.21...v0.1.25) - 2013-04-16
 
 **changes**
 
 * Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
 
-## [v0.1.21](https://github.com/assemble/handlebars-helpers/compare/v0.1.20...v0.1.21) - 2013-04-07
+## [v0.1.21](https://github.com/helpers/handlebars-helpers/compare/v0.1.20...v0.1.21) - 2013-04-07
 
 **changes**
 
 * Add markdown helpers back, add more tests.
 
-## [v0.1.20](https://github.com/assemble/handlebars-helpers/compare/v0.1.11...v0.1.20) - 2013-04-06
+## [v0.1.20](https://github.com/helpers/handlebars-helpers/compare/v0.1.11...v0.1.20) - 2013-04-06
 
 **changes**
 
 * Generalized helpers structure, externalized utilities.
 
-## [v0.1.11](https://github.com/assemble/handlebars-helpers/compare/v0.1.10...v0.1.11) - 2013-04-05
+## [v0.1.11](https://github.com/helpers/handlebars-helpers/compare/v0.1.10...v0.1.11) - 2013-04-05
 
 **changes**
 
 * New authors and gist helpers, general cleanup and new tests.
 
-## [v0.1.10](https://github.com/assemble/handlebars-helpers/compare/v0.1.8...v0.1.10) - 2013-04-04
+## [v0.1.10](https://github.com/helpers/handlebars-helpers/compare/v0.1.8...v0.1.10) - 2013-04-04
 
 **changes**
 
 * Externalized utility javascript from helpers.js
 
-## [v0.1.8](https://github.com/assemble/handlebars-helpers/compare/v0.1.7...v0.1.8) - 2013-03-28
+## [v0.1.8](https://github.com/helpers/handlebars-helpers/compare/v0.1.7...v0.1.8) - 2013-03-28
 
 **changes**
 
 * Gruntfile updated with mocha tests for 71 helpers, bug fixes.
 
-## [v0.1.7](https://github.com/assemble/handlebars-helpers/compare/v0.1.3...v0.1.7) - 2013-03-18
+## [v0.1.7](https://github.com/helpers/handlebars-helpers/compare/v0.1.3...v0.1.7) - 2013-03-18
 
 **changes**
 
 * New path helper 'relative', for resolving relative path from one absolute path to another.
 
-## [v0.1.3](https://github.com/assemble/handlebars-helpers/compare/v0.1.2...v0.1.3) - 2013-03-16
+## [v0.1.3](https://github.com/helpers/handlebars-helpers/compare/v0.1.2...v0.1.3) - 2013-03-16
 
 **changes**
 
 * New helpers, 'formatPhoneNumber' and 'eachProperty'
 
-## [v0.1.2](https://github.com/assemble/handlebars-helpers/compare/v0.1.0...v0.1.2) - 2013-03-15
+## [v0.1.2](https://github.com/helpers/handlebars-helpers/compare/v0.1.0...v0.1.2) - 2013-03-15
 
 **changes**
 
@@ -2642,7 +2673,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ### Contributors
 
-| **Commits** | **Contributor** | 
+| **Commits** | **Contributor** |
 | --- | --- |
 | 499 | [jonschlinkert](https://github.com/jonschlinkert) |
 | 178 | [doowb](https://github.com/doowb) |
@@ -2683,8 +2714,6 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 | 1 | [nathanjessen](https://github.com/nathanjessen) |
 | 1 | [supersheep](https://github.com/supersheep) |
 
-### Release history
-
 ### Building docs
 
 _(This document was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme) (a [verb](https://github.com/verbose/verb) generator), please don't edit the readme directly. Any changes to the readme must be made in [.verb.md](.verb.md).)_
@@ -2723,4 +2752,4 @@ MIT
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.1, on March 30, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.3.1, on March 31, 2017._
