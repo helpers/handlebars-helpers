@@ -54,6 +54,18 @@ describe('math', function() {
     });
   });
 
+  describe('remainder', function() {
+    it('should return the remainder of two numbers.', function() {
+      var fn = hbs.compile('{{remainder value 5}}');
+      assert.equal(fn({value: 7}), '2');
+    });
+
+    it('should take the sign of the dividend.', function() {
+      var fn = hbs.compile('{{remainder 5 -3}}');
+      assert.equal(fn(), '2');
+    });
+  });
+
   describe('round', function() {
     it('should return the value rounded to the nearest integer.', function() {
       var fn = hbs.compile('{{round value}}');
