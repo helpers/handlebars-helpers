@@ -1,3 +1,20 @@
+v0.8.2:
+  date: "2017-03-30"
+  changes:
+    - documentation updates
+    - fixes md helper to use sync by default
+v0.8.1:
+  date: "2017-03-30"
+  changes:
+    - fixes sorting in withSort helper. see https://github.com/helpers/handlebars-helpers/pull/245
+    - adds toPath helper
+    - handle null inputs in number helpers
+    - adds stripProtocol helper
+v0.8.0:
+  date: "2017-01-25"
+  changes:
+    - handle string arguments in list helpers
+    - adds JSONParse helper as an alias for parseJSON
 v0.7.6:
   date: "2017-01-08"
   changes:
