@@ -155,9 +155,9 @@ describe('array', function() {
     });
   });
 
-  describe('groupEach', function() {
+  describe('withGroup', function() {
     it('should iterate over an array grouping elements by a given number', function() {
-      var fn = hbs.compile('{{#groupEach 4 collection }}{{#each this}}{{name}}{{/each}}<br>{{/groupEach}}');
+      var fn = hbs.compile('{{#withGroup collection 4}}{{#each this}}{{name}}{{/each}}<br>{{/withGroup}}');
       var res = fn({
         collection: [ {name: 'a'}, {name: 'b'}, {name: 'c'}, {name: 'd'}, {name: 'e'}, {name: 'f'}, {name: 'g'}, {name: 'h'}]
       });
