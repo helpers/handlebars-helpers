@@ -230,6 +230,18 @@ describe('array', function() {
     });
   });
 
+  describe('lengthLt', function() {
+    it('should render the first block if length is less than the given number', function() {
+      var fn = hbs.compile('{{#lengthLt array 99}}AAA{{else}}BBB{{/lengthLt}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not less than the given number', function() {
+      var fn = hbs.compile('{{#lengthLt array 2}}AAA{{else}}BBB{{/lengthLt}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
       var ctx = {array: ['a', 'b', 'c']};
