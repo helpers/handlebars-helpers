@@ -254,6 +254,18 @@ describe('array', function() {
     });
   });
 
+  describe('lengthLte', function() {
+    it('should render the first block if length is greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthLte array 8}}AAA{{else}}BBB{{/lengthLte}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthLte array 7}}AAA{{else}}BBB{{/lengthLte}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
       var ctx = {array: ['a', 'b', 'c']};
