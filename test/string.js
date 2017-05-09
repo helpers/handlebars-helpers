@@ -127,7 +127,7 @@ describe('string', function() {
       assert.equal(fn(), '');
     });
     it('should return the number of occurrences of a string, within a string.', function() {
-      var fn = hbs.compile('{{occurrences "Death by Snu-Snu" "Snu"}}');
+      var fn = hbs.compile('{{occurrences "Jar-Jar Binks" "Jar"}}');
       assert.equal(fn(), '2');
     });
   });
