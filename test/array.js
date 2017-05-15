@@ -218,6 +218,54 @@ describe('array', function() {
     });
   });
 
+  describe('lengthGt', function() {
+    it('should render the first block if length is greater than the given number', function() {
+      var fn = hbs.compile('{{#lengthGt array 2}}AAA{{else}}BBB{{/lengthGt}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not greater than the given number', function() {
+      var fn = hbs.compile('{{#lengthGt array 99}}AAA{{else}}BBB{{/lengthGt}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
+  describe('lengthLt', function() {
+    it('should render the first block if length is less than the given number', function() {
+      var fn = hbs.compile('{{#lengthLt array 99}}AAA{{else}}BBB{{/lengthLt}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not less than the given number', function() {
+      var fn = hbs.compile('{{#lengthLt array 2}}AAA{{else}}BBB{{/lengthLt}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
+  describe('lengthGte', function() {
+    it('should render the first block if length is greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthGte array 8}}AAA{{else}}BBB{{/lengthGte}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthGte array 9}}AAA{{else}}BBB{{/lengthGte}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
+  describe('lengthLte', function() {
+    it('should render the first block if length is greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthLte array 8}}AAA{{else}}BBB{{/lengthLte}}');
+      fn(context).should.equal('AAA');
+    });
+
+    it('should render the inverse block if length is not greater than or equal to the given number', function() {
+      var fn = hbs.compile('{{#lengthLte array 7}}AAA{{else}}BBB{{/lengthLte}}');
+      fn(context).should.equal('BBB');
+    });
+  });
+
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
       var ctx = {array: ['a', 'b', 'c']};
