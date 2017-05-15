@@ -313,5 +313,30 @@ describe('string', function() {
       assert.equal(fn(), 'BENDER SHOULD NOT BE ALLOWED ON TV');
     });
   });
-});
 
+  describe('nl2br', function() {
+    it('should return an HTML line break inserted string', function() {
+      var context = {str: '<span>Line1.</span>\nLine2.\r\nLine3.\rLine4.\n\rLine5.'}
+      var fn = hbs.compile('{{nl2br str}}');
+      assert.equal(fn(context), '&lt;span&gt;Line1.&lt;/span&gt;<br>\nLine2.<br>\r\nLine3.<br>\rLine4.<br>\n\rLine5.');
+    });
+
+    it('should return an HTML line break replaced string', function() {
+      var context = {str: '<span>Line1.</span>\nLine2.\r\nLine3.\rLine4.\n\rLine5.'}
+      var fn = hbs.compile('{{nl2br str replace=true}}');
+      assert.equal(fn(context), '&lt;span&gt;Line1.&lt;/span&gt;<br>Line2.<br>Line3.<br>Line4.<br>Line5.');
+    });
+
+    it('should return an XHTML line break inserted string', function() {
+      var context = {str: 'Line1.\nLine2.\r\nLine3.\rLine4.\n\rLine5.'}
+      var fn = hbs.compile('{{nl2br str isXhtml=true}}');
+      assert.equal(fn(context), 'Line1.<br />\nLine2.<br />\r\nLine3.<br />\rLine4.<br />\n\rLine5.');
+    });
+
+    it('should return an XHTML line break replaced string', function() {
+      var context = {str: 'Line1.\nLine2.\r\nLine3.\rLine4.\n\rLine5.'}
+      var fn = hbs.compile('{{nl2br str isXhtml=true replace=true}}');
+      assert.equal(fn(context), 'Line1.<br />Line2.<br />Line3.<br />Line4.<br />Line5.');
+    });
+  });
+});
