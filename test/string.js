@@ -110,6 +110,28 @@ describe('string', function() {
     });
   });
 
+  describe('isString', function() {
+    it('should return true for string', function() {
+      hbs.compile('{{isString "foo"}}')().should.equal('true');
+    });
+
+    it('should return true for empty string', function() {
+      hbs.compile('{{isString ""}}')().should.equal('true');
+    });
+
+    it('should return false for number', function() {
+      hbs.compile('{{isString 123}}')().should.equal('false');
+    });
+
+    it('should return false for null', function() {
+      hbs.compile('{{isString null}}')().should.equal('false');
+    });
+
+    it('should return false when undefined', function() {
+      hbs.compile('{{isString}}')().should.equal('false');
+    });
+  });
+
   describe('lowercase', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{lowercase}}');
@@ -314,4 +336,3 @@ describe('string', function() {
     });
   });
 });
-
