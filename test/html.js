@@ -57,6 +57,10 @@ describe('html', function() {
       var fn = hbs.compile('{{ellipsis}}');
       fn().should.equal('');
     });
+    it('should return an empty string if empty', function() {
+      var fn = hbs.compile('{{ellipsis "" 1}}');
+      fn().should.equal('');
+    });
     it('should return then string truncated by a specified length.', function() {
       var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
       fn().should.equal('Bender should not be allowed on…');
@@ -109,6 +113,10 @@ describe('html', function() {
   describe('truncate', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{truncate}}');
+      fn().should.equal('');
+    });
+    it('should return an empty string if empty', function() {
+      var fn = hbs.compile('{{truncate "" 1}}');
       fn().should.equal('');
     });
     it('should return the string truncated by a specified length.', function() {
