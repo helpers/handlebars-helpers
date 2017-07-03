@@ -1,3 +1,7 @@
+v0.8.4:
+  date: "2017-07-03"
+  changes:
+    - removes strlen helper in favor of fixing the length helper
 v0.8.3:
   date: "2017-07-03"
   changes:

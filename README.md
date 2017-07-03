@@ -71,7 +71,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **150 helpers** in **19 categories**:
+Currently **149 helpers** in **19 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -323,11 +323,10 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https
 * **[sentence](#sentence)** ([code](lib/string.js#L348) | [tests](test/string.js#L214))
 * **[snakecase](#snakecase)** ([code](lib/string.js#L371) | [tests](test/string.js#L225))
 * **[split](#split)** ([code](lib/string.js#L390) | [tests](test/string.js#L240))
-* **[startsWith](#startsWith)** ([code](lib/string.js#L415) | [tests](test/string.js#L297))
-* **[strlen](#strlen)** ([code](lib/string.js#L442) | [tests](test/string.js#L255))
-* **[titleize](#titleize)** ([code](lib/string.js#L460) | [tests](test/string.js#L271))
-* **[trim](#trim)** ([code](lib/string.js#L490) | [tests](test/string.js#L282))
-* **[uppercase](#uppercase)** ([code](lib/string.js#L509) | [tests](test/string.js#L316))
+* **[startsWith](#startsWith)** ([code](lib/string.js#L415) | [tests](test/string.js#L281))
+* **[titleize](#titleize)** ([code](lib/string.js#L441) | [tests](test/string.js#L255))
+* **[trim](#trim)** ([code](lib/string.js#L471) | [tests](test/string.js#L266))
+* **[uppercase](#uppercase)** ([code](lib/string.js#L490) | [tests](test/string.js#L300))
 
 ### [url helpers](#url)
 
@@ -2348,24 +2347,7 @@ Tests whether a string begins with the given prefix.
 {{/startsWith}}
 ```
 
-### [{{strlen}}](lib/string.js#L442)
-
-Returns the length of a string.
-
-**Params**
-
-* `string` **{String}**
-* `options` **{Object}**
-* `returns` **{Number}**
-
-**Example**
-
-```handlebars
-{{strlen "Hello, world!"}}
-//=> 13
-```
-
-### [{{titleize}}](lib/string.js#L460)
+### [{{titleize}}](lib/string.js#L441)
 
 Title case the given string.
 
@@ -2381,7 +2363,7 @@ Title case the given string.
 //=> 'This Is Title Case'
 ```
 
-### [{{trim}}](lib/string.js#L490)
+### [{{trim}}](lib/string.js#L471)
 
 Removes extraneous whitespace from the beginning and end of a string.
 
@@ -2397,7 +2379,7 @@ Removes extraneous whitespace from the beginning and end of a string.
 //=> 'ABC'
 ```
 
-### [{{uppercase}}](lib/string.js#L509)
+### [{{uppercase}}](lib/string.js#L490)
 
 Uppercase all of the characters in the given string. If used as a
 block helper it will uppercase the entire block. This helper
@@ -2631,6 +2613,12 @@ Cast `val` to an array.
 ***
 
 ## History
+
+## [v0.8.4](https://github.com/helpers/handlebars-helpers/compare/v0.8.3...v0.8.4) - 2017-07-03
+
+**changes**
+
+* removes strlen helper in favor of fixing the length helper
 
 ## [v0.8.3](https://github.com/helpers/handlebars-helpers/compare/v0.8.2...v0.8.3) - 2017-07-03
 
