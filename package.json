@@ -101,7 +101,7 @@
     "global-modules": "^0.2.3",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-format-md": "^0.1.11",
+    "gulp-format-md": "^1.0.0",
     "gulp-istanbul": "^1.1.1",
     "gulp-mocha": "^3.0.1",
     "gulp-unused": "^0.2.0",
@@ -115,7 +115,7 @@
     "template-helpers": "^0.6.7",
     "templates": "^0.25.3",
     "through2": "^2.0.3",
-    "verb-generate-readme": "^0.3.0",
+    "verb-generate-readme": "^0.6.0",
     "vinyl": "^2.0.1"
   },
   "keywords": [
