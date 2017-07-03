@@ -252,22 +252,6 @@ describe('string', function() {
     });
   });
 
-  describe('strlen', function() {
-    it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{strlen}}');
-      assert.equal(fn(), '');
-    });
-    it('should return an empty string if not a string', function() {
-      var fn = hbs.compile('{{strlen a}}');
-      assert.equal(fn({a: ['b']}), '');
-      assert.equal(fn({a: {b: 'c'}}), '');
-    });
-    it('should return the string length.', function() {
-      var fn = hbs.compile('{{strlen "Hello, world!"}}');
-      assert.equal(fn(), '13');
-    });
-  });
-
   describe('titleize', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{titleize}}');
