@@ -25,6 +25,4 @@ vendor
 temp
 tmp
 TODO.md
-
-examples/*/dist
-examples/*/site
+package-lock.json

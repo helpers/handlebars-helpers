@@ -1,8 +1,8 @@
 /*!
- * handlebars-helpers <https://github.com/assemble/handlebars-helpers>
+ * handlebars-helpers <https://github.com/helpers/handlebars-helpers>
  *
- * Copyright (c) 2013-2016 Jon Schlinkert, Brian Woodward.
- * Licensed under the MIT license.
+ * Copyright (c) 2013-2017, Jon Schlinkert, Brian Woodward.
+ * Released under the MIT License.
  */
 
 'use strict';
