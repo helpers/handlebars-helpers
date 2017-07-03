@@ -155,16 +155,6 @@ describe('array', function() {
     });
   });
 
-  describe('withGroup', function() {
-    it('should iterate over an array grouping elements by a given number', function() {
-      var fn = hbs.compile('{{#withGroup collection 4}}{{#each this}}{{name}}{{/each}}<br>{{/withGroup}}');
-      var res = fn({
-        collection: [ {name: 'a'}, {name: 'b'}, {name: 'c'}, {name: 'd'}, {name: 'e'}, {name: 'f'}, {name: 'g'}, {name: 'h'}]
-      });
-      res.should.equal('abcd<br>efgh<br>');
-    });
-  });  
-
   describe('inArray', function() {
     it('should render the first block when a value exists in the array.', function() {
       var fn = hbs.compile('{{#inArray array "d"}}AAA{{else}}BBB{{/inArray}}');
@@ -184,6 +174,49 @@ describe('array', function() {
       hbs.compile('{{isArray foo}}')({foo: ['foo']}).should.equal('true');
       hbs.compile('{{isArray (arrayify "foo")}}')().should.equal('true');
       hbs.compile('{{isArray (arrayify ["foo"])}}')().should.equal('true');
+    });
+  });
+
+  describe('itemAt', function() {
+    var ctx = {array: ['foo', 'bar', 'baz']};
+
+    it('should return a null value for undefined array.', function() {
+      hbs.compile('{{#if (itemAt)}}exists{{else}}notfound{{/if}}')().should.equal('notfound');
+    });
+
+    it('should return a null value for empty array.', function() {
+      var fn = hbs.compile('{{#if (itemAt array)}}exists{{else}}notfound{{/if}}');
+      fn({array: []}).should.equal('notfound');
+    });
+
+    it('should return a null value for exceed bound.', function() {
+      var fn = hbs.compile('{{#if (itemAt array 999)}}exists{{else}}notfound{{/if}}');
+      fn(ctx).should.equal('notfound');
+    });
+
+    it('should return a first value of array for undefined index.', function() {
+      var fn = hbs.compile('{{itemAt array}}');
+      fn(ctx).should.equal('foo');
+    });
+
+    it('should return a first value of array for zero index.', function() {
+      var fn = hbs.compile('{{itemAt array 0}}');
+      fn(ctx).should.equal('foo');
+    });
+
+    it('should return a second value of array.', function() {
+      var fn = hbs.compile('{{itemAt array 1}}');
+      fn(ctx).should.equal('bar');
+    });
+
+    it('should return a last value of array.', function() {
+      var fn = hbs.compile('{{itemAt array -1}}');
+      fn(ctx).should.equal('baz');
+    });
+
+    it('should return a last before value of array.', function() {
+      var fn = hbs.compile('{{itemAt array -2}}');
+      fn(ctx).should.equal('bar');
     });
   });
 
@@ -228,31 +261,6 @@ describe('array', function() {
     });
   });
 
-  describe('some', function() {
-    it('should render the first block if the callback returns true', function() {
-      var ctx = {array: ['a', 'b', 'c']};
-      ctx.isString = function(val) {
-        return typeof val === 'string';
-      };
-      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
-      fn(ctx).should.equal('AAA');
-    });
-
-    it('should render the inverse block if the array is undefined', function() {
-      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
-      fn().should.equal('BBB');
-    });
-
-    it('should render the inverse block if falsey', function() {
-      var ctx = {array: [['a'], ['b'], ['c']]};
-      ctx.isString = function(val) {
-        return typeof val === 'string';
-      };
-      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
-      fn(ctx).should.equal('BBB');
-    });
-  });
-
   describe('map', function() {
     it('should return an empty string when undefined.', function() {
       hbs.compile('{{map}}')().should.equal('');
@@ -279,6 +287,31 @@ describe('array', function() {
     it('should return an empty string when the array syntax is invalid:', function() {
       var fn = hbs.compile('{{map \'["b", "c", "a"\'}}');
       fn(context).should.equal('');
+    });
+  });
+
+  describe('some', function() {
+    it('should render the first block if the callback returns true', function() {
+      var ctx = {array: ['a', 'b', 'c']};
+      ctx.isString = function(val) {
+        return typeof val === 'string';
+      };
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn(ctx).should.equal('AAA');
+    });
+
+    it('should render the inverse block if the array is undefined', function() {
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn().should.equal('BBB');
+    });
+
+    it('should render the inverse block if falsey', function() {
+      var ctx = {array: [['a'], ['b'], ['c']]};
+      ctx.isString = function(val) {
+        return typeof val === 'string';
+      };
+      var fn = hbs.compile('{{#some array isString}}AAA{{else}}BBB{{/some}}');
+      fn(ctx).should.equal('BBB');
     });
   });
 
@@ -367,6 +400,16 @@ describe('array', function() {
     });
   });
 
+  describe('withGroup', function() {
+    it('should iterate over an array grouping elements by a given number', function() {
+      var fn = hbs.compile('{{#withGroup collection 4}}{{#each this}}{{name}}{{/each}}<br>{{/withGroup}}');
+      var res = fn({
+        collection: [ {name: 'a'}, {name: 'b'}, {name: 'c'}, {name: 'd'}, {name: 'e'}, {name: 'f'}, {name: 'g'}, {name: 'h'}]
+      });
+      res.should.equal('abcd<br>efgh<br>');
+    });
+  });
+
   describe('withLast', function() {
     it('should return an empty string when undefined.', function() {
       hbs.compile('{{withLast}}')().should.equal('');
@@ -419,49 +462,6 @@ describe('array', function() {
         ]
       });
       res.should.equal('f: 8021 <br>b: 239 <br>d: -12 <br>');
-    });
-  });
-
-  describe('itemAt', function() {
-    var ctx = {array: ['foo', 'bar', 'baz']};
-
-    it('should return a null value for undefined array.', function() {
-      hbs.compile('{{#if (itemAt)}}exists{{else}}notfound{{/if}}')().should.equal('notfound');
-    });
-
-    it('should return a null value for empty array.', function() {
-      var fn = hbs.compile('{{#if (itemAt array)}}exists{{else}}notfound{{/if}}');
-      fn({array: []}).should.equal('notfound');
-    });
-
-    it('should return a null value for exceed bound.', function() {
-      var fn = hbs.compile('{{#if (itemAt array 999)}}exists{{else}}notfound{{/if}}');
-      fn(ctx).should.equal('notfound');
-    });
-
-    it('should return a first value of array for undefined index.', function() {
-      var fn = hbs.compile('{{itemAt array}}');
-      fn(ctx).should.equal('foo');
-    });
-
-    it('should return a first value of array for zero index.', function() {
-      var fn = hbs.compile('{{itemAt array 0}}');
-      fn(ctx).should.equal('foo');
-    });
-
-    it('should return a second value of array.', function() {
-      var fn = hbs.compile('{{itemAt array 1}}');
-      fn(ctx).should.equal('bar');
-    });
-
-    it('should return a last value of array.', function() {
-      var fn = hbs.compile('{{itemAt array -1}}');
-      fn(ctx).should.equal('baz');
-    });
-
-    it('should return a last before value of array.', function() {
-      var fn = hbs.compile('{{itemAt array -2}}');
-      fn(ctx).should.equal('bar');
     });
   });
 });
