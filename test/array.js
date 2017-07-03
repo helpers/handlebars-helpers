@@ -421,4 +421,47 @@ describe('array', function() {
       res.should.equal('f: 8021 <br>b: 239 <br>d: -12 <br>');
     });
   });
+
+  describe('itemAt', function() {
+    var ctx = {array: ['foo', 'bar', 'baz']};
+
+    it('should return a null value for undefined array.', function() {
+      hbs.compile('{{#if (itemAt)}}exists{{else}}notfound{{/if}}')().should.equal('notfound');
+    });
+
+    it('should return a null value for empty array.', function() {
+      var fn = hbs.compile('{{#if (itemAt array)}}exists{{else}}notfound{{/if}}');
+      fn({array: []}).should.equal('notfound');
+    });
+
+    it('should return a null value for exceed bound.', function() {
+      var fn = hbs.compile('{{#if (itemAt array 999)}}exists{{else}}notfound{{/if}}');
+      fn(ctx).should.equal('notfound');
+    });
+
+    it('should return a first value of array for undefined index.', function() {
+      var fn = hbs.compile('{{itemAt array}}');
+      fn(ctx).should.equal('foo');
+    });
+
+    it('should return a first value of array for zero index.', function() {
+      var fn = hbs.compile('{{itemAt array 0}}');
+      fn(ctx).should.equal('foo');
+    });
+
+    it('should return a second value of array.', function() {
+      var fn = hbs.compile('{{itemAt array 1}}');
+      fn(ctx).should.equal('bar');
+    });
+
+    it('should return a last value of array.', function() {
+      var fn = hbs.compile('{{itemAt array -1}}');
+      fn(ctx).should.equal('baz');
+    });
+
+    it('should return a last before value of array.', function() {
+      var fn = hbs.compile('{{itemAt array -2}}');
+      fn(ctx).should.equal('bar');
+    });
+  });
 });
