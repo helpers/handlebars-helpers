@@ -9,7 +9,7 @@ var isValid = require('is-valid-app');
 var through = require('through2');
 var File = require('vinyl');
 
-module.exports = function(app, base, env) {
+module.exports = function(app) {
   if (!isValid(app, 'verbfile')) return;
   app.use(require('verb-generate-readme'));
   app.on('error', console.log);
@@ -70,9 +70,7 @@ module.exports = function(app, base, env) {
     next();
   });
 
-  app.task('default', function(cb) {
-    app.generate(['data', 'toc', 'readme', 'docs'], cb);
-  });
+  app.task('default', ['data', 'toc', 'readme', 'docs']);
 };
 
 function toc(app, options) {
