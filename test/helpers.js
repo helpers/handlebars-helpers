@@ -16,19 +16,29 @@ describe('helpers', function() {
 
   it('should register helpers with handlebars:', function() {
     helpers({handlebars: hbs});
-    hbs.helpers.should.have.properties(['contains', 'default']);
+    assert(hbs.helpers.hasOwnProperty('contains'));
+    assert(hbs.helpers.hasOwnProperty('default'));
   });
 
   it('should get the specified collections', function() {
     var res = helpers(['string', 'array'], {handlebars: hbs.create()});
-    hbs.helpers.should.have.properties(['replace', 'reverse', 'some', 'last']);
-    res.should.not.have.properties(['dirname', 'embed']);
+    assert(res.hasOwnProperty('replace'));
+    assert(res.hasOwnProperty('reverse'));
+    assert(res.hasOwnProperty('some'));
+    assert(res.hasOwnProperty('last'));
+    assert(!res.hasOwnProperty('dirname'));
+    assert(!res.hasOwnProperty('embed'));
   });
 
   it('should get only the specified collection', function() {
     var res = helpers('string', {handlebars: hbs.create()});
-    res.should.have.properties(['replace', 'reverse']);
-    res.should.not.have.properties(['some', 'last', 'dirname']);
+
+    assert(res.hasOwnProperty('replace'));
+    assert(res.hasOwnProperty('reverse'));
+    assert(res.hasOwnProperty('prepend'));
+    assert(!res.hasOwnProperty('some'));
+    assert(!res.hasOwnProperty('last'));
+    assert(!res.hasOwnProperty('dirname'));
   });
 
   it('should support passing an instance of handlebars:', function() {
@@ -38,11 +48,16 @@ describe('helpers', function() {
   });
 
   it('should return a single collection:', function() {
-    helpers.math().should.have.properties(['add', 'subtract', 'divide']);
+    var res = helpers.math();
+    assert(res.hasOwnProperty('add'));
+    assert(res.hasOwnProperty('subtract'));
+    assert(res.hasOwnProperty('divide'));
   });
 
   it('should register collection helpers with handlebars:', function() {
     helpers.math();
-    hbs.helpers.should.have.properties(['add', 'subtract', 'divide']);
+    assert(hbs.helpers.hasOwnProperty('add'));
+    assert(hbs.helpers.hasOwnProperty('subtract'));
+    assert(hbs.helpers.hasOwnProperty('divide'));
   });
 });

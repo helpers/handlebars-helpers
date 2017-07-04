@@ -1,10 +1,10 @@
 'use strict';
 
-require('should');
+require('mocha');
 var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 require('..')({handlebars: hbs});
 
 var orig;
@@ -28,7 +28,7 @@ describe('fs', function() {
     });
 
     it('should work as a subexpression', function() {
-      var fn = hbs.compile('{{mm (readdir dir) "**/[a-c]*.js"}}');
+      var fn = hbs.compile('{{match (readdir dir) "**/[a-c]*.js"}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), [
         'lib/array.js',
         'lib/code.js',
@@ -64,13 +64,14 @@ describe('fs', function() {
         'lib/number.js',
         'lib/object.js',
         'lib/path.js',
+        'lib/regex.js',
         'lib/string.js',
         'lib/url.js'
       ]);
     });
 
     it('should filter using a regex', function() {
-      var fn = hbs.compile('{{readdir dir "/\\.js$/"}}');
+      var fn = hbs.compile('{{readdir dir (toRegex "\\.js$")}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), [
         'lib/array.js',
         'lib/code.js',
@@ -90,6 +91,7 @@ describe('fs', function() {
         'lib/number.js',
         'lib/object.js',
         'lib/path.js',
+        'lib/regex.js',
         'lib/string.js',
         'lib/url.js'
       ]);

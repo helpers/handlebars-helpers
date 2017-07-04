@@ -1,7 +1,27 @@
 v0.9.0:
   date: "2017-07-03"
   changes:
-    - remove `fileSize` helper in favor of new `bytes` helper, which does the same thing with minor differences.
+    - all unit tests now use assert instead of should
+    - remove `fileSize` helper in favor of new `bytes` helper, which does the same thing, but returns `B` instead of `byte` or `bytes`.
+    - JSONParse helper is no longer a block helper. It now returns an object, which can be used as a subexpression to achieve the same behavior as before.
+    - adds better error handling for path helpers, since node.js errors are terrible. We have a better way to handle errors that will be implemented in a near future release.
+    - adds inline helper support to `isEmpty`, so it can now be used as an inline or block helper
+    - adds `raw` helper
+    - adds regex helpers
+    - adds inline helper support to most of the comparison helpers, so they can now be used as inline or block helpers
+    - adds `pluck` helper to array helpers
+    - adds `prepend` and `append` helpers to string helpers
+    - adds `isTruthy` and `isFalsey` comparison helpers
+    - adds `escape` and `url_encode` and `url_decode` URL helpers
+    - adds `attr` helper to html helpers
+    - adds `year` helper to date helpers
+    - adds `typeOf` and `frame` helpers to misc helpers
+    - adds `abs`, `minus`, `modulo`, `plus`, `times` to math helpers
+    - moves `ellipsis` helper from `html` helpers to string helpers
+    - moves `truncate` helper from `html` helpers to string helpers
+    - moves `reverse` helper from `string` helpers to array helpers
+    - differentiate `eq` and `is` helpers so that `eq` is strict equality and `is` is not
+    - removes `mm` helper, use `match` instead
 v0.8.4:
   date: "2017-07-03"
   changes:

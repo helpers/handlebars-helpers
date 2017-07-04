@@ -1,39 +1,58 @@
 'use strict';
 
-require('should');
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
 helpers.comparison({handlebars: hbs});
 
 describe('comparison', function() {
   describe('and', function() {
-    it('should render a block if both values are truthy.', function() {
-      var fn = hbs.compile('{{#and great magnificent}}A{{else}}B{{/and}}');
-      assert.equal(fn({great: true, magnificent: true}), 'A');
+    describe('block', function() {
+      it('should render a block if both values are truthy.', function() {
+        var fn = hbs.compile('{{#and great magnificent}}A{{else}}B{{/and}}');
+        assert.equal(fn({great: true, magnificent: true}), 'A');
+      });
+
+      it('should render the inverse block if both values are not truthy.', function() {
+        var fn = hbs.compile('{{#and great magnificent}}A{{else}}B{{/and}}');
+        assert.equal(fn({great: true, magnificent: false}), 'B');
+      });
     });
 
-    it('should render the inverse block if both values are not truthy.', function() {
-      var fn = hbs.compile('{{#and great magnificent}}A{{else}}B{{/and}}');
-      assert.equal(fn({great: true, magnificent: false}), 'B');
+    describe('inline', function() {
+      it('should render a block if both values are truthy.', function() {
+        var fn = hbs.compile('{{and great magnificent}}');
+        assert.equal(fn({great: true, magnificent: true}), 'true');
+      });
+
+      it('should render the inverse block if both values are not truthy.', function() {
+        var fn = hbs.compile('{{and great magnificent}}');
+        assert.equal(fn({great: true, magnificent: false}), 'false');
+      });
+
+      it('should work as subexpressions', function() {
+        var fn = hbs.compile('{{and (and a b) (and great magnificent)}}');
+        assert.equal(fn({great: true, magnificent: false}), 'false');
+      });
     });
   });
 
   describe('compare', function() {
     describe('errors', function() {
       it('should throw an error when args are invalid', function() {
-        (function() {
+        assert.throws(function() {
           hbs.compile('{{#compare}}{{/compare}}')();
-        }).should.throw('handlebars Helper {{compare}} expects 4 arguments');
-        (function() {
+        }, /expects 4 arguments/);
+        assert.throws(function() {
           hbs.compile('{{#compare a b}}{{/compare}}')();
-        }).should.throw('handlebars Helper {{compare}} expects 4 arguments');
+        }, /expects 4 arguments/);
       });
 
       it('should throw an error when the operator is invalid', function() {
-        (function() {
+        assert.throws(function() {
           hbs.compile('{{#compare a "~" b}}{{/compare}}')();
-        }).should.throw('helper {{compare}}: invalid operator: `~`');
+        });
       });
     });
 
@@ -172,6 +191,16 @@ describe('comparison', function() {
     });
   });
 
+  describe('default', function() {
+    it('should use the given value:', function() {
+      assert.equal(hbs.compile('{{default title "A"}}')({title: 'B'}), 'B');
+    });
+    it('should fallback to the default value when no value exists', function() {
+      assert.equal(hbs.compile('{{default title "A"}}')({title: null}), 'A');
+      assert.equal(hbs.compile('{{default title "A"}}')(), 'A');
+    });
+  });
+
   describe('gt', function() {
     var fn = hbs.compile('{{#gt a b}}A{{else}}B{{/gt}}');
 
@@ -235,44 +264,53 @@ describe('comparison', function() {
   });
 
   describe('has', function() {
-    it('should render a block if the condition is true.', function() {
-      var fn = hbs.compile('{{#has context "C"}}A{{else}}B{{/has}}');
-      assert.equal(fn({context: 'CCC'}), 'A');
+    describe('inline', function() {
+      it('should return true when the property exists', function() {
+        var fn = hbs.compile('{{has "foo"}}');
+        assert.equal(fn({foo: 'bar'}), 'true');
+      });
     });
 
-    it('should render the inverse block if false.', function() {
-      var fn = hbs.compile('{{#has context "zzz"}}A{{else}}B{{/has}}');
-      assert.equal(fn({context: 'CCC'}), 'B');
-    });
+    describe('block', function() {
+      it('should render a block if the condition is true.', function() {
+        var fn = hbs.compile('{{#has context "C"}}A{{else}}B{{/has}}');
+        assert.equal(fn({context: 'CCC'}), 'A');
+      });
 
-    it('should render the inverse block if value is undefined.', function() {
-      var fn = hbs.compile('{{#has context}}A{{else}}B{{/has}}');
-      assert.equal(fn({context: 'CCC'}), 'B');
-    });
+      it('should render the inverse block if false.', function() {
+        var fn = hbs.compile('{{#has context "zzz"}}A{{else}}B{{/has}}');
+        assert.equal(fn({context: 'CCC'}), 'B');
+      });
 
-    it('should render the inverse block if context is undefined.', function() {
-      var fn = hbs.compile('{{#has}}A{{else}}B{{/has}}');
-      assert.equal(fn({context: 'CCC'}), 'B');
-    });
+      it('should render the inverse block if value is undefined.', function() {
+        var fn = hbs.compile('{{#has context}}A{{else}}B{{/has}}');
+        assert.equal(fn({context: 'CCC'}), 'B');
+      });
 
-    it('should work with arrays', function() {
-      var fn = hbs.compile('{{#has array "a"}}A{{else}}B{{/has}}');
-      assert.equal(fn({array: ['a', 'b', 'c']}), 'A');
-    });
+      it('should render the inverse block if context is undefined.', function() {
+        var fn = hbs.compile('{{#has}}A{{else}}B{{/has}}');
+        assert.equal(fn({context: 'CCC'}), 'B');
+      });
 
-    it('should work with two strings', function() {
-      var fn = hbs.compile('{{#has "abc" "a"}}A{{else}}B{{/has}}');
-      assert.equal(fn(), 'A');
-    });
+      it('should work with arrays', function() {
+        var fn = hbs.compile('{{#has array "a"}}A{{else}}B{{/has}}');
+        assert.equal(fn({array: ['a', 'b', 'c']}), 'A');
+      });
 
-    it('should return the inverse when the second string is not found', function() {
-      var fn = hbs.compile('{{#has "abc" "z"}}A{{else}}B{{/has}}');
-      assert.equal(fn(), 'B');
-    });
+      it('should work with two strings', function() {
+        var fn = hbs.compile('{{#has "abc" "a"}}A{{else}}B{{/has}}');
+        assert.equal(fn(), 'A');
+      });
 
-    it('should work with object keys', function() {
-      var fn = hbs.compile('{{#has object "a"}}A{{else}}B{{/has}}');
-      assert.equal(fn({object: {a: 'b'}}), 'A');
+      it('should return the inverse when the second string is not found', function() {
+        var fn = hbs.compile('{{#has "abc" "z"}}A{{else}}B{{/has}}');
+        assert.equal(fn(), 'B');
+      });
+
+      it('should work with object keys', function() {
+        var fn = hbs.compile('{{#has object "a"}}A{{else}}B{{/has}}');
+        assert.equal(fn({object: {a: 'b'}}), 'A');
+      });
     });
   });
 
@@ -449,21 +487,35 @@ describe('comparison', function() {
   });
 
   describe('or', function() {
-    it('should render a block if one of the values is truthy.', function() {
-      var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
-      assert.equal(fn({great: false, magnificent: true}), 'A');
+    describe('block', function() {
+      it('should render a block if one of the values is truthy.', function() {
+        var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
+        assert.equal(fn({great: false, magnificent: true}), 'A');
+      });
+      it('should render a block if any of the values are truthy.', function() {
+        var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
+        assert.equal(fn({great: false, magnificent: false, fantastic: true}), 'A');
+      });
+      it('should render the inverse block if neither are true.', function() {
+        var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
+        assert.equal(fn({great: false, magnificent: false}), 'B');
+      });
+      it('should render the inverse block if none are true.', function() {
+        var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
+        assert.equal(fn({great: false, magnificent: false, fantastic: false}), 'B');
+      });
     });
-    it('should render a block if any of the values are truthy.', function() {
-      var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
-      assert.equal(fn({great: false, magnificent: false, fantastic: true}), 'A');
-    });
-    it('should render the inverse block if neither are true.', function() {
-      var fn = hbs.compile('{{#or great magnificent}}A{{else}}B{{/or}}');
-      assert.equal(fn({great: false, magnificent: false}), 'B');
-    });
-    it('should render the inverse block if none are true.', function() {
-      var fn = hbs.compile('{{#or great magnificent fantastic}}A{{else}}B{{/or}}');
-      assert.equal(fn({great: false, magnificent: false, fantastic: false}), 'B');
+
+    describe('inline', function() {
+      it('should return false none of the values is truthy.', function() {
+        var fn = hbs.compile('{{or great magnificent}}');
+        assert.equal(fn({great: false, magnificent: false}), 'false');
+      });
+
+      it('should return true if one of the values is truthy.', function() {
+        var fn = hbs.compile('{{or great magnificent}}');
+        assert.equal(fn({great: false, magnificent: true}), 'true');
+      });
     });
   });
 

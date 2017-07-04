@@ -1,3 +1,3 @@
 (function(){
-  console.log('foo');
+  process.env.HANDLEBARS_TEST_FOO = 'foo';
 })();

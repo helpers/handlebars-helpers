@@ -1,7 +1,11 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
+var helpers = require('..');
+helpers.array({handlebars: hbs});
+helpers.string({handlebars: hbs});
 
 var context = {
   one: ['A', 'B', 'C', 'D', 'E', 'F'],

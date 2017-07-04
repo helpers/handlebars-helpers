@@ -1,9 +1,11 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
-helpers.array({handlebars: hbs});
+helpers.array({handlebars: hbs})
+helpers.string({handlebars: hbs});
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
 
@@ -68,7 +70,7 @@ describe('array', function() {
 
     it('should return an array with the first two items in a collection', function() {
       var fn = hbs.compile('{{first foo 2}}');
-      assert.equal(fn({foo: ['a', 'b', 'c']}), ['a', 'b'].toString());
+      assert.equal(fn({foo: ['a', 'b', 'c']}), 'a,b');
     });
 
     it('should return an empty string when undefined', function() {
@@ -82,7 +84,7 @@ describe('array', function() {
 
     it('should return an array with the first two items in an array', function() {
       var fn = hbs.compile('{{first foo 2}}');
-      assert.equal(fn({foo: ['a', 'b', 'c']}), ['a', 'b'].toString());
+      assert.equal(fn({foo: ['a', 'b', 'c']}), 'a,b');
     });
   });
 
@@ -245,7 +247,7 @@ describe('array', function() {
     });
 
     it('should return an array with the last two items in an array', function() {
-      assert.equal(hbs.compile('{{last array 2}}')(context), ['g', 'h'].toString());
+      assert.equal(hbs.compile('{{last array 2}}')(context), 'g,h');
     });
   });
 
@@ -267,17 +269,39 @@ describe('array', function() {
     });
 
     it('should map the items in the array and return new values', function() {
-      var o = {array: ['a', 'b', 'c']};
-      o.double = function(str) {
+      var locals = {array: ['a', 'b', 'c']};
+      locals.double = function(str) {
         return str + str;
       };
       var fn = hbs.compile('{{map array double}}');
-      assert.equal(fn(o), 'aa,bb,cc');
+      assert.equal(fn(locals), 'aa,bb,cc');
     });
 
-    it('should return an empty string when value is not an array', function() {
-      var fn = hbs.compile('{{map \'["b", "c", "a"\'}}');
-      assert.equal(fn(context), '');
+    it('should work with subexpressions:', function() {
+      var locals = {};
+      locals.double = function(str) {
+        return str + str;
+      };
+      var fn = hbs.compile('{{map (split "a,b,c" ",") double}}');
+      assert.equal(fn(locals), 'aa,bb,cc');
+    });
+
+    it('should return the value when not an array', function() {
+      var fn = hbs.compile('{{map (split "b,c,a" ",") reverse}}');
+      assert.equal(fn(context), 'b,c,a');
+    });
+
+    it('should return the value when no function is passed', function() {
+      var fn = hbs.compile('{{map (split "b,c,a" ",")}}');
+      assert.equal(fn(context), 'b,c,a');
+    });
+  });
+
+  describe('pluck', function() {
+    it('should get the given value from objects on an array', function() {
+      var ctx = {array: [{a: 'x'}, {a: 'y'}, {a: 'z'}]};
+      var fn = hbs.compile('{{pluck array "a"}}');
+      assert.equal(fn(ctx), 'x,y,z');
     });
   });
 
@@ -321,7 +345,7 @@ describe('array', function() {
 
     it('should return all items in an array sorted in lexicographical order', function() {
       var fn = hbs.compile('{{sort array}}');
-      assert.equal(fn(context), ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].toString());
+      assert.equal(fn(context), 'a,b,c,d,e,f,g,h');
     });
 
     it('should sort the items in the array in reverse order:', function() {
@@ -336,18 +360,23 @@ describe('array', function() {
       assert.equal(hbs.compile('{{sortBy}}')(), '');
     });
 
-    it('should return an empty string when not an array:', function() {
-      var fn = hbs.compile('{{sortBy \'["b", "c", "a"\'}}');
+    it('should sort the items in an array', function() {
+      var fn = hbs.compile('{{sortBy array}}');
+      assert.equal(fn({array: ["b", "c", "a"]}), 'a,b,c');
+    });
+
+    it('should return an empty string when the array is invalid:', function() {
+      var fn = hbs.compile('{{sortBy foo}}');
       assert.equal(fn(context), '');
     });
 
     it('should take a compare function', function() {
-      var ctx = {array: ['b', 'a', 'c']};
-      ctx.compare = function(a, b) {
+      var locals = {array: ['b', 'c', 'a']};
+      locals.compare = function(a, b) {
         return b.localeCompare(a);
       };
       var fn = hbs.compile('{{sortBy array compare}}');
-      assert.equal(fn(ctx), 'c,b,a');
+      assert.equal(fn(locals), 'c,b,a');
     });
 
     it('should sort based on object key:', function() {

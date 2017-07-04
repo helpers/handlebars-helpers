@@ -1,7 +1,8 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
 helpers.html({handlebars: hbs});
 
@@ -9,6 +10,14 @@ var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
 var actual;
 
 describe('html', function() {
+  describe('attr', function() {
+    it('should strip html from a string.', function() {
+      var actual = hbs.compile('<div{{{attr class=foo}}}></div>')({foo: 'btn'});
+      assert.equal(actual, '<div class="btn"></div>');
+      assert.equal(hbs.compile('{{attr}}')(), '');
+    });
+  });
+
   describe('css', function() {
     it('should return an empty string when no context is passed:', function() {
       assert.equal(hbs.compile('{{{css}}}')(), '');
@@ -52,27 +61,6 @@ describe('html', function() {
     });
   });
 
-  describe('ellipsis', function() {
-    it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{ellipsis}}');
-      assert.equal(fn(), '');
-    });
-
-    it('should return then string truncated by a specified length.', function() {
-      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
-      assert.equal(fn(), 'Bender should not be allowed on…');
-    });
-
-    it('should return the string if shorter than the specified length.', function() {
-      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
-      assert.equal(fn(), 'Bender should not be allowed on tv.');
-    });
-
-    it('should return a string if empty', function() {
-      assert(hbs.compile('{{isString (ellipsis "")}}')());
-    });
-  });
-
   describe('js', function() {
     it('should create an empty script tag', function() {
       assert.equal(hbs.compile('{{{js}}}')(), '<script></script>');
@@ -109,37 +97,6 @@ describe('html', function() {
     it('should strip html from a string.', function() {
       var actual = hbs.compile('{{sanitize "<span>foo</span>"}}')();
       assert.equal(actual, 'foo');
-    });
-  });
-
-  describe('truncate', function() {
-    it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{truncate}}');
-      assert.equal(fn(), '');
-    });
-
-    it('should return the string truncated by a specified length.', function() {
-      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
-      assert.equal(fn(), 'Bender should not be allowed on');
-    });
-
-    it('should return the string if shorter than the specified length.', function() {
-      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
-      assert.equal(fn(), 'Bender should not be allowed on tv.');
-    });
-
-    it('should return then string truncated by a specified length', function() {
-      var fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
-      assert.equal(fn(), 'foo bar...');
-    });
-
-    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
-      var fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
-      assert.equal(fn(), 'foo ba…');
-    });
-
-    it('should return a string if empty', function() {
-      assert(hbs.compile('{{isString (truncate "")}}')());
     });
   });
 

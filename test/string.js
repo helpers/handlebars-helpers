@@ -1,7 +1,8 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
 helpers.string({handlebars: hbs});
 
@@ -96,6 +97,21 @@ describe('string', function() {
     it('should lowercase a single character', function() {
       assert.equal(hbs.compile('{{dotcase "f"}}')(), 'f');
       assert.equal(hbs.compile('{{dotcase "A"}}')(), 'a');
+    });
+  });
+
+  describe('ellipsis', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{ellipsis}}');
+      assert.equal(fn(), '');
+    });
+    it('should return then string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
+      assert.equal(fn(), 'Bender should not be allowed on…');
+    });
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv.');
     });
   });
 
@@ -274,6 +290,25 @@ describe('string', function() {
     });
   });
 
+  describe('startsWith', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{startsWith}}');
+      assert.equal(fn(), '');
+    });
+    it('should render "Yes he is", from inside the block.', function() {
+      var fn = hbs.compile('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}');
+      assert.equal(fn(), "Yes he is");
+    });
+    it('should render the Inverse block.', function() {
+      var fn = hbs.compile('{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}');
+      assert.equal(fn(), 'Bro, do you even hello world?');
+    });
+    it("should render the Inverse block.", function() {
+      var fn = hbs.compile('{{#startsWith "myPrefix" nullProperty}}fn block{{else}}inverse block{{/startsWith}}');
+      assert.equal(fn(), 'inverse block');
+    });
+  });
+
   describe('titleize', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{titleize}}');
@@ -300,22 +335,27 @@ describe('string', function() {
     });
   });
 
-  describe('startsWith', function() {
+  describe('truncate', function() {
     it('should return an empty string if undefined', function() {
-      var fn = hbs.compile('{{startsWith}}');
+      var fn = hbs.compile('{{truncate}}');
       assert.equal(fn(), '');
     });
-    it('should render "Yes he is", from inside the block.', function() {
-      var fn = hbs.compile('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}');
-      assert.equal(fn(), "Yes he is");
+    it('should return the string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
+      assert.equal(fn(), 'Bender should not be allowed on');
     });
-    it('should render the Inverse block.', function() {
-      var fn = hbs.compile('{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}');
-      assert.equal(fn(), 'Bro, do you even hello world?');
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv.');
     });
-    it("should render the Inverse block.", function() {
-      var fn = hbs.compile('{{#startsWith "myPrefix" nullProperty}}fn block{{else}}inverse block{{/startsWith}}');
-      assert.equal(fn(), 'inverse block');
+    it('should return then string truncated by a specified length', function() {
+      var fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
+      assert.equal(fn(), 'foo bar...');
+    });
+
+    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
+      var fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
+      assert.equal(fn(), 'foo ba…');
     });
   });
 
@@ -336,3 +376,4 @@ describe('string', function() {
     });
   });
 });
+

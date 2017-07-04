@@ -1,9 +1,10 @@
 'use strict';
 
+require('mocha');
 var os = require('os');
 var assert = require('assert');
 var path = require('path');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var gm = require('global-modules');
 var helpers = require('..');
 helpers.path({handlebars: hbs});

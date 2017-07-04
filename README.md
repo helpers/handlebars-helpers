@@ -34,12 +34,14 @@ See how to [use handlebars-helpers in the browser](https://github.com/doowb/hand
 
 The main export returns a function that needs to be called to expose the object of helpers.
 
+**Get all helpers**
+
 ```js
 var helpers = require('handlebars-helpers')();
 //=> returns object with all (130+) helpers
 ```
 
-**Get a specific collection**
+**Get a specific helper collection**
 
 Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
 
@@ -51,6 +53,15 @@ var math = helpers.math();
 var helpers = require('handlebars-helpers');
 var array = helpers.array();
 //=> only the `collections` helpers
+```
+
+**Get multiple helpers collections**
+
+Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
+
+```js
+var helpers = require('handlebars-helpers')(['math', 'string']);
+//=> only the `math` and `string` helpers
 ```
 
 **Optionally pass your own handlebars**
@@ -71,7 +82,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **149 helpers** in **19 categories**:
+Currently **187 helpers** in **20 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -90,6 +101,7 @@ Currently **149 helpers** in **19 categories**:
 * **[number](#number)** ([code](lib/number.js) | [unit tests](test/number.js))
 * **[object](#object)** ([code](lib/object.js) | [unit tests](test/object.js))
 * **[path](#path)** ([code](lib/path.js) | [unit tests](test/path.js))
+* **[regex](#regex)** ([code](lib/regex.js) | [unit tests](test/regex.js))
 * **[string](#string)** ([code](lib/string.js) | [unit tests](test/string.js))
 * **[url](#url)** ([code](lib/url.js) | [unit tests](test/url.js))
 
@@ -99,29 +111,33 @@ Currently **149 helpers** in **19 categories**:
 
 Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+array+helpers))
 
-* **[after](#after)** ([code](lib/array.js#L28) | [tests](test/array.js#L11))
-* **[arrayify](#arrayify)** ([code](lib/array.js#L45) | [tests](test/array.js#L27))
-* **[before](#before)** ([code](lib/array.js#L66) | [tests](test/array.js#L34))
-* **[eachIndex](#eachIndex)** ([code](lib/array.js#L84) | [tests](test/array.js#L56))
-* **[filter](#filter)** ([code](lib/array.js#L112) | [tests](test/array.js#L89))
-* **[first](#first)** ([code](lib/array.js#L155) | [tests](test/array.js#L63))
-* **[forEach](#forEach)** ([code](lib/array.js#L198) | [tests](test/array.js#L121))
-* **[inArray](#inArray)** ([code](lib/array.js#L241) | [tests](test/array.js#L158))
-* **[isArray](#isArray)** ([code](lib/array.js#L261) | [tests](test/array.js#L170))
-* **[itemAt](#itemAt)** ([code](lib/array.js#L283) | [tests](test/array.js#L180))
-* **[join](#join)** ([code](lib/array.js#L327) | [tests](test/array.js#L223))
-* **[last](#last)** ([code](lib/array.js#L351) | [tests](test/array.js#L238))
-* **[lengthEqual](#lengthEqual)** ([code](lib/array.js#L380) | [tests](test/array.js#L252))
-* **[map](#map)** ([code](lib/array.js#L409) | [tests](test/array.js#L264))
-* **[some](#some)** ([code](lib/array.js#L447) | [tests](test/array.js#L293))
-* **[sort](#sort)** ([code](lib/array.js#L479) | [tests](test/array.js#L318))
-* **[sortBy](#sortBy)** ([code](lib/array.js#L505) | [tests](test/array.js#L343))
-* **[withAfter](#withAfter)** ([code](lib/array.js#L539) | [tests](test/array.js#L375))
-* **[withBefore](#withBefore)** ([code](lib/array.js#L570) | [tests](test/array.js#L382))
-* **[withFirst](#withFirst)** ([code](lib/array.js#L601) | [tests](test/array.js#L389))
-* **[withGroup](#withGroup)** ([code](lib/array.js#L648) | [tests](test/array.js#L403))
-* **[withLast](#withLast)** ([code](lib/array.js#L683) | [tests](test/array.js#L413))
-* **[withSort](#withSort)** ([code](lib/array.js#L724) | [tests](test/array.js#L427))
+* **[after](#after)** ([code](lib/array.js#L27) | [tests](test/array.js#L12))
+* **[arrayify](#arrayify)** ([code](lib/array.js#L44) | [tests](test/array.js#L28))
+* **[before](#before)** ([code](lib/array.js#L63) | [tests](test/array.js#L35))
+* **[eachIndex](#eachIndex)** ([code](lib/array.js#L82) | [tests](test/array.js#L57))
+* **[filter](#filter)** ([code](lib/array.js#L107) | [tests](test/array.js#L90))
+* **[first](#first)** ([code](lib/array.js#L147) | [tests](test/array.js#L64))
+* **[forEach](#forEach)** ([code](lib/array.js#L189) | [tests](test/array.js#L122))
+* **[inArray](#inArray)** ([code](lib/array.js#L229) | [tests](test/array.js#L159))
+* **[isArray](#isArray)** ([code](lib/array.js#L249) | [tests](test/array.js#L171))
+* **[itemAt](#itemAt)** ([code](lib/array.js#L268) | [tests](test/array.js#L181))
+* **[join](#join)** ([code](lib/array.js#L299) | [tests](test/array.js#L224))
+* **[equalsLength](#equalsLength)** ([code](lib/array.js#L318) | [no tests])
+* **[last](#last)** ([code](lib/array.js#L354) | [tests](test/array.js#L239))
+* **[length](#length)** ([code](lib/array.js#L384) | [tests](test/array.js#L253))
+* **[lengthEqual](#lengthEqual)** ([code](lib/array.js#L400) | [tests](test/array.js#L253))
+* **[map](#map)** ([code](lib/array.js#L419) | [tests](test/array.js#L265))
+* **[pluck](#pluck)** ([code](lib/array.js#L450) | [tests](test/array.js#L299))
+* **[reverse](#reverse)** ([code](lib/array.js#L478) | [no tests])
+* **[some](#some)** ([code](lib/array.js#L509) | [tests](test/array.js#L307))
+* **[sort](#sort)** ([code](lib/array.js#L538) | [tests](test/array.js#L332))
+* **[sortBy](#sortBy)** ([code](lib/array.js#L563) | [tests](test/array.js#L357))
+* **[withAfter](#withAfter)** ([code](lib/array.js#L594) | [tests](test/array.js#L389))
+* **[withBefore](#withBefore)** ([code](lib/array.js#L624) | [tests](test/array.js#L396))
+* **[withFirst](#withFirst)** ([code](lib/array.js#L654) | [tests](test/array.js#L403))
+* **[withGroup](#withGroup)** ([code](lib/array.js#L700) | [tests](test/array.js#L417))
+* **[withLast](#withLast)** ([code](lib/array.js#L735) | [tests](test/array.js#L427))
+* **[withSort](#withSort)** ([code](lib/array.js#L774) | [tests](test/array.js#L441))
 
 ### [code helpers](#code)
 
@@ -135,86 +151,94 @@ Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://g
 
 Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers))
 
-* **[isEmpty](#isEmpty)** ([code](lib/collection.js#L28) | [tests](test/collection.js#L11))
-* **[iterate](#iterate)** ([code](lib/collection.js#L56) | [tests](test/collection.js#L38))
-* **[length](#length)** ([code](lib/collection.js#L87) | [tests](test/collection.js#L77))
+* **[isEmpty](#isEmpty)** ([code](lib/collection.js#L29) | [tests](test/collection.js#L12))
+* **[iterate](#iterate)** ([code](lib/collection.js#L55) | [tests](test/collection.js#L39))
 
 ### [comparison helpers](#comparison)
 
 Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers))
 
-* **[and](#and)** ([code](lib/comparison.js#L26) | [tests](test/comparison.js#L10))
-* **[compare](#compare)** ([code](lib/comparison.js#L48) | [tests](test/comparison.js#L22))
-* **[contains](#contains)** ([code](lib/comparison.js#L119) | [tests](test/comparison.js#L148))
-* **[gt](#gt)** ([code](lib/comparison.js#L146) | [tests](test/comparison.js#L175))
-* **[gte](#gte)** ([code](lib/comparison.js#L174) | [tests](test/comparison.js#L206))
-* **[has](#has)** ([code](lib/comparison.js#L197) | [tests](test/comparison.js#L221))
-* **[eq](#eq)** ([code](lib/comparison.js#L232) | [tests](test/comparison.js#L279))
-* **[ifEven](#ifEven)** ([code](lib/comparison.js#L260) | [tests](test/comparison.js#L296))
-* **[ifNth](#ifNth)** ([code](lib/comparison.js#L279) | [tests](test/comparison.js#L308))
-* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L304) | [tests](test/comparison.js#L331))
-* **[is](#is)** ([code](lib/comparison.js#L323) | [tests](test/comparison.js#L343))
-* **[isnt](#isnt)** ([code](lib/comparison.js#L347) | [tests](test/comparison.js#L360))
-* **[lt](#lt)** ([code](lib/comparison.js#L373) | [tests](test/comparison.js#L377))
-* **[lte](#lte)** ([code](lib/comparison.js#L401) | [tests](test/comparison.js#L404))
-* **[neither](#neither)** ([code](lib/comparison.js#L426) | [tests](test/comparison.js#L439))
-* **[or](#or)** ([code](lib/comparison.js#L452) | [tests](test/comparison.js#L451))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L478) | [tests](test/comparison.js#L470))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L497) | [tests](test/comparison.js#L481))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L516) | [tests](test/comparison.js#L492))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L535) | [tests](test/comparison.js#L503))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L554) | [tests](test/comparison.js#L518))
+* **[and](#and)** ([code](lib/comparison.js#L35) | [tests](test/comparison.js#L10))
+* **[compare](#compare)** ([code](lib/comparison.js#L65) | [tests](test/comparison.js#L41))
+* **[contains](#contains)** ([code](lib/comparison.js#L132) | [tests](test/comparison.js#L167))
+* **[default](#default)** ([code](lib/comparison.js#L151) | [tests](test/comparison.js#L194))
+* **[eq](#eq)** ([code](lib/comparison.js#L173) | [tests](test/comparison.js#L317))
+* **[gt](#gt)** ([code](lib/comparison.js#L197) | [tests](test/comparison.js#L204))
+* **[gte](#gte)** ([code](lib/comparison.js#L222) | [tests](test/comparison.js#L235))
+* **[has](#has)** ([code](lib/comparison.js#L242) | [tests](test/comparison.js#L250))
+* **[isFalsey](#isFalsey)** ([code](lib/comparison.js#L285) | [no tests])
+* **[isTruthy](#isTruthy)** ([code](lib/comparison.js#L300) | [no tests])
+* **[ifEven](#ifEven)** ([code](lib/comparison.js#L321) | [tests](test/comparison.js#L334))
+* **[ifNth](#ifNth)** ([code](lib/comparison.js#L338) | [tests](test/comparison.js#L346))
+* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L361) | [tests](test/comparison.js#L369))
+* **[is](#is)** ([code](lib/comparison.js#L285) | [tests](test/comparison.js#L381))
+* **[isnt](#isnt)** ([code](lib/comparison.js#L402) | [tests](test/comparison.js#L398))
+* **[lt](#lt)** ([code](lib/comparison.js#L425) | [tests](test/comparison.js#L415))
+* **[lte](#lte)** ([code](lib/comparison.js#L450) | [tests](test/comparison.js#L442))
+* **[neither](#neither)** ([code](lib/comparison.js#L472) | [tests](test/comparison.js#L477))
+* **[not](#not)** ([code](lib/comparison.js#L487) | [no tests])
+* **[or](#or)** ([code](lib/comparison.js#L510) | [tests](test/comparison.js#L489))
+* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L537) | [tests](test/comparison.js#L522))
+* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L558) | [tests](test/comparison.js#L533))
+* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L579) | [tests](test/comparison.js#L544))
+* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L600) | [tests](test/comparison.js#L555))
+* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L621) | [tests](test/comparison.js#L570))
 
 ### [date helpers](#date)
 
 Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers))
 
-* **[moment](#moment)** ([code](lib/date.js#L15) | [no tests])
+* **[year](#year)** ([code](lib/date.js#L15) | [no tests])
+* **[moment](#moment)** ([code](lib/date.js#L23) | [no tests])
 
 ### [fs helpers](#fs)
 
 Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
 
-* **[fileSize](#fileSize)** ([code](lib/fs.js#L27) | [tests](test/fs.js#L16))
-* **[read](#read)** ([code](lib/fs.js#L68) | [tests](test/fs.js#L55))
-* **[readdir](#readdir)** ([code](lib/fs.js#L81) | [tests](test/fs.js#L62))
+* **[prettyBytes](#prettyBytes)** ([code](lib/fs.js#L31) | [tests](test/fs.js#L16))
+* **[fileSize](#fileSize)** ([code](lib/fs.js#L63) | [no tests])
+* **[read](#read)** ([code](lib/fs.js#L78) | [tests](test/fs.js#L55))
+* **[readdir](#readdir)** ([code](lib/fs.js#L91) | [tests](test/fs.js#L62))
 
 ### [html helpers](#html)
 
 Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers))
 
-* **[css](#css)** ([code](lib/html.js#L23) | [tests](test/html.js#L12))
-* **[ellipsis](#ellipsis)** ([code](lib/html.js#L66) | [tests](test/html.js#L55))
-* **[js](#js)** ([code](lib/html.js#L88) | [tests](test/html.js#L70))
-* **[sanitize](#sanitize)** ([code](lib/html.js#L120) | [tests](test/html.js#L99))
-* **[truncate](#truncate)** ([code](lib/html.js#L142) | [tests](test/html.js#L109))
-* **[ul](#ul)** ([code](lib/html.js#L162) | [tests](test/html.js#L133))
-* **[ol](#ol)** ([code](lib/html.js#L181) | [tests](test/html.js#L140))
-* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L203) | [tests](test/html.js#L147))
+* **[attr](#attr)** ([code](lib/html.js#L26) | [tests](test/html.js#L12))
+* **[css](#css)** ([code](lib/html.js#L48) | [tests](test/html.js#L20))
+* **[js](#js)** ([code](lib/html.js#L88) | [tests](test/html.js#L63))
+* **[sanitize](#sanitize)** ([code](lib/html.js#L120) | [tests](test/html.js#L92))
+* **[ul](#ul)** ([code](lib/html.js#L134) | [tests](test/html.js#L102))
+* **[ol](#ol)** ([code](lib/html.js#L153) | [tests](test/html.js#L109))
+* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L175) | [tests](test/html.js#L116))
 
 ### [i18n helpers](#i18n)
 
 Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+i18n+helpers))
 
-* **[i18n](#i18n)** ([code](lib/i18n.js#L22) | [tests](test/i18n.js#L10))
+* **[i18n](#i18n)** ([code](lib/i18n.js#L23) | [tests](test/i18n.js#L10))
 
 ### [inflection helpers](#inflection)
 
 Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+inflection+helpers))
 
-* **[inflect](#inflect)** ([code](lib/inflection.js#L21) | [tests](test/inflection.js#L8))
-* **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L50) | [tests](test/inflection.js#L21))
+* **[inflect](#inflect)** ([code](lib/inflection.js#L36) | [tests](test/inflection.js#L8))
+* **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L64) | [tests](test/inflection.js#L21))
 
 ### [logging helpers](#logging)
 
 Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+logging+helpers))
 
 * **[log](#log)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[ok](#ok)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[success](#success)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[info](#info)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[bold](#bold)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[warning](#warning)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[warn](#warn)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[error](#error)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[debug](#debug)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[danger](#danger)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[bold](#bold)** ([code](lib/logging.js#Lundefined) | [no tests])
+* **[_debug](#_debug)** ([code](lib/logging.js#Lundefined) | [no tests])
 * **[_inspect](#_inspect)** ([code](lib/logging.js#Lundefined) | [no tests])
 
 ### [markdown helpers](#markdown)
@@ -222,71 +246,78 @@ Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](htt
 Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
 
 * **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [tests](test/markdown.js#L9))
-* **[md](#md)** ([code](lib/markdown.js#L56) | [tests](test/markdown.js#L17))
+* **[md](#md)** ([code](lib/markdown.js#L55) | [tests](test/markdown.js#L17))
 
 ### [match helpers](#match)
 
 Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers))
 
-* **[mm](#mm)** ([code](lib/match.js#L26) | [tests](test/match.js#L15))
-* **[match](#match)** ([code](lib/match.js#L45) | [tests](test/match.js#L14))
-* **[isMatch](#isMatch)** ([code](lib/match.js#L66) | [tests](test/match.js#L64))
+* **[match](#match)** ([code](lib/match.js#L29) | [tests](test/match.js#L13))
+* **[mm](#mm)** ([code](lib/match.js#L41) | [no tests])
+* **[isMatch](#isMatch)** ([code](lib/match.js#L64) | [tests](test/match.js#L61))
 
 ### [math helpers](#math)
 
 Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers))
 
-* **[add](#add)** ([code](lib/math.js#L19) | [tests](test/math.js#L9))
-* **[subtract](#subtract)** ([code](lib/math.js#L31) | [tests](test/math.js#L63))
-* **[divide](#divide)** ([code](lib/math.js#L43) | [tests](test/math.js#L35))
-* **[multiply](#multiply)** ([code](lib/math.js#L55) | [tests](test/math.js#L49))
-* **[floor](#floor)** ([code](lib/math.js#L66) | [tests](test/math.js#L42))
-* **[ceil](#ceil)** ([code](lib/math.js#L77) | [tests](test/math.js#L28))
-* **[round](#round)** ([code](lib/math.js#L88) | [tests](test/math.js#L56))
-* **[sum](#sum)** ([code](lib/math.js#L106) | [tests](test/math.js#L70))
-* **[avg](#avg)** ([code](lib/math.js#L132) | [no tests])
+* **[abs](#abs)** ([code](lib/math.js#L21) | [no tests])
+* **[add](#add)** ([code](lib/math.js#L37) | [tests](test/math.js#L9))
+* **[avg](#avg)** ([code](lib/math.js#L61) | [no tests])
+* **[ceil](#ceil)** ([code](lib/math.js#L76) | [tests](test/math.js#L28))
+* **[divide](#divide)** ([code](lib/math.js#L91) | [tests](test/math.js#L35))
+* **[floor](#floor)** ([code](lib/math.js#L109) | [tests](test/math.js#L42))
+* **[minus](#minus)** ([code](lib/math.js#L125) | [no tests])
+* **[modulo](#modulo)** ([code](lib/math.js#L144) | [no tests])
+* **[multiply](#multiply)** ([code](lib/math.js#L164) | [tests](test/math.js#L49))
+* **[plus](#plus)** ([code](lib/math.js#L182) | [no tests])
+* **[round](#round)** ([code](lib/math.js#L200) | [tests](test/math.js#L56))
+* **[subtract](#subtract)** ([code](lib/math.js#L217) | [tests](test/math.js#L63))
+* **[sum](#sum)** ([code](lib/math.js#L241) | [tests](test/math.js#L70))
+* **[times](#times)** ([code](lib/math.js#L264) | [no tests])
 
 ### [misc helpers](#misc)
 
 Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+misc+helpers))
 
-* **[default](#default)** ([code](lib/misc.js#L21) | [tests](test/misc.js#L13))
-* **[option](#option)** ([code](lib/misc.js#L40) | [tests](test/misc.js#L30))
-* **[noop](#noop)** ([code](lib/misc.js#L54) | [tests](test/misc.js#L23))
-* **[withHash](#withHash)** ([code](lib/misc.js#L68) | [tests](test/misc.js#L48))
+* **[frame](#frame)** ([code](lib/misc.js#L16) | [no tests])
+* **[option](#option)** ([code](lib/misc.js#L31) | [tests](test/misc.js#L19))
+* **[noop](#noop)** ([code](lib/misc.js#L44) | [tests](test/misc.js#L12))
+* **[typeOf](#typeOf)** ([code](lib/misc.js#L64) | [no tests])
+* **[withHash](#withHash)** ([code](lib/misc.js#L76) | [tests](test/misc.js#L37))
 
 ### [number helpers](#number)
 
 Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+number+helpers))
 
-* **[addCommas](#addCommas)** ([code](lib/number.js#L19) | [tests](test/number.js#L63))
-* **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L32) | [tests](test/number.js#L9))
-* **[random](#random)** ([code](lib/number.js#L50) | [tests](test/number.js#L95))
-* **[toAbbr](#toAbbr)** ([code](lib/number.js#L64) | [tests](test/number.js#L70))
-* **[toExponential](#toExponential)** ([code](lib/number.js#L102) | [tests](test/number.js#L38))
-* **[toFixed](#toFixed)** ([code](lib/number.js#L122) | [tests](test/number.js#L16))
-* **[toFloat](#toFloat)** ([code](lib/number.js#L139) | [tests](test/number.js#L56))
-* **[toInt](#toInt)** ([code](lib/number.js#L149) | [tests](test/number.js#L49))
-* **[toPrecision](#toPrecision)** ([code](lib/number.js#L160) | [tests](test/number.js#L27))
+* **[bytes](#bytes)** ([code](lib/number.js#L29) | [tests](test/number.js#L10))
+* **[addCommas](#addCommas)** ([code](lib/number.js#L66) | [tests](test/number.js#L84))
+* **[phoneNumber](#phoneNumber)** ([code](lib/number.js#L79) | [tests](test/number.js#L30))
+* **[random](#random)** ([code](lib/number.js#L97) | [tests](test/number.js#L116))
+* **[toAbbr](#toAbbr)** ([code](lib/number.js#L111) | [tests](test/number.js#L91))
+* **[toExponential](#toExponential)** ([code](lib/number.js#L149) | [tests](test/number.js#L59))
+* **[toFixed](#toFixed)** ([code](lib/number.js#L172) | [tests](test/number.js#L37))
+* **[toFloat](#toFloat)** ([code](lib/number.js#L188) | [tests](test/number.js#L77))
+* **[toInt](#toInt)** ([code](lib/number.js#L198) | [tests](test/number.js#L70))
+* **[toPrecision](#toPrecision)** ([code](lib/number.js#L215) | [tests](test/number.js#L48))
 
 ### [object helpers](#object)
 
 Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers))
 
-* **[extend](#extend)** ([code](lib/object.js#L22) | [tests](test/object.js#L13))
-* **[forIn](#forIn)** ([code](lib/object.js#L61) | [tests](test/object.js#L31))
-* **[forOwn](#forOwn)** ([code](lib/object.js#L88) | [tests](test/object.js#L48))
-* **[toPath](#toPath)** ([code](lib/object.js#L113) | [tests](test/object.js#L85))
-* **[get](#get)** ([code](lib/object.js#L136) | [tests](test/object.js#L75))
-* **[getObject](#getObject)** ([code](lib/object.js#L158) | [tests](test/object.js#L75))
-* **[hasOwn](#hasOwn)** ([code](lib/object.js#L177) | [tests](test/object.js#L124))
-* **[isObject](#isObject)** ([code](lib/object.js#L194) | [tests](test/object.js#L142))
-* **[merge](#merge)** ([code](lib/object.js#L210) | [tests](test/object.js#L154))
-* **[JSONparse](#JSONparse)** ([code](lib/object.js#L235) | [no tests])
-* **[parseJSON](#parseJSON)** ([code](lib/object.js#L244) | [tests](test/object.js#L162))
-* **[pick](#pick)** ([code](lib/object.js#L257) | [tests](test/object.js#L169))
-* **[JSONstringify](#JSONstringify)** ([code](lib/object.js#L284) | [no tests])
-* **[stringify](#stringify)** ([code](lib/object.js#L296) | [tests](test/object.js#L197))
+* **[extend](#extend)** ([code](lib/object.js#L23) | [tests](test/object.js#L13))
+* **[forIn](#forIn)** ([code](lib/object.js#L62) | [tests](test/object.js#L31))
+* **[forOwn](#forOwn)** ([code](lib/object.js#L89) | [tests](test/object.js#L48))
+* **[toPath](#toPath)** ([code](lib/object.js#L115) | [tests](test/object.js#L85))
+* **[get](#get)** ([code](lib/object.js#L138) | [tests](test/object.js#L75))
+* **[getObject](#getObject)** ([code](lib/object.js#L160) | [tests](test/object.js#L75))
+* **[hasOwn](#hasOwn)** ([code](lib/object.js#L179) | [tests](test/object.js#L124))
+* **[isObject](#isObject)** ([code](lib/object.js#L196) | [tests](test/object.js#L142))
+* **[JSONparse](#JSONparse)** ([code](lib/object.js#L211) | [no tests])
+* **[merge](#merge)** ([code](lib/object.js#L226) | [tests](test/object.js#L154))
+* **[parseJSON](#parseJSON)** ([code](lib/object.js#L245) | [tests](test/object.js#L162))
+* **[pick](#pick)** ([code](lib/object.js#L258) | [tests](test/object.js#L169))
+* **[JSONstringify](#JSONstringify)** ([code](lib/object.js#L285) | [no tests])
+* **[stringify](#stringify)** ([code](lib/object.js#L297) | [tests](test/object.js#L197))
 
 ### [path helpers](#path)
 
@@ -294,60 +325,82 @@ Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://g
 
 * **[absolute](#absolute)** ([code](lib/path.js#L24) | [tests](test/path.js#L12))
 * **[dirname](#dirname)** ([code](lib/path.js#L43) | [tests](test/path.js#L24))
-* **[relative](#relative)** ([code](lib/path.js#L60) | [tests](test/path.js#L31))
-* **[basename](#basename)** ([code](lib/path.js#L76) | [tests](test/path.js#L46))
-* **[stem](#stem)** ([code](lib/path.js#L92) | [tests](test/path.js#L57))
-* **[extname](#extname)** ([code](lib/path.js#L108) | [tests](test/path.js#L68))
-* **[segments](#segments)** ([code](lib/path.js#L132) | [tests](test/path.js#L79))
+* **[relative](#relative)** ([code](lib/path.js#L63) | [tests](test/path.js#L31))
+* **[basename](#basename)** ([code](lib/path.js#L85) | [tests](test/path.js#L46))
+* **[stem](#stem)** ([code](lib/path.js#L104) | [tests](test/path.js#L57))
+* **[extname](#extname)** ([code](lib/path.js#L123) | [tests](test/path.js#L68))
+* **[resolve](#resolve)** ([code](lib/path.js#L142) | [no tests])
+* **[segments](#segments)** ([code](lib/path.js#L171) | [tests](test/path.js#L79))
+
+### [regex helpers](#regex)
+
+Visit the: [code](lib/regex.js) | [unit tests](test/regex.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+regex+helpers))
+
+* **[toRegex](#toRegex)** ([code](lib/regex.js#L24) | [no tests])
+* **[test](#test)** ([code](lib/regex.js#L47) | [no tests])
 
 ### [string helpers](#string)
 
 Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+string+helpers))
 
-* **[camelcase](#camelcase)** ([code](lib/string.js#L25) | [tests](test/string.js#L9))
-* **[capitalize](#capitalize)** ([code](lib/string.js#L43) | [tests](test/string.js#L24))
-* **[capitalizeAll](#capitalizeAll)** ([code](lib/string.js#L62) | [tests](test/string.js#L35))
-* **[center](#center)** ([code](lib/string.js#L79) | [tests](test/string.js#L46))
-* **[chop](#chop)** ([code](lib/string.js#L112) | [tests](test/string.js#L57))
-* **[dashcase](#dashcase)** ([code](lib/string.js#L130) | [tests](test/string.js#L72))
-* **[dotcase](#dotcase)** ([code](lib/string.js#L149) | [tests](test/string.js#L87))
-* **[hyphenate](#hyphenate)** ([code](lib/string.js#L167) | [tests](test/string.js#L102))
-* **[isString](#isString)** ([code](lib/string.js#L185) | [no tests])
-* **[lowercase](#lowercase)** ([code](lib/string.js#L201) | [tests](test/string.js#L113))
-* **[occurrences](#occurrences)** ([code](lib/string.js#L221) | [tests](test/string.js#L124))
-* **[pascalcase](#pascalcase)** ([code](lib/string.js#L249) | [tests](test/string.js#L135))
-* **[pathcase](#pathcase)** ([code](lib/string.js#L270) | [tests](test/string.js#L150))
-* **[plusify](#plusify)** ([code](lib/string.js#L289) | [tests](test/string.js#L165))
-* **[reverse](#reverse)** ([code](lib/string.js#L308) | [tests](test/string.js#L203))
-* **[replace](#replace)** ([code](lib/string.js#L328) | [tests](test/string.js#L184))
-* **[sentence](#sentence)** ([code](lib/string.js#L348) | [tests](test/string.js#L214))
-* **[snakecase](#snakecase)** ([code](lib/string.js#L371) | [tests](test/string.js#L225))
-* **[split](#split)** ([code](lib/string.js#L390) | [tests](test/string.js#L240))
-* **[startsWith](#startsWith)** ([code](lib/string.js#L415) | [tests](test/string.js#L281))
-* **[titleize](#titleize)** ([code](lib/string.js#L441) | [tests](test/string.js#L255))
-* **[trim](#trim)** ([code](lib/string.js#L471) | [tests](test/string.js#L266))
-* **[uppercase](#uppercase)** ([code](lib/string.js#L490) | [tests](test/string.js#L300))
+* **[append](#append)** ([code](lib/string.js#L33) | [no tests])
+* **[camelcase](#camelcase)** ([code](lib/string.js#L52) | [tests](test/string.js#L9))
+* **[capitalize](#capitalize)** ([code](lib/string.js#L71) | [tests](test/string.js#L24))
+* **[capitalizeAll](#capitalizeAll)** ([code](lib/string.js#L88) | [tests](test/string.js#L35))
+* **[center](#center)** ([code](lib/string.js#L106) | [tests](test/string.js#L46))
+* **[chop](#chop)** ([code](lib/string.js#L136) | [tests](test/string.js#L57))
+* **[dashcase](#dashcase)** ([code](lib/string.js#L154) | [tests](test/string.js#L72))
+* **[dotcase](#dotcase)** ([code](lib/string.js#L173) | [tests](test/string.js#L87))
+* **[downcase](#downcase)** ([code](lib/string.js#L193) | [no tests])
+* **[ellipsis](#ellipsis)** ([code](lib/string.js#L213) | [tests](test/string.js#L102))
+* **[hyphenate](#hyphenate)** ([code](lib/string.js#L234) | [tests](test/string.js#L117))
+* **[isString](#isString)** ([code](lib/string.js#L251) | [tests](test/string.js#L128))
+* **[lowercase](#lowercase)** ([code](lib/string.js#L267) | [tests](test/string.js#L150))
+* **[occurrences](#occurrences)** ([code](lib/string.js#L289) | [tests](test/string.js#L161))
+* **[pascalcase](#pascalcase)** ([code](lib/string.js#L314) | [tests](test/string.js#L172))
+* **[pathcase](#pathcase)** ([code](lib/string.js#L334) | [tests](test/string.js#L187))
+* **[plusify](#plusify)** ([code](lib/string.js#L354) | [tests](test/string.js#L202))
+* **[prepend](#prepend)** ([code](lib/string.js#L374) | [no tests])
+* **[raw](#raw)** ([code](lib/string.js#L396) | [no tests])
+* **[remove](#remove)** ([code](lib/string.js#L424) | [no tests])
+* **[removeFirst](#removeFirst)** ([code](lib/string.js#L443) | [no tests])
+* **[replace](#replace)** ([code](lib/string.js#L463) | [tests](test/string.js#L221))
+* **[replaceFirst](#replaceFirst)** ([code](lib/string.js#L484) | [no tests])
+* **[reverse](#reverse)** ([code](lib/string.js#L503) | [tests](test/string.js#L240))
+* **[sentence](#sentence)** ([code](lib/string.js#L520) | [tests](test/string.js#L251))
+* **[snakecase](#snakecase)** ([code](lib/string.js#L539) | [tests](test/string.js#L262))
+* **[split](#split)** ([code](lib/string.js#L558) | [tests](test/string.js#L277))
+* **[startsWith](#startsWith)** ([code](lib/string.js#L583) | [tests](test/string.js#L292))
+* **[titleize](#titleize)** ([code](lib/string.js#L607) | [tests](test/string.js#L311))
+* **[trim](#trim)** ([code](lib/string.js#L634) | [tests](test/string.js#L322))
+* **[trimLeft](#trimLeft)** ([code](lib/string.js#L650) | [no tests])
+* **[trimRight](#trimRight)** ([code](lib/string.js#L668) | [no tests])
+* **[truncate](#truncate)** ([code](lib/string.js#L691) | [tests](test/string.js#L337))
+* **[truncateWords](#truncateWords)** ([code](lib/string.js#L723) | [no tests])
+* **[upcase](#upcase)** ([code](lib/string.js#L753) | [no tests])
+* **[uppercase](#uppercase)** ([code](lib/string.js#L774) | [tests](test/string.js#L361))
 
 ### [url helpers](#url)
 
 Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+url+helpers))
 
-* **[encodeURI](#encodeURI)** ([code](lib/url.js#L22) | [tests](test/url.js#L33))
-* **[decodeURI](#decodeURI)** ([code](lib/url.js#L34) | [tests](test/url.js#L40))
-* **[urlResolve](#urlResolve)** ([code](lib/url.js#L48) | [tests](test/url.js#L9))
-* **[urlParse](#urlParse)** ([code](lib/url.js#L60) | [tests](test/url.js#L47))
-* **[stripQuerystring](#stripQuerystring)** ([code](lib/url.js#L73) | [tests](test/url.js#L26))
-* **[stripProtocol](#stripProtocol)** ([code](lib/url.js#L89) | [no tests])
+* **[encodeURI](#encodeURI)** ([code](lib/url.js#L25) | [tests](test/url.js#L33))
+* **[escape](#escape)** ([code](lib/url.js#L40) | [no tests])
+* **[decodeURI](#decodeURI)** ([code](lib/url.js#L54) | [tests](test/url.js#L40))
+* **[url_encode](#url_encode)** ([code](lib/url.js#L65) | [no tests])
+* **[url_decode](#url_decode)** ([code](lib/url.js#L74) | [no tests])
+* **[urlResolve](#urlResolve)** ([code](lib/url.js#L88) | [tests](test/url.js#L9))
+* **[urlParse](#urlParse)** ([code](lib/url.js#L100) | [tests](test/url.js#L47))
+* **[stripQuerystring](#stripQuerystring)** ([code](lib/url.js#L113) | [tests](test/url.js#L26))
+* **[stripProtocol](#stripProtocol)** ([code](lib/url.js#L129) | [no tests])
 
 ***
 
 ## array
 
-### [{{after}}](lib/array.js#L28)
+### [{{after}}](lib/array.js#L27)
 
 Returns all of the items in an array after the specified index. Opposite of [before](#before).
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -358,11 +411,12 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{after array 1}}
 //=> '["c"]'
 ```
 
-### [{{arrayify}}](lib/array.js#L45)
+### [{{arrayify}}](lib/array.js#L44)
 
 Cast the given `value` to an array.
 
@@ -378,11 +432,9 @@ Cast the given `value` to an array.
 //=> '["foo"]'
 ```
 
-### [{{before}}](lib/array.js#L66)
+### [{{before}}](lib/array.js#L63)
 
 Return all of the items in the collection before the specified count. Opposite of [after](#after).
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -393,11 +445,12 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{before array 2}}
 //=> '["a", "b"]'
 ```
 
-### [{{eachIndex}}](lib/array.js#L84)
+### [{{eachIndex}}](lib/array.js#L82)
 
 **Params**
 
@@ -408,16 +461,15 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
-{{#eachIndex collection}}
+<!-- array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] -->
+{{#eachIndex array}}
   {{item}} is {{index}}
 {{/eachIndex}}
 ```
 
-### [{{filter}}](lib/array.js#L112)
+### [{{filter}}](lib/array.js#L107)
 
 Block helper that filters the given array and renders the block for values that evaluate to `true`, otherwise the inverse block is returned.
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -429,15 +481,14 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{#filter array "foo"}}AAA{{else}}BBB{{/filter}}
 //=> 'BBB'
 ```
 
-### [{{first}}](lib/array.js#L155)
+### [{{first}}](lib/array.js#L147)
 
 Returns the first item, or first `n` items of an array.
-
-Given the array `['a', 'b', 'c', 'd', 'e']`:
 
 **Params**
 
@@ -448,11 +499,11 @@ Given the array `['a', 'b', 'c', 'd', 'e']`:
 **Example**
 
 ```handlebars
-{{first array 2}}
+{{first "['a', 'b', 'c', 'd', 'e']" 2}}
 //=> '["a", "b"]'
 ```
 
-### [{{forEach}}](lib/array.js#L198)
+### [{{forEach}}](lib/array.js#L189)
 
 Iterates over each item in an array and exposes the current item in the array as context to the inner block. In addition to the current array item, the helper exposes the following variables to the inner block:
 
@@ -470,26 +521,23 @@ private variables may be defined as hash arguments.
 
 **Example**
 
-```js
-var accounts = [
+```handlebars
+<!-- accounts = [
 {'name': 'John', 'email': 'john@example.com'},
 {'name': 'Malcolm', 'email': 'malcolm@example.com'},
 {'name': 'David', 'email': 'david@example.com'}
-];
+] -->
 
-// example usage
-// {{#forEach accounts}}
-//   <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
-//     {{ name }}
-//   </a>{{#unless isLast}}, {{/unless}}
-// {{/forEach}}
+{{#forEach accounts}}
+  <a href="mailto:{{ email }}" title="Send an email to {{ name }}">
+    {{ name }}
+  </a>{{#unless isLast}}, {{/unless}}
+{{/forEach}}
 ```
 
-### [{{inArray}}](lib/array.js#L241)
+### [{{inArray}}](lib/array.js#L229)
 
 Block helper that renders the block if an array has the given `value`. Optionally specify an inverse block to render when the array does not have the given value.
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -501,6 +549,7 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{#inArray array "d"}}
   foo
 {{else}}
@@ -509,7 +558,7 @@ Given the array `['a', 'b', 'c']`:
 //=> 'bar'
 ```
 
-### [{{isArray}}](lib/array.js#L261)
+### [{{isArray}}](lib/array.js#L249)
 
 Returns true if `value` is an es5 array.
 
@@ -522,14 +571,16 @@ Returns true if `value` is an es5 array.
 
 ```handlebars
 {{isArray "abc"}}
-//=> 'false'
+//=> false
+
+<!-- array: [1, 2, 3] -->
+{{isArray array}}
+//=> true
 ```
 
-### [{{itemAt}}](lib/array.js#L283)
+### [{{itemAt}}](lib/array.js#L268)
 
 Block helper that returns the item with specified index.
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -540,25 +591,25 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{itemAt array 1}}
 //=> 'b'
 ```
 
-### [{{join}}](lib/array.js#L327)
+### [{{join}}](lib/array.js#L299)
 
 Join all elements of array into a string, optionally using a given separator.
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
 * `array` **{Array}**
-* `sep` **{String}**: The separator to use.
+* `separator` **{String}**: The separator to use. Defaults to `,`.
 * `returns` **{String}**
 
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{join array}}
 //=> 'a, b, c'
 
@@ -566,50 +617,74 @@ Given the array `['a', 'b', 'c']`:
 //=> 'a-b-c'
 ```
 
-### [{{last}}](lib/array.js#L351)
+### [{{equalsLength}}](lib/array.js#L318)
 
-Returns the last item, or last `n` items of an array. Opposite of [first](#first).
-
-Given the array `['a', 'b', 'c', 'd', 'e']`:
+Returns true if the the length of the given `value` is equal
+to the given `length`. Can be used as a block or inline helper.
 
 **Params**
 
-* `array` **{Array}**
-* `n` **{Number}**: Number of items to return, starting with the last item.
+* `value` **{Array|String}**
+* `length` **{Number}**
+* `options` **{Object}**
+* `returns` **{String}**
+
+### [{{last}}](lib/array.js#L354)
+
+Returns the last item, or last `n` items of an array or string. Opposite of [first](#first).
+
+**Params**
+
+* `value` **{Array|String}**: Array or string.
+* `n` **{Number}**: Number of items to return from the end of the array.
 * `returns` **{Array}**
 
 **Example**
 
 ```handlebars
-{{last array 2}}
-//=> '["d", "e"]'
+<!-- var value = ['a', 'b', 'c', 'd', 'e'] -->
+
+{{last value}}
+//=> ['e']
+
+{{last value 2}}
+//=> ['d', 'e']
+
+{{last value 3}}
+//=> ['c', 'd', 'e']
 ```
 
-### [{{lengthEqual}}](lib/array.js#L380)
+### [{{length}}](lib/array.js#L384)
 
-Block helper that compares the length of the given array to the number passed as the second argument. If the array length is equal to the given `length`, the block is returned, otherwise an inverse block may optionally be returned.
-
-Given the array `['a', 'b', 'c', 'd', 'e']`:
+Returns the length of the given string or array.
 
 **Params**
 
-* `array` **{Array}**
-* `length` **{Number}**
-* `options` **{Object}**
-* `returns` **{String}**
+* `value` **{Array|Object|String}**
+* `returns` **{Number}**: The length of the value.
 
 **Example**
 
 ```handlebars
-{{#lengthEqual array 10}}AAA{{else}}BBB{{/lengthEqual}}
-//=> 'BBB'
+{{length '["a", "b", "c"]'}}
+//=> 3
+
+//=> myArray = ['a', 'b', 'c', 'd', 'e'];
+{{length myArray}}
+//=> 5
+
+//=> myObject = {'a': 'a', 'b': 'b'};
+{{length myObject}}
+//=> 2
 ```
 
-### [{{map}}](lib/array.js#L409)
+### [{{lengthEqual}}](lib/array.js#L400)
 
-Returns a new array, created by calling `function` on each element of the given `array`.
+Alias for [equalsLength](#equalsLength)
 
-Given an array `['a', 'b', 'c']`:
+### [{{map}}](lib/array.js#L419)
+
+Returns a new array, created by calling `function` on each element of the given `array`. For example,
 
 **Params**
 
@@ -619,32 +694,65 @@ Given an array `['a', 'b', 'c']`:
 
 **Example**
 
-```js
-// register `double` as a helper
-function double(str) {
-  return str + str;
-}
-// then used like this:
-// {{map array double}}
+```handlebars
+<!-- array: ['a', 'b', 'c'], and "double" is a
+fictitious function that duplicates letters -->
+{{map array double}}
 //=> '["aa", "bb", "cc"]'
 ```
 
-### [{{some}}](lib/array.js#L447)
+### [{{pluck}}](lib/array.js#L450)
 
-Block helper that returns the block if the callback returns true for some value in the given array.
-
-Given the array `[1, 'b', 3]`:
+Map over the given object or array or objects and create an array of values from the given `prop`. Dot-notation may be used (as a string) to get nested properties.
 
 **Params**
 
-* `array` **{Array}**
-* `cb` **{Function}**: callback function
-* **{Options}**: Handlebars provided options object
-* `returns` **{Array}**
+* `collection` **{Array|Object}**
+* `prop` **{Function}**
+* `returns` **{String}**
 
 **Example**
 
 ```handlebars
+// {{pluck items "data.title"}}
+//=> '["aa", "bb", "cc"]'
+```
+
+### [{{reverse}}](lib/array.js#L478)
+
+Reverse the elements in an array, or the characters in a string.
+
+**Params**
+
+* `value` **{Array|String}**
+* `returns` **{Array|String}**: Returns the reversed string or array.
+
+**Example**
+
+```handlebars
+<!-- value = 'abcd' -->
+{{reverse value}}
+//=> 'dcba'
+<!-- value = ['a', 'b', 'c', 'd'] -->
+{{reverse value}}
+//=> ['d', 'c', 'b', 'a']
+```
+
+### [{{some}}](lib/array.js#L509)
+
+Block helper that returns the block if the callback returns true for some value in the given array.
+
+**Params**
+
+* `array` **{Array}**
+* `iter` **{Function}**: Iteratee
+* **{Options}**: Handlebars provided options object
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+<!-- array: [1, 'b', 3] -->
 {{#some array isString}}
   Render me if the array has a string.
 {{else}}
@@ -653,11 +761,9 @@ Given the array `[1, 'b', 3]`:
 //=> 'Render me if the array has a string.'
 ```
 
-### [{{sort}}](lib/array.js#L479)
+### [{{sort}}](lib/array.js#L538)
 
 Sort the given `array`. If an array of objects is passed, you may optionally pass a `key` to sort on as the second argument. You may alternatively pass a sorting function as the second argument.
-
-Given an array `['b', 'a', 'c']`:
 
 **Params**
 
@@ -667,15 +773,14 @@ Given an array `['b', 'a', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['b', 'a', 'c'] -->
 {{sort array}}
 //=> '["a", "b", "c"]'
 ```
 
-### [{{sortBy}}](lib/array.js#L505)
+### [{{sortBy}}](lib/array.js#L563)
 
 Sort an `array`. If an array of objects is passed, you may optionally pass a `key` to sort on as the second argument. You may alternatively pass a sorting function as the second argument.
-
-Given an array `[{a: 'zzz'}, {a: 'aaa'}]`:
 
 **Params**
 
@@ -685,15 +790,14 @@ Given an array `[{a: 'zzz'}, {a: 'aaa'}]`:
 **Example**
 
 ```handlebars
+<!-- array: [{a: 'zzz'}, {a: 'aaa'}] -->
 {{sortBy array "a"}}
 //=> '[{"a":"aaa"}, {"a":"zzz"}]'
 ```
 
-### [{{withAfter}}](lib/array.js#L539)
+### [{{withAfter}}](lib/array.js#L594)
 
 Use the items in the array _after_ the specified index as context inside a block. Opposite of [withBefore](#withBefore).
-
-Given the array `['a', 'b', 'c', 'd', 'e']`:
 
 **Params**
 
@@ -705,17 +809,16 @@ Given the array `['a', 'b', 'c', 'd', 'e']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c', 'd', 'e'] -->
 {{#withAfter array 3}}
   {{this}}
 {{/withAfter}}
 //=> "de"
 ```
 
-### [{{withBefore}}](lib/array.js#L570)
+### [{{withBefore}}](lib/array.js#L624)
 
 Use the items in the array _before_ the specified index as context inside a block. Opposite of [withAfter](#withAfter).
-
-Given the array `['a', 'b', 'c', 'd', 'e']`:
 
 **Params**
 
@@ -727,17 +830,16 @@ Given the array `['a', 'b', 'c', 'd', 'e']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c', 'd', 'e'] -->
 {{#withBefore array 3}}
   {{this}}
 {{/withBefore}}
 //=> 'ab'
 ```
 
-### [{{withFirst}}](lib/array.js#L601)
+### [{{withFirst}}](lib/array.js#L654)
 
 Use the first item in a collection inside a handlebars block expression. Opposite of [withLast](#withLast).
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -749,43 +851,42 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{#withFirst array}}
   {{this}}
 {{/withFirst}}
 //=> 'a'
 ```
 
-### [{{withGroup}}](lib/array.js#L648)
+### [{{withGroup}}](lib/array.js#L700)
 
-Block helper that groups array elements by given `value`.
-
-Given the array `['a', 'b', 'c', 'd','e','f','g','h']`:
-//=> 'a','b','c','d'<br>
-//=> 'e','f','g','h'<br>
+Block helper that groups array elements by given group `size`.
 
 **Params**
 
-* `array` **{Array}**
-* `every` **{Number}**
-* `options` **{Object}**
+* `array` **{Array}**: The array to iterate over
+* `size` **{Number}**: The desired length of each array "group"
+* `options` **{Object}**: Handlebars options
 * `returns` **{String}**
 
 **Example**
 
 ```handlebars
+<!-- array: ['a','b','c','d','e','f','g','h'] -->
 {{#withGroup array 4}}
   {{#each this}}
     {{.}}
   {{each}}
   <br>
 {{/withGroup}}
+<!-- results in: -->
+<!-- 'a','b','c','d'<br> -->
+<!-- 'e','f','g','h'<br> -->
 ```
 
-### [{{withLast}}](lib/array.js#L683)
+### [{{withLast}}](lib/array.js#L735)
 
 Use the last item or `n` items in an array as context inside a block. Opposite of [withFirst](#withFirst).
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -797,17 +898,16 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['a', 'b', 'c'] -->
 {{#withLast array}}
   {{this}}
 {{/withLast}}
-//=> 'c'
+<!-- results in: 'c' -->
 ```
 
-### [{{withSort}}](lib/array.js#L724)
+### [{{withSort}}](lib/array.js#L774)
 
 Block helper that sorts a collection and exposes the sorted collection as context inside the block.
-
-Given the array `['b', 'a', 'c']`:
 
 **Params**
 
@@ -819,6 +919,7 @@ Given the array `['b', 'a', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array: ['b', 'a', 'c'] -->
 {{#withSort array}}{{this}}{{/withSort}}
 //=> 'abc'
 ```
@@ -876,7 +977,7 @@ Generate the HTML for a jsFiddle link with the given `params`
 
 ## collection
 
-### [{{isEmpty}}](lib/collection.js#L28)
+### [{{isEmpty}}](lib/collection.js#L29)
 
 Block helper that returns a block if the given collection is
 empty. If the collection is not empty the inverse block is returned
@@ -888,7 +989,7 @@ empty. If the collection is not empty the inverse block is returned
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{iterate}}](lib/collection.js#L56)
+### [{{iterate}}](lib/collection.js#L55)
 
 Iterate over an array or object,
 
@@ -898,33 +999,9 @@ Iterate over an array or object,
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{length}}](lib/collection.js#L87)
-
-Returns the length of the given collection. When using a string literal in the template, the string must be value JSON. See the example below. Otherwise pass in an array or object from the context
-
-**Params**
-
-* `value` **{Array|Object|String}**
-* `returns` **{Number}**: The length of the value.
-
-**Example**
-
-```handlebars
-{{length '["a", "b", "c"]'}}
-//=> 3
-
-//=> myArray = ['a', 'b', 'c', 'd', 'e'];
-{{length myArray}}
-//=> 5
-
-//=> myObject = {'a': 'a', 'b': 'b'};
-{{length myObject}}
-//=> 2
-```
-
 ## comparison
 
-### [{{and}}](lib/comparison.js#L26)
+### [{{and}}](lib/comparison.js#L35)
 
 Block helper that renders the block if **both** of the given values
 are truthy. If an inverse block is specified it will be rendered
@@ -937,7 +1014,7 @@ when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{compare}}](lib/comparison.js#L48)
+### [{{compare}}](lib/comparison.js#L65)
 
 Render a block when a comparison of the first and third
 arguments returns true. The second argument is
@@ -952,11 +1029,9 @@ optionally specify an inverse block to render when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or if specified the inverse block is rendered if falsey.
 
-### [{{contains}}](lib/comparison.js#L119)
+### [{{contains}}](lib/comparison.js#L132)
 
 Block helper that renders the block if `collection` has the given `value`, using strict equality (`===`) for comparison, otherwise the inverse block is rendered (if specified). If a `startIndex` is specified and is negative, it is used as the offset from the end of the collection.
-
-Given the array `['a', 'b', 'c']`:
 
 **Params**
 
@@ -968,6 +1043,7 @@ Given the array `['a', 'b', 'c']`:
 **Example**
 
 ```handlebars
+<!-- array = ['a', 'b', 'c'] -->
 {{#contains array "d"}}
   This will not be rendered.
 {{else}}
@@ -975,7 +1051,31 @@ Given the array `['a', 'b', 'c']`:
 {{/contains}}
 ```
 
-### [{{gt}}](lib/comparison.js#L146)
+### [{{default}}](lib/comparison.js#L151)
+
+Returns the first value that is not undefined, otherwise the "default" value is returned.
+
+**Params**
+
+* `value` **{any}**
+* `defaultValue` **{any}**
+* `returns` **{String}**
+
+### [{{eq}}](lib/comparison.js#L173)
+
+Block helper that renders a block if `a` is **equal to** `b`.
+If an inverse block is specified it will be rendered when falsy.
+You may optionally use the `compare=""` hash argument for the
+second value.
+
+**Params**
+
+* `a` **{String}**
+* `b` **{String}**
+* `options` **{Object}**: Handlebars provided options object
+* `returns` **{String}**: Block, or inverse block if specified and falsey.
+
+### [{{gt}}](lib/comparison.js#L197)
 
 Block helper that renders a block if `a` is **greater than** `b`.
 
@@ -990,7 +1090,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{gte}}](lib/comparison.js#L174)
+### [{{gte}}](lib/comparison.js#L222)
 
 Block helper that renders a block if `a` is **greater than or equal to** `b`.
 
@@ -1005,7 +1105,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{has}}](lib/comparison.js#L197)
+### [{{has}}](lib/comparison.js#L242)
 
 Block helper that renders a block if `value` has `pattern`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1017,21 +1117,31 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{eq}}](lib/comparison.js#L232)
+### [{{isFalsey}}](lib/comparison.js#L285)
 
-Block helper that renders a block if `a` is **equal to** `b`.
-If an inverse block is specified it will be rendered when falsy.
-You may optionally use the `compare=""` hash argument for the
-second value.
+Returns true if the given `value` is falsey. Uses the [falsey](https://github.com/jonschlinkert/falsey)
+library for comparisons. Please see that library for more information
+or to report bugs with this helper.
 
 **Params**
 
-* `a` **{String}**
-* `b` **{String}**
-* `options` **{Object}**: Handlebars provided options object
-* `returns` **{String}**: Block, or inverse block if specified and falsey.
+* `val` **{any}**
+* `options` **{Options}**
+* `returns` **{Boolean}**
 
-### [{{ifEven}}](lib/comparison.js#L260)
+### [{{isTruthy}}](lib/comparison.js#L300)
+
+Returns true if the given `value` is truthy. Uses the [falsey](https://github.com/jonschlinkert/falsey)
+library for comparisons. Please see that library for more information
+or to report bugs with this helper.
+
+**Params**
+
+* `val` **{any}**
+* `options` **{Options}**
+* `returns` **{Boolean}**
+
+### [{{ifEven}}](lib/comparison.js#L321)
 
 Return true if the given value is an even number.
 
@@ -1051,7 +1161,7 @@ Return true if the given value is an even number.
 {{/ifEven}}
 ```
 
-### [{{ifNth}}](lib/comparison.js#L279)
+### [{{ifNth}}](lib/comparison.js#L338)
 
 Conditionally renders a block if the remainder is zero when
 `a` operand is divided by `b`. If an inverse block is specified
@@ -1064,7 +1174,7 @@ it will be rendered when the remainder is **not zero**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{ifOdd}}](lib/comparison.js#L304)
+### [{{ifOdd}}](lib/comparison.js#L361)
 
 Block helper that renders a block if `value` is **an odd number**. If an inverse block is specified it will be rendered when falsy.
 
@@ -1084,10 +1194,11 @@ Block helper that renders a block if `value` is **an odd number**. If an inverse
 {{/ifOdd}}
 ```
 
-### [{{is}}](lib/comparison.js#L323)
+### [{{is}}](lib/comparison.js#L379)
 
 Block helper that renders a block if `a` is **equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
+Similar to [eq](#eq) but does not do strict equality.
 
 **Params**
 
@@ -1096,10 +1207,12 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isnt}}](lib/comparison.js#L347)
+### [{{isnt}}](lib/comparison.js#L402)
 
 Block helper that renders a block if `a` is **not equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
+Similar to [unlessEq](#unlesseq) but does not use strict equality for
+comparisons.
 
 **Params**
 
@@ -1108,7 +1221,7 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{lt}}](lib/comparison.js#L373)
+### [{{lt}}](lib/comparison.js#L425)
 
 Block helper that renders a block if `a` is **less than** `b`.
 
@@ -1122,7 +1235,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{lte}}](lib/comparison.js#L401)
+### [{{lte}}](lib/comparison.js#L450)
 
 Block helper that renders a block if `a` is **less than or equal to** `b`.
 
@@ -1137,7 +1250,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{neither}}](lib/comparison.js#L426)
+### [{{neither}}](lib/comparison.js#L472)
 
 Block helper that renders a block if **neither of** the given values
 are truthy. If an inverse block is specified it will be rendered
@@ -1150,7 +1263,17 @@ when falsy.
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{or}}](lib/comparison.js#L452)
+### [{{not}}](lib/comparison.js#L487)
+
+Returns true if `val` is falsey. Works as a block or inline helper.
+
+**Params**
+
+* `val` **{String}**
+* `options` **{Object}**: Handlebars provided options object
+* `returns` **{String}**
+
+### [{{or}}](lib/comparison.js#L510)
 
 Block helper that renders a block if **any of** the given values is truthy. If an inverse block is specified it will be rendered when falsy.
 
@@ -1168,7 +1291,7 @@ Block helper that renders a block if **any of** the given values is truthy. If a
 {{/or}}
 ```
 
-### [{{unlessEq}}](lib/comparison.js#L478)
+### [{{unlessEq}}](lib/comparison.js#L537)
 
 Block helper that always renders the inverse block **unless `a` is
 is equal to `b`**.
@@ -1180,74 +1303,87 @@ is equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessGt}}](lib/comparison.js#L497)
+### [{{unlessGt}}](lib/comparison.js#L558)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than `b`**.
 
 **Params**
 
-* `context` **{Object}**
+* `a` **{Object}**: The default value
+* `b` **{Object}**: The value to compare
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessLt}}](lib/comparison.js#L516)
+### [{{unlessLt}}](lib/comparison.js#L579)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than `b`**.
 
 **Params**
 
-* `context` **{Object}**
+* `a` **{Object}**: The default value
+* `b` **{Object}**: The value to compare
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessGteq}}](lib/comparison.js#L535)
+### [{{unlessGteq}}](lib/comparison.js#L600)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than or equal to `b`**.
 
 **Params**
 
-* `context` **{Object}**
+* `a` **{any}**
+* `b` **{any}**
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessLteq}}](lib/comparison.js#L554)
+### [{{unlessLteq}}](lib/comparison.js#L621)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than or equal to `b`**.
 
 **Params**
 
-* `context` **{Object}**
+* `a` **{any}**
+* `b` **{any}**
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
 ## date
 
-### [{{moment}}](lib/date.js#L15)
+### [{{year}}](lib/date.js#L15)
+
+Get the current year.
+
+### [{{moment}}](lib/date.js#L23)
 
 Expose `moment` helper
 
 ## fs
 
-### [{{fileSize}}](lib/fs.js#L27)
+### [{{prettyBytes}}](lib/fs.js#L31)
 
 Converts bytes into a nice representation with unit.
-
-**Examples:**
-
-* `13661855 => 13.7 MB`
-* `825399 => 825 KB`
-* `1396 => 1 KB`
 
 **Params**
 
 * `value` **{String}**
 * `returns` **{String}**
 
-### [{{read}}](lib/fs.js#L68)
+**Example**
+
+```handlebars
+{{prettyBytes 13661855}}
+//=> 13.7 MB`
+{{prettyBytes 825399}}
+//=> 825 KB`
+{{prettyBytes 1396}}
+//=> 1 KB`
+```
+
+### [{{read}}](lib/fs.js#L78)
 
 Read a file from the file system. This is useful in composing "include"-style helpers using sub-expressions.
 
@@ -1258,12 +1394,12 @@ Read a file from the file system. This is useful in composing "include"-style he
 
 **Example**
 
-```js
+```handlebars
 {{read "a/b/c.js"}}
 {{someHelper (read "a/b/c.md")}}
 ```
 
-### [{{readdir}}](lib/fs.js#L81)
+### [{{readdir}}](lib/fs.js#L91)
 
 Return an array of files from the given
 directory.
@@ -1275,31 +1411,39 @@ directory.
 
 ## html
 
-### [{{css}}](lib/html.js#L23)
+### [{{attr}}](lib/html.js#L26)
 
-Add an array of `<link>` tags. Automatically resolves
-relative paths to `options.assets` if passed on the context.
+Stringify attributes on the options `hash`.
 
 **Params**
 
-* `context` **{Object}**
+* `options` **{Object}**
 * `returns` **{String}**
-
-### [{{ellipsis}}](lib/html.js#L66)
-
-Truncates a string to the specified `length`, and appends it with an elipsis, `…`.
-
-**Params**
-
-* `str` **{String}**
-* `length` **{Number}**: The desired length of the returned string.
-* `returns` **{String}**: The truncated string.
 
 **Example**
 
-```js
-{{ellipsis "<span>foo bar baz</span>", 7}}
-//=> 'foo bar…'
+```handlebars
+<div{{attr}}></div>
+```
+
+### [{{css}}](lib/html.js#L48)
+
+Add an array of `<link>` tags. Automatically resolves relative paths to `options.assets` if passed on the context.
+
+**Params**
+
+* `list` **{String|Array}**: One or more stylesheet urls.
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+<!-- {stylesheets: ['foo.css', 'bar.css']} -->
+{{css stylesheets}}
+
+// results in:
+// <link type="text/css" rel="stylesheet" href="foo.css">
+// <link type="text/css" rel="stylesheet" href="bar.css">
 ```
 
 ### [{{js}}](lib/html.js#L88)
@@ -1328,30 +1472,12 @@ Strip HTML tags from a string, so that only the text nodes are preserved.
 
 **Example**
 
-```js
+```handlebars
 {{sanitize "<span>foo</span>"}}
 //=> 'foo'
 ```
 
-### [{{truncate}}](lib/html.js#L142)
-
-Truncate a string by removing all HTML tags and limiting the result to the specified `length`. Aslo see [ellipsis](#ellipsis).
-
-**Params**
-
-* `str` **{String}**
-* `limit` **{Number}**: The desired length of the returned string.
-* `suffix` **{String}**: Optionally supply a string to use as a suffix to denote when the string has been truncated.
-* `returns` **{String}**: The truncated string.
-
-**Example**
-
-```js
-truncate("<span>foo bar baz</span>", 7);
-//=> 'foo bar'
-```
-
-### [{{ul}}](lib/html.js#L162)
+### [{{ul}}](lib/html.js#L134)
 
 Block helper for creating unordered lists (`<ul></ul>`)
 
@@ -1361,7 +1487,7 @@ Block helper for creating unordered lists (`<ul></ul>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{ol}}](lib/html.js#L181)
+### [{{ol}}](lib/html.js#L153)
 
 Block helper for creating ordered lists  (`<ol></ol>`)
 
@@ -1371,7 +1497,7 @@ Block helper for creating ordered lists  (`<ol></ol>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{thumbnailImage}}](lib/html.js#L203)
+### [{{thumbnailImage}}](lib/html.js#L175)
 
 Returns a `<figure>` with a thumbnail linked to a full picture
 
@@ -1386,7 +1512,7 @@ Returns a `<figure>` with a thumbnail linked to a full picture
 
 ## i18n
 
-### [{{i18n}}](lib/i18n.js#L22)
+### [{{i18n}}](lib/i18n.js#L23)
 
 i18n helper. See [button-i18n](https://github.com/assemble/buttons)
 for a working example.
@@ -1399,19 +1525,36 @@ for a working example.
 
 ## inflection
 
-### [{{inflect}}](lib/inflection.js#L21)
+### [{{inflect}}](lib/inflection.js#L36)
+
+Returns either the `singular` or `plural` inflection of a word based on the given `count`.
 
 **Params**
 
 * `count` **{Number}**
 * `singular` **{String}**: The singular form
 * `plural` **{String}**: The plural form
-* `include` **{String}**
+* `includeCount` **{String}**
 * `returns` **{String}**
 
-### [{{ordinalize}}](lib/inflection.js#L50)
+**Example**
 
-Returns an ordinalized number (as a string).
+```handlebars
+{{inflect 0 "string" "strings"}}
+//=> "strings"
+{{inflect 1 "string" "strings"}}
+//=> "string"
+{{inflect 1 "string" "strings" true}}
+//=> "1 string"
+{{inflect 2 "string" "strings"}}
+//=> "strings"
+{{inflect 2 "string" "strings" true}}
+//=> "2 strings"
+```
+
+### [{{ordinalize}}](lib/inflection.js#L64)
+
+Returns an ordinalized number as a string.
 
 **Params**
 
@@ -1453,10 +1596,10 @@ Block helper that converts a string of inline markdown to HTML.
 {{#markdown}}
 # Foo
 {{/markdown}}
-//=> <h1>Foo</h1>
+<!-- results in: <h1>Foo</h1> -->
 ```
 
-### [{{md}}](lib/markdown.js#L56)
+### [{{md}}](lib/markdown.js#L55)
 
 Read a markdown file from the file system and inject its contents after converting it to HTML.
 
@@ -1474,14 +1617,15 @@ Read a markdown file from the file system and inject its contents after converti
 
 ## match
 
-### [{{mm}}](lib/match.js#L26)
+### [{{match}}](lib/match.js#L29)
 
-The main function. Pass an array of filepaths, and a string or array of glob patterns. Options may be passed on the hash or on `this.options`.
+Returns an array of strings that match the given glob pattern(s). Options may be passed on the options hash or locals.
 
 **Params**
 
 * `files` **{Array|String}**
 * `patterns` **{Array|String}**: One or more glob patterns.
+* `locals` **{Object}**
 * `options` **{Object}**
 * `returns` **{Array}**: Array of matches
 
@@ -1489,28 +1633,13 @@ The main function. Pass an array of filepaths, and a string or array of glob pat
 
 ```handlebars
 {{match (readdir "foo") "*.js"}}
-```
-
-### [{{match}}](lib/match.js#L45)
-
-Returns an array of files that match the given glob pattern. Options may be passed on the hash or on `this.options`.
-
-**Params**
-
-* `files` **{Array}**
-* `pattern` **{String}**
-* `options` **{Object}**
-* `returns` **{Array}**
-
-**Example**
-
-```handlebars
+{{match (readdir "foo") "*.js"}}
 {{match (readdir "foo") "*.js"}}
 ```
 
-### [{{isMatch}}](lib/match.js#L66)
+### [{{isMatch}}](lib/match.js#L64)
 
-Returns true if a filepath contains the given pattern. Options may be passed on the hash or on `this.options`.
+Returns true if a filepath contains the given pattern. Options may be passed on the options hash or locals.
 
 **Params**
 
@@ -1521,14 +1650,14 @@ Returns true if a filepath contains the given pattern. Options may be passed on 
 
 **Example**
 
-```js
+```handlebars
 {{isMatch "foo.md" "*.md"}}
 //=> true
 ```
 
 ## math
 
-### [{{add}}](lib/math.js#L19)
+### [{{abs}}](lib/math.js#L21)
 
 Return the product of `a` plus `b`.
 
@@ -1536,75 +1665,19 @@ Return the product of `a` plus `b`.
 
 * `a` **{Number}**
 * `b` **{Number}**
+* `returns` **{Number}**
 
-### [{{subtract}}](lib/math.js#L31)
+### [{{add}}](lib/math.js#L37)
 
-Return the product of `a` minus `b`.
+Return the product of `a` plus `b`.
 
 **Params**
 
 * `a` **{Number}**
 * `b` **{Number}**
-
-### [{{divide}}](lib/math.js#L43)
-
-Divide `a` by `b`
-
-**Params**
-
-* `a` **{Number}**: numerator
-* `b` **{Number}**: denominator
-
-### [{{multiply}}](lib/math.js#L55)
-
-Multiply `a` by `b`.
-
-**Params**
-
-* `a` **{Number}**: factor
-* `b` **{Number}**: multiplier
-
-### [{{floor}}](lib/math.js#L66)
-
-Get the `Math.floor()` of the given value.
-
-**Params**
-
-* `value` **{Number}**
-
-### [{{ceil}}](lib/math.js#L77)
-
-Get the `Math.ceil()` of the given value.
-
-**Params**
-
-* `value` **{Number}**
-
-### [{{round}}](lib/math.js#L88)
-
-Round the given value.
-
-**Params**
-
-* `value` **{Number}**
-
-### [{{sum}}](lib/math.js#L106)
-
-Returns the sum of all numbers in the given array.
-
-**Params**
-
-* `array` **{Array}**: Array of numbers to add up.
 * `returns` **{Number}**
 
-**Example**
-
-```handlebars
-{{sum "[1, 2, 3, 4, 5]"}}
-//=> '15'
-```
-
-### [{{avg}}](lib/math.js#L132)
+### [{{avg}}](lib/math.js#L61)
 
 Returns the average of all numbers in the given array.
 
@@ -1620,19 +1693,119 @@ Returns the average of all numbers in the given array.
 //=> '3'
 ```
 
-## misc
+### [{{ceil}}](lib/math.js#L76)
 
-### [{{default}}](lib/misc.js#L21)
-
-Returns the first value if defined, otherwise the "default" value is returned.
+Get the `Math.ceil()` of the given value.
 
 **Params**
 
-* `value` **{any}**
-* `defaultValue` **{any}**
-* `returns` **{String}**
+* `value` **{Number}**
+* `returns` **{Number}**
 
-### [{{option}}](lib/misc.js#L40)
+### [{{divide}}](lib/math.js#L91)
+
+Divide `a` by `b`
+
+**Params**
+
+* `a` **{Number}**: numerator
+* `b` **{Number}**: denominator
+
+### [{{floor}}](lib/math.js#L109)
+
+Get the `Math.floor()` of the given value.
+
+**Params**
+
+* `value` **{Number}**
+* `returns` **{Number}**
+
+### [{{minus}}](lib/math.js#L125)
+
+Return the product of `a` minus `b`.
+
+**Params**
+
+* `a` **{Number}**
+* `b` **{Number}**
+
+### [{{modulo}}](lib/math.js#L144)
+
+Get the remainder of a division operation.
+
+**Params**
+
+* `a` **{Number}**
+* `b` **{Number}**
+* `returns` **{Number}**
+
+### [{{multiply}}](lib/math.js#L164)
+
+Multiply number `a` by number `b`.
+
+**Params**
+
+* `a` **{Number}**: factor
+* `b` **{Number}**: multiplier
+* `returns` **{Number}**
+
+### [{{plus}}](lib/math.js#L182)
+
+Add `a` by `b`.
+
+**Params**
+
+* `a` **{Number}**: factor
+* `b` **{Number}**: multiplier
+
+### [{{round}}](lib/math.js#L200)
+
+Round the given number.
+
+**Params**
+
+* `number` **{Number}**
+* `returns` **{Number}**
+
+### [{{subtract}}](lib/math.js#L217)
+
+Return the product of `a` minus `b`.
+
+**Params**
+
+* `a` **{Number}**
+* `b` **{Number}**
+* `returns` **{Number}**
+
+### [{{sum}}](lib/math.js#L241)
+
+Returns the sum of all numbers in the given array.
+
+**Params**
+
+* `array` **{Array}**: Array of numbers to add up.
+* `returns` **{Number}**
+
+**Example**
+
+```handlebars
+{{sum "[1, 2, 3, 4, 5]"}}
+//=> '15'
+```
+
+### [{{times}}](lib/math.js#L264)
+
+Multiply number `a` by number `b`.
+
+**Params**
+
+* `a` **{Number}**: factor
+* `b` **{Number}**: multiplier
+* `returns` **{Number}**
+
+## misc
+
+### [{{option}}](lib/misc.js#L31)
 
 Return the given value of `prop` from `this.options`. Given the context `{options: {a: {b: {c: 'ddd'}}}}`
 
@@ -1648,7 +1821,7 @@ Return the given value of `prop` from `this.options`. Given the context `{option
 <!-- results => `ddd` -->
 ```
 
-### [{{noop}}](lib/misc.js#L54)
+### [{{noop}}](lib/misc.js#L44)
 
 Block helper that renders the block without taking any arguments.
 
@@ -1657,7 +1830,27 @@ Block helper that renders the block without taking any arguments.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{withHash}}](lib/misc.js#L68)
+### [{{typeOf}}](lib/misc.js#L64)
+
+Get the native type of the given `value`
+
+**Params**
+
+* `value` **{any}**
+* `returns` **{String}**: Returns the type of value.
+
+**Example**
+
+```handlebars
+{{typeOf 1}}
+//=> 'number'
+{{typeOf "1"}}
+//=> 'string'
+{{typeOf "foo"}}
+//=> 'string'
+```
+
+### [{{withHash}}](lib/misc.js#L76)
 
 Block helper that builds the context for the block
 from the options hash.
@@ -1668,7 +1861,23 @@ from the options hash.
 
 ## number
 
-### [{{addCommas}}](lib/number.js#L19)
+### [{{bytes}}](lib/number.js#L29)
+
+Format a number to it's equivalent in bytes. If a string is passed, it's length will be formatted and returned.
+
+**Examples:**
+
+* `'foo' => 3 B`
+* `13661855 => 13.66 MB`
+* `825399 => 825.39 kB`
+* `1396 => 1.4 kB`
+
+**Params**
+
+* `number` **{Number|String}**
+* `returns` **{String}**
+
+### [{{addCommas}}](lib/number.js#L66)
 
 Add commas to numbers
 
@@ -1677,7 +1886,7 @@ Add commas to numbers
 * `num` **{Number}**
 * `returns` **{Number}**
 
-### [{{phoneNumber}}](lib/number.js#L32)
+### [{{phoneNumber}}](lib/number.js#L79)
 
 Convert a string or number to a formatted phone number.
 
@@ -1686,7 +1895,7 @@ Convert a string or number to a formatted phone number.
 * `num` **{Number|String}**: The phone number to format, e.g. `8005551212`
 * `returns` **{Number}**: Formatted phone number: `(800) 555-1212`
 
-### [{{random}}](lib/number.js#L50)
+### [{{random}}](lib/number.js#L97)
 
 Generate a random number between two values
 
@@ -1696,7 +1905,7 @@ Generate a random number between two values
 * `max` **{Number}**
 * `returns` **{String}**
 
-### [{{toAbbr}}](lib/number.js#L64)
+### [{{toAbbr}}](lib/number.js#L111)
 
 Abbreviate numbers to the given number of `precision`. This is for
 general numbers, not size in bytes.
@@ -1707,7 +1916,7 @@ general numbers, not size in bytes.
 * `precision` **{Number}**
 * `returns` **{String}**
 
-### [{{toExponential}}](lib/number.js#L102)
+### [{{toExponential}}](lib/number.js#L149)
 
 Returns a string representing the given number in exponential notation.
 
@@ -1719,45 +1928,61 @@ Returns a string representing the given number in exponential notation.
 
 **Example**
 
-```js
+```handlebars
 {{toExponential number digits}};
 ```
 
-### [{{toFixed}}](lib/number.js#L122)
+### [{{toFixed}}](lib/number.js#L172)
 
 Formats the given number using fixed-point notation.
 
 **Params**
 
 * `number` **{Number}**
-* `digits` **{Number}**: Optional. The number of digits to use after the decimal point; this may be a value between 0 and 20, inclusive, and implementations may optionally support a larger range of values. If this argument is omitted, it is treated as 0.
+* `digits` **{Number}**: (Optional) The number of digits to appear after the decimal point; this may be a value between 0 and 20. If this argument is omitted, it is treated as 0.
+* `returns` **{String}**: A string representing the given number using fixed-point notation.
+
+**Example**
+
+```handlebars
+{{toFixed "1.1234" 2}}
+//=> '1.12'
+```
+
+### [{{toFloat}}](lib/number.js#L188)
+
+**Params**
+
+* `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toFloat}}](lib/number.js#L139)
+### [{{toInt}}](lib/number.js#L198)
 
 **Params**
 
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{toInt}}](lib/number.js#L149)
+### [{{toPrecision}}](lib/number.js#L215)
+
+Returns a string representing the `Number` object to the specified precision.
 
 **Params**
 
 * `number` **{Number}**
-* `returns` **{Number}**
+* `precision` **{Number}**: (Optional) An integer specifying the number of significant digits. If precison is not between 1 and 100 (inclusive), it will be coerced to `0`.
+* `returns` **{String}**: A string representing a Number object in fixed-point or exponential notation rounded to precision significant digits.
 
-### [{{toPrecision}}](lib/number.js#L160)
+**Example**
 
-**Params**
-
-* `number` **{Number}**
-* `precision` **{Number}**: Optional. The number of significant digits.
-* `returns` **{Number}**
+```handlebars
+{{toPrecision "1.1234" 2}}
+//=> '1.1'
+```
 
 ## object
 
-### [{{extend}}](lib/object.js#L22)
+### [{{extend}}](lib/object.js#L23)
 
 Extend the context with the properties of other objects.
 A shallow merge is performed to avoid mutating the context.
@@ -1767,7 +1992,7 @@ A shallow merge is performed to avoid mutating the context.
 * `objects` **{Object}**: One or more objects to extend.
 * `returns` **{Object}**
 
-### [{{forIn}}](lib/object.js#L61)
+### [{{forIn}}](lib/object.js#L62)
 
 Block helper that iterates over the properties of
 an object, exposing each key and value on the context.
@@ -1778,7 +2003,7 @@ an object, exposing each key and value on the context.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{forOwn}}](lib/object.js#L88)
+### [{{forOwn}}](lib/object.js#L89)
 
 Block helper that iterates over the **own** properties of
 an object, exposing each key and value on the context.
@@ -1789,7 +2014,7 @@ an object, exposing each key and value on the context.
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{toPath}}](lib/object.js#L114)
+### [{{toPath}}](lib/object.js#L115)
 
 Take arguments and, if they are string or number, convert them to a dot-delineated object property path.
 
@@ -1798,7 +2023,7 @@ Take arguments and, if they are string or number, convert them to a dot-delineat
 * `prop` **{String|Number}**: The property segments to assemble (can be multiple).
 * `returns` **{String}**
 
-### [{{get}}](lib/object.js#L136)
+### [{{get}}](lib/object.js#L138)
 
 Use property paths (`a.b.c`) to get a value or nested value from
 the context. Works as a regular helper or block helper.
@@ -1810,7 +2035,7 @@ the context. Works as a regular helper or block helper.
 * `options` **{Object}**: The handlebars options object, if used as a block helper.
 * `returns` **{String}**
 
-### [{{getObject}}](lib/object.js#L158)
+### [{{getObject}}](lib/object.js#L160)
 
 Use property paths (`a.b.c`) to get an object from
 the context. Differs from the `get` helper in that this
@@ -1824,7 +2049,7 @@ block helper.
 * `context` **{Object}**: The context object
 * `returns` **{String}**
 
-### [{{hasOwn}}](lib/object.js#L177)
+### [{{hasOwn}}](lib/object.js#L179)
 
 Return true if `key` is an own, enumerable property of the given `context` object.
 
@@ -1840,7 +2065,7 @@ Return true if `key` is an own, enumerable property of the given `context` objec
 {{hasOwn context key}}
 ```
 
-### [{{isObject}}](lib/object.js#L194)
+### [{{isObject}}](lib/object.js#L196)
 
 Return true if `value` is an object.
 
@@ -1856,7 +2081,17 @@ Return true if `value` is an object.
 //=> false
 ```
 
-### [{{merge}}](lib/object.js#L210)
+### [{{JSONparse}}](lib/object.js#L211)
+
+Block helper that parses a string using `JSON.parse`,
+then passes the parsed object to the block as context.
+
+**Params**
+
+* `string` **{String}**: The string to parse
+* `options` **{Object}**: Handlebars options object
+
+### [{{merge}}](lib/object.js#L226)
 
 Deeply merge the properties of the given `objects` with the
 context object.
@@ -1867,17 +2102,7 @@ context object.
 * `objects` **{Object}**
 * `returns` **{Object}**
 
-### [{{JSONparse}}](lib/object.js#L235)
-
-Block helper that parses a string using `JSON.parse`,
-then passes the parsed object to the block as context.
-
-**Params**
-
-* `string` **{String}**: The string to parse
-* `options` **{Object}**: Handlebars options object
-
-### [{{pick}}](lib/object.js#L257)
+### [{{pick}}](lib/object.js#L258)
 
 Pick properties from the context object.
 
@@ -1888,7 +2113,7 @@ Pick properties from the context object.
 * `options` **{Object}**: Handlebars options object.
 * `returns` **{Object}**: Returns an object with the picked values. If used as a block helper, the values are passed as context to the inner block. If no values are found, the context is passed to the inverse block.
 
-### [{{JSONstringify}}](lib/object.js#L284)
+### [{{JSONstringify}}](lib/object.js#L285)
 
 Stringify an object using `JSON.stringify`.
 
@@ -1931,7 +2156,7 @@ Get the directory path segment from the given `filepath`.
 //=> 'docs'
 ```
 
-### [{{relative}}](lib/path.js#L60)
+### [{{relative}}](lib/path.js#L63)
 
 Get the relative filepath from `a` to `b`.
 
@@ -1947,7 +2172,7 @@ Get the relative filepath from `a` to `b`.
 {{relative a b}}
 ```
 
-### [{{basename}}](lib/path.js#L76)
+### [{{basename}}](lib/path.js#L85)
 
 Get the file extension from the given `filepath`.
 
@@ -1963,7 +2188,7 @@ Get the file extension from the given `filepath`.
 //=> 'toc.md'
 ```
 
-### [{{stem}}](lib/path.js#L92)
+### [{{stem}}](lib/path.js#L104)
 
 Get the "stem" from the given `filepath`.
 
@@ -1979,7 +2204,7 @@ Get the "stem" from the given `filepath`.
 //=> 'toc'
 ```
 
-### [{{extname}}](lib/path.js#L108)
+### [{{extname}}](lib/path.js#L123)
 
 Get the file extension from the given `filepath`.
 
@@ -1995,7 +2220,23 @@ Get the file extension from the given `filepath`.
 //=> '.md'
 ```
 
-### [{{segments}}](lib/path.js#L132)
+### [{{resolve}}](lib/path.js#L142)
+
+Resolve an absolute path from the given `filepath`.
+
+**Params**
+
+* `filepath` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{resolve "docs/toc.md"}}
+//=> '/User/dev/docs/toc.md'
+```
+
+### [{{segments}}](lib/path.js#L171)
 
 Get specific (joined) segments of a file path by passing a range of array indices.
 
@@ -2006,7 +2247,7 @@ Get specific (joined) segments of a file path by passing a range of array indice
 
 **Example**
 
-```js
+```handlebars
 {{segments "a/b/c/d" "2" "3"}}
 //=> 'c/d'
 
@@ -2017,9 +2258,65 @@ Get specific (joined) segments of a file path by passing a range of array indice
 //=> 'b/c'
 ```
 
+## regex
+
+### [{{toRegex}}](lib/regex.js#L24)
+
+Convert the given string to a regular expression.
+
+**Params**
+
+* `str` **{String}**
+* `returns` **{RegExp}**
+
+**Example**
+
+```handlebars
+{{toRegex "foo"}}
+//=> /foo/
+```
+
+### [{{test}}](lib/regex.js#L47)
+
+Returns true if the given `str` matches the given regex. A regex can be passed on the context, or using the [toRegex](#toregex) helper as a subexpression.
+
+**Params**
+
+* `str` **{String}**
+* `returns` **{RegExp}**
+
+**Example**
+
+```handlebars
+{{test "bar" (toRegex "foo")}}
+//=> false
+{{test "foobar" (toRegex "foo")}}
+//=> true
+{{test "foobar" (toRegex "^foo$")}}
+//=> false
+```
+
 ## string
 
-### [{{camelcase}}](lib/string.js#L25)
+### [{{append}}](lib/string.js#L33)
+
+Append the specified `suffix` to the given string.
+
+**Params**
+
+* `str` **{String}**
+* `suffix` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+<!-- given that "item.stem" is "foo" -->
+{{append item.stem ".html"}}
+//=> 'foo.html'
+```
+
+### [{{camelcase}}](lib/string.js#L52)
 
 camelCase the characters in the given `string`.
 
@@ -2030,12 +2327,12 @@ camelCase the characters in the given `string`.
 
 **Example**
 
-```js
+```handlebars
 {{camelcase "foo bar baz"}};
 //=> 'fooBarBaz'
 ```
 
-### [{{capitalize}}](lib/string.js#L43)
+### [{{capitalize}}](lib/string.js#L71)
 
 Capitalize the first word in a sentence.
 
@@ -2051,7 +2348,7 @@ Capitalize the first word in a sentence.
 //=> "Foo bar baz"
 ```
 
-### [{{capitalizeAll}}](lib/string.js#L62)
+### [{{capitalizeAll}}](lib/string.js#L88)
 
 Capitalize all words in a string.
 
@@ -2067,7 +2364,7 @@ Capitalize all words in a string.
 //=> "Foo Bar Baz"
 ```
 
-### [{{center}}](lib/string.js#L79)
+### [{{center}}](lib/string.js#L106)
 
 Center a string using non-breaking spaces
 
@@ -2077,7 +2374,7 @@ Center a string using non-breaking spaces
 * `spaces` **{String}**
 * `returns` **{String}**
 
-### [{{chop}}](lib/string.js#L112)
+### [{{chop}}](lib/string.js#L136)
 
 Like trim, but removes both extraneous whitespace **and non-word characters** from the beginning and end of a string.
 
@@ -2088,7 +2385,7 @@ Like trim, but removes both extraneous whitespace **and non-word characters** fr
 
 **Example**
 
-```js
+```handlebars
 {{chop "_ABC_"}}
 //=> 'ABC'
 
@@ -2099,7 +2396,7 @@ Like trim, but removes both extraneous whitespace **and non-word characters** fr
 //=> 'ABC'
 ```
 
-### [{{dashcase}}](lib/string.js#L130)
+### [{{dashcase}}](lib/string.js#L154)
 
 dash-case the characters in `string`. Replaces non-word characters and periods with hyphens.
 
@@ -2110,12 +2407,12 @@ dash-case the characters in `string`. Replaces non-word characters and periods w
 
 **Example**
 
-```js
+```handlebars
 {{dashcase "a-b-c d_e"}}
 //=> 'a-b-c-d-e'
 ```
 
-### [{{dotcase}}](lib/string.js#L149)
+### [{{dotcase}}](lib/string.js#L173)
 
 dot.case the characters in `string`.
 
@@ -2126,12 +2423,47 @@ dot.case the characters in `string`.
 
 **Example**
 
-```js
+```handlebars
 {{dotcase "a-b-c d_e"}}
 //=> 'a.b.c.d.e'
 ```
 
-### [{{hyphenate}}](lib/string.js#L167)
+### [{{downcase}}](lib/string.js#L193)
+
+Lowercase all of the characters in the given string. Alias for [lowercase](#lowercase).
+
+**Params**
+
+* `string` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{downcase "aBcDeF"}}
+//=> 'abcdef'
+```
+
+### [{{ellipsis}}](lib/string.js#L213)
+
+Truncates a string to the specified `length`, and appends it with an elipsis, `…`.
+
+**Params**
+
+* `str` **{String}**
+* `length` **{Number}**: The desired length of the returned string.
+* `returns` **{String}**: The truncated string.
+
+**Example**
+
+```handlebars
+{{ellipsis (sanitize "<span>foo bar baz</span>"), 7}}
+//=> 'foo bar…'
+{{ellipsis "foo bar baz", 7}}
+//=> 'foo bar…'
+```
+
+### [{{hyphenate}}](lib/string.js#L234)
 
 Replace spaces in a string with hyphens.
 
@@ -2147,7 +2479,7 @@ Replace spaces in a string with hyphens.
 //=> "foo-bar-baz-qux"
 ```
 
-### [{{isString}}](lib/string.js#L185)
+### [{{isString}}](lib/string.js#L251)
 
 Return true if `value` is a string.
 
@@ -2163,7 +2495,7 @@ Return true if `value` is a string.
 //=> 'true'
 ```
 
-### [{{lowercase}}](lib/string.js#L201)
+### [{{lowercase}}](lib/string.js#L267)
 
 Lowercase all characters in the given string.
 
@@ -2179,7 +2511,7 @@ Lowercase all characters in the given string.
 //=> 'foo bar baz'
 ```
 
-### [{{occurrences}}](lib/string.js#L221)
+### [{{occurrences}}](lib/string.js#L289)
 
 Return the number of occurrences of `substring` within the given `string`.
 
@@ -2196,7 +2528,7 @@ Return the number of occurrences of `substring` within the given `string`.
 //=> 2
 ```
 
-### [{{pascalcase}}](lib/string.js#L249)
+### [{{pascalcase}}](lib/string.js#L314)
 
 PascalCase the characters in `string`.
 
@@ -2207,12 +2539,12 @@ PascalCase the characters in `string`.
 
 **Example**
 
-```js
+```handlebars
 {{pascalcase "foo bar baz"}}
 //=> 'FooBarBaz'
 ```
 
-### [{{pathcase}}](lib/string.js#L270)
+### [{{pathcase}}](lib/string.js#L334)
 
 path/case the characters in `string`.
 
@@ -2223,12 +2555,12 @@ path/case the characters in `string`.
 
 **Example**
 
-```js
+```handlebars
 {{pathcase "a-b-c d_e"}}
 //=> 'a/b/c/d/e'
 ```
 
-### [{{plusify}}](lib/string.js#L289)
+### [{{plusify}}](lib/string.js#L354)
 
 Replace spaces in the given string with pluses.
 
@@ -2244,25 +2576,79 @@ Replace spaces in the given string with pluses.
 //=> 'foo+bar+baz'
 ```
 
-### [{{reverse}}](lib/string.js#L308)
+### [{{prepend}}](lib/string.js#L374)
 
-Reverse a string.
+Prepends the given `string` with the specified `prefix`.
 
 **Params**
 
 * `str` **{String}**
+* `prefix` **{String}**
 * `returns` **{String}**
 
 **Example**
 
 ```handlebars
-{{reverse "abcde"}}
-//=> 'edcba'
+<!-- given that "val" is "bar" -->
+{{prepend val "foo-"}}
+//=> 'foo-bar'
 ```
 
-### [{{replace}}](lib/string.js#L328)
+### [{{raw}}](lib/string.js#L396)
 
-Replace all occurrences of `a` with `b`.
+Render a block without processing mustache templates inside the block.
+
+**Params**
+
+* `options` **{Object}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{{{#raw}}}}
+{{foo}}
+{{{{/raw}}}}
+//=> '{{foo}}'
+```
+
+### [{{remove}}](lib/string.js#L424)
+
+Remove all occurrences of `substring` from the given `str`.
+
+**Params**
+
+* `str` **{String}**
+* `substring` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{remove "a b a b a b" "a "}}
+//=> 'b b b'
+```
+
+### [{{removeFirst}}](lib/string.js#L443)
+
+Remove the first occurrence of `substring` from the given `str`.
+
+**Params**
+
+* `str` **{String}**
+* `substring` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{remove "a b a b a b" "a"}}
+//=> ' b a b a b'
+```
+
+### [{{replace}}](lib/string.js#L463)
+
+Replace all occurrences of substring `a` with substring `b`.
 
 **Params**
 
@@ -2278,7 +2664,41 @@ Replace all occurrences of `a` with `b`.
 //=> 'z b z b z b'
 ```
 
-### [{{sentence}}](lib/string.js#L348)
+### [{{replaceFirst}}](lib/string.js#L484)
+
+Replace the first occurrence of substring `a` with substring `b`.
+
+**Params**
+
+* `str` **{String}**
+* `a` **{String}**
+* `b` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{replace "a b a b a b" "a" "z"}}
+//=> 'z b a b a b'
+```
+
+### [{{reverse}}](lib/string.js#L503)
+
+Reverse a string.
+
+**Params**
+
+* `str` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{reverse "abcde"}}
+//=> 'edcba'
+```
+
+### [{{sentence}}](lib/string.js#L520)
 
 Sentence case the given string
 
@@ -2294,7 +2714,7 @@ Sentence case the given string
 //=> 'Hello world. Goodbye world.'
 ```
 
-### [{{snakecase}}](lib/string.js#L371)
+### [{{snakecase}}](lib/string.js#L539)
 
 snake_case the characters in the given `string`.
 
@@ -2305,28 +2725,28 @@ snake_case the characters in the given `string`.
 
 **Example**
 
-```js
+```handlebars
 {{snakecase "a-b-c d_e"}}
 //=> 'a_b_c_d_e'
 ```
 
-### [{{split}}](lib/string.js#L390)
+### [{{split}}](lib/string.js#L558)
 
 Split `string` by the given `character`.
 
 **Params**
 
 * `string` **{String}**: The string to split.
-* `returns` **{String}** `character`: Default is `,`
+* `returns` **{String}** `character`: Default is an empty string.
 
 **Example**
 
-```js
+```handlebars
 {{split "a,b,c" ","}}
 //=> ['a', 'b', 'c']
 ```
 
-### [{{startsWith}}](lib/string.js#L415)
+### [{{startsWith}}](lib/string.js#L583)
 
 Tests whether a string begins with the given prefix.
 
@@ -2347,7 +2767,7 @@ Tests whether a string begins with the given prefix.
 {{/startsWith}}
 ```
 
-### [{{titleize}}](lib/string.js#L441)
+### [{{titleize}}](lib/string.js#L607)
 
 Title case the given string.
 
@@ -2363,7 +2783,7 @@ Title case the given string.
 //=> 'This Is Title Case'
 ```
 
-### [{{trim}}](lib/string.js#L471)
+### [{{trim}}](lib/string.js#L634)
 
 Removes extraneous whitespace from the beginning and end of a string.
 
@@ -2374,16 +2794,104 @@ Removes extraneous whitespace from the beginning and end of a string.
 
 **Example**
 
-```js
+```handlebars
 {{trim " ABC "}}
 //=> 'ABC'
 ```
 
-### [{{uppercase}}](lib/string.js#L490)
+### [{{trimLeft}}](lib/string.js#L650)
 
-Uppercase all of the characters in the given string. If used as a
-block helper it will uppercase the entire block. This helper
-does not support inverse blocks.
+Removes extraneous whitespace from the beginning of a string.
+
+**Params**
+
+* `string` **{String}**: The string to trim.
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{trim " ABC "}}
+//=> 'ABC '
+```
+
+### [{{trimRight}}](lib/string.js#L668)
+
+Removes extraneous whitespace from the end of a string.
+
+**Params**
+
+* `string` **{String}**: The string to trim.
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{trimRight " ABC "}}
+//=> ' ABC'
+```
+
+### [{{truncate}}](lib/string.js#L691)
+
+Truncate a string to the specified `length`. Also see [ellipsis](#ellipsis).
+
+**Params**
+
+* `str` **{String}**
+* `limit` **{Number}**: The desired length of the returned string.
+* `suffix` **{String}**: Optionally supply a string to use as a suffix to denote when the string has been truncated. Otherwise an ellipsis (`…`) will be used.
+* `returns` **{String}**: The truncated string.
+
+**Example**
+
+```handlebars
+truncate("foo bar baz", 7);
+//=> 'foo bar'
+truncate(sanitize("<span>foo bar baz</span>", 7));
+//=> 'foo bar'
+```
+
+### [{{truncateWords}}](lib/string.js#L723)
+
+Truncate a string to have the specified number of words. Also see [truncate](#truncate).
+
+**Params**
+
+* `str` **{String}**
+* `limit` **{Number}**: The desired length of the returned string.
+* `suffix` **{String}**: Optionally supply a string to use as a suffix to denote when the string has been truncated.
+* `returns` **{String}**: The truncated string.
+
+**Example**
+
+```handlebars
+truncateWords("foo bar baz", 1);
+//=> 'foo…'
+truncateWords("foo bar baz", 2);
+//=> 'foo bar…'
+truncateWords("foo bar baz", 3);
+//=> 'foo bar baz'
+```
+
+### [{{upcase}}](lib/string.js#L753)
+
+Uppercase all of the characters in the given string. Alias for [uppercase](#uppercase).
+
+**Params**
+
+* `string` **{String}**
+* `returns` **{String}**
+
+**Example**
+
+```handlebars
+{{upcase "aBcDeF"}}
+//=> 'ABCDEF'
+```
+
+### [{{uppercase}}](lib/string.js#L774)
+
+Uppercase all of the characters in the given string. If used as a block helper it will uppercase the entire block. This helper does not support inverse blocks.
 
 **Params**
 
@@ -2391,9 +2899,16 @@ does not support inverse blocks.
 * `options` **{Object}**: Handlebars options object
 * `returns` **{String}**
 
+**Example**
+
+```handlebars
+{{uppercase "aBcDeF"}}
+//=> 'ABCDEF'
+```
+
 ## url
 
-### [{{encodeURI}}](lib/url.js#L22)
+### [{{encodeURI}}](lib/url.js#L25)
 
 Encodes a Uniform Resource Identifier (URI) component
 by replacing each instance of certain characters by
@@ -2405,7 +2920,17 @@ the UTF-8 encoding of the character.
 * `str` **{String}**: The un-encoded string
 * `returns` **{String}**: The endcoded string
 
-### [{{decodeURI}}](lib/url.js#L34)
+### [{{escape}}](lib/url.js#L40)
+
+Escape the given string by replacing characters with escape sequences.
+Useful for allowing the string to be used in a URL, etc.
+
+**Params**
+
+* `str` **{String}**
+* `returns` **{String}**: Escaped string.
+
+### [{{decodeURI}}](lib/url.js#L54)
 
 Decode a Uniform Resource Identifier (URI) component.
 
@@ -2414,7 +2939,15 @@ Decode a Uniform Resource Identifier (URI) component.
 * `str` **{String}**
 * `returns` **{String}**
 
-### [{{urlResolve}}](lib/url.js#L48)
+### [{{url_encode}}](lib/url.js#L65)
+
+Alias for [encodeURI](#encodeuri).
+
+### [{{url_decode}}](lib/url.js#L74)
+
+Alias for [decodeURI](#decodeuri).
+
+### [{{urlResolve}}](lib/url.js#L88)
 
 Take a base URL, and a href URL, and resolve them as a
 browser would for an anchor tag.
@@ -2425,7 +2958,7 @@ browser would for an anchor tag.
 * `href` **{String}**
 * `returns` **{String}**
 
-### [{{urlParse}}](lib/url.js#L60)
+### [{{urlParse}}](lib/url.js#L100)
 
 Parses a `url` string into an object.
 
@@ -2434,16 +2967,16 @@ Parses a `url` string into an object.
 * `str` **{String}**: URL string
 * `returns` **{String}**: Returns stringified JSON
 
-### [{{stripQuerystring}}](lib/url.js#L73)
+### [{{stripQuerystring}}](lib/url.js#L113)
 
-Strip the query string from a `url`.
+Strip the query string from the given `url`.
 
 **Params**
 
 * `url` **{String}**
 * `returns` **{String}**: the url without the queryString
 
-### [{{stripProtocol}}](lib/url.js#L89)
+### [{{stripProtocol}}](lib/url.js#L129)
 
 Strip protocol from a `url`.
 
@@ -2461,7 +2994,17 @@ on secure connections.  Will change 'http://foo.bar to `//foo.bar`
 
 The following utils are exposed on `.utils`.
 
-### [{{toRegex}}](lib/utils/index.js#L56)
+### [{{isRegex}}](lib/utils/index.js#L15)
+
+Returns true if the given value appears to be a
+regular expression.
+
+**Params**
+
+* `value` **{Object}**
+* `returns` **{Boolean}**
+
+### [{{toRegex}}](lib/utils/index.js#L55)
 
 Converts a "regex-string" to an actual regular expression.
 
@@ -2472,22 +3015,12 @@ Converts a "regex-string" to an actual regular expression.
 
 **Example**
 
-```js
+```handlebars
 utils.toRegex('"/foo/"');
 //=> /foo/
 ```
 
-### [{{isRegex}}](lib/utils/index.js#L69)
-
-Returns true if the given value appears to be a
-regular expression.
-
-**Params**
-
-* `value` **{Object}**
-* `returns` **{Boolean}**
-
-### [{{changecase}}](lib/utils/index.js#L111)
+### [{{changecase}}](lib/utils/index.js#L90)
 
 Change casing on the given `string`, optionally passing a delimiter to use between words in the returned string.
 
@@ -2498,7 +3031,7 @@ Change casing on the given `string`, optionally passing a delimiter to use betwe
 
 **Example**
 
-```js
+```handlebars
 utils.changecase('fooBarBaz');
 //=> 'foo bar baz'
 
@@ -2506,7 +3039,7 @@ utils.changecase('fooBarBaz' '-');
 //=> 'foo-bar-baz'
 ```
 
-### [{{random}}](lib/utils/index.js#L137)
+### [{{random}}](lib/utils/index.js#L116)
 
 Generate a random number
 
@@ -2516,26 +3049,7 @@ Generate a random number
 * `max` **{Number}**
 * `returns` **{Number}**
 
-### [{{isUndefined}}](lib/utils/index.js#L150)
-
-Returns true if the given value is `undefined` or
-is a handlebars options hash.
-
-**Params**
-
-* `value` **{any}**
-* `returns` **{Boolean}**
-
-### [{{isOptions}}](lib/utils/index.js#L163)
-
-Returns true if the given value appears to be an **options** object.
-
-**Params**
-
-* `value` **{Object}**
-* `returns` **{Boolean}**
-
-### [{{getArgs}}](lib/utils/index.js#L175)
+### [{{getArgs}}](lib/utils/index.js#L128)
 
 Get options from the options hash and `this`.
 
@@ -2544,75 +3058,33 @@ Get options from the options hash and `this`.
 * `app` **{Object}**: The current application instance.
 * `returns` **{Object}**
 
-### [{{isObject}}](lib/utils/index.js#L208)
-
-Returns true if the given value is an object
-and not an array.
-
-**Params**
-
-* `value` **{any}**
-* `returns` **{Boolean}**
-
-### [{{isEmpty}}](lib/utils/index.js#L221)
-
-Returns true if the given value is empty.
-
-**Params**
-
-* `value` **{any}**
-* `returns` **{Boolean}**
-
-### [{{tryParse}}](lib/utils/index.js#L244)
-
-Try to parse the given `string` as JSON. Fails
-gracefully if the value cannot be parsed.
-
-**Params**
-
-* `string` **{String}**
-* `returns` **{Object}**
-
-### [{{result}}](lib/utils/index.js#L260)
-
-Return the given value. If the value is a function
-it will be called, and the result is returned.
-
-**Params**
-
-* `val` **{any}**
-* `returns` **{any}**
-
-### [{{identity}}](lib/utils/index.js#L275)
-
-Return the given value, unchanged.
-
-**Params**
-
-* `val` **{any}**
-* `returns` **{any}**
-
-### [{{isString}}](lib/utils/index.js#L287)
-
-Return true if `val` is a string.
-
-**Params**
-
-* `val` **{any}**: The value to check
-* `returns` **{Boolean}**
-
-### [{{arrayify}}](lib/utils/index.js#L299)
-
-Cast `val` to an array.
-
-**Params**
-
-* `val` **{any}**: The value to arrayify.
-* `returns` **{Array}**
-
 ***
 
 ## History
+
+## [v0.9.0](https://github.com/helpers/handlebars-helpers/compare/v0.8.4...v0.9.0) - 2017-07-03
+
+**changes**
+
+* remove `fileSize` helper in favor of new `bytes` helper, which does the same thing with minor differences.
+* adds better error handling for path helpers, since node.js errors are terrible. We have a better way to handle errors that will be implemented in a near future release.
+* adds inline helper support to `isEmpty`, so it can now be used as an inline or block helper
+* adds `raw` helper
+* adds regex helpers
+* adds inline helper support to most of the comparison helpers, so they can now be used as inline or block helpers
+* adds `pluck` helper to array helpers
+* adds `prepend` and `append` helpers to string helpers
+* adds `isTruthy` and `isFalsey` comparison helpers
+* adds `escape` and `url_encode` and `url_decode` URL helpers
+* adds `attr` helper to html helpers
+* adds `year` helper to date helpers
+* adds `typeOf` and `frame` helpers to misc helpers
+* adds `abs`, `minus`, `modulo`, `plus`, `times` to math helpers
+* moves `ellipsis` helper from `html` helpers to string helpers
+* moves `truncate` helper from `html` helpers to string helpers
+* moves `reverse` helper from `string` helpers to array helpers
+* differentiate `eq` and `is` helpers so that `eq` is strict equality and `is` is not
+* removes `mm` helper, use `match` instead
 
 ## [v0.8.4](https://github.com/helpers/handlebars-helpers/compare/v0.8.3...v0.8.4) - 2017-07-03
 
@@ -2805,46 +3277,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ### Contributors
 
-| **Commits** | **Contributor** |
-| --- | --- |
-| 499 | [jonschlinkert](https://github.com/jonschlinkert) |
-| 178 | [doowb](https://github.com/doowb) |
-| 12 | [spacedawwwg](https://github.com/spacedawwwg) |
-| 5 | [hariadi](https://github.com/hariadi) |
-| 4 | [ChiperSoft](https://github.com/ChiperSoft) |
-| 4 | [stephenway](https://github.com/stephenway) |
-| 4 | [makotot](https://github.com/makotot) |
-| 4 | [timdouglas](https://github.com/timdouglas) |
-| 3 | [GreenRaccoon23](https://github.com/GreenRaccoon23) |
-| 3 | [LaurentGoderre](https://github.com/LaurentGoderre) |
-| 3 | [Melindrea](https://github.com/Melindrea) |
-| 3 | [adjohnson916](https://github.com/adjohnson916) |
-| 2 | [huntie](https://github.com/huntie) |
-| 2 | [acinader](https://github.com/acinader) |
-| 2 | [jfroom](https://github.com/jfroom) |
-| 2 | [sheedy](https://github.com/sheedy) |
-| 2 | [Arkkimaagi](https://github.com/Arkkimaagi) |
-| 2 | [cfjedimaster](https://github.com/cfjedimaster) |
-| 2 | [backflip](https://github.com/backflip) |
-| 2 | [nlfurniss](https://github.com/nlfurniss) |
-| 1 | [alesk](https://github.com/alesk) |
-| 1 | [alisd23](https://github.com/alisd23) |
-| 1 | [dandv](https://github.com/dandv) |
-| 1 | [thegreatsunra](https://github.com/thegreatsunra) |
-| 1 | [dwabyick](https://github.com/dwabyick) |
-| 1 | [iamstolis](https://github.com/iamstolis) |
-| 1 | [jasonbellamy](https://github.com/jasonbellamy) |
-| 1 | [joeybaker](https://github.com/joeybaker) |
-| 1 | [allmarkedup](https://github.com/allmarkedup) |
-| 1 | [eins78](https://github.com/eins78) |
-| 1 | [efender](https://github.com/efender) |
-| 1 | [pburtchaell](https://github.com/pburtchaell) |
-| 1 | [samtiffin](https://github.com/samtiffin) |
-| 1 | [shannonmoeller](https://github.com/shannonmoeller) |
-| 1 | [Swapnull](https://github.com/Swapnull) |
-| 1 | [liammoat](https://github.com/liammoat) |
-| 1 | [nathanjessen](https://github.com/nathanjessen) |
-| 1 | [supersheep](https://github.com/supersheep) |
+### Release history
 
 ### Building docs
 
@@ -2884,4 +3317,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on July 03, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on July 04, 2017._

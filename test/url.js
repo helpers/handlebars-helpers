@@ -1,8 +1,10 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
+helpers.object({handlebars: hbs});
 helpers.url({handlebars: hbs});
 
 describe('url', function() {
@@ -47,51 +49,36 @@ describe('url', function() {
   describe('urlParse', function() {
     it('should take a string, and return an object stringified to JSON.', function() {
       var fn = hbs.compile('{{{JSONstringify (urlParse "http://foo.com/bar/baz?key=value" "json")}}}');
-      JSON.parse(fn()).should.eql({
-        "protocol": "http:",
-        "slashes": true,
-        "auth": null,
-        "host": "foo.com",
-        "port": null,
-        "hostname": "foo.com",
-        "hash": null,
-        "search": "?key=value",
-        "query": "key=value",
-        "pathname": "/bar/baz",
-        "path": "/bar/baz?key=value",
-        "href": "http://foo.com/bar/baz?key=value"
-      });
+
+      assert.deepEqual(fn(), '{"protocol":"http:","slashes":true,"auth":null,"host":"foo.com","port":null,"hostname":"foo.com","hash":null,"search":"?key=value","query":"key=value","pathname":"/bar/baz","path":"/bar/baz?key=value","href":"http://foo.com/bar/baz?key=value"}');
     });
   });
 
   describe('strip protocol', function() {
     it('should take an http url and return without the protocol', function() {
       var data = { testUrl: 'http://foo.bar' };
-      var expectedResult = '//foo.bar/';
       var fn = hbs.compile('{{stripProtocol testUrl}}');
-      fn(data).should.eql(expectedResult);
+      assert.equal(fn(data), '//foo.bar/');
     });
 
     it('strip https protocol', function() {
       var data = { testUrl: 'https://foo.bar' };
-      var expectedResult = '//foo.bar/';
       var fn = hbs.compile('{{stripProtocol testUrl}}');
-      fn(data).should.eql(expectedResult);
+      assert.equal(fn(data), '//foo.bar/');
     });
 
     it('should leave a relative url unchanged', function() {
-      var testUrl = 'path/to/file';
-      var data = { testUrl: testUrl };
+      var expected = 'path/to/file';
+      var data = { testUrl: expected };
       var fn = hbs.compile('{{stripProtocol testUrl}}');
-      fn(data).should.eql(testUrl);
+      assert.equal(fn(data), expected);
     });
 
     it('should leave an absolute url unchanged', function() {
-      var testUrl = '/path/to/file';
-      var data = { testUrl: testUrl };
+      var expected = '/path/to/file';
+      var data = { testUrl: expected };
       var fn = hbs.compile('{{stripProtocol testUrl}}');
-      fn(data).should.eql(testUrl);
+      assert.equal(fn(data), expected);
     });
-
   });
 });

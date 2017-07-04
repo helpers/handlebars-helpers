@@ -1,7 +1,8 @@
 'use strict';
 
+require('mocha');
 var assert = require('assert');
-var hbs = require('handlebars');
+var hbs = require('handlebars').create();
 var helpers = require('..');
 helpers.code({handlebars: hbs});
 
