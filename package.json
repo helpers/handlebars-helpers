@@ -5,7 +5,6 @@
   "homepage": "https://github.com/helpers/handlebars-helpers",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
-    "(https://github.com/homersimpsons)",
     "Aleš Kotnik (www.draagle.com)",
     "Alex Hunt (https://alexhunt.io)",
     "Ali Sheehan-Dare (https://github.com/alisd23)",
@@ -46,7 +45,8 @@
     "Spud Hsu (http://spud.in)",
     "Stephen Way (http://stephenway.net)",
     "Thomas Jaggi (http://responsive.ch)",
-    "Tim Douglas (https://github.com/timdouglas)"
+    "Tim Douglas (https://github.com/timdouglas)",
+    "(https://github.com/homersimpsons)"
   ],
   "repository": "helpers/handlebars-helpers",
   "bugs": {
@@ -59,7 +59,7 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "scripts": {
     "test": "mocha"

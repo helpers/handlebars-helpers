@@ -86,7 +86,7 @@ describe('object', function() {
     it('should return a path from provided arguments', function() {
       hbs.compile('{{toPath "a" "b" "c"}}')().should.equal('a.b.c');
     });
-    it('should return a path from calculated arguments', function () {
+    it('should return a path from calculated arguments', function() {
       var t = hbs.compile('{{toPath "a" (add 1 1) "b"}}')();
       t.should.equal('a.2.b');
     });

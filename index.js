@@ -25,7 +25,6 @@ module.exports = function helpers(groups, options) {
 
   options = options || {};
   var hbs = options.handlebars || options.hbs || require('handlebars');
-
   define(module.exports, 'handlebars', hbs);
 
   if (groups) {
@@ -37,6 +36,7 @@ module.exports = function helpers(groups, options) {
       hbs.registerHelper(group);
     });
   }
+
   return hbs.helpers;
 };
 
