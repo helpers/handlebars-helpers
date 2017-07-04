@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "homepage": "https://github.com/helpers/handlebars-helpers",
   "authors": [
     "Brian Woodward (https://github.com/doowb)",
@@ -24,7 +24,6 @@
     "index.js"
   ],
   "dependencies": {
-    "arr-filter": "^1.1.2",
     "arr-flatten": "^1.0.3",
     "array-sort": "^0.1.2",
     "create-frame": "^1.0.0",
@@ -34,25 +33,24 @@
     "get-object": "^0.2.0",
     "get-value": "^2.0.6",
     "handlebars": "^4.0.10",
-    "handlebars-utils": "^1.0.0",
-    "helper-date": "^0.2.3",
+    "handlebars-helper-create-frame": "^0.1.0",
+    "handlebars-utils": "^1.0.1",
+    "has-value": "^1.0.0",
+    "helper-date": "^1.0.0",
     "helper-markdown": "^0.2.2",
     "helper-md": "^0.2.2",
     "html-tag": "^1.0.0",
     "is-even": "^1.0.0",
     "is-glob": "^3.1.0",
     "is-number": "^3.0.0",
-    "is-odd": "^1.0.0",
     "kind-of": "^5.0.0",
     "lazy-cache": "^2.0.2",
     "logging-helpers": "^1.0.0",
-    "make-iterator": "^1.0.0",
     "micromatch": "^3.0.3",
-    "mixin-deep": "^1.2.0",
-    "normalize-path": "^2.1.1",
     "relative": "^3.0.2",
     "striptags": "^3.0.1",
-    "to-gfm-code-block": "^0.1.1"
+    "to-gfm-code-block": "^0.1.1",
+    "year": "^0.2.1"
   },
   "devDependencies": {
     "engine-handlebars": "^0.8.2",
@@ -70,7 +68,6 @@
     "js-yaml": "^3.8.4",
     "markdown-link": "^0.1.1",
     "mocha": "^3.4.2",
-    "should": "^11.2.1",
     "template-helpers": "^0.6.7",
     "templates": "^1.2.8",
     "through2": "^2.0.3",
