@@ -1,11 +1,32 @@
 'use strict';
 
 require('should');
+var assert = require('assert');
 var hbs = require('handlebars');
 var helpers = require('..');
 helpers.number({handlebars: hbs});
 
 describe('number', function() {
+  describe('bytes', function() {
+    it('should format a number', function() {
+      assert.equal(hbs.compile('{{bytes num}}')({num: 13661855}), '13.66 MB');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 825399}), '825.4 kB');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 1396}), '1.4 kB');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 0}), '0 B');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 1}), '1 B');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 2}), '2 B');
+    });
+
+    it('should return "0 B" when an invalid value is passed', function() {
+      assert.equal(hbs.compile('{{bytes num}}')({num: {}}), '0 B');
+    });
+
+    it('should return string length when a string is passed', function() {
+      assert.equal(hbs.compile('{{bytes num}}')({num: 'foo'}), '3 B');
+      assert.equal(hbs.compile('{{bytes num}}')({num: 'foobar'}), '6 B');
+    });
+  });
+
   describe('phoneNumber', function() {
     it('Format a phone number.', function() {
       var fn = hbs.compile('{{phoneNumber value}}');
