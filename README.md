@@ -82,7 +82,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **187 helpers** in **20 categories**:
+Currently **188 helpers** in **20 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -270,11 +270,12 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://g
 * **[modulo](#modulo)** ([code](lib/math.js#L138) | [no tests])
 * **[multiply](#multiply)** ([code](lib/math.js#L158) | [tests](test/math.js#L50))
 * **[plus](#plus)** ([code](lib/math.js#L176) | [no tests])
-* **[random](#random)** ([code](lib/math.js#L195) | [tests](test/math.js#L90))
-* **[round](#round)** ([code](lib/math.js#L213) | [tests](test/math.js#L57))
-* **[subtract](#subtract)** ([code](lib/math.js#L230) | [tests](test/math.js#L64))
-* **[sum](#sum)** ([code](lib/math.js#L252) | [tests](test/math.js#L71))
-* **[times](#times)** ([code](lib/math.js#L275) | [no tests])
+* **[random](#random)** ([code](lib/math.js#L195) | [tests](test/math.js#L102))
+* **[remainder](#remainder)** ([code](lib/math.js#L213) | [tests](test/math.js#L57))
+* **[round](#round)** ([code](lib/math.js#L225) | [tests](test/math.js#L69))
+* **[subtract](#subtract)** ([code](lib/math.js#L242) | [tests](test/math.js#L76))
+* **[sum](#sum)** ([code](lib/math.js#L264) | [tests](test/math.js#L83))
+* **[times](#times)** ([code](lib/math.js#L287) | [no tests])
 
 ### [misc helpers](#misc)
 
@@ -1758,7 +1759,16 @@ Generate a random number between two values
 * `max` **{Number}**
 * `returns` **{String}**
 
-### [{{round}}](lib/math.js#L213)
+### [{{remainder}}](lib/math.js#L213)
+
+Get the remainder when `a` is divided by `b`.
+
+**Params**
+
+* `a` **{Number}**: a
+* `b` **{Number}**: b
+
+### [{{round}}](lib/math.js#L225)
 
 Round the given number.
 
@@ -1767,7 +1777,7 @@ Round the given number.
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{subtract}}](lib/math.js#L230)
+### [{{subtract}}](lib/math.js#L242)
 
 Return the product of `a` minus `b`.
 
@@ -1777,7 +1787,7 @@ Return the product of `a` minus `b`.
 * `b` **{Number}**
 * `returns` **{Number}**
 
-### [{{sum}}](lib/math.js#L252)
+### [{{sum}}](lib/math.js#L264)
 
 Returns the sum of all numbers in the given array.
 
@@ -1793,7 +1803,7 @@ Returns the sum of all numbers in the given array.
 <!-- results in: '15' -->
 ```
 
-### [{{times}}](lib/math.js#L275)
+### [{{times}}](lib/math.js#L287)
 
 Multiply number `a` by number `b`.
 
