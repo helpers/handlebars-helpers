@@ -90,8 +90,8 @@ describe('math', function() {
   describe('random', function() {
     it('should return a random number between two values.', function() {
       var fn = hbs.compile('{{random 5 10}}');
-      assert(fn() > 5);
-      assert(fn() < 10);
+      assert(fn() >= 5);
+      assert(fn() <= 10);
     });
   });
 });
