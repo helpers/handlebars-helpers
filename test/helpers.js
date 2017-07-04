@@ -1,7 +1,6 @@
 'use strict';
 
 require('mocha');
-require('should');
 var assert = require('assert');
 var hbs = require('handlebars');
 var helpers = require('..');

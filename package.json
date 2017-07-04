@@ -65,58 +65,58 @@
     "test": "mocha"
   },
   "dependencies": {
-    "arr-filter": "^1.1.1",
-    "arr-flatten": "^1.0.1",
+    "arr-filter": "^1.1.2",
+    "arr-flatten": "^1.0.3",
     "array-sort": "^0.1.2",
     "create-frame": "^1.0.0",
-    "define-property": "^0.2.5",
-    "for-in": "^0.1.6",
-    "for-own": "^0.1.4",
+    "define-property": "^1.0.0",
+    "for-in": "^1.0.2",
+    "for-own": "^1.0.0",
     "get-object": "^0.2.0",
     "get-value": "^2.0.6",
-    "handlebars": "^4.0.6",
+    "handlebars": "^4.0.10",
+    "handlebars-utils": "^1.0.0",
     "helper-date": "^0.2.3",
-    "helper-markdown": "^0.2.1",
+    "helper-markdown": "^0.2.2",
     "helper-md": "^0.2.2",
     "html-tag": "^1.0.0",
-    "index-of": "^0.2.0",
-    "is-even": "^0.1.1",
+    "is-even": "^1.0.0",
     "is-glob": "^3.1.0",
     "is-number": "^3.0.0",
-    "is-odd": "^0.1.1",
-    "kind-of": "^3.1.0",
+    "is-odd": "^1.0.0",
+    "kind-of": "^5.0.0",
     "lazy-cache": "^2.0.2",
-    "logging-helpers": "^0.4.0",
-    "make-iterator": "^0.3.0",
-    "micromatch": "^2.3.11",
-    "mixin-deep": "^1.1.3",
-    "normalize-path": "^2.0.1",
+    "logging-helpers": "^1.0.0",
+    "make-iterator": "^1.0.0",
+    "micromatch": "^3.0.3",
+    "mixin-deep": "^1.2.0",
+    "normalize-path": "^2.1.1",
     "relative": "^3.0.2",
-    "striptags": "^2.1.1",
+    "striptags": "^3.0.1",
     "to-gfm-code-block": "^0.1.1"
   },
   "devDependencies": {
-    "engine-handlebars": "^0.8.0",
+    "engine-handlebars": "^0.8.2",
     "fs-exists-sync": "^0.1.0",
-    "global-modules": "^0.2.3",
+    "global-modules": "^1.0.0",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
+    "gulp-eslint": "^4.0.0",
     "gulp-format-md": "^1.0.0",
-    "gulp-istanbul": "^1.1.1",
+    "gulp-istanbul": "^1.1.2",
     "gulp-mocha": "^3.0.1",
-    "gulp-unused": "^0.2.0",
+    "gulp-unused": "^0.2.1",
     "helper-changelog": "^0.3.0",
     "helper-coverage": "^0.1.3",
-    "is-valid-app": "^0.2.1",
-    "js-yaml": "^3.7.0",
+    "is-valid-app": "^0.3.0",
+    "js-yaml": "^3.8.4",
     "markdown-link": "^0.1.1",
-    "mocha": "^3.2.0",
-    "should": "^11.1.2",
+    "mocha": "^3.4.2",
+    "should": "^11.2.1",
     "template-helpers": "^0.6.7",
-    "templates": "^0.25.3",
+    "templates": "^1.2.8",
     "through2": "^2.0.3",
     "verb-generate-readme": "^0.6.0",
-    "vinyl": "^2.0.1"
+    "vinyl": "^2.1.0"
   },
   "keywords": [
     "assemble",
@@ -188,6 +188,17 @@
     ],
     "lint": {
       "reflinks": true
+    }
+  },
+  "lintDeps": {
+    "devDependencies": {
+      "files": {
+        "patterns": [
+          "test/integration/*.js",
+          "test/support/*.js",
+          "test/utils/*.js"
+        ]
+      }
     }
   }
 }

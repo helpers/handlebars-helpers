@@ -112,23 +112,23 @@ describe('string', function() {
 
   describe('isString', function() {
     it('should return true for string', function() {
-      hbs.compile('{{isString "foo"}}')().should.equal('true');
+      assert.equal(hbs.compile('{{isString "foo"}}')(), 'true');
     });
 
     it('should return true for empty string', function() {
-      hbs.compile('{{isString ""}}')().should.equal('true');
+      assert.equal(hbs.compile('{{isString ""}}')(), 'true');
     });
 
     it('should return false for number', function() {
-      hbs.compile('{{isString 123}}')().should.equal('false');
+      assert.equal(hbs.compile('{{isString 123}}')(), 'false');
     });
 
     it('should return false for null', function() {
-      hbs.compile('{{isString null}}')().should.equal('false');
+      assert.equal(hbs.compile('{{isString null}}')(), 'false');
     });
 
     it('should return false when undefined', function() {
-      hbs.compile('{{isString}}')().should.equal('false');
+      assert.equal(hbs.compile('{{isString}}')(), 'false');
     });
   });
 

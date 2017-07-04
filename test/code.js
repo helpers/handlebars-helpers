@@ -1,6 +1,6 @@
 'use strict';
 
-require('should');
+var assert = require('assert');
 var hbs = require('handlebars');
 var helpers = require('..');
 helpers.code({handlebars: hbs});
@@ -8,7 +8,7 @@ helpers.code({handlebars: hbs});
 describe('code', function() {
   describe('embed', function() {
     it('should embed markdown:', function() {
-      hbs.compile('{{{embed "test/fixtures/simple.md"}}}')().should.equal([
+      assert.equal(hbs.compile('{{{embed "test/fixtures/simple.md"}}}')(), [
         '```markdown',
         '## Some Markdown\n',
         ' - one',
@@ -20,7 +20,7 @@ describe('code', function() {
     });
 
     it('should determine the language from the file extension', function() {
-      hbs.compile('{{{embed "test/fixtures/embedded.md"}}}')().should.equal([
+      assert.equal(hbs.compile('{{{embed "test/fixtures/embedded.md"}}}')(), [
         '```markdown',
         '## Markdown',
         '',
@@ -40,7 +40,7 @@ describe('code', function() {
 
     it('should use the language defined in the last argument', function() {
       var template = hbs.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
-      template().should.equal([
+      assert.equal(template(), [
         '```hbs',
         '<!DOCTYPE html>',
         '  <html lang="en">',
@@ -61,7 +61,7 @@ describe('code', function() {
   describe('gist', function() {
     it('should return a gist script tag', function() {
       var fn = hbs.compile('{{{gist "abcdefg"}}}');
-      fn().should.equal('<script src="https://gist.github.com/abcdefg.js"></script>');
+      assert.equal(fn(), '<script src="https://gist.github.com/abcdefg.js"></script>');
     });
   });
 
@@ -69,19 +69,19 @@ describe('code', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {
       var source = '{{{jsfiddle id="UXbas"}}}';
       var fn = hbs.compile(source);
-      fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
+      assert.equal(fn(), '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
 
     it('should throw an error if id is missing', function() {
-      (function() {
+      assert.throws(function() {
         hbs.compile('{{jsfiddle}}')();
-      }).should.throw('jsfiddle helper expects an `id`');
+      });
     });
 
     it('should return a jsfiddle embed link, with custom tabs assigned', function() {
       var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
       var fn = hbs.compile(source);
-      fn().should.equal('<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
+      assert.equal(fn(), '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
   });
 });

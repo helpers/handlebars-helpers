@@ -1,3 +1,7 @@
+v0.9.0:
+  date: "2017-07-03"
+  changes:
+    - remove `fileSize` helper in favor of new `bytes` helper, which does the same thing with minor differences.
 v0.8.4:
   date: "2017-07-03"
   changes:
