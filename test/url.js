@@ -9,19 +9,15 @@ helpers.url({handlebars: hbs});
 
 describe('url', function() {
   describe('urlResolve', function() {
-    it('should take a base URL, and a href URL, and resolve them as a browser would', function() {
-      var fn = hbs.compile('{{urlResolve "/one/two/three" "four"}}');
-      assert.equal(fn(), '/one/two/four');
-    });
+    it('should resolve a URL', function() {
+      var fn1 = hbs.compile('{{urlResolve "/one/two/three" "four"}}');
+      assert.equal(fn1(), '/one/two/four');
 
-    it('should take a base URL, and a href URL, and resolve them as a browser would', function() {
-      var fn = hbs.compile('{{urlResolve "http://example.com/" "/one"}}');
-      assert.equal(fn(), 'http://example.com/one');
-    });
+      var fn2 = hbs.compile('{{urlResolve "http://example.com/" "/one"}}');
+      assert.equal(fn2(), 'http://example.com/one');
 
-    it('should take a base URL, and a href URL, and resolve them as a browser would', function() {
-      var fn = hbs.compile('{{urlResolve "http://example.com/one" "/two"}}');
-      assert.equal(fn(), 'http://example.com/two');
+      var fn3 = hbs.compile('{{urlResolve "http://example.com/one" "/two"}}');
+      assert.equal(fn3(), 'http://example.com/two');
     });
   });
 
