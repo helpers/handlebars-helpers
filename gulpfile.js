@@ -24,7 +24,7 @@ gulp.task('mocha', ['coverage'], function() {
 
 gulp.task('eslint', function() {
   return gulp.src(['*.js', 'lib/**/*.js', 'test/*.js'])
-    .pipe(eslint());
+    .pipe(eslint.format());
 });
 
 gulp.task('unused', function() {
