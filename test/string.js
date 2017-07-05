@@ -297,14 +297,14 @@ describe('string', function() {
     });
     it('should render "Yes he is", from inside the block.', function() {
       var fn = hbs.compile('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}');
-      assert.equal(fn(), "Yes he is");
+      assert.equal(fn(), 'Yes he is');
     });
     it('should render the Inverse block.', function() {
       var fn = hbs.compile('{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}');
       assert.equal(fn(), 'Bro, do you even hello world?');
     });
-    it("should render the Inverse block.", function() {
-      var fn = hbs.compile('{{#startsWith "myPrefix" nullProperty}}fn block{{else}}inverse block{{/startsWith}}');
+    it('should render the Inverse block when an undefined value is passed in..', function() {
+      var fn = hbs.compile('{{#startsWith "myPrefix" undefined}}fn block{{else}}inverse block{{/startsWith}}');
       assert.equal(fn(), 'inverse block');
     });
   });

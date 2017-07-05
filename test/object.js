@@ -94,7 +94,7 @@ describe('object', function() {
     });
     it('should return a `get` compatible path', function() {
       var fn = hbs.compile('{{get (toPath "a" (add 1 1) "j") this}}');
-      assert.equal(fn({a: [{b: 'c', d: 'e'},{f: 'g', h: 'i'}, {j: 'k', l: 'm'}]}), 'k');
+      assert.equal(fn({a: [{b: 'c', d: 'e'}, {f: 'g', h: 'i'}, {j: 'k', l: 'm'}]}), 'k');
     });
   });
 
@@ -164,7 +164,7 @@ describe('object', function() {
   describe('JSONparse', function() {
     it('should parse a JSON string:', function() {
       var fn = hbs.compile('{{lookup (JSONparse string) "name"}}');
-      assert.equal(fn({string: "{\"name\": \"Fry\"}"}), 'Fry');
+      assert.equal(fn({string: '{"name": "Fry"}'}), 'Fry');
     });
   });
 
@@ -199,7 +199,7 @@ describe('object', function() {
   describe('stringify', function() {
     it('should stringify an object:', function() {
       var fn = hbs.compile('{{{stringify data}}}');
-      var res = fn({data: {name: "Halle", age: 4, userid: "Nicole"}});
+      var res = fn({data: {name: 'Halle', age: 4, userid: 'Nicole'}});
       assert.equal(res, '{"name":"Halle","age":4,"userid":"Nicole"}');
     });
   });

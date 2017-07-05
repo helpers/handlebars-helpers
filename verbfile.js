@@ -210,14 +210,6 @@ function customDocsHelpers(app) {
   });
 }
 
-function section(name) {
-  return `## ${name}\n{%= apidocs("lib/${name}.js") %}`;
-}
-
-function listItem(file) {
-  return '- **' + link(file.stem, '#' + file.stem) + '** (code ' + link(file.stem, file.relative) + ')';
-}
-
 function codeLink(title, path, start) {
   return link(title, path + '#L' + start);
 }

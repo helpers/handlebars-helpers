@@ -4,7 +4,7 @@ require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
 var helpers = require('..');
-helpers.array({handlebars: hbs})
+helpers.array({handlebars: hbs});
 helpers.string({handlebars: hbs});
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
@@ -362,7 +362,7 @@ describe('array', function() {
 
     it('should sort the items in an array', function() {
       var fn = hbs.compile('{{sortBy array}}');
-      assert.equal(fn({array: ["b", "c", "a"]}), 'a,b,c');
+      assert.equal(fn({array: ['b', 'c', 'a']}), 'a,b,c');
     });
 
     it('should return an empty string when the array is invalid:', function() {

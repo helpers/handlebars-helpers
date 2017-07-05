@@ -7,7 +7,6 @@ var assert = require('assert');
 var hbs = require('handlebars').create();
 require('..')({handlebars: hbs});
 
-var orig;
 var libFiles = fs.readdirSync(path.join(__dirname, '../lib'))
   .map(function(fp) {
     return path.join('lib', fp);

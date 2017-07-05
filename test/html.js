@@ -51,7 +51,7 @@ describe('html', function() {
       assert.equal(hbs.compile('{{{css styles}}}')(ctx), [
         '<link type="text/css" rel="stylesheet" href="a.css">',
         '<link type="text/css" rel="stylesheet" href="bcss">',
-        '<link type="text/css" rel="stylesheet" href="c.css">',
+        '<link type="text/css" rel="stylesheet" href="c.css">'
       ].join('\n'));
     });
 
@@ -80,7 +80,7 @@ describe('html', function() {
       assert.equal(hbs.compile('{{{js scripts}}}')(ctx), [
         '<script src="a.js"></script>',
         '<script src="bjs"></script>',
-        '<script src="c.js"></script>',
+        '<script src="c.js"></script>'
       ].join('\n'));
     });
 
@@ -137,7 +137,7 @@ describe('html', function() {
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
           '</a>',
           '<figcaption>My new caption!</figcaption>',
-          '</figure>',
+          '</figure>'
         ].join('\n');
         assert.equal(fn(context), comparison);
       });
@@ -223,12 +223,12 @@ describe('html', function() {
         };
         var fn = hbs.compile(source);
         var comparison = [
-         '<figure id="image-id">',
-         '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">',
-         '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
-         '</a>',
-         '<figcaption>My new caption!</figcaption>',
-         '</figure>',
+          '<figure id="image-id">',
+          '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">',
+          '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
+          '</a>',
+          '<figcaption>My new caption!</figcaption>',
+          '</figure>'
         ].join('\n');
         assert.equal(fn(context), comparison);
       });

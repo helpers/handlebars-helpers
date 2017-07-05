@@ -18,7 +18,7 @@ describe('matching', function() {
     });
 
     it('should take an array of patterns', function() {
-      var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'f*.js']}
+      var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'f*.js']};
       var fn = hbs.compile('{{match files patterns}}');
       assert.equal(fn(ctx), 'array.js,url.js,utils.js,fs.js');
     });

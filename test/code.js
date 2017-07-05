@@ -35,7 +35,7 @@ describe('code', function() {
         '',
         '[Click here](http://assemble.io) for more documentation.',
         '',
-        '```\n',
+        '```\n'
       ].join('\n'));
     });
 
@@ -54,7 +54,7 @@ describe('code', function() {
         '  </body>',
         '</html>',
         '',
-        '```\n',
+        '```\n'
       ].join('\n'));
     });
   });

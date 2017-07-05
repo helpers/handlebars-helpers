@@ -3,7 +3,6 @@
 require('mocha');
 var assert = require('assert');
 var HTML = require('../lib/utils/html');
-var Handlebars = require('handlebars');
 
 describe('html', function() {
   describe('parseAttributes', function() {
