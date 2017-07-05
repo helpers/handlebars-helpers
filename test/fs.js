@@ -45,79 +45,79 @@ describe('fs', function() {
       }
 
       assert.deepEqual(fn({dir: 'lib', filter: filter}).split(','), [
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js',
-        'lib/fs.js',
-        'lib/html.js',
-        'lib/i18n.js',
-        'lib/index.js',
-        'lib/inflection.js',
-        'lib/logging.js',
-        'lib/markdown.js',
-        'lib/match.js',
-        'lib/math.js',
-        'lib/misc.js',
-        'lib/number.js',
-        'lib/object.js',
-        'lib/path.js',
-        'lib/regex.js',
-        'lib/string.js',
-        'lib/url.js'
+        path.join('lib', 'array.js'),
+        path.join('lib', 'code.js'),
+        path.join('lib', 'collection.js'),
+        path.join('lib', 'comparison.js'),
+        path.join('lib', 'date.js'),
+        path.join('lib', 'fs.js'),
+        path.join('lib', 'html.js'),
+        path.join('lib', 'i18n.js'),
+        path.join('lib', 'index.js'),
+        path.join('lib', 'inflection.js'),
+        path.join('lib', 'logging.js'),
+        path.join('lib', 'markdown.js'),
+        path.join('lib', 'match.js'),
+        path.join('lib', 'math.js'),
+        path.join('lib', 'misc.js'),
+        path.join('lib', 'number.js'),
+        path.join('lib', 'object.js'),
+        path.join('lib', 'path.js'),
+        path.join('lib', 'regex.js'),
+        path.join('lib', 'string.js'),
+        path.join('lib', 'url.js')
       ]);
     });
 
     it('should filter using a regex', function() {
       var fn = hbs.compile('{{readdir dir (toRegex "\\.js$")}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), [
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js',
-        'lib/fs.js',
-        'lib/html.js',
-        'lib/i18n.js',
-        'lib/index.js',
-        'lib/inflection.js',
-        'lib/logging.js',
-        'lib/markdown.js',
-        'lib/match.js',
-        'lib/math.js',
-        'lib/misc.js',
-        'lib/number.js',
-        'lib/object.js',
-        'lib/path.js',
-        'lib/regex.js',
-        'lib/string.js',
-        'lib/url.js'
+        path.join('lib', 'array.js'),
+        path.join('lib', 'code.js'),
+        path.join('lib', 'collection.js'),
+        path.join('lib', 'comparison.js'),
+        path.join('lib', 'date.js'),
+        path.join('lib', 'fs.js'),
+        path.join('lib', 'html.js'),
+        path.join('lib', 'i18n.js'),
+        path.join('lib', 'index.js'),
+        path.join('lib', 'inflection.js'),
+        path.join('lib', 'logging.js'),
+        path.join('lib', 'markdown.js'),
+        path.join('lib', 'match.js'),
+        path.join('lib', 'math.js'),
+        path.join('lib', 'misc.js'),
+        path.join('lib', 'number.js'),
+        path.join('lib', 'object.js'),
+        path.join('lib', 'path.js'),
+        path.join('lib', 'regex.js'),
+        path.join('lib', 'string.js'),
+        path.join('lib', 'url.js')
       ]);
     });
 
     it('should filter using a glob pattern', function() {
       var fn = hbs.compile('{{readdir dir "lib/[a-d]*.js"}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), [
-        'lib/array.js',
-        'lib/code.js',
-        'lib/collection.js',
-        'lib/comparison.js',
-        'lib/date.js'
+        path.join('lib', 'array.js'),
+        path.join('lib', 'code.js'),
+        path.join('lib', 'collection.js'),
+        path.join('lib', 'comparison.js'),
+        path.join('lib', 'date.js')
       ]);
     });
 
     it('should filter by fs.stat (files)', function() {
       var fn = hbs.compile('{{readdir dir "isFile"}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), libFiles.filter(function(fp) {
-        return fp.indexOf('lib/util') !== 0;
+        return fp.indexOf(path.join('lib', 'util')) !== 0;
       }));
     });
 
     it('should filter by fs.stat (dirs)', function() {
       var fn = hbs.compile('{{readdir dir "isDirectory"}}');
       assert.deepEqual(fn({dir: 'lib'}).split(','), [
-        'lib/utils'
+        path.join('lib', 'utils')
       ]);
     });
 

@@ -54,15 +54,15 @@ describe('templates integration tests', function() {
   describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
       var view = compile('{{relative "dist/docs.html" "index.html"}}');
-      assert.equal(view.fn(), '../index.html');
+      assert.equal(view.fn(), path.join('..', 'index.html'));
     });
-    it('should return the relative path from file A to file B', function() {
+    it('should return the relative path from file A to file B in', function() {
       var view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
-      assert.equal(view.fn(), '../../assets');
+      assert.equal(view.fn(), path.join('..', '..', 'assets'));
     });
     it('should use the cwd passed on options', function() {
       var view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
-      assert.equal(view.fn({cwd: gm}), '../../assets');
+      assert.equal(view.fn({cwd: gm}), path.join('..', '..', 'assets'));
     });
   });
 
