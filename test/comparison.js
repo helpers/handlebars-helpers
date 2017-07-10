@@ -180,13 +180,23 @@ describe('comparison', function() {
       assert.equal(fn({array: ['a', 'b', 'c']}), 'A');
     });
 
-    it('should render the block when an index is passed::', function() {
+    it('should render the block when an index is passed:', function() {
       var fn = hbs.compile('{{#contains array "a" 0}}A{{else}}B{{/contains}}');
       assert.equal(fn({array: ['a', 'b', 'c']}), 'A');
     });
 
     it('should render the inverse block when false with index:', function() {
       var fn = hbs.compile('{{#contains array "a" 1}}A{{else}}B{{/contains}}');
+      assert.equal(fn({array: ['a', 'b', 'c']}), 'B');
+    });
+
+    it('should not render the block when an undefined argument is passed:', function() {
+      var fn = hbs.compile('{{#contains array nothing}}A{{/contains}}');
+      assert.equal(fn({array: ['a', 'b', 'c']}), '');
+    });
+
+    it('should render the inverse block when an undefined argument is passed:', function() {
+      var fn = hbs.compile('{{#contains array nothing}}A{{else}}B{{/contains}}');
       assert.equal(fn({array: ['a', 'b', 'c']}), 'B');
     });
   });
