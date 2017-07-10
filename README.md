@@ -161,28 +161,28 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[and](#and)** ([code](lib/comparison.js#L21) | [tests](test/comparison.js#L10))
 * **[compare](#compare)** ([code](lib/comparison.js#L51) | [tests](test/comparison.js#L41))
 * **[contains](#contains)** ([code](lib/comparison.js#L118) | [tests](test/comparison.js#L167))
-* **[default](#default)** ([code](lib/comparison.js#L137) | [tests](test/comparison.js#L194))
-* **[eq](#eq)** ([code](lib/comparison.js#L159) | [tests](test/comparison.js#L317))
-* **[gt](#gt)** ([code](lib/comparison.js#L182) | [tests](test/comparison.js#L204))
-* **[gte](#gte)** ([code](lib/comparison.js#L206) | [tests](test/comparison.js#L235))
-* **[has](#has)** ([code](lib/comparison.js#L226) | [tests](test/comparison.js#L250))
-* **[isFalsey](#isFalsey)** ([code](lib/comparison.js#L269) | [no tests])
-* **[isTruthy](#isTruthy)** ([code](lib/comparison.js#L284) | [no tests])
-* **[ifEven](#ifEven)** ([code](lib/comparison.js#L305) | [tests](test/comparison.js#L334))
-* **[ifNth](#ifNth)** ([code](lib/comparison.js#L322) | [tests](test/comparison.js#L346))
-* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L345) | [tests](test/comparison.js#L369))
-* **[is](#is)** ([code](lib/comparison.js#L269) | [tests](test/comparison.js#L381))
-* **[isnt](#isnt)** ([code](lib/comparison.js#L384) | [tests](test/comparison.js#L398))
-* **[lt](#lt)** ([code](lib/comparison.js#L406) | [tests](test/comparison.js#L415))
-* **[lte](#lte)** ([code](lib/comparison.js#L430) | [tests](test/comparison.js#L442))
-* **[neither](#neither)** ([code](lib/comparison.js#L451) | [tests](test/comparison.js#L477))
-* **[not](#not)** ([code](lib/comparison.js#L465) | [no tests])
-* **[or](#or)** ([code](lib/comparison.js#L487) | [tests](test/comparison.js#L489))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L513) | [tests](test/comparison.js#L522))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L533) | [tests](test/comparison.js#L533))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L553) | [tests](test/comparison.js#L544))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L573) | [tests](test/comparison.js#L555))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L593) | [tests](test/comparison.js#L570))
+* **[default](#default)** ([code](lib/comparison.js#L137) | [tests](test/comparison.js#L204))
+* **[eq](#eq)** ([code](lib/comparison.js#L159) | [tests](test/comparison.js#L327))
+* **[gt](#gt)** ([code](lib/comparison.js#L182) | [tests](test/comparison.js#L214))
+* **[gte](#gte)** ([code](lib/comparison.js#L206) | [tests](test/comparison.js#L245))
+* **[has](#has)** ([code](lib/comparison.js#L226) | [tests](test/comparison.js#L260))
+* **[isFalsey](#isFalsey)** ([code](lib/comparison.js#L268) | [no tests])
+* **[isTruthy](#isTruthy)** ([code](lib/comparison.js#L283) | [no tests])
+* **[ifEven](#ifEven)** ([code](lib/comparison.js#L304) | [tests](test/comparison.js#L344))
+* **[ifNth](#ifNth)** ([code](lib/comparison.js#L321) | [tests](test/comparison.js#L356))
+* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L344) | [tests](test/comparison.js#L379))
+* **[is](#is)** ([code](lib/comparison.js#L268) | [tests](test/comparison.js#L391))
+* **[isnt](#isnt)** ([code](lib/comparison.js#L383) | [tests](test/comparison.js#L408))
+* **[lt](#lt)** ([code](lib/comparison.js#L405) | [tests](test/comparison.js#L425))
+* **[lte](#lte)** ([code](lib/comparison.js#L429) | [tests](test/comparison.js#L452))
+* **[neither](#neither)** ([code](lib/comparison.js#L450) | [tests](test/comparison.js#L487))
+* **[not](#not)** ([code](lib/comparison.js#L464) | [no tests])
+* **[or](#or)** ([code](lib/comparison.js#L486) | [tests](test/comparison.js#L499))
+* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L512) | [tests](test/comparison.js#L532))
+* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L532) | [tests](test/comparison.js#L543))
+* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L552) | [tests](test/comparison.js#L554))
+* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L572) | [tests](test/comparison.js#L565))
+* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L592) | [tests](test/comparison.js#L580))
 
 ### [date helpers](#date)
 
@@ -1120,7 +1120,7 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isFalsey}}](lib/comparison.js#L269)
+### [{{isFalsey}}](lib/comparison.js#L268)
 
 Returns true if the given `value` is falsey. Uses the [falsey](https://github.com/jonschlinkert/falsey)
 library for comparisons. Please see that library for more information
@@ -1132,7 +1132,7 @@ or to report bugs with this helper.
 * `options` **{Options}**
 * `returns` **{Boolean}**
 
-### [{{isTruthy}}](lib/comparison.js#L284)
+### [{{isTruthy}}](lib/comparison.js#L283)
 
 Returns true if the given `value` is truthy. Uses the [falsey](https://github.com/jonschlinkert/falsey)
 library for comparisons. Please see that library for more information
@@ -1144,7 +1144,7 @@ or to report bugs with this helper.
 * `options` **{Options}**
 * `returns` **{Boolean}**
 
-### [{{ifEven}}](lib/comparison.js#L305)
+### [{{ifEven}}](lib/comparison.js#L304)
 
 Return true if the given value is an even number.
 
@@ -1164,7 +1164,7 @@ Return true if the given value is an even number.
 {{/ifEven}}
 ```
 
-### [{{ifNth}}](lib/comparison.js#L322)
+### [{{ifNth}}](lib/comparison.js#L321)
 
 Conditionally renders a block if the remainder is zero when
 `a` operand is divided by `b`. If an inverse block is specified
@@ -1177,7 +1177,7 @@ it will be rendered when the remainder is **not zero**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{ifOdd}}](lib/comparison.js#L345)
+### [{{ifOdd}}](lib/comparison.js#L344)
 
 Block helper that renders a block if `value` is **an odd number**. If an inverse block is specified it will be rendered when falsy.
 
@@ -1197,7 +1197,7 @@ Block helper that renders a block if `value` is **an odd number**. If an inverse
 {{/ifOdd}}
 ```
 
-### [{{is}}](lib/comparison.js#L362)
+### [{{is}}](lib/comparison.js#L361)
 
 Block helper that renders a block if `a` is **equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1210,7 +1210,7 @@ Similar to [eq](#eq) but does not do strict equality.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isnt}}](lib/comparison.js#L384)
+### [{{isnt}}](lib/comparison.js#L383)
 
 Block helper that renders a block if `a` is **not equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1224,7 +1224,7 @@ comparisons.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{lt}}](lib/comparison.js#L406)
+### [{{lt}}](lib/comparison.js#L405)
 
 Block helper that renders a block if `a` is **less than** `b`.
 
@@ -1238,7 +1238,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{lte}}](lib/comparison.js#L430)
+### [{{lte}}](lib/comparison.js#L429)
 
 Block helper that renders a block if `a` is **less than or equal to** `b`.
 
@@ -1253,7 +1253,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{neither}}](lib/comparison.js#L451)
+### [{{neither}}](lib/comparison.js#L450)
 
 Block helper that renders a block if **neither of** the given values
 are truthy. If an inverse block is specified it will be rendered
@@ -1266,7 +1266,7 @@ when falsy.
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{not}}](lib/comparison.js#L465)
+### [{{not}}](lib/comparison.js#L464)
 
 Returns true if `val` is falsey. Works as a block or inline helper.
 
@@ -1276,7 +1276,7 @@ Returns true if `val` is falsey. Works as a block or inline helper.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{or}}](lib/comparison.js#L487)
+### [{{or}}](lib/comparison.js#L486)
 
 Block helper that renders a block if **any of** the given values is truthy. If an inverse block is specified it will be rendered when falsy.
 
@@ -1294,7 +1294,7 @@ Block helper that renders a block if **any of** the given values is truthy. If a
 {{/or}}
 ```
 
-### [{{unlessEq}}](lib/comparison.js#L513)
+### [{{unlessEq}}](lib/comparison.js#L512)
 
 Block helper that always renders the inverse block **unless `a` is
 is equal to `b`**.
@@ -1306,7 +1306,7 @@ is equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessGt}}](lib/comparison.js#L533)
+### [{{unlessGt}}](lib/comparison.js#L532)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than `b`**.
@@ -1318,7 +1318,7 @@ is greater than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessLt}}](lib/comparison.js#L553)
+### [{{unlessLt}}](lib/comparison.js#L552)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than `b`**.
@@ -1330,7 +1330,7 @@ is less than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessGteq}}](lib/comparison.js#L573)
+### [{{unlessGteq}}](lib/comparison.js#L572)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than or equal to `b`**.
@@ -1342,7 +1342,7 @@ is greater than or equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessLteq}}](lib/comparison.js#L593)
+### [{{unlessLteq}}](lib/comparison.js#L592)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than or equal to `b`**.
@@ -3304,4 +3304,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on July 05, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on July 10, 2017._
