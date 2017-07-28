@@ -1,7 +1,7 @@
 {
   "name": "handlebars-helpers",
   "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "homepage": "https://github.com/helpers/handlebars-helpers",
   "authors": [
     "Brian Woodward (https://github.com/doowb)",
@@ -28,6 +28,7 @@
     "array-sort": "^0.1.2",
     "create-frame": "^1.0.0",
     "define-property": "^1.0.0",
+    "falsey": "^0.3.0",
     "for-in": "^1.0.2",
     "for-own": "^1.0.0",
     "get-object": "^0.2.0",
@@ -132,6 +133,7 @@
     "Dan Gorby (https://plus.google.com/+GreenRaccoon23)",
     "Dane Petersen (https://thegreatsunra.com)",
     "Daniel Wabyick (https://github.com/dwabyick)",
+    "Dennis Borisevich (https://github.com/DenSpirit)",
     "Foundy (http://foundy.io)",
     "GONZO (https://github.com/why2pac)",
     "GracefulLight (https://brendaniel.github.io)",
@@ -140,6 +142,7 @@
     "Jarvis Badgley (http://www.chipersoft.com)",
     "Jason Bellamy (http://jasonbellamy.com)",
     "Jeffrey Froom (http://jfroom.com)",
+    "Joey Baker (https://www.byjoeybaker.com)",
     "Jon Schlinkert (http://twitter.com/jonschlinkert)",
     "Laurent Goderre (https://github.com/LaurentGoderre)",
     "Liam Moat (http://www.liammoat.com)",
