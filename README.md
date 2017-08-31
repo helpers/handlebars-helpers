@@ -260,22 +260,22 @@ Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https:/
 
 Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers))
 
-* **[abs](#abs)** ([code](lib/math.js#L16) | [no tests])
-* **[add](#add)** ([code](lib/math.js#L32) | [tests](test/math.js#L10))
-* **[avg](#avg)** ([code](lib/math.js#L55) | [no tests])
-* **[ceil](#ceil)** ([code](lib/math.js#L70) | [tests](test/math.js#L29))
-* **[divide](#divide)** ([code](lib/math.js#L85) | [tests](test/math.js#L36))
-* **[floor](#floor)** ([code](lib/math.js#L103) | [tests](test/math.js#L43))
-* **[minus](#minus)** ([code](lib/math.js#L119) | [no tests])
-* **[modulo](#modulo)** ([code](lib/math.js#L138) | [no tests])
-* **[multiply](#multiply)** ([code](lib/math.js#L158) | [tests](test/math.js#L50))
-* **[plus](#plus)** ([code](lib/math.js#L176) | [no tests])
-* **[random](#random)** ([code](lib/math.js#L195) | [tests](test/math.js#L102))
-* **[remainder](#remainder)** ([code](lib/math.js#L213) | [tests](test/math.js#L57))
-* **[round](#round)** ([code](lib/math.js#L225) | [tests](test/math.js#L69))
-* **[subtract](#subtract)** ([code](lib/math.js#L242) | [tests](test/math.js#L76))
-* **[sum](#sum)** ([code](lib/math.js#L264) | [tests](test/math.js#L83))
-* **[times](#times)** ([code](lib/math.js#L287) | [no tests])
+* **[abs](#abs)** ([code](lib/math.js#L15) | [no tests])
+* **[add](#add)** ([code](lib/math.js#L31) | [tests](test/math.js#L10))
+* **[avg](#avg)** ([code](lib/math.js#L54) | [no tests])
+* **[ceil](#ceil)** ([code](lib/math.js#L69) | [tests](test/math.js#L29))
+* **[divide](#divide)** ([code](lib/math.js#L84) | [tests](test/math.js#L36))
+* **[floor](#floor)** ([code](lib/math.js#L102) | [tests](test/math.js#L43))
+* **[minus](#minus)** ([code](lib/math.js#L118) | [no tests])
+* **[modulo](#modulo)** ([code](lib/math.js#L137) | [no tests])
+* **[multiply](#multiply)** ([code](lib/math.js#L157) | [tests](test/math.js#L50))
+* **[plus](#plus)** ([code](lib/math.js#L175) | [no tests])
+* **[random](#random)** ([code](lib/math.js#L194) | [tests](test/math.js#L102))
+* **[remainder](#remainder)** ([code](lib/math.js#L212) | [tests](test/math.js#L57))
+* **[round](#round)** ([code](lib/math.js#L224) | [tests](test/math.js#L69))
+* **[subtract](#subtract)** ([code](lib/math.js#L241) | [tests](test/math.js#L76))
+* **[sum](#sum)** ([code](lib/math.js#L263) | [tests](test/math.js#L83))
+* **[times](#times)** ([code](lib/math.js#L286) | [no tests])
 
 ### [misc helpers](#misc)
 
@@ -1648,9 +1648,18 @@ Returns true if a filepath contains the given pattern. Options may be passed on 
 
 ## math
 
-### [{{abs}}](lib/math.js#L16)
+### [{{abs}}](lib/math.js#L15)
 
-Return the product of `a` plus `b`.
+Return the magnitude of `a`.
+
+**Params**
+
+* `a` **{Number}**
+* `returns` **{Number}**
+
+### [{{add}}](lib/math.js#L31)
+
+Return the sum of `a` plus `b`.
 
 **Params**
 
@@ -1658,17 +1667,7 @@ Return the product of `a` plus `b`.
 * `b` **{Number}**
 * `returns` **{Number}**
 
-### [{{add}}](lib/math.js#L32)
-
-Return the product of `a` plus `b`.
-
-**Params**
-
-* `a` **{Number}**
-* `b` **{Number}**
-* `returns` **{Number}**
-
-### [{{avg}}](lib/math.js#L55)
+### [{{avg}}](lib/math.js#L54)
 
 Returns the average of all numbers in the given array.
 
@@ -1684,7 +1683,7 @@ Returns the average of all numbers in the given array.
 <!-- results in: '3' -->
 ```
 
-### [{{ceil}}](lib/math.js#L70)
+### [{{ceil}}](lib/math.js#L69)
 
 Get the `Math.ceil()` of the given value.
 
@@ -1693,7 +1692,7 @@ Get the `Math.ceil()` of the given value.
 * `value` **{Number}**
 * `returns` **{Number}**
 
-### [{{divide}}](lib/math.js#L85)
+### [{{divide}}](lib/math.js#L84)
 
 Divide `a` by `b`
 
@@ -1702,7 +1701,7 @@ Divide `a` by `b`
 * `a` **{Number}**: numerator
 * `b` **{Number}**: denominator
 
-### [{{floor}}](lib/math.js#L103)
+### [{{floor}}](lib/math.js#L102)
 
 Get the `Math.floor()` of the given value.
 
@@ -1711,16 +1710,16 @@ Get the `Math.floor()` of the given value.
 * `value` **{Number}**
 * `returns` **{Number}**
 
-### [{{minus}}](lib/math.js#L119)
+### [{{minus}}](lib/math.js#L118)
 
-Return the product of `a` minus `b`.
+Return the difference of `a` minus `b`.
 
 **Params**
 
 * `a` **{Number}**
 * `b` **{Number}**
 
-### [{{modulo}}](lib/math.js#L138)
+### [{{modulo}}](lib/math.js#L137)
 
 Get the remainder of a division operation.
 
@@ -1730,9 +1729,9 @@ Get the remainder of a division operation.
 * `b` **{Number}**
 * `returns` **{Number}**
 
-### [{{multiply}}](lib/math.js#L158)
+### [{{multiply}}](lib/math.js#L157)
 
-Multiply number `a` by number `b`.
+Return the product of `a` times `b`.
 
 **Params**
 
@@ -1740,7 +1739,7 @@ Multiply number `a` by number `b`.
 * `b` **{Number}**: multiplier
 * `returns` **{Number}**
 
-### [{{plus}}](lib/math.js#L176)
+### [{{plus}}](lib/math.js#L175)
 
 Add `a` by `b`.
 
@@ -1749,7 +1748,7 @@ Add `a` by `b`.
 * `a` **{Number}**: factor
 * `b` **{Number}**: multiplier
 
-### [{{random}}](lib/math.js#L195)
+### [{{random}}](lib/math.js#L194)
 
 Generate a random number between two values
 
@@ -1759,7 +1758,7 @@ Generate a random number between two values
 * `max` **{Number}**
 * `returns` **{String}**
 
-### [{{remainder}}](lib/math.js#L213)
+### [{{remainder}}](lib/math.js#L212)
 
 Get the remainder when `a` is divided by `b`.
 
@@ -1768,7 +1767,7 @@ Get the remainder when `a` is divided by `b`.
 * `a` **{Number}**: a
 * `b` **{Number}**: b
 
-### [{{round}}](lib/math.js#L225)
+### [{{round}}](lib/math.js#L224)
 
 Round the given number.
 
@@ -1777,7 +1776,7 @@ Round the given number.
 * `number` **{Number}**
 * `returns` **{Number}**
 
-### [{{subtract}}](lib/math.js#L242)
+### [{{subtract}}](lib/math.js#L241)
 
 Return the product of `a` minus `b`.
 
@@ -1787,7 +1786,7 @@ Return the product of `a` minus `b`.
 * `b` **{Number}**
 * `returns` **{Number}**
 
-### [{{sum}}](lib/math.js#L264)
+### [{{sum}}](lib/math.js#L263)
 
 Returns the sum of all numbers in the given array.
 
@@ -1803,7 +1802,7 @@ Returns the sum of all numbers in the given array.
 <!-- results in: '15' -->
 ```
 
-### [{{times}}](lib/math.js#L287)
+### [{{times}}](lib/math.js#L286)
 
 Multiply number `a` by number `b`.
 
@@ -3267,7 +3266,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 | **Commits** | **Contributor** |  
 | --- | --- |  
 | 527 | [jonschlinkert](https://github.com/jonschlinkert) |  
-| 227 | [doowb](https://github.com/doowb) |  
+| 230 | [doowb](https://github.com/doowb) |  
 | 12  | [spacedawwwg](https://github.com/spacedawwwg) |  
 | 5   | [hariadi](https://github.com/hariadi) |  
 | 4   | [ChiperSoft](https://github.com/ChiperSoft) |  
@@ -3288,6 +3287,7 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 | 2   | [Arkkimaagi](https://github.com/Arkkimaagi) |  
 | 2   | [cfjedimaster](https://github.com/cfjedimaster) |  
 | 2   | [backflip](https://github.com/backflip) |  
+| 2   | [kevindavus](https://github.com/kevindavus) |  
 | 2   | [nlfurniss](https://github.com/nlfurniss) |  
 | 1   | [alesk](https://github.com/alesk) |  
 | 1   | [alisd23](https://github.com/alisd23) |  
@@ -3353,4 +3353,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on August 21, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on August 31, 2017._
