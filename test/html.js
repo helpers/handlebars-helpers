@@ -39,7 +39,7 @@ describe('html', function() {
     });
 
     it('should not use options.assets when passing in an absolute url', function() {
-      var actual = hbs.compile('{{{css "https://abc.com/bar.css"}}}')({options: {assets: "foo"}});
+      var actual = hbs.compile('{{{css "https://abc.com/bar.css"}}}')({options: {assets: 'foo'}});
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="https://abc.com/bar.css">');
     });
 
