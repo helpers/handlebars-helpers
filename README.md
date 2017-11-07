@@ -138,6 +138,7 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 * **[withGroup](#withGroup)** ([code](lib/array.js#L692) | [tests](test/array.js#L418))
 * **[withLast](#withLast)** ([code](lib/array.js#L727) | [tests](test/array.js#L428))
 * **[withSort](#withSort)** ([code](lib/array.js#L766) | [tests](test/array.js#L442))
+* **[unique](#unique)** ([code](lib/array.js#L801) | [tests](test/array.js#L483))
 
 ### [code helpers](#code)
 
@@ -923,6 +924,25 @@ Block helper that sorts a collection and exposes the sorted collection as contex
 <!-- array: ['b', 'a', 'c'] -->
 {{#withSort array}}{{this}}{{/withSort}}
 <!-- results in: 'abc' -->
+```
+
+## code
+
+### [{{unique}}](lib/array.js#L801)
+
+Block helper that return an array with all duplicate values removed. Best used along with a #each helper
+
+**Params**
+
+* `array` **{Array}**
+* `returns` **{Array}**: Array with No duplicate values
+
+**Example**
+
+```handlebars
+<!-- array: ['a', 'a', 'c', 'b', 'e', 'e'] -->
+{{#each (unique array)}}{{this}}{{/each}}
+<!-- results in: 'acbe' -->
 ```
 
 ## code
