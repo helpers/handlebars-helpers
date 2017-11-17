@@ -15,7 +15,7 @@ var utils = module.exports;
  * @return {String}
  */
 
-utils.read = function (fp) {
+utils.read = function(fp) {
   return fs.readFileSync(fp, 'utf8');
 };
 
@@ -28,7 +28,7 @@ utils.read = function (fp) {
  * @return {String}
  */
 
-utils.fixture = function (type) {
+utils.fixture = function(type) {
   return function(fp) {
     return utils.read('test/fixtures/' + type + '/' + fp);
   };
@@ -43,7 +43,7 @@ utils.fixture = function (type) {
  * @return {String}
  */
 
-utils.expected = function (type) {
+utils.expected = function(type) {
   return function(fp) {
     return utils.read('test/expected/' + type + '/' + fp);
   };
