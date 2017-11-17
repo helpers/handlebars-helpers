@@ -82,7 +82,7 @@ var math = helpers.math({
 
 ## Categories
 
-Currently **188 helpers** in **20 categories**:
+Currently **189 helpers** in **20 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -138,52 +138,52 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 * **[withGroup](#withGroup)** ([code](lib/array.js#L692) | [tests](test/array.js#L418))
 * **[withLast](#withLast)** ([code](lib/array.js#L727) | [tests](test/array.js#L428))
 * **[withSort](#withSort)** ([code](lib/array.js#L766) | [tests](test/array.js#L442))
-* **[unique](#unique)** ([code](lib/array.js#L801) | [tests](test/array.js#L483))
+* **[unique](#unique)** ([code](lib/array.js#L816) | [tests](test/array.js#L483))
 
 ### [code helpers](#code)
 
 Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers))
 
-* **[embed](#embed)** ([code](lib/code.js#L24) | [tests](test/code.js#L10))
-* **[gist](#gist)** ([code](lib/code.js#L46) | [tests](test/code.js#L62))
-* **[jsfiddle](#jsfiddle)** ([code](lib/code.js#L61) | [tests](test/code.js#L69))
+* **[embed](#embed)** ([code](lib/code.js#L23) | [tests](test/code.js#L10))
+* **[gist](#gist)** ([code](lib/code.js#L45) | [tests](test/code.js#L62))
+* **[jsfiddle](#jsfiddle)** ([code](lib/code.js#L60) | [tests](test/code.js#L69))
 
 ### [collection helpers](#collection)
 
 Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers))
 
-* **[isEmpty](#isEmpty)** ([code](lib/collection.js#L22) | [tests](test/collection.js#L14))
-* **[iterate](#iterate)** ([code](lib/collection.js#L49) | [tests](test/collection.js#L41))
+* **[isEmpty](#isEmpty)** ([code](lib/collection.js#L31) | [tests](test/collection.js#L14))
+* **[iterate](#iterate)** ([code](lib/collection.js#L59) | [tests](test/collection.js#L68))
 
 ### [comparison helpers](#comparison)
 
 Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers))
 
-* **[and](#and)** ([code](lib/comparison.js#L21) | [tests](test/comparison.js#L10))
-* **[compare](#compare)** ([code](lib/comparison.js#L51) | [tests](test/comparison.js#L41))
-* **[contains](#contains)** ([code](lib/comparison.js#L118) | [tests](test/comparison.js#L167))
-* **[default](#default)** ([code](lib/comparison.js#L137) | [tests](test/comparison.js#L204))
-* **[eq](#eq)** ([code](lib/comparison.js#L159) | [tests](test/comparison.js#L351))
-* **[gt](#gt)** ([code](lib/comparison.js#L182) | [tests](test/comparison.js#L214))
-* **[gte](#gte)** ([code](lib/comparison.js#L206) | [tests](test/comparison.js#L245))
-* **[has](#has)** ([code](lib/comparison.js#L226) | [tests](test/comparison.js#L260))
-* **[isFalsey](#isFalsey)** ([code](lib/comparison.js#L268) | [tests](test/comparison.js#L327))
-* **[isTruthy](#isTruthy)** ([code](lib/comparison.js#L283) | [tests](test/comparison.js#L339))
-* **[ifEven](#ifEven)** ([code](lib/comparison.js#L304) | [tests](test/comparison.js#L368))
-* **[ifNth](#ifNth)** ([code](lib/comparison.js#L321) | [tests](test/comparison.js#L380))
-* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L344) | [tests](test/comparison.js#L403))
-* **[is](#is)** ([code](lib/comparison.js#L268) | [tests](test/comparison.js#L327))
-* **[isnt](#isnt)** ([code](lib/comparison.js#L383) | [tests](test/comparison.js#L432))
-* **[lt](#lt)** ([code](lib/comparison.js#L405) | [tests](test/comparison.js#L449))
-* **[lte](#lte)** ([code](lib/comparison.js#L429) | [tests](test/comparison.js#L476))
-* **[neither](#neither)** ([code](lib/comparison.js#L450) | [tests](test/comparison.js#L511))
-* **[not](#not)** ([code](lib/comparison.js#L464) | [no tests])
-* **[or](#or)** ([code](lib/comparison.js#L486) | [tests](test/comparison.js#L523))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L512) | [tests](test/comparison.js#L556))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L532) | [tests](test/comparison.js#L567))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L552) | [tests](test/comparison.js#L578))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L572) | [tests](test/comparison.js#L589))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L592) | [tests](test/comparison.js#L604))
+* **[and](#and)** ([code](lib/comparison.js#L27) | [tests](test/comparison.js#L10))
+* **[compare](#compare)** ([code](lib/comparison.js#L57) | [tests](test/comparison.js#L41))
+* **[contains](#contains)** ([code](lib/comparison.js#L124) | [tests](test/comparison.js#L167))
+* **[default](#default)** ([code](lib/comparison.js#L143) | [tests](test/comparison.js#L204))
+* **[eq](#eq)** ([code](lib/comparison.js#L165) | [tests](test/comparison.js#L351))
+* **[gt](#gt)** ([code](lib/comparison.js#L188) | [tests](test/comparison.js#L214))
+* **[gte](#gte)** ([code](lib/comparison.js#L212) | [tests](test/comparison.js#L245))
+* **[has](#has)** ([code](lib/comparison.js#L232) | [tests](test/comparison.js#L260))
+* **[isFalsey](#isFalsey)** ([code](lib/comparison.js#L274) | [tests](test/comparison.js#L327))
+* **[isTruthy](#isTruthy)** ([code](lib/comparison.js#L289) | [tests](test/comparison.js#L339))
+* **[ifEven](#ifEven)** ([code](lib/comparison.js#L310) | [tests](test/comparison.js#L368))
+* **[ifNth](#ifNth)** ([code](lib/comparison.js#L327) | [tests](test/comparison.js#L380))
+* **[ifOdd](#ifOdd)** ([code](lib/comparison.js#L350) | [tests](test/comparison.js#L403))
+* **[is](#is)** ([code](lib/comparison.js#L274) | [tests](test/comparison.js#L327))
+* **[isnt](#isnt)** ([code](lib/comparison.js#L389) | [tests](test/comparison.js#L432))
+* **[lt](#lt)** ([code](lib/comparison.js#L411) | [tests](test/comparison.js#L449))
+* **[lte](#lte)** ([code](lib/comparison.js#L435) | [tests](test/comparison.js#L476))
+* **[neither](#neither)** ([code](lib/comparison.js#L456) | [tests](test/comparison.js#L511))
+* **[not](#not)** ([code](lib/comparison.js#L470) | [no tests])
+* **[or](#or)** ([code](lib/comparison.js#L492) | [tests](test/comparison.js#L523))
+* **[unlessEq](#unlessEq)** ([code](lib/comparison.js#L518) | [tests](test/comparison.js#L556))
+* **[unlessGt](#unlessGt)** ([code](lib/comparison.js#L538) | [tests](test/comparison.js#L567))
+* **[unlessLt](#unlessLt)** ([code](lib/comparison.js#L558) | [tests](test/comparison.js#L578))
+* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L578) | [tests](test/comparison.js#L589))
+* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L598) | [tests](test/comparison.js#L604))
 
 ### [date helpers](#date)
 
@@ -207,11 +207,11 @@ Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://g
 
 * **[attr](#attr)** ([code](lib/html.js#L23) | [tests](test/html.js#L13))
 * **[css](#css)** ([code](lib/html.js#L45) | [tests](test/html.js#L21))
-* **[js](#js)** ([code](lib/html.js#L85) | [tests](test/html.js#L64))
-* **[sanitize](#sanitize)** ([code](lib/html.js#L117) | [tests](test/html.js#L93))
-* **[ul](#ul)** ([code](lib/html.js#L131) | [tests](test/html.js#L103))
-* **[ol](#ol)** ([code](lib/html.js#L150) | [tests](test/html.js#L110))
-* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L172) | [tests](test/html.js#L117))
+* **[js](#js)** ([code](lib/html.js#L89) | [tests](test/html.js#L69))
+* **[sanitize](#sanitize)** ([code](lib/html.js#L121) | [tests](test/html.js#L98))
+* **[ul](#ul)** ([code](lib/html.js#L135) | [tests](test/html.js#L108))
+* **[ol](#ol)** ([code](lib/html.js#L154) | [tests](test/html.js#L115))
+* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js#L176) | [tests](test/html.js#L122))
 
 ### [i18n helpers](#i18n)
 
@@ -431,7 +431,7 @@ Cast the given `value` to an array.
 
 ```handlebars
 {{arrayify "foo"}}
-<!-- results in: '["foo"]' -->
+<!-- results in: [ "foo" ] -->
 ```
 
 ### [{{before}}](lib/array.js#L58)
@@ -582,7 +582,7 @@ Returns true if `value` is an es5 array.
 
 ### [{{itemAt}}](lib/array.js#L263)
 
-Block helper that returns the item with specified index.
+Returns the item from `array` at index `idx`.
 
 **Params**
 
@@ -732,10 +732,10 @@ Reverse the elements in an array, or the characters in a string.
 **Example**
 
 ```handlebars
-<!-- value = 'abcd' -->
+<!-- value: 'abcd' -->
 {{reverse value}}
 <!-- results in: 'dcba' -->
-<!-- value = ['a', 'b', 'c', 'd'] -->
+<!-- value: ['a', 'b', 'c', 'd'] -->
 {{reverse value}}
 <!-- results in: ['d', 'c', 'b', 'a'] -->
 ```
@@ -926,28 +926,27 @@ Block helper that sorts a collection and exposes the sorted collection as contex
 <!-- results in: 'abc' -->
 ```
 
-## code
+### [{{unique}}](lib/array.js#L816)
 
-### [{{unique}}](lib/array.js#L801)
-
-Block helper that return an array with all duplicate values removed. Best used along with a #each helper
+Block helper that return an array with all duplicate values removed. Best used along with a [each](#each) helper.
 
 **Params**
 
 * `array` **{Array}**
-* `returns` **{Array}**: Array with No duplicate values
+* `options` **{Object}**
+* `returns` **{Array}**
 
 **Example**
 
 ```handlebars
 <!-- array: ['a', 'a', 'c', 'b', 'e', 'e'] -->
-{{#each (unique array)}}{{this}}{{/each}}
+{{#each (unique array)}}{{.}}{{/each}}
 <!-- results in: 'acbe' -->
 ```
 
 ## code
 
-### [{{embed}}](lib/code.js#L24)
+### [{{embed}}](lib/code.js#L23)
 
 Embed code from an external file as preformatted text.
 
@@ -961,12 +960,11 @@ Embed code from an external file as preformatted text.
 
 ```handlebars
 {{embed 'path/to/file.js'}}
-
-<!-- specify the language to use -->
+<!-- optionally specify the language to use -->
 {{embed 'path/to/file.hbs' 'html')}}
 ```
 
-### [{{gist}}](lib/code.js#L46)
+### [{{gist}}](lib/code.js#L45)
 
 Embed a GitHub Gist using only the id of the Gist
 
@@ -981,7 +979,7 @@ Embed a GitHub Gist using only the id of the Gist
 {{gist "12345"}}
 ```
 
-### [{{jsfiddle}}](lib/code.js#L61)
+### [{{jsfiddle}}](lib/code.js#L60)
 
 Generate the HTML for a jsFiddle link with the given `params`
 
@@ -998,11 +996,9 @@ Generate the HTML for a jsFiddle link with the given `params`
 
 ## collection
 
-### [{{isEmpty}}](lib/collection.js#L22)
+### [{{isEmpty}}](lib/collection.js#L31)
 
-Block helper that returns a block if the given collection is
-empty. If the collection is not empty the inverse block is returned
-(if supplied).
+Inline, subexpression, or block helper that returns true (or the block) if the given collection is empty, or false (or the inverse block, if supplied) if the colleciton is not empty.
 
 **Params**
 
@@ -1010,11 +1006,24 @@ empty. If the collection is not empty the inverse block is returned
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{iterate}}](lib/collection.js#L49)
+**Example**
 
-Iterate over an array or object. If `collection` is an array,
-`.forEach` is called, else if `collection` is an object, `.forOwn`
-is called, otherwise the inverse block is returned.
+```handlebars
+<!-- array: [] -->
+{{#isEmpty array}}AAA{{else}}BBB{{/isEmpty}}
+<!-- results in: 'AAA' -->
+
+<!-- array: [] -->
+{{isEmpty array}}
+<!-- results in: true -->
+```
+
+### [{{iterate}}](lib/collection.js#L59)
+
+Block helper that iterates over an array or object. If
+an array is given, `.forEach` is called, or if an object
+is given, `.forOwn` is called, otherwise the inverse block
+is returned.
 
 **Params**
 
@@ -1024,11 +1033,9 @@ is called, otherwise the inverse block is returned.
 
 ## comparison
 
-### [{{and}}](lib/comparison.js#L21)
+### [{{and}}](lib/comparison.js#L27)
 
-Block helper that renders the block if **both** of the given values
-are truthy. If an inverse block is specified it will be rendered
-when falsy.
+Helper that renders the block if **both** of the given values are truthy. If an inverse block is specified it will be rendered when falsy. Works as a block helper, inline helper or subexpression.
 
 **Params**
 
@@ -1037,7 +1044,15 @@ when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{compare}}](lib/comparison.js#L51)
+**Example**
+
+```handlebars
+<!-- {great: true, magnificent: true} -->
+{{#and great magnificent}}A{{else}}B{{/and}}
+<!-- results in: 'A' -->
+```
+
+### [{{compare}}](lib/comparison.js#L57)
 
 Render a block when a comparison of the first and third
 arguments returns true. The second argument is
@@ -1052,7 +1067,7 @@ optionally specify an inverse block to render when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or if specified the inverse block is rendered if falsey.
 
-### [{{contains}}](lib/comparison.js#L118)
+### [{{contains}}](lib/comparison.js#L124)
 
 Block helper that renders the block if `collection` has the given `value`, using strict equality (`===`) for comparison, otherwise the inverse block is rendered (if specified). If a `startIndex` is specified and is negative, it is used as the offset from the end of the collection.
 
@@ -1074,7 +1089,7 @@ Block helper that renders the block if `collection` has the given `value`, using
 {{/contains}}
 ```
 
-### [{{default}}](lib/comparison.js#L137)
+### [{{default}}](lib/comparison.js#L143)
 
 Returns the first value that is not undefined, otherwise the "default" value is returned.
 
@@ -1084,7 +1099,7 @@ Returns the first value that is not undefined, otherwise the "default" value is 
 * `defaultValue` **{any}**
 * `returns` **{String}**
 
-### [{{eq}}](lib/comparison.js#L159)
+### [{{eq}}](lib/comparison.js#L165)
 
 Block helper that renders a block if `a` is **equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1098,7 +1113,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{gt}}](lib/comparison.js#L182)
+### [{{gt}}](lib/comparison.js#L188)
 
 Block helper that renders a block if `a` is **greater than** `b`.
 
@@ -1113,7 +1128,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{gte}}](lib/comparison.js#L206)
+### [{{gte}}](lib/comparison.js#L212)
 
 Block helper that renders a block if `a` is **greater than or equal to** `b`.
 
@@ -1128,7 +1143,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{has}}](lib/comparison.js#L226)
+### [{{has}}](lib/comparison.js#L232)
 
 Block helper that renders a block if `value` has `pattern`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1140,7 +1155,7 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isFalsey}}](lib/comparison.js#L268)
+### [{{isFalsey}}](lib/comparison.js#L274)
 
 Returns true if the given `value` is falsey. Uses the [falsey](https://github.com/jonschlinkert/falsey)
 library for comparisons. Please see that library for more information
@@ -1152,7 +1167,7 @@ or to report bugs with this helper.
 * `options` **{Options}**
 * `returns` **{Boolean}**
 
-### [{{isTruthy}}](lib/comparison.js#L283)
+### [{{isTruthy}}](lib/comparison.js#L289)
 
 Returns true if the given `value` is truthy. Uses the [falsey](https://github.com/jonschlinkert/falsey)
 library for comparisons. Please see that library for more information
@@ -1164,7 +1179,7 @@ or to report bugs with this helper.
 * `options` **{Options}**
 * `returns` **{Boolean}**
 
-### [{{ifEven}}](lib/comparison.js#L304)
+### [{{ifEven}}](lib/comparison.js#L310)
 
 Return true if the given value is an even number.
 
@@ -1184,7 +1199,7 @@ Return true if the given value is an even number.
 {{/ifEven}}
 ```
 
-### [{{ifNth}}](lib/comparison.js#L321)
+### [{{ifNth}}](lib/comparison.js#L327)
 
 Conditionally renders a block if the remainder is zero when
 `a` operand is divided by `b`. If an inverse block is specified
@@ -1197,7 +1212,7 @@ it will be rendered when the remainder is **not zero**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{ifOdd}}](lib/comparison.js#L344)
+### [{{ifOdd}}](lib/comparison.js#L350)
 
 Block helper that renders a block if `value` is **an odd number**. If an inverse block is specified it will be rendered when falsy.
 
@@ -1217,7 +1232,7 @@ Block helper that renders a block if `value` is **an odd number**. If an inverse
 {{/ifOdd}}
 ```
 
-### [{{is}}](lib/comparison.js#L361)
+### [{{is}}](lib/comparison.js#L367)
 
 Block helper that renders a block if `a` is **equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1230,7 +1245,7 @@ Similar to [eq](#eq) but does not do strict equality.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isnt}}](lib/comparison.js#L383)
+### [{{isnt}}](lib/comparison.js#L389)
 
 Block helper that renders a block if `a` is **not equal to** `b`.
 If an inverse block is specified it will be rendered when falsy.
@@ -1244,7 +1259,7 @@ comparisons.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{lt}}](lib/comparison.js#L405)
+### [{{lt}}](lib/comparison.js#L411)
 
 Block helper that renders a block if `a` is **less than** `b`.
 
@@ -1258,7 +1273,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{lte}}](lib/comparison.js#L429)
+### [{{lte}}](lib/comparison.js#L435)
 
 Block helper that renders a block if `a` is **less than or equal to** `b`.
 
@@ -1273,7 +1288,7 @@ second value.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{neither}}](lib/comparison.js#L450)
+### [{{neither}}](lib/comparison.js#L456)
 
 Block helper that renders a block if **neither of** the given values
 are truthy. If an inverse block is specified it will be rendered
@@ -1286,7 +1301,7 @@ when falsy.
 * `options` **{}**: Handlebars options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{not}}](lib/comparison.js#L464)
+### [{{not}}](lib/comparison.js#L470)
 
 Returns true if `val` is falsey. Works as a block or inline helper.
 
@@ -1296,7 +1311,7 @@ Returns true if `val` is falsey. Works as a block or inline helper.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{or}}](lib/comparison.js#L486)
+### [{{or}}](lib/comparison.js#L492)
 
 Block helper that renders a block if **any of** the given values is truthy. If an inverse block is specified it will be rendered when falsy.
 
@@ -1314,7 +1329,7 @@ Block helper that renders a block if **any of** the given values is truthy. If a
 {{/or}}
 ```
 
-### [{{unlessEq}}](lib/comparison.js#L512)
+### [{{unlessEq}}](lib/comparison.js#L518)
 
 Block helper that always renders the inverse block **unless `a` is
 is equal to `b`**.
@@ -1326,7 +1341,7 @@ is equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessGt}}](lib/comparison.js#L532)
+### [{{unlessGt}}](lib/comparison.js#L538)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than `b`**.
@@ -1338,7 +1353,7 @@ is greater than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Inverse block by default, or block if falsey.
 
-### [{{unlessLt}}](lib/comparison.js#L552)
+### [{{unlessLt}}](lib/comparison.js#L558)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than `b`**.
@@ -1350,7 +1365,7 @@ is less than `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessGteq}}](lib/comparison.js#L572)
+### [{{unlessGteq}}](lib/comparison.js#L578)
 
 Block helper that always renders the inverse block **unless `a` is
 is greater than or equal to `b`**.
@@ -1362,7 +1377,7 @@ is greater than or equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-### [{{unlessLteq}}](lib/comparison.js#L592)
+### [{{unlessLteq}}](lib/comparison.js#L598)
 
 Block helper that always renders the inverse block **unless `a` is
 is less than or equal to `b`**.
@@ -1458,7 +1473,7 @@ Add an array of `<link>` tags. Automatically resolves relative paths to `options
 <!-- <link type="text/css" rel="stylesheet" href="bar.css"> -->
 ```
 
-### [{{js}}](lib/html.js#L85)
+### [{{js}}](lib/html.js#L89)
 
 Generate one or more `<script></script>` tags with paths/urls to javascript or coffeescript files.
 
@@ -1473,7 +1488,7 @@ Generate one or more `<script></script>` tags with paths/urls to javascript or c
 {{js scripts}}
 ```
 
-### [{{sanitize}}](lib/html.js#L117)
+### [{{sanitize}}](lib/html.js#L121)
 
 Strip HTML tags from a string, so that only the text nodes are preserved.
 
@@ -1489,7 +1504,7 @@ Strip HTML tags from a string, so that only the text nodes are preserved.
 <!-- results in: 'foo' -->
 ```
 
-### [{{ul}}](lib/html.js#L131)
+### [{{ul}}](lib/html.js#L135)
 
 Block helper for creating unordered lists (`<ul></ul>`)
 
@@ -1499,7 +1514,7 @@ Block helper for creating unordered lists (`<ul></ul>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{ol}}](lib/html.js#L150)
+### [{{ol}}](lib/html.js#L154)
 
 Block helper for creating ordered lists  (`<ol></ol>`)
 
@@ -1509,7 +1524,7 @@ Block helper for creating ordered lists  (`<ol></ol>`)
 * `options` **{Object}**
 * `returns` **{String}**
 
-### [{{thumbnailImage}}](lib/html.js#L172)
+### [{{thumbnailImage}}](lib/html.js#L176)
 
 Returns a `<figure>` with a thumbnail linked to a full picture
 
@@ -3066,6 +3081,13 @@ Generate a random number
 
 ## History
 
+## [v0.10.0](https://github.com/helpers/handlebars-helpers/compare/v0.9.0...v0.10.0) - 2017-11-17
+
+**changes**
+
+* adds `unique` to array helpers
+* updates `css` helper to ensure that path.join() is not called on an absolute URL.
+
 ## [v0.9.0](https://github.com/helpers/handlebars-helpers/compare/v0.8.4...v0.9.0) - 2017-07-03
 
 **changes**
@@ -3283,56 +3305,6 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 
 ### Contributors
 
-| **Commits** | **Contributor** |  
-| --- | --- |  
-| 527 | [jonschlinkert](https://github.com/jonschlinkert) |  
-| 230 | [doowb](https://github.com/doowb) |  
-| 12  | [spacedawwwg](https://github.com/spacedawwwg) |  
-| 5   | [hariadi](https://github.com/hariadi) |  
-| 4   | [ChiperSoft](https://github.com/ChiperSoft) |  
-| 4   | [LaurentGoderre](https://github.com/LaurentGoderre) |  
-| 4   | [stephenway](https://github.com/stephenway) |  
-| 4   | [makotot](https://github.com/makotot) |  
-| 4   | [timdouglas](https://github.com/timdouglas) |  
-| 3   | [xymbol](https://github.com/xymbol) |  
-| 3   | [GreenRaccoon23](https://github.com/GreenRaccoon23) |  
-| 3   | [Melindrea](https://github.com/Melindrea) |  
-| 3   | [robsilva](https://github.com/robsilva) |  
-| 3   | [AndersDJohnson](https://github.com/AndersDJohnson) |  
-| 2   | [huntie](https://github.com/huntie) |  
-| 2   | [acinader](https://github.com/acinader) |  
-| 2   | [DenSpirit](https://github.com/DenSpirit) |  
-| 2   | [jfroom](https://github.com/jfroom) |  
-| 2   | [sheedy](https://github.com/sheedy) |  
-| 2   | [Arkkimaagi](https://github.com/Arkkimaagi) |  
-| 2   | [cfjedimaster](https://github.com/cfjedimaster) |  
-| 2   | [backflip](https://github.com/backflip) |  
-| 2   | [kevindavus](https://github.com/kevindavus) |  
-| 2   | [nlfurniss](https://github.com/nlfurniss) |  
-| 1   | [alesk](https://github.com/alesk) |  
-| 1   | [alisd23](https://github.com/alisd23) |  
-| 1   | [dandv](https://github.com/dandv) |  
-| 1   | [thegreatsunra](https://github.com/thegreatsunra) |  
-| 1   | [dwabyick](https://github.com/dwabyick) |  
-| 1   | [foundy](https://github.com/foundy) |  
-| 1   | [why2pac](https://github.com/why2pac) |  
-| 1   | [brendaniel](https://github.com/brendaniel) |  
-| 1   | [iamstolis](https://github.com/iamstolis) |  
-| 1   | [jasonbellamy](https://github.com/jasonbellamy) |  
-| 1   | [joeybaker](https://github.com/joeybaker) |  
-| 1   | [allmarkedup](https://github.com/allmarkedup) |  
-| 1   | [eins78](https://github.com/eins78) |  
-| 1   | [efender](https://github.com/efender) |  
-| 1   | [omeshp](https://github.com/omeshp) |  
-| 1   | [pburtchaell](https://github.com/pburtchaell) |  
-| 1   | [samtiffin](https://github.com/samtiffin) |  
-| 1   | [shannonmoeller](https://github.com/shannonmoeller) |  
-| 1   | [Swapnull](https://github.com/Swapnull) |  
-| 1   | [homersimpsons](https://github.com/homersimpsons) |  
-| 1   | [liammoat](https://github.com/liammoat) |  
-| 1   | [nathanjessen](https://github.com/nathanjessen) |  
-| 1   | [supersheep](https://github.com/supersheep) |  
-
 ### Release history
 
 ### Building docs
@@ -3373,4 +3345,4 @@ Released under the [MIT License](LICENSE).
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on August 31, 2017._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on November 17, 2017._
