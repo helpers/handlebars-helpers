@@ -3,9 +3,8 @@
 var os = require('os');
 var path = require('path');
 var assert = require('assert');
-var engine = require('engine-handlebars');
-var hbs = require('handlebars').create();
 var gm = require('global-modules');
+var engine = require('engine-handlebars');
 var templates = require('templates');
 var helpers = require('../..');
 var compile;

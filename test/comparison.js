@@ -20,7 +20,7 @@ describe('comparison', function() {
       });
     });
 
-    describe('inline', function() {
+    describe('inline or subexpression', function() {
       it('should render a block if both values are truthy.', function() {
         var fn = hbs.compile('{{and great magnificent}}');
         assert.equal(fn({great: true, magnificent: true}), 'true');

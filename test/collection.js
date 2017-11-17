@@ -11,7 +11,7 @@ helpers.string({handlebars: hbs});
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
 
 describe('collection', function() {
-  describe('isEmpty', function() {
+  describe('isEmpty block helper', function() {
     it('should render the first block when an array is empty', function() {
       var fn = hbs.compile('{{#isEmpty array}}AAA{{else}}BBB{{/isEmpty}}');
       assert.equal(fn({array: []}), 'AAA');
@@ -35,6 +35,33 @@ describe('collection', function() {
     it('should render the first block when an object is empty', function() {
       var fn = hbs.compile('{{#isEmpty object}}AAA{{else}}BBB{{/isEmpty}}');
       assert.equal(fn({object: {}}), 'AAA');
+    });
+  });
+
+  describe('isEmpty inline helper', function() {
+    it('should render the first block when an array is empty', function() {
+      var fn = hbs.compile('{{isEmpty array}}');
+      assert.equal(fn({array: []}), 'true');
+    });
+
+    it('should render the first block when the value is null', function() {
+      var fn = hbs.compile('{{isEmpty}}');
+      assert.equal(fn({array: []}), 'true');
+    });
+
+    it('should render the second block when an array is not empty', function() {
+      var fn = hbs.compile('{{isEmpty array}}');
+      assert.equal(fn(context), 'false');
+    });
+
+    it('should render the second block when an object is not empty', function() {
+      var fn = hbs.compile('{{isEmpty object}}');
+      assert.equal(fn({object: {foo: 'bar'}}), 'false');
+    });
+
+    it('should render the first block when an object is empty', function() {
+      var fn = hbs.compile('{{isEmpty object}}');
+      assert.equal(fn({object: {}}), 'true');
     });
   });
 
