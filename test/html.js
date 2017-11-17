@@ -38,6 +38,11 @@ describe('html', function() {
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="abc.css">');
     });
 
+    it('should not use options.assets when passing in an absolute url', function() {
+      var actual = hbs.compile('{{{css "https://abc.com/bar.css"}}}')({options: {assets: 'foo'}});
+      assert.equal(actual, '<link type="text/css" rel="stylesheet" href="https://abc.com/bar.css">');
+    });
+
     it('should use the `href` attribute on the hash', function() {
       actual = hbs.compile('{{{css href=""}}}')();
       assert.equal(actual, '');
