@@ -7,7 +7,7 @@ var helpers = require('..');
 helpers.array({handlebars: hbs});
 helpers.string({handlebars: hbs});
 
-var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
+var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g']};
 
 describe('array', function() {
   describe('after', function() {
@@ -479,4 +479,16 @@ describe('array', function() {
       assert.equal(res, 'f: 8021 <br>b: 239 <br>d: -12 <br>');
     });
   });
+
+  describe('unique', function() {
+    it('should return empty string when the array is null', function() {
+      var fn = hbs.compile('{{#unique}}{{this}}{{/unique}}');
+      assert.equal(fn(context), '');
+    });
+    it('should return array with unique items', function() {
+      var fn = hbs.compile('{{#unique duplicate}}{{this}}{{/unique}}');
+      assert.equal(fn(context).toString(), 'a,b,c,d,f,g');
+    });
+  });
+  
 });
