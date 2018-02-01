@@ -1202,7 +1202,7 @@ Return true if the given value is an even number.
 ### [{{ifNth}}](lib/comparison.js#L327)
 
 Conditionally renders a block if the remainder is zero when
-`a` operand is divided by `b`. If an inverse block is specified
+`b` operand is divided by `a`. If an inverse block is specified
 it will be rendered when the remainder is **not zero**.
 
 **Params**
