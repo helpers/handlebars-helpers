@@ -41,7 +41,6 @@
     "helper-markdown": "^1.0.0",
     "helper-md": "^0.2.2",
     "html-tag": "^2.0.0",
-    "is-even": "^1.0.0",
     "is-glob": "^4.0.0",
     "is-number": "^4.0.0",
     "kind-of": "^6.0.0",
