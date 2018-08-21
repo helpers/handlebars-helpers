@@ -118,6 +118,19 @@ describe('array', function() {
       var fn = hbs.compile(source);
       assert.equal(fn(ctx), 'd');
     });
+
+    it('should just return the array of there is no function', function() {
+      var source = '{{filter collection 1 property="price"}}';
+      var ctx = {
+        collection: [
+          {price: 1, name: 'one'},
+          {price: 1, name: 'two'},
+          {price: 2, name: 'three'},
+          {price: 3, name: 'four'}
+        ]
+      };
+      assert.equal(hbs.compile(source)(ctx), [{price: 1, name: 'one'}, {price: 1, name: 'two'}]);
+    });
   });
 
   describe('forEach', function() {
@@ -490,5 +503,5 @@ describe('array', function() {
       assert.equal(fn(context).toString(), 'a,b,c,d,f,g');
     });
   });
-  
+
 });
