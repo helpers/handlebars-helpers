@@ -180,6 +180,11 @@ describe('array', function() {
       var fn = hbs.compile('{{#inArray array "foo"}}AAA{{else}}BBB{{/inArray}}');
       assert.equal(fn(context), 'BBB');
     });
+
+    it('should render the inverse block when the array does not exist', function() {
+      var fn = hbs.compile('{{#inArray noArray "foo"}}AAA{{else}}BBB{{/inArray}}');
+      assert.equal(fn(context), 'BBB');
+    });
   });
 
   describe('isArray', function() {
