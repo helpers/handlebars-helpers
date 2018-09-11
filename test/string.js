@@ -1,435 +1,379 @@
-"use strict";
+'use strict';
 
-require("mocha");
-var assert = require("assert");
-var hbs = require("handlebars").create();
-var helpers = require("..");
-helpers.string({ handlebars: hbs });
+require('mocha');
+var assert = require('assert');
+var hbs = require('handlebars').create();
+var helpers = require('..');
+helpers.string({handlebars: hbs});
 
-describe("string", function() {
-  describe("camelcase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{camelcase}}");
-      assert.equal(fn(), "");
+describe('string', function() {
+  describe('camelcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{camelcase}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in camelcase", function() {
+    it('should return the string in camelcase', function() {
       var fn = hbs.compile('{{camelcase "foo bar baz qux"}}');
-      assert.equal(fn(), "fooBarBazQux");
+      assert.equal(fn(), 'fooBarBazQux');
     });
-    it("should lowercase a single character", function() {
-      assert.equal(hbs.compile('{{camelcase "f"}}')(), "f");
-      assert.equal(hbs.compile('{{camelcase "A"}}')(), "a");
+    it('should lowercase a single character', function() {
+      assert.equal(hbs.compile('{{camelcase "f"}}')(), 'f');
+      assert.equal(hbs.compile('{{camelcase "A"}}')(), 'a');
     });
   });
 
-  describe("capitalize", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{capitalize}}");
-      assert.equal(fn(), "");
+  describe('capitalize', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalize}}');
+      assert.equal(fn(), '');
     });
-    it("should capitalize a word.", function() {
+    it('should capitalize a word.', function() {
       var fn = hbs.compile('{{capitalize "foo"}}');
-      assert.equal(fn(), "Foo");
+      assert.equal(fn(), 'Foo');
     });
   });
 
-  describe("capitalizeAll", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{capitalizeAll}}");
-      assert.equal(fn(), "");
+  describe('capitalizeAll', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{capitalizeAll}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string with the every word capitalized.", function() {
-      var fn = hbs.compile(
-        '{{capitalizeAll "bender should not bE allowed on tV"}}'
-      );
-      assert.equal(fn(), "Bender Should Not BE Allowed On TV");
+    it('should return the string with the every word capitalized.', function() {
+      var fn = hbs.compile('{{capitalizeAll "bender should not bE allowed on tV"}}');
+      assert.equal(fn(), 'Bender Should Not BE Allowed On TV');
     });
   });
 
-  describe("center", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{center}}");
-      assert.equal(fn(), "");
+  describe('center', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{center}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string centered by using non-breaking spaces.", function() {
-      var fn = hbs.compile(
-        '{{center "Bender should not be allowed on tv." 2}}'
-      );
-      assert.equal(
-        fn(),
-        "&amp;nbsp;&amp;nbsp;Bender should not be allowed on tv.&amp;nbsp;&amp;nbsp;"
-      );
+    it('should return the string centered by using non-breaking spaces.', function() {
+      var fn = hbs.compile('{{center "Bender should not be allowed on tv." 2}}');
+      assert.equal(fn(), '&amp;nbsp;&amp;nbsp;Bender should not be allowed on tv.&amp;nbsp;&amp;nbsp;');
     });
   });
 
-  describe("chop", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{chop}}");
-      assert.equal(fn(), "");
+  describe('chop', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{chop}}');
+      assert.equal(fn(), '');
     });
-    it("should remove non-word characters from start of string", function() {
+    it('should remove non-word characters from start of string', function() {
       var fn = hbs.compile('{{chop "- foo bar baz"}}');
-      assert.equal(fn(), "foo bar baz");
+      assert.equal(fn(), 'foo bar baz');
     });
-    it("should remove non-word characters from end of string", function() {
+    it('should remove non-word characters from end of string', function() {
       var fn = hbs.compile('{{chop "foo bar baz _- "}}');
-      assert.equal(fn(), "foo bar baz");
+      assert.equal(fn(), 'foo bar baz');
     });
   });
 
-  describe("dashcase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{dashcase}}");
-      assert.equal(fn(), "");
+  describe('dashcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{dashcase}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in dashcase", function() {
+    it('should return the string in dashcase', function() {
       var fn = hbs.compile('{{dashcase "foo bar baz qux"}}');
-      assert.equal(fn(), "foo-bar-baz-qux");
+      assert.equal(fn(), 'foo-bar-baz-qux');
     });
-    it("should lowercase a single character", function() {
-      assert.equal(hbs.compile('{{dashcase "f"}}')(), "f");
-      assert.equal(hbs.compile('{{dashcase "A"}}')(), "a");
+    it('should lowercase a single character', function() {
+      assert.equal(hbs.compile('{{dashcase "f"}}')(), 'f');
+      assert.equal(hbs.compile('{{dashcase "A"}}')(), 'a');
     });
   });
 
-  describe("dotcase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{dotcase}}");
-      assert.equal(fn(), "");
+  describe('dotcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{dotcase}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in dotcase", function() {
+    it('should return the string in dotcase', function() {
       var fn = hbs.compile('{{dotcase "foo bar baz qux"}}');
-      assert.equal(fn(), "foo.bar.baz.qux");
+      assert.equal(fn(), 'foo.bar.baz.qux');
     });
-    it("should lowercase a single character", function() {
-      assert.equal(hbs.compile('{{dotcase "f"}}')(), "f");
-      assert.equal(hbs.compile('{{dotcase "A"}}')(), "a");
-    });
-  });
-
-  describe("ellipsis", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{ellipsis}}");
-      assert.equal(fn(), "");
-    });
-    it("should return then string truncated by a specified length.", function() {
-      var fn = hbs.compile(
-        '{{ellipsis "Bender should not be allowed on tv." 31}}'
-      );
-      assert.equal(fn(), "Bender should not be allowed on…");
-    });
-    it("should return the string if shorter than the specified length.", function() {
-      var fn = hbs.compile(
-        '{{ellipsis "Bender should not be allowed on tv." 100}}'
-      );
-      assert.equal(fn(), "Bender should not be allowed on tv.");
+    it('should lowercase a single character', function() {
+      assert.equal(hbs.compile('{{dotcase "f"}}')(), 'f');
+      assert.equal(hbs.compile('{{dotcase "A"}}')(), 'a');
     });
   });
 
-  describe("hyphenate", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{hyphenate}}");
-      assert.equal(fn(), "");
+  describe('ellipsis', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{ellipsis}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string with spaces replaced with hyphens.", function() {
-      var fn = hbs.compile(
-        '{{hyphenate "Bender should not be allowed on tv."}}'
-      );
-      assert.equal(fn(), "Bender-should-not-be-allowed-on-tv.");
+    it('should return then string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
+      assert.equal(fn(), 'Bender should not be allowed on…');
     });
-  });
-
-  describe("isString", function() {
-    it("should return true for string", function() {
-      assert.equal(hbs.compile('{{isString "foo"}}')(), "true");
-    });
-
-    it("should return true for empty string", function() {
-      assert.equal(hbs.compile('{{isString ""}}')(), "true");
-    });
-
-    it("should return false for number", function() {
-      assert.equal(hbs.compile("{{isString 123}}")(), "false");
-    });
-
-    it("should return false for null", function() {
-      assert.equal(hbs.compile("{{isString null}}")(), "false");
-    });
-
-    it("should return false when undefined", function() {
-      assert.equal(hbs.compile("{{isString}}")(), "false");
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 100}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv.');
     });
   });
 
-  describe("lowercase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{lowercase}}");
-      assert.equal(fn(), "");
+  describe('hyphenate', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{hyphenate}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in lowercase", function() {
-      var fn = hbs.compile(
-        '{{lowercase "BENDER SHOULD NOT BE ALLOWED ON TV"}}'
-      );
-      assert.equal(fn(), "bender should not be allowed on tv");
+    it('should return the string with spaces replaced with hyphens.', function() {
+      var fn = hbs.compile('{{hyphenate "Bender should not be allowed on tv."}}');
+      assert.equal(fn(), 'Bender-should-not-be-allowed-on-tv.');
     });
   });
 
-  describe("occurrences", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{occurrences}}");
-      assert.equal(fn(), "");
+  describe('isString', function() {
+    it('should return true for string', function() {
+      assert.equal(hbs.compile('{{isString "foo"}}')(), 'true');
     });
-    it("should return the number of occurrences of a string, within a string.", function() {
+
+    it('should return true for empty string', function() {
+      assert.equal(hbs.compile('{{isString ""}}')(), 'true');
+    });
+
+    it('should return false for number', function() {
+      assert.equal(hbs.compile('{{isString 123}}')(), 'false');
+    });
+
+    it('should return false for null', function() {
+      assert.equal(hbs.compile('{{isString null}}')(), 'false');
+    });
+
+    it('should return false when undefined', function() {
+      assert.equal(hbs.compile('{{isString}}')(), 'false');
+    });
+  });
+
+  describe('lowercase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{lowercase}}');
+      assert.equal(fn(), '');
+    });
+    it('should return the string in lowercase', function() {
+      var fn = hbs.compile('{{lowercase "BENDER SHOULD NOT BE ALLOWED ON TV"}}');
+      assert.equal(fn(), 'bender should not be allowed on tv');
+    });
+  });
+
+  describe('occurrences', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{occurrences}}');
+      assert.equal(fn(), '');
+    });
+    it('should return the number of occurrences of a string, within a string.', function() {
       var fn = hbs.compile('{{occurrences "Jar-Jar Binks" "Jar"}}');
-      assert.equal(fn(), "2");
+      assert.equal(fn(), '2');
     });
   });
 
-  describe("pascalcase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{pascalcase}}");
-      assert.equal(fn(), "");
+  describe('pascalcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{pascalcase}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in pascalcase", function() {
+    it('should return the string in pascalcase', function() {
       var fn = hbs.compile('{{pascalcase "foo bar baz qux"}}');
-      assert.equal(fn(), "FooBarBazQux");
+      assert.equal(fn(), 'FooBarBazQux');
     });
-    it("should uppercase a single character", function() {
-      assert.equal(hbs.compile('{{pascalcase "f"}}')(), "F");
-      assert.equal(hbs.compile('{{pascalcase "A"}}')(), "A");
+    it('should uppercase a single character', function() {
+      assert.equal(hbs.compile('{{pascalcase "f"}}')(), 'F');
+      assert.equal(hbs.compile('{{pascalcase "A"}}')(), 'A');
     });
   });
 
-  describe("pathcase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{pathcase}}");
-      assert.equal(fn(), "");
+  describe('pathcase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{pathcase}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in pathcase", function() {
+    it('should return the string in pathcase', function() {
       var fn = hbs.compile('{{pathcase "foo bar baz qux"}}');
-      assert.equal(fn(), "foo/bar/baz/qux");
+      assert.equal(fn(), 'foo/bar/baz/qux');
     });
-    it("should lowercase a single character", function() {
-      assert.equal(hbs.compile('{{pathcase "f"}}')(), "f");
-      assert.equal(hbs.compile('{{pathcase "A"}}')(), "a");
+    it('should lowercase a single character', function() {
+      assert.equal(hbs.compile('{{pathcase "f"}}')(), 'f');
+      assert.equal(hbs.compile('{{pathcase "A"}}')(), 'a');
     });
   });
 
-  describe("plusify", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{plusify}}");
-      assert.equal(fn(), "");
+  describe('plusify', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{plusify}}');
+      assert.equal(fn(), '');
     });
-    it("should return the empty string with no change.", function() {
+    it('should return the empty string with no change.', function() {
       var fn = hbs.compile('{{plusify ""}}');
-      assert.equal(fn(), "");
+      assert.equal(fn(), '');
     });
-    it("should return the string with no change.", function() {
+    it('should return the string with no change.', function() {
       var fn = hbs.compile('{{plusify "BenderShouldNotBeAllowedOnTv."}}');
-      assert.equal(fn(), "BenderShouldNotBeAllowedOnTv.");
+      assert.equal(fn(), 'BenderShouldNotBeAllowedOnTv.');
     });
-    it("should return the string with spaces replaced with pluses.", function() {
+    it('should return the string with spaces replaced with pluses.', function() {
       var fn = hbs.compile('{{plusify "Bender should not be allowed on tv."}}');
-      assert.equal(fn(), "Bender+should+not+be+allowed+on+tv.");
+      assert.equal(fn(), 'Bender+should+not+be+allowed+on+tv.');
     });
   });
 
-  describe("replace", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{replace}}");
-      assert.equal(fn(), "");
+  describe('replace', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{replace}}');
+      assert.equal(fn(), '');
     });
     it('should replace occurrences of string "A" with string "B"', function() {
       var fn = hbs.compile('{{replace "Bender Bending Rodriguez" "B" "M"}}');
-      assert.equal(fn(), "Mender Mending Rodriguez");
+      assert.equal(fn(), 'Mender Mending Rodriguez');
     });
-    it("should return the string if `a` is undefined", function() {
+    it('should return the string if `a` is undefined', function() {
       var fn = hbs.compile('{{replace "a b c"}}');
-      assert.equal(fn(), "a b c");
+      assert.equal(fn(), 'a b c');
     });
     it('should replace the string with `""` if `b` is undefined', function() {
       var fn = hbs.compile('{{replace "a b c" "a"}}');
-      assert.equal(fn(), " b c");
+      assert.equal(fn(), ' b c');
     });
   });
 
-  describe("reverse", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{reverse}}");
-      assert.equal(fn(), "");
+  describe('reverse', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{reverse}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in reverse.", function() {
+    it('should return the string in reverse.', function() {
       var fn = hbs.compile('{{reverse "bender should NOT be allowed on TV."}}');
-      assert.equal(fn(), ".VT no dewolla eb TON dluohs redneb");
+      assert.equal(fn(), '.VT no dewolla eb TON dluohs redneb');
     });
   });
 
-  describe("sentence", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{sentence}}");
-      assert.equal(fn(), "");
+  describe('sentence', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{sentence}}');
+      assert.equal(fn(), '');
     });
-    it("should capitalize the first word of each sentence in a string and convert the rest of the sentence to lowercase.", function() {
-      var fn = hbs.compile(
-        '{{sentence "bender should NOT be allowed on TV. fry SHOULD be allowed on TV."}}'
-      );
-      assert.equal(
-        fn(),
-        "Bender should not be allowed on tv. Fry should be allowed on tv."
-      );
+    it('should capitalize the first word of each sentence in a string and convert the rest of the sentence to lowercase.', function() {
+      var fn = hbs.compile('{{sentence "bender should NOT be allowed on TV. fry SHOULD be allowed on TV."}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv. Fry should be allowed on tv.');
     });
   });
 
-  describe("snakecase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{snakecase}}");
-      assert.equal(fn(), "");
+  describe('snakecase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{snakecase}}');
+      assert.equal(fn(), '');
     });
-    it("should lowercase a single character", function() {
-      assert.equal(hbs.compile('{{snakecase "a"}}')(), "a");
-      assert.equal(hbs.compile('{{snakecase "A"}}')(), "a");
+    it('should lowercase a single character', function() {
+      assert.equal(hbs.compile('{{snakecase "a"}}')(), 'a');
+      assert.equal(hbs.compile('{{snakecase "A"}}')(), 'a');
     });
-    it("should return the string in snakecase", function() {
+    it('should return the string in snakecase', function() {
       var fn = hbs.compile('{{snakecase "foo bar baz qux"}}');
-      assert.equal(fn(), "foo_bar_baz_qux");
+      assert.equal(fn(), 'foo_bar_baz_qux');
     });
   });
 
-  describe("split", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{split}}");
-      assert.equal(fn(), "");
+  describe('split', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{split}}');
+      assert.equal(fn(), '');
     });
-    it("should split the string with the default character", function() {
+    it('should split the string with the default character', function() {
       var fn = hbs.compile('{{#each (split "a,b,c")}}<{{.}}>{{/each}}');
-      assert.equal(fn(), "<a><b><c>");
+      assert.equal(fn(), '<a><b><c>');
     });
-    it("should split the string on the given character", function() {
+    it('should split the string on the given character', function() {
       var fn = hbs.compile('{{#each (split "a|b|c" "|")}}<{{.}}>{{/each}}');
-      assert.equal(fn(), "<a><b><c>");
+      assert.equal(fn(), '<a><b><c>');
     });
   });
 
-  describe("startsWith", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{startsWith}}");
-      assert.equal(fn(), "");
+  describe('startsWith', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{startsWith}}');
+      assert.equal(fn(), '');
     });
     it('should render "Yes he is", from inside the block.', function() {
-      var fn = hbs.compile(
-        '{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}'
-      );
-      assert.equal(fn(), "Yes he is");
+      var fn = hbs.compile('{{#startsWith "Bender" "Bender is great"}}Yes he is{{/startsWith}}');
+      assert.equal(fn(), 'Yes he is');
     });
-    it("should render the Inverse block.", function() {
-      var fn = hbs.compile(
-        '{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}'
-      );
-      assert.equal(fn(), "Bro, do you even hello world?");
+    it('should render the Inverse block.', function() {
+      var fn = hbs.compile('{{#startsWith "Goodbye" "Hello, world!"}}Whoops{{else}}Bro, do you even hello world?{{/startsWith}}');
+      assert.equal(fn(), 'Bro, do you even hello world?');
     });
-    it("should render the Inverse block when an undefined value is passed in..", function() {
-      var fn = hbs.compile(
-        '{{#startsWith "myPrefix" undefined}}fn block{{else}}inverse block{{/startsWith}}'
-      );
-      assert.equal(fn(), "inverse block");
+    it('should render the Inverse block when an undefined value is passed in..', function() {
+      var fn = hbs.compile('{{#startsWith "myPrefix" undefined}}fn block{{else}}inverse block{{/startsWith}}');
+      assert.equal(fn(), 'inverse block');
     });
   });
 
-  describe("titleize", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{titleize}}");
-      assert.equal(fn(), "");
+  describe('titleize', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{titleize}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string in title case.", function() {
+    it('should return the string in title case.', function() {
       var fn = hbs.compile('{{titleize "Bender-should-Not-be-allowed_on_Tv"}}');
-      assert.equal(fn(), "Bender Should Not Be Allowed On Tv");
+      assert.equal(fn(), 'Bender Should Not Be Allowed On Tv');
     });
   });
 
-  describe("trim", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{trim}}");
-      assert.equal(fn(), "");
+  describe('trim', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{trim}}');
+      assert.equal(fn(), '');
     });
-    it("should trim leading whitespace", function() {
+    it('should trim leading whitespace', function() {
       var fn = hbs.compile('{{trim "    foo"}}');
-      assert.equal(fn(), "foo");
+      assert.equal(fn(), 'foo');
     });
-    it("should trim trailing whitespace", function() {
+    it('should trim trailing whitespace', function() {
       var fn = hbs.compile('{{trim "foo   "}}');
-      assert.equal(fn(), "foo");
+      assert.equal(fn(), 'foo');
     });
   });
 
-  describe("truncate", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{truncate}}");
-      assert.equal(fn(), "");
+  describe('truncate', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{truncate}}');
+      assert.equal(fn(), '');
     });
-    it("should return the string truncated by a specified length.", function() {
-      var fn = hbs.compile(
-        '{{truncate "Bender should not be allowed on tv." 31}}'
-      );
-      assert.equal(fn(), "Bender should not be allowed on");
+    it('should return the string truncated by a specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 31}}');
+      assert.equal(fn(), 'Bender should not be allowed on');
     });
-    it("should return the string if shorter than the specified length.", function() {
-      var fn = hbs.compile(
-        '{{truncate "Bender should not be allowed on tv." 100}}'
-      );
-      assert.equal(fn(), "Bender should not be allowed on tv.");
+    it('should return the string if shorter than the specified length.', function() {
+      var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv.');
     });
-    it("should return then string truncated by a specified length", function() {
+    it('should return then string truncated by a specified length', function() {
       var fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
-      assert.equal(fn(), "foo bar...");
+      assert.equal(fn(), 'foo bar...');
     });
 
-    it("should return then string truncated by a specified length, providing a custom string to denote an omission.", function() {
+    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
       var fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
-      assert.equal(fn(), "foo ba…");
+      assert.equal(fn(), 'foo ba…');
     });
   });
 
-  describe("uppercase", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{uppercase}}");
-      assert.equal(fn(), "");
+  describe('uppercase', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{uppercase}}');
+      assert.equal(fn(), '');
     });
 
-    it("should return the string in uppercase", function() {
-      var fn = hbs.compile(
-        '{{uppercase "bender should not be allowed on tv"}}'
-      );
-      assert.equal(fn(), "BENDER SHOULD NOT BE ALLOWED ON TV");
+    it('should return the string in uppercase', function() {
+      var fn = hbs.compile('{{uppercase "bender should not be allowed on tv"}}');
+      assert.equal(fn(), 'BENDER SHOULD NOT BE ALLOWED ON TV');
     });
 
-    it("should work as a block helper", function() {
-      var fn = hbs.compile(
-        "{{#uppercase}}bender should not be allowed on tv{{/uppercase}}"
-      );
-      assert.equal(fn(), "BENDER SHOULD NOT BE ALLOWED ON TV");
-    });
-  });
-
-  describe.only("format", function() {
-    it("should return an empty string if undefined", function() {
-      var fn = hbs.compile("{{format}}");
-      assert.equal(fn(), "");
-    });
-    it("should return format string with no parameters", function() {
-      var fn = hbs.compile('{{format "to format {0} {1}"}}');
-      assert.equal(fn(), "to format {0} {1}");
-    });
-    it("should return format string with few parameters", function() {
-      var fn = hbs.compile('{{format "to format {0} {1} {3}" "a"}}');
-      assert.equal(fn(), "to format a {1} {3}");
-    });
-    it("should return format string with parameters", function() {
-      var fn = hbs.compile('{{format "to format {0} {1} {0}" "a" "b"}}');
-      assert.equal(fn(), "to format a b a");
-    });
-    it("should return format string with parameters, skip rest", function() {
-      var fn = hbs.compile('{{format "to format {0} {1}" "a" "b" "c"}}');
-      assert.equal(fn(), "to format a b");
+    it('should work as a block helper', function() {
+      var fn = hbs.compile('{{#uppercase}}bender should not be allowed on tv{{/uppercase}}');
+      assert.equal(fn(), 'BENDER SHOULD NOT BE ALLOWED ON TV');
     });
   });
 });
+
