@@ -48,6 +48,22 @@ describe('array', function() {
     });
   });
 
+  describe.only('concat', function() {
+    it('should return an empty string when undefined', function() {
+      assert.equal(hbs.compile('{{concat}}')(), '');
+    });
+
+    it('should return the array if only one was provided', function() {
+      var fn = hbs.compile('{{concat array}}');
+      assert.equal(fn(context), 'a,b,c,d,e,f,g,h');
+    });
+
+    it('should return the concatination of the two provided arrays', function() {
+      var fn = hbs.compile('{{concat array duplicate}}');
+      assert.equal(fn(context), 'a,b,c,d,e,f,g,h,a,b,b,c,d,b,f,a,g');
+    });
+  });
+
   describe('each', function() {
     it('should use the key and value of each property in an object inside a block', function() {
       var fn = hbs.compile('{{#each obj}}{{@key}}: {{this}} {{/each}}');
