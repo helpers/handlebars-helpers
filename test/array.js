@@ -4,8 +4,8 @@ require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
 var helpers = require('..');
-helpers.array({handlebars: hbs});
 helpers.string({handlebars: hbs});
+helpers.array({handlebars: hbs});
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g']};
 
@@ -302,6 +302,32 @@ describe('array', function() {
       var ctx = {array: [{a: 'x'}, {a: 'y'}, {a: 'z'}]};
       var fn = hbs.compile('{{pluck array "a"}}');
       assert.equal(fn(ctx), 'x,y,z');
+    });
+  });
+
+  describe('reverse', function() {
+    it('should return an empty array when given an empty array', function() {
+      var locals = {array: []};
+      var fn = hbs.compile('{{reverse array}}');
+      assert.equal(fn(locals), []);
+    });
+
+    it('should return the same for arrays of lenght 1', function() {
+      var locals = {array: ['a']};
+      var fn = hbs.compile('{{reverse array}}');
+      assert.equal(fn(locals), ['a']);
+    });
+
+    it('should swap the items in an array of length 2', function() {
+      var locals = {array: ['a', 'b']};
+      var fn = hbs.compile('{{reverse array}}');
+      assert.equal(fn(locals), ['b', 'a']);
+    });
+
+    it('should revert arrays of arbitrary length', function() {
+      var clone = context.array.slice(0);
+      var fn = hbs.compile('{{reverse array}}');
+      assert.equal(fn(context), clone.reverse());
     });
   });
 
