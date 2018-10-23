@@ -73,7 +73,7 @@ describe('math', function() {
     });
   });
 
-  describe.only('subtract', function() {
+  describe('subtract', function() {
     it('should return the difference of two numbers.', function() {
       var fn = hbs.compile('{{subtract value 5}}');
       assert.equal(fn({value: 5}), '0');

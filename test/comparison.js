@@ -375,6 +375,11 @@ describe('comparison', function() {
       var fn = hbs.compile('{{#ifEven number}}A{{else}}B{{/ifEven}}');
       assert.equal(fn({number: 9}), 'B');
     });
+
+    it('should render the inverse block if the number does not exist', function() {
+      var fn = hbs.compile('{{#ifEven number}}A{{else}}B{{/ifEven}}');
+      assert.equal(fn({number: null}), 'B');
+    });
   });
 
   describe('ifNth', function() {
@@ -409,6 +414,11 @@ describe('comparison', function() {
     it('should render the inverse block if the number is odd', function() {
       var fn = hbs.compile('{{#ifOdd number}}A{{else}}B{{/ifOdd}}');
       assert.equal(fn({number: 8}), 'B');
+    });
+
+    it('should render the inverse block if the number does not exist', function() {
+      var fn = hbs.compile('{{#ifOdd number}}A{{else}}B{{/ifOdd}}');
+      assert.equal(fn({number: null}), 'B');
     });
   });
 
