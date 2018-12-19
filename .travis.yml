@@ -14,3 +14,5 @@ node_js:
   - '0.12'
 allowed_failures:
   node_js: '0.12'
+  node_js: '4'
+  node_js: '5'
