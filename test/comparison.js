@@ -553,6 +553,18 @@ describe('comparison', function() {
     });
   });
 
+  describe('ternary', function() {
+    it('should return exprT if condition is truthy', function() {
+      var fn = hbs.compile('{{ternary isItFriday "Yes" "No"}}');
+      assert.equal(fn({isItFriday: true}), 'Yes');
+    });
+
+    it('should return exprF if condition is falsy', function() {
+      var fn = hbs.compile('{{ternary isItFriday "Yes" "No"}}');
+      assert.equal(fn({isItFriday: false}), 'No');
+    });
+  });
+
   describe('unlessEq', function() {
     it('should render a block unless the value is equal to a given number.', function() {
       var fn = hbs.compile('{{#unlessEq number compare=8}}A{{/unlessEq}}');
