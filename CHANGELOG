@@ -1,3 +1,7 @@
+v0.10.1:
+  date: "2019-03-06"
+  changes:
+    - fixes truncating in truncateWords helper.
 v0.10.0:
   date: "2017-11-17"
   changes:
