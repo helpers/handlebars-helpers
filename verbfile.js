@@ -193,7 +193,7 @@ function customDocsHelpers(app) {
   });
 
   app.helper('anchor', function(file) {
-    return link(file.stem, '#' + file.stem);
+    return link(file.stem, '#' + file.stem.toLowerCase());
   });
 
   app.helper('codeLink', function(file) {

@@ -105,7 +105,7 @@ describe('string', function() {
       var fn = hbs.compile('{{ellipsis}}');
       assert.equal(fn(), '');
     });
-    it('should return then string truncated by a specified length.', function() {
+    it('should return the string truncated by a specified length.', function() {
       var fn = hbs.compile('{{ellipsis "Bender should not be allowed on tv." 31}}');
       assert.equal(fn(), 'Bender should not be allowed on…');
     });
@@ -348,14 +348,41 @@ describe('string', function() {
       var fn = hbs.compile('{{truncate "Bender should not be allowed on tv." 100}}');
       assert.equal(fn(), 'Bender should not be allowed on tv.');
     });
-    it('should return then string truncated by a specified length', function() {
+    it('should return the string truncated by a specified length', function() {
       var fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
       assert.equal(fn(), 'foo bar...');
     });
 
-    it('should return then string truncated by a specified length, providing a custom string to denote an omission.', function() {
+    it('should return the string truncated by a specified length, providing a custom string to denote an omission.', function() {
       var fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
       assert.equal(fn(), 'foo ba…');
+    });
+  });
+
+  describe('truncateWords', function() {
+    it('should return an empty string if undefined', function() {
+      var fn = hbs.compile('{{truncateWords}}');
+      assert.equal(fn(), '');
+    });
+
+    it('should return the string truncated by a specified number of words.', function() {
+      var fn = hbs.compile('{{truncateWords "Bender should not be allowed on tv." 3}}');
+      assert.equal(fn(), 'Bender should not…');
+    });
+
+    it('should return the string if shorter than the specified number of words.', function() {
+      var fn = hbs.compile('{{truncateWords "Bender should not be allowed on tv." 100}}');
+      assert.equal(fn(), 'Bender should not be allowed on tv.');
+    });
+
+    it('should return the string truncated by a specified number of words with the custom suffix.', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz qux" 3 ""}}');
+      assert.equal(fn(), 'foo bar baz');
+    });
+
+    it('should return the string truncated by a specified number of words with the custom suffix.', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz qux" 2 " [see more]"}}');
+      assert.equal(fn(), 'foo bar [see more]');
     });
   });
 
