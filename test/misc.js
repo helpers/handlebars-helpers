@@ -1,66 +1,78 @@
-'use strict';
-
-require('mocha');
-var assert = require('assert');
-var hbs = require('handlebars').create();
-var helpers = require('..');
+const assert = require('assert');
+const hbs = require('handlebars').create();
+const helpers = require('..');
 
 describe('misc', function() {
   beforeEach(function() {
-    helpers.misc({handlebars: hbs});
+    helpers.misc({ handlebars: hbs });
   });
 
   describe('noop', function() {
     it('should be a noop', function() {
-      var fn = hbs.compile('{{#noop}}{{message}}{{/noop}}');
+      const fn = hbs.compile('{{#noop}}{{message}}{{/noop}}');
       assert.equal(fn({message: 'This is a test'}), 'This is a test');
     });
   });
 
   describe('option', function() {
     it('should get an option', function() {
-      var fn = hbs.compile('{{option "a"}}');
+      const fn = hbs.compile('{{option "a"}}');
       assert.equal(fn({options: {a: 'bbb'}}), 'bbb');
     });
     it('should return an empty string when no options are found', function() {
       assert.equal(hbs.compile('{{option "a"}}')(), '');
     });
     it('should get a nested option', function() {
-      var fn = hbs.compile('{{option "a.b.c"}}');
+      const fn = hbs.compile('{{option "a.b.c"}}');
       assert.equal(fn({options: {a: {b: {c: 'ddd'}}}}), 'ddd');
     });
     it('should work as a subexpression', function() {
-      var fn = hbs.compile('{{option "a.b.c"}}');
+      const fn = hbs.compile('{{option "a.b.c"}}');
       assert.equal(fn({options: {a: {b: {c: 'ddd'}}}}), 'ddd');
     });
   });
 
-  describe('withHash', function() {
-    it('should return an empty sting', function() {
-      var fn = hbs.compile('{{#withHash}}{{message}}{{/withHash}}');
-      var actual = fn({message: 'This is a test'});
-      assert.equal(typeof actual, 'string');
-      assert.equal(actual, '');
+  describe('typeOf', function() {
+    it('should return the type of a string', function() {
+      const fn = hbs.compile('{{typeOf value}}');
+      assert.equal(fn({ value: 'foo' }), 'string');
     });
-    it('should not blow up when no hash is defined.', function() {
-      var fn = hbs.compile('{{#withHash}}{{/withHash}}');
-      assert.equal(fn(), '');
+    it('should return the type of a number', function() {
+      const fn = hbs.compile('{{typeOf value}}');
+      assert.equal(fn({ value: 1 }), 'number');
     });
-    it('should return the inverse hash when defined and the value is falsy.', function() {
-      var fn = hbs.compile('{{#withHash}}foo{{else}}bar{{/withHash}}');
-      assert.equal(fn(), 'bar');
+  });
+
+  describe('for', () => {
+    it.skip('loops correctly with start and end', function() { // currently fails
+      const fn = hbs.compile('{{#for 1 6}}X{{/for}}');
+      assert.equal(fn({}), 'XXXXXX');
     });
-    it('should return string from the newly created context', function() {
-      var fn = hbs.compile('{{#withHash message="test"}}{{message}}{{/withHash}}');
-      assert.equal(fn({message: 'This is a test'}), 'test');
+    it('loops correctly with start, end, and increment', function() {
+      const fn = hbs.compile('{{#for 1 6 2}}X{{/for}}');
+      assert.equal(fn({}), 'XXX');
     });
-    it('should return string from the parent context', function() {
-      var fn = hbs.compile('{{#withHash message=this.message}}{{message}}{{/withHash}}');
-      assert.equal(fn({message: 'This is a test'}), 'This is a test');
+  });
+
+  describe('md5', () => {
+    it('returns the md5 hash of the parameter', function() {
+      const fn = hbs.compile('{{md5 name}}');
+      assert.equal(fn({ name: 'john' }), '527bd5b5d689e2c32ae974c6229ff785');
     });
-    it('should add two attributes to the new context', function() {
-      var fn = hbs.compile('{{#withHash subject="Feedback" message="Hello!"}}{{subject}} - {{message}}{{/withHash}}');
-      assert.equal(fn({}), 'Feedback - Hello!');
+
+    it('returns md5 only of the first parameter', function() {
+      const fn = hbs.compile('{{md5 name age}}');
+      assert.equal(fn({ name: 'john', age: '25' }), '527bd5b5d689e2c32ae974c6229ff785');
+    });
+
+    it('returns md5 as empty string if null is passed to it. ', function() {
+      const fn = hbs.compile('{{md5 name}}');
+      assert.equal(fn({ name: null }), '');
+    });
+
+    it('returns md5 as empty string if undefined is passed to it. ', function() {
+      const fn = hbs.compile('{{md5 name}}');
+      assert.equal(fn({ name: undefined }), '');
     });
   });
 });

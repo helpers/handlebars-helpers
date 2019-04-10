@@ -7,10 +7,10 @@ module.exports = {
     // './test/support/env.js'
   ],
   testRegex: '(/test/.*|(\\.|/)(tests))\\.(ts|js)x?$',
-  testPathIgnorePatterns: ['./test/support/', './test/fixtures/'],
+  testPathIgnorePatterns: ['./test/support/'],
   coverageDirectory: 'coverage',
   collectCoverageFrom: [
-    'app.js',
-    'src/**/*.js'
+    'index.js',
+    'lib/**/*.js'
   ]
 };
