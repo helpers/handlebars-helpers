@@ -878,7 +878,7 @@ Block helper that groups array elements by given group `size`.
 {{#withGroup array 4}}
   {{#each this}}
     {{.}}
-  {{each}}
+  {{/each}}
   <br>
 {{/withGroup}}
 <!-- results in: -->
