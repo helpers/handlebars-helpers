@@ -9,6 +9,6 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[{**/{actual,fixtures,expected,templates}/**,*.md}]
+[{**/{actual,expected,templates}/**,*.md}]
 trim_trailing_whitespace = false
 insert_final_newline = false

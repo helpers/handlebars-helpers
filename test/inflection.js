@@ -1,20 +1,17 @@
-'use strict';
-
-require('mocha');
-var assert = require('assert');
-var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.inflection({handlebars: hbs});
+const assert = require('assert');
+const hbs = require('handlebars').create();
+const helpers = require('..');
+helpers.inflection({ handlebars: hbs });
 
 describe('inflection', function() {
   describe('inflect', function() {
     it('should return the plural or singular form of a word based on a value.', function() {
-      var template = hbs.compile('{{inflect mail "junk" "mail"}}');
+      const template = hbs.compile('{{inflect mail "junk" "mail"}}');
       assert.equal(template({mail: 3}), 'mail');
     });
 
     it('should return the plural or singular form of a word based on a value and include the count.', function() {
-      var template = hbs.compile('{{inflect messages "message" "messages" true}}');
+      const template = hbs.compile('{{inflect messages "message" "messages" true}}');
       assert.equal(template({messages: 1}), '1 message');
     });
   });

@@ -5,17 +5,9 @@
  * Released under the MIT License.
  */
 
-'use strict';
+const lib = require('./lib/');
 
-var forIn = require('for-in');
-var define = require('define-property');
-var lib = require('./lib/');
-
-/**
- * Expose helpers
- */
-
-module.exports = function helpers(groups, options) {
+module.exports = (groups, options) => {
   if (typeof groups === 'string') {
     groups = [groups];
   } else if (!Array.isArray(groups)) {
@@ -23,39 +15,26 @@ module.exports = function helpers(groups, options) {
     groups = null;
   }
 
-  options = options || {};
-  var hbs = options.handlebars || options.hbs || require('handlebars');
-  define(module.exports, 'handlebars', hbs);
+  const hbs = options.handlebars || options.hbs;
+  if (!hbs) throw new Error('You need to pass "handlebars" as an option');
 
   if (groups) {
     groups.forEach(function(key) {
       hbs.registerHelper(lib[key]);
     });
   } else {
-    forIn(lib, function(group, key) {
-      hbs.registerHelper(group);
-    });
+    Object.keys(lib).forEach(key => hbs.registerHelper(lib[key]));
   }
 
   return hbs.helpers;
 };
 
-/**
- * Expose helper groups
- */
-
-forIn(lib, function(group, key) {
-  define(module.exports, key, function(options) {
+Object.keys(lib).forEach(key => {
+  module.exports[key] = options => {
     options = options || {};
-    var hbs = options.handlebars || options.hbs || require('handlebars');
-    define(module.exports, 'handlebars', hbs);
-    hbs.registerHelper(group);
+    const hbs = options.handlebars || options.hbs;
+    if (!hbs) throw new Error('You need to pass "handlebars" as an option');
+    hbs.registerHelper(lib[key]);
     return hbs.helpers;
-  });
+  };
 });
-
-/**
- * Expose `utils`
- */
-
-module.exports.utils = require('./lib/utils');

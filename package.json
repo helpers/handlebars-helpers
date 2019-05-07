@@ -65,66 +65,29 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "jest --runInBand",
+    "cover": "jest --coverage",
+    "docs": "jsdoc -c jsdoc.js"
   },
-  "dependencies": {
-    "arr-flatten": "^1.1.0",
-    "array-sort": "^0.1.4",
-    "create-frame": "^1.0.0",
-    "define-property": "^1.0.0",
-    "falsey": "^0.3.2",
-    "for-in": "^1.0.2",
-    "for-own": "^1.0.0",
-    "get-object": "^0.2.0",
-    "get-value": "^2.0.6",
-    "handlebars": "^4.0.11",
-    "handlebars-helper-create-frame": "^0.1.0",
-    "handlebars-utils": "^1.0.6",
-    "has-value": "^1.0.0",
-    "helper-date": "^1.0.1",
-    "helper-markdown": "^1.0.0",
-    "helper-md": "^0.2.2",
-    "html-tag": "^2.0.0",
-    "is-even": "^1.0.0",
-    "is-glob": "^4.0.0",
-    "is-number": "^4.0.0",
-    "kind-of": "^6.0.0",
-    "lazy-cache": "^2.0.2",
-    "logging-helpers": "^1.0.0",
-    "micromatch": "^3.1.4",
-    "relative": "^3.0.2",
-    "striptags": "^3.1.0",
-    "to-gfm-code-block": "^0.1.1",
-    "year": "^0.2.1"
+  "dependencies": {},
+  "peerDependencies": {
+    "handlebars": "4.x",
+    "moment": "2.x"
   },
   "devDependencies": {
-    "engine-handlebars": "^0.8.2",
-    "fs-exists-sync": "^0.1.0",
-    "global-modules": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0",
-    "gulp-format-md": "^1.0.0",
-    "gulp-istanbul": "^1.1.2",
-    "gulp-mocha": "^3.0.1",
-    "gulp-unused": "^0.2.1",
-    "helper-changelog": "^0.3.0",
-    "helper-coverage": "^0.1.3",
-    "is-valid-app": "^0.3.0",
-    "js-yaml": "^3.10.0",
-    "markdown-link": "^0.1.1",
-    "mocha": "^3.5.2",
-    "template-helpers": "^0.6.7",
-    "templates": "^1.2.9",
-    "through2": "^2.0.3",
-    "verb-generate-readme": "^0.6.0",
-    "vinyl": "^2.1.0"
+    "docdash": "^1.1.0",
+    "eslint": "5.16.0",
+    "handlebars": "4.1.1",
+    "jest": "24.6.0",
+    "jsdoc": "^3.5.5",
+    "mockdate": "2.0.2",
+    "moment": "2.24.0"
   },
   "keywords": [
     "array",
-    "assemble",
     "collection",
     "comparison",
     "date",
@@ -134,9 +97,6 @@
     "html",
     "i18n",
     "inflection",
-    "log",
-    "logging",
-    "markdown",
     "math",
     "number",
     "object",
@@ -148,50 +108,5 @@
     "url",
     "util",
     "utility"
-  ],
-  "verb": {
-    "run": true,
-    "toc": true,
-    "tasks": [
-      "readme"
-    ],
-    "layout": "default",
-    "copyright": {
-      "start": "2013"
-    },
-    "plugins": [
-      "gulp-format-md"
-    ],
-    "related": {
-      "highlight": "template-helpers",
-      "list": [
-        "assemble",
-        "template-helpers",
-        "utils"
-      ]
-    },
-    "reflinks": [
-      "falsey",
-      "helper-date",
-      "moment"
-    ],
-    "helpers": [
-      "helper-changelog",
-      "helper-coverage"
-    ],
-    "lint": {
-      "reflinks": true
-    }
-  },
-  "lintDeps": {
-    "devDependencies": {
-      "files": {
-        "patterns": [
-          "test/integration/*.js",
-          "test/support/*.js",
-          "test/utils/*.js"
-        ]
-      }
-    }
-  }
+  ]
 }
