@@ -1,0 +1,50 @@
+version: 2.1
+
+orbs:
+  queue: eddiewebb/queue@volatile
+
+workflows:
+  build_and_publish:
+    jobs:
+      - queue/block_workflow:
+          context: oneflow
+          only-on-branch: master
+          time: "10" # minutes max wait
+      - build:
+          context: oneflow
+          requires:
+            - queue/block_workflow
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10-stretch
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v2-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+            - v2-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}
+            - v2-npm-deps-{{ .Branch }}
+            - v2-npm-deps-
+      - run:
+          name: install NPM dependencies
+          command: |
+            echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN\nscope=@oneflow" > .npmrc
+            npm install
+      - save_cache:
+          key: v2-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: test
+          command: npm run cover
+      - run:
+          name: upload coverage report
+          command: bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+      # - run:
+      #     name: audit
+      #     command: npm audit
+      - run:
+          name: do a release
+          command: npx semantic-release

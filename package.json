@@ -1,9 +1,9 @@
 {
-  "name": "handlebars-helpers",
-  "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.",
-  "version": "0.10.0",
-  "homepage": "https://github.com/helpers/handlebars-helpers",
-  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "name": "handlebars-kit",
+  "description": "More than 130 Handlebars helpers in ~20 categories.",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Oneflow/handlebars-kit",
+  "author": "OneFlow Systems Ltd",
   "contributors": [
     "Adrián Mugnolo (https://github.com/xymbol)",
     "Aleš Kotnik (www.draagle.com)",
@@ -54,9 +54,9 @@
     "Tim Douglas (https://github.com/timdouglas)",
     "(https://github.com/homersimpsons)"
   ],
-  "repository": "helpers/handlebars-helpers",
+  "repository": "Oneflow/handlebars-kit",
   "bugs": {
-    "url": "https://github.com/helpers/handlebars-helpers/issues"
+    "url": "https://github.com/Oneflow/handlebars-kit/issues"
   },
   "license": "MIT",
   "files": [
@@ -70,7 +70,8 @@
   "scripts": {
     "test": "jest --runInBand",
     "cover": "jest --coverage",
-    "docs": "jsdoc -c jsdoc.js"
+    "docs": "jsdoc -c jsdoc.js",
+    "release": "semantic-release"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -80,11 +81,12 @@
   "devDependencies": {
     "docdash": "^1.1.0",
     "eslint": "5.16.0",
-    "handlebars": "4.1.1",
+    "handlebars": "4.1.2",
     "jest": "24.6.0",
-    "jsdoc": "^3.5.5",
+    "jsdoc": "3.6.1",
     "mockdate": "2.0.2",
-    "moment": "2.24.0"
+    "moment": "2.24.0",
+    "semantic-release": "15.13.12"
   },
   "keywords": [
     "array",
