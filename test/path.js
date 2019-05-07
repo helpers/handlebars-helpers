@@ -74,4 +74,15 @@ describe('assemble', function() {
       assert.equal(fn({ value: {} }), '');
     });
   });
+
+  describe('linkToUNC', () => {
+    it('returns blank string if no link supplied', () => {
+      const fn = hbs.compile('{{linkToUNC null}}');
+      assert.equal(fn({}), '');
+    });
+    it('changes file:// to \\\\ and reverse the slashes', () => {
+      const fn = hbs.compile('{{linkToUNC "file://path.to/here"}}');
+      assert.equal(fn({}), '\\\\path.to\\here');
+    });
+  });
 });

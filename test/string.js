@@ -484,10 +484,13 @@ describe('string', function() {
       const fn = hbs.compile('{{truncate "foo bar baz qux" 7}}...');
       assert.equal(fn(), 'foo bar...');
     });
-
     it('should return the string truncated by a specified length, providing a custom string to denote an omission.', function() {
       const fn = hbs.compile('{{truncate "foo bar baz qux" 7 "…"}}');
       assert.equal(fn(), 'foo ba…');
+    });
+    it('should return the string truncated from the left with a negative length', function() {
+      const fn = hbs.compile('{{truncate "foo bar baz qux" -3}}');
+      assert.equal(fn(), 'qux');
     });
   });
 
@@ -547,6 +550,35 @@ describe('string', function() {
     it('should replace multiple slashes correctly', function() {
       const fn = hbs.compile('{{slashToDot "one/two/three/four"}}');
       assert.equal(fn(), 'one.two.three.four');
+    });
+  });
+
+  describe('pad', () => {
+    it('repeats the contents from and to', () => {
+      const fn = hbs.compile('{{#pad 1 5}}X{{/pad}}');
+      assert.equal(fn({}), 'XXXX');
+    });
+  });
+
+  describe('zeroPad', () => {
+    it('ignores an undefined object', () => {
+      const fn = hbs.compile('{{zeroPad num}}');
+      assert.equal(fn({}), '');
+    });
+
+    it('pads a 3-digit number with 1 digit', () => {
+      const fn = hbs.compile('{{zeroPad num}}');
+      assert.equal(fn({ num: 123 }), '0123');
+    });
+
+    it('doesn\'t pad a 3-digit number when not necessary', () => {
+      const fn = hbs.compile('{{zeroPad num 1}}');
+      assert.equal(fn({ num: 123 }), '123');
+    });
+
+    it('pads to the right amount', () => {
+      const fn = hbs.compile('{{zeroPad num 6}}');
+      assert.equal(fn({ num: 123 }), '000123');
     });
   });
 });

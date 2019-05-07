@@ -1,3 +1,12 @@
+# NOTE: WIP FORK
+
+This is a fork of the `handlebars-helpers` npm created by [Jon Schlinkert](https://github.com/jonschlinkert).
+
+Below is the original readme. More info to come.
+
+---
+
+
 # handlebars-helpers [![NPM version](https://img.shields.io/npm/v/handlebars-helpers.svg?style=flat)](https://www.npmjs.com/package/handlebars-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers)  [![NPM total downloads](https://img.shields.io/npm/dt/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers) [![Linux Build Status](https://img.shields.io/travis/helpers/handlebars-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/helpers/handlebars-helpers) [![Windows Build Status](https://img.shields.io/appveyor/ci/helpers/handlebars-helpers.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/helpers/handlebars-helpers)
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.

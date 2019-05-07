@@ -83,6 +83,7 @@
     "handlebars": "4.1.1",
     "jest": "24.6.0",
     "jsdoc": "^3.5.5",
+    "mockdate": "2.0.2",
     "moment": "2.24.0"
   },
   "keywords": [

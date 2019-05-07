@@ -174,4 +174,16 @@ describe('object', function() {
       assert.equal(res, '{"name":"Halle","age":4,"userid":"Nicole"}');
     });
   });
+
+  describe('checkExists', () => {
+    it('returns the contents if field exists', () => {
+      const fn = hbs.compile("{{#checkExists test 'field'}}assert{{/checkExists}}");
+      assert.equal(fn({ test: { field: 'here' } }), 'assert');
+    });
+
+    it('doesn\'t return the contents if field doesn\'t exist', () => {
+      const fn = hbs.compile("{{#checkExists test 'field'}}assert{{/checkExists}}");
+      assert.equal(fn({ test: { differentField: 'here' } }), '');
+    });
+  });
 });

@@ -1,10 +1,11 @@
 const assert = require('assert');
 const moment = require('moment');
+const MockDate = require('mockdate');
 const hbs = require('handlebars').create();
 const helpers = require('..');
 helpers.date({ handlebars: hbs });
 
-const context = { formatDate: "MM-DD-YYYY", time: new Date('2018-12-31') };
+const context = { formatDate: 'MM-DD-YYYY', time: new Date('2018-12-31') };
 
 describe('date', function() {
   describe('year', () => {
@@ -60,4 +61,42 @@ describe('date', function() {
       assert.deepEqual(fn(context), 'December 31, 2018');
     });
   });
+
+  describe('formatDate', () => {
+    it('returns blank if no date', () => {
+      const fn = hbs.compile('{{formatDate date}}');
+      assert.equal(fn({ date: null }), '');
+    });
+    it('returns an ISO date if no format supplied', () => {
+      const fn = hbs.compile('{{formatDate date}}');
+      assert.equal(fn({ date: new Date('2017-01-18T10:54:00.000Z') }), '2017-01-18T10:54:00');
+    });
+    it('returns an formatted date if format supplied', () => {
+      const fn = hbs.compile("{{formatDate date 'dddd'}}");
+      assert.equal(fn({ date: new Date('2017-01-18T10:54:00.000Z') }), 'Wednesday');
+    });
+  });
+
+  describe('niceDate', () => {
+    it('returns blank if no date', () => {
+      const fn = hbs.compile('{{niceDate date}}');
+      assert.equal(fn({ date: null }), '');
+    });
+    it('returns a nice date', () => {
+      const fn = hbs.compile('{{niceDate date}}');
+      assert.equal(fn({ date: new Date('2017-01-18T10:54:00.000Z') }), 'Wed 18 01 2017');
+    });
+  });
+
+  describe('getTime', () => {
+    it('returns blank if no date', () => {
+      const fn = hbs.compile('{{getTime date}}');
+      assert.equal(fn({ date: null }), '');
+    });
+    it('returns a time format string', () => {
+      const fn = hbs.compile('{{getTime date}}');
+      assert.equal(fn({ date: new Date('2017-01-18T10:54:00.000Z') }), '10:54');
+    });
+  });
+
 });

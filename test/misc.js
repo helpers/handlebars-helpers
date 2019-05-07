@@ -43,17 +43,6 @@ describe('misc', function() {
     });
   });
 
-  describe('for', () => {
-    it.skip('loops correctly with start and end', function() { // currently fails
-      const fn = hbs.compile('{{#for 1 6}}X{{/for}}');
-      assert.equal(fn({}), 'XXXXXX');
-    });
-    it('loops correctly with start, end, and increment', function() {
-      const fn = hbs.compile('{{#for 1 6 2}}X{{/for}}');
-      assert.equal(fn({}), 'XXX');
-    });
-  });
-
   describe('md5', () => {
     it('returns the md5 hash of the parameter', function() {
       const fn = hbs.compile('{{md5 name}}');
