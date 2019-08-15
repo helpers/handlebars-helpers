@@ -580,6 +580,11 @@ describe('string', function() {
       const fn = hbs.compile('{{zeroPad num 6}}');
       assert.equal(fn({ num: 123 }), '000123');
     });
+
+    it('pads a number in string', () => {
+      const fn = hbs.compile('{{zeroPad num 3}}');
+      assert.equal(fn({ num: '5' }), '005');
+    });
   });
 });
 
