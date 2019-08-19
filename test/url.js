@@ -44,9 +44,20 @@ describe('url', function() {
 
   describe('urlParse', function() {
     it('should take a string, and return an object stringified to JSON.', function() {
-      var fn = hbs.compile('{{{JSONstringify (urlParse "http://foo.com/bar/baz?key=value" "json")}}}');
-
+      var fn = hbs.compile('{{{JSONstringify (urlParse "http://foo.com/bar/baz?key=value")}}}');
       assert.deepEqual(fn(), '{"protocol":"http:","slashes":true,"auth":null,"host":"foo.com","port":null,"hostname":"foo.com","hash":null,"search":"?key=value","query":"key=value","pathname":"/bar/baz","path":"/bar/baz?key=value","href":"http://foo.com/bar/baz?key=value"}');
+    });
+
+    it('should take a string, and return an object stringified to JSON. The query string should be parsed as well.', function() {
+      var fn = hbs.compile('{{{JSONstringify (urlParse "http://foo.com/bar/baz?key=value" parseQueryString=true)}}}');
+      assert.deepEqual(fn(), '{"protocol":"http:","slashes":true,"auth":null,"host":"foo.com","port":null,"hostname":"foo.com","hash":null,"search":"?key=value","query":{"key":"value"},"pathname":"/bar/baz","path":"/bar/baz?key=value","href":"http://foo.com/bar/baz?key=value"}');
+    });
+  });
+
+  describe('parseQueryString', function() {
+    it('should take a string, and return an object stringified to JSON.', function() {
+      var fn = hbs.compile('{{{JSONstringify (parseQueryString "key=value")}}}');
+      assert.deepEqual(fn(), '{"key":"value"}');
     });
   });
 
