@@ -38,12 +38,12 @@ describe('array', function() {
       assert.equal(hbs.compile('{{before}}')(), '');
     });
     it('should return all of the items in an array before the given index', function() {
-      var fn = hbs.compile('{{before array 5}}');
+      var fn = hbs.compile('{{before array 3}}');
       assert.equal(fn(context), 'a,b,c');
     });
 
     it('should return all of the items in an array before the specified count', function() {
-      var fn = hbs.compile('{{before array 5}}');
+      var fn = hbs.compile('{{before array 3}}');
       assert.equal(fn(context), 'a,b,c');
     });
   });
@@ -396,7 +396,7 @@ describe('array', function() {
 
   describe('withBefore', function() {
     it('should use all of the items in an array before the specified count', function() {
-      var fn = hbs.compile('{{#withBefore array 5}}<{{this}}>{{/withBefore}}');
+      var fn = hbs.compile('{{#withBefore array 3}}<{{this}}>{{/withBefore}}');
       assert.equal(fn(context), '<a><b><c>');
     });
   });
