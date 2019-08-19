@@ -375,5 +375,28 @@ describe('string', function() {
       assert.equal(fn(), 'BENDER SHOULD NOT BE ALLOWED ON TV');
     });
   });
+  
+  describe("format", function() {
+    it("should return an empty string if undefined", function() {
+      var fn = hbs.compile("{{format}}");
+      assert.equal(fn(), "");
+    });
+    it("should return format string with no parameters", function() {
+      var fn = hbs.compile('{{format "to format {0} {1}"}}');
+      assert.equal(fn(), "to format {0} {1}");
+    });
+    it("should return format string with few parameters", function() {
+      var fn = hbs.compile('{{format "to format {0} {1} {3}" "a"}}');
+      assert.equal(fn(), "to format a {1} {3}");
+    });
+    it("should return format string with parameters", function() {
+      var fn = hbs.compile('{{format "to format {0} {1} {0}" "a" "b"}}');
+      assert.equal(fn(), "to format a b a");
+    });
+    it("should return format string with parameters, skip rest", function() {
+      var fn = hbs.compile('{{format "to format {0} {1}" "a" "b" "c"}}');
+      assert.equal(fn(), "to format a b");
+    });
+  });
 });
 
