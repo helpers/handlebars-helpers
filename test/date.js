@@ -94,8 +94,9 @@ describe('date', function() {
       assert.equal(fn({ date: null }), '');
     });
     it('returns a time format string', () => {
+      const date = new Date('2017-01-18T10:54:00.000Z');
       const fn = hbs.compile('{{getTime date}}');
-      assert.equal(fn({ date: new Date('2017-01-18T10:54:00.000Z') }), '10:54');
+      assert.equal(fn({ date }), date.toString().substring(16, 21)); // mm:ss
     });
   });
 

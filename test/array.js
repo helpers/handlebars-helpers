@@ -1,10 +1,12 @@
 const assert = require('assert');
 const hbs = require('handlebars').create();
 const helpers = require('..');
+
 helpers.string({ handlebars: hbs });
 helpers.array({ handlebars: hbs });
+helpers.math({ handlebars: hbs });
 
-const context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g']};
+const context = { array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g'] };
 
 describe('array', function() {
   describe('after', function() {
@@ -473,6 +475,91 @@ describe('array', function() {
     it('should return array with unique items', function() {
       const fn = hbs.compile('{{#unique duplicate}}{{this}}{{/unique}}');
       assert.equal(fn(context).toString(), 'a,b,c,d,f,g');
+    });
+  });
+
+  describe('partition', function() {
+    it('iterate correctly', function() {
+      const fn = hbs.compile('{{#partition array 3}}<{{#each this}}{{this}}{{/each}}>{{/partition}}');
+      assert.equal(fn({ array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] }), '<abc><def><gh>');
+    });
+
+    it('iteration index available', function() {
+      const fn = hbs.compile('{{#partition array 4}}({{@index}})<{{#each this}}{{@index}}{{/each}}>{{/partition}}');
+      assert.equal(fn({ array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] }), '(0)<0123>(1)<0123>');
+    });
+
+    it('array parameter validation', function() {
+      try {
+        hbs.compile('{{#partition array 3}}<{{#each this}}{{this}}{{/each}}>{{/partition}}')({ array: 'wrong type of string' });
+        throw new Error('Wrong type handled!');
+      } catch (err) {
+        assert.equal(err.message, 'First parameter have to be an array');
+      }
+    });
+  });
+
+  describe('mergeArrays', () => {
+    it('should merge two arrays with multiply', function() {
+      const data = { quantities: [1, 2, 5], weights: [0.125, 0.5, 0.75] };
+      const fn = hbs.compile('{{mergeArrays "times" quantities weights }}');
+      assert.equal(fn(data), '0.125,1,3.75');
+    });
+
+    it('should merge three arrays with plus', function() {
+      const data = { arr1: [5, 3, 1], arr2: [2, 8, 10], arr3: [1, 1, 1] };
+      const fn = hbs.compile('{{mergeArrays "plus" arr1 arr2 arr3 }}');
+      assert.equal(fn(data), '8,12,12');
+    });
+
+    it('should merge two arrays of different length with subtract', function() {
+      const data = { arr1: [5.3, 6.3], arr2: [1.4, 7.3, 9.3, 4.5] };
+      const fn = hbs.compile('{{mergeArrays "subtract" arr1 arr2 }}');
+      assert.equal(fn(data), '3.9,-1,9.3,4.5');
+    });
+
+    it('should work with single array', function() {
+      const data = { arr: [1, 2, 3, 4, 5] };
+      const fn = hbs.compile('{{mergeArrays "plus" arr }}');
+      assert.equal(fn(data), '1,2,3,4,5');
+    });
+
+    it('should get total weigth of items with plunk and sum', function() {
+      const template = '{{sum (mergeArrays "times" (pluck items "quantity") (pluck items "weight")) }}';
+      const data = {
+        items: [
+          { quantity: 2, weight: 0.25 },
+          { quantity: 1, weight: 0.125 },
+          { quantity: 4, weight: 0.5 }
+        ]
+      };
+
+      const fn = hbs.compile(template);
+      assert.equal(fn(data), '2.625');
+    });
+
+    it('should get an error if incorrect helper passed', function() {
+      const template = '{{mergeArrays "unknownWrongHelper" arr1 arr2 }}';
+      const data = { arr1: [5.3, 6.3], arr2: [1.4, 7.3, 9.3, 4.5] };
+
+      try {
+        hbs.compile(template)(data);
+        throw new Error('An unknown helper handled!');
+      } catch (err) {
+        assert.equal(err.message, 'An unknown helper function is passed as a first argument');
+      }
+    });
+
+    it('should get an error if incorrect array arguments passed', function() {
+      const template = '{{mergeArrays "plus" arr1 notarr2 }}';
+      const data = { arr1: [5.3, 6.3], notarr2: '[1.4, 7.3, 9.3, 4.5]' };
+
+      try {
+        hbs.compile(template)(data);
+        throw new Error('Incorrect array arguments handled!');
+      } catch (err) {
+        assert.equal(err.message, 'Some of the arrays arguments are incorrect');
+      }
     });
   });
 
