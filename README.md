@@ -1,7 +1,7 @@
 # NOTE: WIP FORK
 
 This is a fork of the `handlebars-helpers` npm created by [Jon Schlinkert](https://github.com/jonschlinkert).
-
+Repo uses trunk-based development, to learn more, please visit this [page](https://oneflow.atlassian.net/wiki/spaces/DEV/pages/704643073/Trunk-Based+Development)
 Below is the original readme. More info to come.
 
 ---
