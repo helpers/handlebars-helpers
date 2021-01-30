@@ -92,7 +92,6 @@
     "is-glob": "^4.0.0",
     "is-number": "^4.0.0",
     "kind-of": "^6.0.0",
-    "lazy-cache": "^2.0.2",
     "logging-helpers": "^1.0.0",
     "micromatch": "^3.1.4",
     "relative": "^3.0.2",
