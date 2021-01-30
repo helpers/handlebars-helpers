@@ -1,11 +1,10 @@
-# handlebars-helpers [![NPM version](https://img.shields.io/npm/v/handlebars-helpers.svg?style=flat)](https://www.npmjs.com/package/handlebars-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers)  [![NPM total downloads](https://img.shields.io/npm/dt/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers) [![Linux Build Status](https://img.shields.io/travis/helpers/handlebars-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/helpers/handlebars-helpers) [![Windows Build Status](https://img.shields.io/appveyor/ci/helpers/handlebars-helpers.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/helpers/handlebars-helpers)
+## Budibase handlebars-helpers
+
+*NOTE: This is a fork of the handlebars-helpers repo to prepare it for use with rollup as part of Budibase.*
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
-You might also be interested in [template-helpers](https://github.com/jonschlinkert/template-helpers).
-
 - [Install](#install)
-- [Browser usage](#browser-usage)
 - [Usage](#usage)
 - [Helpers](#helpers)
 - [Utils](#utils)
@@ -14,21 +13,11 @@ You might also be interested in [template-helpers](https://github.com/jonschlink
 
 ## Install
 
-Install with [npm](https://www.npmjs.com/):
-
-```sh
-$ npm install --save handlebars-helpers
-```
-
 Install with [yarn](https://yarnpkg.com):
 
 ```sh
 $ yarn add handlebars-helpers
 ```
-
-## Browser usage
-
-See how to [use handlebars-helpers in the browser](https://github.com/doowb/handlebars-helpers-browserify-example).
 
 ## Usage
 
