@@ -1,0 +1,41 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 30   # Just in case something goes realy real realy BAD.....
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    name: Run tests for NodeJS version ${{ matrix.node-version }}
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile   # will run `yarn install --frozen-lockfile` command
+
+    - name: Lint code
+      run: yarn lint
+
+    - name: Run test against code
+      run: yarn test
+
+    - name: Pacakge code
+      run: yarn pack
