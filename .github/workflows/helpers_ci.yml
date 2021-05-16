@@ -12,7 +12,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+
+    runs-on: ubuntu-20.04
+
+    timeout-minutes: 50   # Just in case something goes realy real realy BAD.....
 
     strategy:
       matrix:
