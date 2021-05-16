@@ -16,17 +16,27 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [10.x, 12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    name: Run tests for NodeJS version ${{ matrix.node-version }}
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn
-    - run: yarn test
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile   # will run `yarn install --frozen-lockfile` command
+
+    - name: Lint code
+      run: yarn lint
+
+    - name: Run test against code
+      run: yarn test
       env:
         CI: true
         name: Handlebars-helpers CI
