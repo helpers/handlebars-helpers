@@ -1,14 +1,17 @@
 name: Handlebars-helpers CI
 
 on: 
- # Trigger the workflow on push or pull request,
- # but only for the master branch
- push:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch
+  push:
     branches:
       - master
- pull_request:
+  pull_request:
     branches:
       - master
+  release:
+    types: 
+      - created
 
 jobs:
   build:
@@ -47,8 +50,8 @@ jobs:
           CI: true
           name: Handlebars-helpers CI
 
-      - name: Publish to NPM if not a PR
-        if: ${{ github.event_name != 'pull_request'}}
+      - name: Publish to NPM only on a relase event
+        if: github.event_name == 'release' && github.event.action == 'created'
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
