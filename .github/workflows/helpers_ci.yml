@@ -46,6 +46,9 @@ jobs:
         env:
           CI: true
           name: Handlebars-helpers CI
-      - uses: JS-DevTools/npm-publish@v1
+
+      - name: Publish to NPM if not a PR
+        if: ${{ github.event_name != 'pull_request'}}
+        uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
