@@ -2,21 +2,23 @@ name: Handlebars-helpers CI
 
 on: 
   # Trigger the workflow on push or pull request,
-  # but only for the master branch
+  # but only for the master branch (or main)
   push:
     branches:
       - master
+      - main
   pull_request:
     branches:
       - master
+      - main
   release:
     types: 
       - created
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
   build:
-
-    name: Run tests for NodeJS version ${{ matrix.node-version }} on @ ${{ matrix.os }}
 
     runs-on: ${{ matrix.os }}
 
@@ -44,7 +46,7 @@ jobs:
       - name: Lint code
         run: yarn lint
 
-      - name: Run test against code
+      - name: Run tests against code
         run: yarn test
         env:
           CI: true
