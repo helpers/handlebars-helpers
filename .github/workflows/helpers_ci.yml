@@ -13,36 +13,39 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    name: Run tests for NodeJS version ${{ matrix.node-version }} on @ ${{ matrix.os }}
 
-    timeout-minutes: 50   # Just in case something goes realy real realy BAD.....
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 30   # Just in case something goes realy real realy BAD.....
 
     strategy:
+      fail-fast: false
       matrix:
-        node-version: [10.x, 12.x, 14.x, 16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    name: Run tests for NodeJS version ${{ matrix.node-version }}
+        node-version: [10.x, 12.x, 14.x, 16.x]
+        os: [ubuntu-20.04, windows-2019, macos-10.15]
 
     steps:
-    - uses: actions/checkout@v2
+      - name: Checkout GITHub code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: yarn install --frozen-lockfile   # will run `yarn install --frozen-lockfile` command
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile   # will run `yarn install --frozen-lockfile` command
 
-    - name: Lint code
-      run: yarn lint
+      - name: Lint code
+        run: yarn lint
 
-    - name: Run test against code
-      run: yarn test
-      env:
-        CI: true
-        name: Handlebars-helpers CI
-    - uses: JS-DevTools/npm-publish@v1
-      with:
-        token: ${{ secrets.NPM_TOKEN }}
+      - name: Run test against code
+        run: yarn test
+        env:
+          CI: true
+          name: Handlebars-helpers CI
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
