@@ -88,7 +88,6 @@ Currently **189 helpers** in **20 categories**:
 * **[html](#html)** ([code](lib/html.js) | [unit tests](test/html.js))
 * **[i18n](#i18n)** ([code](lib/i18n.js) | [unit tests](test/i18n.js))
 * **[inflection](#inflection)** ([code](lib/inflection.js) | [unit tests](test/inflection.js))
-* **[logging](#logging)** ([code](lib/logging.js) | [unit tests](test/logging.js))
 * **[markdown](#markdown)** ([code](lib/markdown.js) | [unit tests](test/markdown.js))
 * **[match](#match)** ([code](lib/match.js) | [unit tests](test/match.js))
 * **[math](#math)** ([code](lib/math.js) | [unit tests](test/math.js))
@@ -220,22 +219,6 @@ Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issue
 
 * **[inflect](#inflect)** ([code](lib/inflection.js#L30) | [tests](test/inflection.js#L9))
 * **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L58) | [tests](test/inflection.js#L22))
-
-### [logging helpers](#logging)
-
-Visit the: [code](lib/logging.js) | [unit tests](test/logging.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+logging+helpers))
-
-* **[log](#log)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[ok](#ok)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[success](#success)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[info](#info)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[warning](#warning)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[warn](#warn)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[error](#error)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[danger](#danger)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[bold](#bold)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[_debug](#_debug)** ([code](lib/logging.js#Lundefined) | [no tests])
-* **[_inspect](#_inspect)** ([code](lib/logging.js#Lundefined) | [no tests])
 
 ### [markdown helpers](#markdown)
 
@@ -1595,10 +1578,6 @@ Returns an ordinalized number as a string.
 {{ordinalize 22}}
 <!-- '22nd' -->
 ```
-
-## logging
-
-[logging-helpers](https://github.com/helpers/logging-helpers).
 
 ## markdown
 
