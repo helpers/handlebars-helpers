@@ -1,20 +1,18 @@
 name: Security Monitor GitHub Action
 
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - reopened
       - synchronize
-      - review_requested
       - edited
     branches:
       - "*"
 
-concurrency: security-monitor
-
 jobs:
   security_monitor:
+    if: ${{ !contains(github.head_ref, 'dependabot') }}
     runs-on: ubuntu-latest
     name: Security Monitor
     steps:
@@ -23,3 +21,23 @@ jobs:
       with:
         gh-pat: ${{ secrets.security_monitor }} # github personal access token
         action-user: ${{ secrets.security_monitor_user }}
+
+  pass_dependabot_status:
+    if: ${{ contains(github.head_ref, 'dependabot') }}
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+    name: Pass security-monitor status check for dependabot
+    steps:
+      - name: pass security-monitor status check for dependabot
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.repos.createCommitStatus({
+              context: 'security-monitor',
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.payload.pull_request.head.sha,
+              state: 'success'
+            });
