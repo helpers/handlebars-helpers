@@ -2127,9 +2127,10 @@ Parses the given string using `JSON.parse`.
 **Example**
 
 ```handlebars
-<!-- string: '{"foo": "bar"}' -->
-{{JSONparse string}}
-<!-- results in: { foo: 'bar' } -->
+{{#JSONparse '{"foo": "bar"}'}}
+  {{foo}}
+{{/JSONparse}}
+<!-- output: bar -->
 ```
 
 ### [{{JSONstringify}}](lib/object.js#L218)
