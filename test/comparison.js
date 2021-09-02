@@ -321,6 +321,30 @@ describe('comparison', function() {
     });
   });
 
+  describe('isFalsey', function() {
+    it('should render block if given value is falsey.', function() {
+      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: 'nope'}), 'A');
+    });
+
+    it('should render inverse if given value is truthy', function() {
+      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: 'CCC'}), 'B');
+    });
+  });
+
+  describe('isTruthy', function() {
+    it('should render block if given value is truthy.', function() {
+      const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: 'CCC'}), 'A');
+    });
+
+    it('should render inverse if given value is not truthy', function() {
+      const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: 'nope'}), 'B');
+    });
+  });
+
   describe('eq', function() {
     it('should render a block if the value is equal to a given number.', function() {
       const fn = hbs.compile('{{#eq number compare=8}}A{{/eq}}');
