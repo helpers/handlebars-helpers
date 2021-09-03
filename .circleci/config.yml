@@ -30,7 +30,7 @@ jobs:
       - run:
           name: install NPM dependencies
           command: |
-            echo -e "//registry.npmjs.org/:_authToken=$NPM_TOKEN\nscope=@oneflow" > .npmrc
+            echo -e "registry=https://npm.pkg.github.com/oneflow\n//npm.pkg.github.com/:_authToken=$GH_TOKEN\nscope=@oneflow" > .npmrc
             npm install
       - save_cache:
           key: v2-npm-deps-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "package-lock.json" }}
