@@ -1062,7 +1062,7 @@ optionally specify an inverse block to render when falsy.
 **Params**
 
 * `a` **{}**
-* `operator` **{}**: The operator to use. Operators must be enclosed in quotes: `">"`, `"="`, `"<="`, and so on.
+* `operator` **{}**: The operator to use. Operators must be enclosed in quotes: `">"`, `"=="`, `"<="`, and so on.
 * `b` **{}**
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or if specified the inverse block is rendered if falsey.
