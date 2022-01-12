@@ -1,6 +1,6 @@
 ## handlebars-helpers
 
-[![Build](https://github.com/Budibase/handlebars-helpers/actions/workflows/helpers_ci.yml/badge.svg)](https://github.com/Budibase/handlebars-helpers/actions/workflows/helpers_ci.yml)
+[![Build](https://github.com/helpers/handlebars-helpers/actions/workflows/helpers_ci.yml/badge.svg)](https://github.com/helpers/handlebars-helpers/actions/workflows/helpers_ci.yml)
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
