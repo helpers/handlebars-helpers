@@ -1,12 +1,6 @@
-## Budibase handlebars-helpers
+## handlebars-helpers
 
-*NOTE: This is a fork of the handlebars-helpers repo to prepare it for use with rollup as part of Budibase.*
-
-[![Prod Dependencies](https://github.com/Budibase/handlebars-helpers/status.svg)](https://github.com/Budibase/handlebars-helpers)
-[![Dev Dependencies](https://github.com/Budibase/handlebars-helpers/dev-status.svg)](https://github.com/Budibase/handlebars-helpers#info=devDependencies)
-
-[![Build](https://github.com/Budibase/handlebars-helpers/actions/workflows/node.js.yml/badge.svg)](https://github.com/Budibase/handlebars-helpers/actions/workflows/node.js.yml)
-[![Build Matrix](http://github-actions.40ants.com/Budibase/handlebars-helper/matrix.svg)](https://github.com/Budibase/handlebars-helpers
+[![Build](https://github.com/Budibase/handlebars-helpers/actions/workflows/helpers_ci.yml/badge.svg)](https://github.com/Budibase/handlebars-helpers/actions/workflows/helpers_ci.yml)
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
