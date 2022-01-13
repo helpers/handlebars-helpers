@@ -36,7 +36,7 @@ import { array, collection, math, number } from 'handlebars-helpers';
 
 ## Categories
 
-Currently **165 helpers** in **18 categories**:
+Currently **162 helpers** in **18 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -44,7 +44,7 @@ Currently **165 helpers** in **18 categories**:
 * **[comparison](#comparison)** ([code](lib/comparison.js) | [unit tests](test/comparison.js))
 * **[date](#date)** ([code](lib/date.js) | [unit tests](test/date.js))
 * **[html](#html)** ([code](lib/html.js) | [unit tests](test/html.js))
-* **[i18n](#i18n)** ([code](lib/i18n.js) | [unit tests](test/i18n.js))
+* **[i18n](#internationalization)** ([code](lib/i18n.js) | [unit tests](test/i18n.js))
 * **[inflection](#inflection)** ([code](lib/inflection.js) | [unit tests](test/inflection.js))
 * **[markdown](#markdown)** ([code](lib/markdown.js) | [unit tests](test/markdown.js))
 * **[match](#match)** ([code](lib/match.js) | [unit tests](test/match.js))
@@ -59,7 +59,7 @@ Currently **165 helpers** in **18 categories**:
 
 ## All helpers
 
-### [array helpers](#array)
+### Array helpers
 
 Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+array+helpers)
 
@@ -82,30 +82,30 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 * **[reverse](#reverse)** ([code](lib/array.js) | [tests](test/array.js))
 * **[some](#some)** ([code](lib/array.js) | [tests](test/array.js))
 * **[sort](#sort)** ([code](lib/array.js) | [tests](test/array.js))
-* **[sortBy](#sortBy)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withAfter](#withAfter)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withBefore](#withBefore)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withFirst](#withFirst)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withGroup](#withGroup)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withLast](#withLast)** ([code](lib/array.js) | [tests](test/array.js))
-* **[withSort](#withSort)** ([code](lib/array.js) | [tests](test/array.js))
+* **[sortBy](#sortby)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withAfter](#withafter)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withBefore](#withbefore)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withFirst](#withfirst)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withGroup](#withgroup)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withLast](#withlast)** ([code](lib/array.js) | [tests](test/array.js))
+* **[withSort](#withsort)** ([code](lib/array.js) | [tests](test/array.js))
 * **[unique](#unique)** ([code](lib/array.js) | [tests](test/array.js))
 
-### [code helpers](#code)
+### Code helpers
 
 Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers)
 
 * **[gist](#gist)** ([code](lib/code.js) | [tests](test/code.js))
 * **[jsfiddle](#jsfiddle)** ([code](lib/code.js) | [tests](test/code.js))
 
-### [collection helpers](#collection)
+### Collection helpers
 
 Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers)
 
 * **[isEmpty](#isempty)** ([code](lib/collection.js) | [tests](test/collection.js))
 * **[iterate](#iterate)** ([code](lib/collection.js) | [tests](test/collection.js))
 
-### [comparison helpers](#comparison)
+### Comparison helpers
 
 Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+comparison+helpers)
 
@@ -134,13 +134,13 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[unlessGteq](#unlessgteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[unlessLteq](#unlesslteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 
-### [date helpers](#date)
+### Date helpers
 
 Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers)
 
 * **[year](#year)** ([code](lib/date.js) | [tests](test/date.js))
 
-### [html helpers](#html)
+### HTML helpers
 
 Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers)
 
@@ -150,35 +150,35 @@ Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://g
 * **[sanitize](#sanitize)** ([code](lib/html.js) | [tests](test/html.js))
 * **[ul](#ul)** ([code](lib/html.js) | [tests](test/html.js))
 * **[ol](#ol)** ([code](lib/html.js) | [tests](test/html.js))
-* **[thumbnailImage](#thumbnailImage)** ([code](lib/html.js) | [tests](test/html.js))
+* **[thumbnailImage](#thumbnailimage)** ([code](lib/html.js) | [tests](test/html.js))
 
-### [i18n helpers](#i18n)
+### Internationalization helpers
 
 Visit the: [code](lib/i18n.js) | [unit tests](test/i18n.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+i18n+helpers)
 
 * **[i18n](#i18n)** ([code](lib/i18n.js) | [tests](test/i18n.js))
 
-### [inflection helpers](#inflection)
+### Inflection helpers
 
 Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+inflection+helpers)
 
 * **[inflect](#inflect)** ([code](lib/inflection.js) | [tests](test/inflection.js))
 * **[ordinalize](#ordinalize)** ([code](lib/inflection.js) | [tests](test/inflection.js))
 
-### [markdown helpers](#markdown)
+### Markdown helpers
 
 Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers)
 
 * **[markdownToHTML](#markdowntohtml)** ([code](lib/markdown.js) | [tests](test/markdown.js))
 
-### [match helpers](#match)
+### Match helpers
 
 Visit the: [code](lib/match.js) | [unit tests](test/match.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+match+helpers)
 
 * **[match](#match)** ([code](lib/match.js) | [tests](test/match.js))
-* **[isMatch](#isMatch)** ([code](lib/match.js) | [tests](test/match.js))
+* **[isMatch](#ismatch)** ([code](lib/match.js) | [tests](test/match.js))
 
-### [math helpers](#math)
+### Math helpers
 
 Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+math+helpers)
 
@@ -195,31 +195,30 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://g
 * **[subtract](#subtract)** ([code](lib/math.js) | [tests](test/math.js))
 * **[sum](#sum)** ([code](lib/math.js) | [tests](test/math.js))
 
-### [misc helpers](#misc)
+### Misc helpers
 
 Visit the: [code](lib/misc.js) | [unit tests](test/misc.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+misc+helpers)
 
-* **[frame](#frame)** ([code](lib/misc.js) | [no tests])
 * **[option](#option)** ([code](lib/misc.js) | [tests](test/misc.js))
 * **[noop](#noop)** ([code](lib/misc.js) | [tests](test/misc.js))
-* **[typeOf](#typeOf)** ([code](lib/misc.js) | [no tests])
-* **[withHash](#withHash)** ([code](lib/misc.js) | [tests](test/misc.js))
+* **[typeOf](#typeof)** ([code](lib/misc.js) | [no tests])
+* **[withHash](#withhash)** ([code](lib/misc.js) | [tests](test/misc.js))
 
-### [number helpers](#number)
+### Number helpers
 
 Visit the: [code](lib/number.js) | [unit tests](test/number.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+number+helpers)
 
 * **[bytes](#bytes)** ([code](lib/number.js) | [tests](test/number.js))
-* **[addCommas](#addCommas)** ([code](lib/number.js) | [tests](test/number.js))
-* **[phoneNumber](#phoneNumber)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toAbbr](#toAbbr)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toExponential](#toExponential)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toFixed](#toFixed)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toFloat](#toFloat)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toInt](#toInt)** ([code](lib/number.js) | [tests](test/number.js))
-* **[toPrecision](#toPrecision)** ([code](lib/number.js) | [tests](test/number.js))
+* **[addCommas](#addcommas)** ([code](lib/number.js) | [tests](test/number.js))
+* **[phoneNumber](#phonenumber)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toAbbr](#toabbr)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toExponential](#toexponential)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toFixed](#tofixed)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toFloat](#tofloat)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toInt](#toint)** ([code](lib/number.js) | [tests](test/number.js))
+* **[toPrecision](#toprecision)** ([code](lib/number.js) | [tests](test/number.js))
 
-### [object helpers](#object)
+### Object helpers
 
 Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+object+helpers)
 
@@ -238,7 +237,7 @@ Visit the: [code](lib/object.js) | [unit tests](test/object.js) | [issues](https
 * **[pick](#pick)** ([code](lib/object.js) | [tests](test/object.js))
 * **[stringify](#stringify)** ([code](lib/object.js) | [tests](test/object.js))
 
-### [path helpers](#path)
+### Path helpers
 
 Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+path+helpers)
 
@@ -251,14 +250,14 @@ Visit the: [code](lib/path.js) | [unit tests](test/path.js) | [issues](https://g
 * **[resolve](#resolve)** ([code](lib/path.js) | [no tests])
 * **[segments](#segments)** ([code](lib/path.js) | [tests](test/path.js))
 
-### [regex helpers](#regex)
+### Regex helpers
 
 Visit the: [code](lib/regex.js) | [unit tests](test/regex.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+regex+helpers)
 
 * **[toRegex](#toRegex)** ([code](lib/regex.js) | [no tests])
 * **[test](#test)** ([code](lib/regex.js) | [no tests])
 
-### [string helpers](#string)
+### String helpers
 
 Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+string+helpers)
 
@@ -298,19 +297,19 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https
 * **[upcase](#upcase)** ([code](lib/string.js) | [no tests])
 * **[uppercase](#uppercase)** ([code](lib/string.js) | [tests](test/string.js))
 
-### [url helpers](#url)
+### URL helpers
 
 Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+url+helpers)
 
-* **[encodeURI](#encodeURI)** ([code](lib/url.js) | [tests](test/url.js))
+* **[encodeURI](#encodeuri)** ([code](lib/url.js) | [tests](test/url.js))
 * **[escape](#escape)** ([code](lib/url.js) | [no tests])
-* **[decodeURI](#decodeURI)** ([code](lib/url.js) | [tests](test/url.js))
+* **[decodeURI](#decodeuri)** ([code](lib/url.js) | [tests](test/url.js))
 * **[url_encode](#url_encode)** ([code](lib/url.js) | [no tests])
 * **[url_decode](#url_decode)** ([code](lib/url.js) | [no tests])
-* **[urlResolve](#urlResolve)** ([code](lib/url.js) | [tests](test/url.js))
-* **[urlParse](#urlParse)** ([code](lib/url.js) | [tests](test/url.js))
-* **[stripQuerystring](#stripQuerystring)** ([code](lib/url.js) | [tests](test/url.js))
-* **[stripProtocol](#stripProtocol)** ([code](lib/url.js) | [no tests])
+* **[urlResolve](#urlresolve)** ([code](lib/url.js) | [tests](test/url.js))
+* **[urlParse](#urlparse)** ([code](lib/url.js) | [tests](test/url.js))
+* **[stripQuerystring](#stripquerystring)** ([code](lib/url.js) | [tests](test/url.js))
+* **[stripProtocol](#stripprotocol)** ([code](lib/url.js) | [no tests])
 
 ***
 
@@ -1385,7 +1384,7 @@ Returns a `<figure>` with a thumbnail linked to a full picture
 * `context.height` **{Number}**
 * `returns` **{String}**: HTML `<figure>` element with image and optional caption/link.
 
-## i18n
+## internationalization
 
 ### i18n
 
