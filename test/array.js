@@ -161,6 +161,18 @@ describe('array', function() {
     });
   });
 
+  describe('hasLength', function() {
+    it('should render the first block if length is the given number', function() {
+      const fn = hbs.compile('{{#hasLength array 8}}AAA{{else}}BBB{{/hasLength}}');
+      assert.equal(fn(context), 'AAA');
+    });
+
+    it('should render the inverse block if length is not the given number', function() {
+      const fn = hbs.compile('{{#hasLength array 3}}AAA{{else}}BBB{{/hasLength}}');
+      assert.equal(fn(context), 'BBB');
+    });
+  });
+
   describe('inArray', function() {
     it('should render the first block when a value exists in the array', function() {
       const fn = hbs.compile('{{#inArray array "d"}}AAA{{else}}BBB{{/inArray}}');
@@ -252,18 +264,6 @@ describe('array', function() {
 
     it('should return an array with the last two items in an array', function() {
       assert.equal(hbs.compile('{{last array 2}}')(context), 'g,h');
-    });
-  });
-
-  describe('lengthEqual', function() {
-    it('should render the first block if length is the given number', function() {
-      const fn = hbs.compile('{{#lengthEqual array 8}}AAA{{else}}BBB{{/lengthEqual}}');
-      assert.equal(fn(context), 'AAA');
-    });
-
-    it('should render the inverse block if length is not the given number', function() {
-      const fn = hbs.compile('{{#lengthEqual array 3}}AAA{{else}}BBB{{/lengthEqual}}');
-      assert.equal(fn(context), 'BBB');
     });
   });
 

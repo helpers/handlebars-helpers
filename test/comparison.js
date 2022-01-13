@@ -325,45 +325,23 @@ describe('comparison', function() {
     });
   });
 
-  describe('isFalsey', function() {
-    it('should render block if given value is falsey.', function() {
-      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: ''}), 'A');
-    });
-
-    it('should render block if given value is falsey.', function() {
-      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: 0}), 'A');
-    });
-
-    it('should render inverse if given value is truthy', function() {
-      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: 'CCC'}), 'B');
-    });
-
-    it('should render inverse if given value is truthy', function() {
-      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: true}), 'B');
-    });
-  });
-
   describe('isTruthy', function() {
-    it('should render block if given value is truthy.', function() {
+    it('should render block if given value is truthy (string)', function() {
       const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
       assert.equal(fn({value: 'CCC'}), 'A');
     });
 
-    it('should render block if given value is truthy.', function() {
+    it('should render block if given value is truthy (boolean)', function() {
       const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
       assert.equal(fn({value: true}), 'A');
     });
 
-    it('should render inverse if given value is not truthy', function() {
+    it('should render inverse if given value is not truthy (string)', function() {
       const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
       assert.equal(fn({value: ''}), 'B');
     });
 
-    it('should render inverse if given value is not truthy', function() {
+    it('should render inverse if given value is not truthy (boolean)', function() {
       const fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
       assert.equal(fn({value: false}), 'B');
     });
@@ -538,6 +516,70 @@ describe('comparison', function() {
     it('should render the inverse block if neither are true.', function() {
       const fn = hbs.compile('{{#neither great magnificent}}A{{else}}B{{/neither}}');
       assert.equal(fn({great: true, magnificent: false}), 'B');
+    });
+  });
+
+  describe('not', function() {
+    describe('block', function() {
+      it('should render a block if the value is not truthy (boolean)', function() {
+        const fn = hbs.compile('{{#not x}}A{{else}}B{{/not}}');
+        assert.equal(fn({x: false}), 'A');
+      });
+      it('should render a block if the value is not truthy (string)', function() {
+        const fn = hbs.compile('{{#not x}}A{{else}}B{{/not}}');
+        assert.equal(fn({x: ''}), 'A');
+      });
+
+      it('should render the inverse block if the value is truthy (boolean)', function() {
+        const fn = hbs.compile('{{#not x}}A{{else}}B{{/not}}');
+        assert.equal(fn({x: true}), 'B');
+      });
+      it('should render the inverse block if the value is truthy (string)', function() {
+        const fn = hbs.compile('{{#not x}}A{{else}}B{{/not}}');
+        assert.equal(fn({x: 'hello'}), 'B');
+      });
+    });
+
+    describe('inline', function() {
+      it('should return false the value is truthy (boolean)', function() {
+        const fn = hbs.compile('{{not x}}');
+        assert.equal(fn({x: true}), 'false');
+      });
+      it('should return false the value is truthy (string)', function() {
+        const fn = hbs.compile('{{not x}}');
+        assert.equal(fn({x: 'hello'}), 'false');
+      });
+
+      it('should return true if the value is not truthy (boolean)', function() {
+        const fn = hbs.compile('{{not x}}');
+        assert.equal(fn({x: false}), 'true');
+      });
+      it('should return true if the value is not truthy (string)', function() {
+        const fn = hbs.compile('{{not x}}');
+        assert.equal(fn({x: ''}), 'true');
+      });
+    });
+
+    describe('a subexpression', function() {
+      it('should render block if given value is falsey.', function() {
+        const fn = hbs.compile('{{#if (not value)}}A{{else}}B{{/if}}');
+        assert.equal(fn({value: ''}), 'A');
+      });
+
+      it('should render block if given value is falsey.', function() {
+        const fn = hbs.compile('{{#if (not value)}}A{{else}}B{{/if}}');
+        assert.equal(fn({value: 0}), 'A');
+      });
+
+      it('should render inverse if given value is truthy', function() {
+        const fn = hbs.compile('{{#if (not value)}}A{{else}}B{{/if}}');
+        assert.equal(fn({value: 'CCC'}), 'B');
+      });
+
+      it('should render inverse if given value is truthy', function() {
+        const fn = hbs.compile('{{#if (not value)}}A{{else}}B{{/if}}');
+        assert.equal(fn({value: true}), 'B');
+      });
     });
   });
 

@@ -37,7 +37,7 @@ import { array, collection, math, number } from 'handlebars-helpers';
 
 ## Categories
 
-Currently **189 helpers** in **20 categories**:
+Currently **165 helpers** in **18 categories**:
 
 * **[array](#array)** ([code](lib/array.js) | [unit tests](test/array.js))
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
@@ -71,14 +71,13 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 * **[filter](#filter)** ([code](lib/array.js) | [tests](test/array.js))
 * **[first](#first)** ([code](lib/array.js) | [tests](test/array.js))
 * **[forEach](#forEach)** ([code](lib/array.js) | [tests](test/array.js))
+* **[hasLength](#hasLength)** ([code](lib/array.js) | [tests](test/array.js))
 * **[inArray](#inArray)** ([code](lib/array.js) | [tests](test/array.js))
 * **[isArray](#isArray)** ([code](lib/array.js) | [tests](test/array.js))
 * **[itemAt](#itemAt)** ([code](lib/array.js) | [tests](test/array.js))
 * **[join](#join)** ([code](lib/array.js) | [tests](test/array.js))
-* **[equalsLength](#equalsLength)** ([code](lib/array.js) | [no tests])
 * **[last](#last)** ([code](lib/array.js) | [tests](test/array.js))
 * **[length](#length)** ([code](lib/array.js) | [tests](test/array.js))
-* **[lengthEqual](#lengthEqual)** ([code](lib/array.js) | [tests](test/array.js))
 * **[map](#map)** ([code](lib/array.js) | [tests](test/array.js))
 * **[pluck](#pluck)** ([code](lib/array.js) | [tests](test/array.js))
 * **[reverse](#reverse)** ([code](lib/array.js) | [no tests])
@@ -119,7 +118,6 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[gt](#gt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[gte](#gte)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[has](#has)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[isFalsey](#isFalsey)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[isTruthy](#isTruthy)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[ifEven](#ifEven)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[ifNth](#ifNth)** ([code](lib/comparison.js) | [tests](test/comparison.js))
@@ -129,7 +127,7 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[lt](#lt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[lte](#lte)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[neither](#neither)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[not](#not)** ([code](lib/comparison.js) | [no tests])
+* **[not](#not)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[or](#or)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[unlessEq](#unlessEq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[unlessGt](#unlessGt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
@@ -141,7 +139,7 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 
 Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers)
 
-* **[year](#year)** ([code](lib/date.js) | [no tests])
+* **[year](#year)** ([code](lib/date.js) | [tests](test/date.js))
 
 ### [html helpers](#html)
 
@@ -192,7 +190,6 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://g
 * **[ceil](#ceil)** ([code](lib/math.js) | [tests](test/math.js))
 * **[divide](#divide)** ([code](lib/math.js) | [tests](test/math.js))
 * **[floor](#floor)** ([code](lib/math.js) | [tests](test/math.js))
-* **[modulo](#modulo)** ([code](lib/math.js) | [no tests])
 * **[multiply](#multiply)** ([code](lib/math.js) | [tests](test/math.js))
 * **[random](#random)** ([code](lib/math.js) | [tests](test/math.js))
 * **[remainder](#remainder)** ([code](lib/math.js) | [tests](test/math.js))
@@ -541,7 +538,7 @@ Join all elements of array into a string, optionally using a given separator.
 <!-- results in: 'a-b-c' -->
 ```
 
-### [{{equalsLength}}](lib/array.js)
+### [{{hasLength}}](lib/array.js)
 
 Returns true if the the length of the given `value` is equal
 to the given `length`. Can be used as a block or inline helper.
@@ -601,10 +598,6 @@ Returns the length of the given string or array.
 {{length myObject}}
 <!-- results in: 2 -->
 ```
-
-### [{{lengthEqual}}](lib/array.js)
-
-Alias for [equalsLength](#equalsLength)
 
 ### [{{map}}](lib/array.js)
 
@@ -1059,23 +1052,9 @@ If an inverse block is specified it will be rendered when falsy.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**
 
-### [{{isFalsey}}](lib/comparison.js)
-
-Returns true if the given `value` is falsey. Uses the [falsey](https://github.com/jonschlinkert/falsey)
-library for comparisons. Please see that library for more information
-or to report bugs with this helper.
-
-**Params**
-
-* `val` **{any}**
-* `options` **{Options}**
-* `returns` **{Boolean}**
-
 ### [{{isTruthy}}](lib/comparison.js)
 
-Returns true if the given `value` is truthy. Uses the [falsey](https://github.com/jonschlinkert/falsey)
-library for comparisons. Please see that library for more information
-or to report bugs with this helper.
+Returns true if the given `value` is truthy.
 
 **Params**
 
@@ -1613,16 +1592,6 @@ Get the `Math.floor()` of the given value.
 * `value` **{Number}**
 * `returns` **{Number}**
 
-### [{{modulo}}](lib/math.js)
-
-Get the remainder of a division operation.
-
-**Params**
-
-* `a` **{Number}**
-* `b` **{Number}**
-* `returns` **{Number}**
-
 ### [{{multiply}}](lib/math.js)
 
 Return the product of `a` times `b`.
@@ -1645,12 +1614,20 @@ Generate a random number between two values
 
 ### [{{remainder}}](lib/math.js)
 
-Get the remainder when `a` is divided by `b`.
+Get the remainder of dividing `a` by `b`.
 
 **Params**
 
-* `a` **{Number}**: a
-* `b` **{Number}**: b
+* `a` **{Number}**
+* `b` **{Number}**
+* `returns` **{Number}**
+
+**Example**
+
+```handlebars
+{{remainder 7 5}}
+<!-- results in: 2 -->
+```
 
 ### [{{round}}](lib/math.js)
 
