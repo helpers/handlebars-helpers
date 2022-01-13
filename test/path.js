@@ -6,8 +6,9 @@ var assert = require('assert');
 var path = require('path');
 var hbs = require('handlebars').create();
 var gm = require('global-modules');
-var helpers = require('..');
-helpers.path({handlebars: hbs});
+const pathHelpers = require('../lib/path');
+
+hbs.registerHelper(pathHelpers);
 
 describe('assemble', function() {
   describe('absolute', function() {
@@ -32,15 +33,15 @@ describe('assemble', function() {
   describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
       var fn = hbs.compile('{{relative "dist/docs.html" "index.html"}}');
-      assert.equal(fn(), path.join('..', 'index.html'));
+      assert.equal(fn(), 'index.html');
     });
     it('should return the relative path from file A to file B', function() {
       var fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
-      assert.equal(fn(), path.join('..', '..', 'assets'));
+      assert.equal(fn(), '../../assets');
     });
     it('should use the cwd passed on options', function() {
       var fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
-      assert.equal(fn({cwd: gm}), path.join('..', '..', 'assets'));
+      assert.equal(fn({cwd: gm}), '../../assets');
     });
   });
 

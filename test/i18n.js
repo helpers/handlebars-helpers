@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.i18n({handlebars: hbs});
+const i18nHelpers = require('../lib/i18n');
+
+hbs.registerHelper(i18nHelpers);
 
 var context = {language: 'en', en: {key: 'value', a: {b: 'c'}}, fr: {key: 'valeur'}};
 

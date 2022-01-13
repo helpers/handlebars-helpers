@@ -6,18 +6,6 @@ var utils = require('../lib/utils');
 var HTML = require('../lib/utils/html');
 
 describe('utils', function() {
-  describe('chop', function() {
-    it('should return an empty string if undefined', function() {
-      assert.equal(utils.chop(), '');
-    });
-    it('should remove non-word characters from start of string', function() {
-      assert.equal(utils.chop('- foo bar baz'), 'foo bar baz');
-    });
-    it('should remove non-word characters from end of string', function() {
-      assert.equal(utils.chop('foo bar baz _- '), 'foo bar baz');
-    });
-  });
-
   describe('changecase', function() {
     it('should return an empty string if undefined', function() {
       assert.equal(utils.changecase(), '');

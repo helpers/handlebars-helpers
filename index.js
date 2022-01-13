@@ -5,57 +5,22 @@
  * Released under the MIT License.
  */
 
-'use strict';
-
-var forIn = require('for-in');
-var define = require('define-property');
-var lib = require('./lib/');
-
-/**
- * Expose helpers
- */
-
-module.exports = function helpers(groups, options) {
-  if (typeof groups === 'string') {
-    groups = [groups];
-  } else if (!Array.isArray(groups)) {
-    options = groups;
-    groups = null;
-  }
-
-  options = options || {};
-  var hbs = options.handlebars || options.hbs || require('handlebars');
-  define(module.exports, 'handlebars', hbs);
-
-  if (groups) {
-    groups.forEach(function(key) {
-      hbs.registerHelper(lib[key]);
-    });
-  } else {
-    forIn(lib, function(group, key) {
-      hbs.registerHelper(group);
-    });
-  }
-
-  return hbs.helpers;
-};
-
-/**
- * Expose helper groups
- */
-
-forIn(lib, function(group, key) {
-  define(module.exports, key, function(options) {
-    options = options || {};
-    var hbs = options.handlebars || options.hbs || require('handlebars');
-    define(module.exports, 'handlebars', hbs);
-    hbs.registerHelper(group);
-    return hbs.helpers;
-  });
-});
-
-/**
- * Expose `utils`
- */
-
-module.exports.utils = require('./lib/utils');
+module.exports.array = require('./lib/array');
+module.exports.code = require('./lib/code');
+module.exports.collection = require('./lib/collection');
+module.exports.comparison = require('./lib/comparison');
+module.exports.date = require('./lib/date');
+module.exports.html = require('./lib/html');
+module.exports.i18n = require('./lib/i18n');
+module.exports.inflection = require('./lib/inflection');
+module.exports.logging = require('./lib/logging');
+module.exports.markdown = require('./lib/markdown');
+module.exports.match = require('./lib/match');
+module.exports.math = require('./lib/math');
+module.exports.misc = require('./lib/misc');
+module.exports.number = require('./lib/number');
+module.exports.object = require('./lib/object');
+module.exports.path = require('./lib/path');
+module.exports.regex = require('./lib/regex');
+module.exports.string = require('./lib/string');
+module.exports.url = require('./lib/url');

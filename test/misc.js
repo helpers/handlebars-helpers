@@ -3,13 +3,11 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
+const miscHelpers = require('../lib/misc');
+
+hbs.registerHelper(miscHelpers);
 
 describe('misc', function() {
-  beforeEach(function() {
-    helpers.misc({handlebars: hbs});
-  });
-
   describe('noop', function() {
     it('should be a noop', function() {
       var fn = hbs.compile('{{#noop}}{{message}}{{/noop}}');

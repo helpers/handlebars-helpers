@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.number({handlebars: hbs});
+const numberHelpers = require('../lib/number');
+
+hbs.registerHelper(numberHelpers);
 
 describe('number', function() {
   describe('bytes', function() {

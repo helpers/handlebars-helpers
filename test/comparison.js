@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.comparison({handlebars: hbs});
+const comparisonHelpers = require('../lib/comparison');
+
+hbs.registerHelper(comparisonHelpers);
 
 describe('comparison', function() {
   describe('and', function() {
@@ -349,12 +350,12 @@ describe('comparison', function() {
   });
 
   describe('eq', function() {
-    it('should render a block if the value is equal to a given number.', function() {
+    it('should render a block if the value is equal to a given number', function() {
       var fn = hbs.compile('{{#eq number compare=8}}A{{/eq}}');
       assert.equal(fn({number: 8}), 'A');
     });
 
-    it('should render the inverse block if falsey.', function() {
+    it('should render the inverse block if falsey', function() {
       var fn = hbs.compile('{{#eq number compare=8}}A{{else}}B{{/eq}}');
       assert.equal(fn({number: 9}), 'B');
     });

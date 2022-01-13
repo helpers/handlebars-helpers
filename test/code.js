@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.code({handlebars: hbs});
+const codeHelpers = require('../lib/code');
+
+hbs.registerHelper(codeHelpers);
 
 describe('code', function() {
   describe('embed', function() {

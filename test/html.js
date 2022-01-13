@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.html({handlebars: hbs});
+const htmlHelpers = require('../lib/html');
+
+hbs.registerHelper(htmlHelpers);
 
 var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
 var actual;

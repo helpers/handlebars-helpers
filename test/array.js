@@ -3,9 +3,13 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.array({handlebars: hbs});
-helpers.string({handlebars: hbs});
+const arrayHelpers = require('../lib/array');
+const objectHelpers = require('../lib/object');
+const stringHelpers = require('../lib/string');
+
+hbs.registerHelper(arrayHelpers);
+hbs.registerHelper(objectHelpers);
+hbs.registerHelper(stringHelpers);
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g']};
 
@@ -372,16 +376,22 @@ describe('array', function() {
 
     it('should take a compare function', function() {
       var locals = {array: ['b', 'c', 'a']};
-      locals.compare = function(a, b) {
-        return b.localeCompare(a);
+      locals.compare = (str) => {
+        if (str === 'a') {
+          return 2;
+        }
+        if (str === 'b') {
+          return 3;
+        }
+        return 1;
       };
       var fn = hbs.compile('{{sortBy array compare}}');
-      assert.equal(fn(locals), 'c,b,a');
+      assert.equal(fn(locals), 'c,a,b');
     });
 
     it('should sort based on object key:', function() {
       var ctx = {arr: [{a: 'zzz'}, {a: 'aaa'}]};
-      hbs.registerHelper(helpers.object());
+      hbs.registerHelper(objectHelpers);
       var fn = hbs.compile('{{{stringify (sortBy arr "a") 0}}}');
       assert.equal(fn(ctx), '[{"a":"aaa"},{"a":"zzz"}]');
     });
@@ -490,5 +500,5 @@ describe('array', function() {
       assert.equal(fn(context).toString(), 'a,b,c,d,f,g');
     });
   });
-  
+
 });

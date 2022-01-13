@@ -4,8 +4,9 @@ var fs = require('fs');
 var path = require('path');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.match({handlebars: hbs});
+const matchHelpers = require('../lib/match');
+
+hbs.registerHelper(matchHelpers);
 
 var testFiles = fs.readdirSync(__dirname);
 var rootFiles = fs.readdirSync(path.join(__dirname, '..'));
@@ -18,9 +19,9 @@ describe('matching', function() {
     });
 
     it('should take an array of patterns', function() {
-      var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'f*.js']};
+      var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'st*.js']};
       var fn = hbs.compile('{{match files patterns}}');
-      assert.equal(fn(ctx), 'array.js,url.js,utils.js,fs.js');
+      assert.equal(fn(ctx), 'array.js,url.js,utils.js,string.js');
     });
 
     it('should take options from the "options[helper name]" object', function() {

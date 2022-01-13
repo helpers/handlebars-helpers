@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.inflection({handlebars: hbs});
+const inflectionHelpers = require('../lib/inflection');
+
+hbs.registerHelper(inflectionHelpers);
 
 describe('inflection', function() {
   describe('inflect', function() {

@@ -1,8 +1,8 @@
 {
   "name": "handlebars-helpers",
   "description": "More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.",
-  "version": "0.10.0",
-  "homepage": "https://github.com/helpers/handlebars-helpers",
+  "version": "0.11.0",
+  "homepage": "https://github.com/wirechunk/handlebars-helpers",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "contributors": [
     "Adrián Mugnolo (https://github.com/xymbol)",
@@ -54,9 +54,9 @@
     "Tim Douglas (https://github.com/timdouglas)",
     "(https://github.com/homersimpsons)"
   ],
-  "repository": "helpers/handlebars-helpers",
+  "repository": "wirechunk/handlebars-helpers",
   "bugs": {
-    "url": "https://github.com/helpers/handlebars-helpers/issues"
+    "url": "https://github.com/wirechunk/handlebars-helpers/issues"
   },
   "license": "MIT",
   "files": [
@@ -65,20 +65,16 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=0.16.0"
   },
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "arr-flatten": "^1.1.0",
-    "array-sort": "^0.1.4",
     "create-frame": "^1.0.0",
-    "define-property": "^1.0.0",
     "falsey": "^0.3.2",
-    "for-in": "^1.0.2",
-    "for-own": "^1.0.0",
     "get-object": "^0.2.0",
+    "get-relative-path": "^1.0.2",
     "get-value": "^2.0.6",
     "handlebars": "^4.0.11",
     "handlebars-helper-create-frame": "^0.1.0",
@@ -93,19 +89,16 @@
     "is-number": "^4.0.0",
     "kind-of": "^6.0.0",
     "lazy-cache": "^2.0.2",
+    "lodash": "^4.17.21",
     "logging-helpers": "^1.0.0",
     "micromatch": "^3.1.4",
-    "relative": "^3.0.2",
-    "striptags": "^3.1.0",
-    "to-gfm-code-block": "^0.1.1",
-    "year": "^0.2.1"
+    "striptags": "^3.1.0"
   },
   "devDependencies": {
     "engine-handlebars": "^0.8.2",
+    "eslint": "^8.6.0",
     "fs-exists-sync": "^0.1.0",
     "global-modules": "^1.0.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0",
     "gulp-format-md": "^1.0.0",
     "gulp-istanbul": "^1.1.2",
     "gulp-mocha": "^3.0.1",
@@ -172,8 +165,7 @@
     },
     "reflinks": [
       "falsey",
-      "helper-date",
-      "moment"
+      "helper-date"
     ],
     "helpers": [
       "helper-changelog",

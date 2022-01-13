@@ -3,8 +3,9 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.string({handlebars: hbs});
+const stringHelpers = require('../lib/string');
+
+hbs.registerHelper(stringHelpers);
 
 describe('string', function() {
   describe('camelcase', function() {

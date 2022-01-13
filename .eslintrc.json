@@ -1,17 +1,18 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
   "env": {
     "browser": false,
     "es6": true,
     "node": true,
     "mocha": true
   },
-
   "globals": {
     "document": false,
     "navigator": false,
     "window": false
   },
-
   "rules": {
     "accessor-pairs": 2,
     "arrow-spacing": [2, { "before": true, "after": true }],

@@ -3,11 +3,14 @@
 require('mocha');
 var assert = require('assert');
 var support = require('./support');
-var expected = support.expected('object');
-var helpers = require('..');
 var hbs = require('handlebars').create();
-helpers.math({handlebars: hbs});
-helpers.object({handlebars: hbs});
+const mathHelpers = require('../lib/math');
+const objectHelpers = require('../lib/object');
+
+hbs.registerHelper(mathHelpers);
+hbs.registerHelper(objectHelpers);
+
+const expected = support.expected('object');
 
 var context = {object: {a: 'b', c: 'd', e: 'f'}};
 
@@ -20,12 +23,12 @@ describe('object', function() {
     });
 
     it('should work as a non-helper util:', function() {
-      var actual = helpers().extend({a: {b: 'c'}}, {d: {e: 'f'}}, {g: {h: 'i'}});
+      var actual = objectHelpers.extend({a: {b: 'c'}}, {d: {e: 'f'}}, {g: {h: 'i'}});
       assert.deepEqual(actual, { a: { b: 'c' }, d: { e: 'f' }, g: { h: 'i' } });
     });
 
     it('should skip over sparse objects', function() {
-      var actual = helpers().extend({a: {b: 'c'}}, null, {g: {h: 'i'}});
+      var actual = objectHelpers.extend({a: {b: 'c'}}, null, {g: {h: 'i'}});
       assert.deepEqual(actual, { a: { b: 'c' }, g: { h: 'i' } });
     });
   });

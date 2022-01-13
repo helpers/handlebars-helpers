@@ -3,9 +3,11 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.object({handlebars: hbs});
-helpers.url({handlebars: hbs});
+const objectHelpers = require('../lib/object');
+const urlHelpers = require('../lib/url');
+
+hbs.registerHelper(objectHelpers);
+hbs.registerHelper(urlHelpers);
 
 describe('url', function() {
   describe('urlResolve', function() {

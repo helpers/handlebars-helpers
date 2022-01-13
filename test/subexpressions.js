@@ -3,9 +3,11 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.array({handlebars: hbs});
-helpers.string({handlebars: hbs});
+const arrayHelpers = require('../lib/array');
+const stringHelpers = require('../lib/string');
+
+hbs.registerHelper(arrayHelpers);
+hbs.registerHelper(stringHelpers);
 
 var context = {
   one: ['A', 'B', 'C', 'D', 'E', 'F'],
@@ -19,7 +21,7 @@ describe('subexpressions', function() {
         var fn = hbs.compile('{{lowercase (first one)}}');
         assert.equal(fn(context), 'a');
       });
-      it('Should return the last item in a collection, all uppercase.', function() {
+      it('Should return the last item in a collection, all uppercase', function() {
         var fn = hbs.compile('{{uppercase (last two)}}');
         assert.equal(fn(context), 'F');
       });

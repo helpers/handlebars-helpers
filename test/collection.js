@@ -3,10 +3,13 @@
 require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.array({handlebars: hbs});
-helpers.collection({handlebars: hbs});
-helpers.string({handlebars: hbs});
+const arrayHelpers = require('../lib/array');
+const collectionHelpers = require('../lib/collection');
+const stringHelpers = require('../lib/string');
+
+hbs.registerHelper(arrayHelpers);
+hbs.registerHelper(collectionHelpers);
+hbs.registerHelper(stringHelpers);
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']};
 

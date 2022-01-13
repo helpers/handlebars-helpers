@@ -4,8 +4,9 @@ require('mocha');
 var assert = require('assert');
 var fs = require('fs');
 var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.markdown({handlebars: hbs});
+const markdownHelpers = require('../lib/markdown');
+
+hbs.registerHelper(markdownHelpers);
 
 describe('markdown', function() {
   describe('markdown', function() {
