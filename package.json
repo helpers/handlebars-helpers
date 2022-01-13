@@ -62,9 +62,9 @@
   "license": "MIT",
   "files": [
     "index.js",
-    "lib"
+    "lib",
+    "index.d.ts"
   ],
-  "types": "index.d.ts",
   "main": "index.js",
   "engines": {
     "node": ">=0.16.0"
