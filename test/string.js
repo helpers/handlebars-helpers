@@ -239,17 +239,6 @@ describe('string', function() {
     });
   });
 
-  describe('reverse', function() {
-    it('should return an empty string if undefined', function() {
-      const fn = hbs.compile('{{reverse}}');
-      assert.equal(fn(), '');
-    });
-    it('should return the string in reverse.', function() {
-      const fn = hbs.compile('{{reverse "bender should NOT be allowed on TV."}}');
-      assert.equal(fn(), '.VT no dewolla eb TON dluohs redneb');
-    });
-  });
-
   describe('sentence', function() {
     it('should return an empty string if undefined', function() {
       const fn = hbs.compile('{{sentence}}');

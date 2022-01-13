@@ -81,19 +81,18 @@
     "handlebars-helper-create-frame": "^0.1.0",
     "handlebars-utils": "^1.0.6",
     "has-value": "^1.0.0",
-    "helper-date": "^1.0.1",
-    "helper-markdown": "^1.0.0",
-    "helper-md": "^0.2.2",
     "html-tag": "^2.0.0",
     "is-even": "^1.0.0",
     "kind-of": "^6.0.0",
     "lazy-cache": "^2.0.2",
     "lodash": "^4.17.21",
     "micromatch": "^4.0.4",
+    "remarkable": "^2.0.1",
     "striptags": "^3.1.0"
   },
   "peerDependencies": {
-    "handlebars": "^4.7.7"
+    "handlebars": "^4.7.7",
+    "highlight.js": "^11.4.0"
   },
   "devDependencies": {
     "engine-handlebars": "^0.8.2",

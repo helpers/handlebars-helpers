@@ -1,7 +1,7 @@
 # handlebars-helpers
 <!-- {% raw %} -->
 
-> More than 160 Handlebars helpers for Handlebars.
+> More than 160 helpers for Handlebars.
 
 - [Browser usage](#browser-usage)
 - [Usage](#usage)
@@ -9,7 +9,7 @@
 - [History](#history)
 - [About](#about)
 
-ou might also be interested in [template-helpers](https://github.com/jonschlinkert/template-helpers).
+You might also be interested in [template-helpers](https://github.com/jonschlinkert/template-helpers).
 
 ## Browser usage
 
@@ -66,20 +66,20 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 * **[after](#after)** ([code](lib/array.js) | [tests](test/array.js))
 * **[arrayify](#arrayify)** ([code](lib/array.js) | [tests](test/array.js))
 * **[before](#before)** ([code](lib/array.js) | [tests](test/array.js))
-* **[eachIndex](#eachIndex)** ([code](lib/array.js) | [tests](test/array.js))
+* **[eachIndex](#eachindex)** ([code](lib/array.js) | [tests](test/array.js))
 * **[filter](#filter)** ([code](lib/array.js) | [tests](test/array.js))
 * **[first](#first)** ([code](lib/array.js) | [tests](test/array.js))
-* **[forEach](#forEach)** ([code](lib/array.js) | [tests](test/array.js))
-* **[hasLength](#hasLength)** ([code](lib/array.js) | [tests](test/array.js))
-* **[inArray](#inArray)** ([code](lib/array.js) | [tests](test/array.js))
-* **[isArray](#isArray)** ([code](lib/array.js) | [tests](test/array.js))
-* **[itemAt](#itemAt)** ([code](lib/array.js) | [tests](test/array.js))
+* **[forEach](#foreach)** ([code](lib/array.js) | [tests](test/array.js))
+* **[hasLength](#haslength)** ([code](lib/array.js) | [tests](test/array.js))
+* **[inArray](#inarray)** ([code](lib/array.js) | [tests](test/array.js))
+* **[isArray](#isarray)** ([code](lib/array.js) | [tests](test/array.js))
+* **[itemAt](#itemat)** ([code](lib/array.js) | [tests](test/array.js))
 * **[join](#join)** ([code](lib/array.js) | [tests](test/array.js))
 * **[last](#last)** ([code](lib/array.js) | [tests](test/array.js))
 * **[length](#length)** ([code](lib/array.js) | [tests](test/array.js))
 * **[map](#map)** ([code](lib/array.js) | [tests](test/array.js))
 * **[pluck](#pluck)** ([code](lib/array.js) | [tests](test/array.js))
-* **[reverse](#reverse)** ([code](lib/array.js) | [no tests])
+* **[reverse](#reverse)** ([code](lib/array.js) | [tests](test/array.js))
 * **[some](#some)** ([code](lib/array.js) | [tests](test/array.js))
 * **[sort](#sort)** ([code](lib/array.js) | [tests](test/array.js))
 * **[sortBy](#sortBy)** ([code](lib/array.js) | [tests](test/array.js))
@@ -102,7 +102,7 @@ Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://g
 
 Visit the: [code](lib/collection.js) | [unit tests](test/collection.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+collection+helpers)
 
-* **[isEmpty](#isEmpty)** ([code](lib/collection.js) | [tests](test/collection.js))
+* **[isEmpty](#isempty)** ([code](lib/collection.js) | [tests](test/collection.js))
 * **[iterate](#iterate)** ([code](lib/collection.js) | [tests](test/collection.js))
 
 ### [comparison helpers](#comparison)
@@ -117,10 +117,10 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[gt](#gt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[gte](#gte)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[has](#has)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[isTruthy](#isTruthy)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[ifEven](#ifEven)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[ifNth](#ifNth)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[ifOdd](#ifOdd)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[isTruthy](#istruthy)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[ifEven](#ifeven)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[ifNth](#ifnth)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[ifOdd](#ifodd)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[is](#is)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[isnt](#isnt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[lt](#lt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
@@ -128,11 +128,11 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[neither](#neither)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[not](#not)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 * **[or](#or)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[unlessEq](#unlessEq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[unlessGt](#unlessGt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[unlessLt](#unlessLt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
-* **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[unlessEq](#unlesseq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[unlessGt](#unlessgt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[unlessLt](#unlesslt)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[unlessGteq](#unlessgteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
+* **[unlessLteq](#unlesslteq)** ([code](lib/comparison.js) | [tests](test/comparison.js))
 
 ### [date helpers](#date)
 
@@ -169,8 +169,7 @@ Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issue
 
 Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers)
 
-* **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [tests](test/markdown.js))
-* **[md](#md)** ([code](lib/markdown.js) | [tests](test/markdown.js))
+* **[markdownToHTML](#markdowntohtml)** ([code](lib/markdown.js) | [tests](test/markdown.js))
 
 ### [match helpers](#match)
 
@@ -286,7 +285,6 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https
 * **[removeFirst](#removeFirst)** ([code](lib/string.js) | [no tests])
 * **[replace](#replace)** ([code](lib/string.js) | [tests](test/string.js))
 * **[replaceFirst](#replaceFirst)** ([code](lib/string.js) | [no tests])
-* **[reverse](#reverse)** ([code](lib/string.js) | [tests](test/string.js))
 * **[sentence](#sentence)** ([code](lib/string.js) | [tests](test/string.js))
 * **[snakecase](#snakecase)** ([code](lib/string.js) | [tests](test/string.js))
 * **[split](#split)** ([code](lib/string.js) | [tests](test/string.js))
@@ -1453,7 +1451,7 @@ Returns an ordinalized number as a string.
 
 ## markdown
 
-### markdown
+### markdownToHTML
 
 Block helper that converts a string of inline markdown to HTML.
 
@@ -1466,10 +1464,17 @@ Block helper that converts a string of inline markdown to HTML.
 **Example**
 
 ```handlebars
-{{#markdown}}
+{{#markdownToHTML}}
 # Foo
-{{/markdown}}
-<!-- results in: <h1>Foo</h1> -->
+
+> some quote
+{{/markdownToHTML}}
+<!-- results in:
+<h1>Foo</h1>
+<blockquote>
+<p>some quote</p>
+</blockquote>
+-->
 ```
 
 ### md
@@ -1609,7 +1614,7 @@ Generate a random number between two values
 
 * `min` **{Number}**
 * `max` **{Number}**
-* `returns` **{String}**
+* `returns` **{Number}**
 
 ### remainder
 
@@ -2547,22 +2552,6 @@ Replace the first occurrence of substring `a` with substring `b`.
 <!-- results in:  'z b a b a b' -->
 ```
 
-### reverse
-
-Reverse a string.
-
-**Params**
-
-* `str` **{String}**
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{reverse "abcde"}}
-<!-- results in:  'edcba' -->
-```
-
 ### sentence
 
 Sentence case the given string
@@ -2857,18 +2846,6 @@ Strip protocol from a `url`. Useful for displaying media that may have an 'http'
 {{stripProtocol url}}
 <!-- results in: '//foo.bar' -->
 ```
-
-***
-
-### random(lib/utils/index.js)
-
-Generate a random number
-
-**Params**
-
-* `min` **{Number}**
-* `max` **{Number}**
-* `returns` **{Number}**
 
 ***
 

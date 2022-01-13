@@ -10,18 +10,32 @@ hbs.registerHelper(markdownHelpers);
 
 describe('markdown', function() {
   describe('markdown', function() {
-    it('should render markdown using the {{#markdown}} block helper', function() {
-      const template = hbs.compile('{{#markdown}}## {{../title}}{{/markdown}}');
+    it('should render markdown using the block helper (very simple)', function() {
+      const template = hbs.compile('{{#markdownToHTML}}## {{../title}}{{/markdownToHTML}}');
       assert.equal(template({title: 'Markdown Test'}), '<h2>Markdown Test</h2>\n');
     });
-  });
 
-  describe('md', function() {
-    it('should render markdown from a file using the {{md}} inline helper', function() {
+    it('should render markdown using the block helper (simple)', function() {
+      const templateMd = fs.readFileSync('test/fixtures/simple.md', 'utf8');
       const expected = fs.readFileSync('test/expected/simple.html', 'utf8');
-      const template = hbs.compile('{{{md fp}}}');
-      const actual = template({fp: 'test/fixtures/simple.md'});
-      assert.equal(actual, expected);
+      const template = hbs.compile(`{{#markdownToHTML}}${templateMd}{{/markdownToHTML}}`);
+      assert.equal(template({word: 'Awesome'}), expected);
+    });
+
+    it('should render markdown using an inline call', function() {
+      const templateMd = `## Some Markdown
+
+ - one
+ - two
+ - three
+
+[Click here](http://github.com)
+
+### Awesome!
+`;
+      const expected = fs.readFileSync('test/expected/simple.html', 'utf8');
+      const template = hbs.compile('{{markdownToHTML md}}', {noEscape: true});
+      assert.equal(template({md: templateMd}), expected);
     });
   });
 });

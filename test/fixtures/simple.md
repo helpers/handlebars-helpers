@@ -5,3 +5,5 @@
  - three
 
 [Click here](http://github.com)
+
+### {{../word}}!

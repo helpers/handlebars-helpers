@@ -309,6 +309,28 @@ describe('array', function() {
     });
   });
 
+  describe('reverse', function() {
+    it('should return an empty string if the input is undefined', function() {
+      const fn = hbs.compile('{{reverse x}}');
+      assert.equal(fn({}), '');
+    });
+
+    it('should return an empty string if the input is a plain object', function() {
+      const fn = hbs.compile('{{reverse x}}');
+      assert.equal(fn({x: {}}), '');
+    });
+
+    it('should return an array in reverse', function() {
+      const fn = hbs.compile('{{reverse x}}');
+      assert.equal(fn({x: ['a', 'b', 'c', 'd']}), 'd,c,b,a');
+    });
+
+    it('should return a string in reverse', function() {
+      const fn = hbs.compile('{{reverse "good morning"}}');
+      assert.equal(fn(), 'gninrom doog');
+    });
+  });
+
   describe('some', function() {
     it('should render the first block if the callback returns true', function() {
       const ctx = {array: ['a', 'b', 'c']};
