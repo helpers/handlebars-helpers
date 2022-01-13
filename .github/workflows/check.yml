@@ -1,0 +1,15 @@
+name: Code checks
+on:
+  - push
+  - pull_request
+jobs:
+  typecheck_lint_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 17.1.0
+      - run: npm i
+      - run: ./node_modules/.bin/eslint .
+      - run: npm run test

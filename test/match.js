@@ -1,59 +1,60 @@
 'use strict';
 
-var fs = require('fs');
-var path = require('path');
-var assert = require('assert');
-var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.match({handlebars: hbs});
+const fs = require('fs');
+const path = require('path');
+const assert = require('assert');
+const hbs = require('handlebars').create();
+const matchHelpers = require('../lib/match');
 
-var testFiles = fs.readdirSync(__dirname);
-var rootFiles = fs.readdirSync(path.join(__dirname, '..'));
+hbs.registerHelper(matchHelpers);
+
+const testFiles = fs.readdirSync(__dirname);
+const rootFiles = fs.readdirSync(path.join(__dirname, '..'));
 
 describe('matching', function() {
   describe('match', function() {
     it('should use the main micromatch function to filter an array', function() {
-      var fn = hbs.compile('{{match files "(a|u)*.js"}}');
+      const fn = hbs.compile('{{match files "(a|u)*.js"}}');
       assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js');
     });
 
     it('should take an array of patterns', function() {
-      var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'f*.js']};
-      var fn = hbs.compile('{{match files patterns}}');
-      assert.equal(fn(ctx), 'array.js,url.js,utils.js,fs.js');
+      const ctx = {files: testFiles, patterns: ['(a|u)*.js', 'st*.js']};
+      const fn = hbs.compile('{{match files patterns}}');
+      assert.equal(fn(ctx), 'array.js,url.js,utils.js,string.js');
     });
 
     it('should take options from the "options[helper name]" object', function() {
-      var ctx = {files: testFiles, options: {match: {dot: true}}};
-      var fn = hbs.compile('{{match files "*"}}');
+      const ctx = {files: testFiles, options: {match: {dot: true}}};
+      const fn = hbs.compile('{{match files "*"}}');
       assert(/array\.js/.test(fn(ctx)));
     });
 
     it('should take options from the hash', function() {
-      var ctx = {files: rootFiles};
+      const ctx = {files: rootFiles};
       assert(/\.gitignore/.test(hbs.compile('{{match files "*" dot=true}}')(ctx)));
       assert(!/\.gitignore/.test(hbs.compile('{{match files "*" dot=false}}')(ctx)));
     });
 
     it('should use return matching items', function() {
-      var fn = hbs.compile('{{match files "(a|u)*.js"}}');
+      const fn = hbs.compile('{{match files "(a|u)*.js"}}');
       assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js');
     });
 
     it('should take options from the "options[helper name]" object', function() {
-      var ctx = {files: rootFiles, options: {match: {dot: true}}};
-      var fn = hbs.compile('{{match files "*"}}');
+      const ctx = {files: rootFiles, options: {match: {dot: true}}};
+      const fn = hbs.compile('{{match files "*"}}');
       assert(/\.gitignore/.test(fn(ctx)));
     });
 
     it('should take options from the hash', function() {
-      var ctx = {files: rootFiles};
+      const ctx = {files: rootFiles};
       assert(/\.gitignore/.test(hbs.compile('{{match files "*" dot=true}}')(ctx)));
       assert(!/\.gitignore/.test(hbs.compile('{{match files "*" dot=false}}')(ctx)));
     });
 
     it('should take options passed as the last argument', function() {
-      var ctx = {files: rootFiles, options: {dot: true}};
+      const ctx = {files: rootFiles, options: {dot: true}};
       assert(/\.gitignore/.test(hbs.compile('{{match files "*" options}}')(ctx)));
     });
   });

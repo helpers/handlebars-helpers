@@ -1,50 +1,39 @@
 'use strict';
 
-var fs = require('fs');
+const fs = require('fs');
 
-/**
- * Expose `utils`
- */
-
-var utils = module.exports;
-
-/**
- * Read a file at the given `filepath`
- *
- * @param {String} `fp`
- * @return {String}
- */
-
-utils.read = function(fp) {
+const read = (fp) => {
   return fs.readFileSync(fp, 'utf8');
 };
 
 /**
- * Returns a function for reading a test fixture 
+ * Returns a function for reading a test fixture
  * of the given `type` at the given `filepath`.
  *
  * @param {String} `type`
- * @param {String} `fp`
- * @return {String}
+ * @return {(filePath: String) => String}
  */
 
-utils.fixture = function(type) {
+const fixture = function(type) {
   return function(fp) {
-    return utils.read('test/fixtures/' + type + '/' + fp);
+    return read('test/fixtures/' + type + '/' + fp);
   };
 };
+
+module.exports.fixture = fixture;
 
 /**
  * Returns a function for reading a file
  * of the given `type` at the given `filepath`.
  *
  * @param {String} `type`
- * @param {String} `fp`
- * @return {String}
+ * @return {(filePath: String) => String}
  */
 
-utils.expected = function(type) {
+const expected = function(type) {
   return function(fp) {
-    return utils.read('test/expected/' + type + '/' + fp);
+    return read('test/expected/' + type + '/' + fp);
   };
 };
+
+module.exports.expected = expected;

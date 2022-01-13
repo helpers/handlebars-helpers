@@ -1,18 +1,19 @@
 'use strict';
 
 require('mocha');
-var assert = require('assert');
-var hbs = require('handlebars').create();
-var helpers = require('..');
-helpers.html({handlebars: hbs});
+const assert = require('assert');
+const hbs = require('handlebars').create();
+const htmlHelpers = require('../lib/html');
 
-var locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
-var actual;
+hbs.registerHelper(htmlHelpers);
+
+const locals = {data: [{aaa: 'AAA', bbb: 'BBB'}, {aaa: 'CCC', bbb: 'DDD'}]};
+let actual;
 
 describe('html', function() {
   describe('attr', function() {
     it('should strip html from a string.', function() {
-      var actual = hbs.compile('<div{{{attr class=foo}}}></div>')({foo: 'btn'});
+      const actual = hbs.compile('<div{{{attr class=foo}}}></div>')({foo: 'btn'});
       assert.equal(actual, '<div class="btn"></div>');
       assert.equal(hbs.compile('{{attr}}')(), '');
     });
@@ -24,22 +25,22 @@ describe('html', function() {
     });
 
     it('should use a path passed as a string', function() {
-      var actual = hbs.compile('{{{css "abc.css"}}}')();
+      const actual = hbs.compile('{{{css "abc.css"}}}')();
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="abc.css">');
     });
 
     it('should use options.assets', function() {
-      var actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: 'foo'}});
+      const actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: 'foo'}});
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="foo/abc.css">');
     });
 
     it('should ensure that options.assets is a string', function() {
-      var actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: null}});
+      const actual = hbs.compile('{{{css "abc.css"}}}')({options: {assets: null}});
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="abc.css">');
     });
 
     it('should not use options.assets when passing in an absolute url', function() {
-      var actual = hbs.compile('{{{css "https://abc.com/bar.css"}}}')({options: {assets: 'foo'}});
+      const actual = hbs.compile('{{{css "https://abc.com/bar.css"}}}')({options: {assets: 'foo'}});
       assert.equal(actual, '<link type="text/css" rel="stylesheet" href="https://abc.com/bar.css">');
     });
 
@@ -52,7 +53,7 @@ describe('html', function() {
     });
 
     it('should create multiple tags from an array passed on the context:', function() {
-      var ctx = {styles: ['a.css', 'bcss', 'c.css'] };
+      const ctx = {styles: ['a.css', 'bcss', 'c.css'] };
       assert.equal(hbs.compile('{{{css styles}}}')(ctx), [
         '<link type="text/css" rel="stylesheet" href="a.css">',
         '<link type="text/css" rel="stylesheet" href="bcss">',
@@ -61,7 +62,7 @@ describe('html', function() {
     });
 
     it('should create a less tag (TODO: only works with array format)', function() {
-      var ctx = {styles: ['a.less'] };
+      const ctx = {styles: ['a.less'] };
       assert.equal(hbs.compile('{{{css styles}}}')(ctx), '<link type="text/css" rel="stylesheet/less" href="a.less">');
     });
   });
@@ -81,7 +82,7 @@ describe('html', function() {
     });
 
     it('should create multiple tags from an array passed on the context:', function() {
-      var ctx = {scripts: ['a.js', 'bjs', 'c.js'] };
+      const ctx = {scripts: ['a.js', 'bjs', 'c.js'] };
       assert.equal(hbs.compile('{{{js scripts}}}')(ctx), [
         '<script src="a.js"></script>',
         '<script src="bjs"></script>',
@@ -90,7 +91,7 @@ describe('html', function() {
     });
 
     it('should create a coffeescript tag (TODO: only works with array format)', function() {
-      var ctx = {scripts: ['a.coffee'] };
+      const ctx = {scripts: ['a.coffee'] };
       assert.equal(hbs.compile('{{{js scripts}}}')(ctx), '<script type="text/coffeescript" src="a.coffee"></script>');
     });
   });
@@ -100,21 +101,21 @@ describe('html', function() {
       assert.equal(hbs.compile('{{sanitize}}')(), '');
     });
     it('should strip html from a string.', function() {
-      var actual = hbs.compile('{{sanitize "<span>foo</span>"}}')();
+      const actual = hbs.compile('{{sanitize "<span>foo</span>"}}')();
       assert.equal(actual, 'foo');
     });
   });
 
   describe('ul', function() {
     it('should should return an unordered list', function() {
-      var fn = hbs.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
+      const fn = hbs.compile('{{#ul data class="names"}}{{aaa}} {{bbb}}{{/ul}}');
       assert.equal(fn(locals), '<ul class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ul>');
     });
   });
 
   describe('ol', function() {
     it('should should return an ordered list', function() {
-      var fn = hbs.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
+      const fn = hbs.compile('{{#ol data class="names"}}{{aaa}} {{bbb}}{{/ol}}');
       assert.equal(fn(locals), '<ol class="names"><li>AAA BBB</li>\n<li>CCC DDD</li></ol>');
     });
   });
@@ -122,7 +123,7 @@ describe('html', function() {
   describe('thumbnailImage', function() {
     describe('{{{thumbnailImage context}}}', function() {
       it('should return figure with link and caption', function() {
-        var context = {
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -135,8 +136,8 @@ describe('html', function() {
             caption: 'My new caption!'
           }
         };
-        var fn = hbs.compile('{{{thumbnailImage data}}}');
-        var comparison = [
+        const fn = hbs.compile('{{{thumbnailImage data}}}');
+        const comparison = [
           '<figure id="image-id">',
           '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
@@ -148,8 +149,8 @@ describe('html', function() {
       });
 
       it('should return figure with extra class "test"', function() {
-        var source = '{{{thumbnailImage data}}}';
-        var context = {
+        const source = '{{{thumbnailImage data}}}';
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -166,8 +167,8 @@ describe('html', function() {
           }
         };
 
-        var fn = hbs.compile(source);
-        var comparison = [
+        const fn = hbs.compile(source);
+        const comparison = [
           '<figure id="image-id" class="test">',
           '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
@@ -179,8 +180,8 @@ describe('html', function() {
       });
 
       it('should return figure with image that has class "test"', function() {
-        var source = '{{{thumbnailImage data}}}';
-        var context = {
+        const source = '{{{thumbnailImage data}}}';
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -196,8 +197,8 @@ describe('html', function() {
             caption: 'My new caption!'
           }
         };
-        var fn = hbs.compile(source);
-        var comparison = [
+        const fn = hbs.compile(source);
+        const comparison = [
           '<figure id="image-id">',
           '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200" class="test">',
@@ -209,8 +210,8 @@ describe('html', function() {
       });
 
       it('should return figure with link that has class "test"', function() {
-        var source = '{{{thumbnailImage data}}}';
-        var context = {
+        const source = '{{{thumbnailImage data}}}';
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -226,8 +227,8 @@ describe('html', function() {
             caption: 'My new caption!'
           }
         };
-        var fn = hbs.compile(source);
-        var comparison = [
+        const fn = hbs.compile(source);
+        const comparison = [
           '<figure id="image-id">',
           '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail" class="test">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
@@ -239,8 +240,8 @@ describe('html', function() {
       });
 
       it('should return figure without link', function() {
-        var source = '{{{thumbnailImage data}}}';
-        var context = {
+        const source = '{{{thumbnailImage data}}}';
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -252,8 +253,8 @@ describe('html', function() {
             caption: 'My new caption!'
           }
         };
-        var fn = hbs.compile(source);
-        var comparison = [
+        const fn = hbs.compile(source);
+        const comparison = [
           '<figure id="image-id">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',
           '<figcaption>My new caption!</figcaption>',
@@ -263,8 +264,8 @@ describe('html', function() {
       });
 
       it('should return figure without caption', function() {
-        var source = '{{{thumbnailImage data}}}';
-        var context = {
+        const source = '{{{thumbnailImage data}}}';
+        const context = {
           data: {
             id: 'id',
             alt: 'Picture of a placeholder',
@@ -276,8 +277,8 @@ describe('html', function() {
             full: 'http://placehold.it/600x400/0eafff/ffffff.png'
           }
         };
-        var fn = hbs.compile(source);
-        var comparison = [
+        const fn = hbs.compile(source);
+        const comparison = [
           '<figure id="image-id">',
           '<a href="http://placehold.it/600x400/0eafff/ffffff.png" rel="thumbnail">',
           '<img alt="Picture of a placeholder" src="http://placehold.it/200x200/0eafff/ffffff.png" width="200" height="200">',

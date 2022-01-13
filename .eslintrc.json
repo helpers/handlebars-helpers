@@ -1,17 +1,18 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
   "env": {
     "browser": false,
     "es6": true,
     "node": true,
     "mocha": true
   },
-
   "globals": {
     "document": false,
     "navigator": false,
     "window": false
   },
-
   "rules": {
     "accessor-pairs": 2,
     "arrow-spacing": [2, { "before": true, "after": true }],
@@ -95,10 +96,12 @@
     "no-unreachable": 2,
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
     "no-useless-call": 0,
+    "no-var": 2,
     "no-with": 2,
     "one-var": [0, { "initialized": "never" }],
     "operator-linebreak": [0, "after", { "overrides": { "?": "before", ":": "before" } }],
     "padded-blocks": [0, "never"],
+    "prefer-const": 2,
     "quotes": [2, "single", "avoid-escape"],
     "radix": 2,
     "semi": [2, "always"],
