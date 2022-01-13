@@ -19,7 +19,6 @@ const allHelpers = {
   ...require('../../lib/html'),
   ...require('../../lib/i18n'),
   ...require('../../lib/inflection'),
-  ...require('../../lib/logging'),
   ...require('../../lib/markdown'),
   ...require('../../lib/match'),
   ...require('../../lib/math'),

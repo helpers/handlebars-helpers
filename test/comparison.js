@@ -328,12 +328,22 @@ describe('comparison', function() {
   describe('isFalsey', function() {
     it('should render block if given value is falsey.', function() {
       var fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: 'nope'}), 'A');
+      assert.equal(fn({value: ''}), 'A');
+    });
+
+    it('should render block if given value is falsey.', function() {
+      var fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: 0}), 'A');
     });
 
     it('should render inverse if given value is truthy', function() {
       var fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
       assert.equal(fn({value: 'CCC'}), 'B');
+    });
+
+    it('should render inverse if given value is truthy', function() {
+      const fn = hbs.compile('{{#if (isFalsey value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: true}), 'B');
     });
   });
 
@@ -343,9 +353,19 @@ describe('comparison', function() {
       assert.equal(fn({value: 'CCC'}), 'A');
     });
 
+    it('should render block if given value is truthy.', function() {
+      var fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: true}), 'A');
+    });
+
     it('should render inverse if given value is not truthy', function() {
       var fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
-      assert.equal(fn({value: 'nope'}), 'B');
+      assert.equal(fn({value: ''}), 'B');
+    });
+
+    it('should render inverse if given value is not truthy', function() {
+      var fn = hbs.compile('{{#if (isTruthy value)}}A{{else}}B{{/if}}');
+      assert.equal(fn({value: false}), 'B');
     });
   });
 

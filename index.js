@@ -13,7 +13,6 @@ module.exports.date = require('./lib/date');
 module.exports.html = require('./lib/html');
 module.exports.i18n = require('./lib/i18n');
 module.exports.inflection = require('./lib/inflection');
-module.exports.logging = require('./lib/logging');
 module.exports.markdown = require('./lib/markdown');
 module.exports.match = require('./lib/match');
 module.exports.math = require('./lib/math');
