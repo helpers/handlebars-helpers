@@ -1,11 +1,11 @@
 'use strict';
 
 require('mocha');
-var os = require('os');
-var assert = require('assert');
-var path = require('path');
-var hbs = require('handlebars').create();
-var gm = require('global-modules');
+const os = require('os');
+const assert = require('assert');
+const path = require('path');
+const hbs = require('handlebars').create();
+const gm = require('global-modules');
 const pathHelpers = require('../lib/path');
 
 hbs.registerHelper(pathHelpers);
@@ -32,15 +32,15 @@ describe('assemble', function() {
 
   describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
-      var fn = hbs.compile('{{relative "dist/docs.html" "index.html"}}');
+      const fn = hbs.compile('{{relative "dist/docs.html" "index.html"}}');
       assert.equal(fn(), 'index.html');
     });
     it('should return the relative path from file A to file B', function() {
-      var fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
+      const fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
       assert.equal(fn(), '../../assets');
     });
     it('should use the cwd passed on options', function() {
-      var fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
+      const fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
       assert.equal(fn({cwd: gm}), '../../assets');
     });
   });
@@ -51,7 +51,7 @@ describe('assemble', function() {
       assert.equal(hbs.compile('{{basename "a/b/c/docs/toc.md"}}')(), 'toc.md');
     });
     it('should get the basename when a path has no extension', function() {
-      var fn = hbs.compile('{{basename "a/b/c/CHANGELOG"}}');
+      const fn = hbs.compile('{{basename "a/b/c/CHANGELOG"}}');
       assert.equal(fn(), 'CHANGELOG');
     });
   });
@@ -62,7 +62,7 @@ describe('assemble', function() {
       assert.equal(hbs.compile('{{stem "a/b/c/docs/toc.md"}}')(), 'toc');
     });
     it('should get the stem when a path has no extension', function() {
-      var fn = hbs.compile('{{stem "CHANGELOG"}}');
+      const fn = hbs.compile('{{stem "CHANGELOG"}}');
       assert.equal(fn(), 'CHANGELOG');
     });
   });
@@ -73,7 +73,7 @@ describe('assemble', function() {
       assert.equal(hbs.compile('{{extname "a/b/c/docs/toc.md"}}')(), '.md');
     });
     it('should not blow up when a path has no extension', function() {
-      var fn = hbs.compile('{{extname "a/b/c/CHANGELOG"}}');
+      const fn = hbs.compile('{{extname "a/b/c/CHANGELOG"}}');
       assert.equal(fn(), '');
     });
   });

@@ -1,14 +1,14 @@
 'use strict';
 
-var os = require('os');
-var path = require('path');
-var assert = require('assert');
-var gm = require('global-modules');
-var engine = require('engine-handlebars');
-var templates = require('templates');
-var compile;
-var render;
-var app;
+const os = require('os');
+const path = require('path');
+const assert = require('assert');
+const gm = require('global-modules');
+const engine = require('engine-handlebars');
+const templates = require('templates');
+let compile;
+let render;
+let app;
 
 const allHelpers = {
   ...require('../../lib/array'),
@@ -72,15 +72,15 @@ describe('templates integration tests', function() {
 
   describe('relative', function() {
     it('should return the relative path from file A to file B', function() {
-      var view = compile('{{relative "dist/docs.html" "index.html"}}');
+      const view = compile('{{relative "dist/docs.html" "index.html"}}');
       assert.equal(view.fn(), 'index.html');
     });
     it('should return the relative path from file A to file B in', function() {
-      var view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
+      const view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
       assert.equal(view.fn(), '../../assets');
     });
     it('should use the cwd passed on options', function() {
-      var view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
+      const view = compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
       assert.equal(view.fn({cwd: gm}), '../../assets');
     });
   });
@@ -91,7 +91,7 @@ describe('templates integration tests', function() {
       assert.equal(render('{{basename "a/b/c/docs/toc.md"}}'), 'toc.md');
     });
     it('should get the basename when a path has no extension', function() {
-      var view = compile('{{basename "a/b/c/CHANGELOG"}}');
+      const view = compile('{{basename "a/b/c/CHANGELOG"}}');
       assert.equal(view.fn(), 'CHANGELOG');
     });
   });
@@ -102,7 +102,7 @@ describe('templates integration tests', function() {
       assert.equal(render('{{stem "a/b/c/docs/toc.md"}}'), 'toc');
     });
     it('should get the stem when a path has no extension', function() {
-      var view = compile('{{stem "CHANGELOG"}}');
+      const view = compile('{{stem "CHANGELOG"}}');
       assert.equal(view.fn(), 'CHANGELOG');
     });
   });
@@ -113,7 +113,7 @@ describe('templates integration tests', function() {
       assert.equal(render('{{extname "a/b/c/docs/toc.md"}}'), '.md');
     });
     it('should not blow up when a path has no extension', function() {
-      var view = compile('{{extname "a/b/c/CHANGELOG"}}');
+      const view = compile('{{extname "a/b/c/CHANGELOG"}}');
       assert.equal(view.fn(), '');
     });
   });

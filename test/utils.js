@@ -1,9 +1,9 @@
 'use strict';
 
 require('mocha');
-var assert = require('assert');
-var utils = require('../lib/utils');
-var HTML = require('../lib/utils/html');
+const assert = require('assert');
+const utils = require('../lib/utils');
+const HTML = require('../lib/utils/html');
 
 describe('utils', function() {
   describe('changecase', function() {
@@ -40,7 +40,7 @@ describe('utils', function() {
 
     describe('toAttributes', function() {
       it('should convert an object hash into html attributes', function() {
-        var hash = {disabled: true, display: 'hidden', class: 'fade'};
+        const hash = {disabled: true, display: 'hidden', class: 'fade'};
         assert.equal(HTML.toAttributes(hash), ' disabled display="hidden" class="fade"');
       });
     });

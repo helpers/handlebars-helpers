@@ -1,8 +1,8 @@
 'use strict';
 
 require('mocha');
-var assert = require('assert');
-var hbs = require('handlebars').create();
+const assert = require('assert');
+const hbs = require('handlebars').create();
 const codeHelpers = require('../lib/code');
 
 hbs.registerHelper(codeHelpers);
@@ -41,7 +41,7 @@ describe('code', function() {
     });
 
     it('should use the language defined in the last argument', function() {
-      var template = hbs.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
+      const template = hbs.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
       assert.equal(template(), [
         '```hbs',
         '<!DOCTYPE html>',
@@ -62,15 +62,15 @@ describe('code', function() {
 
   describe('gist', function() {
     it('should return a gist script tag', function() {
-      var fn = hbs.compile('{{{gist "abcdefg"}}}');
+      const fn = hbs.compile('{{{gist "abcdefg"}}}');
       assert.equal(fn(), '<script src="https://gist.github.com/abcdefg.js"></script>');
     });
   });
 
   describe('jsfiddle', function() {
     it('should return a jsfiddle embed link, with default tabs assigned', function() {
-      var source = '{{{jsfiddle id="UXbas"}}}';
-      var fn = hbs.compile(source);
+      const source = '{{{jsfiddle id="UXbas"}}}';
+      const fn = hbs.compile(source);
       assert.equal(fn(), '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/result,js,html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
 
@@ -81,8 +81,8 @@ describe('code', function() {
     });
 
     it('should return a jsfiddle embed link, with custom tabs assigned', function() {
-      var source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
-      var fn = hbs.compile(source);
+      const source = '{{{jsfiddle id="UXbas" tabs="html,css"}}}';
+      const fn = hbs.compile(source);
       assert.equal(fn(), '<iframe width="100%" height="300" src="http://jsfiddle.net/UXbas/embedded/html,css/presentation/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>');
     });
   });
