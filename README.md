@@ -1,4 +1,5 @@
 # handlebars-helpers
+<!-- {% raw %} -->
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
@@ -3161,3 +3162,4 @@ $ npm install && npm test
 Copyright © 2017, [Jon Schlinkert](https://github.com/jonschlinkert).
 When this project was created some helpers were sourced from [Swag, by Elving Rodriguez](http://elving.github.com/swag/).
 Released under the [MIT License](LICENSE).
+<!-- {% endraw %} -->
