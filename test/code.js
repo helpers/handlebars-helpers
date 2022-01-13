@@ -8,58 +8,6 @@ const codeHelpers = require('../lib/code');
 hbs.registerHelper(codeHelpers);
 
 describe('code', function() {
-  describe('embed', function() {
-    it('should embed markdown:', function() {
-      assert.equal(hbs.compile('{{{embed "test/fixtures/simple.md"}}}')(), [
-        '```markdown',
-        '## Some Markdown\n',
-        ' - one',
-        ' - two',
-        ' - three\n',
-        '[Click here](http://github.com)\n',
-        '```\n'
-      ].join('\n'));
-    });
-
-    it('should determine the language from the file extension', function() {
-      assert.equal(hbs.compile('{{{embed "test/fixtures/embedded.md"}}}')(), [
-        '```markdown',
-        '## Markdown',
-        '',
-        'Code example',
-        '',
-        '&#x60&#x60&#x60js',
-        'var urlresolve = function(base, href) {',
-        '  return url.resolve(base, href);',
-        '};',
-        '&#x60&#x60&#x60',
-        '',
-        '[Click here](http://assemble.io) for more documentation.',
-        '',
-        '```\n'
-      ].join('\n'));
-    });
-
-    it('should use the language defined in the last argument', function() {
-      const template = hbs.compile('{{{embed "test/fixtures/index.html" "hbs"}}}');
-      assert.equal(template(), [
-        '```hbs',
-        '<!DOCTYPE html>',
-        '  <html lang="en">',
-        '  <head>',
-        '    <meta charset="UTF-8">',
-        '    <title>{{title}}</title>',
-        '  </head>',
-        '  <body>',
-        '    {{> foo }}',
-        '  </body>',
-        '</html>',
-        '',
-        '```\n'
-      ].join('\n'));
-    });
-  });
-
   describe('gist', function() {
     it('should return a gist script tag', function() {
       const fn = hbs.compile('{{{gist "abcdefg"}}}');

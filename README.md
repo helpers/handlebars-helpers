@@ -97,7 +97,6 @@ Visit the: [code](lib/array.js) | [unit tests](test/array.js) | [issues](https:/
 
 Visit the: [code](lib/code.js) | [unit tests](test/code.js) | [issues](https://github.com/wirechunk/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+code+helpers)
 
-* **[embed](#embed)** ([code](lib/code.js) | [tests](test/code.js))
 * **[gist](#gist)** ([code](lib/code.js) | [tests](test/code.js))
 * **[jsfiddle](#jsfiddle)** ([code](lib/code.js) | [tests](test/code.js))
 
@@ -868,24 +867,6 @@ Block helper that return an array with all duplicate values removed. Best used a
 ```
 
 ## code
-
-### [{{embed}}](lib/code.js)
-
-Embed code from an external file as preformatted text.
-
-**Params**
-
-* `filepath` **{String}**: filepath to the file to embed.
-* `language` **{String}**: Optionally specify the language to use for syntax highlighting.
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{embed 'path/to/file.js'}}
-<!-- optionally specify the language to use -->
-{{embed 'path/to/file.hbs' 'html')}}
-```
 
 ### [{{gist}}](lib/code.js)
 
