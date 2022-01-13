@@ -1,4 +1,4 @@
-# handlebars-helpers [![NPM version](https://img.shields.io/npm/v/handlebars-helpers.svg?style=flat)](https://www.npmjs.com/package/handlebars-helpers) [![NPM monthly downloads](https://img.shields.io/npm/dm/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers)  [![NPM total downloads](https://img.shields.io/npm/dt/handlebars-helpers.svg?style=flat)](https://npmjs.org/package/handlebars-helpers) [![Linux Build Status](https://img.shields.io/travis/helpers/handlebars-helpers.svg?style=flat&label=Travis)](https://travis-ci.org/helpers/handlebars-helpers) [![Windows Build Status](https://img.shields.io/appveyor/ci/helpers/handlebars-helpers.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/helpers/handlebars-helpers)
+# handlebars-helpers
 
 > More than 130 Handlebars helpers in ~20 categories. Helpers can be used with Assemble, Generate, Verb, Ghost, gulp-handlebars, grunt-handlebars, consolidate, or any node.js/Handlebars project.
 
@@ -12,70 +12,25 @@ You might also be interested in [template-helpers](https://github.com/jonschlink
 - [History](#history)
 - [About](#about)
 
-## Install
-
-Install with [npm](https://www.npmjs.com/):
-
-```sh
-$ npm install --save handlebars-helpers
-```
-
-Install with [yarn](https://yarnpkg.com):
-
-```sh
-$ yarn add handlebars-helpers
-```
-
 ## Browser usage
 
 See how to [use handlebars-helpers in the browser](https://github.com/doowb/handlebars-helpers-browserify-example).
 
 ## Usage
 
-The main export returns a function that needs to be called to expose the object of helpers.
+The main file (`index.js`) exports groups of helpers. See it for a list of all the groups.
 
-**Get all helpers**
-
-```js
-var helpers = require('handlebars-helpers')();
-//=> returns object with all (130+) helpers
-```
-
-**Get a specific helper collection**
-
-Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
+Import the groups you want and register each as a helper:
 
 ```js
-var helpers = require('handlebars-helpers');
-var math = helpers.math();
-//=> only the `math` helpers
+import handlebars from 'handlebars';
+import { array, collection, math, number } from 'handlebars-helpers';
 
-var helpers = require('handlebars-helpers');
-var array = helpers.array();
-//=> only the `collections` helpers
-```
-
-**Get multiple helpers collections**
-
-Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
-
-```js
-var helpers = require('handlebars-helpers')(['math', 'string']);
-//=> only the `math` and `string` helpers
-```
-
-**Optionally pass your own handlebars**
-
-```js
-var handlebars = require('handlebars');
-var helpers = require('handlebars-helpers')({
-  handlebars: handlebars
-});
-
-// or for a specific collection
-var math = helpers.math({
-  handlebars: handlebars
-});
+[array, collection, math, number].forEach(
+  (helper) => {
+    Handlebars.registerHelper(helper);
+  },
+);
 ```
 
 ## Helpers
