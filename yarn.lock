@@ -2539,11 +2539,6 @@ extract-gfm@^0.1.0:
   dependencies:
     kind-of "^5.0.2"
 
-"falsey@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/falsey/-/falsey-1.0.0.tgz#71bdd775c24edad9f2f5c015ce8be24400bb5d7d"
-  integrity sha512-zMDNZ/Ipd8MY0+346CPvhzP1AsiVyNfTOayJza4reAIWf72xbkuFUDcJNxSAsQE1b9Bu0wijKb8Ngnh/a7fI5w==
-
 fancy-log@^1.1.0, fancy-log@^1.3.2:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/fancy-log/-/fancy-log-1.3.3.tgz#dbc19154f558690150a23953a0adbd035be45fc7"
@@ -3524,7 +3519,7 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-handlebars-utils@^1.0.2, handlebars-utils@^1.0.4, handlebars-utils@^1.0.6:
+handlebars-utils@^1.0.4, handlebars-utils@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/handlebars-utils/-/handlebars-utils-1.0.6.tgz#cb9db43362479054782d86ffe10f47abc76357f9"
   integrity sha512-d5mmoQXdeEqSKMtQQZ9WkiUcO1E3tPbWxluCK9hVgIDPzQa9WsKo3Lbe/sGflTe7TomHEeZaOgwIkyIr1kfzkw==
@@ -3784,15 +3779,6 @@ helper-license@^0.2.1:
     markdown-utils "^0.6.0"
     mixin-deep "^1.0.1"
 
-helper-markdown@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/helper-markdown/-/helper-markdown-1.0.0.tgz#ee7e9fc554675007d37eb90f7853b13ce74f3e10"
-  integrity sha512-AnDqMS4ejkQK0MXze7pA9TM3pu01ZY+XXsES6gEE0RmCGk5/NIfvTn0NmItfyDOjRAzyo9z6X7YHbHX4PzIvOA==
-  dependencies:
-    handlebars-utils "^1.0.2"
-    highlight.js "^9.12.0"
-    remarkable "^1.7.1"
-
 helper-md@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/helper-md/-/helper-md-0.2.2.tgz#c1f59d7e55bbae23362fd8a0e971607aec69d41f"
@@ -3880,11 +3866,6 @@ helper-toc@^0.2.0:
     markdown-utils "^0.6.1"
     mixin-deep "^1.1.0"
     relative "^3.0.0"
-
-highlight.js@^9.12.0:
-  version "9.18.5"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.5.tgz#d18a359867f378c138d6819edfc2a8acd5f29825"
-  integrity sha512-a5bFyofd/BHCX52/8i8uJkjr9DYwXIPnM/plwI6W7ezItLGqzt7X2G2nXuYSfsIJdkwwj/g9DG1LkcGJI/dDoA==
 
 homedir-polyfill@^1.0.0, homedir-polyfill@^1.0.1:
   version "1.0.3"

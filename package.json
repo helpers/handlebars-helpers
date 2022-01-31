@@ -84,8 +84,6 @@
     "handlebars": "^4.7.7",
     "handlebars-utils": "^1.0.6",
     "has-value": "^2.0.2",
-    "helper-date": "^1.0.1",
-    "helper-markdown": "^1.0.0",
     "helper-md": "^0.2.2",
     "html-tag": "^2.0.0",
     "is-even": "^1.0.0",
@@ -169,7 +167,6 @@
     },
     "reflinks": [
       "falsey",
-      "helper-date",
       "moment"
     ],
     "helpers": [

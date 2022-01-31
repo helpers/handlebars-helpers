@@ -77,12 +77,9 @@ Currently **189 helpers** in **20 categories**:
 * **[code](#code)** ([code](lib/code.js) | [unit tests](test/code.js))
 * **[collection](#collection)** ([code](lib/collection.js) | [unit tests](test/collection.js))
 * **[comparison](#comparison)** ([code](lib/comparison.js) | [unit tests](test/comparison.js))
-* **[date](#date)** ([code](lib/date.js) | [unit tests](test/date.js))
-* **[fs](#fs)** ([code](lib/fs.js) | [unit tests](test/fs.js))
 * **[html](#html)** ([code](lib/html.js) | [unit tests](test/html.js))
 * **[i18n](#i18n)** ([code](lib/i18n.js) | [unit tests](test/i18n.js))
 * **[inflection](#inflection)** ([code](lib/inflection.js) | [unit tests](test/inflection.js))
-* **[markdown](#markdown)** ([code](lib/markdown.js) | [unit tests](test/markdown.js))
 * **[match](#match)** ([code](lib/match.js) | [unit tests](test/match.js))
 * **[math](#math)** ([code](lib/math.js) | [unit tests](test/math.js))
 * **[misc](#misc)** ([code](lib/misc.js) | [unit tests](test/misc.js))
@@ -173,22 +170,6 @@ Visit the: [code](lib/comparison.js) | [unit tests](test/comparison.js) | [issue
 * **[unlessGteq](#unlessGteq)** ([code](lib/comparison.js#L578) | [tests](test/comparison.js#L589))
 * **[unlessLteq](#unlessLteq)** ([code](lib/comparison.js#L598) | [tests](test/comparison.js#L604))
 
-### [date helpers](#date)
-
-Visit the: [code](lib/date.js) | [unit tests](test/date.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+date+helpers))
-
-* **[year](#year)** ([code](lib/date.js#L15) | [no tests])
-* **[date](#date)** ([code](lib/date.js#Lundefined) | [no tests])
-* **[moment](#moment)** ([code](lib/date.js#L24) | [no tests])
-
-### [fs helpers](#fs)
-
-Visit the: [code](lib/fs.js) | [unit tests](test/fs.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+fs+helpers))
-
-* **[fileSize](#fileSize)** ([code](lib/fs.js#L14) | [no tests])
-* **[read](#read)** ([code](lib/fs.js#L29) | [tests](test/fs.js#L16))
-* **[readdir](#readdir)** ([code](lib/fs.js#L42) | [tests](test/fs.js#L23))
-
 ### [html helpers](#html)
 
 Visit the: [code](lib/html.js) | [unit tests](test/html.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+html+helpers))
@@ -213,13 +194,6 @@ Visit the: [code](lib/inflection.js) | [unit tests](test/inflection.js) | [issue
 
 * **[inflect](#inflect)** ([code](lib/inflection.js#L30) | [tests](test/inflection.js#L9))
 * **[ordinalize](#ordinalize)** ([code](lib/inflection.js#L58) | [tests](test/inflection.js#L22))
-
-### [markdown helpers](#markdown)
-
-Visit the: [code](lib/markdown.js) | [unit tests](test/markdown.js) | [issues](https://github.com/helpers/handlebars-helpers/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+markdown+helpers))
-
-* **[markdown](#markdown)** ([code](lib/markdown.js#Lundefined) | [tests](test/markdown.js#L10))
-* **[md](#md)** ([code](lib/markdown.js#L55) | [tests](test/markdown.js#L18))
 
 ### [match helpers](#match)
 
@@ -1361,51 +1335,6 @@ is less than or equal to `b`**.
 * `options` **{Object}**: Handlebars provided options object
 * `returns` **{String}**: Block, or inverse block if specified and falsey.
 
-## date
-
-### [{{year}}](lib/date.js#L15)
-
-Get the current year.
-
-**Example**
-
-```handlebars
-{{year}}
-<!-- 2017 -->
-```
-
-### [{{moment}}](lib/date.js#L24)
-
-Use [moment](http://momentjs.com) as a helper. See [helper-date](https://github.com/helpers/helper-date) for more details.
-
-## fs
-
-### [{{read}}](lib/fs.js#L29)
-
-Read a file from the file system. This is useful in composing "include"-style helpers using sub-expressions.
-
-**Params**
-
-* `filepath` **{String}**
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{read "a/b/c.js"}}
-{{someHelper (read "a/b/c.md")}}
-```
-
-### [{{readdir}}](lib/fs.js#L42)
-
-Return an array of files from the given
-directory.
-
-**Params**
-
-* `directory` **{String}**
-* `returns` **{Array}**
-
 ## html
 
 ### [{{attr}}](lib/html.js#L23)
@@ -1571,43 +1500,6 @@ Returns an ordinalized number as a string.
 <!-- '29th' -->
 {{ordinalize 22}}
 <!-- '22nd' -->
-```
-
-## markdown
-
-### [{{markdown}}](lib/markdown.js#L28)
-
-Block helper that converts a string of inline markdown to HTML.
-
-**Params**
-
-* `context` **{Object}**
-* `options` **{Object}**
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{#markdown}}
-# Foo
-{{/markdown}}
-<!-- results in: <h1>Foo</h1> -->
-```
-
-### [{{md}}](lib/markdown.js#L55)
-
-Read a markdown file from the file system and inject its contents after converting it to HTML.
-
-**Params**
-
-* `context` **{Object}**
-* `options` **{Object}**
-* `returns` **{String}**
-
-**Example**
-
-```handlebars
-{{md "foo/bar.md"}}
 ```
 
 ## match
@@ -3046,218 +2938,6 @@ Generate a random number
 * `returns` **{Number}**
 
 ***
-
-## History
-
-## [v0.10.0](https://github.com/helpers/handlebars-helpers/compare/v0.9.0...v0.10.0) - 2017-11-17
-
-**changes**
-
-* adds `unique` to array helpers
-* updates `css` helper to ensure that path.join() is not called on an absolute URL.
-
-## [v0.9.0](https://github.com/helpers/handlebars-helpers/compare/v0.8.4...v0.9.0) - 2017-07-03
-
-**changes**
-
-* all unit tests now use assert instead of should
-* remove `fileSize` helper in favor of new `bytes` helper, which does the same thing, but returns `B` instead of `byte` or `bytes`.
-* JSONParse helper is no longer a block helper. It now returns an object, which can be used as a subexpression to achieve the same behavior as before.
-* adds better error handling for path helpers, since node.js errors are terrible. We have a better way to handle errors that will be implemented in a near future release.
-* adds inline helper support to `isEmpty`, so it can now be used as an inline or block helper
-* adds `raw` helper
-* adds regex helpers
-* adds inline helper support to most of the comparison helpers, so they can now be used as inline or block helpers
-* adds `pluck` helper to array helpers
-* adds `prepend` and `append` helpers to string helpers
-* adds `isTruthy` and `isFalsey` comparison helpers
-* adds `escape` and `url_encode` and `url_decode` URL helpers
-* adds `attr` helper to html helpers
-* adds `year` helper to date helpers
-* adds `typeOf` and `frame` helpers to misc helpers
-* adds `abs`, `minus`, `modulo`, `plus`, `times` to math helpers
-* moves `ellipsis` helper from `html` helpers to string helpers
-* moves `truncate` helper from `html` helpers to string helpers
-* moves `reverse` helper from `string` helpers to array helpers
-* differentiate `eq` and `is` helpers so that `eq` is strict equality and `is` is not
-* removes `mm` helper, use `match` instead
-
-## [v0.8.4](https://github.com/helpers/handlebars-helpers/compare/v0.8.3...v0.8.4) - 2017-07-03
-
-**changes**
-
-* removes strlen helper in favor of fixing the length helper
-
-## [v0.8.3](https://github.com/helpers/handlebars-helpers/compare/v0.8.2...v0.8.3) - 2017-07-03
-
-**changes**
-
-* adds strlen helper
-* adds itemAt helper
-* clean up code comments for array helpers
-
-## [v0.8.2](https://github.com/helpers/handlebars-helpers/compare/v0.8.1...v0.8.2) - 2017-03-30
-
-**changes**
-
-* documentation updates
-* fixes md helper to use sync by default
-
-## [v0.8.1](https://github.com/helpers/handlebars-helpers/compare/v0.8.0...v0.8.1) - 2017-03-30
-
-**changes**
-
-* fixes sorting in withSort helper. see https://github.com/helpers/handlebars-helpers/pull/245
-* adds toPath helper
-* handle null inputs in number helpers
-* adds stripProtocol helper
-
-## [v0.8.0](https://github.com/helpers/handlebars-helpers/compare/v0.7.6...v0.8.0) - 2017-01-25
-
-**changes**
-
-* handle string arguments in list helpers
-* adds JSONParse helper as an alias for parseJSON
-
-## [v0.7.6](https://github.com/helpers/handlebars-helpers/compare/v0.7.0...v0.7.6) - 2017-01-08
-
-**changes**
-
-* fixes markdown helpers. see https://github.com/helpers/handlebars-helpers/pull/226
-* documentation improvements and other minor fixes
-
-## [v0.7.0](https://github.com/helpers/handlebars-helpers/compare/v0.6.0...v0.7.0) - 2016-07-16
-
-**changes**
-
-* The [or](#or) helper can now take a variable number of arguments
-
-## [v0.6.0](https://github.com/helpers/handlebars-helpers/compare/v0.3.3...v0.6.0) - 2016-05-13
-
-**changes**
-
-* the main export is now a function that takes a name or array of names of helper types to load. Example `helpers(['string', 'array'])` will load only the `string` and `array` helpers
-* helper types can alternatively be accessed as methods. example - `helpers.path()` will return all of the path helpers.
-* handlebars may be provided by the user. if not provided it will fall back to the `handlebars-helpers`  handlebars
-* helpers are now as generic as possible, with little to no code related to assemble, grunt, etc.
-* helpers are lazy-loaded using getters for improved performance
-* Once tests are added for the `md` and `markdown` helpers, we'll have 100% unit test coverage on helpers
-
-## [v0.3.3](https://github.com/helpers/handlebars-helpers/compare/v0.3.2...v0.3.3) - 2013-09-03
-
-**changes**
-
-* Adds fileSize helper.
-* Adds startsWith helper.
-
-## [v0.3.2](https://github.com/helpers/handlebars-helpers/compare/v0.3.0...v0.3.2) - 2013-08-20
-
-**changes**
-
-* Adds glob helper.
-
-## [v0.3.0](https://github.com/helpers/handlebars-helpers/compare/v0.2.4...v0.3.0) - 2013-07-30
-
-**changes**
-
-* The project has been refactored, cleaned up, and full documentation has bee put up at http://assemble.io
-
-## [v0.2.4](https://github.com/helpers/handlebars-helpers/compare/v0.2.3...v0.2.4) - 2013-05-11
-
-**changes**
-
-* Adding object globbing utility functions to be used in helpers later.
-
-## [v0.2.3](https://github.com/helpers/handlebars-helpers/compare/v0.2.0...v0.2.3) - 2013-05-11
-
-**changes**
-
-* File globbing added to some helpers. Including md and some file helpers.
-
-## [v0.2.0](https://github.com/helpers/handlebars-helpers/compare/v0.1.32...v0.2.0) - 2013-05-07
-
-**changes**
-
-* A bunch of new tests for markdown and special helpers.
-* Refactored most of the rest of the helpers to separate functions from Handlebars registration.
-
-## [v0.1.32](https://github.com/helpers/handlebars-helpers/compare/v0.1.31...v0.1.32) - 2013-05-02
-
-**changes**
-
-* Updates utils and a number of helpers, including value, property, and stringify.
-
-## [v0.1.31](https://github.com/helpers/handlebars-helpers/compare/v0.1.30...v0.1.31) - 2013-04-21
-
-**changes**
-
-* Fixes relative helper
-
-## [v0.1.30](https://github.com/helpers/handlebars-helpers/compare/v0.1.25...v0.1.30) - 2013-04-20
-
-**changes**
-
-* Refactoring helpers-collection module to separate the functions from the Handlebars helper registration process.
-
-## [v0.1.25](https://github.com/helpers/handlebars-helpers/compare/v0.1.21...v0.1.25) - 2013-04-16
-
-**changes**
-
-* Adding defineSection and renderSection helpers to try to get sections populated in a layout from the page.
-
-## [v0.1.21](https://github.com/helpers/handlebars-helpers/compare/v0.1.20...v0.1.21) - 2013-04-07
-
-**changes**
-
-* Add markdown helpers back, add more tests.
-
-## [v0.1.20](https://github.com/helpers/handlebars-helpers/compare/v0.1.11...v0.1.20) - 2013-04-06
-
-**changes**
-
-* Generalized helpers structure, externalized utilities.
-
-## [v0.1.11](https://github.com/helpers/handlebars-helpers/compare/v0.1.10...v0.1.11) - 2013-04-05
-
-**changes**
-
-* New authors and gist helpers, general cleanup and new tests.
-
-## [v0.1.10](https://github.com/helpers/handlebars-helpers/compare/v0.1.8...v0.1.10) - 2013-04-04
-
-**changes**
-
-* Externalized utility javascript from helpers.js
-
-## [v0.1.8](https://github.com/helpers/handlebars-helpers/compare/v0.1.7...v0.1.8) - 2013-03-28
-
-**changes**
-
-* Gruntfile updated with mocha tests for 71 helpers, bug fixes.
-
-## [v0.1.7](https://github.com/helpers/handlebars-helpers/compare/v0.1.3...v0.1.7) - 2013-03-18
-
-**changes**
-
-* New path helper 'relative', for resolving relative path from one absolute path to another.
-
-## [v0.1.3](https://github.com/helpers/handlebars-helpers/compare/v0.1.2...v0.1.3) - 2013-03-16
-
-**changes**
-
-* New helpers, 'formatPhoneNumber' and 'eachProperty'
-
-## [v0.1.2](https://github.com/helpers/handlebars-helpers/compare/v0.1.0...v0.1.2) - 2013-03-15
-
-**changes**
-
-* Update README.md with documentation, examples.
-
-## [v0.1.0] - 2013-03-06
-
-**changes**
-
-* First commit.
 
 ## About
 
