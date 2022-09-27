@@ -28,9 +28,16 @@ describe('number', function() {
   });
 
   describe('phoneNumber', function() {
-    it('Format a phone number.', function() {
-      var fn = hbs.compile('{{phoneNumber value}}');
-      assert.equal(fn({value: '8005551212'}), '(800) 555-1212');
+    it('should return formatted number if 10-11 numeric digits', function () {
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '8005551212' }), '(800) 555-1212');
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '800.555.1212' }), '(800) 555-1212');
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '18005551212' }), '1 (800) 555-1212');
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '1-800-555-1212' }), '1 (800) 555-1212');
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '+18005551212' }), '1 (800) 555-1212');
+    });
+    it('should return original value if not 10-11 numeric digits', function () {
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: '800555121' }), '800555121');
+      assert.equal(hbs.compile('{{phoneNumber value}}')({ value: 'foo' }), 'foo');
     });
   });
 
