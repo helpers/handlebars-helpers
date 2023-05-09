@@ -16,7 +16,7 @@
 Install with [yarn](https://yarnpkg.com):
 
 ```sh
-$ yarn add handlebars-helpers
+$ yarn add @budibase/handlebars-helpers
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ The main export returns a function that needs to be called to expose the object 
 **Get all helpers**
 
 ```js
-var helpers = require('handlebars-helpers')();
+var helpers = require('@budibase/handlebars-helpers')();
 //=> returns object with all (130+) helpers
 ```
 
@@ -35,11 +35,11 @@ var helpers = require('handlebars-helpers')();
 Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
 
 ```js
-var helpers = require('handlebars-helpers');
+var helpers = require('@budibase/handlebars-helpers');
 var math = helpers.math();
 //=> only the `math` helpers
 
-var helpers = require('handlebars-helpers');
+var helpers = require('@budibase/handlebars-helpers');
 var array = helpers.array();
 //=> only the `collections` helpers
 ```
@@ -49,7 +49,7 @@ var array = helpers.array();
 Helper collections are exposed as getters, so only the helpers you want will be required and loaded.
 
 ```js
-var helpers = require('handlebars-helpers')(['math', 'string']);
+var helpers = require('@budibase/handlebars-helpers')(['math', 'string']);
 //=> only the `math` and `string` helpers
 ```
 
@@ -57,7 +57,7 @@ var helpers = require('handlebars-helpers')(['math', 'string']);
 
 ```js
 var handlebars = require('handlebars');
-var helpers = require('handlebars-helpers')({
+var helpers = require('@budibase/handlebars-helpers')({
   handlebars: handlebars
 });
 
