@@ -2366,9 +2366,9 @@ Truncates a string to the specified `length`, and appends it with an elipsis, `�
 **Example**
 
 ```handlebars
-{{ellipsis (sanitize "<span>foo bar baz</span>"), 7}}
+{{ellipsis (sanitize "<span>foo bar baz</span>") 7}}
 <!-- results in:  'foo bar…' -->
-{{ellipsis "foo bar baz", 7}}
+{{ellipsis "foo bar baz" 7}}
 <!-- results in:  'foo bar…' -->
 ```
 
