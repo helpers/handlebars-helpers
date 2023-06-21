@@ -222,7 +222,6 @@ Visit the: [code](lib/math.js) | [unit tests](test/math.js) | [issues](https://g
 * **[round](#round)** ([code](lib/math.js#L224) | [tests](test/math.js#L69))
 * **[subtract](#subtract)** ([code](lib/math.js#L241) | [tests](test/math.js#L76))
 * **[sum](#sum)** ([code](lib/math.js#L263) | [tests](test/math.js#L83))
-* **[times](#times)** ([code](lib/math.js#L286) | [no tests])
 
 ### [misc helpers](#misc)
 
@@ -335,8 +334,6 @@ Visit the: [code](lib/url.js) | [unit tests](test/url.js) | [issues](https://git
 * **[encodeURI](#encodeURI)** ([code](lib/url.js#L19) | [tests](test/url.js#L31))
 * **[escape](#escape)** ([code](lib/url.js#L34) | [no tests])
 * **[decodeURI](#decodeURI)** ([code](lib/url.js#L48) | [tests](test/url.js#L38))
-* **[url_encode](#url_encode)** ([code](lib/url.js#L59) | [no tests])
-* **[url_decode](#url_decode)** ([code](lib/url.js#L68) | [no tests])
 * **[urlResolve](#urlResolve)** ([code](lib/url.js#L82) | [tests](test/url.js#L11))
 * **[urlParse](#urlParse)** ([code](lib/url.js#L94) | [tests](test/url.js#L45))
 * **[stripQuerystring](#stripQuerystring)** ([code](lib/url.js#L106) | [tests](test/url.js#L24))
@@ -1626,7 +1623,7 @@ Get the remainder of a division operation.
 
 ### [{{multiply}}](lib/math.js#L157)
 
-Return the product of `a` times `b`.
+Return the product of `a` multiply `b`.
 
 **Params**
 
@@ -1696,10 +1693,6 @@ Returns the sum of all numbers in the given array.
 {{sum "[1, 2, 3, 4, 5]"}}
 <!-- results in: '15' -->
 ```
-
-### [{{times}}](lib/math.js#L286)
-
-Multiply number `a` by number `b`.
 
 **Params**
 
@@ -2847,14 +2840,6 @@ Decode a Uniform Resource Identifier (URI) component.
 
 * `str` **{String}**
 * `returns` **{String}**
-
-### [{{url_encode}}](lib/url.js#L59)
-
-Alias for [encodeURI](#encodeuri).
-
-### [{{url_decode}}](lib/url.js#L68)
-
-Alias for [decodeURI](#decodeuri).
 
 ### [{{urlResolve}}](lib/url.js#L82)
 
