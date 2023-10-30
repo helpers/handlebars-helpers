@@ -363,7 +363,7 @@ Visit the: [code](lib/string.js) | [unit tests](test/string.js) | [issues](https
 * **[pathcase](#pathcase)** ([code](lib/string.js#L323) | [tests](test/string.js#L188))
 * **[plusify](#plusify)** ([code](lib/string.js#L343) | [tests](test/string.js#L203))
 * **[prepend](#prepend)** ([code](lib/string.js#L363) | [no tests])
-* **[raw](#raw)** ([code](lib/string.js#L385) | [no tests])
+* **[raw](raw)** ([code](lib/string.js#L385) | [no tests])
 * **[remove](#remove)** ([code](lib/string.js#L413) | [no tests])
 * **[removeFirst](#removeFirst)** ([code](lib/string.js#L432) | [no tests])
 * **[replace](#replace)** ([code](lib/string.js#L452) | [tests](test/string.js#L222))
@@ -2655,7 +2655,7 @@ Render a block without processing mustache templates inside the block.
 **Example**
 
 ```handlebars
-{{{{#raw}}}}
+{{{{raw}}}}
 {{foo}}
 {{{{/raw}}}}
 <!-- results in:  '{{foo}}' -->
