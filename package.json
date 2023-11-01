@@ -94,7 +94,7 @@
     "kind-of": "^6.0.0",
     "lazy-cache": "^2.0.2",
     "logging-helpers": "^1.0.0",
-    "micromatch": "^3.1.4",
+    "micromatch": "^4.0.5",
     "relative": "^3.0.2",
     "striptags": "^3.1.0",
     "to-gfm-code-block": "^0.1.1",
