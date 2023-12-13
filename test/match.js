@@ -14,13 +14,13 @@ describe('matching', function() {
   describe('match', function() {
     it('should use the main micromatch function to filter an array', function() {
       var fn = hbs.compile('{{match files "(a|u)*.js"}}');
-      assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js');
+      assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js,uuid.js');
     });
 
     it('should take an array of patterns', function() {
       var ctx = {files: testFiles, patterns: ['(a|u)*.js', 'f*.js']};
       var fn = hbs.compile('{{match files patterns}}');
-      assert.equal(fn(ctx), 'array.js,url.js,utils.js');
+      assert.equal(fn(ctx), 'array.js,url.js,utils.js,uuid.js');
     });
 
     it('should take options from the "options[helper name]" object', function() {
@@ -37,7 +37,7 @@ describe('matching', function() {
 
     it('should use return matching items', function() {
       var fn = hbs.compile('{{match files "(a|u)*.js"}}');
-      assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js');
+      assert.equal(fn({files: testFiles}), 'array.js,url.js,utils.js,uuid.js');
     });
 
     it('should take options from the "options[helper name]" object', function() {
