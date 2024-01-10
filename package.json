@@ -75,7 +75,6 @@
     "clean": "./node_modules/.bin/rimraf .nyc_output"
   },
   "dependencies": {
-    "define-property": "^2.0.2",
     "extend-shallow": "^3.0.2",
     "for-in": "^1.0.2",
     "get-object": "^0.2.0",
