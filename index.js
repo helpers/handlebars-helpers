@@ -7,8 +7,6 @@
 
 'use strict';
 
-var forIn = require('for-in');
-var define = require('define-property');
 var lib = require('./lib/');
 
 /**
@@ -25,16 +23,17 @@ module.exports = function helpers(groups, options) {
 
   options = options || {};
   var hbs = options.handlebars || options.hbs || require('handlebars');
-  define(module.exports, 'handlebars', hbs);
+  module.exports.handlebars = hbs;
 
   if (groups) {
     groups.forEach(function(key) {
       hbs.registerHelper(lib[key]);
     });
   } else {
-    forIn(lib, function(group, key) {
+    for (const key in lib) {
+      const group = lib[key];
       hbs.registerHelper(group);
-    });
+    }
   }
 
   return hbs.helpers;
@@ -43,16 +42,17 @@ module.exports = function helpers(groups, options) {
 /**
  * Expose helper groups
  */
+for (const key in lib) {
+  const group = lib[key];
 
-forIn(lib, function(group, key) {
-  define(module.exports, key, function(options) {
+  module.exports[key] = function(options) {
     options = options || {};
     var hbs = options.handlebars || options.hbs || require('handlebars');
-    define(module.exports, 'handlebars', hbs);
+    module.exports.handlebars = hbs;
     hbs.registerHelper(group);
     return hbs.helpers;
-  });
-});
+  };
+}
 
 /**
  * Expose `utils`
