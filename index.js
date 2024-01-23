@@ -50,7 +50,7 @@ for (const key in lib) {
     var hbs = options.handlebars || options.hbs || require('handlebars');
     module.exports.handlebars = hbs;
     hbs.registerHelper(group);
-    return hbs.helpers;
+    return group;
   };
 }
 
