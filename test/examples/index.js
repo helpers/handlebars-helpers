@@ -90,10 +90,9 @@ describe('examples', function() {
     describe(key, function() {
 
       for (const func in group) {
+        const { example } = getCommentInfo(fileContent, func);
 
-        it(func, function() {
-          const { example } = getCommentInfo(fileContent, func);
-
+        example && it(func, function() {
           let [hbs, expectedResult] = example.split('->').map(x => x.trim());
 
           const context = {
