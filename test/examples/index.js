@@ -95,7 +95,8 @@ describe('examples', function() {
           let [hbs, expectedResult] = example.split('->').map(x => x.trim());
 
           const context = {
-            double: i => i * 2
+            double: i => i * 2,
+            isString: (x) => typeof(x) === 'string'
           };
 
           const arrays = hbs.match(/\[[^/\]]+\]/);
