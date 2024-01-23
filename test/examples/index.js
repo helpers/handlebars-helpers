@@ -6,6 +6,8 @@ require('mocha');
 const sinon = require('sinon');
 sinon.stub(require('../../lib/uuid'), 'uuid').returns('f34ebc66-93bd-4f7c-b79b-92b5569138bc');
 
+sinon.stub(require('../../lib/math'), 'random').returns(10);
+
 var assert = require('assert');
 var lib = require('../../lib/');
 
