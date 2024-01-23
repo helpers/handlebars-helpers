@@ -359,6 +359,28 @@ describe('string', function() {
     });
   });
 
+  describe('truncateWords', function() {
+    it('should return then string truncated when the specified length is shorter than the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 2}}');
+      assert.equal(fn(), 'foo bar…');
+    });
+
+    it('should be able to truncate a single word', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 1}}');
+      assert.equal(fn(), 'foo…');
+    });
+
+    it('should return the original string when the specified length matches the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 3}}');
+      assert.equal(fn(), 'foo bar baz');
+    });
+
+    it('should return the original string when the specified length is bigger than the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 4}}');
+      assert.equal(fn(), 'foo bar baz');
+    });
+  });
+
   describe('uppercase', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{uppercase}}');
