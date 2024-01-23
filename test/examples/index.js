@@ -88,7 +88,6 @@ describe('examples', function() {
     const fileContent = fs.readFileSync(require.resolve(path.join('../../lib/', key)), 'utf8');
 
     describe(key, function() {
-
       for (const func in group) {
         const { example } = getCommentInfo(fileContent, lib[key][func].toString());
 
