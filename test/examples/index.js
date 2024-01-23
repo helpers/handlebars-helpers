@@ -122,7 +122,7 @@ describe('examples', function() {
           } catch (e) {
             // Nothing to parse
           }
-          result = result.replace(/&nbsp;/g, ' ');
+          result = result.replace(/&amp;nbsp;/g, ' ');
           assert.equal(result, expectedResult);
         });
       }
