@@ -102,6 +102,7 @@
     "mocha": "^8.4.0",
     "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
+    "sinon": "^17.0.1",
     "template-helpers": "^1.0.1",
     "templates": "^1.2.9",
     "through2": "^4.0.2",
