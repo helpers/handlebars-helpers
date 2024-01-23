@@ -39,12 +39,7 @@ describe('array', function() {
     });
     it('should return all of the items in an array before the given index', function() {
       var fn = hbs.compile('{{before array 5}}');
-      assert.equal(fn(context), 'a,b,c');
-    });
-
-    it('should return all of the items in an array before the specified count', function() {
-      var fn = hbs.compile('{{before array 5}}');
-      assert.equal(fn(context), 'a,b,c');
+      assert.equal(fn(context), 'a,b,c,d');
     });
   });
 
