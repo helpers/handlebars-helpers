@@ -78,6 +78,11 @@ describe('math', function() {
       var fn = hbs.compile('{{subtract value 5}}');
       assert.equal(fn({value: 5}), '0');
     });
+
+    it('should handle the args being string representations of numbers', function() {
+      var fn = hbs.compile('{{subtract value "4"}}');
+      assert.equal(fn({value: '5'}), '1');
+    });
   });
 
   describe('sum', function() {

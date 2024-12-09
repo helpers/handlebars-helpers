@@ -6,6 +6,7 @@ var hbs = require('handlebars').create();
 var helpers = require('..');
 helpers.array({handlebars: hbs});
 helpers.string({handlebars: hbs});
+helpers.regex({handlebars: hbs});
 
 var context = {array: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'], duplicate: [ 'a', 'b', 'b', 'c', 'd', 'b', 'f', 'a', 'g']};
 
@@ -118,6 +119,32 @@ describe('array', function() {
       var fn = hbs.compile(source);
       assert.equal(fn(ctx), 'd');
     });
+
+    it('should just return the array of there is no function', function() {
+      var source = '{{filter collection 1 property="price"}}';
+      var ctx = {
+        collection: [
+          {price: 1, name: 'one'},
+          {price: 1, name: 'two'},
+          {price: 2, name: 'three'},
+          {price: 3, name: 'four'}
+        ]
+      };
+      assert.equal(hbs.compile(source)(ctx), [{price: 1, name: 'one'}, {price: 1, name: 'two'}]);
+    });
+
+    it('should allow filter to be a regex', function() {
+      var source = '{{filter collection (toRegex "o") property="name"}}';
+      var ctx = {
+        collection: [
+          {price: 1, name: 'one'},
+          {price: 1, name: 'two'},
+          {price: 2, name: 'three'},
+          {price: 3, name: 'four'}
+        ]
+      };
+      assert.equal(hbs.compile(source)(ctx), [{price: 1, name: 'one'}, {price: 1, name: 'two'}, {price: 3, name: 'four'}]);
+    });
   });
 
   describe('forEach', function() {
@@ -165,6 +192,11 @@ describe('array', function() {
 
     it('should render the inverse block when a value does not exist', function() {
       var fn = hbs.compile('{{#inArray array "foo"}}AAA{{else}}BBB{{/inArray}}');
+      assert.equal(fn(context), 'BBB');
+    });
+
+    it('should render the inverse block when the array does not exist', function() {
+      var fn = hbs.compile('{{#inArray noArray "foo"}}AAA{{else}}BBB{{/inArray}}');
       assert.equal(fn(context), 'BBB');
     });
   });
@@ -490,5 +522,5 @@ describe('array', function() {
       assert.equal(fn(context).toString(), 'a,b,c,d,f,g');
     });
   });
-  
+
 });
