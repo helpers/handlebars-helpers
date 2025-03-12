@@ -34,7 +34,7 @@ describe('assemble', function() {
       var fn = hbs.compile('{{relative "dist/docs.html" "index.html"}}');
       assert.equal(fn(), path.join('..', 'index.html'));
     });
-    it('should return the relative path from file A to file B', function() {
+    it('should return the relative path from file A to folder B', function() {
       var fn = hbs.compile('{{relative "examples/result/md/path.md" "examples/assets"}}');
       assert.equal(fn(), path.join('..', '..', 'assets'));
     });

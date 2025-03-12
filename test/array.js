@@ -39,12 +39,7 @@ describe('array', function() {
     });
     it('should return all of the items in an array before the given index', function() {
       var fn = hbs.compile('{{before array 5}}');
-      assert.equal(fn(context), 'a,b,c');
-    });
-
-    it('should return all of the items in an array before the specified count', function() {
-      var fn = hbs.compile('{{before array 5}}');
-      assert.equal(fn(context), 'a,b,c');
+      assert.equal(fn(context), 'a,b,c,d');
     });
   });
 
@@ -343,6 +338,12 @@ describe('array', function() {
       assert.equal(res, 'a,b,c');
     });
 
+    it('should sort the items in a frozen array', function() {
+      var fn = hbs.compile('{{sort array}}');
+      var res = fn({array: Object.freeze(['c', 'a', 'b'])});
+      assert.equal(res, 'a,b,c');
+    });
+
     it('should return all items in an array sorted in lexicographical order', function() {
       var fn = hbs.compile('{{sort array}}');
       assert.equal(fn(context), 'a,b,c,d,e,f,g,h');
@@ -351,6 +352,12 @@ describe('array', function() {
     it('should sort the items in the array in reverse order:', function() {
       var fn = hbs.compile('{{sort array reverse="true"}}');
       var res = fn({array: ['c', 'a', 'b']});
+      assert.equal(res, 'c,b,a');
+    });
+
+    it('should sort the items in a frozen array in reverse order:', function() {
+      var fn = hbs.compile('{{sort array reverse="true"}}');
+      var res = fn({array: Object.freeze(['c', 'a', 'b'])});
       assert.equal(res, 'c,b,a');
     });
   });

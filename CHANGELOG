@@ -1,3 +1,9 @@
+v0.11.0:
+  date: "2023-06-21"
+  changes:
+    - removed `times` from math helpers
+    - removed alias `url_encode` and `url_decode` from URL helpers
+    - fixed decodeURI example, it was a using escape and had the example for encodeURI
 v0.10.0:
   date: "2017-11-17"
   changes:

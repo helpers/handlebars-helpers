@@ -4,7 +4,7 @@ require('mocha');
 var assert = require('assert');
 var hbs = require('handlebars').create();
 var helpers = require('..');
-helpers.string({handlebars: hbs});
+helpers.string({ handlebars: hbs });
 
 describe('string', function() {
   describe('camelcase', function() {
@@ -359,6 +359,28 @@ describe('string', function() {
     });
   });
 
+  describe('truncateWords', function() {
+    it('should return then string truncated when the specified length is shorter than the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 2}}');
+      assert.equal(fn(), 'foo bar…');
+    });
+
+    it('should be able to truncate a single word', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 1}}');
+      assert.equal(fn(), 'foo…');
+    });
+
+    it('should return the original string when the specified length matches the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 3}}');
+      assert.equal(fn(), 'foo bar baz');
+    });
+
+    it('should return the original string when the specified length is bigger than the word count', function() {
+      var fn = hbs.compile('{{truncateWords "foo bar baz" 4}}');
+      assert.equal(fn(), 'foo bar baz');
+    });
+  });
+
   describe('uppercase', function() {
     it('should return an empty string if undefined', function() {
       var fn = hbs.compile('{{uppercase}}');
@@ -373,6 +395,51 @@ describe('string', function() {
     it('should work as a block helper', function() {
       var fn = hbs.compile('{{#uppercase}}bender should not be allowed on tv{{/uppercase}}');
       assert.equal(fn(), 'BENDER SHOULD NOT BE ALLOWED ON TV');
+    });
+  });
+
+  describe('lorem', function() {
+    // Bad parameters
+    it('Should return "Lorem ipsum" only, if passed no parameters', function() {
+      var fn = hbs.compile('{{ lorem }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return "Lorem ipsum" only, if passed a non-number (string)', function() {
+      var fn = hbs.compile('{{ lorem a }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return "Lorem ipsum" only, if passed a non-number (array)', function() {
+      var fn = hbs.compile('{{ lorem [1,2,3] }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return "Lorem ipsum" only, if passed a number less than 1', function() {
+      var fn = hbs.compile('{{ lorem -1 }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return "Lorem ipsum" only, if passed a number less than 1', function() {
+      var fn = hbs.compile('{{ lorem 0 }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return "Lorem ipsum" only, if passed a number less than 1', function() {
+      var fn = hbs.compile('{{ lorem -999 }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    // Good parameters
+    it('Should return a string of "Lorem ipsum" if passed 11', function() {
+      var fn = hbs.compile('{{ lorem 11 }}');
+      assert.equal(fn(), 'Lorem ipsum');
+    });
+    it('Should return a string of "Lorem" if passed 5', function() {
+      var fn = hbs.compile('{{ lorem 5 }}');
+      assert.equal(fn(), 'Lorem');
+    });
+    it('Should return a string of "Lorem ipsum dolor sit amet, consectetur adipiscing" if passed 50', function() {
+      var fn = hbs.compile('{{ lorem 50 }}');
+      assert.equal(fn(), 'Lorem ipsum dolor sit amet, consectetur adipiscing');
+    });
+    it('Should return a string of length 8032 if passed 8032', function() {
+      var fn = hbs.compile('{{ lorem 8032 }}');
+      assert.equal(fn().length, 8032);
     });
   });
 });
